@@ -1,0 +1,36 @@
+:root {
+    --primary-color:#314d67;
+    --secondary-color:#c27277;
+    --tritiary-color:#7b6270;
+    --primmary-color-light:#4e6b8c;
+    --secondary-color-light:#d99da0;
+    --tritiary-color-light:#9b7e8c;
+    --text-primary: #1E293B;
+    --text-muted: #64748B;
+    --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.1), 0 2px 4px -2px rgba(15, 23, 42, 0.1);
+
+}
+/* Font */
+@font-face {
+  font-family: 'Poppins';
+  src: url('font/Poppins-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+/* Admin Body Login Page */
+.admin-login-body {
+    background-color: var(--secondary-color);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.login-card {
+    background-color: var(--tritiary-color);
+    padding: 3rem 2.5rem;
+    border-radius: .3rem;
+}
