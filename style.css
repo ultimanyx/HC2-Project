@@ -1,15 +1,16 @@
 :root {
-    --primary-color:#314d67;
-    --secondary-color:#c27277;
-    --tritiary-color:#7b6270;
-    --primmary-color-light:#4e6b8c;
-    --secondary-color-light:#d99da0;
-    --tritiary-color-light:#9b7e8c;
+    --primary-color:#C1C0C2;
+    --secondary-color:#ECC5C6;
+    --tritiary-color:#837D68;
+    --primmary-color-light:#cfccd3;
+    --secondary-color-light:#f5c5c6;
+    --tritiary-color-light:#a79b73;
+    --white-color:#ffffff;
     --text-primary: #1E293B;
     --text-muted: #64748B;
     --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.1), 0 2px 4px -2px rgba(15, 23, 42, 0.1);
-
+    --box-shadow:  0 20px 60px rgba(0, 0, 0, 0.3);
 }
 /* Font */
 @font-face {
@@ -22,15 +23,60 @@
 
 /* Admin Body Login Page */
 .admin-login-body {
-    background-color: var(--secondary-color);
+    background-color: var(--secondary-color-light);
     display:flex;
     align-items:center;
     justify-content:center;
     font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 .login-card {
-    background-color: var(--tritiary-color);
+    background-color: var(--white-color);
     padding: 3rem 2.5rem;
-    border-radius: .3rem;
+    border-radius: 1.5rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: var(--box-shadow);
+}
+
+.login-card-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-card-header{
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    border-bottom: 1px solid black;
+}
+
+.login-card-header p{
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-top: 0.3rem;
+}
+
+.form-group {
+    display:flex;
+    flex-direction: column;
+    gap: .05rem;
+}
+
+.form-group input{
+    border: 1px solid var(--tritiary-color);
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    font-size: 1rem;
+    background-color: var(--white-color);
+    outline: none;
+}
+
+form-group input:focus{
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-sm);
 }
