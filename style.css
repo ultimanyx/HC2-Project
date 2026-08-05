@@ -5,44 +5,40 @@
   box-sizing: border-box;
 }
 
-/* ----- root -----*/
+/* ----- ROOT VARIABLES ----- */
 :root {
---background :#F8F6F1;
---foreground :#1A1826;
---card-background:#FFFFFF;
---primary :#B8721F;
---primary-forground :#FFFFFF;
---secondary :#EDE9E1;
---muted :#6B6680;
---accent :#6D28D9;
---border :rgba(26,24,38,0.10);
---focus-ring :#B8721F;
---error :#DC2626;
-
+  --background: #F8F6F1;
+  --foreground: #1A1826;
+  --card-background: #FFFFFF;
+  --primary: #B8721F;
+  --primary-foreground: #FFFFFF;
+  --secondary: #EDE9E1;
+  --muted: #6B6680;
+  --accent: #6D28D9;
+  --border: rgba(26, 24, 38, 0.10);
+  --focus-ring: #B8721F;
+  --error: #DC2626;
 }
 
-/* ----- Font -----*/
+/* ----- FONTS ----- */
 @font-face {
   font-family: "Poppins";
-  src: url('../font/Poppins/Poppins-Regular.ttf'); 
-  format('truetype');
+  src: url('../font/Poppins/Poppins-Regular.ttf') format('truetype');
 }
 
 @font-face {
   font-family: "Plus_Jakarta_Sans";
-  src: url('../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf'); 
-  format('truetype');
+  src: url('../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf') format('truetype');
 }
 
 @font-face {
   font-family: "Fraunces";
-  src: url('../font/Fraunces/static/Fraunces_72pt-Regular.ttf'); 
-  format('truetype');
+  src: url('../font/Fraunces/static/Fraunces_72pt-Regular.ttf') format('truetype');
 }
 
-
+/* ----- BODY ----- */
 body {
-  font-family: "Plus_Jakarta_Sans",sans-serif;
+  font-family: "Plus_Jakarta_Sans", sans-serif;
   background: linear-gradient(145deg, #f6f9fc 0%, #e6f0f5 100%);
   min-height: 100vh;
   display: flex;
@@ -67,21 +63,14 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
-.login-card:hover {
-  transform: translateY(-4px);
-  box-shadow:
-    0 30px 50px -16px rgba(0, 40, 60, 0.20),
-    0 10px 28px -8px rgba(0, 0, 0, 0.06);
-}
-
-/* ----- HEADER (no icon) ----- */
+/* ----- LOGIN HEADER ----- */
 .login-header {
   text-align: center;
   margin-bottom: 2rem;
 }
 
 .login-header h1 {
-  font-family: "Fraunces",sans-serif;
+  font-family: "Fraunces", sans-serif;
   font-size: 1.9rem;
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -96,7 +85,42 @@ body {
   letter-spacing: 0.01em;
 }
 
-/* ----- FORM ELEMENTS WITH LABELS ----- */
+/* ----- SIGN-UP HEADER ----- */
+.signup-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.signup-header h1 {
+  font-family: "Fraunces", sans-serif;
+  font-size: 1.9rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #0b2a3e;
+  margin-bottom: 0.2rem;
+}
+
+.signup-header p {
+  color: #5e7b94;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+/* Login" link in sign-up header — clean, no underline */
+.signup-header .login-link {
+  color: #0066ff;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.signup-header .login-link:hover {
+  color: #0044cc;
+  text-decoration: none;
+}
+
+/* ----- FORM ELEMENTS ----- */
 .login-form {
   display: flex;
   flex-direction: column;
@@ -145,7 +169,7 @@ body {
   box-shadow: 0 0 0 4px rgba(42, 90, 122, 0.08);
 }
 
-/* ----- OPTIONS ROW (remember + forgot) ----- */
+/* ----- OPTIONS ROW (Remember + Forgot) ----- */
 .login-options {
   display: flex;
   justify-content: space-between;
@@ -198,21 +222,25 @@ body {
   color: #0b2a3e;
 }
 
+/*---- FORGOT PASSWORD */
 .forgot-link {
   color: #2a5a7a;
   font-weight: 500;
   text-decoration: none;
-  border-bottom: 1.5px solid transparent;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 .forgot-link:hover {
   color: #1a3f59;
-  border-bottom-color: #1a3f59;
+  text-decoration: none;
 }
 
-/* ----- SUBMIT BUTTON (no icon) ----- */
+/* ----- SUBMIT BUTTON (works for both <button> and <a>) ----- */
 .btn-login {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
   background: linear-gradient(135deg, #1e3c5c, #2a5a7a);
   border: none;
   padding: 0.95rem 1.8rem;
@@ -227,6 +255,7 @@ body {
   box-shadow: 0 6px 16px rgba(30, 60, 92, 0.18);
   letter-spacing: 0.3px;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
 }
 
 .btn-login:hover {
@@ -240,8 +269,8 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* ----- SIGNUP FOOTER ----- */
-.signup-footer {
+/* ----- FOOTER LINK "Create one" ----- */
+.login-footer {
   text-align: center;
   margin-top: 1.8rem;
   color: #4b6c85;
@@ -249,27 +278,27 @@ body {
   font-weight: 450;
 }
 
-.signup-footer a {
-  color: #1e3c5c;
+.login-footer a {
+  color: #0066ff;
   font-weight: 600;
   text-decoration: none;
-  border-bottom: 1.5px solid transparent;
-  transition: border-color 0.2s ease, color 0.2s ease;
   margin-left: 0.2rem;
+  transition: color 0.2s ease;
 }
 
-.signup-footer a:hover {
-  color: #0f283b;
-  border-bottom-color: #0f283b;
+.login-footer a:hover {
+  color: #0044cc;
+  text-decoration: none;
 }
 
-/* ----- RESPONSIVE TWEAKS -----
+/* ----- RESPONSIVE TWEAKS  -----
 @media (max-width: 460px) {
   .login-card {
     padding: 2rem 1.5rem 2.2rem;
   }
 
-  .login-header h1 {
+  .login-header h1,
+  .signup-header h1 {
     font-size: 1.6rem;
   }
 
