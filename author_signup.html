@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sign Up</title>
+  <title>Author Sign Up</title>
 
   <!-- External CSS -->
   <link rel="stylesheet" href="style.css" />
+
+  <link rel="icon" type="image/png" href="image/logo.png">
+  
 </head>
 <body>
 
@@ -17,7 +20,7 @@
       <h1>Sign Up</h1>
       <p>
         Already have an Account?
-        <a href="user_login.html" class="login-link">Login</a>
+        <a href="author_login.html" class="login-link">Login</a>
       </p>
     </div>
 
@@ -26,11 +29,23 @@
 
       <!-- Full Name -->
       <div class="input-group">
-        <label for="fullname">Full Name</label>
+        <label for="fullname">Author Name / Pen Name</label>
         <input
           type="text"
-          id="fullname"
-          name="fullname"
+          id="authorname"
+          name="authorname"
+          placeholder="The Writer"
+          required
+          autofocus
+        />
+      </div>
+      
+      <div class="input-group">
+        <label for="fullname">User Name </label>
+        <input
+          type="text"
+          id="username"
+          name="username"
           placeholder="John Doe"
           required
           autofocus
@@ -62,8 +77,21 @@
         />
       </div>
 
+      <!-- Phone Number -->
+      <div class="input-group">
+        <label for="number">Phone Number</label>
+        <input
+          type="tel"
+          id="number"
+          name="number"
+          placeholder="09XX XXX XXXX"
+          required
+          pattern="[0-9]{11}"
+        />
+      </div>
+
       <!-- Submit Button (full-width link) -->
-      <a href="user_login.html" class="btn-login">Sign Up</a>
+      <button type="submit" class="btn-login">Sign Up</button>
 
     </form>
 
