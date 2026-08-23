@@ -1,47 +1,100 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-    
-    <link rel="stylesheet" href="style.css" />
 
-    <link rel="icon" type="image/png" href="image/logo.png">
+    <link rel="stylesheet" href="user_page.css" />
 
-</head>
-<body>
-
+    <link rel="icon" type="image/png" href="image/logo.png" />
+  </head>
+  <body>
     <nav class="navbar">
+      <!-- Logo -->
+      <a href="#" class="nav-logo">
+        <img src="image/logo.png" alt="Logo" />
+      </a>
 
-    <!-- Logo -->
-    <a href="#" class="nav-logo">
-        <img src="images/logo.png" alt="Logo">
-    </a>
-
-    <!-- Navigation Bar -->
-    <div class="nav-links">
+      <!-- Navigation Bar -->
+      <div class="nav-links">
         <a href="#">Home</a>
         <a href="#">Browse</a>
         <a href="#">My Library</a>
         <a href="#">Trending</a>
+
+        <!-- Search -->
+        <div class="nav-search">
+          <input type="text" placeholder="Search..." />
+          <button type="button" aria-label="Search">
+            <img src="icons/search.svg" alt="search-btn" />
+          </button>
+        </div>
+
+        <!-- User -->
+        <div class="nav-user">
+          <img
+            src="icons/person-circle.svg"
+            class="user-icon"
+            alt="User-Icon"
+          />
+          <span>Welcome User</span>
+        </div>
+      </div>
+    </nav>
+
+    <div class="hero-banner">
+      <div class="banner-text">
+        <h3>Discover Your Next Story</h3>
+        <p>
+          Find novels worth getting lost in. Browse thousands of stories across
+          different genres.
+        </p>
+      </div>
     </div>
 
-    <!-- Search -->
-    <div class="nav-search">
-        <input type="text" placeholder="Search...">
-        <button type="button" aria-label="Search">
-            
-        </button>
+    <h2 id="weekly-books">Weekly Books</h2>
+
+    <div class="weeklycards-rows">
+      <div class="weekly-card">
+        <img src="image/shadow-slave-.jpg" alt="" />
+        <h3>Card 1</h3>
+        <p>Content here</p>
+      </div>
+
+      <div class="weekly-card">
+        <img src="image/shadow-slave-.jpg" alt="" />
+        <h3>Card 1</h3>
+        <p>Content here</p>
+      </div>
+
+      <div class="weekly-card">
+        <img src="image/shadow-slave-.jpg" alt="" />
+        <h3>Card 1</h3>
+        <p>Content here</p>
+      </div>
+
+      <div class="weekly-card">
+        <img src="image/shadow-slave-.jpg" alt="" />
+        <h3>Card 1</h3>
+        <p>Content here</p>
+      </div>
     </div>
 
-    <!-- User -->
-    <div class="nav-user">
-        <span class="user-icon">♙</span>
-        <span>Welcome User</span>
+    <div class="top10">
+      <div class="top10-books">
+        <h3>Top 10 Action Novel</h3>
+      </div>
+
+      <div class="top10-books">
+        <h3>Top 10 Romance Novel</h3>
+      </div>
+
+      <div class="top10-books">
+        <h3>Top 10 Fantasy Novel</h3>
+      </div>
     </div>
 
-</nav>
     
-</body>
+  </body>
 </html>
