@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 /* =====================================================
    ROOT VARIABLES
 ===================================================== */
@@ -183,6 +187,15 @@ body {
   width: 100%;
 }
 
+#select {
+  color: var(--primary);
+  border-bottom:2px solid var(--primary);
+}
+
+/* Don't show the hover underline on the active link */
+.nav-links a#select:hover::after {
+  width: 0;
+}
 
 /* =====================================================
    SEARCH
@@ -722,6 +735,7 @@ body {
 
   cursor: pointer;
 }
+
 
 
 /* =====================================================
