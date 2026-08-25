@@ -1,0 +1,371 @@
+/* =====================================================
+   BASE
+===================================================== */
+html {
+  overflow-y: scroll;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =====================================================
+   ROOT VARIABLES
+===================================================== */
+
+:root {
+  /* Main */
+  --background: #f8f6f1;
+  --foreground: #1a1826;
+
+  /* Cards */
+  --card-background: #ffffff;
+  --card-foreground: #1a1826;
+
+  /* Primary */
+  --primary: #b8721f;
+  --primary-foreground: #ffffff;
+
+  /* Secondary */
+  --secondary: #ede9e1;
+  --secondary-foreground: #1a1826;
+
+  /* Muted */
+  --muted: #ede9e1;
+  --muted-foreground: #6b6680;
+
+  /* Accent */
+  --accent: #6d28d9;
+  --accent-foreground: #ffffff;
+
+  /* Border */
+  --border: rgba(26, 24, 38, 0.1);
+
+  /* Input */
+  --input-background: #ede9e1;
+
+  /* Focus */
+  --ring: #b8721f;
+  --focus-ring: rgba(184, 114, 31, 0.18);
+
+  /* Destructive */
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+
+  /* Links */
+  --link: #3b6f91;
+  --link-hover: #2c536d;
+
+  /* Shadows */
+  --shadow:
+    0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
+
+  /* Footer */
+  --footer-background: #1a1826;
+  --footer-foreground: #ffffff;
+  --footer-muted: #d8d0c8;
+
+  /* Fonts */
+  --font-body: "Plus_Jakarta_Sans", sans-serif;
+  --font-heading: "Fraunces", serif;
+}
+
+/* =====================================================
+   FONTS
+===================================================== */
+
+@font-face {
+  font-family: "Plus_Jakarta_Sans";
+  src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("../font/Fraunces/static/Fraunces_72pt-Regular.ttf")
+    format("truetype");
+}
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar {
+  width: 100%;
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 40px;
+
+  background-color: var(--card-background);
+  border-bottom: 1px solid var(--border);
+}
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.nav-logo img {
+  width: 40px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* =====================================================
+   NAVIGATION LINKS
+===================================================== */
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links a {
+  position: relative;
+
+  color: var(--foreground);
+  text-decoration: none;
+
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+
+  padding: 10px 0;
+
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+/* Underline */
+
+.nav-links a::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: 2px;
+
+  width: 0;
+  height: 2px;
+
+  background-color: var(--primary);
+
+  transition: width 0.2s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+#select {
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary);
+}
+
+/* Don't show the hover underline on the active link */
+.nav-links a#select:hover::after {
+  width: 0;
+}
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.nav-search {
+  width: 220px;
+  height: 35px;
+
+  display: flex;
+  align-items: center;
+
+  border: 1px solid var(--border);
+  border-radius: 20px;
+
+  background-color: var(--input-background);
+
+  overflow: hidden;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.nav-search input {
+  flex: 1;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 0 15px;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  font-family: var(--font-body);
+  font-size: 14px;
+
+  color: var(--foreground);
+}
+
+.nav-search input::placeholder {
+  color: var(--muted-foreground);
+}
+
+/* =====================================================
+   SEARCH BUTTON
+===================================================== */
+
+.nav-search button {
+  width: 42px;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.nav-search button img {
+  width: 18px;
+  height: 18px;
+}
+
+/* =====================================================
+   SEARCH FOCUS
+===================================================== */
+
+.nav-search:focus-within {
+  border-color: var(--ring);
+
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+/* =====================================================
+   USER
+===================================================== */
+
+.nav-user {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  color: var(--foreground);
+
+  font-family: var(--font-body);
+  font-size: 14px;
+
+  white-space: nowrap;
+}
+
+.user-icon {
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: transparent;
+
+  font-size: 20px;
+}
+
+
+.top-cards {
+    display: flex;
+    margin-top: 50px;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 100px;
+}
+
+.top-card {
+    width: 300px;
+    background: var(--primary-foreground);
+    border-radius: 160px 160px 0 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    font-family: var(--font-body);
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* Different card heights */
+.top-card#top1 {
+    height: 600px;
+}
+
+.top-card#top2 {
+    height: 550px;
+}
+
+.top-card#top3 {
+    height: 500px;
+}
+
+/* Image section */
+.arch-image {
+    width: 100%;
+    min-height: 0;
+    flex: 1;
+}
+
+.arch-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Content section */
+.arch-content {
+    height: 125px;
+    text-align: center;
+    padding: 10px;
+    flex-shrink: 0;
+}
+
+.arch-content h1,
+.arch-content h2 {
+    margin: 0;
+}
+
+.arch-content a {
+    display: inline-block;
+    margin-top: 10px;
+}

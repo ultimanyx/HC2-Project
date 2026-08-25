@@ -1,16 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ranking</title>
 
-    <link rel="stylesheet" href="css/user_ranking.css">
+    <link rel="stylesheet" href="css/user_ranking.css" />
 
-    <link rel="icon" href="image/logo.png">
+    <link rel="icon" href="image/logo.png" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <!-- Logo -->
+      <a href="#" class="nav-logo">
+        <img src="image/logo.png" alt="Logo" />
+      </a>
 
-</head>
-<body>
-    
-</body>
+      <!-- Navigation Bar -->
+      <div class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="#">Browse</a>
+        <a href="library.html">My Library</a>
+        <a href="ranking.html" id="select">Ranking</a>
+
+        <!-- Search -->
+        <div class="nav-search">
+          <input type="text" placeholder="Search..." />
+          <button type="button" aria-label="Search">
+            <img src="icons/search.svg" alt="search-btn" />
+          </button>
+        </div>
+
+        <!-- User -->
+        <div class="nav-user">
+          <img
+            src="icons/person-circle.svg"
+            class="user-icon"
+            alt="User-Icon"
+          />
+          <span>Welcome User</span>
+        </div>
+      </div>
+    </nav>
+
+    <div class="top-cards">
+      <!-- TOP 3 -->
+      <div class="top-card" id="top3">
+        <div class="arch-image">
+          <img src="image/shadow-slave-.jpg" alt="Shadow Slave" />
+        </div>
+
+        <div class="arch-content">
+          <h1>Top 3</h1>
+          <h2>Shadow Slave</h2>
+          <a href="#">Read</a>
+        </div>
+      </div>
+
+      <!-- TOP 1 -->
+      <div class="top-card" id="top1">
+        <div class="arch-image">
+          <img src="image/shadow-slave-.jpg" alt="Shadow Slave" />
+        </div>
+
+        <div class="arch-content">
+          <h1>Top 1</h1>
+          <h2>Shadow Slave</h2>
+          <a href="#">Read</a>
+        </div>
+      </div>
+
+      <!-- TOP 2 -->
+      <div class="top-card" id="top2">
+        <div class="arch-image">
+          <img src="image/shadow-slave-.jpg" alt="Shadow Slave" />
+        </div>
+
+        <div class="arch-content">
+          <h1>Top 2</h1>
+          <h2>Shadow Slave</h2>
+          <a href="#">Read</a>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
