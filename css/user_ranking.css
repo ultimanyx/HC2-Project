@@ -373,30 +373,49 @@ body {
 .remaining-ranking {
   display: flex;
   flex-direction: column;
-  margin: 30px 50px ;
+  margin: 30px 50px;
   padding: 50px;
   background-color: var(--card-background);
-  border-radius: 50px ;
+  border-radius: 50px;
+  gap: 0;
 }
 
+/* Table Header */
+.remaining-ranking::before {
+  content: "Ranking\A Image\A Book\A Genre\A Rating\A Change";
+  white-space: pre;
+  display: none;
+}
 
-/* Individual Book */
-
+/* Individual Row */
 .ranking-book {
   width: 100%;
-  display: flex;
+  min-height: 108px;
+  display: grid;
+  grid-template-columns: 70px 100px 2fr 1fr 100px 100px;
   align-items: center;
   gap: 10px;
-  margin-bottom: 10px;
-  padding-right: 5px;
-  padding-bottom: 5px;  
-  padding-top: 5px;
+  margin-bottom: 0;
+  padding: 5px;
+  box-sizing: border-box;
   border: var(--border) solid 2px;
+  border-bottom: none;
 }
 
+/* Round the bottom of the table */
+.ranking-book:last-child {
+  border-bottom: var(--border) solid 2px;
+}
 
-/* Ranking Book Card */
+/* Ranking number */
+.ranking-number {
+  text-align: center;
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--foreground);
+}
 
+/* Book Image */
 .ranking-book img {
   width: 88px;
   height: 108px;
@@ -406,14 +425,34 @@ body {
   border: 1px solid var(--border);
 }
 
-
-/* Book Title */
-
-.ranking-book p {
-  margin: 0;
+/* Book information */
+.book-title,
+.book-genre,
+.book-rating,
+.book-change {
   font-family: var(--font-body);
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.4;
   color: var(--foreground);
+}
+
+/* Book title */
+.book-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Genre */
+.book-genre {
+  font-size: 1rem;
+}
+
+/* Rating */
+.book-rating {
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Change */
+.book-change {
+  text-align: center;
+  font-weight: 600;
 }
