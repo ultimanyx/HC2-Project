@@ -1,14 +1,11 @@
-/* =====================================================
-   BASE
-===================================================== */
-html {
-  overflow-y: scroll;
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  overflow-y: scroll;
 }
 
 /* =====================================================
@@ -41,7 +38,7 @@ html {
   --accent-foreground: #ffffff;
 
   /* Border */
-  --border: rgba(26, 24, 38, 0.1);
+  --border: rgba(26, 24, 38, 0.10);
 
   /* Input */
   --input-background: #ede9e1;
@@ -60,7 +57,8 @@ html {
 
   /* Shadows */
   --shadow:
-    0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
+    0 20px 40px -12px rgba(0, 20, 30, 0.10),
+    0 8px 24px -6px rgba(0, 0, 0, 0.04);
 
   /* Footer */
   --footer-background: #1a1826;
@@ -71,6 +69,7 @@ html {
   --font-body: "Plus_Jakarta_Sans", sans-serif;
   --font-heading: "Fraunces", serif;
 }
+
 
 /* =====================================================
    FONTS
@@ -88,6 +87,7 @@ html {
     format("truetype");
 }
 
+
 /* =====================================================
    BODY
 ===================================================== */
@@ -97,6 +97,7 @@ body {
   background-color: var(--background);
   color: var(--foreground);
 }
+
 
 /* =====================================================
    NAVBAR
@@ -116,6 +117,7 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
+
 /* =====================================================
    LOGO
 ===================================================== */
@@ -131,6 +133,7 @@ body {
   height: auto;
   object-fit: contain;
 }
+
 
 /* =====================================================
    NAVIGATION LINKS
@@ -161,6 +164,7 @@ body {
   color: var(--primary);
 }
 
+
 /* Underline */
 
 .nav-links a::after {
@@ -185,7 +189,7 @@ body {
 
 #select {
   color: var(--primary);
-  border-bottom: 2px solid var(--primary);
+  border-bottom:2px solid var(--primary);
 }
 
 /* Don't show the hover underline on the active link */
@@ -239,6 +243,7 @@ body {
   color: var(--muted-foreground);
 }
 
+
 /* =====================================================
    SEARCH BUTTON
 ===================================================== */
@@ -264,6 +269,7 @@ body {
   height: 18px;
 }
 
+
 /* =====================================================
    SEARCH FOCUS
 ===================================================== */
@@ -271,8 +277,10 @@ body {
 .nav-search:focus-within {
   border-color: var(--ring);
 
-  box-shadow: 0 0 0 3px var(--focus-ring);
+  box-shadow:
+    0 0 0 3px var(--focus-ring);
 }
+
 
 /* =====================================================
    USER
@@ -303,239 +311,6 @@ body {
   background-color: transparent;
 
   font-size: 20px;
-}
-
-.top-cards {
-  display: flex;
-  margin-top: 50px;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 100px;
-}
-
-.top-card {
-  width: 300px;
-  background: var(--primary-foreground);
-  border-radius: 160px 160px 0 0;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  font-family: var(--font-body);
-
-  display: flex;
-  flex-direction: column;
-}
-
-/* Different card heights */
-.top-card#top1 {
-  height: 600px;
-}
-
-.top-card#top2 {
-  height: 550px;
-}
-
-.top-card#top3 {
-  height: 500px;
-}
-
-/* Image section */
-.arch-image {
-  width: 100%;
-  min-height: 0;
-  flex: 1;
-}
-
-.arch-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* ========================= Content Section ========================= */
-.arch-content {
-  height: 125px;
-  padding: 10px;
-  text-align: center;
-  flex-shrink: 0;
-}
-
-.arch-content h1 {
-  margin-bottom: 4px;
-  font-size: 1.5rem;
-  font-weight: large;
-  color: var(--foreground);
-}
-
-.arch-content h2 {
-  margin-bottom: 4px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--foreground);
-}
-
-.arch-content a {
-  display: inline-block;
-}
-
-/* ========================= Read Button ========================= */
-
-.read-button {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 7px 25px;
-  border: none;
-  border-radius: 4px;
-  background-color: var(--primary);
-  color: var(--primary-foreground);
-  font-family: var(--font-body);
-  font-size: 14px;
-  text-decoration: none;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-/* .read-button:hover {
-  background-color: var(--link-hover);
-} */
-
-/*=======================*/
-.remaining-ranking {
-  display: flex;
-  flex-direction: column;
-  margin: 30px 50px;
-  padding: 50px;
-  background-color: var(--card-background);
-  border-radius: 50px;
-  gap: 0;
-}
-
-/* =========================
-   Ranking Table
-========================= */
-
-.ranking-table {
-  width: 85%;
-  margin: 80px auto;
-  border-collapse: collapse;
-  background: var(--card-background);
-  color: var(--card-foreground);
-  font-family: var(--font-body);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-}
-
-/* Header */
-.ranking-table thead {
-  background: var(--secondary);
-}
-
-.ranking-table th {
-  padding: 14px 16px;
-  text-align: left;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--muted-foreground);
-  border-bottom: 1px solid var(--border);
-}
-
-/* Rows */
-.ranking-table tbody tr {
-  border-bottom: 1px solid var(--border);
-  transition: background 0.2s ease;
-}
-
-.ranking-table tbody tr:last-child {
-  border-bottom: none;
-}
-
-.ranking-table tbody tr:hover {
-  background: var(--background);
-}
-
-/* Cells */
-.ranking-table td {
-  padding: 12px 16px;
-  vertical-align: middle;
-  font-size: 14px;
-}
-
-/* Ranking */
-.ranking-table th:first-child,
-.ranking-table td:first-child {
-  width: 70px;
-  text-align: center;
-}
-
-.ranking-table td:first-child {
-  font-weight: 700;
-  color: var(--primary);
-}
-
-/* Cover */
-.ranking-table th:nth-child(2),
-.ranking-table td:nth-child(2) {
-  width: 70px;
-}
-
-.ranking-table td:nth-child(2) img {
-  width: 45px;
-  height: 65px;
-  display: block;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-/* Title */
-.ranking-table td:nth-child(3) {
-  font-weight: 600;
-}
-
-/* Genre */
-.ranking-table td:nth-child(4) {
-  color: var(--muted-foreground);
-}
-
-/* Rating */
-.ranking-table td:nth-child(5) {
-  font-weight: 600;
-}
-
-/* Change */
-.book-change {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-weight: 700;
-  font-size: 16px;
-}
-
-.book-change img {
-  width: 30px;
-  height: auto;
-  object-fit: contain;
-}
-
-
-.star {
-  filter: brightness(0) saturate(100%) invert(95%) sepia(51%) saturate(2063%) hue-rotate(326deg) brightness(85%) contrast(89%);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  
-}
-
-.book-change img[src*="arrow-up-short"]{
-  filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(118deg)
-    brightness(118%) contrast(119%);
- 
-}
-
-.book-change img[src*="arrow-down-short"] {
-  filter: invert(16%) sepia(99%) saturate(7404%) hue-rotate(4deg)
-    brightness(95%) contrast(118%);
 }
 
 /* =====================================================
@@ -613,6 +388,16 @@ body {
 }
 
 
+div
+
+
+
+
+
+
+
+
+
 /* Footer Links */
 
 .footer-section a {
@@ -656,4 +441,3 @@ body {
 
   color: var(--footer-muted);
 }
-
