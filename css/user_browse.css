@@ -38,7 +38,7 @@ html {
   --accent-foreground: #ffffff;
 
   /* Border */
-  --border: rgba(26, 24, 38, 0.10);
+  --border: rgba(26, 24, 38, 0.1);
 
   /* Input */
   --input-background: #ede9e1;
@@ -57,8 +57,7 @@ html {
 
   /* Shadows */
   --shadow:
-    0 20px 40px -12px rgba(0, 20, 30, 0.10),
-    0 8px 24px -6px rgba(0, 0, 0, 0.04);
+    0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
 
   /* Footer */
   --footer-background: #1a1826;
@@ -69,7 +68,6 @@ html {
   --font-body: "Plus_Jakarta_Sans", sans-serif;
   --font-heading: "Fraunces", serif;
 }
-
 
 /* =====================================================
    FONTS
@@ -87,7 +85,6 @@ html {
     format("truetype");
 }
 
-
 /* =====================================================
    BODY
 ===================================================== */
@@ -97,7 +94,6 @@ body {
   background-color: var(--background);
   color: var(--foreground);
 }
-
 
 /* =====================================================
    NAVBAR
@@ -117,7 +113,6 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
-
 /* =====================================================
    LOGO
 ===================================================== */
@@ -133,7 +128,6 @@ body {
   height: auto;
   object-fit: contain;
 }
-
 
 /* =====================================================
    NAVIGATION LINKS
@@ -164,7 +158,6 @@ body {
   color: var(--primary);
 }
 
-
 /* Underline */
 
 .nav-links a::after {
@@ -189,7 +182,7 @@ body {
 
 #select {
   color: var(--primary);
-  border-bottom:2px solid var(--primary);
+  border-bottom: 2px solid var(--primary);
 }
 
 /* Don't show the hover underline on the active link */
@@ -243,7 +236,6 @@ body {
   color: var(--muted-foreground);
 }
 
-
 /* =====================================================
    SEARCH BUTTON
 ===================================================== */
@@ -269,7 +261,6 @@ body {
   height: 18px;
 }
 
-
 /* =====================================================
    SEARCH FOCUS
 ===================================================== */
@@ -277,10 +268,8 @@ body {
 .nav-search:focus-within {
   border-color: var(--ring);
 
-  box-shadow:
-    0 0 0 3px var(--focus-ring);
+  box-shadow: 0 0 0 3px var(--focus-ring);
 }
-
 
 /* =====================================================
    USER
@@ -313,48 +302,69 @@ body {
   font-size: 20px;
 }
 
-
 .browse-header {
-    width:100% ;
-    height: 300px;
-    background-color: var(--primary);
-    font-family: var(--font-heading);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  width: 100%;
+  height: 300px;
+  background-color: var(--primary);
+  font-family: var(--font-heading);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .browse-header h1 {
-    
-    padding-left: 40px ;
-    margin-bottom: 8px;
-    font-size: 2.5rem;
+  padding-left: 40px;
+  margin-bottom: 8px;
+  font-size: 2.5rem;
 }
 
 .browse-header p {
-    padding-left: 40px ;
-    font-size: 16px;
+  padding-left: 40px;
+  font-size: 16px;
 }
 
+.filter {
+  margin: 20px auto;
+  display: flex;
+  width: 70%;
+  height: 100px;
+  background-color: white;
+  border: var(--border) solid 1px;
+  border-radius: 8px;
+}
 
+.filter-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10px;
+  padding: 10px 40px;
+  gap: 20px;
+}
 
+.filter-group label {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--secondary-foreground);
+}
 
+.filter-group select,
+.filter-group input {
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--background);
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--foreground);
+  outline: none;
+  transition: border 0.2s;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#min-rating {
+    width: 70px ;
+}
 
 
 /* =====================================================
@@ -369,20 +379,17 @@ body {
   color: var(--footer-foreground);
 }
 
-
 /* Footer Content */
 
 .footer-content {
   display: grid;
 
-  grid-template-columns:
-    3fr 1fr 1fr;
+  grid-template-columns: 3fr 1fr 1fr;
 
   gap: 50px;
 
   padding: 45px 60px;
 }
-
 
 /* Footer Section */
 
@@ -390,7 +397,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-
 
 /* Footer Heading */
 
@@ -405,7 +411,6 @@ body {
   color: var(--footer-foreground);
 }
 
-
 /* Footer Logo */
 
 .footer-logo {
@@ -414,7 +419,6 @@ body {
 
   margin-bottom: 12px;
 }
-
 
 /* Footer Description */
 
@@ -430,17 +434,6 @@ body {
 
   color: var(--footer-muted);
 }
-
-
-
-
-
-
-
-
-
-
-
 
 /* Footer Links */
 
@@ -464,12 +457,10 @@ body {
   color: var(--primary);
 }
 
-
 /* Footer Bottom */
 
 .footer-bottom {
-  border-top:
-    1px solid rgba(255, 255, 255, 0.10);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 
   padding: 18px 60px;
 
