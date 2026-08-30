@@ -380,79 +380,119 @@ body {
   gap: 0;
 }
 
-/* Table Header */
-.remaining-ranking::before {
-  content: "Ranking\A Image\A Book\A Genre\A Rating\A Change";
-  white-space: pre;
-  display: none;
+/* =========================
+   Ranking Table
+========================= */
+
+.ranking-table {
+  width: 85%;
+  margin: 80px auto ;
+  border-collapse: collapse;
+  background: var(--card-background);
+  color: var(--card-foreground);
+  font-family: var(--font-body);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
 }
 
-/* Individual Row */
-.ranking-book {
-  width: 100%;
-  min-height: 108px;
-  display: grid;
-  grid-template-columns: 70px 100px 2fr 1fr 100px 100px;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 0;
-  padding: 5px;
-  box-sizing: border-box;
-  border: var(--border) solid 2px;
+/* Header */
+.ranking-table thead {
+  background: var(--secondary);
+}
+
+.ranking-table th {
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted-foreground);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Rows */
+.ranking-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s ease;
+}
+
+.ranking-table tbody tr:last-child {
   border-bottom: none;
 }
 
-/* Round the bottom of the table */
-.ranking-book:last-child {
-  border-bottom: var(--border) solid 2px;
+.ranking-table tbody tr:hover {
+  background: var(--background);
 }
 
-/* Ranking number */
-.ranking-number {
+/* Cells */
+.ranking-table td {
+  padding: 12px 16px;
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+/* Ranking */
+.ranking-table th:first-child,
+.ranking-table td:first-child {
+  width: 70px;
   text-align: center;
-  font-family: var(--font-body);
-  font-weight: 600;
-  color: var(--foreground);
 }
 
-/* Book Image */
-.ranking-book img {
-  width: 88px;
-  height: 108px;
-  flex-shrink: 0;
+.ranking-table td:first-child {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* Cover */
+.ranking-table th:nth-child(2),
+.ranking-table td:nth-child(2) {
+  width: 70px;
+}
+
+.ranking-table td:nth-child(2) img {
+  width: 45px;
+  height: 65px;
+  display: block;
   object-fit: cover;
-  border-radius: 3px;
-  border: 1px solid var(--border);
+  border-radius: 5px;
 }
 
-/* Book information */
-.book-title,
-.book-genre,
-.book-rating,
-.book-change {
-  font-family: var(--font-body);
-  color: var(--foreground);
-}
-
-/* Book title */
-.book-title {
-  font-size: 1rem;
+/* Title */
+.ranking-table td:nth-child(3) {
   font-weight: 600;
 }
 
 /* Genre */
-.book-genre {
-  font-size: 1rem;
+.ranking-table td:nth-child(4) {
+  color: var(--muted-foreground);
 }
 
 /* Rating */
-.book-rating {
-  text-align: center;
+.ranking-table td:nth-child(5) {
   font-weight: 600;
 }
 
 /* Change */
 .book-change {
-  text-align: center;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 700;
+  font-size: 16px;
 }
+
+.book-change img {
+  width: 30px;
+  height: auto;
+  object-fit: contain;
+}
+
+.book-change img[src*="arrow-up-short"] {
+  filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(118deg) brightness(118%) contrast(119%);
+}
+
+.book-change img[src*="arrow-down-short"] {
+  filter: invert(16%) sepia(99%) saturate(7404%) hue-rotate(4deg) brightness(95%) contrast(118%);
+}
+
