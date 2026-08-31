@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<style>
+  :root{
+    --sidebar-bg:#2b2733;
+    --sidebar-bg-light:#3a3545;
+    --page-bg:#f4f2f6;
+    --card-bg:#ffffff;
+    --border:#e7e3ee;
+    --text-dark:#2b2733;
+    --text-muted:#8b869a;
+    --purple:#9b7ee8;
+    --blue:#4a6cf7;
+    --orange:#f5a623;
+    --green:#3ec28f;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Trebuchet MS','Segoe UI',sans-serif;
+    background:var(--page-bg);
+    color:var(--text-dark);
+  }
+  .layout{
+    display:flex;
+    min-height:100vh;
+  }
+ 
+  /* Sidebar */
+  .sidebar{
+    width:220px;
+    background:var(--sidebar-bg);
+    color:#cfc9de;
+    display:flex;
+    flex-direction:column;
+    padding:18px 14px;
+  }
+  .nav-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 14px;
+    margin-bottom:10px;
+    border-radius:6px;
+    font-size:14px;
+    cursor:pointer;
+    background:var(--sidebar-bg-light);
+    transition:background .15s ease;
+  }
+  .nav-item:hover{ background:#463f56; }
+  .nav-item.active{
+    background:#5b4fce;
+    color:#fff;
+  }
+  .nav-item.logout{
+    margin-top:auto;
+  }
+ 
+  /* Main */
+  .main{
+    flex:1;
+    padding:18px 22px;
+  }
+  .topbar{
+    background:var(--card-bg);
+    border:1px solid #9fb8f0;
+    border-radius:6px;
+    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:20px;
+  }
+  .topbar .avatar{
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    border:2px solid var(--text-dark);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+  }
+ 
+  .grid-top{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-bottom:18px;
+  }
+  .card{
+    background:var(--card-bg);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:16px 18px;
+  }
+  .card-label{
+    font-size:12px;
+    color:var(--text-muted);
+    margin-bottom:2px;
+  }
+  .card-value{
+    font-size:26px;
+    font-weight:700;
+    margin-bottom:6px;
+  }
+  .chart-wrap{
+    height:170px;
+    position:relative;
+  }
+  .legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 22px;
+    margin-top:12px;
+    font-size:12px;
+    color:var(--text-muted);
+  }
+  .legend-item{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    min-width:110px;
+    justify-content:space-between;
+  }
+  .legend-item .name{
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    display:inline-block;
+  }
+  .legend-item .pct{
+    color:var(--text-dark);
+    font-weight:600;
+  }
+ 
+  .users-card .chart-wrap{
+    height:120px;
+  }
+  .users-row{
+    display:flex;
+    gap:24px;
+    align-items:center;
+  }
+  .users-row .stat{ width:140px; flex-shrink:0; }
+  .users-row .chart-wrap{ flex:1; }
+</style>
+</head>
+<body>
+<div class="layout">
+ 
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="nav-item active">Dashboard</div>
+    <div class="nav-item">Manage Users</div>
+    <div class="nav-item">Manage Books</div>
+    <div class="nav-item">Ads Performance</div>
+    <div class="nav-item">Archive</div>
+    <div class="nav-item logout">Log Out</div>
+  </div>
+ 
+  <!-- Main content -->
+  <div class="main">
+    <div class="topbar">
+      <span class="avatar">👤</span>
+      Welcome Admin
+    </div>
+ 
+    <div class="grid-top">
+      <!-- Advertisement Revenue -->
+      <div class="card">
+        <div class="card-label">Advertisement Revenue</div>
+        <div class="card-value">100</div>
+        <div class="chart-wrap"><canvas id="revenuePie"></canvas></div>
+        <div class="legend" id="revenueLegend"></div>
+      </div>
+ 
+      <!-- Popular Genre -->
+      <div class="card">
+        <div class="card-label">Popular Genre</div>
+        <div class="card-value">00</div>
+        <div class="chart-wrap"><canvas id="genreBar"></canvas></div>
+        <div class="legend" id="genreLegend"></div>
+      </div>
+    </div>
+ 
+    <!-- Number of Users -->
+    <div class="card users-card">
+      <div class="users-row">
+        <div class="stat">
+          <div class="card-label">Number of Users</div>
+          <div class="card-value">354</div>
+        </div>
+        <div class="chart-wrap"><canvas id="usersLine"></canvas></div>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<script>
+const colors = {
+  purple:'#9b7ee8',
+  blue:'#4a6cf7',
+  orange:'#f5a623',
+  green:'#3ec28f'
+};
+ 
+// ---- Advertisement Revenue Pie ----
+const revenueData = [
+  {label:'Advertisement 1', value:25, color:colors.purple},
+  {label:'Advertisement 2', value:25, color:colors.blue},
+  {label:'Advertisement 3', value:25, color:colors.orange},
+  {label:'Advertisement 4', value:25, color:colors.green},
+];
+new Chart(document.getElementById('revenuePie'), {
+  type:'pie',
+  data:{
+    labels: revenueData.map(d=>d.label),
+    datasets:[{
+      data: revenueData.map(d=>d.value),
+      backgroundColor: revenueData.map(d=>d.color),
+      borderWidth:0
+    }]
+  },
+  options:{
+    plugins:{ legend:{ display:false } },
+    maintainAspectRatio:false
+  }
+});
+const revenueLegendEl = document.getElementById('revenueLegend');
+revenueData.forEach(d=>{
+  revenueLegendEl.innerHTML += `<div class="legend-item"><span class="name"><span class="dot" style="background:${d.color}"></span>${d.label}</span><span class="pct">${d.value}%</span></div>`;
+});
+ 
+// ---- Popular Genre Bar ----
+const genreData = [
+  {label:'Action', value:20, color:colors.purple},
+  {label:'Fantasy', value:90, color:colors.blue},
+  {label:'Thriller', value:30, color:colors.orange},
+  {label:'Romance', value:80, color:colors.green},
+];
+new Chart(document.getElementById('genreBar'), {
+  type:'bar',
+  data:{
+    labels: genreData.map(d=>d.label),
+    datasets:[{
+      data: genreData.map(d=>d.value),
+      backgroundColor: genreData.map(d=>d.color),
+      borderRadius:4,
+      maxBarThickness:34
+    }]
+  },
+  options:{
+    plugins:{ legend:{ display:false } },
+    maintainAspectRatio:false,
+    scales:{
+      x:{ grid:{ display:false }, ticks:{ display:false } },
+      y:{ display:false, max:100 }
+    }
+  }
+});
+const genreLegendEl = document.getElementById('genreLegend');
+genreData.forEach(d=>{
+  genreLegendEl.innerHTML += `<div class="legend-item"><span class="name"><span class="dot" style="background:${d.color}"></span>${d.label}</span><span class="pct">${d.value}%</span></div>`;
+});
+ 
+// ---- Number of Users Line ----
+const usersValues = [40,55,48,60,52,70,65,80,72,90,85,100,95,110,105,120];
+new Chart(document.getElementById('usersLine'), {
+  type:'line',
+  data:{
+    labels: usersValues.map((_,i)=>i),
+    datasets:[{
+      data: usersValues,
+      borderColor: colors.blue,
+      borderWidth:2,
+      pointRadius:0,
+      tension:0.35,
+      fill:false
+    }]
+  },
+  options:{
+    plugins:{ legend:{ display:false } },
+    maintainAspectRatio:false,
+    scales:{
+      x:{ display:false },
+      y:{ display:false }
+    }
+  }
+});
+</script>
+</body>
+</html>
+ 
