@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Author Dashboard</title>
+<link rel="stylesheet" href="css/author_dashboard.css">
+</head>
+<body>
+<div class="layout">
+ 
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="nav-item active">Dashboard</div>
+    <div class="nav-item">My Books</div>
+    <div class="nav-item">Add New Book</div>
+    <div class="nav-item">Earnings</div>
+    <div class="nav-item">Reviews</div>
+    <div class="nav-item">Messages</div>
+    <div class="nav-item logout">Log Out</div>
+  </div>
+ 
+  <!-- Main content -->
+  <div class="main">
+    <div class="topbar">
+      <span class="avatar">👤</span>
+      Welcome, Author
+    </div>
+ 
+    <!-- Top stat strip -->
+    <div class="stat-strip">
+      <div class="stat-card">
+        <div class="card-label">Total Books</div>
+        <div class="card-value">12</div>
+      </div>
+      <div class="stat-card">
+        <div class="card-label">Total Sales</div>
+        <div class="card-value">2,480</div>
+      </div>
+      <div class="stat-card">
+        <div class="card-label">Earnings</div>
+        <div class="card-value">$6,150</div>
+      </div>
+      <div class="stat-card">
+        <div class="card-label">Avg Rating</div>
+        <div class="card-value">4.6</div>
+      </div>
+    </div>
+ 
+    <div class="grid-top">
+      <!-- Sales Trend -->
+      <div class="card">
+        <div class="card-label">Sales This Year</div>
+        <div class="card-value">2,480</div>
+        <div class="chart-wrap">
+          <svg class="line-chart" viewBox="0 0 300 100" preserveAspectRatio="none">
+            <path d="M0,80 L25,68 L50,72 L75,55 L100,60 L125,42 L150,48 L175,30 L200,36 L225,20 L250,26 L275,10 L300,15" />
+          </svg>
+        </div>
+      </div>
+ 
+      <!-- Sales by Book -->
+      <div class="card">
+        <div class="card-label">Sales Share by Book</div>
+        <div class="card-value">100%</div>
+        <div class="chart-wrap">
+          <div class="pie"></div>
+        </div>
+        <div class="legend">
+          <div class="legend-item"><span class="name"><span class="dot" style="background:var(--purple)"></span>The Last Chapter</span><span class="pct">45%</span></div>
+          <div class="legend-item"><span class="name"><span class="dot" style="background:var(--blue)"></span>Silent Harbor</span><span class="pct">25%</span></div>
+          <div class="legend-item"><span class="name"><span class="dot" style="background:var(--orange)"></span>Winter's Edge</span><span class="pct">18%</span></div>
+          <div class="legend-item"><span class="name"><span class="dot" style="background:var(--green)"></span>Others</span><span class="pct">12%</span></div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- My Books table -->
+    <div class="card books-card">
+      <div class="card-label">My Books</div>
+      <table class="books-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Status</th>
+            <th>Sales</th>
+            <th>Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>The Last Chapter</td>
+            <td>Fantasy</td>
+            <td><span class="status published">Published</span></td>
+            <td>1,116</td>
+            <td><span class="stars">★★★★★</span></td>
+          </tr>
+          <tr>
+            <td>Silent Harbor</td>
+            <td>Thriller</td>
+            <td><span class="status published">Published</span></td>
+            <td>620</td>
+            <td><span class="stars">★★★★☆</span></td>
+          </tr>
+          <tr>
+            <td>Winter's Edge</td>
+            <td>Romance</td>
+            <td><span class="status review">In Review</span></td>
+            <td>446</td>
+            <td><span class="stars">★★★★☆</span></td>
+          </tr>
+          <tr>
+            <td>Beyond the Veil</td>
+            <td>Sci-Fi</td>
+            <td><span class="status draft">Draft</span></td>
+            <td>0</td>
+            <td><span class="stars">—</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+ 
+    <!-- Reviews summary -->
+    <div class="card">
+      <div class="reviews-row">
+        <div class="stat">
+          <div class="card-label">Reader Reviews</div>
+          <div class="card-value">312</div>
+        </div>
+        <div class="chart-wrap">
+          <div class="bar-chart">
+            <div class="bar-col">
+              <div class="bar" style="height:12%; background:var(--orange);"></div>
+              <div class="bar-name">1★</div>
+            </div>
+            <div class="bar-col">
+              <div class="bar" style="height:8%; background:var(--orange);"></div>
+              <div class="bar-name">2★</div>
+            </div>
+            <div class="bar-col">
+              <div class="bar" style="height:20%; background:var(--yellow);"></div>
+              <div class="bar-name">3★</div>
+            </div>
+            <div class="bar-col">
+              <div class="bar" style="height:45%; background:var(--blue);"></div>
+              <div class="bar-name">4★</div>
+            </div>
+            <div class="bar-col">
+              <div class="bar" style="height:90%; background:var(--green);"></div>
+              <div class="bar-name">5★</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+</body>
+</html>
+ 
