@@ -419,7 +419,7 @@ a {
   padding: 14px 30px;
   border: none;
   border-radius: 4px;
-  background-color: var(--primary);
+  background-color: var(--link);
   color: var(--primary-foreground);
   font-family: var(--font-body);
   font-size: 18px;
