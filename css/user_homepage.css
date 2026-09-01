@@ -98,9 +98,15 @@ body {
   color: var(--foreground);
 }
 
-a {
+.weeklycards-rows a{
   text-decoration: none;
 }
+
+.weeklycards-rows a:hover{
+   cursor:;
+}
+
+
 
 /* =====================================================
    NAVBAR
