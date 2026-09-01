@@ -98,15 +98,6 @@ body {
   color: var(--foreground);
 }
 
-.weeklycards-rows a{
-  text-decoration: none;
-}
-
-.weeklycards-rows a:hover{
-   cursor:;
-}
-
-
 
 /* =====================================================
    NAVBAR
@@ -173,9 +164,7 @@ body {
   color: var(--primary);
 }
 
-
 /* Underline */
-
 .nav-links a::after {
   content: "";
 
@@ -205,6 +194,7 @@ body {
 .nav-links a#select:hover::after {
   width: 0;
 }
+
 
 /* =====================================================
    SEARCH
@@ -252,11 +242,6 @@ body {
   color: var(--muted-foreground);
 }
 
-
-/* =====================================================
-   SEARCH BUTTON
-===================================================== */
-
 .nav-search button {
   width: 42px;
   height: 100%;
@@ -278,16 +263,9 @@ body {
   height: 18px;
 }
 
-
-/* =====================================================
-   SEARCH FOCUS
-===================================================== */
-
 .nav-search:focus-within {
   border-color: var(--ring);
-
-  box-shadow:
-    0 0 0 3px var(--focus-ring);
+  box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
 
@@ -365,45 +343,41 @@ body {
 
 
 /* =====================================================
-   WEEKLY BOOKS
+   WEEKLY BOOKS – FIXED LAYOUT (row, equal cards)
 ===================================================== */
 
 #weekly-books {
   margin-top: 40px;
   margin-left: 40px;
-
   font-family: var(--font-heading);
-
   font-size: 1.5rem;
   font-weight: 700;
-
   color: var(--foreground);
 }
 
 .weeklycards-rows {
-  display: flex;
-  flex-direction: row;
-
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 25px;
-
   margin: 30px 40px;
 }
 
-
-/* Weekly Card */
+.weeklycards-rows a {
+  text-decoration: none;
+}
 
 .weekly-card {
-  flex: 1;
-
   background-color: var(--card-background);
-
   border: 1px solid var(--border);
   border-radius: 12px;
-
-  padding: 20px;
-
+  padding: 12px 15px;
   box-shadow: var(--shadow);
-
+  display: flex;
+  flex-direction: column;   
+  align-items: center;
+  height: 400px; 
+  max-width: 300px;
+  overflow: hidden;
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
@@ -411,80 +385,58 @@ body {
 
 .weekly-card:hover {
   transform: translateY(-3px);
-
-  box-shadow:
-    0 15px 30px -10px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.12);
 }
-
-
-/* Weekly Card Image */
 
 .weekly-card img {
-  width: 275px;
-  height: auto;
-
+  width: 100%;
+  max-width: 200px;
+  height: 280px;             /* fixed height – won't stretch card */
+  object-fit: contain;       /* keeps proportions, no distortion */
   display: block;
-
-  margin-left: auto;
-  margin-right: auto;
-
   border-radius: 6px;
+  flex-shrink: 0;
+  margin-top: 15px;
 }
-
-
-/* Weekly Card Title */
 
 .weekly-card h3 {
   margin-top: 15px;
-
   font-family: var(--font-heading);
-
-  font-size: 20px;
-
+  font-size: 18px;
+  text-align: center;
   color: var(--foreground);
+  flex: 0 0 auto;
 }
 
-
-/* Weekly Card Text */
-
 .weekly-card p {
-  margin-top: 8px;
-
+  margin-top: 6px;
   font-family: var(--font-body);
-
   font-size: 13px;
+  text-align: center;
   line-height: 1.5;
-
   color: var(--muted-foreground);
+  flex: 0 0 auto;
 }
 
 
 /* =====================================================
-   TOP 10
+   TOP 10 – IMAGES HAVE FIXED SIZE
 ===================================================== */
 
 .top10 {
   width: 100%;
 
   display: grid;
-
-  grid-template-columns:
-    repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 
   gap: 50px;
 
   padding: 30px 40px;
 }
 
-
-/* Genre Column */
-
 .top10-books {
   min-width: 0;
 }
-
-
-/* Genre Heading */
 
 .top10-books h3 {
   margin-bottom: 15px;
@@ -497,8 +449,10 @@ body {
   color: var(--foreground);
 }
 
-
-/* Individual Book */
+.top10-books a {
+  text-decoration: none;
+  display: block;
+}
 
 .book {
   width: 100%;
@@ -511,32 +465,22 @@ body {
   margin-bottom: 7px;
 }
 
-
-/* Book Cover */
-
 .book img {
-  width: 48px;
-  height: 68px;
-
+  width: 78px;              /* fixed width */
+  height: 98px;             /* fixed height */
   flex-shrink: 0;
-
   object-fit: cover;
-
   border-radius: 3px;
-
   border: 1px solid var(--border);
 }
-
-
-/* Book Title */
 
 .book p {
   margin: 0;
 
   font-family: var(--font-body);
 
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 550;
 
   line-height: 1.4;
 
@@ -556,30 +500,20 @@ body {
   color: var(--footer-foreground);
 }
 
-
-/* Footer Content */
-
 .footer-content {
   display: grid;
 
-  grid-template-columns:
-    3fr 1fr 1fr;
+  grid-template-columns: 3fr 1fr 1fr;
 
   gap: 50px;
 
   padding: 45px 60px;
 }
 
-
-/* Footer Section */
-
 .footer-section {
   display: flex;
   flex-direction: column;
 }
-
-
-/* Footer Heading */
 
 .footer-section h3 {
   margin-bottom: 15px;
@@ -592,18 +526,12 @@ body {
   color: var(--footer-foreground);
 }
 
-
-/* Footer Logo */
-
 .footer-logo {
   width: 45px;
   height: auto;
 
   margin-bottom: 12px;
 }
-
-
-/* Footer Description */
 
 .footer-section p {
   max-width: 280px;
@@ -617,9 +545,6 @@ body {
 
   color: var(--footer-muted);
 }
-
-
-/* Footer Links */
 
 .footer-section a {
   width: fit-content;
@@ -641,12 +566,8 @@ body {
   color: var(--primary);
 }
 
-
-/* Footer Bottom */
-
 .footer-bottom {
-  border-top:
-    1px solid rgba(255, 255, 255, 0.10);
+  border-top: 1px solid rgba(255, 255, 255, 0.10);
 
   padding: 18px 60px;
 
@@ -665,7 +586,7 @@ body {
 
 
 /* =====================================================
-   BUTTONS
+   BUTTONS – (unused in current HTML, see notes below)
 ===================================================== */
 
 .btn-primary {
@@ -694,7 +615,6 @@ body {
   transform: translateY(-1px);
 }
 
-
 .btn-secondary {
   padding: 10px 20px;
 
@@ -711,7 +631,6 @@ body {
   cursor: pointer;
 }
 
-
 .btn-accent {
   padding: 10px 20px;
 
@@ -727,7 +646,6 @@ body {
 
   cursor: pointer;
 }
-
 
 .btn-danger {
   padding: 10px 20px;
@@ -746,11 +664,12 @@ body {
 }
 
 
-
 /* =====================================================
-   RESPONSIVE - TABLET
+   RESPONSIVE
 ===================================================== */
 
+
+/* 
 @media (max-width: 1000px) {
 
   .navbar {
@@ -766,11 +685,18 @@ body {
   }
 
   .weeklycards-rows {
-    gap: 15px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin: 25px 30px;
+  }
+
+  .weekly-card {
+    height: 440px;
   }
 
   .weekly-card img {
-    width: 100%;
+    height: 240px;
+    max-width: 180px;
   }
 
   .top10 {
@@ -779,35 +705,23 @@ body {
   }
 
   .footer-content {
-    grid-template-columns:
-      2fr 1fr 1fr;
-
+    grid-template-columns: 2fr 1fr 1fr;
     padding: 40px;
   }
 }
-
-
-/* =====================================================
-   RESPONSIVE - MOBILE
-===================================================== */
 
 @media (max-width: 800px) {
 
   .navbar {
     height: auto;
-
     flex-direction: column;
-
     gap: 15px;
-
     padding: 15px 20px;
   }
 
   .nav-links {
     width: 100%;
-
     flex-wrap: wrap;
-
     justify-content: center;
   }
 
@@ -828,12 +742,18 @@ body {
   }
 
   .weeklycards-rows {
-    display: grid;
-
-    grid-template-columns:
-      repeat(2, 1fr);
-
+    grid-template-columns: repeat(2, 1fr);
     margin: 25px 20px;
+    gap: 18px;
+  }
+
+  .weekly-card {
+    height: 420px;
+  }
+
+  .weekly-card img {
+    height: 220px;
+    max-width: 160px;
   }
 
   #weekly-books {
@@ -842,32 +762,21 @@ body {
 
   .top10 {
     grid-template-columns: 1fr;
-
     gap: 35px;
-
     padding: 25px 20px;
   }
 
   .footer-content {
-    grid-template-columns:
-      1fr 1fr;
-
+    grid-template-columns: 1fr 1fr;
     gap: 30px;
-
     padding: 35px 30px;
   }
 }
-
-
-/* /* =====================================================
-   RESPONSIVE - SMALL MOBILE
-===================================================== */
 
 @media (max-width: 500px) {
 
   .nav-links {
     flex-direction: column;
-
     gap: 8px;
   }
 
@@ -893,20 +802,27 @@ body {
 
   .weeklycards-rows {
     grid-template-columns: 1fr;
+    margin: 20px;
+    gap: 20px;
+  }
+
+  .weekly-card {
+    height: 420px;
+    max-width: 320px;
+    margin: 0 auto;
   }
 
   .weekly-card img {
-    width: 100%;
-    max-width: 275px;
+    height: 220px;
+    max-width: 160px;
   }
 
   .footer-content {
     grid-template-columns: 1fr;
-
     padding: 30px 20px;
   }
 
   .footer-bottom {
     padding: 15px 20px;
   }
-} 
+} */
