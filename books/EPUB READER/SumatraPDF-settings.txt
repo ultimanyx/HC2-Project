@@ -119,8 +119,8 @@ FileStates [
 		OpenCount = 1
 		UseDefaultState = false
 		DisplayMode = continuous
-		ScrollPos = -1 -1
-		PageNo = 1
+		ScrollPos = -1 406.646
+		PageNo = 2
 		Zoom = fit page
 		Rotation = 0
 		WindowState = 1
@@ -166,10 +166,10 @@ SessionData [
 			[
 				FilePath = C:\Users\AXIS\Desktop\HC2 Project\books\Historical\Quo Vadis A Narrative of the Time of Nero by Henryk Sienkiewicz\pg2853-images-3.epub
 				DisplayMode = continuous
-				PageNo = 1
+				PageNo = 2
 				Zoom = fit page
 				Rotation = 0
-				ScrollPos = -1 -1
+				ScrollPos = -1 406.646
 				ShowToc = true
 			]
 		]
