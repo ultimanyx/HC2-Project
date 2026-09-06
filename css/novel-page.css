@@ -426,6 +426,9 @@ a {
   transition: background-color 0.2s ease;
 }
 
+/* =====================================================
+   CHAPTER TABLE HEADER
+===================================================== */
 
 .chapter-container {
   display: flex;
@@ -439,8 +442,8 @@ a {
 
 .container-header {
   padding: 20px;
-  background-color: var(--foreground);
-  color: var(--primary-muted);
+  background-color: var(--primary-muted);
+  color: var(--accent-foreground);
   border-radius: 12px 12px 0 0;
   border-bottom: #ffffff solid 1px;
   display: flex;
@@ -449,48 +452,59 @@ a {
 }
 
 .container-header img {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   margin-left: 25px;
-  filter: brightness(0) saturate(100%) invert(41%) sepia(77%) saturate(444%) hue-rotate(352deg) brightness(101%) contrast(99%);
+  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
 }
 
 .container-header h3{
   letter-spacing: 1.5px;
 }
 
+/* =====================================================
+   CHAPTER TABLE
+===================================================== */
+
 .chapter-table {
   width: 100%;
-  padding: 0;
-  background-color: var(--accent-foreground);
-  
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: var(--card-background);
+  color: var(--card-foreground);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
 }
 
-#chapter-list {
-  border-collapse: separate;
-  border-spacing: 0;
-  width: 100%;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  overflow: auto;
-
+.chapter-table tbody tr {
+  border-bottom: 1px solid var(--border);
 }
 
-#chapter-list tr{
-  background-color: var(--foreground);
+.chapter-table tbody tr:last-child {
+  border-bottom: none;
 }
 
-#chapter-list td {
-  padding: 13px;
-  border: 1px dotted var(--card-background);
-  font-weight: bold;
-  padding: 10px;
+/* Zebra striping for readability */
+.chapter-table tbody tr:nth-child(even) {
+  background-color: var(--secondary);
+}
+
+
+.chapter-table td {
+  padding: 15px 20px;
   text-align: left;
-
 }
 
-#chapter-list a{
-  color: var(--primary-muted);
+.chapter-table td a {
+  display: block;
+  width: 100%;
+  color: var(--foreground);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
 }
 
 
