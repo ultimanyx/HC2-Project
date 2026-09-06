@@ -17,20 +17,31 @@
         <a href="browse.html">Browse</a>
         <a href="library.html">My Library</a>
         <a href="ranking.html">Ranking</a>
+
         <div class="nav-search">
           <input type="text" placeholder="Search..." />
           <button type="button" aria-label="Search">
             <img src="/icons/search.svg" alt="search-btn" />
           </button>
         </div>
-        <div class="nav-user">
-          <img
-            src="/icons/person-circle.svg"
-            class="user-icon"
-            alt="User-Icon"
-          />
-          <span>Welcome User</span>
+
+        <div class="nav-user-dropdown">
+          <div class="nav-user" tabindex="0" role="button" aria-haspopup="true">
+            <img src="/icons/person-circle.svg" class="user-icon" alt="User-Icon" />
+            <span>Welcome User</span>
+            <span class="dropdown-arrow"><img src="/icons/caret-down-fill.svg" alt="triangle-down"></span>
+          </div>
+
+          <!-- Dropdown Menu -->
+          <div class="dropdown-menu" role="menu">
+            <a href="#" role="menuitem">Profile</a>
+            <a href="#" role="menuitem">Settings</a>
+            <a href="#" role="menuitem">Help</a>
+            <div class="dropdown-divider"></div>
+            <a href="#" role="menuitem" class="logout-item">Logout</a>
+          </div>
         </div>
+
       </div>
     </nav>
 
@@ -288,16 +299,6 @@
             Discover your next story and explore novels worth getting lost in.
           </p>
         </div>
-
-        <!-- Quick Links
-    <div class="footer-section">
-      <h3>Quick Links</h3>
-
-      <a href="#">Home</a>
-      <a href="#">Browse</a>
-      <a href="#">My Library</a>
-      <a href="#">Trending</a>
-    </div> -->
 
         <div class="footer-section">
           <h3>Hot Genres</h3>

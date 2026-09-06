@@ -11,19 +11,15 @@
   </head>
   <body>
     <nav class="navbar">
-      <!-- Logo -->
       <a href="#" class="nav-logo">
         <img src="/image/logo.png" alt="Logo" />
       </a>
-
-      <!-- Navigation Bar -->
       <div class="nav-links">
         <a href="home.html">Home</a>
         <a href="browse.html">Browse</a>
         <a href="library.html">My Library</a>
         <a href="ranking.html" id="select">Ranking</a>
 
-        <!-- Search -->
         <div class="nav-search">
           <input type="text" placeholder="Search..." />
           <button type="button" aria-label="Search">
@@ -31,15 +27,23 @@
           </button>
         </div>
 
-        <!-- User -->
-        <div class="nav-user">
-          <img
-            src="/icons/person-circle.svg"
-            class="user-icon"
-            alt="User-Icon"
-          />
-          <span>Welcome User</span>
+        <div class="nav-user-dropdown">
+          <div class="nav-user" tabindex="0" role="button" aria-haspopup="true">
+            <img src="/icons/person-circle.svg" class="user-icon" alt="User-Icon" />
+            <span>Welcome User</span>
+            <span class="dropdown-arrow"><img src="/icons/caret-down-fill.svg" alt="triangle-down"></span>
+          </div>
+
+          <!-- Dropdown Menu -->
+          <div class="dropdown-menu" role="menu">
+            <a href="#" role="menuitem">Profile</a>
+            <a href="#" role="menuitem">Settings</a>
+            <a href="#" role="menuitem">Help</a>
+            <div class="dropdown-divider"></div>
+            <a href="#" role="menuitem" class="logout-item">Logout</a>
+          </div>
         </div>
+
       </div>
     </nav>
 

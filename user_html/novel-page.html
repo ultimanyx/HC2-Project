@@ -1,29 +1,25 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+  <!doctype html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Home</title>
 
-    <link rel="stylesheet" href="/css/novel-page.css" />
+      <link rel="stylesheet" href="/css/novel-page.css" />
 
-    <link rel="icon" type="image" href="/image/logo.png" />
-  </head>
-  <body>
-    <nav class="navbar">
-      <!-- Logo -->
+      <link rel="icon" type="image" href="/image/logo.png" />
+    </head>
+    <body>
+      <nav class="navbar">
       <a href="#" class="nav-logo">
         <img src="/image/logo.png" alt="Logo" />
       </a>
-
-      <!-- Navigation Bar -->
       <div class="nav-links">
         <a href="home.html" id="select">Home</a>
         <a href="browse.html">Browse</a>
         <a href="library.html">My Library</a>
         <a href="ranking.html">Ranking</a>
 
-        <!-- Search -->
         <div class="nav-search">
           <input type="text" placeholder="Search..." />
           <button type="button" aria-label="Search">
@@ -31,224 +27,232 @@
           </button>
         </div>
 
-        <!-- User -->
-        <div class="nav-user">
-          <img
-            src="/icons/person-circle.svg"
-            class="user-icon"
-            alt="User-Icon"
-          />
-          <span>Welcome User</span>
-        </div>
-      </div>
-    </nav>
+        <div class="nav-user-dropdown">
+          <div class="nav-user" tabindex="0" role="button" aria-haspopup="true">
+            <img src="/icons/person-circle.svg" class="user-icon" alt="User-Icon" />
+            <span>Welcome User</span>
+            <span class="dropdown-arrow"><img src="/icons/caret-down-fill.svg" alt="triangle-down"></span>
+          </div>
 
-    <div class="header-container">
-      <img src="/books/Historical/A Tale of Two Cities by Charles Dickens/a-tale-of-two-cities-9781416503064_lg.jpg" alt="shadowslave" />
-      <div class="header">
-        <h1>A TALE OF TWO CITIES</h1>
-        <span>
-          <img src="/icons/book-half.svg" alt="bookicon" class="book-icon" />
-          <p class="genre">Historical</p>
-        </span>
-        <span>
-          <img
-            src="/icons/journal-text.svg"
-            alt="chaptericon"
-            class="chapter-icon"
-          />
-          <p class="chapter-count">21 Chapters</p>
-        </span>
-        <div class="description">
-          <h3>Synopsis</h3>
-          <p>
-            A Tale of Two Cities is a historical novel published in 1859 by English author Charles Dickens, set in London and Paris before and during the French Revolution. The novel tells the story of the French Doctor Manette, his 18-year-long imprisonment in the Bastille in Paris, and his release to live in London with his daughter Lucie whom he had never met. The story is set against the conditions that led up to the French Revolution and the Reign of Terror.
-          </p>
-        </div>
-
-        <div class="star">
-          <p>Rate this Book!</p>
-
-        </div>
-
-        <div class="button-container">
-          <a href="/user_html/novel_chapter1.html" class="read-button" >Read First Chapter</a>
-
-          <a href="#" class="add-library-button" >+ Add to Library</a>
+          <!-- Dropdown Menu -->
+          <div class="dropdown-menu" role="menu">
+            <a href="#" role="menuitem">Profile</a>
+            <a href="#" role="menuitem">Settings</a>
+            <a href="#" role="menuitem">Help</a>
+            <div class="dropdown-divider"></div>
+            <a href="#" role="menuitem" class="logout-item">Logout</a>
+          </div>
         </div>
 
       </div>
-    </div>
+    </nav>  
 
-    <div class="chapter-container">
+      <div class="header-container">
+        <img src="/books/Historical/A Tale of Two Cities by Charles Dickens/a-tale-of-two-cities-9781416503064_lg.jpg" alt="shadowslave" />
+        <div class="header">
+          <h1>A TALE OF TWO CITIES</h1>
+          <span>
+            <img src="/icons/book-half.svg" alt="bookicon" class="book-icon" />
+            <p class="genre">Historical</p>
+          </span>
+          <span>
+            <img
+              src="/icons/journal-text.svg"
+              alt="chaptericon"
+              class="chapter-icon"
+            />
+            <p class="chapter-count">21 Chapters</p>
+          </span>
+          <div class="description">
+            <h3>Synopsis</h3>
+            <p>
+              A Tale of Two Cities is a historical novel published in 1859 by English author Charles Dickens, set in London and Paris before and during the French Revolution. The novel tells the story of the French Doctor Manette, his 18-year-long imprisonment in the Bastille in Paris, and his release to live in London with his daughter Lucie whom he had never met. The story is set against the conditions that led up to the French Revolution and the Reign of Terror.
+            </p>
+          </div>
 
-      <div class="container-header">
-        <img src="/icons/journal-text.svg " alt="chapter-list icon">
-         <h3>Chapter List</h3>
-      </div>
-
-      <table class="chapter-table">
-        <tbody id="chapter-list">
-          <tr>
-            <td><a href="">
-              Chapter 1: The New Beningging             
-            </a></td>
-            <td><a href="">
-              Chapter 2: The Second      
-            </a></td>
-          </tr>
-
-          <tr>
-            <td><a href="">
-              Chapter 1: The New Beningging             
-            </a></td>
-            <td><a href="">
-              Chapter 2: The Second      
-            </a></td>
-          </tr>
-
-
-          <tr>
-            <td><a href="">
-              Chapter 1: The New Beningging             
-            </a></td>
-            <td><a href="">
-              Chapter 2: The Second      
-            </a></td>
-          </tr>
-
-          <tr>
-            <td><a href="">
-              Chapter 1: The New Beningging             
-            </a></td>
-            <td><a href="">
-              Chapter 2: The Second      
-            </a></td>
-          </tr>
-
-          <tr>
-            <td><a href="">
-              Chapter 1: The New Beningging             
-            </a></td>
-            <td><a href="">
-              Chapter 2: The Second      
-            </a></td>
-          </tr>
-
-          <tr>
-            <td><a href="">
-              Chapter 1: The New Beningging             
-            </a></td>
-            <td><a href="">
-              Chapter 2: The Second      
-            </a></td>
-          </tr>
-
-          <tr>
-            <td><a href="">
-              Chapter 1: The New Beningging             
-            </a></td>
-            <td><a href="">
-              Chapter 2: The Second      
-            </a></td>
-          </tr>
-
-          <tr>
-            <td><a href="">
-              Chapter 1: The New Beningging             
-            </a></td>
-            <td><a href="">
-              Chapter 2: The Second      
-            </a></td>
-          </tr>
-
-          <tr>
-            <td><a href="">
-              Chapter 1: The New Beningging             
-            </a></td>
-            <td><a href="">
-              Chapter 2: The Second      
-            </a></td>
-          </tr>
-
-          <tr>
-            <td><a href="">
-              Chapter 1: The New Beningging             
-            </a></td>
-            <td><a href="">
-              Chapter 2: The Second      
-            </a></td>
-          </tr>
-
-        </tbody>
-
-      </table>
-
-        <div class="container-footer">
-            <button>Previous</button>
-
-
-            <select name="chapter" id="chapter-number">
-              <option value="1-20">Chapter: 10-20</option>
-              <option value="21-40">Chapter: 21-40</option>
-              <option value="1-20">Chapter: 41-60</option>
-              <option value="21-40">Chapter: 61-80</option>
-              <option value="1-20">Chapter: 81-100</option>
-              <option value="21-40">Chapter: 101-120</option>
-
-            </select>
-
-            <button>Next</button>
+          <div class="star">
+            <p>Rate this Book!</p>
 
           </div>
-    </div>
-    
 
-    <footer class="footer">
-      <div class="footer-content">
-        <!-- Logo / About -->
-        <div class="footer-section">
-          <img src="/image/logo.png" alt="Logo" class="footer-logo" />
+          <div class="button-container">
+            <a href="/user_html/novel_chapter1.html" class="read-button" >Read First Chapter</a>
 
-          <p>
-            Discover your next story and explore novels worth getting lost in.
-          </p>
-        </div>
+            <a href="#" class="add-library-button" >+ Add to Library</a>
+          </div>
 
-        <!-- Quick Links
-    <div class="footer-section">
-      <h3>Quick Links</h3>
-
-      <a href="#">Home</a>
-      <a href="#">Browse</a>
-      <a href="#">My Library</a>
-      <a href="#">Trending</a>
-    </div> -->
-
-        <!-- Genres -->
-        <div class="footer-section">
-          <h3>Hot Genres</h3>
-
-          <a href="#">Action</a>
-          <a href="#">Romance</a>
-          <a href="#">Fantasy</a>
-          <a href="#">Mystery</a>
-        </div>
-
-        <!-- About -->
-        <div class="footer-section">
-          <h3>About</h3>
-
-          <a href="#">About Us</a>
-          <a href="#">Contact</a>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
         </div>
       </div>
 
-      <div class="footer-bottom">
-        <p>© 2026 Novel Library. All rights reserved.</p>
+      <div class="chapter-container">
+
+        <div class="container-header">
+          <img src="/icons/journal-text.svg " alt="chapter-list icon">
+          <h3>Chapter List</h3>
+        </div>
+
+        <table class="chapter-table">
+          <tbody id="chapter-list">
+            <tr>
+              <td><a href="">
+                Chapter 1: The New Beningging             
+              </a></td>
+              <td><a href="">
+                Chapter 2: The Second      
+              </a></td>
+            </tr>
+
+            <tr>
+              <td><a href="">
+                Chapter 1: The New Beningging             
+              </a></td>
+              <td><a href="">
+                Chapter 2: The Second      
+              </a></td>
+            </tr>
+
+
+            <tr>
+              <td><a href="">
+                Chapter 1: The New Beningging             
+              </a></td>
+              <td><a href="">
+                Chapter 2: The Second      
+              </a></td>
+            </tr>
+
+            <tr>
+              <td><a href="">
+                Chapter 1: The New Beningging             
+              </a></td>
+              <td><a href="">
+                Chapter 2: The Second      
+              </a></td>
+            </tr>
+
+            <tr>
+              <td><a href="">
+                Chapter 1: The New Beningging             
+              </a></td>
+              <td><a href="">
+                Chapter 2: The Second      
+              </a></td>
+            </tr>
+
+            <tr>
+              <td><a href="">
+                Chapter 1: The New Beningging             
+              </a></td>
+              <td><a href="">
+                Chapter 2: The Second      
+              </a></td>
+            </tr>
+
+            <tr>
+              <td><a href="">
+                Chapter 1: The New Beningging             
+              </a></td>
+              <td><a href="">
+                Chapter 2: The Second      
+              </a></td>
+            </tr>
+
+            <tr>
+              <td><a href="">
+                Chapter 1: The New Beningging             
+              </a></td>
+              <td><a href="">
+                Chapter 2: The Second      
+              </a></td>
+            </tr>
+
+            <tr>
+              <td><a href="">
+                Chapter 1: The New Beningging             
+              </a></td>
+              <td><a href="">
+                Chapter 2: The Second      
+              </a></td>
+            </tr>
+
+            <tr>
+              <td><a href="">
+                Chapter 1: The New Beningging             
+              </a></td>
+              <td><a href="">
+                Chapter 2: The Second      
+              </a></td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+          <div class="container-footer">
+              <button>Previous</button>
+
+
+              <select name="chapter" id="chapter-number">
+                <option value="1-20">Chapter: 10-20</option>
+                <option value="21-40">Chapter: 21-40</option>
+                <option value="1-20">Chapter: 41-60</option>
+                <option value="21-40">Chapter: 61-80</option>
+                <option value="1-20">Chapter: 81-100</option>
+                <option value="21-40">Chapter: 101-120</option>
+
+              </select>
+
+              <button>Next</button>
+
+            </div>
       </div>
-    </footer>
-  </body>
-</html>
+      
+
+      <footer class="footer">
+        <div class="footer-content">
+          <!-- Logo / About -->
+          <div class="footer-section">
+            <img src="/image/logo.png" alt="Logo" class="footer-logo" />
+
+            <p>
+              Discover your next story and explore novels worth getting lost in.
+            </p>
+          </div>
+
+          <!-- Quick Links
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+
+        <a href="#">Home</a>
+        <a href="#">Browse</a>
+        <a href="#">My Library</a>
+        <a href="#">Trending</a>
+      </div> -->
+
+          <!-- Genres -->
+          <div class="footer-section">
+            <h3>Hot Genres</h3>
+
+            <a href="#">Action</a>
+            <a href="#">Romance</a>
+            <a href="#">Fantasy</a>
+            <a href="#">Mystery</a>
+          </div>
+
+          <!-- About -->
+          <div class="footer-section">
+            <h3>About</h3>
+
+            <a href="#">About Us</a>
+            <a href="#">Contact</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2026 Novel Library. All rights reserved.</p>
+        </div>
+      </footer>
+    </body>
+  </html>
