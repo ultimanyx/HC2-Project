@@ -355,6 +355,36 @@ body {
   color: var(--foreground);
 }
 
+/* --- Buttons (Previous / Next) --- */
+
+.container-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between; 
+  gap: 16px;
+  padding: 25px 30px;
+  margin-top: 50px;
+  border-top: 2px solid var(--border);
+  background-color: var(--card-background);
+  border-radius:  0px 0px 12px 12px;
+}
+
+.container-footer button {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 28px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  min-width: 110px;  /* keeps buttons balanced */
+}
+
+
 /* =====================================================
     FOOTER
     ===================================================== */
