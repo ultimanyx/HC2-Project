@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
     adContent.innerHTML = `
       <div class="video-ad">
         <video id="adVideo" muted playsinline preload="metadata">
-          <source src="/advertisement/milo-ad.mp4" type="video/mp4">
+          <source src="../advertisement/milo-ad.mp4" type="video/mp4">
           Your browser does not support video.
         </video>
         <div class="video-placeholder" id="videoPlaceholder" style="display:none;">
