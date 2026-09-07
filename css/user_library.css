@@ -508,6 +508,10 @@
     padding: 0 30px;
 }
 
+.book-grid a{
+  text-decoration: none;
+}
+
 /* ─── Book Card ─── */
 .book-card {
     background: var(--card-background);
