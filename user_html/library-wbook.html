@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library with Book</title>
 
     <link rel="stylesheet" href="../css/user_library.css" />
     <link rel="icon" type="image" href="../image/logo.png" />
-</head>
-<body>
+  </head>
+  <body>
     <nav class="navbar">
       <!-- Logo -->
       <a href="#" class="nav-logo">
@@ -33,10 +33,16 @@
         <!-- User Dropdown -->
         <div class="nav-user-dropdown">
           <div class="nav-user" tabindex="0" role="button" aria-haspopup="true">
-            <img src="../icons/person-circle.svg" class="user-icon" alt="User-Icon" />
+            <img
+              src="../icons/person-circle.svg"
+              class="user-icon"
+              alt="User-Icon"
+            />
             <span>Welcome User</span>
             <!-- arrow using a simple text symbol – works without external SVG -->
-            <span class="dropdown-arrow"><img src="../icons/caret-down-fill.svg" alt="triangle-down"></span>
+            <span class="dropdown-arrow"
+              ><img src="../icons/caret-down-fill.svg" alt="triangle-down"
+            /></span>
           </div>
 
           <!-- Dropdown Menu -->
@@ -54,22 +60,44 @@
     <!-- <div class="no-book"> 
         <h4>Please add a book to your library.</h4>
     </div> -->
+ <div class="library-header">
+            <div class="library-title">
+                <h2>My Library</h2>
+                <p>Books you collected through your Journey</p>
+            </div>
 
-    <div class="main-container">
-        <div >
+            <div class="library-stats">
+                <div class="stat-card">
+                    <span class="stat-number" id="totalBooks">8</span>
+                    <span class="stat-label">Total Books</span> 
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="readingBooks">3</span>
+                    <span class="stat-label">Reading</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="completedBooks">3</span>
+                    <span class="stat-label">Completed</span>
+                </div>
 
+            </div>
         </div>
 
-    </div>
+        <!-- Toolbar for The Categories -->
+        <div class="library-toolbar">
+            <div class="filter-group">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="reading">Reading</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+            </div>
 
     <footer class="footer">
       <div class="footer-content">
         <!-- Logo / About -->
         <div class="footer-section">
-          <img src="../image/logo.png" alt="Logo" class="footer-logo">
+          <img src="../image/logo.png" alt="Logo" class="footer-logo" />
           <p>
-            Discover your next story and explore novels
-            worth getting lost in.
+            Discover your next story and explore novels worth getting lost in.
           </p>
         </div>
 
@@ -96,5 +124,5 @@
         <p>© 2026 Novel Library. All rights reserved.</p>
       </div>
     </footer>
-</body>
+  </body>
 </html>
