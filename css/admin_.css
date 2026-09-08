@@ -112,7 +112,9 @@ a {
 }
  
 .nav-item {
-  font-size: 16px;
+  font-size: 22px;
+  font-weight: 400;
+  margin-top: 5px;
   color: #4a4a4a;
   padding: 9px 10px;
   border-radius: 6px;
