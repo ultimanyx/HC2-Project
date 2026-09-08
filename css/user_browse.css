@@ -466,59 +466,95 @@ body {
 #min-rating {
   width: 70px;
 }
-
 /* =====================================================
    CARD CONTAINER
 ===================================================== */
-
-.card-container a {
-  text-decoration: none;
-  color: inherit;
-}
-
 .card-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
-  margin: 20px 10px;
+  margin: 30px 40px;
 }
 
+.card-container a {
+  text-decoration: none;
+  color: black;
+}
+
+/* =====================================================
+   NOVEL CARD – simple & clean (beginner style)
+===================================================== */
 .novel-card {
-  padding: 20px;
-  border: var(--border) solid 1px;
+  background: white;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  background-color: var(--primary-foreground);
-  text-align: left;
+  padding: 0;
 }
 
-.novel-card span {
-  display: flex;
-  align-items: center;
-  margin-top: 5px;
-}
-
-.novel-card span p:first-child {
-  margin-right: auto;
-}
-
-.cover {
+/* ── Cover image ── */
+.novel-card .cover {
   width: 100%;
-  max-width: 300px;
-  height: 220px;
+  height: 350px;
+  object-fit: cover;
   display: block;
-  margin: 5px auto;
+  border-bottom: 1px solid #ddd;
 }
 
-.star {
-  filter: brightness(0) saturate(100%) invert(95%) sepia(51%) saturate(2063%) hue-rotate(326deg) brightness(85%) contrast(89%);
-  width: 22px;
-  height: auto;
+/* ── Title ── */
+.novel-card h1 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 12px 14px 4px 14px;
+  color: #222;
 }
 
+/* ── Author + Rating row ── */
+.novel-card span {
+  display: block;
+  padding: 10px 14px 14px 14px;
+  border-top: 1px solid #eee;
+}
+
+/* ── "Author:" text ── */
+.novel-card span p:first-child {
+  display: inline;
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.novel-card span p:first-child::after {
+  content: " Unknown";
+  color: #333;
+  font-weight: 500;
+}
+
+/* ── Star icon ── */
+.novel-card span .star {
+  width: 16px;
+  height: 16px;
+  float: right;
+  margin-top: 2px;
+}
+
+/* ── Rating number ── */
+.novel-card span p:last-child {
+  display: inline;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  float: right;
+  margin-right: 4px;
+}
+
+/* ── Hover effect ── */
 .novel-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.12);
+  border-color: #b8721f;
+  background: #fcf9f5;
+  transform: translateY(-8px); 
 }
+
 
 /* =====================================================
    FOOTER
