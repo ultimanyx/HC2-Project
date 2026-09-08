@@ -341,10 +341,20 @@ body {
   margin-bottom: 6px;
 }
 
+
 /* =====================================================
-   REPORT BUTTON
+   TOP-BUTTON
 ===================================================== */
-/* ── Chapter header flex layout (keep this) ── */
+.top-button {
+  display: flex;
+  flex-direction: row;
+}
+
+
+/* =====================================================
+   BOOKMARK BUTTON
+===================================================== */
+
 .chapter-header {
   display: flex;
   flex-wrap: wrap;
@@ -358,16 +368,93 @@ body {
   flex: 1 1 auto;
 }
 
-.report-btn-wrap {
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   flex-shrink: 0;
-  align-self: flex-end;
-  margin-bottom: 6px;
+}
+/* =====================================================
+   TOP BUTTON BAR
+===================================================== */
+.top-button {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
 }
 
-/* ── Report button ── */
+/* =====================================================
+   BOOKMARK BUTTON
+===================================================== */
+.bookmark-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card-background);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 6px 18px 6px 14px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--foreground);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.bookmark-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(184, 114, 31, 0.25);
+}
+
+.bookmark-btn:hover .bookmark-icon {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(200%) contrast(100%);
+}
+
+.bookmark-btn:active {
+  transform: scale(0.96);
+}
+
+.bookmark-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  flex-shrink: 0;
+  transition: filter 0.2s ease;
+}
+
+.bookmark-text {
+  line-height: 1;
+}
+
+.bookmark-btn.bookmarked {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+.bookmark-btn.bookmarked .bookmark-icon {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(200%) contrast(100%);
+}
+
+.bookmark-btn.bookmarked:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(184, 114, 31, 0.4);
+}
+
+/* =====================================================
+   REPORT BUTTON — now matches bookmark hover
+===================================================== */
 .report-btn {
   display: flex;
-  align-items: end;
+  align-items: center;
   gap: 6px;
   background: var(--card-background);
   border: 1px solid var(--border);
@@ -378,16 +465,19 @@ body {
   font-weight: 500;
   color: var(--foreground);
   cursor: pointer;
-  margin-left: auto; 
+  transition: all 0.2s ease;
 }
 
-
 .report-btn:hover {
-  background: var(--muted);
+  background: var(--primary);
   border-color: var(--primary);
-  color: var(--primary);
+  color: #ffffff;
   transform: translateY(-1px);
-  
+  box-shadow: 0 4px 12px rgba(184, 114, 31, 0.25);
+}
+
+.report-btn:hover .report-icon {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(200%) contrast(100%);
 }
 
 .report-btn:active {
@@ -399,13 +489,8 @@ body {
   height: 18px;
   display: block;
   flex-shrink: 0;
+  transition: filter 0.2s ease;
 }
-
-.report-btn:hover .report-icon{
-  filter: brightness(0) saturate(100%) invert(45%) sepia(28%) saturate(1213%) hue-rotate(352deg) brightness(101%) contrast(90%);
-}
-
-
 /* =====================================================
    CHAPTER CONTAINER
 ===================================================== */

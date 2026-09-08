@@ -37,9 +37,6 @@
 
           <!-- Dropdown Menu -->
           <div class="dropdown-menu" role="menu">
-            <!-- <a href="#" role="menuitem">Profile</a>
-            <a href="#" role="menuitem">Settings</a>
-            <a href="#" role="menuitem">Help</a> -->
             <div class="dropdown-divider"></div>
             <a href="user_login.html" role="menuitem" class="logout-item">Logout</a>
           </div>
@@ -51,14 +48,19 @@
     <!-- ============================================================
     CHAPTER CONTENT
     ============================================================ -->
- <div class="chapter-container">
-
-<div class="report-btn-wrap">
+    <div class="chapter-container">
+      <div class="top-button">
+<button class="bookmark-btn" id="bookmarkBtn" aria-label="Bookmark this chapter">
+            <img src="../icons/bookmark.svg" alt="bookmark" class="bookmark-icon">
+            </svg>
+            <span class="bookmark-text">Bookmark</span>
+          </button>
           <button class="report-btn" id="reportBtn" aria-label="Report issue with this chapter">
             <img src="../icons/flag.svg" alt="report flag" class="report-icon" />
             Report
           </button>
-        </div>
+      </div>
+
       <div class="chapter-header">
         <div class="header-left">
           <h2 id="chapter-number">Chapter 1</h2>
