@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Author Dashboard</title>
+<link rel="stylesheet" href="../css/author_earnings.css">
+ <link rel="icon" type="image" href="../image/logo.png" />
+</head>
+<body>
+ 
+  <div class="layout">
+ 
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">Author</div>
+ 
+      <nav class="nav">
+        <a href="admin.html" class="nav-item sub ">
+          <span class="nav-icon"></span> Dashboard
+        </a>
+ 
+        <div class="nav-section">My Novels
+</div>
+        <a href="#" class="nav-item sub">All Novels</a>
+        <a href="#" class="nav-item sub">Create Novel
+</a>
+ 
+        <div class="nav-section">Analytics</div>
+        <a href="#" class="nav-item sub active">Earnings</a>
+<!--  
+        <a href="#" class="nav-item"> Profile / Settings</a>
+      </nav>
+  -->
+      <a href="#" class="logout"> Logout</a>
+    </aside>
+ 
+     <main class="main">
+<!-- MAIN CONTENT START -->
+<div class="topbar">
+  <h1>Earnings Per Book</h1>
+  <div style="display: flex; align-items: center; gap: 16px;">
+    <button class="btn btn-primary" style="padding: 10px 24px; font-size: 16px;">
+      Withdraw Funds
+    </button>
+    <div class="user-chip">
+      <span>Sarah J.</span>
+      <span class="avatar">SJ</span>
+    </div>
+  </div>
+</div>
+
+<!-- Stats Summary (3 columns to match your CSS grid) -->
+<div class="stats">
+  <div class="stat-card">
+    <div class="stat-label">Total Lifetime Earnings</div>
+    <div class="stat-value">₱15,284.50</div>
+    <div class="stat-change positive">↑ 12.5% from last month</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Pending Balance</div>
+    <div class="stat-value">₱312.00</div>
+    <div class="stat-change warning">Estimated payout: Oct 15</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Active Novels</div>
+    <div class="stat-value">6</div>
+    <div class="stat-change" style="color: #64748b;">3 completed · 3 ongoing</div>
+  </div>
+</div>
+
+<!-- Filter Bar -->
+<div class="filter-bar">
+  <div class="filter-group">
+    <label for="period">Period</label>
+    <select id="period">
+      <option>Last 30 Days</option>
+      <option>This Quarter</option>
+      <option>This Year</option>
+      <option selected>All Time</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <label for="book-filter">Book</label>
+    <select id="book-filter">
+      <option selected>All Novels</option>
+      <option>Shadows of the Crown</option>
+      <option>Ember & Ash</option>
+      <option>The Last Prophecy</option>
+      <option>Starlight Drive</option>
+    </select>
+  </div>
+  <div class="filter-actions">
+    <button class="btn">Reset</button>
+    <button class="btn btn-primary">Apply Filter</button>
+  </div>
+</div>
+
+<!-- Earnings Per Book Table -->
+<div class="table-card">
+  <h2>Detailed Breakdown by Book</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Book Title</th>
+        <th>Status</th>
+        <th>Units Sold / Reads</th>
+        <th>Total Earned</th>
+        <th>Pending</th>
+        <th>Last Payout</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Shadows of the Crown</strong></td>
+        <td><span class="badge active">Ongoing</span></td>
+        <td>12,843 reads</td>
+        <td>₱1,820.40</td>
+        <td>₱112.00</td>
+        <td>Sep 01, 2026</td>
+      </tr>
+      <tr>
+        <td><strong>Ember & Ash</strong></td>
+        <td><span class="badge completed">Completed</span></td>
+        <td>8,210 reads</td>
+        <td>₱1,205.75</td>
+        <td>—</td>
+        <td>Aug 15, 2026</td>
+      </tr>
+      <tr>
+        <td><strong>The Last Prophecy</strong></td>
+        <td><span class="badge active">Ongoing</span></td>
+        <td>5,672 reads</td>
+        <td>₱784.20</td>
+        <td>₱98.50</td>
+        <td>Sep 15, 2026</td>
+      </tr>
+      <tr>
+        <td><strong>Starlight Drive</strong></td>
+        <td><span class="badge paused">On Hiatus</span></td>
+        <td>3,401 reads</td>
+        <td>₱342.15</td>
+        <td>₱42.00</td>
+        <td>Jul 01, 2026</td>
+      </tr>
+      <tr>
+        <td><strong>Beneath the Veil</strong></td>
+        <td><span class="badge completed">Completed</span></td>
+        <td>1,950 reads</td>
+        <td>₱132.00</td>
+        <td>—</td>
+        <td>Jun 10, 2026</td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- <div style="margin-top: 20px; font-size: 16px; color: var(--muted-foreground); border-top: 1px solid var(--border); padding-top: 16px; display: flex; justify-content: space-between;">
+    <span>Showing 5 of 6 active novels</span>
+    <span>Earnings are based on subscription reads, tips, and ad revenue share.</span>
+  </div> -->
+</div>
+    </main>
+  </div>
+ 
+</body>
+</html>
+ 
