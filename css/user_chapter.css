@@ -19,6 +19,7 @@ html {
   --card-background: #ffffff;
   --card-foreground: #1a1826;
   --primary: #b8721f;
+  --primary-hover: #a0641a;
   --primary-foreground: #ffffff;
   --secondary: #ede9e1;
   --secondary-foreground: #1a1826;
@@ -406,15 +407,6 @@ body {
   background-color: #a0641a; /* Darker shade – we can add a variable */
   transform: translateY(-2px);
 }
-/* Add a variable for hover if you like, but we’ll keep it hard-coded for now – but the rule says only root colors, so we should also change that to a variable. Let's add --primary-hover: #a0641a; */
-/* I'll add that to root as well. Let's do that. */
-
-/* Actually, to strictly follow "use color only on the root", we should add --primary-hover and use it. Let's add it. */
-:root {
-  /* ... existing ... */
-  --primary-hover: #a0641a;
-}
-/* Then use it below: */
 
 .container-footer button:hover:not(:disabled) {
   background-color: var(--primary-hover);
