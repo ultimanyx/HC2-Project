@@ -380,6 +380,10 @@ tbody tr:last-child td {
   border-bottom: none;
 }
 
+.star-rating {
+    filter: brightness(0) saturate(100%) invert(95%) sepia(51%) saturate(2063%) hue-rotate(326deg) brightness(85%) contrast(89%);
+}
+
 /* ---------- Badge / status pills ---------- */
 .badge {
   display: inline-block;
@@ -399,7 +403,7 @@ tbody tr:last-child td {
 .badge.completed {
   background-color: #e2e8f0;
   color: #475569;
-}
+}   
 
 /* ---------- Form Container ---------- */
 .form-container {
