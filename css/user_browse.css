@@ -524,7 +524,6 @@ body {
 }
 
 .novel-card span p:first-child::after {
-  content: " Unknown";
   color: #333;
   font-weight: 500;
 }
