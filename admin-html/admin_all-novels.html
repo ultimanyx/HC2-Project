@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Users</title>
+    <link rel="stylesheet" href="../css/admin_all-novel.css" />
+    <link rel="icon" type="image" href="../image/logo.png" />
+  </head>
+  <body>
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="brand">Admin</div>
+
+        <nav class="nav">
+          <a href="admin.html" class="nav-item sub">
+            <span class="nav-icon"></span> Dashboard
+          </a>
+
+          <div class="nav-section">Novel Management</div>
+          <a href="#" class="nav-item sub active">All Novels</a>
+          <a href="#" class="nav-item sub">Pending Novels</a>
+          <a href="admin_reported-novels.html" class="nav-item sub">Reported Novels</a>
+
+          <div class="nav-section">User Management</div>
+          <a href="admin_admanage-user.html" class="nav-item sub ">Users</a>
+          <a href="admin_usermanage-author.html" class="nav-item sub ">Authors</a>
+
+          <div class="nav-section">Advertisement</div>
+          <a href="admin_ad-management.html" class="nav-item sub"
+            >Ad Management</a
+          >
+          <a href="admin_revenue-reports.html" class="nav-item sub "
+            >Revenue Reports</a
+          >
+
+          <!-- <a href="#" class="nav-item"> Profile / Settings</a>
+        </nav> -->
+
+        <a href="admin_login.html" class="logout"> Logout</a>
+      </aside>
+
+      <main class="main">
+                <div class="topbar">
+        <h1>All Novels</h1>
+        <div class="user-chip">
+            <span>Welcome, Admin</span>
+            <span class="avatar">A</span>
+        </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats">
+        <div class="stat-card">
+            <div class="stat-label">Total Novels</div>
+            <div class="stat-value">284</div>
+            <div class="stat-change positive">↑ 12 new this month</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Published</div>
+            <div class="stat-value">156</div>
+            <div class="stat-change positive">55% of total</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Total Reads</div>
+            <div class="stat-value">1.2M</div>
+            <div class="stat-change positive">↑ 18% from last month</div>
+        </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+        <div class="filter-group">
+            <label for="search-novel">🔍 Search</label>
+            <input type="text" id="search-novel" placeholder="Search by title or author..." />
+        </div>
+        <div class="filter-group">
+            <label for="genre-filter">Genre</label>
+            <select id="genre-filter">
+            <option>All Genres</option>
+            <option>Fantasy</option>
+            <option>Romance</option>
+            <option>Sci-Fi</option>
+            <option>Mystery</option>
+            <option>Thriller</option>
+            <option>Young Adult</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="status-filter">Status</label>
+            <select id="status-filter">
+            <option>All Statuses</option>
+            <option>Published</option>
+            <option>Draft</option>
+            <option>Pending</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="sort-novel">Sort by</label>
+            <select id="sort-novel">
+            <option>Last Updated</option>
+            <option>Title</option>
+            <option>Reads</option>
+            <option>Rating</option>
+            </select>
+        </div>
+        <div class="filter-actions">
+            <button class="btn btn-primary">+ Add Novel</button>
+        </div>
+        </div>
+
+        <!-- Novels Table -->
+        <div class="table-card">
+        <h2>All Novels</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Genre</th>
+                <th>Status</th>
+                <th>Chapters</th>
+                <th>Reads</th>
+                <th>Rating</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>#001</td>
+                <td><strong>Shadows of the Crown</strong></td>
+                <td>Sarah J. Maas</td>
+                <td>Fantasy</td>
+                <td><span class="badge active">Published</span></td>
+                <td>24</td>
+                <td>12,843</td>
+                <td><img src="../icons/star-fill.svg" alt="star-rating" class="star-rating"> 4.8</td>
+                <td>
+                <button class="btn btn-primary btn-sm">Edit</button>
+                <button class="btn btn-sm">View</button>
+                <button class="btn btn-danger btn-sm">Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td>#002</td>
+                <td><strong>Ember & Ash</strong></td>
+                <td>Stephen King</td>
+                <td>Romance</td>
+                <td><span class="badge active">Published</span></td>
+                <td>32</td>
+                <td>8,210</td>
+                <td><img src="../icons/star-fill.svg" alt="star-rating" class="star-rating"> 4.6</td>
+                <td>
+                <button class="btn btn-primary btn-sm">Edit</button>
+                <button class="btn btn-sm">View</button>
+                <button class="btn btn-danger btn-sm">Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td>#003</td>
+                <td><strong>The Last Prophecy</strong></td>
+                <td>J.K. Rowling</td>
+                <td>Sci-Fi</td>
+                <td><span class="badge paused">Pending</span></td>
+                <td>18</td>
+                <td>5,672</td>
+                <td><img src="../icons/star-fill.svg" alt="star-rating" class="star-rating"> 4.2</td>
+                <td>
+                <button class="btn btn-primary btn-sm">Edit</button>
+                <button class="btn btn-sm ">View</button>
+                <button class="btn btn-danger btn-sm">Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td>#004</td>
+                <td><strong>Starlight Drive</strong></td>
+                <td>George R.R. Martin</td>
+                <td>Young Adult</td>
+                <td><span class="badge completed">Archived</span></td>
+                <td>12</td>
+                <td>3,401</td>
+                <td><img src="../icons/star-fill.svg" alt="star-rating" class="star-rating"> 3.9</td>
+                <td>
+                <button class="btn btn-primary btn-sm">Edit</button>
+                <button class="btn btn-sm">View</button>
+                <button class="btn btn-danger btn-sm">Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td>#005</td>
+                <td><strong>The Lost Kingdom</strong></td>
+                <td>J.R.R. Tolkien</td>
+                <td>Fantasy</td>
+                <td><span class="badge paused">Draft</span></td>
+                <td>6</td>
+                <td>—</td>
+                <td>—</td>
+                <td>
+                <button class="btn btn-primary btn-sm">Edit</button>
+                <button class="btn btn-sm">View</button>
+                <button class="btn btn-danger btn-sm">Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td>#006</td>
+                <td><strong>Beneath the Veil</strong></td>
+                <td>Sarah J. Maas</td>
+                <td>Mystery</td>
+                <td><span class="badge active">Published</span></td>
+                <td>20</td>
+                <td>1,950</td>
+                <td><img src="../icons/star-fill.svg" alt="star-rating" class="star-rating"> 4.0</td>
+                <td>
+                <button class="btn btn-primary btn-sm">Edit</button>
+                <button class="btn btn-sm">View</button>
+                <button class="btn btn-danger btn-sm">Delete</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- <div class="table-footer">
+            <span>Showing 6 of 284 novels</span>
+            <span>💡 Click <strong>View</strong> to see the public-facing page.</span>
+        </div> -->
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
