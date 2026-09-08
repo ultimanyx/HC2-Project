@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Novels</title>
+<link rel="stylesheet" href="../css/author_all-novels.css">
+<link rel="icon" type="image" href="../image/logo.png" />
+</head>
+<body>
+ 
+  <div class="layout">
+ 
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">Author</div>
+ 
+      <nav class="nav">
+        <a href="author_dashboard.html" class="nav-item sub">
+          <span class="nav-icon"></span> Dashboard
+        </a>
+ 
+        <div class="nav-section">My Novels</div>
+        <a href="author_all-novel.html" class="nav-item sub active">All Novels</a>
+        <a href="author_create-novel.html" class="nav-item sub">Create Novel</a>
+        <a href="author_draft-novel.html" class="nav-item sub">Draft Novel</a>
+ 
+        <div class="nav-section">Analytics</div>
+        <a href="author_earnings.html" class="nav-item sub">Earnings</a>
+ 
+        <a href="author_login.html" class="logout">Logout</a>
+      </nav>
+    </aside>
+ 
+    <main class="main">
+
+      <div class="topbar">
+        <h1>All Novels</h1>
+        <div class="user-chip">
+          <span>Sarah J.</span>
+          <span class="avatar">SJ</span>
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-label">Total Novels</div>
+          <div class="stat-value">6</div>
+          <div class="stat-change positive">↑ 2 new this month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Published</div>
+          <div class="stat-value">3</div>
+          <div class="stat-change positive">All active</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Total Reads</div>
+          <div class="stat-value">32,076</div>
+          <div class="stat-change positive">↑ 12.5% from last month</div>
+        </div>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <div class="filter-group">
+          <label for="search-novel">Search</label>
+          <input type="text" id="search-novel" placeholder="Search by title..." />
+        </div>
+        <div class="filter-group">
+          <label for="status-filter">Status</label>
+          <select id="status-filter">
+            <option>All Statuses</option>
+            <option>Ongoing</option>
+            <option>Completed</option>
+            <option>Draft</option>
+            <option>On Hiatus</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="sort-novel">Sort by</label>
+          <select id="sort-novel">
+            <option>Last Updated</option>
+            <option>Title</option>
+            <option>Reads</option>
+            <option>Rating</option>
+          </select>
+        </div>
+        <div class="filter-actions">
+          <a href="author_create-novel.html" class="btn btn-primary">+ Create New Novel</a>
+        </div>
+      </div>
+
+      <!-- Novels Table -->
+      <div class="table-card">
+        <h2>Your Novels</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Status</th>
+              <th>Genre</th>
+              <th>Chapters</th>
+              <th>Reads</th>
+              <th>Rating</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Shadows of the Crown</strong></td>
+              <td><span class="badge active">Ongoing</span></td>
+              <td>Fantasy</td>
+              <td>24</td>
+              <td>12,843</td>
+              <td>⭐ 4.8</td>
+              <td>
+                <button class="btn btn-sm">Edit</button>
+                <button class="btn btn-primary btn-sm">View</button>
+                <button class="btn btn-sm btn-danger">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Ember & Ash</strong></td>
+              <td><span class="badge completed">Completed</span></td>
+              <td>Romance</td>
+              <td>32</td>
+              <td>8,210</td>
+              <td>⭐ 4.6</td>
+              <td>
+                <button class="btn btn-sm">Edit</button>
+                <button class="btn btn-primary btn-sm">View</button>
+                <button class="btn btn-sm btn-danger">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>The Last Prophecy</strong></td>
+              <td><span class="badge active">Ongoing</span></td>
+              <td>Sci-Fi</td>
+              <td>18</td>
+              <td>5,672</td>
+              <td>⭐ 4.2</td>
+              <td>
+                <button class="btn btn-sm">Edit</button>
+                <button class="btn btn-primary btn-sm">View</button>
+                <button class="btn btn-sm btn-danger">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Starlight Drive</strong></td>
+              <td><span class="badge paused">On Hiatus</span></td>
+              <td>Young Adult</td>
+              <td>12</td>
+              <td>3,401</td>
+              <td>⭐ 3.9</td>
+              <td>
+                <button class="btn btn-sm">Edit</button>
+                <button class="btn btn-primary btn-sm">View</button>
+                <button class="btn btn-sm btn-danger">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>The Lost Kingdom</strong></td>
+              <td><span class="badge paused">Draft</span></td>
+              <td>Fantasy</td>
+              <td>6</td>
+              <td>—</td>
+              <td>—</td>
+              <td>
+                <button class="btn btn-sm">Edit</button>
+                <button class="btn btn-primary btn-sm">View</button>
+                <button class="btn btn-sm btn-danger">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Beneath the Veil</strong></td>
+              <td><span class="badge completed">Completed</span></td>
+              <td>Mystery</td>
+              <td>20</td>
+              <td>1,950</td>
+              <td>⭐ 4.0</td>
+              <td>
+                <button class="btn btn-sm">Edit</button>
+                <button class="btn btn-primary btn-sm">View</button>
+                <button class="btn btn-sm btn-danger">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- Optional footer
+        <div class="text-muted" style="margin-top: 16px; border-top: 1px solid var(--border); padding-top: 14px; display: flex; justify-content: space-between; font-size: 14px;">
+          <span>Showing 6 novels</span>
+          <span>💡 Click <strong>View</strong> to see the public‑facing page of your novel.</span>
+        </div> -->
+      </div>
+    </main>
+  </div>
+ 
+</body>
+</html>
