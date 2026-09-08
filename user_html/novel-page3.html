@@ -28,9 +28,15 @@
 
         <div class="nav-user-dropdown">
           <div class="nav-user" tabindex="0" role="button" aria-haspopup="true">
-            <img src="../icons/person-circle.svg" class="user-icon" alt="User-Icon" />
+            <img
+              src="../icons/person-circle.svg"
+              class="user-icon"
+              alt="User-Icon"
+            />
             <span>Welcome User</span>
-            <span class="dropdown-arrow"><img src="../icons/caret-down-fill.svg" alt="triangle-down"></span>
+            <span class="dropdown-arrow"
+              ><img src="../icons/caret-down-fill.svg" alt="triangle-down"
+            /></span>
           </div>
 
           <!-- Dropdown Menu -->
@@ -42,12 +48,14 @@
             <a href="#" role="menuitem" class="logout-item">Logout</a>
           </div>
         </div>
-
       </div>
     </nav>
 
     <div class="header-container">
-      <img src="../books/Historical/A Tale of Two Cities by Charles Dickens/a-tale-of-two-cities-9781416503064_lg.jpg" alt="shadowslave" />
+      <img
+        src="../books/Historical/A Tale of Two Cities by Charles Dickens/a-tale-of-two-cities-9781416503064_lg.jpg"
+        alt="shadowslave"
+      />
       <div class="header">
         <h1>A TALE OF TWO CITIES</h1>
         <span>
@@ -65,67 +73,66 @@
         <div class="description">
           <h3>Synopsis</h3>
           <p>
-            A Tale of Two Cities is a historical novel published in 1859 by English author Charles Dickens, set in London and Paris before and during the French Revolution. The novel tells the story of the French Doctor Manette, his 18-year-long imprisonment in the Bastille in Paris, and his release to live in London with his daughter Lucie whom he had never met. The story is set against the conditions that led up to the French Revolution and the Reign of Terror.
+            A Tale of Two Cities is a historical novel published in 1859 by
+            English author Charles Dickens, set in London and Paris before and
+            during the French Revolution. The novel tells the story of the
+            French Doctor Manette, his 18-year-long imprisonment in the Bastille
+            in Paris, and his release to live in London with his daughter Lucie
+            whom he had never met. The story is set against the conditions that
+            led up to the French Revolution and the Reign of Terror.
           </p>
         </div>
 
         <div class="star">
           <p>Rate this Book!</p>
+          <input
+            type="range"
+            min="0.5"
+            max="5"
+            step="0.5"
+            value="2.5"
+            class="star-rating"
+            style="--val: 2.5"
+            oninput="this.style = '--val:' + this.value"
+          />
         </div>
 
         <div class="button-container">
-          <a href="novel_chapter1.html" class="read-button">Read First Chapter</a>
+          <a href="novel_chapter1.html" class="read-button"
+            >Read First Chapter</a
+          >
           <a href="#" class="add-library-button">+ Add to Library</a>
         </div>
-
       </div>
     </div>
 
     <div class="chapter-container">
-
       <div class="container-header">
-        <img src="../icons/journal-text.svg" alt="chapter-list icon">
+        <img src="../icons/journal-text.svg" alt="chapter-list icon" />
         <h3>Chapter List</h3>
       </div>
 
       <table class="chapter-table">
         <tbody id="chapter-list">
           <tr>
-            <td><a href="">
-              Chapter 41: The Game Made
-            </a></td>
-            <td><a href="">
-              Chapter 42: The Substance of the Shadow
-            </a></td>
+            <td><a href=""> Chapter 41: The Game Made </a></td>
+            <td><a href=""> Chapter 42: The Substance of the Shadow </a></td>
           </tr>
 
           <tr>
-            <td><a href="">
-              Chapter 43: Dusk
-            </a></td>
-            <td><a href="">
-              Chapter 44: Darkness
-            </a></td>
+            <td><a href=""> Chapter 43: Dusk </a></td>
+            <td><a href=""> Chapter 44: Darkness </a></td>
           </tr>
 
           <tr>
-            <td><a href="">
-              Chapter 45: Fifty-two
-            </a></td>
-            <td><a href="">
-              Chapter 46: The Knitting Done
-            </a></td>
+            <td><a href=""> Chapter 45: Fifty-two </a></td>
+            <td><a href=""> Chapter 46: The Knitting Done </a></td>
           </tr>
 
           <tr>
-            <td><a href="">
-              Chapter 47: The Footsteps Die Out For Ever
-            </a></td>
-            <td><a href="">
-
-            </a></td>
+            <td><a href=""> Chapter 47: The Footsteps Die Out For Ever </a></td>
+            <td><a href=""> </a></td>
           </tr>
-
         </tbody>
       </table>
 
@@ -136,7 +143,6 @@
           <option value="1-20">Chapter: 1-20</option>
           <option value="21-40">Chapter: 21-40</option>
           <option value="41-60">Chapter: 41-47</option>
-
         </select>
 
         <button>Next</button>
