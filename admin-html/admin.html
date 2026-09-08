@@ -2,57 +2,123 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Admin Dashboard — Sidebar</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
 <link rel="stylesheet" href="../css/admin_.css">
 </head>
 <body>
  
-<aside class="sidebar">
-  <p class="mark">Admin</p>
+  <div class="layout">
  
-  <nav>
-    <a class="item active" href="#"><span class="icon">&#9635;</span>Dashboard</a>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">Admin</div>
  
-    <div class="group">
-      <span class="group-label">Novel Management</span>
-      <div class="sub-list">
-        <a class="sub-item" href="#">All Novels</a>
-        <a class="sub-item" href="#">Pending Novels</a>
-        <a class="sub-item" href="#">Reported Novels</a>
-      </div>
-    </div>
+      <nav class="nav">
+        <a href="#" class="nav-item active">
+          <span class="nav-icon">&#9635;</span> Dashboard
+        </a>
  
-    <div class="group">
-      <span class="group-label">User Management</span>
-      <div class="sub-list">
-        <a class="sub-item" href="#">Users</a>
-        <a class="sub-item" href="#">Authors</a>
-      </div>
-    </div>
+        <div class="nav-section">Novel Management</div>
+        <a href="#" class="nav-item sub">All Novels</a>
+        <a href="#" class="nav-item sub">Pending Novels</a>
+        <a href="#" class="nav-item sub">Reported Novels</a>
  
-    <div class="group">
-      <span class="group-label">Advertisement</span>
-      <div class="sub-list">
-        <a class="sub-item" href="#">Ad Management</a>
-        <a class="sub-item" href="#">Ad Statistics</a>
-      </div>
-    </div>
+        <div class="nav-section">User Management</div>
+        <a href="#" class="nav-item sub">Users</a>
+        <a href="#" class="nav-item sub">Authors</a>
  
-    <div class="group">
-      <span class="group-label">Revenue</span>
-      <div class="sub-list">
-        <a class="sub-item" href="#">Revenue Reports</a>
-      </div>
-    </div>
+        <div class="nav-section">Advertisement</div>
+        <a href="#" class="nav-item sub">Ad Management</a>
+        <a href="#" class="nav-item sub">Ad Statistics</a>
  
-    <a class="item" href="#"><span class="icon">&#9776;</span>Analytics</a>
-    <a class="item" href="#"><span class="icon">&#9881;</span>Profile / Settings</a>
-  </nav>
+        <div class="nav-section">Revenue</div>
+        <a href="#" class="nav-item sub">Revenue Reports</a>
  
-  <div class="foot">
-    <a class="item" href="#"><span class="icon">&#8592;</span>Logout</a>
+        <a href="#" class="nav-item">&#8801; Analytics</a>
+        <a href="#" class="nav-item">&#9679; Profile / Settings</a>
+      </nav>
+ 
+      <a href="#" class="logout">&#8592; Logout</a>
+    </aside>
+ 
+    <!-- Main content -->
+    <main class="main">
+ 
+      <header class="topbar">
+        <h1>Overview</h1>
+        <div class="user-chip">
+          <span>Welcome, Admin</span>
+          <span class="avatar">A</span>
+        </div>
+      </header>
+ 
+      <!-- Stat cards -->
+      <section class="stats">
+        <div class="stat-card">
+          <p class="stat-label">Total Novels</p>
+          <p class="stat-value">1,248</p>
+          <p class="stat-change positive">+12% this week</p>
+        </div>
+ 
+        <div class="stat-card">
+          <p class="stat-label">Pending Approvals</p>
+          <p class="stat-value">18</p>
+          <p class="stat-change warning">Needs action</p>
+        </div>
+ 
+        <div class="stat-card">
+          <p class="stat-label">Active Users</p>
+          <p class="stat-value">8,520</p>
+          <p class="stat-change positive">+5% this month</p>
+        </div>
+ 
+        <div class="stat-card">
+          <p class="stat-label">Monthly Revenue</p>
+          <p class="stat-value">$4,250</p>
+          <p class="stat-change positive">+18% increase</p>
+        </div>
+      </section>
+ 
+      <!-- Table -->
+      <section class="table-card">
+        <h2>Recently Submitted Novels</h2>
+ 
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Category</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Shadows of Eldoria</td>
+              <td>J.R. Walker</td>
+              <td>Fantasy</td>
+              <td><span class="badge pending">Pending</span></td>
+            </tr>
+            <tr>
+              <td>Cyber Genesis</td>
+              <td>Aria Chen</td>
+              <td>Sci-Fi</td>
+              <td><span class="badge approved">Approved</span></td>
+            </tr>
+            <tr>
+              <td>Love in Verona</td>
+              <td>Elena Rostova</td>
+              <td>Romance</td>
+              <td><span class="badge approved">Approved</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+ 
+    </main>
   </div>
-</aside>
  
 </body>
 </html>
+ 
