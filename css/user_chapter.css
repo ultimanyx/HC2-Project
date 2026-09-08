@@ -320,6 +320,92 @@ body {
   background: var(--muted);
 }
 
+
+/* ── Chapter header flex layout ── */
+.chapter-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 20px;
+  margin-bottom: 40px;
+}
+
+.chapter-header .header-left {
+  flex: 1 1 auto;
+}
+
+.report-btn-wrap {
+  flex-shrink: 0;
+  align-self: flex-end;
+  margin-bottom: 6px;
+}
+
+/* =====================================================
+   REPORT BUTTON
+===================================================== */
+/* ── Chapter header flex layout (keep this) ── */
+.chapter-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 20px;
+  margin-bottom: 40px;
+}
+
+.chapter-header .header-left {
+  flex: 1 1 auto;
+}
+
+.report-btn-wrap {
+  flex-shrink: 0;
+  align-self: flex-end;
+  margin-bottom: 6px;
+}
+
+/* ── Report button ── */
+.report-btn {
+  display: flex;
+  align-items: end;
+  gap: 6px;
+  background: var(--card-background);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 6px 16px 6px 12px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--foreground);
+  cursor: pointer;
+  margin-left: auto; 
+}
+
+
+.report-btn:hover {
+  background: var(--muted);
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-1px);
+  
+}
+
+.report-btn:active {
+  transform: scale(0.96);
+}
+
+.report-btn .report-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.report-btn:hover .report-icon{
+  filter: brightness(0) saturate(100%) invert(45%) sepia(28%) saturate(1213%) hue-rotate(352deg) brightness(101%) contrast(90%);
+}
+
+
 /* =====================================================
    CHAPTER CONTAINER
 ===================================================== */
