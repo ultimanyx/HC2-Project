@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Revenue Reports</title>
+    <link rel="stylesheet" href="../css/admin_usermanage-author.css" />
+    <link rel="icon" type="image" href="../image/logo.png" />
+  </head>
+  <body>
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="brand">Admin</div>
+
+        <nav class="nav">
+          <a href="admin.html" class="nav-item sub">
+            <span class="nav-icon"></span> Dashboard
+          </a>
+
+          <div class="nav-section">Novel Management</div>
+          <a href="#" class="nav-item sub">All Novels</a>
+          <a href="#" class="nav-item sub">Pending Novels</a>
+          <a href="admin_reported-novels.html" class="nav-item sub">Reported Novels</a>
+
+          <div class="nav-section">User Management</div>
+          <a href="#" class="nav-item sub">Users</a>
+          <a href="admin_usermanage-author.html" class="nav-item sub active">Authors</a>
+
+          <div class="nav-section">Advertisement</div>
+          <a href="admin_ad-management.html" class="nav-item sub"
+            >Ad Management</a
+          >
+          <a href="admin_revenue-reports.html" class="nav-item sub "
+            >Revenue Reports</a
+          >
+
+          <!-- <a href="#" class="nav-item"> Profile / Settings</a>
+        </nav> -->
+
+        <a href="admin_login.html" class="logout"> Logout</a>
+      </aside>
+
+      <main class="main">
+                    <div class="topbar">
+            <h1>User Management</h1>
+            <div class="user-chip">
+                <span>Welcome, Admin</span>
+                <span class="avatar">A</span>
+            </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats">
+            <div class="stat-card">
+                <div class="stat-label">Total Users</div>
+                <div class="stat-value">1,284</div>
+                <div class="stat-change positive">↑ 12% this month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Active Users</div>
+                <div class="stat-value">843</div>
+                <div class="stat-change positive">65% of total</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">New Users (30d)</div>
+                <div class="stat-value">124</div>
+                <div class="stat-change positive">↑ 8% from last month</div>
+            </div>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="filter-bar">
+            <div class="filter-group">
+                <label for="search-user">Search</label>
+                <input type="text" id="search-user" placeholder="Search by name or email..." />
+            </div>
+            <div class="filter-group">
+                <label for="role-filter">Role</label>
+                <select id="role-filter">
+                <option>All Roles</option>
+                <option>Reader</option>
+                <option>Author</option>
+                <option>Admin</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="status-filter">Status</label>
+                <select id="status-filter">
+                <option>All Statuses</option>
+                <option>Active</option>
+                <option>Suspended</option>
+                <option>Banned</option>
+                </select>
+            </div>
+            <div class="filter-actions">
+                <button class="btn btn-primary">+ Add User</button>
+            </div>
+            </div>
+
+            <!-- Users Table -->
+            <div class="table-card">
+            <h2>All Users</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Joined</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>#001</td>
+                    <td><strong>john_doe</strong></td>
+                    <td>john@example.com</td>
+                    <td>Author</td>
+                    <td><span class="badge active">Active</span></td>
+                    <td>Jan 12, 2026</td>
+                    <td>
+                    <!-- <button class="btn btn-sm">Edit</button> -->
+                    <button class="btn btn-sm btn-danger">Ban</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>#002</td>
+                    <td><strong>jane_reader</strong></td>
+                    <td>jane@example.com</td>
+                    <td>Reader</td>
+                    <td><span class="badge active">Active</span></td>
+                    <td>Feb 3, 2026</td>
+                    <td>
+                    <!-- <button class="btn btn-sm">Edit</button> -->
+                    <button class="btn btn-sm btn-danger">Ban</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>#003</td>
+                    <td><strong>sam_writer</strong></td>
+                    <td>sam@example.com</td>
+                    <td>Author</td>
+                    <td><span class="badge paused">Suspended</span></td>
+                    <td>Dec 20, 2025</td>
+                    <td>
+                    <!-- <button class="btn btn-sm">Edit</button> -->
+                    <button class="btn btn-sm btn-danger">Ban</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>#004</td>
+                    <td><strong>alex_admin</strong></td>
+                    <td>alex@admin.com</td>
+                    <td>Admin</td>
+                    <td><span class="badge active">Active</span></td>
+                    <td>Nov 5, 2025</td>
+                    <td>
+                    <!-- <button class="btn btn-sm">Edit</button> -->
+                    <button class="btn btn-sm btn-danger">Ban</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>#005</td>
+                    <td><strong>emma_reader</strong></td>
+                    <td>emma@example.com</td>
+                    <td>Reader</td>
+                    <td><span class="badge completed">Banned</span></td>
+                    <td>Oct 15, 2025</td>
+                    <td>
+                    <!-- <button class="btn btn-sm">Edit</button> -->
+                    <button class="btn btn-sm btn-success-muted">Unban</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- <div class="text-muted" style="margin-top: 16px; border-top: 1px solid var(--border); padding-top: 14px; display: flex; justify-content: space-between; font-size: 14px;">
+                <span>Showing 5 of 1,284 users</span>
+                <span>💡 Click <strong>Edit</strong> to modify user details.</span>
+            </div> -->
+            </div>
+      </main>
+    </div>
+  </body>
+</html>
