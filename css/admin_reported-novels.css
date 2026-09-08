@@ -1,0 +1,258 @@
+/* ================================
+   GENERAL
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f7f7f9;
+    color: #292631;
+}
+
+
+/* ================================
+   MAIN PAGE
+================================ */
+
+.reported-page {
+    width: 100%;
+    min-height: 100vh;
+    padding: 40px;
+}
+
+
+/* ================================
+   PAGE HEADER
+================================ */
+
+.page-header {
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #292631;
+}
+
+
+/* ================================
+   SEARCH
+================================ */
+
+.search-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.search-section label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #44404b;
+}
+
+.search-section input {
+    width: 350px;
+    height: 42px;
+    padding: 0 15px;
+
+    border: 1px solid #dedbe3;
+    border-radius: 8px;
+
+    background-color: #ffffff;
+    color: #292631;
+
+    font-size: 14px;
+    outline: none;
+}
+
+.search-section input::placeholder {
+    color: #99959f;
+}
+
+.search-section input:focus {
+    border-color: #8b8495;
+}
+
+
+/* ================================
+   TABLE CONTAINER
+================================ */
+
+.table-container {
+    width: 100%;
+    background-color: #ffffff;
+
+    border: 1px solid #e4e1e7;
+    border-radius: 12px;
+
+    overflow-x: auto;
+}
+
+
+/* ================================
+   TABLE
+================================ */
+
+table {
+    width: 100%;
+    min-width: 850px;
+    border-collapse: collapse;
+}
+
+
+/* ================================
+   TABLE HEADER
+================================ */
+
+thead {
+    background-color: #f5f3f7;
+}
+
+th {
+    padding: 18px 20px;
+
+    text-align: left;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    color: #55515c;
+
+    border-bottom: 1px solid #e4e1e7;
+}
+
+
+/* ================================
+   TABLE BODY
+================================ */
+
+td {
+    padding: 20px;
+
+    font-size: 14px;
+    color: #55515c;
+
+    border-bottom: 1px solid #eeeaf0;
+
+    vertical-align: middle;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background-color: #faf9fb;
+}
+
+
+/* ================================
+   NOVEL TITLE
+================================ */
+
+.novel-title {
+    font-weight: 600;
+    color: #292631;
+}
+
+
+/* ================================
+   STATUS
+================================ */
+
+.status {
+    display: inline-block;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* Pending Status */
+
+.status.pending {
+    background-color: #fff3d6;
+    color: #9a6b00;
+}
+
+
+/* Under Review Status */
+
+.status.review {
+    background-color: #e8e4f5;
+    color: #5b4b85;
+}
+
+
+/* ================================
+   VIEW BUTTON
+================================ */
+
+.view-button {
+    border: none;
+
+    padding: 8px 16px;
+
+    border-radius: 7px;
+
+    background-color: #2d2935;
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.view-button:hover {
+    background-color: #484251;
+}
+
+
+/* ================================
+   RESPONSIVE DESIGN
+================================ */
+
+@media (max-width: 768px) {
+
+    .reported-page {
+        padding: 25px 18px;
+    }
+
+    .page-header h1 {
+        font-size: 23px;
+    }
+
+    .search-section {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .search-section input {
+        width: 100%;
+    }
+
+    .table-container {
+        border-radius: 8px;
+    }
+
+    th,
+    td {
+        padding: 15px;
+    }
+}

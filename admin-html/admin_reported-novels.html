@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reported Novels</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="../css/admin_reported-novels.css">
+</head>
+
+<body>
+
+    <main class="reported-page">
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>REPORTED NOVELS</h1>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-section">
+            <label for="search">Search:</label>
+
+            <input 
+                type="text" 
+                id="search"
+                placeholder="Search reported novels..."
+            >
+        </div>
+
+        <!-- Reported Novels Table -->
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Novel Title</th>
+                        <th>Author</th>
+                        <th>Report Reason</th>
+                        <th>Reported By</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <!-- Novel 1 -->
+                    <tr>
+                        <td>
+                            <div class="novel-title">
+                                The Dark Room
+                            </div>
+                        </td>
+
+                        <td>Juan Cruz</td>
+
+                        <td>Inappropriate Content</td>
+
+                        <td>user123</td>
+
+                        <td>
+                            <span class="status pending">
+                                Pending
+                            </span>
+                        </td>
+
+                        <td>
+                            <button class="view-button">
+                                View
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- Novel 2 -->
+                    <tr>
+                        <td>
+                            <div class="novel-title">
+                                Lost Memories
+                            </div>
+                        </td>
+
+                        <td>Maria Santos</td>
+
+                        <td>Copyright Violation</td>
+
+                        <td>user456</td>
+
+                        <td>
+                            <span class="status review">
+                                Under Review
+                            </span>
+                        </td>
+
+                        <td>
+                            <button class="view-button">
+                                View
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- Novel 3 -->
+                    <tr>
+                        <td>
+                            <div class="novel-title">
+                                Broken Hearts
+                            </div>
+                        </td>
+
+                        <td>Pedro Reyes</td>
+
+                        <td>Spam</td>
+
+                        <td>user789</td>
+
+                        <td>
+                            <span class="status pending">
+                                Pending
+                            </span>
+                        </td>
+
+                        <td>
+                            <button class="view-button">
+                                View
+                            </button>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
