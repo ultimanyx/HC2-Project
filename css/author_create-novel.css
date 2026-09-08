@@ -165,15 +165,25 @@ a {
 }
 
 .logout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 15px;
   color: #6b6b6b;
-  padding: 7px 10px;
-  margin-top: 14px;
+  padding: 10px 14px;
+  margin-top: auto;       /* ← THIS pushes it to the bottom */
+  border-top: 1px solid var(--border);
+  border-radius: 6px;
+  transition: background 0.2s ease, color 0.2s ease;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .logout:hover {
-  color: #18181b;
+  color: #dc2626;
+  background-color: #fef2f2;
 }
+
 
 /* ---------- Main content (scrolls independently) ---------- */
 .main {
