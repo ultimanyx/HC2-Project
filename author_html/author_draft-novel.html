@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Draft Novel</title>
+<link rel="stylesheet" href="../css/author_draft-novel.css">
+ <link rel="icon" type="image" href="../image/logo.png" />
+</head>
+<body>
+ 
+  <div class="layout">
+ 
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">Author</div>
+ 
+      <nav class="nav">
+        <a href="author_dashboard.html  " class="nav-item sub    ">
+          <span class="nav-icon"></span> Dashboard
+        </a>
+ 
+        <div class="nav-section">My Novels
+</div>
+        <a href="#" class="nav-item sub">All Novels</a>
+        <a href="author_create-novel.html" class="nav-item sub">Create Novel</a>
+        <a href="author_draft-novel.html" class="nav-item sub active">Draft Novel</a>
+ 
+        <div class="nav-section">Analytics</div>
+        <a href="author_earnings.html" class="nav-item sub">Earnings</a>
+<!--  
+        <a href="#" class="nav-item"> Profile / Settings</a>
+      </nav>
+  -->
+      <a href="#" class="logout"> Logout</a>
+    </aside>
+ 
+     <main class="main">
+            <div class="topbar">
+            <h1>Draft Books</h1>
+            <div class="user-chip">
+                <span>Sarah J.</span>
+                <span class="avatar">SJ</span>
+            </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="stats">
+            <div class="stat-card">
+                <div class="stat-label">Total Drafts</div>
+                <div class="stat-value">4</div>
+                <div class="stat-change positive">+2 this week</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Last Edited</div>
+                <div class="stat-value">The Lost Kingdom</div>
+                <div class="stat-change text-muted">Today</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Ready to Publish</div>
+                <div class="stat-value">1</div>
+                <div class="stat-change warning">Needs final review</div>
+            </div>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="filter-bar">
+            <div class="filter-group">
+                <label for="search-draft">Search</label>
+                <input type="text" id="search-draft" placeholder="Search drafts..." />
+            </div>
+            <div class="filter-group">
+                <label for="sort-draft">Sort by</label>
+                <select id="sort-draft">
+                <option>Last Edited</option>
+                <option>Title</option>
+                <option>Date Created</option>
+                </select>
+            </div>
+            <div class="filter-actions">
+                <button class="btn btn-primary">+ New Draft</button>
+            </div>
+            </div>
+
+            <!-- Drafts Table -->
+            <div class="table-card">
+            <h2>Your Draft Novels</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Last Edited</th>
+                    <th>Words</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><strong>The Lost Kingdom</strong></td>
+                    <td><span class="badge paused">Draft</span></td>
+                    <td>Today, 2:30 PM</td>
+                    <td>3,420</td>
+                    <td>
+                    <button class="btn btn-sm">Edit</button>
+                    <button class="btn btn-primary btn-sm">Publish</button>
+                    <button class="btn btn-sm btn-danger"></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Embers of Tomorrow</strong></td>
+                    <td><span class="badge paused">Draft</span></td>
+                    <td>Yesterday, 6:15 PM</td>
+                    <td>1,890</td>
+                    <td>
+                    <button class="btn btn-sm">Edit</button>
+                    <button class="btn btn-primary btn-sm">Publish</button>
+                    <button class="btn btn-sm btn-danger"></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Whispers in the Dark</strong></td>
+                    <td><span class="badge paused">Draft</span></td>
+                    <td>Sep 05, 2026</td>
+                    <td>5,100</td>
+                    <td>
+                    <button class="btn btn-sm">Edit</button>
+                    <button class="btn btn-primary btn-sm">Publish</button>
+                    <button class="btn btn-sm btn-danger"></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Starlight Drive (untitled)</strong></td>
+                    <td><span class="badge paused">Draft</span></td>
+                    <td>Aug 28, 2026</td>
+                    <td>0</td>
+                    <td>
+                    <button class="btn btn-sm">Edit</button>
+                    <button class="btn btn-primary btn-sm">Publish</button>
+                    <button class="btn btn-sm btn-danger"></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- <div class="text-muted" style="margin-top: 16px; border-top: 1px solid var(--border); padding-top: 14px; display: flex; justify-content: space-between; font-size: 14px;">
+                <span>Showing 4 drafts</span>
+                <span>💡 Drafts are private – only you can see them.</span>
+            </div> -->
+            </div>
+    </main>
+  </div>
+ 
+</body>
+</html>
+ 
