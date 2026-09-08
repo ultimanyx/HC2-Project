@@ -2,159 +2,166 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Author Dashboard</title>
 <link rel="stylesheet" href="../css/author_dashboard.css">
+ <link rel="icon" type="image" href="../image/logo.png" />
 </head>
 <body>
-<div class="layout">
  
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <div class="nav-item active">Dashboard</div>
-    <div class="nav-item">My Books</div>
-    <div class="nav-item">Add New Book</div>
-    <div class="nav-item">Earnings</div>
-    <div class="nav-item">Reviews</div>
-    <div class="nav-item">Messages</div>
-    <div class="nav-item logout">Log Out</div>
-  </div>
+  <div class="layout">
  
-  <!-- Main content -->
-  <div class="main">
-    <div class="topbar">
-      <span class="avatar">👤</span>
-      Welcome, Author
-    </div>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">Author</div>
  
-    <!-- Top stat strip -->
-    <div class="stat-strip">
-      <div class="stat-card">
-        <div class="card-label">Total Books</div>
-        <div class="card-value">12</div>
-      </div>
-      <div class="stat-card">
-        <div class="card-label">Total Sales</div>
-        <div class="card-value">2,480</div>
-      </div>
-      <div class="stat-card">
-        <div class="card-label">Earnings</div>
-        <div class="card-value">$6,150</div>
-      </div>
-      <div class="stat-card">
-        <div class="card-label">Avg Rating</div>
-        <div class="card-value">4.6</div>
-      </div>
-    </div>
+      <nav class="nav">
+        <a href="admin.html" class="nav-item sub    ">
+          <span class="nav-icon"></span> Dashboard
+        </a>
  
-    <div class="grid-top">
-      <!-- Sales Trend -->
-      <div class="card">
-        <div class="card-label">Sales This Year</div>
-        <div class="card-value">2,480</div>
-        <div class="chart-wrap">
-          <svg class="line-chart" viewBox="0 0 300 100" preserveAspectRatio="none">
-            <path d="M0,80 L25,68 L50,72 L75,55 L100,60 L125,42 L150,48 L175,30 L200,36 L225,20 L250,26 L275,10 L300,15" />
-          </svg>
-        </div>
-      </div>
- 
-      <!-- Sales by Book -->
-      <div class="card">
-        <div class="card-label">Sales Share by Book</div>
-        <div class="card-value">100%</div>
-        <div class="chart-wrap">
-          <div class="pie"></div>
-        </div>
-        <div class="legend">
-          <div class="legend-item"><span class="name"><span class="dot" style="background:var(--purple)"></span>The Last Chapter</span><span class="pct">45%</span></div>
-          <div class="legend-item"><span class="name"><span class="dot" style="background:var(--blue)"></span>Silent Harbor</span><span class="pct">25%</span></div>
-          <div class="legend-item"><span class="name"><span class="dot" style="background:var(--orange)"></span>Winter's Edge</span><span class="pct">18%</span></div>
-          <div class="legend-item"><span class="name"><span class="dot" style="background:var(--green)"></span>Others</span><span class="pct">12%</span></div>
-        </div>
-      </div>
-    </div>
- 
-    <!-- My Books table -->
-    <div class="card books-card">
-      <div class="card-label">My Books</div>
-      <table class="books-table">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Genre</th>
-            <th>Status</th>
-            <th>Sales</th>
-            <th>Rating</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>The Last Chapter</td>
-            <td>Fantasy</td>
-            <td><span class="status published">Published</span></td>
-            <td>1,116</td>
-            <td><span class="stars">★★★★★</span></td>
-          </tr>
-          <tr>
-            <td>Silent Harbor</td>
-            <td>Thriller</td>
-            <td><span class="status published">Published</span></td>
-            <td>620</td>
-            <td><span class="stars">★★★★☆</span></td>
-          </tr>
-          <tr>
-            <td>Winter's Edge</td>
-            <td>Romance</td>
-            <td><span class="status review">In Review</span></td>
-            <td>446</td>
-            <td><span class="stars">★★★★☆</span></td>
-          </tr>
-          <tr>
-            <td>Beyond the Veil</td>
-            <td>Sci-Fi</td>
-            <td><span class="status draft">Draft</span></td>
-            <td>0</td>
-            <td><span class="stars">—</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
- 
-    <!-- Reviews summary -->
-    <div class="card">
-      <div class="reviews-row">
-        <div class="stat">
-          <div class="card-label">Reader Reviews</div>
-          <div class="card-value">312</div>
-        </div>
-        <div class="chart-wrap">
-          <div class="bar-chart">
-            <div class="bar-col">
-              <div class="bar" style="height:12%; background:var(--orange);"></div>
-              <div class="bar-name">1★</div>
-            </div>
-            <div class="bar-col">
-              <div class="bar" style="height:8%; background:var(--orange);"></div>
-              <div class="bar-name">2★</div>
-            </div>
-            <div class="bar-col">
-              <div class="bar" style="height:20%; background:var(--yellow);"></div>
-              <div class="bar-name">3★</div>
-            </div>
-            <div class="bar-col">
-              <div class="bar" style="height:45%; background:var(--blue);"></div>
-              <div class="bar-name">4★</div>
-            </div>
-            <div class="bar-col">
-              <div class="bar" style="height:90%; background:var(--green);"></div>
-              <div class="bar-name">5★</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+        <div class="nav-section">My Novels
 </div>
+        <a href="#" class="nav-item sub">All Novels</a>
+        <a href="#" class="nav-item sub">All Novels</a>
+        <a href="#" class="nav-item sub">Create Novel
+</a>
+ 
+        <div class="nav-section">Analytics</div>
+        <a href="#" class="nav-item sub">Earnings</a>
+ 
+        <a href="#" class="nav-item"> Profile / Settings</a>
+      </nav>
+ 
+      <a href="#" class="logout"> Logout</a>
+    </aside>
+ 
+     <main class="main">
+
+      <!-- TOPBAR -->
+      <div class="topbar">
+        <h1>Advertisement Management</h1>
+        <div class="user-chip">
+          <span>Welcome, Author</span>
+          <div class="avatar">A</div>
+        </div>
+      </div>
+
+      <!-- FILTER BAR (Ad-Specific) -->
+      <div class="filter-bar">
+        <div class="filter-group">
+          <label for="period">Period</label>
+          <select id="period">
+            <option>Last 30 days</option>
+            <option selected>This month</option>
+            <option>Last quarter</option>
+            <option>Year to date</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="format">Ad Format</label>
+          <select id="format">
+            <option>All formats</option>
+            <option>Display</option>
+            <option>Video</option>
+          </select>
+        </div>
+        <div class="filter-actions">
+          <span class="btn">Reset</span>
+          <span class="btn btn-primary">Apply</span>
+        </div>
+      </div>
+
+      <!-- STATS (Ad KPIs) -->
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-label">
+            <!-- <span class="emoji">💰</span>  -->
+            Ad Revenue</div>
+          <div class="stat-value">₱142,800</div>
+          <div class="stat-change positive">8.2% vs last month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">
+            <!-- <span class="emoji"></span>  -->
+            Total Views
+        </div>
+          <div class="stat-value">6.4M</div>
+          <div class="stat-change positive">5.1% vs last month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">
+            <!-- <span class="emoji"></span>  -->
+            Avg. eCPM</div>
+          <div class="stat-value">₱22.31</div>
+          <div class="stat-change positive">0.9% vs last month</div>
+        </div>
+      </div>
+
+      <!-- TABLE (Ad Performance) -->
+      <div class="table-card">
+        <h2>
+          📋 Top Performing Ad Campaigns
+          <!-- <small>Showing 5 of 48</small> -->
+        </h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Campaign</th>
+              <th>Format</th>
+              <th class="text-right">Views</th>
+              <th class="text-right">Clicks</th>
+              <th class="text-right">Revenue</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="fw-600">Nestle Milo Drink </span></td>
+              <td>Video</td>
+              <td class="text-right">1,240,000</td>
+              <td class="text-right">34,720</td>
+              <td class="text-right">₱42,500</td>
+              <td><span class="badge active">● Active</span></td>
+            </tr>
+            <tr>
+              <td><span class="fw-600">Datu Puti</span></td>
+              <td>Video</td>
+              <td class="text-right">2,1    00,000</td>
+              <td class="text-right">52,500</td>
+              <td class="text-right">₱38,200</td>
+              <td><span class="badge active">● Active</span></td>
+            </tr>
+            <tr>
+              <td><span class="fw-600">Scatter67</span></td>
+              <td>Video</td>
+              <td class="text-right">980,000</td>
+              <td class="text-right">29,400</td>
+              <td class="text-right">₱94,100</td>
+              <td><span class="badge paused">⏸️ Paused</span></td>
+            </tr>
+            <tr>
+              <td><span class="fw-600">CTV Holiday Special</span></td>
+              <td>Banner</td>
+              <td class="text-right">620,000</td>
+              <td class="text-right">11,160</td>
+              <td class="text-right">₱21,800</td>
+              <td><span class="badge completed">✔️ Completed</span></td>
+            </tr>
+            <tr>
+              <td><span class="fw-600">Coca Cola Coke</span></td>
+              <td>Banner</td>
+              <td class="text-right">450,000</td>
+              <td class="text-right">6,750</td>
+              <td class="text-right">₱16,200</td>
+              <td><span class="badge active">● Active</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+  </div>
  
 </body>
 </html>

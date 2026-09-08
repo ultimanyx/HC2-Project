@@ -113,7 +113,7 @@ a {
  
 .nav-item {
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 400;
   margin-top: 5px;
   color: #4a4a4a;
   padding: 9px 10px;
@@ -124,7 +124,6 @@ a {
   padding-left: 18px;
   color: #6b6b6b;
   font-size: 19px;
-  font-weight: 400  ;
 }
 
 
@@ -136,7 +135,7 @@ a {
 }
  
 .nav-item:hover {
-  background-color: #cbced1;
+  background-color: #f8fafc;
 }
  
 .nav-icon {
@@ -153,7 +152,7 @@ a {
 }
  
 .logout {
-  font-size: 22px;
+  font-size: 16px;
   color: #6b6b6b;
   padding: 9px 10px;
   margin-top: 16px;
