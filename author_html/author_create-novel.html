@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Author Dashboard</title>
+<link rel="stylesheet" href="../css/author_create-novel.css ">
+ <link rel="icon" type="image" href="../image/logo.png" />
+</head>
+<body>
+ 
+  <div class="layout">
+ 
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">Author</div>
+ 
+      <nav class="nav">
+        <a href="admin.html" class="nav-item sub ">
+          <span class="nav-icon"></span> Dashboard
+        </a>
+ 
+        <div class="nav-section">My Novels
+</div>
+        <a href="#" class="nav-item sub">All Novels</a>
+        <a href="#" class="nav-item sub active">Create Novel
+        <a href="#" class="nav-item sub">Draft Books</a>
+</a>
+ 
+        <div class="nav-section">Analytics</div>
+        <a href="author_earnings.html" class="nav-item sub ">Earnings</a>
+<!--  
+        <a href="#" class="nav-item"> Profile / Settings</a>
+      </nav>
+  -->
+      <a href="#" class="logout"> Logout</a>
+    </aside>
+ 
+     <main class="main">
+            <div class="topbar">
+            <h1>Create New Novel</h1>
+            <div class="user-chip">
+                <span>Sarah J.</span>
+                <span class="avatar">SJ</span>
+            </div>
+            </div>
+
+            <!-- Main Form Card -->
+            <div class="form-container">
+
+            <!-- Row 1: Title + Subtitle -->
+            <div class="form-grid-2">
+                <div class="form-group">
+                <label for="title">Novel Title <span style="color: var(--destructive);">*</span></label>
+                <input type="text" id="title" placeholder="e.g. Shadows of the Crown" />
+                <span class="hint">Max 60 characters. This is what readers will see first.</span>
+                </div>
+                <div class="form-group">
+                <label for="subtitle">Subtitle (Optional)</label>
+                <input type="text" id="subtitle" placeholder="e.g. A Tale of Fire and Blood" />
+                <span class="hint">A short secondary line to add context.</span>
+                </div>
+            </div>
+
+            <!-- Row 2: Genre + Tags -->
+            <div class="form-grid-2">
+                <div class="form-group">
+                <label for="genre">Genre <span style="color: var(--destructive);">*</span></label>
+                <select id="genre">
+                    <option value="">Select primary genre…</option>
+                    <option>Fantasy</option>
+                    <option>Romance</option>
+                    <option>Sci-Fi</option>
+                    <option>Mystery</option>
+                    <option>Thriller</option>
+                    <option>Literary Fiction</option>
+                    <option>Young Adult</option>
+                </select>
+                </div>
+                <div class="form-group">
+                <label for="tags">Tags / Keywords</label>
+                <input type="text" id="tags" placeholder="e.g. enemies to lovers, magic, adventure" />
+                <span class="hint">Separate with commas. Helps readers discover your book.</span>
+                </div>
+            </div>
+
+            <!-- Cover Upload (Full Width) -->
+            <div class="form-group-full">
+                <label>Cover Image</label>
+                <div class="upload-zone">
+                <p><strong>Click to upload</strong> or drag and drop</p>
+                <p class="sub">PNG, JPG, or WEBP — Max 5MB (Recommended: 1200 x 1800 px)</p>
+                </div>
+            </div>
+
+            <!-- Synopsis / Blurb (Full Width) -->
+            <div class="form-group-full">
+                <div class="form-group">
+                <label for="synopsis">Synopsis / Blurb <span style="color: var(--destructive);">*</span></label>
+                <textarea id="synopsis" placeholder="Write a compelling description that hooks potential readers…"></textarea>
+                <span class="hint">Aim for 150–300 words. This is your book’s sales pitch.</span>
+                </div>
+            </div>
+
+            <!-- Row 3: Status + Age Rating -->
+            <div class="form-grid-2">
+                <div class="form-group">
+                <label for="status">Publishing Status</label>
+                <select id="status">
+                    <option>Draft (Private)</option>
+                    <option>Ongoing (Public)</option>
+                    <option>Completed</option>
+                    <option>On Hiatus</option>
+                </select>
+                <span class="hint">Choose 'Draft' if you're not ready to share it yet.</span>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="form-actions">
+                <button class="btn btn-outline">Cancel</button>
+                <button class="btn">Save as Draft</button>
+                <button class="btn">Publish Now</button>
+                <span class="spacer"></span>
+                <button class="btn btn-primary btn-lg">Submit Book</button>
+            </div>
+
+            </div>
+    </main>
+  </div>
+ 
+</body>
+</html>
+ 
