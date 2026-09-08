@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Pending Novels</title>
+
+    <!-- Use the same CSS as before -->
+    <link rel="stylesheet" href="../css/admin_pending-novel.css" />
+
+    <link rel="icon" type="image" href="../image/logo.png" />
+  </head>
+
+  <body>
+    <div class="layout">
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+
+        <div class="brand">Admin</div>
+
+        <nav class="nav">
+
+          <a href="admin.html" class="nav-item sub">
+            <span class="nav-icon"></span>
+            Dashboard
+          </a>
+
+          <div class="nav-section">Novel Management</div>
+
+          <a href="#" class="nav-item sub">
+            All Novels
+          </a>
+
+          <a href="#" class="nav-item sub active">
+            Pending Novels
+          </a>
+
+          <a href="#" class="nav-item sub">
+            Reported Novels
+          </a>
+
+
+          <div class="nav-section">User Management</div>
+
+          <a href="#" class="nav-item sub">
+            Users
+          </a>
+
+          <a href="admin_usermanage-author.html" class="nav-item sub">
+            Authors
+          </a>
+
+
+          <div class="nav-section">Advertisement</div>
+
+          <a href="admin_ad-management.html" class="nav-item sub">
+            Ad Management
+          </a>
+
+          <a href="admin_revenue-reports.html" class="nav-item sub">
+            Revenue Reports
+          </a>
+
+        </nav>
+
+        <a href="admin_login.html" class="logout">
+          Logout
+        </a>
+
+      </aside>
+
+
+      <!-- Main Content -->
+      <main class="main">
+
+        <!-- Topbar -->
+        <div class="topbar">
+
+          <h1>PENDING NOVELS</h1>
+
+          <div class="user-chip">
+            <span>Welcome, Admin</span>
+
+            <div class="avatar">
+              A
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- Page Toolbar -->
+        <div class="ad-toolbar">
+
+          <div class="left">
+
+            <h1>Pending Novels</h1>
+
+            <span class="ad-count">
+              4 Novels
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- Search -->
+        <div class="filter-bar">
+
+          <div class="filter-group">
+
+            <label for="search">
+              Search
+            </label>
+
+            <input
+              type="text"
+              id="search"
+              placeholder="Search pending novels..."
+            />
+
+          </div>
+
+        </div>
+
+
+        <!-- Pending Novels Table -->
+        <div class="table-card">
+
+          <h2>📚 Pending Novels</h2>
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Novel Title</th>
+                <th>Author</th>
+                <th>Genre</th>
+                <th>Submitted Date</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              <!-- Novel 1 -->
+              <tr>
+
+                <td class="fw-600">
+                  The Last Promise
+                </td>
+
+                <td>
+                  Juan Cruz
+                </td>
+
+                <td>
+                  Romance
+                </td>
+
+                <td>
+                  Sept 8, 2026
+                </td>
+
+                <td>
+                  <span class="badge paused">
+                    Pending
+                  </span>
+                </td>
+
+                <td>
+
+                  <div class="action-group">
+
+                    <button class="btn-secondary">
+                      View
+                    </button>
+
+                    <button class="btn-primary">
+                      Approve
+                    </button>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+
+              <!-- Novel 2 -->
+              <tr>
+
+                <td class="fw-600">
+                  Shadows of Yesterday
+                </td>
+
+                <td>
+                  Maria Santos
+                </td>
+
+                <td>
+                  Mystery
+                </td>
+
+                <td>
+                  Sept 7, 2026
+                </td>
+
+                <td>
+                  <span class="badge paused">
+                    Pending
+                  </span>
+                </td>
+
+                <td>
+
+                  <div class="action-group">
+
+                    <button class="btn-secondary">
+                      View
+                    </button>
+
+                    <button class="btn-primary">
+                      Approve
+                    </button>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+
+              <!-- Novel 3 -->
+              <tr>
+
+                <td class="fw-600">
+                  Beyond the Stars
+                </td>
+
+                <td>
+                  Pedro Reyes
+                </td>
+
+                <td>
+                  Fantasy
+                </td>
+
+                <td>
+                  Sept 6, 2026
+                </td>
+
+                <td>
+                  <span class="badge paused">
+                    Pending
+                  </span>
+                </td>
+
+                <td>
+
+                  <div class="action-group">
+
+                    <button class="btn-secondary">
+                      View
+                    </button>
+
+                    <button class="btn-primary">
+                      Approve
+                    </button>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+
+              <!-- Novel 4 -->
+              <tr>
+
+                <td class="fw-600">
+                  A Broken Vow
+                </td>
+
+                <td>
+                  Ana Garcia
+                </td>
+
+                <td>
+                  Drama
+                </td>
+
+                <td>
+                  Sept 5, 2026
+                </td>
+
+                <td>
+                  <span class="badge paused">
+                    Pending
+                  </span>
+                </td>
+
+                <td>
+
+                  <div class="action-group">
+
+                    <button class="btn-secondary">
+                      View
+                    </button>
+
+                    <button class="btn-primary">
+                      Approve
+                    </button>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </main>
+
+    </div>
+  </body>
+</html>
