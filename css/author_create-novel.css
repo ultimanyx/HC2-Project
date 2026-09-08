@@ -66,11 +66,21 @@
   --font-heading: "Fraunces", serif;
 }
 
+/* =====================================================
+   FIX: Lock page, sidebar stays put
+===================================================== */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; /* prevents whole page from scrolling */
+}
+
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   background-color: #fafafa;
   color: #18181b;
-  font-size: 15px; /* was 17px */
+  font-size: 15px;
 }
 
 a {
@@ -81,23 +91,28 @@ a {
 /* ---------- Layout ---------- */
 .layout {
   display: flex;
+  height: 100vh;        /* full viewport height */
+  overflow: hidden;     /* no outer scroll */
   min-height: 100vh;
 }
 
-/* ---------- Sidebar ---------- */
+/* ---------- Sidebar (fixed, won't scroll with main) ---------- */
 .sidebar {
-  width: 270px; /* was 300px */
+  width: 270px;
   background-color: #ffffff;
   border-right: 1px solid rgba(0, 0, 0, 0.06);
-  padding: 20px 14px; /* was 24px 16px */
+  padding: 20px 14px;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;       /* keeps sidebar width from shrinking */
+  overflow-y: auto;     /* sidebar scrolls internally if needed */
+  height: 100vh;        /* full height */
 }
 
 .brand {
-  font-size: 20px; /* was 22px */
+  font-size: 20px;
   font-weight: 700;
-  margin-bottom: 20px; /* was 24px */
+  margin-bottom: 20px;
   padding-left: 8px;
   color: #18181b;
 }
@@ -105,23 +120,23 @@ a {
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 1px; /* was 2px */
+  gap: 1px;
   flex: 1;
 }
 
 .nav-item {
-  font-size: 18px; /* was 22px */
-  font-weight: 400; /* was 600 – changed to match base */
-  margin-top: 3px; /* was 5px */
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: 3px;
   color: #4a4a4a;
-  padding: 7px 10px; /* was 9px 10px */
+  padding: 7px 10px;
   border-radius: 6px;
 }
 
 .nav-item.sub {
-  padding-left: 16px; /* was 18px */
+  padding-left: 16px;
   color: #6b6b6b;
-  font-size: 16px; /* was 19px */
+  font-size: 16px;
   font-weight: 400;
 }
 
@@ -129,11 +144,11 @@ a {
   background-color: #eff6ff;
   color: #1d4ed8;
   font-weight: 600;
-  font-size: 16px; /* was 19px */
+  font-size: 16px;
 }
 
 .nav-item:hover {
-  background-color: #cbced1; /* kept as-is – not a size/font value */
+  background-color: #cbced1;
 }
 
 .nav-icon {
@@ -141,43 +156,45 @@ a {
 }
 
 .nav-section {
-  font-size: 21px; /* was 26px */
+  font-size: 21px;
   font-weight: 600;
   color: #18181b;
-  margin-top: 14px; /* was 16px */
-  margin-bottom: 3px; /* was 4px */
+  margin-top: 14px;
+  margin-bottom: 3px;
   padding-left: 10px;
 }
 
 .logout {
-  font-size: 15px; /* was 22px */
+  font-size: 15px;
   color: #6b6b6b;
-  padding: 7px 10px; /* was 9px 10px */
-  margin-top: 14px; /* was 16px */
+  padding: 7px 10px;
+  margin-top: 14px;
 }
 
 .logout:hover {
   color: #18181b;
 }
 
-/* ---------- Main content ---------- */
+/* ---------- Main content (scrolls independently) ---------- */
 .main {
   flex: 1;
-  padding: 24px 32px; /* was 32px 40px */
+  padding: 24px 32px;
+  overflow-y: auto;     /* main content scrolls here */
+  height: 100vh;        /* full height */
 }
 
 .topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 22px; /* was 20px */
+  margin-bottom: 22px;
   gap: 16px;
 }
 
 .topbar h1 {
-  font-size: 26px; /* was 28px */
+  font-size: 26px;
   font-weight: 700;
-  letter-spacing: -0.3px; /* was -0.4px */
+  letter-spacing: -0.3px;
 }
 
 .user-chip {
@@ -210,8 +227,8 @@ a {
   background: #ffffff;
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 12px 20px; /* was 14px 20px */
-  margin-bottom: 20px; /* was 28px */
+  padding: 12px 20px;
+  margin-bottom: 20px;
 }
 
 .filter-group {
@@ -221,8 +238,8 @@ a {
 }
 
 .filter-group label {
-  font-size: 15px; /* was 18px */
-  font-weight: 600; /* was 500 – adjusted to match base's label weight */
+  font-size: 15px;
+  font-weight: 600;
   color: var(--muted-foreground);
 }
 
@@ -231,9 +248,9 @@ a {
   background: var(--input-background);
   border: 1px solid var(--border);
   border-radius: 6px;
-  margin-right: 0; /* was 50px */
-  padding: 6px 12px; /* was 8px 12px */
-  font-size: 15px; /* was 16px */
+  margin-right: 0;
+  padding: 6px 12px;
+  font-size: 15px;
   font-family: var(--font-body);
   color: var(--foreground);
   outline: none;
@@ -249,14 +266,14 @@ a {
 .filter-actions {
   margin-left: auto;
   display: flex;
-  gap: 6px; /* was 8px */
+  gap: 6px;
 }
 
 /* Generic button style */
 .btn {
-  padding: 8px 16px; /* was 8px 20px */
+  padding: 8px 16px;
   border-radius: 6px;
-  font-size: 15px; /* was 18 px (fixed) */
+  font-size: 15px;
   font-weight: 600;
   border: none;
   background: var(--secondary);
@@ -272,128 +289,128 @@ a {
   background: #1d4ed8;
 }
 
-  /* ---- Form Container ---- */
-  .form-container {
-    background: var(--card-background);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 28px 32px;
-    box-shadow: var(--shadow);
-  }
+/* ---- Form Container ---- */
+.form-container {
+  background: var(--card-background);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px 32px;
+  box-shadow: var(--shadow);
+}
 
-  /* ---- Grid Layouts ---- */
-  .form-grid-2 {
-    display: grid;
-    gap: 24px 32px;
-    margin-bottom: 24px;
-  }
+/* ---- Grid Layouts ---- */
+.form-grid-2 {
+  display: grid;
+  gap: 24px 32px;
+  margin-bottom: 24px;
+}
 
-  .form-group-full {
-    margin-bottom: 24px;
-  }
+.form-group-full {
+  margin-bottom: 24px;
+}
 
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
 
-  .form-group label {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--muted-foreground);
-    letter-spacing: 0.02em;
-  }
+.form-group label {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  letter-spacing: 0.02em;
+}
 
-  .form-group .hint {
-    font-size: 13px;
-    color: var(--muted-foreground);
-    font-weight: 400;
-    margin-top: 2px;
-  }
+.form-group .hint {
+  font-size: 13px;
+  color: var(--muted-foreground);
+  font-weight: 400;
+  margin-top: 2px;
+}
 
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    background: var(--input-background);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 10px 14px;
-    font-size: 16px;
-    font-family: var(--font-body);
-    color: var(--foreground);
-    outline: none;
-    transition: 0.15s;
-    width: 100%;
-  }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: var(--input-background);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 16px;
+  font-family: var(--font-body);
+  color: var(--foreground);
+  outline: none;
+  transition: 0.15s;
+  width: 100%;
+}
 
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px var(--focus-ring);
-  }
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
 
-  .form-group textarea {
-    min-height: 140px;
-    resize: vertical;
-  }
+.form-group textarea {
+  min-height: 140px;
+  resize: vertical;
+}
 
-  /* ---- Upload Zone ---- */
-  .upload-zone {
-    border: 2px dashed var(--border);
-    border-radius: 8px;
-    padding: 36px 20px;
-    text-align: center;
-    background: var(--secondary);
-    cursor: pointer;
-    transition: 0.2s;
-  }
-  .upload-zone:hover {
-    border-color: var(--primary);
-    background: #f8fafc;
-  }
-  .upload-zone .icon {
-    font-size: 32px;
-    display: block;
-    margin-bottom: 8px;
-  }
-  .upload-zone p {
-    font-size: 16px;
-    color: var(--muted-foreground);
-    margin: 4px 0;
-  }
-  .upload-zone .sub {
-    font-size: 14px;
-    color: var(--muted-foreground);
-  }
+/* ---- Upload Zone ---- */
+.upload-zone {
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  padding: 36px 20px;
+  text-align: center;
+  background: var(--secondary);
+  cursor: pointer;
+  transition: 0.2s;
+}
+.upload-zone:hover {
+  border-color: var(--primary);
+  background: #f8fafc;
+}
+.upload-zone .icon {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 8px;
+}
+.upload-zone p {
+  font-size: 16px;
+  color: var(--muted-foreground);
+  margin: 4px 0;
+}
+.upload-zone .sub {
+  font-size: 14px;
+  color: var(--muted-foreground);
+}
 
-  /* ---- Action Buttons ---- */
-  .form-actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 12px;
-    border-top: 1px solid var(--border);
-    padding-top: 24px;
-    margin-top: 8px;
-  }
+/* ---- Action Buttons ---- */
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  margin-top: 8px;
+}
 
-  .form-actions .spacer {
-    flex: 1;
-  }
+.form-actions .spacer {
+  flex: 1;
+}
 
-  .btn-lg {
-    padding: 12px 32px;
-    font-size: 17px;
-    border-radius: 8px;
-  }
+.btn-lg {
+  padding: 12px 32px;
+  font-size: 17px;
+  border-radius: 8px;
+}
 
-  .btn-outline {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--foreground);
-  }
-  .btn-outline:hover {
-    background: var(--secondary);
-  }
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--foreground);
+}
+.btn-outline:hover {
+  background: var(--secondary);
+}
