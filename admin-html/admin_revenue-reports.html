@@ -1,171 +1,177 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Revenue Reports</title>
-<link rel="stylesheet" href="../css/admin_revenue-reports.css">
- <link rel="icon" type="image" href="../image/logo.png" />
-</head>
-<body>
- 
-  <div class="layout">
- 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="brand">Admin</div>
- 
-      <nav class="nav">
-        <a href="admin.html" class="nav-item sub    ">
-          <span class="nav-icon"></span> Dashboard
-        </a>
- 
-        <div class="nav-section">Novel Management</div>
-        <a href="#" class="nav-item sub">All Novels</a>
-        <a href="#" class="nav-item sub">Pending Novels</a>
-        <a href="#" class="nav-item sub">Reported Novels</a>
- 
-        <div class="nav-section">User Management</div>
-        <a href="#" class="nav-item sub">Users</a>
-        <a href="#" class="nav-item sub">Authors</a>
- 
-        <div class="nav-section">Advertisement</div>
-        <a href="admin_ad-management.html" class="nav-item sub">Ad Management</a>
-        <a href="admin_revenue-reports.html" class="nav-item sub active">Revenue Reports</a>
- 
-        <a href="#" class="nav-item"> Profile / Settings</a>
-      </nav>
- 
-      <a href="#" class="logout"> Logout</a>
-    </aside>
- 
-     <main class="main">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Revenue Reports</title>
+    <link rel="stylesheet" href="../css/admin_revenue-reports.css" />
+    <link rel="icon" type="image" href="../image/logo.png" />
+  </head>
+  <body>
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="brand">Admin</div>
 
-      <!-- TOPBAR -->
-      <div class="topbar">
-        <h1>Advertisement Management</h1>
-        <div class="user-chip">
-          <span>Welcome, Admin</span>
-          <div class="avatar">A</div>
-        </div>
-      </div>
+        <nav class="nav">
+          <a href="admin.html" class="nav-item sub">
+            <span class="nav-icon"></span> Dashboard
+          </a>
 
-      <!-- FILTER BAR (Ad-Specific) -->
-      <div class="filter-bar">
-        <div class="filter-group">
-          <label for="period">Period</label>
-          <select id="period">
-            <option>Last 30 days</option>
-            <option selected>This month</option>
-            <option>Last quarter</option>
-            <option>Year to date</option>
-          </select>
-        </div>
-        <div class="filter-group">
-          <label for="format">Ad Format</label>
-          <select id="format">
-            <option>All formats</option>
-            <option>Display</option>
-            <option>Video</option>
-          </select>
-        </div>
-        <div class="filter-actions">
-          <span class="btn">Reset</span>
-          <span class="btn btn-primary">Apply</span>
-        </div>
-      </div>
+          <div class="nav-section">Novel Management</div>
+          <a href="#" class="nav-item sub">All Novels</a>
+          <a href="#" class="nav-item sub">Pending Novels</a>
+          <a href="#" class="nav-item sub">Reported Novels</a>
 
-      <!-- STATS (Ad KPIs) -->
-      <div class="stats">
-        <div class="stat-card">
-          <div class="stat-label">
-            <!-- <span class="emoji">💰</span>  -->
-            Ad Revenue</div>
-          <div class="stat-value">₱142,800</div>
-          <div class="stat-change positive">8.2% vs last month</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">
-            <!-- <span class="emoji"></span>  -->
-            Total Views
-        </div>
-          <div class="stat-value">6.4M</div>
-          <div class="stat-change positive">5.1% vs last month</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">
-            <!-- <span class="emoji"></span>  -->
-            Avg. eCPM</div>
-          <div class="stat-value">₱22.31</div>
-          <div class="stat-change positive">0.9% vs last month</div>
-        </div>
-      </div>
+          <div class="nav-section">User Management</div>
+          <a href="#" class="nav-item sub">Users</a>
+          <a href="#" class="nav-item sub">Authors</a>
 
-      <!-- TABLE (Ad Performance) -->
-      <div class="table-card">
-        <h2>
-          📋 Top Performing Ad Campaigns
-          <!-- <small>Showing 5 of 48</small> -->
-        </h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Campaign</th>
-              <th>Format</th>
-              <th class="text-right">Views</th>
-              <th class="text-right">Clicks</th>
-              <th class="text-right">Revenue</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span class="fw-600">Nestle Milo Drink </span></td>
-              <td>Video</td>
-              <td class="text-right">1,240,000</td>
-              <td class="text-right">34,720</td>
-              <td class="text-right">₱42,500</td>
-              <td><span class="badge active">● Active</span></td>
-            </tr>
-            <tr>
-              <td><span class="fw-600">Datu Puti</span></td>
-              <td>Video</td>
-              <td class="text-right">2,1    00,000</td>
-              <td class="text-right">52,500</td>
-              <td class="text-right">₱38,200</td>
-              <td><span class="badge active">● Active</span></td>
-            </tr>
-            <tr>
-              <td><span class="fw-600">Scatter67</span></td>
-              <td>Video</td>
-              <td class="text-right">980,000</td>
-              <td class="text-right">29,400</td>
-              <td class="text-right">₱94,100</td>
-              <td><span class="badge paused">⏸️ Paused</span></td>
-            </tr>
-            <tr>
-              <td><span class="fw-600">CTV Holiday Special</span></td>
-              <td>Banner</td>
-              <td class="text-right">620,000</td>
-              <td class="text-right">11,160</td>
-              <td class="text-right">₱21,800</td>
-              <td><span class="badge completed">✔️ Completed</span></td>
-            </tr>
-            <tr>
-              <td><span class="fw-600">Coca Cola Coke</span></td>
-              <td>Banner</td>
-              <td class="text-right">450,000</td>
-              <td class="text-right">6,750</td>
-              <td class="text-right">₱16,200</td>
-              <td><span class="badge active">● Active</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+          <div class="nav-section">Advertisement</div>
+          <a href="admin_ad-management.html" class="nav-item sub"
+            >Ad Management</a
+          >
+          <a href="admin_revenue-reports.html" class="nav-item sub active"
+            >Revenue Reports</a
+          >
 
-    </main>
-  </div>
- 
-</body>
+          <!-- <a href="#" class="nav-item"> Profile / Settings</a>
+        </nav> -->
+
+        <a href="#" class="logout"> Logout</a>
+      </aside>
+
+      <main class="main">
+        <!-- TOPBAR -->
+        <div class="topbar">
+          <h1>Advertisement Management</h1>
+          <div class="user-chip">
+            <span>Welcome, Admin</span>
+            <div class="avatar">A</div>
+          </div>
+        </div>
+
+        <!-- FILTER BAR (Ad-Specific) -->
+        <div class="filter-bar">
+          <div class="filter-group">
+            <label for="period">Period</label>
+            <select id="period">
+              <option>Last 30 days</option>
+              <option selected>This month</option>
+              <option>Last quarter</option>
+              <option>Year to date</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="format">Ad Format</label>
+            <select id="format">
+              <option>All formats</option>
+              <option>Display</option>
+              <option>Video</option>
+            </select>
+          </div>
+          <div class="filter-actions">
+            <span class="btn">Reset</span>
+            <span class="btn btn-primary">Apply</span>
+          </div>
+        </div>
+
+        <!-- STATS (Ad KPIs) -->
+        <div class="stats">
+          <div class="stat-card">
+            <div class="stat-label">
+              <!-- <span class="emoji">💰</span>  -->
+              Ad Revenue
+            </div>
+            <div class="stat-value">₱142,800</div>
+            <div class="stat-change positive">8.2% vs last month</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">
+              <!-- <span class="emoji"></span>  -->
+              Total Views
+            </div>
+            <div class="stat-value">6.4M</div>
+            <div class="stat-change positive">5.1% vs last month</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">
+              <!-- <span class="emoji"></span>  -->
+              Avg. eCPM
+            </div>
+            <div class="stat-value">₱22.31</div>
+            <div class="stat-change positive">0.9% vs last month</div>
+          </div>
+        </div>
+
+        <!-- TABLE (Ad Performance) -->
+        <div class="table-card">
+          <h2>
+            📋 Top Performing Ad Campaigns
+            <!-- <small>Showing 5 of 48</small> -->
+          </h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Campaign</th>
+                <th>Format</th>
+                <th class="text-right">Views</th>
+                <th class="text-right">Clicks</th>
+                <th class="text-right">Revenue</th>
+                <th class="text-right">CPM</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="fw-600">Nestle Milo Drink</span></td>
+                <td>Video</td>
+                <td class="text-right">1,240,000</td>
+                <td class="text-right">34,720</td>
+                <td class="text-right">₱42,500</td>
+                <td class="text-right">₱34.27</td>
+                <td><span class="badge active">● Active</span></td>
+              </tr>
+              <tr>
+                <td><span class="fw-600">Datu Puti</span></td>
+                <td>Video</td>
+                <td class="text-right">2,100,000</td>
+                <td class="text-right">52,500</td>
+                <td class="text-right">₱38,200</td>
+                <td class="text-right">₱18.19</td>
+                <td><span class="badge active">● Active</span></td>
+              </tr>
+              <tr>
+                <td><span class="fw-600">Scatter67</span></td>
+                <td>Video</td>
+                <td class="text-right">980,000</td>
+                <td class="text-right">29,400</td>
+                <td class="text-right">₱94,100</td>
+                <td class="text-right">₱96.02</td>
+                <td><span class="badge paused">⏸️ Paused</span></td>
+              </tr>
+              <tr>
+                <td><span class="fw-600">CTV Holiday Special</span></td>
+                <td>Banner</td>
+                <td class="text-right">620,000</td>
+                <td class="text-right">11,160</td>
+                <td class="text-right">₱21,800</td>
+                <td class="text-right">₱35.16</td>
+                <td><span class="badge completed">✔️ Completed</span></td>
+              </tr>
+              <tr>
+                <td><span class="fw-600">Coca Cola Coke</span></td>
+                <td>Banner</td>
+                <td class="text-right">450,000</td>
+                <td class="text-right">6,750</td>
+                <td class="text-right">₱16,200</td>
+                <td class="text-right">₱36.00</td>
+                <td><span class="badge active">● Active</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </body>
 </html>
- 
