@@ -9,6 +9,15 @@ document.addEventListener('DOMContentLoaded', function () {
   const CHAPTER_EXT = '.html';
   const TOTAL_CHAPTERS = 21; // ← set this to the total number of chapters
 
+  const VIDEO_SOURCES = [
+  '../advertisement/milo-ad.mp4',
+  '../advertisement/datu-puti-ad.mp4'
+
+];
+
+const BANNER_IMAGES = [
+  '../advertisement/scatter.png',
+];
   // ---------- STATE ----------
   const state = {
     timer: AD_DURATION,
@@ -69,35 +78,35 @@ document.addEventListener('DOMContentLoaded', function () {
   // ---------- AD RENDERERS ----------
   function renderBanner() {
     adTypeLabel.textContent = 'Banner Ad';
+     const randomImage = BANNER_IMAGES[Math.floor(Math.random() * BANNER_IMAGES.length)];
+
     adContent.innerHTML = `
       <div class="banner-ad">
         <div class="banner-bg"></div>
         <div class="banner-content">
-          <div class="banner-icon"></div>
-          <h2>Continue Your Journey</h2>
-          <p>Enjoy this short message before proceeding to the next chapter.</p>
-          <span class="cta-badge">✨ Keep Reading</span>
-        </div>
+           <img src="${randomImage}" alt="Banner ad" class="banner-image" /> 
       </div>
-    `;
+    </div>
+  `;
   }
 
 
   function renderVideo() {
     adTypeLabel.textContent = 'Video Ad';
-    adContent.innerHTML = `
-      <div class="video-ad">
-        <video id="adVideo" muted playsinline preload="metadata">
-          <source src="../advertisement/milo-ad.mp4" type="video/mp4">
-          Your browser does not support video.
-        </video>
-        <div class="video-placeholder" id="videoPlaceholder" style="display:none;">
-          <span class="play-icon"></span>
-          <p>Video ad would play here.</p>
-          <p style="font-size:13px;color:#6b7a93;">(Sample video from W3Schools)</p>
-        </div>
+     const randomVideo = VIDEO_SOURCES[Math.floor(Math.random() * VIDEO_SOURCES.length)];
+     adContent.innerHTML = `
+    <div class="video-ad">
+      <video id="adVideo" muted playsinline preload="metadata">
+        <source src="${randomVideo}" type="video/mp4">
+        Your browser does not support video.
+      </video>
+      <div class="video-placeholder" id="videoPlaceholder" style="display:none;">
+        <span class="play-icon"></span>
+        <p>Video ad would play here.</p>
+        <p style="font-size:13px;color:#6b7a93;">(Sample video from W3Schools)</p>
       </div>
-    `;
+    </div>
+  `;
 
     const video = document.getElementById('adVideo');
     if (video) {

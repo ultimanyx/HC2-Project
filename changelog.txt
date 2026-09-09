@@ -9,3 +9,9 @@ Added
 2.add font Poppins to the project.
 3.file for image and font.
 
+delete for now
+<div class="banner-text">
+          <h2>Continue Your Journey</h2>
+          <p>Enjoy this short message before proceeding to the next chapter.</p>
+          <span class="cta-badge">✨ Keep Reading</span>
+        </div>
