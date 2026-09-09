@@ -56,6 +56,7 @@
 body {
   font-family: "Plus_Jakarta_Sans", sans-serif;
   background: var(--background);
+  /* background-image: url(..); */
   min-height: 100vh;
   display: flex;
   align-items: center;
