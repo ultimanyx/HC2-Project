@@ -450,7 +450,7 @@ body {
 }
 
 /* =====================================================
-   REPORT BUTTON — now matches bookmark hover
+   REPORT BUTTON 
 ===================================================== */
 .report-btn {
   display: flex;
@@ -575,7 +575,7 @@ body {
 }
 
 .container-footer button:hover:not(:disabled) {
-  background-color: #a0641a; /* Darker shade – we can add a variable */
+  background-color: #a0641a; 
   transform: translateY(-2px);
 }
 

@@ -5,7 +5,7 @@
 }
 
 /* =====================================================
-   ROOT VARIABLES — Lighter Theme
+   ROOT VARIABLES 
 ===================================================== */
 
 :root {
@@ -65,7 +65,26 @@
   --font-body: "Plus_Jakarta_Sans", sans-serif;
   --font-heading: "Fraunces", serif;
 }
+/* =====================================================
+   FONTS
+===================================================== */
 
+@font-face {
+  font-family: "Poppins";
+  src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Plus_Jakarta_Sans";
+  src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
+    format("truetype");
+}
+@font-face {
+  font-family: "Fraunces";
+  src: url("../font/Fraunces/static/Fraunces_72pt-Regular.ttf")
+    format("truetype");
+}
+
+/* ============ Body ==========*/
 /* =====================================================
    FIX: Lock page, sidebar stays put
 ===================================================== */
@@ -73,7 +92,7 @@ html,
 body {
   height: 100%;
   margin: 0;
-  overflow: hidden; /* prevents whole page from scrolling */
+  overflow: hidden;
 }
 
 body {
@@ -91,8 +110,8 @@ a {
 /* ---------- Layout ---------- */
 .layout {
   display: flex;
-  height: 100vh;        /* full viewport height */
-  overflow: hidden;     /* no outer scroll */
+  height: 100vh;       
+  overflow: hidden;     
   min-height: 100vh;
 }
 
@@ -104,9 +123,9 @@ a {
   padding: 20px 14px;
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;       /* keeps sidebar width from shrinking */
-  overflow-y: auto;     /* sidebar scrolls internally if needed */
-  height: 100vh;        /* full height */
+  flex-shrink: 0;      
+  overflow-y: auto;    
+  height: 100vh;      
 }
 
 .brand {
@@ -171,7 +190,7 @@ a {
   font-size: 15px;
   color: #6b6b6b;
   padding: 10px 14px;
-  margin-top: auto;       /* ← THIS pushes it to the bottom */
+  margin-top: auto;    
   border-top: 1px solid var(--border);
   border-radius: 6px;
   transition: background 0.2s ease, color 0.2s ease;
@@ -185,12 +204,12 @@ a {
 }
 
 
-/* ---------- Main content (scrolls independently) ---------- */
+/* ---------- Main content ---------- */
 .main {
   flex: 1;
   padding: 24px 32px;
-  overflow-y: auto;     /* main content scrolls here */
-  height: 100vh;        /* full height */
+  overflow-y: auto;   
+  height: 100vh;       
 }
 
 .topbar {

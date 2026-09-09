@@ -5,7 +5,7 @@
 }
 
 /* =====================================================
-   ROOT VARIABLES — Lighter Theme
+   ROOT VARIABLES 
 ===================================================== */
 
 :root {
@@ -65,7 +65,26 @@
   --font-body: "Plus_Jakarta_Sans", sans-serif;
   --font-heading: "Fraunces", serif;
 }
+/* =====================================================
+   FONTS
+===================================================== */
 
+@font-face {
+  font-family: "Poppins";
+  src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Plus_Jakarta_Sans";
+  src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
+    format("truetype");
+}
+@font-face {
+  font-family: "Fraunces";
+  src: url("../font/Fraunces/static/Fraunces_72pt-Regular.ttf")
+    format("truetype");
+}
+
+/* ============ Body ==========*/
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   background-color: #fafafa;
@@ -86,18 +105,18 @@ a {
 
 /* ---------- Sidebar ---------- */
 .sidebar {
-  width: 270px; /* was 300px */
+  width: 270px; 
   background-color: #ffffff;
   border-right: 1px solid rgba(0, 0, 0, 0.06);
-  padding: 20px 14px; /* was 24px 16px */
+  padding: 20px 14px; 
   display: flex;
   flex-direction: column;
 }
 
 .brand {
-  font-size: 20px; /* was 22px */
+  font-size: 20px; 
   font-weight: 700;
-  margin-bottom: 20px; /* was 24px */
+  margin-bottom: 20px; 
   padding-left: 8px;
   color: #18181b;
 }
@@ -105,30 +124,30 @@ a {
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 1px; /* was 2px */
+  gap: 1px; 
   flex: 1;
 }
 
 .nav-item {
-  font-size: 18px; /* was 22px */
+  font-size: 18px; 
   font-weight: 400;
-  margin-top: 3px; /* was 5px */
+  margin-top: 3px; 
   color: #4a4a4a;
-  padding: 7px 10px; /* was 9px 10px */
+  padding: 7px 10px; 
   border-radius: 6px;
 }
 
 .nav-item.sub {
-  padding-left: 16px; /* was 18px */
+  padding-left: 16px; 
   color: #6b6b6b;
-  font-size: 16px; /* was 19px */
+  font-size: 16px; 
 }
 
 .nav-item.active {
   background-color: #eff6ff;
   color: #1d4ed8;
   font-weight: 600;
-  font-size: 16px; /* was 19px */
+  font-size: 16px; 
 }
 
 .nav-item:hover {
@@ -140,43 +159,52 @@ a {
 }
 
 .nav-section {
-  font-size: 21px; /* was 26px */
+  font-size: 21px; 
   font-weight: 600;
   color: #18181b;
-  margin-top: 14px; /* was 16px */
-  margin-bottom: 3px; /* was 4px */
+  margin-top: 14px; 
+  margin-bottom: 3px; 
   padding-left: 10px;
 }
 
 .logout {
-  font-size: 15px; /* was 16px */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
   color: #6b6b6b;
-  padding: 7px 10px; /* was 9px 10px */
-  margin-top: 14px; /* was 16px */
+  padding: 10px 14px;
+  margin-top: auto;         
+  border-top: 1px solid var(--border);
+  border-radius: 6px;
+  transition: background 0.2s ease, color 0.2s ease;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .logout:hover {
-  color: #18181b;
+  color: #dc2626;
+  background-color: #fef2f2;
 }
 
 /* ---------- Main content ---------- */
 .main {
   flex: 1;
-  padding: 24px 32px; /* was 32px 40px */
+  padding: 24px 32px; 
 }
 
 .topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 22px; /* was 20px */
+  margin-bottom: 22px; 
   gap: 16px;
 }
 
 .topbar h1 {
-  font-size: 26px; /* was 28px */
+  font-size: 26px; 
   font-weight: 700;
-  letter-spacing: -0.3px; /* was -0.4px */
+  letter-spacing: -0.3px; 
 }
 
 .user-chip {
@@ -209,8 +237,8 @@ a {
   background: #ffffff;
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 12px 20px; /* was 14px 20px */
-  margin-bottom: 20px; /* was 28px */
+  padding: 12px 20px; 
+  margin-bottom: 20px; 
 }
 
 .filter-group {
@@ -220,8 +248,8 @@ a {
 }
 
 .filter-group label {
-  font-size: 15px; /* was 18px */
-  font-weight: 600; /* was 500 */
+  font-size: 15px; 
+  font-weight: 600; 
   color: var(--muted-foreground);
 }
 
@@ -230,9 +258,9 @@ a {
   background: var(--input-background);
   border: 1px solid var(--border);
   border-radius: 6px;
-  margin-right: 0; /* was 50px */
-  padding: 6px 12px; /* was 8px 12px */
-  font-size: 15px; /* was 16px */
+  margin-right: 0; 
+  padding: 6px 12px; 
+  font-size: 15px;
   font-family: var(--font-body);
   color: var(--foreground);
   outline: none;
@@ -248,14 +276,14 @@ a {
 .filter-actions {
   margin-left: auto;
   display: flex;
-  gap: 6px; /* was 8px */
+  gap: 6px; 
 }
 
-/* Generic button style */
+/* button style */
 .btn {
-  padding: 8px 16px; /* was 8px 20px */
+  padding: 8px 16px; 
   border-radius: 6px;
-  font-size: 15px; /* was 18 px (fixed) */
+  font-size: 15px;
   font-weight: 600;
   border: none;
   background: var(--secondary);
@@ -275,8 +303,8 @@ a {
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px; /* was 20px */
-  margin-bottom: 24px; /* was 28px */
+  gap: 16px; 
+  margin-bottom: 24px;
 }
 
 .stat-card {
@@ -312,9 +340,15 @@ a {
   color: #ca8a04;
 }
 
+
+
+.check-icon {
+  filter: brightness(0) saturate(100%) invert(50%) sepia(22%) saturate(1336%) hue-rotate(70deg) brightness(98%) contrast(100%);
+}
+
 /* ---------- Table card ---------- */
 .table-card {
-  margin-top: 10px; /* was 50px */
+  margin-top: 10px; 
   background-color: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 10px;
@@ -324,7 +358,7 @@ a {
 .table-card h2 {
   font-size: 18px; 
   font-weight: 700;
-  margin-bottom: 14px; /* was 18px */
+  margin-bottom: 14px; 
 }
 
 table {
@@ -334,18 +368,18 @@ table {
 
 thead th {
   text-align: left;
-  font-size: 15px; /* was 18px */
+  font-size: 15px; 
   text-transform: uppercase;
   letter-spacing: 0.03em;
   color: #94a3b8;
   font-weight: 600;
-  padding-bottom: 10px; /* was 12px */
+  padding-bottom: 10px; 
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 tbody td {
-  font-size: 16px; /* was 18px */
-  padding: 12px 0; /* was 14px 0 */
+  font-size: 16px;
+  padding: 12px 0; 
   border-bottom: 1px solid #f1f5f9;
   color: #18181b;
 }
@@ -357,9 +391,9 @@ tbody tr:last-child td {
 /* Badge / status pills */
 .badge {
   display: inline-block;
-  font-size: 13px; /* was 14px */
+  font-size: 13px; 
   font-weight: 600;
-  padding: 3px 12px; /* was 4px 14px */
+  padding: 3px 12px; 
   border-radius: 20px;
 }
 .badge.active {

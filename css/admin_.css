@@ -5,7 +5,7 @@
 }
 
 /* =====================================================
-  ROOT VARIABLES — Lighter Theme
+  ROOT VARIABLES 
 ===================================================== */
 
 :root {
@@ -36,7 +36,26 @@
   --font-body: "Plus_Jakarta_Sans", sans-serif;
   --font-heading: "Fraunces", serif;
 }
+/* =====================================================
+   FONTS
+===================================================== */
 
+@font-face {
+  font-family: "Poppins";
+  src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Plus_Jakarta_Sans";
+  src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
+    format("truetype");
+}
+@font-face {
+  font-family: "Fraunces";
+  src: url("../font/Fraunces/static/Fraunces_72pt-Regular.ttf")
+    format("truetype");
+}
+
+/* ============ Body ==========*/
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   background-color: #fafafa;
@@ -57,7 +76,7 @@ a {
 
 /* ---------- Sidebar ---------- */
 .sidebar {
-  width: 270px; /* was 280px */
+  width: 270px; 
   background-color: #ffffff;
   border-right: 1px solid rgba(0, 0, 0, 0.06);
   padding: 20px 14px;
@@ -76,14 +95,14 @@ a {
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 1px; /* was 2px */
+  gap: 1px; 
   flex: 1;
 }
 
 .nav-item {
-  font-size: 18px; /* was 19px */
+  font-size: 18px; 
   font-weight: 400;
-  margin-top: 3px; /* was 4px */
+  margin-top: 3px; 
   color: #4a4a4a;
   padding: 7px 10px;
   border-radius: 6px;
@@ -92,14 +111,14 @@ a {
 .nav-item.sub {
   padding-left: 16px;
   color: #6b6b6b;
-  font-size: 16px; /* was 17px */
+  font-size: 16px; 
 }
 
 .nav-item.active {
   background-color: #eff6ff;
   color: #1d4ed8;
   font-weight: 600;
-  font-size: 16px; /* was 17px */
+  font-size: 16px;
 }
 
 .nav-item:hover {
@@ -111,23 +130,32 @@ a {
 }
 
 .nav-section {
-  font-size: 21px; /* was 22px */
+  font-size: 21px; 
   font-weight: 600;
   color: #18181b;
   margin-top: 14px;
-  margin-bottom: 3px; /* was 4px */
+  margin-bottom: 3px; 
   padding-left: 10px;
 }
 
 .logout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 15px;
   color: #6b6b6b;
-  padding: 7px 10px;
-  margin-top: 14px;
+  padding: 10px 14px;
+  margin-top: auto;         
+  border-top: 1px solid var(--border);
+  border-radius: 6px;
+  transition: background 0.2s ease, color 0.2s ease;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .logout:hover {
-  color: #18181b;
+  color: #dc2626;
+  background-color: #fef2f2;
 }
 
 /* ---------- Main content ---------- */
@@ -140,7 +168,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 22px; /* was 24px */
+  margin-bottom: 22px; 
 }
 
 .topbar h1 {
@@ -152,13 +180,13 @@ a {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 16px; /* was 15px */
+  font-size: 16px;
   color: #4a4a4a;
 }
 
 .avatar {
-  width: 32px; /* was 30px */
-  height: 32px; /* was 30px */
+  width: 32px; 
+  height: 32px; 
   border-radius: 50%;
   background-color: #eff6ff;
   color: #2563eb;
@@ -166,13 +194,13 @@ a {
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  font-size: 14px; /* was 13px */
+  font-size: 14px; 
 }
 
 /* ---------- Stat cards ---------- */
 .stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* was 4 */
+  grid-template-columns: repeat(3, 1fr); 
   gap: 16px;
   margin-bottom: 24px;
 }
@@ -181,14 +209,14 @@ a {
   background-color: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 10px;
-  padding: 18px 16px; /* was 16px */
+  padding: 18px 16px; 
 }
 
 .stat-label {
-  font-size: 15px; /* was 16px */
+  font-size: 15px; 
   font-weight: 600;
   color: #64748b;
-  margin-bottom: 6px; /* was 8px */
+  margin-bottom: 6px; 
 }
 
 .stat-value {
@@ -212,7 +240,7 @@ a {
 
 /* ---------- Table card ---------- */
 .table-card {
-  margin-top: 10px; /* added to match base */
+  margin-top: 10px; 
   background-color: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 10px;
@@ -243,7 +271,7 @@ thead th {
 
 tbody td {
   font-size: 16px;
-  padding: 12px 0; /* was 10px 0 */
+  padding: 12px 0; 
   border-bottom: 1px solid #f1f5f9;
   color: #18181b;
 }
@@ -257,7 +285,7 @@ tbody tr:last-child td {
   display: inline-block;
   font-size: 13px;
   font-weight: 600;
-  padding: 3px 12px; /* was 3px 10px */
+  padding: 3px 12px; 
   border-radius: 20px;
 }
 
@@ -284,14 +312,14 @@ tbody tr:last-child td {
   color: #475569;
 }
 
-/* ---------- Ad management toolbar (if used) ---------- */
+/* ---------- Ad management toolbar  ---------- */
 .ad-toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 14px;
-  margin-bottom: 20px; /* was 18px */
+  margin-bottom: 20px; 
 }
 
 .ad-toolbar .left {
@@ -319,7 +347,7 @@ tbody tr:last-child td {
   background: var(--primary);
   color: #fff;
   border: none;
-  padding: 9px 20px; /* was 8px 18px */
+  padding: 9px 20px; 
   border-radius: 8px;
   font-size: 15px;
   font-weight: 600;
@@ -339,7 +367,7 @@ tbody tr:last-child td {
   background: #f1f5f9;
   color: #18181b;
   border: none;
-  padding: 8px 16px; /* was 6px 14px */
+  padding: 8px 16px; 
   border-radius: 6px;
   font-size: 14px;
   font-weight: 500;
@@ -356,7 +384,7 @@ tbody tr:last-child td {
   border: none;
   padding: 4px 10px;
   border-radius: 6px;
-  font-size: 13px; /* was 12px */
+  font-size: 13px; 
   font-weight: 600;
   font-family: var(--font-body), sans-serif;
   cursor: pointer;
@@ -371,7 +399,7 @@ tbody tr:last-child td {
   border: none;
   padding: 4px 10px;
   border-radius: 6px;
-  font-size: 13px; /* was 12px */
+  font-size: 13px; 
   font-weight: 600;
   font-family: var(--font-body), sans-serif;
   cursor: pointer;
@@ -386,7 +414,7 @@ tbody tr:last-child td {
   border: none;
   padding: 4px 10px;
   border-radius: 6px;
-  font-size: 13px; /* was 12px */
+  font-size: 13px; 
   font-weight: 600;
   font-family: var(--font-body), sans-serif;
   cursor: pointer;
@@ -398,7 +426,7 @@ tbody tr:last-child td {
 .action-group {
   display: flex;
   align-items: center;
-  gap: 6px; /* was 4px */
+  gap: 6px; 
   flex-wrap: wrap;
   justify-content: flex-end;
 }

@@ -5,7 +5,7 @@
 }
 
 /* =====================================================
-   ROOT VARIABLES — Lighter Theme
+   ROOT VARIABLES 
 ===================================================== */
 
 :root {
@@ -36,7 +36,26 @@
   --font-body: "Plus_Jakarta_Sans", sans-serif;
   --font-heading: "Fraunces", serif;
 }
+/* =====================================================
+   FONTS
+===================================================== */
 
+@font-face {
+  font-family: "Poppins";
+  src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Plus_Jakarta_Sans";
+  src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
+    format("truetype");
+}
+@font-face {
+  font-family: "Fraunces";
+  src: url("../font/Fraunces/static/Fraunces_72pt-Regular.ttf")
+    format("truetype");
+}
+
+/* ============ Body ==========*/
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   background-color: #fafafa;
@@ -120,14 +139,23 @@ a {
 }
 
 .logout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 15px;
   color: #6b6b6b;
-  padding: 7px 10px;
-  margin-top: 14px;
+  padding: 10px 14px;
+  margin-top: auto;         
+  border-top: 1px solid var(--border);
+  border-radius: 6px;
+  transition: background 0.2s ease, color 0.2s ease;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .logout:hover {
-  color: #18181b;
+  color: #dc2626;
+  background-color: #fef2f2;
 }
 
 /* ---------- Main content ---------- */

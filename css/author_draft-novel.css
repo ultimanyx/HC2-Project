@@ -5,7 +5,7 @@
 }
 
 /* =====================================================
-   ROOT VARIABLES — Lighter Theme
+   ROOT VARIABLES
 ===================================================== */
 
 :root {
@@ -66,6 +66,27 @@
   --font-heading: "Fraunces", serif;
 }
 
+
+/* =====================================================
+   FONTS
+===================================================== */
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Plus_Jakarta_Sans";
+  src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
+    format("truetype");
+}
+@font-face {
+  font-family: "Fraunces";
+  src: url("../font/Fraunces/static/Fraunces_72pt-Regular.ttf")
+    format("truetype");
+}
+
+/* ============ Body ==========*/
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   background-color: #fafafa;
@@ -156,7 +177,7 @@ a {
   font-size: 15px;
   color: #6b6b6b;
   padding: 10px 14px;
-  margin-top: auto;       /* ← THIS pushes it to the bottom */
+  margin-top: auto;      
   border-top: 1px solid var(--border);
   border-radius: 6px;
   transition: background 0.2s ease, color 0.2s ease;
@@ -286,7 +307,6 @@ a {
 }
 
 /* ---------- Utility Classes ---------- */
-/* Small button for tables and compact areas */
 .btn-sm {
   padding: 4px 12px;
   font-size: 13px;
