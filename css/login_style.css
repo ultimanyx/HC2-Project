@@ -55,8 +55,9 @@
 
 body {
   font-family: "Plus_Jakarta_Sans", sans-serif;
-  background: var(--background);
-  /* background-image: url(..); */
+  /* background-image: url(../image/shadow-slave-book-1-9781638494195_hr.jpg);
+  background-repeat: no-repeat;
+background-size: cover; */
   min-height: 100vh;
   display: flex;
   align-items: center;
