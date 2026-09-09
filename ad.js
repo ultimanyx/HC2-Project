@@ -2,12 +2,12 @@ document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
   // ---------- CONFIG ----------
-  const AD_DURATION = 10; // seconds
+  const AD_DURATION = 15; // seconds
 
   // ==== CHAPTER NAVIGATION CONFIG ====
   const CHAPTER_BASE = 'novel_chapter'; // e.g., novel_chapter1.html, novel_chapter1.html
   const CHAPTER_EXT = '.html';
-  const TOTAL_CHAPTERS = 21; // ← set this to the total number of chapters
+  const TOTAL_CHAPTERS = 47; // ← set this to the total number of chapters
 
   const VIDEO_SOURCES = [
   '../advertisement/milo-ad.mp4',
