@@ -95,6 +95,7 @@ body {
   color: var(--foreground);
   letter-spacing: -0.02em;
   margin-bottom: 0.2rem;
+  
 }
 
 .login-header p {
