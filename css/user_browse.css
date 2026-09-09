@@ -535,6 +535,9 @@ body {
   float: right;
   margin-top: 2px;
 }
+.star {
+  filter: brightness(0) saturate(100%) invert(44%) sepia(86%) saturate(468%) hue-rotate(352deg) brightness(92%) contrast(86%);
+}
 
 /* ── Rating number ── */
 .novel-card span p:last-child {
