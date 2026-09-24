@@ -1,101 +1,100 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Author Sign Up</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Author Sign Up</title>
 
+    <link rel="stylesheet" href="../css/login_style.css" />
 
-  <link rel="stylesheet" href="../css/login_style.css" />
+    <link rel="icon" type="image/png" href="image/logo.png" />
+  </head>
+  <body>
+    <div class="login-wrapper">
+      <div class="left-panel" aria-label="left logo and description">
+        <div class="left-logo">
+          <img
+            src="../image/logo-nobackground-circle.png"
+            alt="NovelNest logo"
+          />
+        </div>
+        <h2>NovelNest</h2>
+        <p>
+          Free stories that come alive and free knowledge that finds its home.
+        </p>
+      </div>
+      <div class="login-card" role="main" aria-label="Sign up card">
+        <div class="signup-header">
+          <h1>Sign Up</h1>
+          <p>
+            Already have an Account?
+            <a href="author_login.html" class="login-link">Login</a>
+          </p>
+        </div>
 
-  <link rel="icon" type="image/png" href="image/logo.png">
-  
-</head>
-<body>
+        <form class="login-form" action="#" method="POST" autocomplete="on">
+          <div class="input-group">
+            <label for="fullname">Author Name / Pen Name</label>
+            <input
+              type="text"
+              id="authorname"
+              name="authorname"
+              placeholder="The Writer"
+              required
+              autofocus
+            />
+          </div>
 
-  <div class="login-card" role="main" aria-label="Sign up card">
+          <div class="input-group">
+            <label for="fullname">User Name </label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="John Doe"
+              required
+              autofocus
+            />
+          </div>
 
+          <div class="input-group">
+            <label for="email">Email address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="JohnDoe@gmail.com"
+              required
+            />
+          </div>
 
-    <div class="signup-header">
-      <h1>Sign Up</h1>
-      <p>
-        Already have an Account?
-        <a href="author_login.html" class="login-link">Login</a>
-      </p>
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              required
+              minlength="6"
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="number">Phone Number</label>
+            <input
+              type="tel"
+              id="number"
+              name="number"
+              placeholder="09XX XXX XXXX"
+              required
+              pattern="[0-9]{11}"
+            />
+          </div>
+
+          <button type="submit" class="btn-login">Sign Up</button>
+        </form>
+      </div>
     </div>
-
-
-    <form class="login-form" action="#" method="POST" autocomplete="on">
-
-
-      <div class="input-group">
-        <label for="fullname">Author Name / Pen Name</label>
-        <input
-          type="text"
-          id="authorname"
-          name="authorname"
-          placeholder="The Writer"
-          required
-          autofocus
-        />
-      </div>
-      
-      <div class="input-group">
-        <label for="fullname">User Name </label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          placeholder="John Doe"
-          required
-          autofocus
-        />
-      </div>
-
-
-      <div class="input-group">
-        <label for="email">Email address</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="JohnDoe@gmail.com"
-          required
-        />
-      </div>
-
-
-      <div class="input-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Enter your password"
-          required
-          minlength="6"
-        />
-      </div>
-
-
-      <div class="input-group">
-        <label for="number">Phone Number</label>
-        <input
-          type="tel"
-          id="number"
-          name="number"
-          placeholder="09XX XXX XXXX"
-          required
-          pattern="[0-9]{11}"
-        />
-      </div>
-
-
-      <button type="submit" class="btn-login">Sign Up</button>
-
-    </form>
-
-  </div>
-
-</body>
+  </body>
 </html>

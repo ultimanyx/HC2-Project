@@ -1,76 +1,83 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login Page</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
 
+    <link rel="stylesheet" href="../css/login_style.css" />
 
-  <link rel="stylesheet" href="../css/login_style.css">
+    <link rel="icon" type="image/png" href="../image/logo.png" />
+  </head>
+  <body>
+    <div class="login-wrapper">
+      <div class="left-panel" aria-label="left logo and description">
+        <div class="left-logo">
+          <img
+            src="../image/logo-nobackground-circle.png"
+            alt="NovelNest logo"
+          />
+        </div>
+        <h2>NovelNest</h2>
+        <p>
+          Free stories that come alive and free knowledge that finds its home.
+        </p>
+      </div>
 
-  <link rel="icon" type="image/png" href="../image/logo.png">
-  
-</head>
-<body>
+      <div class="login-card" role="main" aria-label="Login card">
+        <div class="login-header">
+          <h1>Welcome Back</h1>
+          <p>Sign in to your account</p>
+        </div>
 
-  <div class="login-card" role="main" aria-label="Login card">
+        <form
+          class="login-form"
+          action="home.html"
+          method="GET"
+          autocomplete="on"
+        >
+          <div class="input-group">
+            <label for="email">Email address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              required
+              autofocus
+            />
+          </div>
 
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              required
+              minlength="6"
+            />
+          </div>
 
-    <div class="login-header">
-      <h1>Welcome Back</h1>
-      <p>Sign in to your account</p>
+          <div class="login-options">
+            <label class="remember-me">
+              <input type="checkbox" name="remember" checked />
+              <span>Remember me</span>
+            </label>
+            <a href="#" class="forgot-link">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn-login">Sign In</button>
+        </form>
+
+        <div class="login-footer">
+          Don't have an account?
+          <a href="user_signup.html">Create one</a>
+        </div>
+      </div>
+      <!-- end login-card -->
     </div>
-
-
-    <form class="login-form" action="home.html" method="GET" autocomplete="on">
-
-
-      <div class="input-group">
-        <label for="email">Email address</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="you@example.com"
-          required
-          autofocus
-        />
-      </div>
-
-
-      <div class="input-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Enter your password"
-          required
-          minlength="6"
-        />
-      </div>
-
-
-      <div class="login-options">
-        <label class="remember-me">
-          <input type="checkbox" name="remember" checked />
-          <span>Remember me</span>
-        </label>
-        <a href="#" class="forgot-link">Forgot password?</a>
-      </div>
-
-
-      <button type="submit" class="btn-login">Sign In</button>
-
-    </form>
-
-
-    <div class="login-footer">
-      Don't have an account?
-      <a href="user_signup.html">Create one</a>
-    </div>
-
-  </div>
-
-</body>
+    <!-- end login-wrapper -->
+  </body>
 </html>
