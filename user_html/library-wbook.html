@@ -6,22 +6,23 @@
     <title>Library with Book</title>
 
     <link rel="stylesheet" href="../css/user_library.css" />
-    <link rel="icon" type="image" href="../image/logo.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="../image/logo-nobackground-circle.png"
+    />
   </head>
   <body>
     <nav class="navbar">
-
       <a href="#" class="nav-logo">
         <img src="../image/logo.png" alt="Logo" />
       </a>
-
 
       <div class="nav-links">
         <a href="home.html">Home</a>
         <a href="browse.html">Browse</a>
         <a href="library.html" id="select">My Library</a>
         <a href="ranking.html">Ranking</a>
-
 
         <div class="nav-search">
           <input type="text" placeholder="Search..." />
@@ -44,13 +45,14 @@
             /></span>
           </div>
 
-
           <div class="dropdown-menu" role="menu">
             <!-- <a href="#" role="menuitem">Profile</a>
             <a href="#" role="menuitem">Settings</a>
             <a href="#" role="menuitem">Help</a> -->
             <div class="dropdown-divider"></div>
-            <a href="user_login.html" role="menuitem" class="logout-item">Logout</a>
+            <a href="user_login.html" role="menuitem" class="logout-item"
+              >Logout</a
+            >
           </div>
         </div>
       </div>
@@ -59,173 +61,205 @@
     <!-- <div class="no-book"> 
         <h4>Please add a book to your library.</h4>
     </div> -->
- <div class="library-header">
-            <div class="library-title">
-                <h2>My Library</h2>
-                <p>Books you collected through your Journey</p>
-            </div>
+    <div class="library-header">
+      <div class="library-title">
+        <h2>My Library</h2>
+        <p>Books you collected through your Journey</p>
+      </div>
 
-            <div class="library-stats">
-                <div class="stat-card">
-                    <span class="stat-number" id="totalBooks">7</span>
-                    <span class="stat-label">Total Books</span> 
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number" id="readingBooks">4</span>
-                    <span class="stat-label">Reading</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number" id="completedBooks">3</span>
-                    <span class="stat-label">Completed</span>
-                </div>
-
-            </div>
+      <div class="library-stats">
+        <div class="stat-card">
+          <span class="stat-number" id="totalBooks">7</span>
+          <span class="stat-label">Total Books</span>
         </div>
-
-
-        <div class="library-toolbar">
-            <div class="filter-group">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="reading">Reading</button>
-                <button class="filter-btn" data-filter="completed">Completed</button>
-            </div>
+        <div class="stat-card">
+          <span class="stat-number" id="readingBooks">4</span>
+          <span class="stat-label">Reading</span>
         </div>
-
-        <div class="book-grid">
-
-            <a href="novel-page.html"><div class="book-card">
-        <div class="book-cover">
-            <img src="../books/Historical/A Tale of Two Cities by Charles Dickens/a-tale-of-two-cities-9781416503064_lg.jpg" />
-            <span       class="book-status-reading">Reading</span>
+        <div class="stat-card">
+          <span class="stat-number" id="completedBooks">3</span>
+          <span class="stat-label">Completed</span>
         </div>
-        <div class="book-info">
+      </div>
+    </div>
+
+    <div class="library-toolbar">
+      <div class="filter-group">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="reading">Reading</button>
+        <button class="filter-btn" data-filter="completed">Completed</button>
+      </div>
+    </div>
+
+    <div class="book-grid">
+      <a href="novel-page.html"
+        ><div class="book-card">
+          <div class="book-cover">
+            <img
+              src="../books/Historical/A Tale of Two Cities by Charles Dickens/a-tale-of-two-cities-9781416503064_lg.jpg"
+            />
+            <span class="book-status-reading">Reading</span>
+          </div>
+          <div class="book-info">
             <h3 class="book-title">A Tale of Two Cities</h3>
             <p class="book-author">Charles Dickens</p>
             <div class="book-meta">
-                <span class="book-rating"><img src="../icons/star-fill.svg" alt="star"> 4.2</span>
-                <span class="book-progress">25%</span>
+              <span class="book-rating"
+                ><img src="../icons/star-fill.svg" alt="star" /> 4.2</span
+              >
+              <span class="book-progress">25%</span>
             </div>
             <div class="progress-bar">
-                <div class="progress-fill" style="width:25%"></div>
+              <div class="progress-fill" style="width: 25%"></div>
             </div>
+          </div>
         </div>
-    </div>
-    </a>
+      </a>
 
-
-    <div class="book-card">
+      <div class="book-card">
         <div class="book-cover">
-            <img src="../books/Action/Poor_Jack by Frederick_Marryat (Unzipped Files)/Poor_Jack- cover art.png" alt="Book cover" loading="lazy" />
-            <span       class="book-status-reading">Reading</span>
+          <img
+            src="../books/Action/Poor_Jack by Frederick_Marryat (Unzipped Files)/Poor_Jack- cover art.png"
+            alt="Book cover"
+            loading="lazy"
+          />
+          <span class="book-status-reading">Reading</span>
         </div>
         <div class="book-info">
-            <h3 class="book-title">Poor Jack</h3>
-            <p class="book-author">Frederick Marryat</p>
-            <div class="book-meta">
-                <span class="book-rating"><img src="../icons/star-fill.svg" alt="star"> 4.2</span>
-                <span class="book-progress">65%</span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width:65%"></div>
-            </div>
+          <h3 class="book-title">Poor Jack</h3>
+          <p class="book-author">Frederick Marryat</p>
+          <div class="book-meta">
+            <span class="book-rating"
+              ><img src="../icons/star-fill.svg" alt="star" /> 4.2</span
+            >
+            <span class="book-progress">65%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 65%"></div>
+          </div>
         </div>
-    </div>
+      </div>
 
-
-    <div class="book-card">
+      <div class="book-card">
         <div class="book-cover">
-            <img src="../books/Action/The_Sermon_on_the_Mount by bCharles_Gore (Unzipped Files)/The_Sermon_on_the_Mount-cover art.png" alt="Book cover" loading="lazy" />
-            <span class="book-status-completed">Completed</span>
+          <img
+            src="../books/Action/The_Sermon_on_the_Mount by bCharles_Gore (Unzipped Files)/The_Sermon_on_the_Mount-cover art.png"
+            alt="Book cover"
+            loading="lazy"
+          />
+          <span class="book-status-completed">Completed</span>
         </div>
         <div class="book-info">
-            <h3 class="book-title">The Sermon on the Mount</h3>
-            <p class="book-author">Charles Gore</p>
-            <div class="book-meta">
-                <span class="book-rating"><img src="../icons/star-fill.svg" alt="star"> 4.8</span>
-                <span class="book-progress">100%</span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width:100%"></div>
-            </div>
+          <h3 class="book-title">The Sermon on the Mount</h3>
+          <p class="book-author">Charles Gore</p>
+          <div class="book-meta">
+            <span class="book-rating"
+              ><img src="../icons/star-fill.svg" alt="star" /> 4.8</span
+            >
+            <span class="book-progress">100%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 100%"></div>
+          </div>
         </div>
-    </div>
+      </div>
 
-
-    <div class="book-card">
+      <div class="book-card">
         <div class="book-cover">
-            <img src="../books/Horror/Dracula by Bram Stoker/dracula-9781476788104_lg.jpg" alt="Book cover" loading="lazy" />
-            <span class="book-status-completed">Completed</span>
+          <img
+            src="../books/Horror/Dracula by Bram Stoker/dracula-9781476788104_lg.jpg"
+            alt="Book cover"
+            loading="lazy"
+          />
+          <span class="book-status-completed">Completed</span>
         </div>
         <div class="book-info">
-            <h3 class="book-title">Dracula</h3>
-            <p class="book-author">Bram Stoker</p>
-            <div class="book-meta">
-                <span class="book-rating"><img src="../icons/star-fill.svg" alt="star"> 4.6</span>
-                <span class="book-progress">100%</span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width:100%"></div>
-            </div>
+          <h3 class="book-title">Dracula</h3>
+          <p class="book-author">Bram Stoker</p>
+          <div class="book-meta">
+            <span class="book-rating"
+              ><img src="../icons/star-fill.svg" alt="star" /> 4.6</span
+            >
+            <span class="book-progress">100%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 100%"></div>
+          </div>
         </div>
-    </div>
+      </div>
 
-
-    <div class="book-card">
+      <div class="book-card">
         <div class="book-cover">
-            <img src="../books/Fantasy/Peter_and_Wendy-J._M._Barrie (Unzipped Files)/Peter_Pan_in_Kensington_Gardens cover art.png" alt="Book cover" loading="lazy" />
-            <span class="book-status-reading">Reading</span>
+          <img
+            src="../books/Fantasy/Peter_and_Wendy-J._M._Barrie (Unzipped Files)/Peter_Pan_in_Kensington_Gardens cover art.png"
+            alt="Book cover"
+            loading="lazy"
+          />
+          <span class="book-status-reading">Reading</span>
         </div>
         <div class="book-info">
-            <h3 class="book-title">Peter and Wendy</h3>
-            <p class="book-author">J. M. Barrie</p>
-            <div class="book-meta">
-                <span class="book-rating"><img src="../icons/star-fill.svg" alt="star"> 4.5</span>
-                <span class="book-progress">42%</span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width:42%"></div>
-            </div>
+          <h3 class="book-title">Peter and Wendy</h3>
+          <p class="book-author">J. M. Barrie</p>
+          <div class="book-meta">
+            <span class="book-rating"
+              ><img src="../icons/star-fill.svg" alt="star" /> 4.5</span
+            >
+            <span class="book-progress">42%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 42%"></div>
+          </div>
         </div>
-    </div>
+      </div>
 
-
-    <div class="book-card">
+      <div class="book-card">
         <div class="book-cover">
-            <img src="../books/Horror/The Turn of the Screw by Henry James/12948.jpg" alt="Book cover" loading="lazy" />
-            <span class="book-status-completed">Completed</span>
+          <img
+            src="../books/Horror/The Turn of the Screw by Henry James/12948.jpg"
+            alt="Book cover"
+            loading="lazy"
+          />
+          <span class="book-status-completed">Completed</span>
         </div>
         <div class="book-info">
-            <h3 class="book-title">The Turn of the Screw</h3>
-            <p class="book-author">Henry James</p>
-            <div class="book-meta">
-                <span class="book-rating"><img src="../icons/star-fill.svg" alt="star"> 4.7</span>
-                <span class="book-progress">100%</span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width:100%"></div>
-            </div>
+          <h3 class="book-title">The Turn of the Screw</h3>
+          <p class="book-author">Henry James</p>
+          <div class="book-meta">
+            <span class="book-rating"
+              ><img src="../icons/star-fill.svg" alt="star" /> 4.7</span
+            >
+            <span class="book-progress">100%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 100%"></div>
+          </div>
         </div>
-    </div>
+      </div>
 
-
-    <div class="book-card">
+      <div class="book-card">
         <div class="book-cover">
-            <img src="../books/Dystopian & Post-Apocalyptic/The War of the Worlds by H.G. Wells/the-war-of-the-worlds-9781451687989_lg.jpg" alt="Book cover" loading="lazy" />
-            <span class="book-status-reading">Reading</span>
+          <img
+            src="../books/Dystopian & Post-Apocalyptic/The War of the Worlds by H.G. Wells/the-war-of-the-worlds-9781451687989_lg.jpg"
+            alt="Book cover"
+            loading="lazy"
+          />
+          <span class="book-status-reading">Reading</span>
         </div>
         <div class="book-info">
-            <h3 class="book-title">The War of the Worlds</h3>
-            <p class="book-author">H.G. Wells</p>
-            <div class="book-meta">
-                <span class="book-rating"><img src="../icons/star-fill.svg" alt="star"> 4.0</span>
-                <span class="book-progress">5%</span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width:5%"></div>
-            </div>
+          <h3 class="book-title">The War of the Worlds</h3>
+          <p class="book-author">H.G. Wells</p>
+          <div class="book-meta">
+            <span class="book-rating"
+              ><img src="../icons/star-fill.svg" alt="star" /> 4.0</span
+            >
+            <span class="book-progress">5%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 5%"></div>
+          </div>
         </div>
+      </div>
     </div>
-  </div>
 
     <footer class="footer">
       <div class="footer-content">
@@ -236,7 +270,6 @@
           </p>
         </div>
 
-
         <div class="footer-section">
           <h3>Hot Genres</h3>
           <a href="#">Action</a>
@@ -244,7 +277,6 @@
           <a href="#">Fantasy</a>
           <a href="#">Mystery</a>
         </div>
-
 
         <div class="footer-section">
           <h3>About</h3>
