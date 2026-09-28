@@ -38,12 +38,18 @@
           </p>
         </div>
 
-        <form class="login-form" action="#" method="POST" autocomplete="on">
+        <form
+          class="login-form"
+          data-role="reader"
+          action="#"
+          method="POST"
+          autocomplete="on"
+        >
           <div class="input-group">
             <label for="fullname">User Name</label>
             <input
               type="text"
-              id="username"
+              id="reader_username"
               name="username"
               placeholder="John Doe"
               required
@@ -55,7 +61,7 @@
             <label for="email">Email address</label>
             <input
               type="email"
-              id="email"
+              id="reader_email"
               name="email"
               placeholder="JohnDoe@gmail.com"
               required
@@ -66,7 +72,7 @@
             <label for="password">Password</label>
             <input
               type="password"
-              id="password"
+              id="reader_password"
               name="password"
               placeholder="Enter your password"
               required
@@ -78,7 +84,7 @@
             <label for="number">Phone Number</label>
             <input
               type="tel"
-              id="number"
+              id="reader_number"
               name="number"
               placeholder="09XX XXX XXXX"
               required
@@ -92,5 +98,6 @@
       <!-- end login-card -->
     </div>
     <!-- end login-wrapper -->
+    <script src="../login.js"></script>
   </body>
 </html>
