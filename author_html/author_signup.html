@@ -6,6 +6,7 @@
     <title>Author Sign Up</title>
 
     <link rel="stylesheet" href="../css/login_style.css" />
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
 
     <link
       rel="icon"
@@ -17,10 +18,12 @@
     <div class="login-wrapper">
       <div class="left-panel" aria-label="left logo and description">
         <div class="left-logo">
-          <img
-            src="../image/logo-nobackground-circle.png"
-            alt="NovelNest logo"
-          />
+          <a href="../index.html">
+            <img
+              src="../image/logo-nobackground-circle.png"
+              alt="NovelNest logo"
+            />
+          </a>
         </div>
         <h2>NovelNest</h2>
         <p>
@@ -36,7 +39,13 @@
           </p>
         </div>
 
-        <form class="login-form" action="#" method="POST" autocomplete="on">
+        <form
+          class="login-form"
+          action="#"
+          method="POST"
+          autocomplete="on"
+          data-role="author"
+        >
           <div class="input-group">
             <label for="fullname">Author Name / Pen Name</label>
             <input
@@ -100,5 +109,8 @@
         </form>
       </div>
     </div>
+
+    <script src="../js/sweetalert2.all.min.js"></script>
+    <script src="../login.js"></script>
   </body>
 </html>
