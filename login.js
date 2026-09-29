@@ -1,68 +1,66 @@
-const reader_username = document.getElementById("reader_username").value;
-const reader_email = document.getElementById("reader_email").value;
-const reader_password = document.getElementById("reader_password").value;
-const reader_number = document.getElementById("reader_number").value;
+document.addEventListener("DOMContentLoaded", function () {
+  var form = document.querySelector("form.login-form");
+  if (!form) return;
 
-// ---------- SIGN UP PAGE ----------
-const signupForm = document.getElementById("username"); // only exists on signup page
+  var readerUser = document.getElementById("reader_username");
+  var readerEmail = document.getElementById("reader_email");
+  var readerPassword = document.getElementById("reader_password");
+  var readerNumber = document.getElementById("reader_number");
 
-if (signupForm) {
-  document
-    .querySelector("form.login-form")
-    .addEventListener("submit", function (e) {
-      e.preventDefault();
-      // get existing users (or empty array)
-      let users = JSON.parse(localStorage.getItem("users")) || [];
+  // If reader_username exists, we're on the signup page
+  var isSignup = !!readerUser;
 
-      // check if email already used
-      for (let i = 0; i < users.length; i++) {
-        if (users[i].email === reader_email) {
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    // Read values NOW (when user clicks submit), not at page load
+    var email = readerEmail.value.trim();
+    var password = readerPassword.value;
+
+    var users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // ---------- SIGNUP ----------
+    if (isSignup) {
+      var username = readerUser.value.trim();
+      var number = readerNumber.value.trim();
+
+      // check duplicate email
+      for (var i = 0; i < users.length; i++) {
+        if (users[i].email === email) {
           alert("Email already registered!");
           return;
         }
       }
 
-      // save new user
       users.push({
-        username: reader_username,
-        email: reader_email,
-        password: reader_password,
-        number: reader_number,
+        username: username,
+        email: email,
+        password: password,
+        number: number,
       });
       localStorage.setItem("users", JSON.stringify(users));
 
       alert("Account created!");
-      window.location.href = "home.html";
-    });
-}
+      window.location.href = "/user_html/user_login.html";
+      return;
+    }
 
-// ---------- LOGIN PAGE ----------
-const loginForm = document.getElementById("reader_password"); // exists on both, so check for email-only page
-
-if (loginForm && !document.getElementById("reader_username")) {
-  document
-    .querySelector("form.login-form")
-    .addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const email = document.getElementById("reader_email").value;
-      const password = document.getElementById("reader_password").value;
-
-      let users = JSON.parse(localStorage.getItem("users")) || [];
-      let found = false;
-
-      for (let i = 0; i < users.length; i++) {
-        if (users[i].email === email && users[i].password === password) {
-          found = true;
-          break;
-        }
+    // ---------- LOGIN ----------
+    var found = false;
+    for (var j = 0; j < users.length; j++) {
+      if (users[j].email === email && users[j].password === password) {
+        found = true;
+        break;
       }
+    }
 
-      if (found) {
-        localStorage.setItem("loggedIn", email);
-        window.location.href = "home.html";
-      } else {
-        alert("Wrong email or password!");
-      }
-    });
-}
+    if (found) {
+      localStorage.setItem("loggedIn", email);
+      setTimeout(() => {
+        window.location.href = "/user_html/home.html";
+      }, 800);
+    } else {
+      alert("Wrong email or password!");
+    }
+  });
+});
