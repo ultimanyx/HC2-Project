@@ -17,14 +17,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Where to send each role after signup / login
   var LOGIN_PAGES = {
-    reader: "/user_html/user_login.html",
-    author: "/author_html/author_login.html",
-    admin: "/admin-html/admin_login.html", // adjust path if different
+    reader: "../user_html/user_login.html",
+    author: "../author_html/author_login.html",
+    admin: "../admin-html/admin_login.html", // adjust path if different
   };
   var HOME_PAGES = {
-    reader: "/user_html/home.html",
-    author: "/author_html/author_dashboard.html",
-    admin: "/admin-html/admin.html", // adjust path if different
+    reader: "../user_html/home.html",
+    author: "../author_html/author_dashboard.html",
+    admin: "../admin-html/admin.html", // adjust path if different
   };
 
   // Auto-detect: signup pages have a "{role}_username" field, login pages don't
