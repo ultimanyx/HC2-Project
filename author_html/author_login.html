@@ -36,13 +36,7 @@
           <p>Sign in to continue your story</p>
         </div>
 
-        <form
-          class="login-form"
-          action="author_dashboard.html"
-          method="GET"
-          autocomplete="on"
-          data-role="author"
-        >
+        <form class="login-form" autocomplete="on" data-role="author">
           <div class="input-group">
             <label for="email">Email address</label>
             <input
@@ -50,7 +44,6 @@
               id="author_email"
               name="email"
               placeholder="you@example.com"
-              required
               autofocus
             />
           </div>
@@ -62,7 +55,6 @@
               id="author_password"
               name="password"
               placeholder="Enter your password"
-              required
               minlength="6"
             />
           </div>
@@ -85,7 +77,7 @@
       </div>
     </div>
 
-    <script src="../js/sweetalert2.all.min.js"></script>
+    <script src="../sweetalert2.all.min.js"></script>
     <script src="../login.js"></script>
   </body>
 </html>
