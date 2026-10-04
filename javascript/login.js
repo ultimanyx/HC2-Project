@@ -163,9 +163,9 @@ function login(role) {
     }).then(function () {
       // Change these paths to your actual home pages
       if (role === "reader") {
-        window.location.href = "../user_html/user_home.html";
+        window.location.href = "../user_html/home.html";
       } else if (role === "author") {
-        window.location.href = "../author_html/author_home.html";
+        window.location.href = "../author_html/author_dashboard.html";
       }
     });
   } else {
