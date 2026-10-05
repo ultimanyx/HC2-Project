@@ -537,7 +537,7 @@ a {
   transition: background-color 0.2s ease;
 }
 
-.add-library-button {
+#add-library-button {
   display: inline-block;
   margin-top: 10px;
   padding: 14px 30px;
