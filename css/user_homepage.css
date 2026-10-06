@@ -38,7 +38,7 @@ html {
   --accent-foreground: #ffffff;
 
   /* Border */
-  --border: rgba(26, 24, 38, 0.10);
+  --border: rgba(26, 24, 38, 0.1);
 
   /* Input */
   --input-background: #ede9e1;
@@ -57,8 +57,7 @@ html {
 
   /* Shadows */
   --shadow:
-    0 20px 40px -12px rgba(0, 20, 30, 0.10),
-    0 8px 24px -6px rgba(0, 0, 0, 0.04);
+    0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
 
   /* Footer */
   --footer-background: #1a1826;
@@ -69,7 +68,6 @@ html {
   --font-body: "Plus_Jakarta_Sans", sans-serif;
   --font-heading: "Fraunces", serif;
 }
-
 
 /* =====================================================
    FONTS
@@ -87,7 +85,6 @@ html {
     format("truetype");
 }
 
-
 /* =====================================================
    BODY
 ===================================================== */
@@ -97,7 +94,6 @@ body {
   background-color: var(--background);
   color: var(--foreground);
 }
-
 
 /* =====================================================
    NAVBAR
@@ -117,7 +113,6 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
-
 /* =====================================================
    LOGO
 ===================================================== */
@@ -133,7 +128,6 @@ body {
   height: auto;
   object-fit: contain;
 }
-
 
 /* =====================================================
    NAVIGATION LINKS
@@ -183,14 +177,13 @@ body {
 
 #select {
   color: var(--primary);
-  border-bottom:2px solid var(--primary);
+  border-bottom: 2px solid var(--primary);
 }
 
 /* Don't show the hover underline on the active link */
 .nav-links a#select:hover::after {
   width: 0;
 }
-
 
 /* =====================================================
    SEARCH
@@ -264,7 +257,6 @@ body {
   box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
-
 /* =====================================================
    USER & DROPDOWN
 ===================================================== */
@@ -325,11 +317,13 @@ body {
   opacity: 0;
   visibility: hidden;
   transform: translateY(-6px) scale(0.97);
-  transition: opacity 0.2s ease, transform 0.25s ease, visibility 0.2s;
+  transition:
+    opacity 0.2s ease,
+    transform 0.25s ease,
+    visibility 0.2s;
   z-index: 1000;
   pointer-events: none;
 }
-
 
 /* ── show on hover ── */
 .nav-user-dropdown:active .dropdown-menu,
@@ -375,13 +369,10 @@ body {
   color: var(--destructive);
 }
 
-
 /* ── Keep dropdown open when interacting with menu items ── */
 .dropdown-menu a:focus-within {
   background: var(--muted);
 }
-
-
 
 /* =====================================================
    HERO BANNER
@@ -390,12 +381,9 @@ body {
 .hero-banner {
   width: 100%;
   height: 400px;
-
   display: flex;
   align-items: center;
-
   background-color: var(--primary);
-
   color: var(--primary-foreground);
 }
 
@@ -422,7 +410,6 @@ body {
   font-size: 16px;
   line-height: 1.6;
 }
-
 
 /* =====================================================
    WEEKLY BOOKS – FIXED LAYOUT (row, equal cards)
@@ -455,9 +442,9 @@ body {
   padding: 12px 15px;
   box-shadow: var(--shadow);
   display: flex;
-  flex-direction: column;   
+  flex-direction: column;
   align-items: center;
-  height: 400px; 
+  height: 400px;
   max-width: 300px;
   overflow: hidden;
   transition:
@@ -473,8 +460,8 @@ body {
 .weekly-card img {
   width: 100%;
   max-width: 200px;
-  height: 280px;             /* fixed height – won't stretch card */
-  object-fit: contain;       /* keeps proportions, no distortion */
+  height: 280px; /* fixed height – won't stretch card */
+  object-fit: contain; /* keeps proportions, no distortion */
   display: block;
   border-radius: 6px;
   flex-shrink: 0;
@@ -499,7 +486,6 @@ body {
   color: var(--muted-foreground);
   flex: 0 0 auto;
 }
-
 
 /* =====================================================
    TOP 10 – IMAGES HAVE FIXED SIZE
@@ -548,8 +534,8 @@ body {
 }
 
 .book img {
-  width: 78px;              /* fixed width */
-  height: 98px;             /* fixed height */
+  width: 78px; /* fixed width */
+  height: 98px; /* fixed height */
   flex-shrink: 0;
   object-fit: cover;
   border-radius: 3px;
@@ -568,7 +554,6 @@ body {
 
   color: var(--foreground);
 }
-
 
 /* =====================================================
    FOOTER
@@ -649,7 +634,7 @@ body {
 }
 
 .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.10);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 
   padding: 18px 60px;
 
@@ -665,7 +650,6 @@ body {
 
   color: var(--footer-muted);
 }
-
 
 /* =====================================================
    BUTTONS – (unused in current HTML, see notes below)
