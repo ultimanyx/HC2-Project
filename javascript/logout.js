@@ -1,5 +1,5 @@
 document.getElementById("logout").addEventListener("click", function () {
-  const role = this.dataset.role; // "admin", "user", etc.
+  const role = this.dataset.role;
 
   Swal.fire({
     title: "Are you sure?",
@@ -13,9 +13,9 @@ document.getElementById("logout").addEventListener("click", function () {
   }).then((result) => {
     if (result.isConfirmed) {
       const redirects = {
-        admin: "../admin_html/admin_login.html",
-        user: "../user_html/user_login.html",
-        teacher: "../teacher_html/teacher_login.html",
+        admin: "../admin-html/admin_login.html",
+        reader: "../user_html/user_login.html",
+        author: "../author_html/author_login.html",
       };
 
       window.location.href = redirects[role] || "../user_html/user_login.html";
