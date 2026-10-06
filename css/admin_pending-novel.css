@@ -7,40 +7,39 @@
 /* --- ROOT ---*/
 
 :root {
-  --background: #ffffff;
-  --foreground: #18181b;
+  --background: #f8f6f1;
+  --foreground: #1a1826;
 
   --card-background: #ffffff;
-  --card-foreground: #18181b;
+  --card-foreground: #1a1826;
 
-  --primary: #2563eb;
+  --primary: #b8721f;
   --primary-foreground: #ffffff;
 
-  --secondary: #f1f5f9;
-  --secondary-foreground: #18181b;
+  --secondary: #ede9e1;
+  --secondary-foreground: #1a1826;
 
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
+  --muted: #ede9e1;
+  --muted-foreground: #6b6680;
 
-  --accent: #8b5cf6;
+  --accent: #6d28d9;
   --accent-foreground: #ffffff;
 
-  --border: rgba(0, 0, 0, 0.06);
+  --border: rgba(26, 24, 38, 0.1);
 
-  --input-background: #f1f5f9;
+  --input-background: #ede9e1;
 
-  --ring: #2563eb;
-  --focus-ring: rgba(37, 99, 235, 0.18);
+  --ring: #b8721f;
+  --focus-ring: rgba(184, 114, 31, 0.18);
 
-  --destructive: #ef4444;
+  --destructive: #dc2626;
   --destructive-foreground: #ffffff;
 
-  --link: #3b82f6;
-  --link-hover: #1d4ed8;
+  --link: #3b6f91;
+  --link-hover: #2c536d;
 
   --shadow:
-    0 4px 12px rgba(0, 0, 0, 0.04),
-    0 1px 3px rgba(0, 0, 0, 0.02);
+    0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
 
   --font-body: "Plus_Jakarta_Sans", sans-serif;
   --font-heading: "Fraunces", serif;
@@ -67,7 +66,7 @@
 
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
-  background-color: #fafafa;
+  background-color: #f8f6f1;
   color: var(--foreground);
   font-size: 15px;
 }
@@ -77,7 +76,6 @@ a {
   color: inherit;
 }
 
-
 /* --- Layout ---*/
 
 .layout {
@@ -85,13 +83,12 @@ a {
   min-height: 100vh;
 }
 
-
 /* --- Sidebar ---*/
 
 .sidebar {
   width: 270px;
   background-color: #ffffff;
-  border-right: 1px solid rgba(0, 0, 0, 0.06);
+  border-right: 1px solid rgba(26, 24, 38, 0.1);
 
   padding: 20px 14px;
 
@@ -106,7 +103,7 @@ a {
   margin-bottom: 20px;
   padding-left: 8px;
 
-  color: #18181b;
+  color: #1a1826;
 }
 
 .nav {
@@ -122,7 +119,7 @@ a {
 
   margin-top: 3px;
 
-  color: #4a4a4a;
+  color: #6b6680;
 
   padding: 7px 10px;
   border-radius: 6px;
@@ -131,20 +128,20 @@ a {
 .nav-item.sub {
   padding-left: 16px;
 
-  color: #6b6b6b;
+  color: #6b6680;
   font-size: 16px;
 }
 
 .nav-item.active {
-  background-color: #eff6ff;
-  color: #1d4ed8;
+  background-color: rgba(184, 114, 31, 0.12);
+  color: #b8721f;
 
   font-weight: 600;
   font-size: 16px;
 }
 
 .nav-item:hover {
-  background-color: #f8fafc;
+  background-color: #ede9e1;
 }
 
 .nav-icon {
@@ -155,14 +152,13 @@ a {
   font-size: 21px;
   font-weight: 600;
 
-  color: #18181b;
+  color: #1a1826;
 
   margin-top: 14px;
   margin-bottom: 3px;
 
   padding-left: 10px;
 }
-
 
 /* --- Log 0ut ---*/
 
@@ -171,19 +167,21 @@ a {
   align-items: center;
   gap: 8px;
   font-size: 15px;
-  color: #6b6b6b;
+  color: #6b6680;
   padding: 10px 14px;
-  margin-top: auto;         
+  margin-top: auto;
   border-top: 1px solid var(--border);
   border-radius: 6px;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
   text-decoration: none;
   cursor: pointer;
 }
 
 .logout:hover {
   color: #dc2626;
-  background-color: #fef2f2;
+  background-color: rgba(220, 38, 38, 0.08);
 }
 
 /* --- Main ---*/
@@ -192,7 +190,6 @@ a {
   flex: 1;
   padding: 24px 32px;
 }
-
 
 /* --- TopBar ---*/
 
@@ -220,7 +217,7 @@ a {
   gap: 10px;
 
   font-size: 16px;
-  color: #4a4a4a;
+  color: #6b6680;
 }
 
 .avatar {
@@ -229,8 +226,8 @@ a {
 
   border-radius: 50%;
 
-  background-color: #eff6ff;
-  color: #2563eb;
+  background-color: rgba(184, 114, 31, 0.12);
+  color: #b8721f;
 
   display: flex;
   align-items: center;
@@ -239,7 +236,6 @@ a {
   font-weight: 600;
   font-size: 14px;
 }
-
 
 /* --- ToolBar ---*/
 
@@ -274,8 +270,8 @@ a {
 .ad-toolbar .left .ad-count {
   font-size: 14px;
 
-  color: #64748b;
-  background: #f1f5f9;
+  color: #6b6680;
+  background: #ede9e1;
 
   padding: 2px 12px;
 
@@ -342,10 +338,8 @@ a {
 .filter-group input:focus {
   border-color: var(--primary);
 
-  box-shadow:
-    0 0 0 3px var(--focus-ring);
+  box-shadow: 0 0 0 3px var(--focus-ring);
 }
-
 
 /* =====================================================
    TABLE CARD
@@ -356,7 +350,7 @@ a {
 
   background-color: #ffffff;
 
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(26, 24, 38, 0.1);
 
   border-radius: 10px;
 
@@ -371,7 +365,6 @@ a {
 
   margin-bottom: 14px;
 }
-
 
 /* =====================================================
    TABLE
@@ -392,14 +385,13 @@ thead th {
 
   letter-spacing: 0.03em;
 
-  color: #94a3b8;
+  color: #6b6680;
 
   font-weight: 600;
 
   padding-bottom: 10px;
 
-  border-bottom:
-    1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(26, 24, 38, 0.1);
 }
 
 tbody td {
@@ -407,10 +399,9 @@ tbody td {
 
   padding: 14px 8px 14px 0;
 
-  border-bottom:
-    1px solid #f1f5f9;
+  border-bottom: 1px solid rgba(26, 24, 38, 0.06);
 
-  color: #18181b;
+  color: #1a1826;
 }
 
 tbody tr:last-child td {
@@ -420,7 +411,6 @@ tbody tr:last-child td {
 .fw-600 {
   font-weight: 600;
 }
-
 
 /* =====================================================
    STATUS BADGE
@@ -438,27 +428,23 @@ tbody tr:last-child td {
   border-radius: 20px;
 }
 
-
 /* Pending */
 .badge.paused {
-  background-color: #fef9c3;
-  color: #854d0e;
+  background-color: rgba(184, 114, 31, 0.15);
+  color: #8a5410;
 }
-
 
 /* Active / Approved */
 .badge.active {
-  background-color: #dcfce7;
-  color: #166534;
+  background-color: rgba(63, 125, 79, 0.15);
+  color: #2f5d3a;
 }
-
 
 /* Completed */
 .badge.completed {
-  background-color: #e2e8f0;
-  color: #475569;
+  background-color: #ede9e1;
+  color: #6b6680;
 }
-
 
 /* =====================================================
    BUTTONS
@@ -487,14 +473,13 @@ tbody tr:last-child td {
 }
 
 .btn-primary:hover {
-  background: #1d4ed8;
+  background: #9a5f16;
 }
 
-
 .btn-secondary {
-  background: #f1f5f9;
+  background: #ede9e1;
 
-  color: #18181b;
+  color: #1a1826;
 
   border: none;
 
@@ -514,9 +499,8 @@ tbody tr:last-child td {
 }
 
 .btn-secondary:hover {
-  background: #e2e8f0;
+  background: #ddd7cb;
 }
-
 
 /* =====================================================
    ACTION BUTTONS
@@ -531,4 +515,3 @@ tbody tr:last-child td {
 
   flex-wrap: wrap;
 }
-

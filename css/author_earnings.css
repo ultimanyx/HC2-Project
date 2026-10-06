@@ -9,57 +9,56 @@
 ===================================================== */
 
 :root {
-  /* Main — brighter backgrounds, softer contrasts */
-  --background: #ffffff;
-  --foreground: #18181b;
+  /* Main */
+  --background: #f8f6f1;
+  --foreground: #1a1826;
 
-  /* Cards — pure white with subtle separation */
+  /* Cards */
   --card-background: #ffffff;
-  --card-foreground: #18181b;
+  --card-foreground: #1a1826;
 
-  /* Primary — soft blue instead of amber */
-  --primary: #2563eb;
+  /* Primary */
+  --primary: #b8721f;
   --primary-foreground: #ffffff;
 
-  /* Secondary — very light gray */
-  --secondary: #f1f5f9;
-  --secondary-foreground: #18181b;
+  /* Secondary */
+  --secondary: #ede9e1;
+  --secondary-foreground: #1a1826;
 
-  /* Muted — lighter and cooler */
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
+  /* Muted */
+  --muted: #ede9e1;
+  --muted-foreground: #6b6680;
 
-  /* Accent — gentle violet */
-  --accent: #8b5cf6;
+  /* Accent */
+  --accent: #6d28d9;
   --accent-foreground: #ffffff;
 
-  /* Border — much lighter and more transparent */
-  --border: rgba(0, 0, 0, 0.06);
+  /* Border */
+  --border: rgba(26, 24, 38, 0.1);
 
-  /* Input — soft gray background */
-  --input-background: #f1f5f9;
+  /* Input */
+  --input-background: #ede9e1;
 
-  /* Focus — matching primary blue */
-  --ring: #2563eb;
-  --focus-ring: rgba(37, 99, 235, 0.18);
+  /* Focus */
+  --ring: #b8721f;
+  --focus-ring: rgba(184, 114, 31, 0.18);
 
-  /* Destructive — softer red */
-  --destructive: #ef4444;
+  /* Destructive */
+  --destructive: #dc2626;
   --destructive-foreground: #ffffff;
 
-  /* Links — lighter blue */
-  --link: #3b82f6;
-  --link-hover: #1d4ed8;
+  /* Links */
+  --link: #3b6f91;
+  --link-hover: #2c536d;
 
-  /* Shadows — much softer and lighter */
+  /* Shadows */
   --shadow:
-    0 4px 12px rgba(0, 0, 0, 0.04),
-    0 1px 3px rgba(0, 0, 0, 0.02);
+    0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
 
-  /* Footer — light instead of dark */
-  --footer-background: #f8fafc;
-  --footer-foreground: #18181b;
-  --footer-muted: #94a3b8;
+  /* Footer */
+  --footer-background: #1a1826;
+  --footer-foreground: #ffffff;
+  --footer-muted: #d8d0c8;
 
   /* Fonts */
   --font-body: "Plus_Jakarta_Sans", sans-serif;
@@ -85,11 +84,10 @@
     format("truetype");
 }
 
-
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
-  background-color: #fafafa;
-  color: #18181b;
+  background-color: #f8f6f1;
+  color: #1a1826;
   font-size: 15px; /* was 17px */
 }
 
@@ -106,54 +104,54 @@ a {
 
 /* ---------- Sidebar ---------- */
 .sidebar {
-  width: 270px; 
+  width: 270px;
   background-color: #ffffff;
-  border-right: 1px solid rgba(0, 0, 0, 0.06);
-  padding: 20px 14px; 
+  border-right: 1px solid rgba(26, 24, 38, 0.1);
+  padding: 20px 14px;
   display: flex;
   flex-direction: column;
 }
 
 .brand {
-  font-size: 20px; 
+  font-size: 20px;
   font-weight: 700;
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
   padding-left: 8px;
-  color: #18181b;
+  color: #1a1826;
 }
 
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 1px; 
+  gap: 1px;
   flex: 1;
 }
 
 .nav-item {
-  font-size: 18px; 
-  font-weight: 400; 
-  margin-top: 3px; 
-  color: #4a4a4a;
-  padding: 7px 10px; 
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: 3px;
+  color: #6b6680;
+  padding: 7px 10px;
   border-radius: 6px;
 }
 
 .nav-item.sub {
-  padding-left: 16px; 
-  color: #6b6b6b;
-  font-size: 16px; 
+  padding-left: 16px;
+  color: #6b6680;
+  font-size: 16px;
   font-weight: 400;
 }
 
 .nav-item.active {
-  background-color: #eff6ff;
-  color: #1d4ed8;
+  background-color: rgba(184, 114, 31, 0.12);
+  color: #b8721f;
   font-weight: 600;
-  font-size: 16px; 
+  font-size: 16px;
 }
 
 .nav-item:hover {
-  background-color: #cbced1; 
+  background-color: #ede9e1;
 }
 
 .nav-icon {
@@ -161,53 +159,54 @@ a {
 }
 
 .nav-section {
-  font-size: 21px; 
+  font-size: 21px;
   font-weight: 600;
-  color: #18181b;
-  margin-top: 14px; 
-  margin-bottom: 3px; 
+  color: #1a1826;
+  margin-top: 14px;
+  margin-bottom: 3px;
   padding-left: 10px;
 }
-
 
 .logout {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 15px;
-  color: #6b6b6b;
+  color: #6b6680;
   padding: 10px 14px;
-  margin-top: auto;       
+  margin-top: auto;
   border-top: 1px solid var(--border);
   border-radius: 6px;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
   text-decoration: none;
   cursor: pointer;
 }
 
 .logout:hover {
   color: #dc2626;
-  background-color: #fef2f2;
+  background-color: rgba(220, 38, 38, 0.08);
 }
 
 /* ---------- Main content ---------- */
 .main {
   flex: 1;
-  padding: 24px 32px; 
+  padding: 24px 32px;
 }
 
 .topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 22px; 
+  margin-bottom: 22px;
   gap: 16px;
 }
 
 .topbar h1 {
-  font-size: 26px; 
+  font-size: 26px;
   font-weight: 700;
-  letter-spacing: -0.3px; 
+  letter-spacing: -0.3px;
 }
 
 .user-chip {
@@ -215,15 +214,15 @@ a {
   align-items: center;
   gap: 12px;
   font-size: 16px;
-  color: #4a4a4a;
+  color: #6b6680;
 }
 
 .avatar {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #eff6ff;
-  color: #2563eb;
+  background-color: rgba(184, 114, 31, 0.12);
+  color: #b8721f;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -232,13 +231,13 @@ a {
 }
 
 .top-header {
-  display: flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
   gap: 16px;
 }
 
 #withraw-btn {
-  padding: 10px 24px; 
+  padding: 10px 24px;
   font-size: 16px;
 }
 /* ---------- Filter Bar ---------- */
@@ -250,8 +249,8 @@ a {
   background: #ffffff;
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 12px 20px; 
-  margin-bottom: 20px; 
+  padding: 12px 20px;
+  margin-bottom: 20px;
 }
 
 .filter-group {
@@ -261,8 +260,8 @@ a {
 }
 
 .filter-group label {
-  font-size: 15px; 
-  font-weight: 600; 
+  font-size: 15px;
+  font-weight: 600;
   color: var(--muted-foreground);
 }
 
@@ -273,7 +272,7 @@ a {
   border-radius: 6px;
   margin-right: 0;
   padding: 6px 12px;
-  font-size: 15px; 
+  font-size: 15px;
   font-family: var(--font-body);
   color: var(--foreground);
   outline: none;
@@ -289,14 +288,14 @@ a {
 .filter-actions {
   margin-left: auto;
   display: flex;
-  gap: 6px; 
+  gap: 6px;
 }
 
 /*  button style */
 .btn {
   padding: 8px 16px;
   border-radius: 6px;
-  font-size: 15px; 
+  font-size: 15px;
   font-weight: 600;
   border: none;
   background: var(--secondary);
@@ -309,67 +308,67 @@ a {
   color: #ffffff;
 }
 .btn-primary:hover {
-  background: #1d4ed8;
+  background: #9a5f16;
 }
 
 /* ---------- Stat cards ---------- */
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px; 
-  margin-bottom: 24px; 
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 .stat-card {
   background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(26, 24, 38, 0.1);
   border-radius: 10px;
-  padding: 18px 16px; 
+  padding: 18px 16px;
 }
 
 .stat-label {
-  font-size: 15px; 
+  font-size: 15px;
   font-weight: 600;
-  color: #64748b;
+  color: #6b6680;
   margin-bottom: 6px;
 }
 
 .stat-value {
-  font-size: 26px; 
+  font-size: 26px;
   font-weight: 700;
   margin-bottom: 6px;
-  color: #18181b;
+  color: #1a1826;
 }
 
 .stat-change {
-  font-size: 13px; 
+  font-size: 13px;
 }
 
 .stat-change.label {
-  color: #64748b;
+  color: #6b6680;
 }
 
 .stat-change.positive {
-  color: #16a34a;
+  color: #3f7d4f;
 }
 
 .stat-change.warning {
-  color: #ca8a04;
+  color: #b8721f;
 }
 
 /* ---------- Table card ---------- */
 .table-card {
-  margin-top: 10px; 
+  margin-top: 10px;
   background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(26, 24, 38, 0.1);
   border-radius: 10px;
-  padding: 20px; 
+  padding: 20px;
 }
 
 .table-card h2 {
-  font-size: 18px; 
+  font-size: 18px;
   font-weight: 700;
-  margin-bottom: 14px; 
+  margin-bottom: 14px;
 }
 
 table {
@@ -379,20 +378,20 @@ table {
 
 thead th {
   text-align: left;
-  font-size: 15px; 
+  font-size: 15px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  color: #94a3b8;
+  color: #6b6680;
   font-weight: 600;
   padding-bottom: 10px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(26, 24, 38, 0.1);
 }
 
 tbody td {
-  font-size: 16px; 
-  padding: 12px 0; 
-  border-bottom: 1px solid #f1f5f9;
-  color: #18181b;
+  font-size: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(26, 24, 38, 0.06);
+  color: #1a1826;
 }
 
 tbody tr:last-child td {
@@ -402,20 +401,20 @@ tbody tr:last-child td {
 /* Badge / status pills */
 .badge {
   display: inline-block;
-  font-size: 13px; 
+  font-size: 13px;
   font-weight: 600;
   padding: 3px 12px;
   border-radius: 20px;
 }
 .badge.active {
-  background-color: #dcfce7;
-  color: #166534;
+  background-color: rgba(63, 125, 79, 0.15);
+  color: #2f5d3a;
 }
 .badge.paused {
-  background-color: #fef9c3;
-  color: #854d0e;
+  background-color: rgba(184, 114, 31, 0.15);
+  color: #8a5410;
 }
 .badge.completed {
-  background-color: #e2e8f0;
-  color: #475569;
+  background-color: #ede9e1;
+  color: #6b6680;
 }
