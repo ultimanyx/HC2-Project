@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Page</title>
+
     <link rel="stylesheet" href="../css/user_homepage.css" />
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
+
     <link
       rel="icon"
       type="image/png"
@@ -47,7 +50,12 @@
             <a href="#" role="menuitem">Settings</a>
             <a href="#" role="menuitem">Help</a> -->
             <div class="dropdown-divider"></div>
-            <a href="#" role="menuitem" class="logout-item" id="logout"
+            <a
+              href="#"
+              role="menuitem"
+              class="logout-item"
+              id="logout"
+              data-role="reader"
               >Logout</a
             >
           </div>
@@ -423,5 +431,8 @@
         <p>© 2026 Novel Library. All rights reserved.</p>
       </div>
     </footer>
+
+    <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/logout.js"></script>
   </body>
 </html>
