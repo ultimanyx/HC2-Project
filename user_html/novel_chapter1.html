@@ -7,6 +7,7 @@
 
 
     <link rel="stylesheet" href="../css/user_chapter.css" />
+    <link rel="stylesheet" href="../css/sweetalert2.min.css">
 
     <link
       rel="icon"
@@ -14,7 +15,7 @@
       href="../image/logo-nobackground-circle.png"
     />
   </head>
-  <body>
+  <body data-book-id="a-tale-of-two-cities">
     <nav class="navbar">
       <a href="#" class="nav-logo">
         <img src="../image/logo.png" alt="Logo" />
@@ -252,6 +253,75 @@
       </div>
     </div>
 
+    <!-- ===== Report Modal ===== -->
+<div class="report-modal-overlay" id="reportModalOverlay" aria-hidden="true" >
+  <div
+    class="report-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="reportModalTitle"
+  >
+    <div class="report-modal-header">
+      <h3 id="reportModalTitle" class="report-modal-title">Report Chapter</h3>
+      <button
+        type="button"
+        class="report-modal-close"
+        id="reportModalClose"
+        aria-label="Close report dialog"
+      >
+        <img src="../icons/x-lg.svg" alt="" />
+      </button>
+    </div>
+
+    <div class="report-modal-body">
+      <label for="reportReason" class="report-modal-label">
+        Reason <span class="required">*</span>
+      </label>
+      <select id="reportReason" class="report-modal-select">
+        <option value="">Select a reason</option>
+        <option value="Broken content">Broken content</option>
+        <option value="Missing content">Missing content</option>
+        <option value="Wrong chapter">Wrong chapter</option>
+        <option value="Inappropriate content">Inappropriate content</option>
+        <option value="Other">Other</option>
+      </select>
+      <p class="report-modal-error" id="reportReasonError" role="alert">
+        Please select a reason.
+      </p>
+
+      <label for="reportDetails" class="report-modal-label">
+        Additional details <span class="optional">(optional)</span>
+      </label>
+      <textarea
+        id="reportDetails"
+        class="report-modal-textarea"
+        placeholder="Tell us anything else that might help…"
+        maxlength="500"
+      ></textarea>
+    </div>
+
+    <div class="report-modal-footer">
+      <button
+        type="button"
+        class="report-modal-btn report-modal-btn-cancel"
+        id="reportModalCancel"
+      >
+        Cancel
+      </button>
+      <button
+        type="button"
+        class="report-modal-btn report-modal-btn-submit"
+        id="reportModalSubmit"
+      >
+        Submit Report
+      </button>
+    </div>
+  </div>
+</div>
+
+    <script src="../javascript/sweetalert2.all.min.js"></script>
     <script src="../javascript/ad.js"></script>
+    <script src="../javascript/bookmark.js"></script>
+    <script src="../javascript/report.js"></script>
   </body>
 </html>

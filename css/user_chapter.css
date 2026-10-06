@@ -35,7 +35,8 @@ html {
   --destructive-foreground: #ffffff;
   --link: #3b6f91;
   --link-hover: #2c536d;
-  --shadow: 0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
+  --shadow:
+    0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
   --footer-background: #1a1826;
   --footer-foreground: #ffffff;
   --footer-muted: #d8d0c8;
@@ -69,16 +70,23 @@ html {
   --ad-exit-text: #0b0e14;
   --ad-exit-shadow: rgba(247, 151, 30, 0.35);
   --ad-exit-shadow-hover: rgba(247, 151, 30, 0.5);
+
+  --report-danger: #dc2626;
+  --report-danger-hover: #b91c1c;
+  --report-danger-soft: rgba(220, 38, 38, 0.12);
+  --report-danger-ring: rgba(220, 38, 38, 0.18);
 }
 
 @font-face {
   font-family: "Plus_Jakarta_Sans";
-  src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf") format("truetype");
+  src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
+    format("truetype");
 }
 
 @font-face {
   font-family: "Fraunces";
-  src: url("../font/Fraunces/static/Fraunces_72pt-Regular.ttf") format("truetype");
+  src: url("../font/Fraunces/static/Fraunces_72pt-Regular.ttf")
+    format("truetype");
 }
 
 body {
@@ -165,7 +173,9 @@ body {
   border-radius: 20px;
   background-color: var(--input-background);
   overflow: hidden;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .nav-search input {
@@ -264,11 +274,13 @@ body {
   opacity: 0;
   visibility: hidden;
   transform: translateY(-6px) scale(0.97);
-  transition: opacity 0.2s ease, transform 0.25s ease, visibility 0.2s;
+  transition:
+    opacity 0.2s ease,
+    transform 0.25s ease,
+    visibility 0.2s;
   z-index: 1000;
   pointer-events: none;
 }
-
 
 /* ── show on hover ── */
 .nav-user-dropdown:active .dropdown-menu,
@@ -314,12 +326,10 @@ body {
   color: var(--destructive);
 }
 
-
 /* ── Keep dropdown open when interacting with menu items ── */
 .dropdown-menu a:focus-within {
   background: var(--muted);
 }
-
 
 /* ── Chapter header flex layout ── */
 .chapter-header {
@@ -341,7 +351,6 @@ body {
   margin-bottom: 6px;
 }
 
-
 /* =====================================================
    TOP-BUTTON
 ===================================================== */
@@ -349,7 +358,6 @@ body {
   display: flex;
   flex-direction: row;
 }
-
 
 /* =====================================================
    BOOKMARK BUTTON
@@ -415,7 +423,8 @@ body {
 }
 
 .bookmark-btn:hover .bookmark-icon {
-  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(200%) contrast(100%);
+  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%)
+    hue-rotate(0deg) brightness(200%) contrast(100%);
 }
 
 .bookmark-btn:active {
@@ -441,7 +450,8 @@ body {
 }
 
 .bookmark-btn.bookmarked .bookmark-icon {
-  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(200%) contrast(100%);
+  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%)
+    hue-rotate(0deg) brightness(200%) contrast(100%);
 }
 
 .bookmark-btn.bookmarked:hover {
@@ -477,7 +487,8 @@ body {
 }
 
 .report-btn:hover .report-icon {
-  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(200%) contrast(100%);
+  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%)
+    hue-rotate(0deg) brightness(200%) contrast(100%);
 }
 
 .report-btn:active {
@@ -571,11 +582,13 @@ body {
   letter-spacing: 0.3px;
   cursor: pointer;
   min-width: 110px;
-  transition: background-color 0.2s, transform 0.15s;
+  transition:
+    background-color 0.2s,
+    transform 0.15s;
 }
 
 .container-footer button:hover:not(:disabled) {
-  background-color: #a0641a; 
+  background-color: #a0641a;
   transform: translateY(-2px);
 }
 
@@ -703,8 +716,14 @@ body {
 }
 
 @keyframes overlayFadeIn {
-  from { opacity: 0; transform: scale(0.96); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .ad-card {
@@ -716,8 +735,8 @@ body {
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
   border: 1px solid var(--ad-card-border);
   color: var(--ad-text);
-  max-height: 95vh;             
-  overflow: hidden;           
+  max-height: 95vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
@@ -796,7 +815,11 @@ body {
 .progress-bar {
   height: 100%;
   width: 100%;
-  background: linear-gradient(90deg, var(--ad-progress-gradient-start), var(--ad-progress-gradient-end));
+  background: linear-gradient(
+    90deg,
+    var(--ad-progress-gradient-start),
+    var(--ad-progress-gradient-end)
+  );
   border-radius: 4px;
   transition: width 0.3s linear;
 }
@@ -805,8 +828,8 @@ body {
   border-radius: 16px;
   overflow: hidden;
   background: var(--ad-content-bg);
-  min-height: 0;               
-  flex: 1 1 auto;               
+  min-height: 0;
+  flex: 1 1 auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -819,7 +842,7 @@ body {
 .banner-ad {
   width: 100%;
   height: 100%;
-  min-height: 0;               
+  min-height: 0;
   padding: 0;
   position: relative;
   overflow: hidden;
@@ -842,14 +865,14 @@ body {
 }
 
 .banner-ad .banner-content {
-  width: 100%;              
-  height: 100%;              
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   z-index: 2;
-  max-width: none; 
+  max-width: none;
 }
 
 .banner-ad .banner-content .banner-icon {
@@ -860,7 +883,11 @@ body {
 .banner-ad .banner-content h2 {
   font-size: 28px;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--ad-progress-gradient-start), var(--ad-progress-gradient-end));
+  background: linear-gradient(
+    135deg,
+    var(--ad-progress-gradient-start),
+    var(--ad-progress-gradient-end)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 6px;
@@ -888,7 +915,7 @@ body {
 .banner-ad .banner-content .banner-image {
   width: 100%;
   height: 100%;
-  object-fit: contain;      
+  object-fit: contain;
   display: block;
   border-radius: 0;
   margin: 0;
@@ -954,15 +981,22 @@ body {
 .btn-exit {
   display: none;
   padding: 12px 36px;
-  background: linear-gradient(135deg, var(--ad-exit-bg-start), var(--ad-exit-bg-end));
-  color: var(--ad-exit-t  ext);
+  background: linear-gradient(
+    135deg,
+    var(--ad-exit-bg-start),
+    var(--ad-exit-bg-end)
+  );
+  color: var(--ad-exit-t ext);
   font-weight: 700;
   font-size: 17px;
   border: none;
   border-radius: 60px;
   cursor: pointer;
   box-shadow: 0 8px 30px var(--ad-exit-shadow);
-  transition: transform 0.2s, box-shadow 0.2s, opacity 0.4s ease;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    opacity 0.4s ease;
   opacity: 0;
   transform: scale(0.9);
   pointer-events: none;
