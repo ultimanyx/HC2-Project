@@ -1,25 +1,45 @@
 const BOOKMARK_KEY = "bookmarkedChapters";
+const LIBRARY_KEY = "libraryBooks";
 
 const bookmarkButton = document.getElementById("bookmarkBtn");
 const bookmarkChapterNumber = document.getElementById("chapter-number");
 const bookmarkChapterTitle = document.getElementById("chapter-title");
 
-// Read bookmarks from localStorage
+// ---- Bookmarks ----
 function getBookmarks() {
   const data = localStorage.getItem(BOOKMARK_KEY);
-  if (data) {
-    return JSON.parse(data);
-  }
+  if (data) return JSON.parse(data);
   return {};
 }
 
-// Save bookmarks to localStorage
 function saveBookmarks(bookmarks) {
   localStorage.setItem(BOOKMARK_KEY, JSON.stringify(bookmarks));
 }
 
+// ---- Library (self-contained copies) ----
+function getLibraryBooks() {
+  const data = localStorage.getItem(LIBRARY_KEY);
+  if (data) return JSON.parse(data);
+  return [];
+}
+
+function saveLibraryBooks(books) {
+  localStorage.setItem(LIBRARY_KEY, JSON.stringify(books));
+}
+
+function addBookToLibrary(book) {
+  const books = getLibraryBooks();
+
+  for (let i = 0; i < books.length; i++) {
+    if (books[i].id === book.id) return false;
+  }
+
+  books.push(book);
+  saveLibraryBooks(books);
+  return true;
+}
+
 if (bookmarkButton && bookmarkChapterNumber) {
-  // Book info comes from the <body> data attributes
   const bookId = document.body.dataset.bookId;
   const bookTitle = document.body.dataset.bookTitle;
   const bookAuthor = document.body.dataset.bookAuthor;
@@ -29,30 +49,21 @@ if (bookmarkButton && bookmarkChapterNumber) {
 
   const bookmarkText = bookmarkButton.querySelector(".bookmark-text");
 
-  // "Chapter 12" -> 12
   function getChapterNumber() {
     const text = bookmarkChapterNumber.textContent.trim();
     const match = text.match(/\d+/);
-    if (match) {
-      return parseInt(match[0]);
-    }
+    if (match) return parseInt(match[0]);
     return 1;
   }
 
-  // Chapter 2 of 47 -> (2 / 47) * 100 = 4
   function calculateProgress(chapterNum) {
-    if (totalChapters <= 0) {
-      return 0;
-    }
+    if (totalChapters <= 0) return 0;
     const percent = (chapterNum / totalChapters) * 100;
     const rounded = Math.round(percent);
-    if (rounded > 100) {
-      return 100;
-    }
+    if (rounded > 100) return 100;
     return rounded;
   }
 
-  // Update the button text/color based on stored bookmark
   function updateBookmarkButton() {
     const bookmarks = getBookmarks();
     const bookmark = bookmarks[bookId];
@@ -67,7 +78,6 @@ if (bookmarkButton && bookmarkChapterNumber) {
     }
   }
 
-  // When the Bookmark button is clicked
   bookmarkButton.addEventListener("click", function () {
     const bookmarks = getBookmarks();
     const currentChapter = bookmarkChapterNumber.textContent.trim();
@@ -79,21 +89,16 @@ if (bookmarkButton && bookmarkChapterNumber) {
 
     const existing = bookmarks[bookId];
 
-    // Already bookmarked on this chapter -> remove it
+    // ---- Remove bookmark + remove from library ----
     if (existing && existing.chapter === currentChapter) {
       delete bookmarks[bookId];
       saveBookmarks(bookmarks);
 
-      // Also remove the book from the library
       const library = getLibraryBooks();
       const updatedLibrary = [];
-
       for (let i = 0; i < library.length; i++) {
-        if (library[i].id !== bookId) {
-          updatedLibrary.push(library[i]);
-        }
+        if (library[i].id !== bookId) updatedLibrary.push(library[i]);
       }
-
       saveLibraryBooks(updatedLibrary);
 
       Swal.fire({
@@ -106,21 +111,18 @@ if (bookmarkButton && bookmarkChapterNumber) {
       return;
     }
 
-    // Otherwise add/update the bookmark
+    // ---- Add bookmark + add/update library ----
     bookmarks[bookId] = {
       chapter: currentChapter,
       title: currentTitle,
     };
     saveBookmarks(bookmarks);
 
-    // Work out the progress percentage
     const chapterNum = getChapterNumber();
     const progress = calculateProgress(chapterNum);
 
-    // Update the library
     const library = getLibraryBooks();
     let found = false;
-
     for (let i = 0; i < library.length; i++) {
       if (library[i].id === bookId) {
         library[i].progress = progress;
@@ -132,7 +134,7 @@ if (bookmarkButton && bookmarkChapterNumber) {
     if (found) {
       saveLibraryBooks(library);
     } else {
-      const newBook = {
+      addBookToLibrary({
         id: bookId,
         title: bookTitle,
         author: bookAuthor,
@@ -140,8 +142,7 @@ if (bookmarkButton && bookmarkChapterNumber) {
         rating: bookRating,
         progress: progress,
         status: "reading",
-      };
-      addBookToLibrary(newBook);
+      });
     }
 
     Swal.fire({
@@ -153,6 +154,10 @@ if (bookmarkButton && bookmarkChapterNumber) {
     updateBookmarkButton();
   });
 
-  // Run once when the page loads
+  // React to changes made in another tab
+  window.addEventListener("storage", function (e) {
+    if (e.key === BOOKMARK_KEY) updateBookmarkButton();
+  });
+
   updateBookmarkButton();
 }
