@@ -108,7 +108,7 @@ if (bookmarkButton && bookmarkChapterNumber) {
       });
 
       updateBookmarkButton();
-      return;
+      return; // ← THIS IS THE FIX
     }
 
     // ---- Add bookmark + add/update library ----
@@ -154,7 +154,7 @@ if (bookmarkButton && bookmarkChapterNumber) {
     updateBookmarkButton();
   });
 
-  // React to changes made in another tab
+  // React to changes made in another tab (registered ONCE, not per click)
   window.addEventListener("storage", function (e) {
     if (e.key === BOOKMARK_KEY) updateBookmarkButton();
   });

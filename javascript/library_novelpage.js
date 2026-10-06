@@ -3,6 +3,20 @@
    ============================================================ */
 
 const LIBRARY_KEY = "libraryBooks";
+const BOOKMARK_KEY = "bookmarkedChapters";
+
+// Remove the bookmark entry for a book
+function removeBookmarkForBook(bookId) {
+  const data = localStorage.getItem(BOOKMARK_KEY);
+
+  if (!data) {
+    return;
+  }
+
+  const bookmarks = JSON.parse(data);
+  delete bookmarks[bookId];
+  localStorage.setItem(BOOKMARK_KEY, JSON.stringify(bookmarks));
+}
 
 // Get the list of books from localStorage
 function getLibraryBooks() {
@@ -200,6 +214,9 @@ if (libraryButton && bookTitleElement) {
   libraryButton.addEventListener("click", function () {
     const result = toggleLibraryBook(book);
 
+    if (result === "removed") {
+      removeBookmarkForBook(book.id);
+    }
     let title = "";
     let text = "";
     let icon = "";
