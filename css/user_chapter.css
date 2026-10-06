@@ -71,10 +71,8 @@ html {
   --ad-exit-shadow: rgba(247, 151, 30, 0.35);
   --ad-exit-shadow-hover: rgba(247, 151, 30, 0.5);
 
-  --report-danger: #dc2626;
-  --report-danger-hover: #b91c1c;
-  --report-danger-soft: rgba(220, 38, 38, 0.12);
-  --report-danger-ring: rgba(220, 38, 38, 0.18);
+  --destructive-hover: #b91c1c;
+  --overlay-backdrop: rgba(0, 0, 0, 0.5);
 }
 
 @font-face {
@@ -1017,4 +1015,175 @@ body {
 
 .btn-exit:active {
   transform: scale(0.97);
+}
+
+/* ============================================================
+   REPORT MODAL — all styles from :root, no animations
+   ============================================================ */
+
+.report-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--overlay-backdrop);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.report-modal-overlay.active {
+  display: flex;
+}
+
+.report-modal {
+  width: 100%;
+  max-width: 480px;
+  background-color: var(--card-background);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 24px;
+  font-family: var(--font-body);
+}
+
+.report-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.report-modal-title {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.report-modal-close {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 6px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.report-modal-close:hover {
+  background-color: var(--muted);
+}
+
+.report-modal-close img {
+  width: 14px;
+  height: 14px;
+}
+
+.report-modal-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.report-modal-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-bottom: 6px;
+  margin-top: 10px;
+}
+
+.report-modal-label .required {
+  color: var(--destructive);
+}
+
+.report-modal-label .optional {
+  color: var(--muted-foreground);
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.report-modal-select,
+.report-modal-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--foreground);
+  background-color: var(--input-background);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.report-modal-select {
+  cursor: pointer;
+}
+
+.report-modal-textarea {
+  min-height: 100px;
+  resize: vertical;
+  margin-bottom: 4px;
+}
+
+.report-modal-select:focus,
+.report-modal-textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.report-modal-error {
+  display: none;
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--destructive);
+}
+
+.report-modal-error.show {
+  display: block;
+}
+
+.report-modal-select.invalid {
+  border-color: var(--destructive);
+}
+
+.report-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.report-modal-btn {
+  padding: 10px 20px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.report-modal-btn-cancel {
+  background-color: var(--card-background);
+  color: var(--foreground);
+  border-color: var(--border);
+}
+
+.report-modal-btn-cancel:hover {
+  background-color: var(--muted);
+}
+
+.report-modal-btn-submit {
+  background-color: var(--destructive);
+  color: var(--destructive-foreground);
+  border-color: var(--destructive);
+}
+
+.report-modal-btn-submit:hover {
+  background-color: var(--destructive-hover);
+  border-color: var(--destructive-hover);
 }
