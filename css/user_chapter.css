@@ -529,7 +529,6 @@ body {
   margin-bottom: 5px;
   border-bottom: var(--primary) solid 2.5px;
   color: var(--foreground);
-  text-shadow: var(--text-shadow);
 }
 
 #chapter-content p {
