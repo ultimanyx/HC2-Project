@@ -176,3 +176,53 @@ function login(role) {
     });
   }
 }
+
+//admin login
+const ADMIN = {
+  email: "admin@gmail.com",
+  password: "admin123",
+  redirect: "../admin-html/admin.html", // ← change to your admin page
+};
+
+const adminForm = document.querySelector(".login-form");
+
+if (adminForm) {
+  adminForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    adminLogin();
+  });
+}
+
+function adminLogin() {
+  const emailInput = document.getElementById("admin_email");
+  const passwordInput = document.getElementById("admin_password");
+
+  const email = emailInput.value.trim();
+  const password = passwordInput.value.trim();
+
+  if (email === "" || password === "") {
+    Swal.fire({
+      title: "Please Fill all Form Fields",
+      text: "Email and password are required!",
+      icon: "error",
+    });
+    return;
+  }
+
+  if (email === ADMIN.email && password === ADMIN.password) {
+    sessionStorage.setItem("adminLoggedIn", "true");
+
+    Swal.fire({
+      title: "Login successful!",
+      icon: "success",
+    }).then(function () {
+      window.location.href = ADMIN.redirect;
+    });
+  } else {
+    Swal.fire({
+      title: "Login Failed",
+      text: "Wrong admin email or password!",
+      icon: "error",
+    });
+  }
+}
