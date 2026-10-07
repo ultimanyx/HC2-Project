@@ -4,10 +4,6 @@
   box-sizing: border-box;
 }
 
-/* =====================================================
-   ROOT VARIABLES 
-===================================================== */
-
 :root {
   /* Main */
   --background: #f8f6f1;
@@ -53,7 +49,8 @@
 
   /* Shadows */
   --shadow:
-    0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
+    0 20px 40px -12px rgba(0, 20, 30, 0.1),
+    0 8px 24px -6px rgba(0, 0, 0, 0.04);
 
   /* Footer */
   --footer-background: #1a1826;
@@ -65,13 +62,15 @@
   --font-heading: "Fraunces", serif;
 }
 
+
 /* =====================================================
    FONTS
 ===================================================== */
 
 @font-face {
   font-family: "Poppins";
-  src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype");
+  src: url("../font/Poppins/Poppins-Regular.ttf")
+    format("truetype");
 }
 
 @font-face {
@@ -86,11 +85,23 @@
     format("truetype");
 }
 
+
+/* =====================================================
+   BODY
+===================================================== */
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   background-color: #f8f6f1;
   color: #1a1826;
-  font-size: 15px; /* was 17px */
+  font-size: 15px;
 }
 
 a {
@@ -98,13 +109,22 @@ a {
   color: inherit;
 }
 
-/* ---------- Layout ---------- */
+
+/* =====================================================
+   LAYOUT
+===================================================== */
+
 .layout {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* ---------- Sidebar ---------- */
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
 .sidebar {
   width: 270px;
   background-color: #ffffff;
@@ -112,6 +132,9 @@ a {
   padding: 20px 14px;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .brand {
@@ -121,7 +144,7 @@ a {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 20px;
-  padding-left: 0px;
+  padding-left: 0;
   padding-right: 60px;
   color: #1a1826;
   gap: 8px;
@@ -131,6 +154,11 @@ a {
   width: 50px;
   height: 50px;
 }
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
 .nav {
   display: flex;
@@ -179,6 +207,11 @@ a {
   padding-left: 10px;
 }
 
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
 .logout {
   display: flex;
   align-items: center;
@@ -201,11 +234,22 @@ a {
   background-color: rgba(220, 38, 38, 0.08);
 }
 
-/* ---------- Main content ---------- */
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
 .main {
   flex: 1;
   padding: 24px 32px;
+  height: 100vh;
+  overflow-y: auto;
 }
+
+
+/* =====================================================
+   TOPBAR
+===================================================== */
 
 .topbar {
   display: flex;
@@ -242,18 +286,46 @@ a {
   font-size: 14px;
 }
 
-.top-header {
+
+/* =====================================================
+   EARNINGS HEADER
+===================================================== */
+
+.earnings-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 16px;
+  margin-bottom: 20px;
 }
+
+.earnings-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.earnings-header p {
+  font-size: 14px;
+  color: var(--muted-foreground);
+}
+
+
+/* =====================================================
+   WITHDRAW BUTTON
+===================================================== */
 
 #withraw-btn {
   padding: 10px 24px;
   font-size: 16px;
+  cursor: pointer;
 }
 
-/* ---------- Filter Bar ---------- */
+
+/* =====================================================
+   FILTER BAR
+===================================================== */
+
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -304,7 +376,11 @@ a {
   gap: 6px;
 }
 
-/*  button style */
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
 .btn {
   padding: 8px 16px;
   border-radius: 6px;
@@ -314,6 +390,7 @@ a {
   background: var(--secondary);
   color: var(--secondary-foreground);
   transition: 0.15s;
+  cursor: pointer;
 }
 
 .btn-primary {
@@ -325,7 +402,11 @@ a {
   background: #9a5f16;
 }
 
-/* ---------- Stat cards ---------- */
+
+/* =====================================================
+   STAT CARDS
+===================================================== */
+
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -358,10 +439,6 @@ a {
   font-size: 13px;
 }
 
-.stat-change.label {
-  color: #6b6680;
-}
-
 .stat-change.positive {
   color: #3f7d4f;
 }
@@ -370,7 +447,11 @@ a {
   color: #b8721f;
 }
 
-/* ---------- Table card ---------- */
+
+/* =====================================================
+   TABLE CARD
+===================================================== */
+
 .table-card {
   margin-top: 10px;
   background-color: #ffffff;
@@ -384,6 +465,11 @@ a {
   font-weight: 700;
   margin-bottom: 14px;
 }
+
+
+/* =====================================================
+   TABLE
+===================================================== */
 
 table {
   width: 100%;
@@ -412,7 +498,15 @@ tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* Badge / status pills */
+tbody td strong {
+  font-weight: 600;
+}
+
+
+/* =====================================================
+   BADGES / STATUS
+===================================================== */
+
 .badge {
   display: inline-block;
   font-size: 13px;
@@ -434,4 +528,29 @@ tbody tr:last-child td {
 .badge.completed {
   background-color: #ede9e1;
   color: #6b6680;
+}
+
+
+/* =====================================================
+   TABLE FOOTER
+===================================================== */
+
+.table-footer {
+  margin-top: 14px;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--muted-foreground);
+}
+
+.link-primary {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.link-primary:hover {
+  text-decoration: underline;
 }
