@@ -470,8 +470,30 @@ body {
 .novel-card h1 {
   font-size: 18px;
   font-weight: bold;
-  margin: 12px 14px 4px 14px;
+  margin: 8px 14px 4px 14px;
   color: #222;
+}
+
+#genre-block {
+  margin: 0;
+  margin-left: 10px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+} 
+
+#genre-block img {
+  width: 20px;
+  height: 20px;
+
+}
+
+#genre-block h3 {
+  font-size: .9rem;
+  font-weight: 200;
+  margin-left: 5px;
+  margin-top: 5px;
+  margin-bottom: 2px;
 }
 
 /* ── Author + Rating row ── */
