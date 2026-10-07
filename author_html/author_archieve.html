@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Author Archive - NovelNest</title>
+
+    <link rel="stylesheet" href="../css/author_archive.css" />
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="../image/logo-nobackground-circle.png"
+    />
+  </head>
+
+  <body>
+    <div class="layout">
+
+      <!-- ================= SIDEBAR ================= -->
+      <aside class="sidebar">
+
+        <div class="brand">
+          <img src="../image/logocopy.png" alt="brandlogo" />
+          NovelNest
+        </div>
+
+        <nav class="nav">
+
+          <a href="author_dashboard.html" class="nav-item sub">
+            <span class="nav-icon"></span>
+            Dashboard
+          </a>
+
+          <div class="nav-section">My Novels</div>
+
+          <a href="author_all-novel.html" class="nav-item sub">
+            All Novels
+          </a>
+
+          <a href="author_create-novel.html" class="nav-item sub">
+            Create Novel
+          </a>
+
+          <a href="author_draft-novel.html" class="nav-item sub">
+            Draft Novel
+          </a>
+
+          <a href="author_archive.html" class="nav-item sub active">
+            Archive
+          </a>
+
+          <div class="nav-section">Analytics</div>
+
+          <a href="author_earnings.html" class="nav-item sub">
+            Earnings
+          </a>
+
+        </nav>
+
+        <a href="#" class="logout" id="logout" data-role="author">
+          Logout
+        </a>
+
+      </aside>
+
+
+      <!-- ================= MAIN CONTENT ================= -->
+      <main class="main">
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+
+          <h1>Archive</h1>
+
+          <div class="user-chip">
+            <span>Ashley Jane</span>
+            <span class="avatar">AJ</span>
+          </div>
+
+        </div>
+
+
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+
+          <div>
+            <h2>Archived Novels</h2>
+
+            <p>
+              View and manage your archived novels.
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- ================= ARCHIVE SUMMARY ================= -->
+        <div class="stats">
+
+          <div class="stat-card">
+
+            <div class="stat-label">
+              Archived Novels
+            </div>
+
+            <div class="stat-value">
+              3
+            </div>
+
+            <div class="stat-change positive">
+              Total archived
+            </div>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-label">
+              Total Reads
+            </div>
+
+            <div class="stat-value">
+              18,426
+            </div>
+
+            <div class="stat-change positive">
+              Lifetime reads
+            </div>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-label">
+              Total Earnings
+            </div>
+
+            <div class="stat-value">
+              ₱2,845
+            </div>
+
+            <div class="stat-change positive">
+              Lifetime earnings
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================= FILTER BAR ================= -->
+        <div class="filter-bar">
+
+          <div class="filter-group">
+
+            <label for="status-filter">
+              Status
+            </label>
+
+            <select id="status-filter">
+
+              <option selected>
+                All Status
+              </option>
+
+              <option>
+                Completed
+              </option>
+
+              <option>
+                On Hiatus
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="filter-group">
+
+            <label for="sort-filter">
+              Sort By
+            </label>
+
+            <select id="sort-filter">
+
+              <option selected>
+                Recently Archived
+              </option>
+
+              <option>
+                Title A-Z
+              </option>
+
+              <option>
+                Title Z-A
+              </option>
+
+              <option>
+                Most Reads
+              </option>
+
+              <option>
+                Highest Earnings
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="filter-actions">
+
+            <button
+              type="button"
+              class="btn"
+              id="reset-filter"
+            >
+              Reset
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="apply-filter"
+            >
+              Apply Filter
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================= ARCHIVED NOVELS TABLE ================= -->
+        <div class="table-card">
+
+          <h2>Archived Novels</h2>
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Total Reads</th>
+                <th>Rating</th>
+                <th>Total Earnings</th>
+                <th>Archived Date</th>
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              <!-- 1 -->
+              <tr
+                data-status="Completed"
+                data-title="Beneath the Veil"
+                data-reads="8420"
+                data-earnings="1245"
+                data-date="September 15, 2026"
+              >
+
+                <td>
+                  <strong>Beneath the Veil</strong>
+                </td>
+
+                <td>
+                  <span class="badge completed">
+                    Completed
+                  </span>
+                </td>
+
+                <td>
+                  8,420
+                </td>
+
+                <td>
+                  <span class="rating">
+                    ★ 4.7
+                  </span>
+                </td>
+
+                <td>
+                  ₱1,245
+                </td>
+
+                <td>
+                  Sep 15, 2026
+                </td>
+
+              </tr>
+
+
+              <!-- 2 -->
+              <tr
+                data-status="On Hiatus"
+                data-title="Starlight Drive"
+                data-reads="6320"
+                data-earnings="980"
+                data-date="August 28, 2026"
+              >
+
+                <td>
+                  <strong>Starlight Drive</strong>
+                </td>
+
+                <td>
+                  <span class="badge paused">
+                    On Hiatus
+                  </span>
+                </td>
+
+                <td>
+                  6,320
+                </td>
+
+                <td>
+                  <span class="rating">
+                    ★ 4.5
+                  </span>
+                </td>
+
+                <td>
+                  ₱980
+                </td>
+
+                <td>
+                  Aug 28, 2026
+                </td>
+
+              </tr>
+
+
+              <!-- 3 -->
+              <tr
+                data-status="Completed"
+                data-title="Whispers of Winter"
+                data-reads="3686"
+                data-earnings="620"
+                data-date="July 10, 2026"
+              >
+
+                <td>
+                  <strong>Whispers of Winter</strong>
+                </td>
+
+                <td>
+                  <span class="badge completed">
+                    Completed
+                  </span>
+                </td>
+
+                <td>
+                  3,686
+                </td>
+
+                <td>
+                  <span class="rating">
+                    ★ 4.3
+                  </span>
+                </td>
+
+                <td>
+                  ₱620
+                </td>
+
+                <td>
+                  Jul 10, 2026
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <!-- TABLE FOOTER -->
+          <div class="table-footer">
+
+            <span>
+              Showing 3 archived novels
+            </span>
+
+            <span>
+              <a
+                href="author_all-novel.html"
+                class="link-primary"
+              >
+                View all novels →
+              </a>
+            </span>
+
+          </div>
+
+        </div>
+
+      </main>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/author-archive.js"></script>
+    <script src="../javascript/logout.js"></script>
+
+  </body>
+</html>
