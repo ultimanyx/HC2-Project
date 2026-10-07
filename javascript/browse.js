@@ -1,86 +1,160 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Select Filter Controls
-  const titleSearchInput = document.querySelector(".filter .filter-group input[type='text']");
-  const searchButton = document.querySelector(".filter .filter-group button");
+  // ==========================================
+  // FILTER CONTROLS
+  // ==========================================
+  const titleSearchInput = document.getElementById("title-search");
   const genreSelect = document.getElementById("genre");
   const sortSelect = document.getElementById("sort-choice");
   const minRatingInput = document.getElementById("min-rating");
 
-  // 2. Select Cards & Parent Container
-  const cardContainer = document.querySelector(".card-container");
-  const cardLinks = Array.from(cardContainer.querySelectorAll("a"));
+  const applyFilterButton = document.getElementById("apply-filter");
+  const resetFilterButton = document.getElementById("reset-filter");
 
-  // 3. Main Filter & Sort Handler
+  // ==========================================
+  // CARD CONTAINER
+  // ==========================================
+  const cardContainer = document.querySelector(".card-container");
+
+  if (!cardContainer) return;
+
+  const cardLinks = Array.from(
+    cardContainer.querySelectorAll(":scope > a")
+  );
+
+  // ==========================================
+  // FILTER + SORT FUNCTION
+  // ==========================================
   function filterAndSortNovels() {
-    const titleQuery = titleSearchInput ? titleSearchInput.value.trim().toLowerCase() : "";
-    const selectedGenre = genreSelect ? genreSelect.value.toLowerCase() : "all-genre";
-    const minRating = minRatingInput ? parseFloat(minRatingInput.value) || 0 : 0;
-    const selectedSort = sortSelect ? sortSelect.value : "popularity";
+    const titleQuery = titleSearchInput
+      ? titleSearchInput.value.trim().toLowerCase()
+      : "";
+
+    const selectedGenre = genreSelect
+      ? genreSelect.value.toLowerCase()
+      : "all-genre";
+
+    const minRating = minRatingInput
+      ? parseFloat(minRatingInput.value) || 0
+      : 0;
+
+    const selectedSort = sortSelect
+      ? sortSelect.value
+      : "popularity";
 
     const visibleCards = [];
 
+    // ==========================================
+    // CHECK EACH NOVEL
+    // ==========================================
     cardLinks.forEach((link) => {
       const card = link.querySelector(".novel-card");
+
       if (!card) return;
 
-      // Extract Data from Card
-      const titleText = card.querySelector("h1")?.textContent.toLowerCase() || "";
-      const ratingText = card.querySelector("span p:last-child")?.textContent || "0";
+      // Novel title
+      const titleText =
+        card.querySelector("h1")
+          ?.textContent
+          .trim()
+          .toLowerCase() || "";
+
+      // IMPORTANT:
+      // Get genre from the actual genre text,
+      // NOT from the image folder.
+      const genreText =
+        card.querySelector("#genre-block h3")
+          ?.textContent
+          .trim()
+          .toLowerCase() || "";
+
+      // Rating
+      const ratingText =
+        card.querySelector("span p:last-child")
+          ?.textContent || "0";
+
       const rating = parseFloat(ratingText) || 0;
 
-      // Derive Genre from Image File Path (since genre isn't in data-attributes yet)
-      const imgSrc = card.querySelector("img.cover")?.getAttribute("src")?.toLowerCase() || "";
+      // ==========================================
+      // MATCHING
+      // ==========================================
+      const matchesTitle =
+        !titleQuery || titleText.includes(titleQuery);
 
-      // Matching Logic
-      const matchesTitle = !titleQuery || titleText.includes(titleQuery);
-      const matchesRating = rating >= minRating;
-      
-      // Matches selected genre option or checks path directory
       const matchesGenre =
-        selectedGenre === "all-genre" ||
-        imgSrc.includes(selectedGenre) ||
-        (selectedGenre === "sci-fi" && (imgSrc.includes("sci-fi") || imgSrc.includes("scifi")));
+        selectedGenre === "all-genre" || genreText === selectedGenre;
 
+      const matchesRating = rating >= minRating;
+
+      // ==========================================
+      // SHOW / HIDE
+      // ==========================================
       if (matchesTitle && matchesGenre && matchesRating) {
-        link.style.display = ""; // Show card
-        visibleCards.push({ element: link, rating, title: titleText });
+        link.style.display = "";
+
+        visibleCards.push({
+          element: link,
+          rating: rating,
+          title: titleText
+        });
       } else {
-        link.style.display = "none"; // Hide card
+        link.style.display = "none";
       }
     });
 
-    // Sort Visible Cards
+    // ==========================================
+    // SORT
+    // ==========================================
     visibleCards.sort((a, b) => {
-      if (selectedSort === "newest" || selectedSort === "popularity") {
-        return b.rating - a.rating; // Default highest rating first
-      } else if (selectedSort === "updated") {
-        return a.title.localeCompare(b.title); // Alphabetical fallback
+      if (
+        selectedSort === "popularity" ||
+        selectedSort === "newest"
+      ) {
+        return b.rating - a.rating;
       }
+
+      if (selectedSort === "updated") {
+        return a.title.localeCompare(b.title);
+      }
+
       return 0;
     });
 
-    // Re-append to update DOM order
-    visibleCards.forEach((item) => cardContainer.appendChild(item.element));
+    // ==========================================
+    // UPDATE DOM ORDER
+    // ==========================================
+    visibleCards.forEach((item) => {
+      cardContainer.appendChild(item.element);
+    });
   }
 
-  // 4. Attach Event Listeners
-  if (titleSearchInput) {
-    titleSearchInput.addEventListener("input", filterAndSortNovels);
+  // ==========================================
+  // APPLY FILTER
+  // ==========================================
+  if (applyFilterButton) {
+    applyFilterButton.addEventListener("click", filterAndSortNovels);
   }
 
-  if (searchButton) {
-    searchButton.addEventListener("click", filterAndSortNovels);
+  // ==========================================
+  // RESET FILTER
+  // ==========================================
+  if (resetFilterButton) {
+    resetFilterButton.addEventListener("click", () => {
+      // Reset input values
+      if (titleSearchInput) titleSearchInput.value = "";
+      if (genreSelect) genreSelect.value = "all-genre";
+      if (sortSelect) sortSelect.value = "popularity";
+      if (minRatingInput) minRatingInput.value = "0";
+
+      // Show all novels and return cards to original DOM position
+      cardLinks.forEach((link) => {
+        link.style.display = "";
+        cardContainer.appendChild(link);
+      });
+    });
   }
 
-  if (genreSelect) {
-    genreSelect.addEventListener("change", filterAndSortNovels);
-  }
-
-  if (sortSelect) {
-    sortSelect.addEventListener("change", filterAndSortNovels);
-  }
-
-  if (minRatingInput) {
-    minRatingInput.addEventListener("input", filterAndSortNovels);
-  }
+  // ==========================================
+  // INITIAL LOAD
+  // ==========================================
+  filterAndSortNovels();
 });
