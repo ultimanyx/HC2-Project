@@ -3,10 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>All Novels</title>
+    <title>All Novels - NovelNest</title>
     <link rel="stylesheet" href="../css/author_all-novels.css" />
     <link rel="stylesheet" href="../css/sweetalert2.min.css" />
-
     <link
       rel="icon"
       type="image/png"
@@ -15,6 +14,7 @@
   </head>
   <body>
     <div class="layout">
+      <!-- ================= SIDEBAR ================= -->
       <aside class="sidebar">
         <div class="brand">
           <img src="../image/logocopy.png" alt="brandlogo" />
@@ -25,9 +25,7 @@
             <span class="nav-icon"></span>
             Dashboard
           </a>
-          <a href="author_all-novel.html" class="nav-item sub active">
-            All Novels
-          </a>
+          <a href="author_all-novel.html" class="nav-item sub"> All Novels </a>
           <a href="author_create-novel.html" class="nav-item sub">
             Create Novel
           </a>
@@ -35,12 +33,13 @@
             Draft Novel
           </a>
           <a href="author_earnings.html" class="nav-item sub">Earnings</a>
-          <a href="author_archive.html" class="nav-item sub">Archive</a>
+          <a href="author_archive.html" class="nav-item sub active">Archive</a>
         </nav>
         <a href="#" class="logout" id="logout" data-role="author">Logout</a>
       </aside>
-
+      <!-- ================= MAIN CONTENT ================= -->
       <main class="main">
+        <!-- TOPBAR -->
         <div class="topbar">
           <h1>All Novels</h1>
           <div class="user-chip">
@@ -48,7 +47,7 @@
             <span class="avatar">SJ</span>
           </div>
         </div>
-
+        <!-- ================= STATS ================= -->
         <div class="stats">
           <div class="stat-card">
             <div class="stat-label">Total Novels</div>
@@ -66,7 +65,7 @@
             <div class="stat-change positive">↑ 12.5% from last month</div>
           </div>
         </div>
-
+        <!-- ================= FILTER BAR ================= -->
         <div class="filter-bar">
           <div class="filter-group">
             <label for="search-novel">Search</label>
@@ -79,29 +78,29 @@
           <div class="filter-group">
             <label for="status-filter">Status</label>
             <select id="status-filter">
-              <option>All Statuses</option>
-              <option>Ongoing</option>
-              <option>Completed</option>
-              <option>Draft</option>
-              <option>On Hiatus</option>
+              <option value="" selected>All Statuses</option>
+              <option value="Ongoing">Ongoing</option>
+              <option value="Completed">Completed</option>
+              <option value="Draft">Draft</option>
+              <option value="On Hiatus">On Hiatus</option>
             </select>
           </div>
           <div class="filter-group">
             <label for="sort-novel">Sort by</label>
             <select id="sort-novel">
-              <option>Last Updated</option>
-              <option>Title</option>
-              <option>Reads</option>
-              <option>Rating</option>
+              <option value="last_updated" selected>Last Updated</option>
+              <option value="title">Title</option>
+              <option value="reads">Reads</option>
+              <option value="rating">Rating</option>
             </select>
           </div>
           <div class="filter-actions">
-            <a href="author_create-novel.html" class="btn btn-primary"
-              >+ Create New Novel</a
-            >
+            <a href="author_create-novel.html" class="btn btn-primary">
+              + Create New Novel
+            </a>
           </div>
         </div>
-
+        <!-- ================= NOVELS TABLE ================= -->
         <div class="table-card">
           <h2>Your Novels</h2>
           <table>
@@ -132,13 +131,17 @@
                   4.8
                 </td>
                 <td>
-                  <button class="btn btn-sm">Edit</button>
-                  <button class="btn btn-primary btn-sm">View</button>
-                  <button class="btn btn-sm btn-danger">Delete</button>
+                  <button type="button" class="btn btn-sm">Edit</button>
+                  <button type="button" class="btn btn-primary btn-sm">
+                    View
+                  </button>
+                  <button type="button" class="btn btn-danger btn-sm">
+                    Delete
+                  </button>
                 </td>
               </tr>
               <tr>
-                <td><strong>Ember & Ash</strong></td>
+                <td><strong>Ember &amp; Ash</strong></td>
                 <td><span class="badge completed">Completed</span></td>
                 <td>Romance</td>
                 <td>32</td>
@@ -152,9 +155,13 @@
                   4.6
                 </td>
                 <td>
-                  <button class="btn btn-sm">Edit</button>
-                  <button class="btn btn-primary btn-sm">View</button>
-                  <button class="btn btn-sm btn-danger">Delete</button>
+                  <button type="button" class="btn btn-sm">Edit</button>
+                  <button type="button" class="btn btn-primary btn-sm">
+                    View
+                  </button>
+                  <button type="button" class="btn btn-danger btn-sm">
+                    Delete
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -172,9 +179,13 @@
                   4.2
                 </td>
                 <td>
-                  <button class="btn btn-sm">Edit</button>
-                  <button class="btn btn-primary btn-sm">View</button>
-                  <button class="btn btn-sm btn-danger">Delete</button>
+                  <button type="button" class="btn btn-sm">Edit</button>
+                  <button type="button" class="btn btn-primary btn-sm">
+                    View
+                  </button>
+                  <button type="button" class="btn btn-danger btn-sm">
+                    Delete
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -192,22 +203,30 @@
                   3.9
                 </td>
                 <td>
-                  <button class="btn btn-sm">Edit</button>
-                  <button class="btn btn-primary btn-sm">View</button>
-                  <button class="btn btn-sm btn-danger">Delete</button>
+                  <button type="button" class="btn btn-sm">Edit</button>
+                  <button type="button" class="btn btn-primary btn-sm">
+                    View
+                  </button>
+                  <button type="button" class="btn btn-danger btn-sm">
+                    Delete
+                  </button>
                 </td>
               </tr>
               <tr>
                 <td><strong>The Lost Kingdom</strong></td>
-                <td><span class="badge paused">Draft</span></td>
+                <td><span class="badge draft">Draft</span></td>
                 <td>Fantasy</td>
                 <td>6</td>
                 <td>—</td>
                 <td>—</td>
                 <td>
-                  <button class="btn btn-sm">Edit</button>
-                  <button class="btn btn-primary btn-sm">View</button>
-                  <button class="btn btn-sm btn-danger">Delete</button>
+                  <button type="button" class="btn btn-sm">Edit</button>
+                  <button type="button" class="btn btn-primary btn-sm">
+                    View
+                  </button>
+                  <button type="button" class="btn btn-danger btn-sm">
+                    Delete
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -225,22 +244,21 @@
                   4.0
                 </td>
                 <td>
-                  <button class="btn btn-sm">Edit</button>
-                  <button class="btn btn-primary btn-sm">View</button>
-                  <button class="btn btn-sm btn-danger">Delete</button>
+                  <button type="button" class="btn btn-sm">Edit</button>
+                  <button type="button" class="btn btn-primary btn-sm">
+                    View
+                  </button>
+                  <button type="button" class="btn btn-danger btn-sm">
+                    Delete
+                  </button>
                 </td>
               </tr>
             </tbody>
           </table>
-          <!-- Optional footer
-        <div class="text-muted" style="margin-top: 16px; border-top: 1px solid var(--border); padding-top: 14px; display: flex; justify-content: space-between; font-size: 14px;">
-          <span>Showing 6 novels</span>
-          <span>💡 Click <strong>View</strong> to see the public‑facing page of your novel.</span>
-        </div> -->
         </div>
       </main>
     </div>
-
+    <!-- ================= SCRIPTS ================= -->
     <script src="../javascript/sweetalert2.all.min.js"></script>
     <script src="../javascript/author-browse.js"></script>
     <script src="../javascript/logout.js"></script>

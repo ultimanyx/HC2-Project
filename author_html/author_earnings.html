@@ -1,314 +1,327 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Author Earnings - NovelNest</title>
+    <link rel="stylesheet" href="../css/author_earnings.css" />
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="../image/logo-nobackground-circle.png"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Author Earnings - NovelNest</title>
-  <link rel="stylesheet" href="../css/author_earnings.css">
-  <link rel="stylesheet" href="../css/sweetalert2.min.css">
-  <link rel="icon" type="image/png" href="../image/logo-nobackground-circle.png">
-</head>
-
-<body>
-  <div class="layout">
-    <!-- ================= SIDEBAR ================= -->
-    <aside class="sidebar">
-      <div class="brand">
-        <img src="../image/logocopy.png" alt="brandlogo">
-        NovelNest
-      </div>
-
-      <nav class="nav">
-        <a href="author_dashboard.html" class="nav-item sub">
-          <span class="nav-icon"></span>
-          Dashboard
-        </a>
-        <div class="nav-section">My Novels</div>
-        <a href="author_all-novel.html" class="nav-item sub">All Novels</a>
-        <a href="author_create-novel.html" class="nav-item sub">Create Novel</a>
-        <a href="author_draft-novel.html" class="nav-item sub">Draft Novel</a>
-        <div class="nav-section">Analytics</div>
-        <a href="author_earnings.html" class="nav-item sub active">Earnings</a>
-      </nav>
-
-      <a href="#" class="logout" id="logout" data-role="author">Logout</a>
-    </aside>
-
-    <!-- ================= MAIN CONTENT ================= -->
-    <main class="main">
-      <!-- TOPBAR -->
-      <div class="topbar">
-        <h1>Earnings</h1>
-        <div class="user-chip">
-          <span>Ashley Jane</span>
-          <span class="avatar">AJ</span>
+  <body>
+    <div class="layout">
+      <!-- ================= SIDEBAR ================= -->
+      <aside class="sidebar">
+        <div class="brand">
+          <img src="../image/logocopy.png" alt="brandlogo" />
+          NovelNest
         </div>
-      </div>
+        <nav class="nav">
+          <a href="author_dashboard.html" class="nav-item sub">
+            <span class="nav-icon"></span>
+            Dashboard
+          </a>
+          <a href="author_all-novel.html" class="nav-item sub"> All Novels </a>
+          <a href="author_create-novel.html" class="nav-item sub">
+            Create Novel
+          </a>
+          <a href="author_draft-novel.html" class="nav-item sub">
+            Draft Novel
+          </a>
+          <a href="author_earnings.html" class="nav-item sub active"
+            >Earnings</a
+          >
+          <a href="author_archive.html" class="nav-item sub">Archive</a>
+        </nav>
+        <a href="#" class="logout" id="logout" data-role="author">Logout</a>
+      </aside>
 
-      <!-- ================= EARNINGS HEADER ================= -->
-      <div class="earnings-header">
-        <div>
-          <h2>Earnings Overview</h2>
-          <p>Track your novel earnings, reads, pending balance, and payouts.</p>
-        </div>
-        <button type="button" class="btn btn-primary" id="withraw-btn">Withdraw Funds</button>
-      </div>
-
-      <!-- ================= STATS ================= -->
-      <div class="stats">
-        <div class="stat-card">
-          <div class="stat-label">Total Lifetime Earnings</div>
-          <div class="stat-value">₱15,284.50</div>
-          <div class="stat-change positive">Lifetime earnings</div>
+      <!-- ================= MAIN CONTENT ================= -->
+      <main class="main">
+        <!-- TOPBAR -->
+        <div class="topbar">
+          <h1>Earnings</h1>
+          <div class="user-chip">
+            <span>Ashley Jane</span>
+            <span class="avatar">AJ</span>
+          </div>
         </div>
 
-        <div class="stat-card">
-          <div class="stat-label">Pending Balance</div>
-          <div class="stat-value">₱312.00</div>
-          <div class="stat-change warning">Pending payout</div>
+        <!-- ================= EARNINGS HEADER ================= -->
+        <div class="earnings-header">
+          <div>
+            <h2>Earnings Overview</h2>
+            <p>
+              Track your novel earnings, reads, pending balance, and payouts.
+            </p>
+          </div>
+          <button type="button" class="btn btn-primary" id="withraw-btn">
+            Withdraw Funds
+          </button>
         </div>
 
-        <div class="stat-card">
-          <div class="stat-label">Active Novels</div>
-          <div class="stat-value">6</div>
-          <div class="stat-change positive">Currently active</div>
-        </div>
-      </div>
+        <!-- ================= STATS ================= -->
+        <div class="stats">
+          <div class="stat-card">
+            <div class="stat-label">Total Lifetime Earnings</div>
+            <div class="stat-value">₱15,284.50</div>
+            <div class="stat-change positive">Lifetime earnings</div>
+          </div>
 
-      <!-- ================= FILTER BAR ================= -->
-      <div class="filter-bar">
-        <!-- PERIOD -->
-        <div class="filter-group">
-          <label for="period">Period</label>
-          <select id="period">
-            <option selected>All Time</option>
-            <option>September 2026</option>
-            <option>August 2026</option>
-            <option>July 2026</option>
-            <option>June 2026</option>
-          </select>
-        </div>
+          <div class="stat-card">
+            <div class="stat-label">Pending Balance</div>
+            <div class="stat-value">₱312.00</div>
+            <div class="stat-change warning">Pending payout</div>
+          </div>
 
-        <!-- BOOK -->
-        <div class="filter-group">
-          <label for="book-filter">Book</label>
-          <select id="book-filter">
-            <option selected>All Novels</option>
-            <option>Shadows of the Crown</option>
-            <option>Ember &amp; Ash</option>
-            <option>The Last Prophecy</option>
-            <option>Starlight Drive</option>
-            <option>Beneath the Veil</option>
-          </select>
+          <div class="stat-card">
+            <div class="stat-label">Active Novels</div>
+            <div class="stat-value">6</div>
+            <div class="stat-change positive">Currently active</div>
+          </div>
         </div>
 
-        <!-- BUTTONS -->
-        <div class="filter-actions">
-          <button type="button" class="btn" id="reset-filter">Reset</button>
-          <button type="button" class="btn btn-primary" id="apply-filter">Apply Filter</button>
+        <!-- ================= FILTER BAR ================= -->
+        <div class="filter-bar">
+          <!-- PERIOD -->
+          <div class="filter-group">
+            <label for="period">Period</label>
+            <select id="period">
+              <option selected>All Time</option>
+              <option>September 2026</option>
+              <option>August 2026</option>
+              <option>July 2026</option>
+              <option>June 2026</option>
+            </select>
+          </div>
+
+          <!-- BOOK -->
+          <div class="filter-group">
+            <label for="book-filter">Book</label>
+            <select id="book-filter">
+              <option selected>All Novels</option>
+              <option>Shadows of the Crown</option>
+              <option>Ember &amp; Ash</option>
+              <option>The Last Prophecy</option>
+              <option>Starlight Drive</option>
+              <option>Beneath the Veil</option>
+            </select>
+          </div>
+
+          <!-- BUTTONS -->
+          <div class="filter-actions">
+            <button type="button" class="btn" id="reset-filter">Reset</button>
+            <button type="button" class="btn btn-primary" id="apply-filter">
+              Apply Filter
+            </button>
+          </div>
         </div>
-      </div>
 
-      <!-- ================= EARNINGS TABLE ================= -->
-      <div class="table-card">
-        <h2>Earnings Reports</h2>
+        <!-- ================= EARNINGS TABLE ================= -->
+        <div class="table-card">
+          <h2>Earnings Reports</h2>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Book Title</th>
-              <th>Status</th>
-              <th>Period</th>
-              <th>Total Reads</th>
-              <th>Total Earned</th>
-              <th>Pending</th>
-              <th>Last Payout</th>
-            </tr>
-          </thead>
+          <table>
+            <thead>
+              <tr>
+                <th>Book Title</th>
+                <th>Status</th>
+                <th>Period</th>
+                <th>Total Reads</th>
+                <th>Total Earned</th>
+                <th>Pending</th>
+                <th>Last Payout</th>
+              </tr>
+            </thead>
 
-          <tbody>
-            <!-- 1 -->
-            <tr data-period="August 2026">
-              <td><strong>The Last Prophecy</strong></td>
-              <td><span class="badge active">Ongoing</span></td>
-              <td>August 2026</td>
-              <td>1,920</td>
-              <td>₱274.80</td>
-              <td>₱65.00</td>
-              <td>Aug 15, 2026</td>
-            </tr>
+            <tbody>
+              <!-- 1 -->
+              <tr data-period="August 2026">
+                <td><strong>The Last Prophecy</strong></td>
+                <td><span class="badge active">Ongoing</span></td>
+                <td>August 2026</td>
+                <td>1,920</td>
+                <td>₱274.80</td>
+                <td>₱65.00</td>
+                <td>Aug 15, 2026</td>
+              </tr>
 
-            <!-- 2 -->
-            <tr data-period="July 2026">
-              <td><strong>Shadows of the Crown</strong></td>
-              <td><span class="badge active">Ongoing</span></td>
-              <td>July 2026</td>
-              <td>3,210</td>
-              <td>₱455.40</td>
-              <td>₱72.00</td>
-              <td>Jul 01, 2026</td>
-            </tr>
+              <!-- 2 -->
+              <tr data-period="July 2026">
+                <td><strong>Shadows of the Crown</strong></td>
+                <td><span class="badge active">Ongoing</span></td>
+                <td>July 2026</td>
+                <td>3,210</td>
+                <td>₱455.40</td>
+                <td>₱72.00</td>
+                <td>Jul 01, 2026</td>
+              </tr>
 
-            <!-- 3 -->
-            <tr data-period="September 2026">
-              <td><strong>Beneath the Veil</strong></td>
-              <td><span class="badge completed">Completed</span></td>
-              <td>September 2026</td>
-              <td>850</td>
-              <td>₱72.00</td>
-              <td>—</td>
-              <td>Sep 10, 2026</td>
-            </tr>
+              <!-- 3 -->
+              <tr data-period="September 2026">
+                <td><strong>Beneath the Veil</strong></td>
+                <td><span class="badge completed">Completed</span></td>
+                <td>September 2026</td>
+                <td>850</td>
+                <td>₱72.00</td>
+                <td>—</td>
+                <td>Sep 10, 2026</td>
+              </tr>
 
-            <!-- 4 -->
-            <tr data-period="July 2026">
-              <td><strong>Ember &amp; Ash</strong></td>
-              <td><span class="badge completed">Completed</span></td>
-              <td>July 2026</td>
-              <td>2,640</td>
-              <td>₱386.50</td>
-              <td>—</td>
-              <td>Jul 15, 2026</td>
-            </tr>
+              <!-- 4 -->
+              <tr data-period="July 2026">
+                <td><strong>Ember &amp; Ash</strong></td>
+                <td><span class="badge completed">Completed</span></td>
+                <td>July 2026</td>
+                <td>2,640</td>
+                <td>₱386.50</td>
+                <td>—</td>
+                <td>Jul 15, 2026</td>
+              </tr>
 
-            <!-- 5 -->
-            <tr data-period="September 2026">
-              <td><strong>Starlight Drive</strong></td>
-              <td><span class="badge paused">On Hiatus</span></td>
-              <td>September 2026</td>
-              <td>1,120</td>
-              <td>₱145.50</td>
-              <td>₱42.00</td>
-              <td>Sep 01, 2026</td>
-            </tr>
+              <!-- 5 -->
+              <tr data-period="September 2026">
+                <td><strong>Starlight Drive</strong></td>
+                <td><span class="badge paused">On Hiatus</span></td>
+                <td>September 2026</td>
+                <td>1,120</td>
+                <td>₱145.50</td>
+                <td>₱42.00</td>
+                <td>Sep 01, 2026</td>
+              </tr>
 
-            <!-- 6 -->
-            <tr data-period="September 2026">
-              <td><strong>Shadows of the Crown</strong></td>
-              <td><span class="badge active">Ongoing</span></td>
-              <td>September 2026</td>
-              <td>4,320</td>
-              <td>₱620.50</td>
-              <td>₱112.00</td>
-              <td>Sep 01, 2026</td>
-            </tr>
+              <!-- 6 -->
+              <tr data-period="September 2026">
+                <td><strong>Shadows of the Crown</strong></td>
+                <td><span class="badge active">Ongoing</span></td>
+                <td>September 2026</td>
+                <td>4,320</td>
+                <td>₱620.50</td>
+                <td>₱112.00</td>
+                <td>Sep 01, 2026</td>
+              </tr>
 
-            <!-- 7 -->
-            <tr data-period="September 2026">
-              <td><strong>Ember &amp; Ash</strong></td>
-              <td><span class="badge completed">Completed</span></td>
-              <td>September 2026</td>
-              <td>2,840</td>
-              <td>₱420.75</td>
-              <td>—</td>
-              <td>Sep 15, 2026</td>
-            </tr>
+              <!-- 7 -->
+              <tr data-period="September 2026">
+                <td><strong>Ember &amp; Ash</strong></td>
+                <td><span class="badge completed">Completed</span></td>
+                <td>September 2026</td>
+                <td>2,840</td>
+                <td>₱420.75</td>
+                <td>—</td>
+                <td>Sep 15, 2026</td>
+              </tr>
 
-            <!-- 8 -->
-            <tr data-period="July 2026">
-              <td><strong>The Last Prophecy</strong></td>
-              <td><span class="badge active">Ongoing</span></td>
-              <td>July 2026</td>
-              <td>1,602</td>
-              <td>₱199.20</td>
-              <td>₱42.00</td>
-              <td>Jul 15, 2026</td>
-            </tr>
+              <!-- 8 -->
+              <tr data-period="July 2026">
+                <td><strong>The Last Prophecy</strong></td>
+                <td><span class="badge active">Ongoing</span></td>
+                <td>July 2026</td>
+                <td>1,602</td>
+                <td>₱199.20</td>
+                <td>₱42.00</td>
+                <td>Jul 15, 2026</td>
+              </tr>
 
-            <!-- 9 -->
-            <tr data-period="August 2026">
-              <td><strong>Beneath the Veil</strong></td>
-              <td><span class="badge completed">Completed</span></td>
-              <td>August 2026</td>
-              <td>650</td>
-              <td>₱60.00</td>
-              <td>—</td>
-              <td>Aug 10, 2026</td>
-            </tr>
+              <!-- 9 -->
+              <tr data-period="August 2026">
+                <td><strong>Beneath the Veil</strong></td>
+                <td><span class="badge completed">Completed</span></td>
+                <td>August 2026</td>
+                <td>650</td>
+                <td>₱60.00</td>
+                <td>—</td>
+                <td>Aug 10, 2026</td>
+              </tr>
 
-            <!-- 10 -->
-            <tr data-period="August 2026">
-              <td><strong>Starlight Drive</strong></td>
-              <td><span class="badge paused">On Hiatus</span></td>
-              <td>August 2026</td>
-              <td>980</td>
-              <td>₱112.25</td>
-              <td>₱30.00</td>
-              <td>Aug 01, 2026</td>
-            </tr>
+              <!-- 10 -->
+              <tr data-period="August 2026">
+                <td><strong>Starlight Drive</strong></td>
+                <td><span class="badge paused">On Hiatus</span></td>
+                <td>August 2026</td>
+                <td>980</td>
+                <td>₱112.25</td>
+                <td>₱30.00</td>
+                <td>Aug 01, 2026</td>
+              </tr>
 
-            <!-- 11 -->
-            <tr data-period="September 2026">
-              <td><strong>The Last Prophecy</strong></td>
-              <td><span class="badge active">Ongoing</span></td>
-              <td>September 2026</td>
-              <td>2,150</td>
-              <td>₱310.20</td>
-              <td>₱98.50</td>
-              <td>Sep 15, 2026</td>
-            </tr>
+              <!-- 11 -->
+              <tr data-period="September 2026">
+                <td><strong>The Last Prophecy</strong></td>
+                <td><span class="badge active">Ongoing</span></td>
+                <td>September 2026</td>
+                <td>2,150</td>
+                <td>₱310.20</td>
+                <td>₱98.50</td>
+                <td>Sep 15, 2026</td>
+              </tr>
 
-            <!-- 12 -->
-            <tr data-period="August 2026">
-              <td><strong>Shadows of the Crown</strong></td>
-              <td><span class="badge active">Ongoing</span></td>
-              <td>August 2026</td>
-              <td>3,850</td>
-              <td>₱540.25</td>
-              <td>₱85.00</td>
-              <td>Aug 01, 2026</td>
-            </tr>
+              <!-- 12 -->
+              <tr data-period="August 2026">
+                <td><strong>Shadows of the Crown</strong></td>
+                <td><span class="badge active">Ongoing</span></td>
+                <td>August 2026</td>
+                <td>3,850</td>
+                <td>₱540.25</td>
+                <td>₱85.00</td>
+                <td>Aug 01, 2026</td>
+              </tr>
 
-            <!-- 13 -->
-            <tr data-period="August 2026">
-              <td><strong>Ember &amp; Ash</strong></td>
-              <td><span class="badge completed">Completed</span></td>
-              <td>August 2026</td>
-              <td>2,730</td>
-              <td>₱398.50</td>
-              <td>—</td>
-              <td>Aug 15, 2026</td>
-            </tr>
+              <!-- 13 -->
+              <tr data-period="August 2026">
+                <td><strong>Ember &amp; Ash</strong></td>
+                <td><span class="badge completed">Completed</span></td>
+                <td>August 2026</td>
+                <td>2,730</td>
+                <td>₱398.50</td>
+                <td>—</td>
+                <td>Aug 15, 2026</td>
+              </tr>
 
-            <!-- 14 -->
-            <tr data-period="June 2026">
-              <td><strong>Beneath the Veil</strong></td>
-              <td><span class="badge completed">Completed</span></td>
-              <td>June 2026</td>
-              <td>450</td>
-              <td>₱45.00</td>
-              <td>—</td>
-              <td>Jun 10, 2026</td>
-            </tr>
+              <!-- 14 -->
+              <tr data-period="June 2026">
+                <td><strong>Beneath the Veil</strong></td>
+                <td><span class="badge completed">Completed</span></td>
+                <td>June 2026</td>
+                <td>450</td>
+                <td>₱45.00</td>
+                <td>—</td>
+                <td>Jun 10, 2026</td>
+              </tr>
 
-            <!-- 15 -->
-            <tr data-period="July 2026">
-              <td><strong>Starlight Drive</strong></td>
-              <td><span class="badge paused">On Hiatus</span></td>
-              <td>July 2026</td>
-              <td>1,301</td>
-              <td>₱84.40</td>
-              <td>₱42.00</td>
-              <td>Jul 01, 2026</td>
-            </tr>
-          </tbody>
-        </table>
+              <!-- 15 -->
+              <tr data-period="July 2026">
+                <td><strong>Starlight Drive</strong></td>
+                <td><span class="badge paused">On Hiatus</span></td>
+                <td>July 2026</td>
+                <td>1,301</td>
+                <td>₱84.40</td>
+                <td>₱42.00</td>
+                <td>Jul 01, 2026</td>
+              </tr>
+            </tbody>
+          </table>
 
-        <div class="table-footer">
-          <span>Showing earnings reports</span>
-          <span>
-            <a href="author_dashboard.html" class="link-primary">Back to Dashboard →</a>
-          </span>
+          <div class="table-footer">
+            <span>Showing earnings reports</span>
+            <span>
+              <a href="author_dashboard.html" class="link-primary"
+                >Back to Dashboard →</a
+              >
+            </span>
+          </div>
         </div>
-      </div>
-    </main>
-  </div>
+      </main>
+    </div>
 
-  <!-- ================= JAVASCRIPT ================= -->
-  <script src="../javascript/sweetalert2.all.min.js"></script>
-  <script src="../javascript/author-filter.js"></script>
-  <script src="../javascript/logout.js"></script>
-</body>
-
+    <!-- ================= JAVASCRIPT ================= -->
+    <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/author-filter.js"></script>
+    <script src="../javascript/logout.js"></script>
+  </body>
 </html>
