@@ -38,11 +38,13 @@
   font-family: "Poppins";
   src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype");
 }
+
 @font-face {
   font-family: "Plus_Jakarta_Sans";
   src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
     format("truetype");
 }
+
 @font-face {
   font-family: "Fraunces";
   src: url("../font/Fraunces/static/Fraunces_72pt-Regular.ttf")

@@ -40,11 +40,13 @@
   font-family: "Poppins";
   src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype");
 }
+
 @font-face {
   font-family: "Plus_Jakarta_Sans";
   src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
     format("truetype");
 }
+
 @font-face {
   font-family: "Fraunces";
   src: url("../font/Fraunces/static/Fraunces_72pt-Regular.ttf")
@@ -335,6 +337,7 @@ a {
   background: var(--primary);
   color: #ffffff;
 }
+
 .btn-primary:hover {
   background: #9a5f16;
 }
@@ -343,6 +346,7 @@ a {
   background: #3f7d4f;
   color: #ffffff;
 }
+
 .btn-success:hover {
   background: #2f5d3a;
 }
@@ -351,6 +355,7 @@ a {
   background: #d18a24;
   color: #ffffff;
 }
+
 .btn-warning:hover {
   background: #b8721f;
 }
@@ -359,6 +364,7 @@ a {
   background: #dc2626;
   color: #ffffff;
 }
+
 .btn-danger:hover {
   background: #b91c1c;
 }
@@ -497,6 +503,7 @@ tbody tr:hover {
   font-weight: 600;
   text-decoration: none;
 }
+
 .link-primary:hover {
   text-decoration: underline;
 }

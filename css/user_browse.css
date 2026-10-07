@@ -11,7 +11,6 @@ html {
 /* =====================================================
    ROOT VARIABLES
 ===================================================== */
-
 :root {
   /* Main */
   --background: #f8f6f1;
@@ -56,8 +55,9 @@ html {
   --link-hover: #2c536d;
 
   /* Shadows */
-  --shadow:
+  --boxshadow:
     0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
+  --text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 
   /* Footer */
   --footer-background: #1a1826;
@@ -72,7 +72,6 @@ html {
 /* =====================================================
    FONTS
 ===================================================== */
-
 @font-face {
   font-family: "Plus_Jakarta_Sans";
   src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
@@ -88,7 +87,6 @@ html {
 /* =====================================================
    BODY
 ===================================================== */
-
 body {
   font-family: var(--font-body);
   background-color: var(--background);
@@ -98,17 +96,13 @@ body {
 /* =====================================================
    NAVBAR
 ===================================================== */
-
 .navbar {
   width: 100%;
   height: 60px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   padding: 0 40px;
-
   background-color: var(--card-background);
   border-bottom: 1px solid var(--border);
 }
@@ -116,7 +110,6 @@ body {
 /* =====================================================
    LOGO
 ===================================================== */
-
 .nav-logo {
   display: flex;
   align-items: center;
@@ -132,7 +125,6 @@ body {
 /* =====================================================
    NAVIGATION LINKS
 ===================================================== */
-
 .nav-links {
   display: flex;
   align-items: center;
@@ -141,16 +133,12 @@ body {
 
 .nav-links a {
   position: relative;
-
   color: var(--foreground);
   text-decoration: none;
-
   font-family: var(--font-body);
   font-size: 15px;
   font-weight: 500;
-
   padding: 10px 0;
-
   transition: color 0.2s ease;
 }
 
@@ -159,20 +147,14 @@ body {
 }
 
 /* Underline */
-
 .nav-links a::after {
   content: "";
-
   position: absolute;
-
   left: 0;
   bottom: 2px;
-
   width: 0;
   height: 2px;
-
   background-color: var(--primary);
-
   transition: width 0.2s ease;
 }
 
@@ -193,21 +175,15 @@ body {
 /* =====================================================
    SEARCH
 ===================================================== */
-
 .nav-search {
   width: 220px;
   height: 35px;
-
   display: flex;
   align-items: center;
-
   border: 1px solid var(--border);
   border-radius: 20px;
-
   background-color: var(--input-background);
-
   overflow: hidden;
-
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease;
@@ -215,20 +191,14 @@ body {
 
 .nav-search input {
   flex: 1;
-
   width: 100%;
   height: 100%;
-
   padding: 0 15px;
-
   border: none;
   outline: none;
-
   background: transparent;
-
   font-family: var(--font-body);
   font-size: 14px;
-
   color: var(--foreground);
 }
 
@@ -239,20 +209,15 @@ body {
 /* =====================================================
    SEARCH BUTTON
 ===================================================== */
-
 .nav-search button {
   width: 42px;
   height: 100%;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   border: none;
   outline: none;
-
   background: transparent;
-
   cursor: pointer;
 }
 
@@ -264,17 +229,14 @@ body {
 /* =====================================================
    SEARCH FOCUS
 ===================================================== */
-
 .nav-search:focus-within {
   border-color: var(--ring);
-
   box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
 /* =====================================================
    USER DROPDOWN – FULLY INTEGRATED
 ===================================================== */
-
 /* Container – must be positioned relative for the absolute menu */
 .nav-user-dropdown {
   position: relative;
@@ -286,7 +248,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 12px;               /* makes it feel clickable */
+  padding: 6px 12px; /* makes it feel clickable */
   border-radius: 30px;
   transition: background 0.2s;
   user-select: none;
@@ -327,12 +289,15 @@ body {
   background: var(--card-background);
   border-radius: 12px;
   padding: 8px 0;
-  box-shadow: var(--shadow);
+  box-shadow: var(--boxshadow);
   border: 1px solid var(--border);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-6px) scale(0.97);
-  transition: opacity 0.2s ease, transform 0.25s ease, visibility 0.2s;
+  transition:
+    opacity 0.2s ease,
+    transform 0.25s ease,
+    visibility 0.2s;
   z-index: 1000;
   pointer-events: none;
 }
@@ -358,6 +323,7 @@ body {
 .nav-links .dropdown-menu a::after {
   display: none;
 }
+
 .nav-links .dropdown-menu a:hover::after {
   width: 0;
 }
@@ -395,7 +361,6 @@ body {
 /* =====================================================
    BROWSE HEADER
 ===================================================== */
-
 .browse-header {
   width: 100%;
   height: 300px;
@@ -421,7 +386,6 @@ body {
 /* =====================================================
    FILTER BAR
 ===================================================== */
-
 .filter {
   margin-top: 30px;
   margin-bottom: 50px;
@@ -466,6 +430,7 @@ body {
 #min-rating {
   width: 70px;
 }
+
 /* =====================================================
    CARD CONTAINER
 ===================================================== */
@@ -535,8 +500,10 @@ body {
   float: right;
   margin-top: 2px;
 }
+
 .star {
-  filter: brightness(0) saturate(100%) invert(44%) sepia(86%) saturate(468%) hue-rotate(352deg) brightness(92%) contrast(86%);
+  filter: brightness(0) saturate(100%) invert(44%) sepia(86%) saturate(468%)
+    hue-rotate(352deg) brightness(92%) contrast(86%);
 }
 
 /* ── Rating number ── */
@@ -554,14 +521,12 @@ body {
 .novel-card:hover {
   border-color: #b8721f;
   background: #fcf9f5;
-  transform: translateY(-8px); 
+  transform: translateY(-8px);
 }
-
 
 /* =====================================================
    FOOTER
 ===================================================== */
-
 .footer {
   margin-top: 60px;
   background-color: var(--footer-background);

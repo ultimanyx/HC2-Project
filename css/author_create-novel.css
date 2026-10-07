@@ -5,8 +5,8 @@
 }
 
 /* =====================================================
-    ROOT VARIABLES 
-  ===================================================== */
+   ROOT VARIABLES 
+===================================================== */
 
 :root {
   /* Main */
@@ -64,19 +64,22 @@
   --font-body: "Plus_Jakarta_Sans", sans-serif;
   --font-heading: "Fraunces", serif;
 }
+
 /* =====================================================
-    FONTS
-  ===================================================== */
+   FONTS
+===================================================== */
 
 @font-face {
   font-family: "Poppins";
   src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype");
 }
+
 @font-face {
   font-family: "Plus_Jakarta_Sans";
   src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
     format("truetype");
 }
+
 @font-face {
   font-family: "Fraunces";
   src: url("../font/Fraunces/static/Fraunces_72pt-Regular.ttf")
@@ -85,8 +88,8 @@
 
 /* ============ Body ==========*/
 /* =====================================================
-    FIX: Lock page, sidebar stays put
-  ===================================================== */
+   FIX: Lock page, sidebar stays put
+===================================================== */
 html,
 body {
   height: 100%;
@@ -324,6 +327,7 @@ a {
   background: var(--primary);
   color: #ffffff;
 }
+
 .btn-primary:hover {
   background: #9a5f16;
 }
@@ -405,20 +409,24 @@ a {
   cursor: pointer;
   transition: 0.2s;
 }
+
 .upload-zone:hover {
   border-color: var(--primary);
   background: #f8f6f1;
 }
+
 .upload-zone .icon {
   font-size: 32px;
   display: block;
   margin-bottom: 8px;
 }
+
 .upload-zone p {
   font-size: 16px;
   color: var(--muted-foreground);
   margin: 4px 0;
 }
+
 .upload-zone .sub {
   font-size: 14px;
   color: var(--muted-foreground);
@@ -450,6 +458,7 @@ a {
   border: 1px solid var(--border);
   color: var(--foreground);
 }
+
 .btn-outline:hover {
   background: var(--secondary);
 }

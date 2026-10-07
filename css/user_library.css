@@ -1,796 +1,706 @@
-  /* =====================================================
-    BASE
-  ===================================================== */
-  html {
-    overflow-y: scroll;
-  }
-
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-
-  /* =====================================================
-    ROOT VARIABLES
-  ===================================================== */
-
-  :root {
-    /* Main */
-    --background: #f8f6f1;
-    --foreground: #1a1826;
-
-    /* Cards */
-    --card-background: #ffffff;
-    --card-foreground: #1a1826;
-
-    /* Primary */
-    --primary: #b8721f;
-    --primary-foreground: #ffffff;
-
-    /* Secondary */
-    --secondary: #ede9e1;
-    --secondary-foreground: #1a1826;
-
-    /* Muted */
-    --muted: #ede9e1;
-    --muted-foreground: #6b6680;
-
-    /* Accent */
-    --accent: #6d28d9;
-    --accent-foreground: #ffffff;
-
-    /* Border */
-    --border: rgba(26, 24, 38, 0.10);
-
-    /* Input */
-    --input-background: #ede9e1;
-
-    /* Focus */
-    --ring: #b8721f;
-    --focus-ring: rgba(184, 114, 31, 0.18);
-
-    /* Destructive */
-    --destructive: #dc2626;
-    --destructive-foreground: #ffffff;
-
-    /* Links */
-    --link: #3b6f91;
-    --link-hover: #2c536d;
-
-    /* Shadows */
-    --shadow:
-      0 20px 40px -12px rgba(0, 20, 30, 0.10),
-      0 8px 24px -6px rgba(0, 0, 0, 0.04);
-
-    /* Footer */
-    --footer-background: #1a1826;
-    --footer-foreground: #ffffff;
-    --footer-muted: #d8d0c8;
-
-    /* Fonts */
-    --font-body: "Plus_Jakarta_Sans", sans-serif;
-    --font-heading: "Fraunces", serif;
-  }
-
-
-  /* =====================================================
-    FONTS
-  ===================================================== */
-
-  @font-face {
-    font-family: "Plus_Jakarta_Sans";
-    src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
-      format("truetype");
-  }
-
-  @font-face {
-    font-family: "Fraunces";
-    src: url("../font/Fraunces/static/Fraunces_72pt-Regular.ttf")
-      format("truetype");
-  }
-
-
-  /* =====================================================
-    BODY
-  ===================================================== */
-
-  body {
-    font-family: var(--font-body);
-    background-color: var(--background);
-    color: var(--foreground);
-  }
-
-
-  /* =====================================================
-    NAVBAR
-  ===================================================== */
-
-  .navbar {
-    width: 100%;
-    height: 60px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 0 40px;
-
-    background-color: var(--card-background);
-    border-bottom: 1px solid var(--border);
-  }
-
-
-  /* =====================================================
-    LOGO
-  ===================================================== */
-
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-  }
-
-  .nav-logo img {
-    width: 40px;
-    height: auto;
-    object-fit: contain;
-  }
-
-
-  /* =====================================================
-    NAVIGATION LINKS
-  ===================================================== */
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-  }
-
-  .nav-links a {
-    position: relative;
-
-    color: var(--foreground);
-    text-decoration: none;
-
-    font-family: var(--font-body);
-    font-size: 15px;
-    font-weight: 500;
-
-    padding: 10px 0;
-
-    transition: color 0.2s ease;
-  }
-
-  .nav-links a:hover {
-    color: var(--primary);
-  }
-
-
-  /* Underline */
-
-  .nav-links a::after {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    bottom: 2px;
-
-    width: 0;
-    height: 2px;
-
-    background-color: var(--primary);
-
-    transition: width 0.2s ease;
-  }
-
-  .nav-links a:hover::after {
-    width: 100%;
-  }
-
-  #select {
-    color: var(--primary);
-    border-bottom:2px solid var(--primary);
-  }
-
-  /* Don't show the hover underline on the active link */
-  .nav-links a#select:hover::after {
-    width: 0;
-  }
-
-
-
-  /* =====================================================
-    SEARCH
-  ===================================================== */
-
-  .nav-search {
-    width: 220px;
-    height: 35px;
-
-    display: flex;
-    align-items: center;
-
-    border: 1px solid var(--border);
-    border-radius: 20px;
-
-    background-color: var(--input-background);
-
-    overflow: hidden;
-
-    transition:
-      border-color 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-
-  .nav-search input {
-    flex: 1;
-
-    width: 100%;
-    height: 100%;
-
-    padding: 0 15px;
-
-    border: none;
-    outline: none;
-
-    background: transparent;
-
-    font-family: var(--font-body);
-    font-size: 14px;
-
-    color: var(--foreground);
-  }
-
-  .nav-search input::placeholder {
-    color: var(--muted-foreground);
-  }
-
-
-  /* =====================================================
-    SEARCH BUTTON
-  ===================================================== */
-
-  .nav-search button {
-    width: 42px;
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: none;
-    outline: none;
-
-    background: transparent;
-
-    cursor: pointer;
-  }
-
-  .nav-search button img {
-    width: 18px;
-    height: 18px;
-  }
-
-
-  /* =====================================================
-    SEARCH FOCUS
-  ===================================================== */
-
-  .nav-search:focus-within {
-    border-color: var(--ring);
-
-    box-shadow:
-      0 0 0 3px var(--focus-ring);
-  }
-
-
-  /* =====================================================
-    USER DROPDOWN – FULLY INTEGRATED
-  ===================================================== */
-
-  /* Container – must be positioned relative for the absolute menu */
-  .nav-user-dropdown {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-  }
-
-  .nav-user {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 12px;               /* makes it feel clickable */
-    border-radius: 30px;
-    transition: background 0.2s;
-    user-select: none;
-    color: var(--foreground);
-    font-family: var(--font-body);
-    font-size: 14px;
-    white-space: nowrap;
-    cursor: pointer;
-  }
-
-  .nav-user:hover {
-    background: rgba(0, 0, 0, 0.05);
-  }
-
-  .user-icon {
-    width: 25px;
-    height: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: transparent;
-    font-size: 20px;
-  }
-
-  .dropdown-arrow {
-    font-size: 0.6rem;
-    color: var(--muted-foreground);
-    margin-left: 2px;
-    transition: transform 0.25s ease;
-  }
-
-  /* ── Hide dropdown by default ── */
-  .dropdown-menu {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    min-width: 160px;
-    background: var(--card-background);
-    border-radius: 12px;
-    padding: 8px 0;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-6px) scale(0.97);
-    transition: opacity 0.2s ease, transform 0.25s ease, visibility 0.2s;
-    z-index: 1000;
-    pointer-events: none;
-  }
-
-  /* ── Show on hover / focus / active (mobile support) ── */
-  .nav-user-dropdown:hover .dropdown-menu,
-  .nav-user-dropdown:focus-within .dropdown-menu,
-  .nav-user-dropdown:active .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0) scale(1);
-    pointer-events: auto;
-  }
-
-  /* ── Rotate arrow on open ── */
-  .nav-user-dropdown:hover .dropdown-arrow,
-  .nav-user-dropdown:focus-within .dropdown-arrow,
-  .nav-user-dropdown:active .dropdown-arrow {
-    transform: rotate(180deg);
-  }
-
-  /* ── Remove underline effect from dropdown links ── */
-  .nav-links .dropdown-menu a::after {
-    display: none;
-  }
-  .nav-links .dropdown-menu a:hover::after {
-    width: 0;
-  }
-
-  .dropdown-menu a {
-    display: flex;
-    align-items: center;
-    padding: 10px 18px;
-    color: var(--foreground);
-    font-size: 0.9rem;
-    text-decoration: none;
-    transition: background 0.15s;
-    border-left: 3px solid transparent;
-  }
-
-  .dropdown-menu a:hover {
-    background: var(--muted);
-  }
-
-  .dropdown-divider {
-    height: 1px;
-    background: var(--border);
-    margin: 6px 12px;
-  }
-
-  .dropdown-menu .logout-item {
-    color: var(--destructive);
-  }
-
-  /* ── Keep dropdown open when interacting with menu items ── */
-  .dropdown-menu a:focus-within {
-    background: var(--muted);
-  }
-
-
-  /* =====================================================
-    NO-BOOK
-  ===================================================== */
-
-  .no-book {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    min-height: 300px;
-  }
-
-  .no-book h4{
-    margin: 0;
-    color: var(--muted-foreground);
-
-  }
-
-  .no-book a{
-    text-decoration: none;
-  }
-
-  /* =====================================================
-    WITH-BOOK
-  ===================================================== */
+/* =====================================================
+   BASE
+===================================================== */
+html {
+  overflow-y: scroll;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =====================================================
+   ROOT VARIABLES
+===================================================== */
+:root {
+  /* Main */
+  --background: #f8f6f1;
+  --foreground: #1a1826;
+
+  /* Cards */
+  --card-background: #ffffff;
+  --card-foreground: #1a1826;
+
+  /* Primary */
+  --primary: #b8721f;
+  --primary-foreground: #ffffff;
+
+  /* Secondary */
+  --secondary: #ede9e1;
+  --secondary-foreground: #1a1826;
+
+  /* Muted */
+  --muted: #ede9e1;
+  --muted-foreground: #6b6680;
+
+  /* Accent */
+  --accent: #6d28d9;
+  --accent-foreground: #ffffff;
+
+  /* Border */
+  --border: rgba(26, 24, 38, 0.1);
+
+  /* Input */
+  --input-background: #ede9e1;
+
+  /* Focus */
+  --ring: #b8721f;
+  --focus-ring: rgba(184, 114, 31, 0.18);
+
+  /* Destructive */
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+
+  /* Links */
+  --link: #3b6f91;
+  --link-hover: #2c536d;
+
+  /* Shadows */
+  --boxshadow:
+    0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
+  --text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+
+  /* Footer */
+  --footer-background: #1a1826;
+  --footer-foreground: #ffffff;
+  --footer-muted: #d8d0c8;
+
+  /* Fonts */
+  --font-body: "Plus_Jakarta_Sans", sans-serif;
+  --font-heading: "Fraunces", serif;
+}
+
+/* =====================================================
+   FONTS
+===================================================== */
+@font-face {
+  font-family: "Plus_Jakarta_Sans";
+  src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("../font/Fraunces/static/Fraunces_72pt-Regular.ttf")
+    format("truetype");
+}
+
+/* =====================================================
+   BODY
+===================================================== */
+body {
+  font-family: var(--font-body);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+.navbar {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  background-color: var(--card-background);
+  border-bottom: 1px solid var(--border);
+}
+
+/* =====================================================
+   LOGO
+===================================================== */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.nav-logo img {
+  width: 40px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* =====================================================
+   NAVIGATION LINKS
+===================================================== */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links a {
+  position: relative;
+  color: var(--foreground);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px 0;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+/* Underline */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary);
+  transition: width 0.2s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+#select {
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary);
+}
+
+/* Don't show the hover underline on the active link */
+.nav-links a#select:hover::after {
+  width: 0;
+}
+
+/* =====================================================
+   SEARCH
+===================================================== */
+.nav-search {
+  width: 220px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background-color: var(--input-background);
+  overflow: hidden;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.nav-search input {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  padding: 0 15px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--foreground);
+}
+
+.nav-search input::placeholder {
+  color: var(--muted-foreground);
+}
+
+/* =====================================================
+   SEARCH BUTTON
+===================================================== */
+.nav-search button {
+  width: 42px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.nav-search button img {
+  width: 18px;
+  height: 18px;
+}
+
+/* =====================================================
+   SEARCH FOCUS
+===================================================== */
+.nav-search:focus-within {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+/* =====================================================
+   USER DROPDOWN – FULLY INTEGRATED
+===================================================== */
+/* Container – must be positioned relative for the absolute menu */
+.nav-user-dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.nav-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px; /* makes it feel clickable */
+  border-radius: 30px;
+  transition: background 0.2s;
+  user-select: none;
+  color: var(--foreground);
+  font-family: var(--font-body);
+  font-size: 14px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.nav-user:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.user-icon {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  font-size: 20px;
+}
+
+.dropdown-arrow {
+  font-size: 0.6rem;
+  color: var(--muted-foreground);
+  margin-left: 2px;
+  transition: transform 0.25s ease;
+}
+
+/* ── Hide dropdown by default ── */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 160px;
+  background: var(--card-background);
+  border-radius: 12px;
+  padding: 8px 0;
+  box-shadow: var(--boxshadow); /* UPDATED: uses --boxshadow */
+  border: 1px solid var(--border);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px) scale(0.97);
+  transition:
+    opacity 0.2s ease,
+    transform 0.25s ease,
+    visibility 0.2s;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* ── Show on hover / focus / active (mobile support) ── */
+.nav-user-dropdown:hover .dropdown-menu,
+.nav-user-dropdown:focus-within .dropdown-menu,
+.nav-user-dropdown:active .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* ── Rotate arrow on open ── */
+.nav-user-dropdown:hover .dropdown-arrow,
+.nav-user-dropdown:focus-within .dropdown-arrow,
+.nav-user-dropdown:active .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+/* ── Remove underline effect from dropdown links ── */
+.nav-links .dropdown-menu a::after {
+  display: none;
+}
+
+.nav-links .dropdown-menu a:hover::after {
+  width: 0;
+}
+
+.dropdown-menu a {
+  display: flex;
+  align-items: center;
+  padding: 10px 18px;
+  color: var(--foreground);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: background 0.15s;
+  border-left: 3px solid transparent;
+}
+
+.dropdown-menu a:hover {
+  background: var(--muted);
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 6px 12px;
+}
+
+.dropdown-menu .logout-item {
+  color: var(--destructive);
+}
+
+/* ── Keep dropdown open when interacting with menu items ── */
+.dropdown-menu a:focus-within {
+  background: var(--muted);
+}
+
+/* =====================================================
+   NO-BOOK
+===================================================== */
+.no-book {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 300px;
+}
+
+.no-book h4 {
+  margin: 0;
+  color: var(--muted-foreground);
+}
+
+.no-book a {
+  text-decoration: none;
+}
+
+/* =====================================================
+   WITH-BOOK
+===================================================== */
 .library-header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 24px;
-    background-color: var(--primary);
-    width: 100%;
-    margin: 0 auto 32px auto;
-    padding: 40px 30px 50px 30px; 
-    border-bottom: 1px solid var(--border); 
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  background-color: var(--primary);
+  width: 100%;
+  margin: 0 auto 32px auto;
+  padding: 40px 30px 50px 30px;
+  border-bottom: 1px solid var(--border);
 }
 
 /* ─── title ─── */
 .library-title h2 {
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--accent-foreground);
-    margin: 0 0 4px 0;
-    letter-spacing: -0.5px;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent-foreground);
+  margin: 0 0 4px 0;
+  letter-spacing: -0.5px;
+  text-shadow: var(--text-shadow); /* ADDED: Applies text shadow to title */
 }
 
 .library-title p {
-    font-size: 15px;
-    color: var(--accent-foreground);
-    margin: 0;
+  font-size: 15px;
+  color: var(--accent-foreground);
+  margin: 0;
+  text-shadow: var(--text-shadow); /* ADDED: Applies text shadow to subtitle */
 }
 
 /* ─── stats ─── */
 .library-stats {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
 }
 
 .stat-card {
-    background: var(--card-background);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 10px 28px;
-    text-align: center;
-    min-width: 90px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  background: var(--card-background);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 28px;
+  text-align: center;
+  min-width: 90px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
-
 .stat-number {
-    display: block;
-    font-size: 30px;
-    font-weight: 700;
-    color: var(--primary);
-    line-height: 1.2;
+  display: block;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.2;
 }
 
 .stat-label {
-    display: block;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--muted-foreground);
-    margin-top: 2px;
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  margin-top: 2px;
 }
+
 /* =====================================================
    BOOK GRID – 4 columns
 ===================================================== */
 .book-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    max-width: 1200px;
-    margin: 0 auto 40px auto;
-    padding: 0 30px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto 40px auto;
+  padding: 0 30px;
 }
 
-.book-grid a{
+.book-grid a {
   text-decoration: none;
 }
 
 /* ─── Book Card ─── */
 .book-card {
-    background: var(--card-background);
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  background: var(--card-background);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .book-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow);
+  transform: translateY(-4px);
+  box-shadow: var(--boxshadow); /* UPDATED: uses --boxshadow */
 }
 
 /* ─── Cover ─── */
 .book-cover {
-    position: relative;
-    aspect-ratio: 2 / 3;
-    overflow: hidden;
-    background: var(--muted);
+  position: relative;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background: var(--muted);
 }
 
 .book-cover img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
 }
-
 
 /* ─── Status Badge ─── */
 .book-status-reading,
 .book-status-completed {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    padding: 4px 14px;
-    border-radius: 30px;
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: #ffffff;
-    pointer-events: none;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 14px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  pointer-events: none;
 }
 
 .book-status-reading {
-    background: var(--link);
+  background: var(--link);
 }
 
 .book-status-completed {
-    background: var(--ring);
+  background: var(--ring);
 }
-
-
 
 /* ─── Info ─── */
 .book-info {
-    padding: 16px 16px 18px;
-    display: flex;
-    flex-direction: column;
+  padding: 16px 16px 18px;
+  display: flex;
+  flex-direction: column;
 }
 
 .book-title {
-    font-family: var(--font-heading);
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--foreground);
-    margin: 0 0 2px;
-    line-height: 1.3;
-    overflow: hidden;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--foreground);
+  margin: 0 0 2px;
+  line-height: 1.3;
+  overflow: hidden;
 }
 
 .book-author {
-    font-size: 13px;
-    color: var(--muted-foreground);
-    margin: 0 0 10px;
+  font-size: 13px;
+  color: var(--muted-foreground);
+  margin: 0 0 10px;
 }
 
 .book-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 13px;
-    color: var(--muted-foreground);
-    margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--muted-foreground);
+  margin-bottom: 6px;
 }
 
 .book-rating {
-    font-weight: 500;
+  font-weight: 500;
 }
 
-.book-rating img{
-    margin-right: 6px;
-    filter: brightness(0) saturate(100%) invert(74%) sepia(65%) saturate(6907%) hue-rotate(12deg) brightness(90%) contrast(76%);
+.book-rating img {
+  margin-right: 6px;
+  filter: brightness(0) saturate(100%) invert(74%) sepia(65%) saturate(6907%)
+    hue-rotate(12deg) brightness(90%) contrast(76%);
 }
 
 .book-progress {
-    font-weight: 500;
+  font-weight: 500;
 }
 
 /* ─── Progress Bar ─── */
 .progress-bar {
-    width: 100%;
-    height: 6px;
-    border-radius: 4px;
-    background: var(--muted);
-    overflow: hidden;
+  width: 100%;
+  height: 6px;
+  border-radius: 4px;
+  background: var(--muted);
+  overflow: hidden;
 }
 
 .progress-fill {
-    height: 100%;
-    border-radius: 4px;
-    background: var(--primary);
-    transition: width 0.6s ease;
+  height: 100%;
+  border-radius: 4px;
+  background: var(--primary);
+  transition: width 0.6s ease;
 }
+
 /* =====================================================
    LIBRARY TOOLBAR
 ===================================================== */
 .library-toolbar {
-    display: flex;
-    flex-wrap: wrap;
-    
-    justify-content: center;
-    gap: 16px;
-    max-width: 1200px;
-    margin: 0 auto 32px auto;
-    padding: 16px 30px 8px 30px;
-    border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto 32px auto;
+  padding: 16px 30px 8px 30px;
+  border-bottom: 1px solid var(--border);
 }
 
 .filter-group {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 8px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .filter-btn {
-    padding: 8px 24px;
-    border: 1px solid var(--border);
-    border-radius: 30px;
-    background: transparent;
-    color: var(--muted-foreground);
-    font-family: var(--font-body);
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
+  padding: 8px 24px;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  background: transparent;
+  color: var(--muted-foreground);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .filter-btn:hover {
-    border-color: var(--primary);
-    color: var(--foreground);
+  border-color: var(--primary);
+  color: var(--foreground);
 }
 
 .filter-btn.active {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: var(--primary-foreground);
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-foreground);
 }
 
-  /* =====================================================
-    FOOTER
-  ===================================================== */
+/* =====================================================
+   FOOTER
+===================================================== */
+.footer {
+  margin-top: 60px;
+  background-color: var(--footer-background);
+  color: var(--footer-foreground);
+}
 
-  .footer {
-    margin-top: 60px;
+/* Footer Content */
+.footer-content {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+  gap: 50px;
+  padding: 45px 60px;
+}
 
-    background-color: var(--footer-background);
+/* Footer Section */
+.footer-section {
+  display: flex;
+  flex-direction: column;
+}
 
-    color: var(--footer-foreground);
-  }
+/* Footer Heading */
+.footer-section h3 {
+  margin-bottom: 15px;
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--footer-foreground);
+}
 
+/* Footer Logo */
+.footer-logo {
+  width: 45px;
+  height: auto;
+  margin-bottom: 12px;
+}
 
-  /* Footer Content */
+/* Footer Description */
+.footer-section p {
+  max-width: 280px;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--footer-muted);
+}
 
-  .footer-content {
-    display: grid;
+/* Footer Links */
+.footer-section a {
+  width: fit-content;
+  margin-bottom: 9px;
+  color: var(--footer-muted);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  transition: color 0.2s ease;
+}
 
-    grid-template-columns:
-      3fr 1fr 1fr;
+.footer-section a:hover {
+  color: var(--primary);
+}
 
-    gap: 50px;
+/* Footer Bottom */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 18px 60px;
+  text-align: center;
+}
 
-    padding: 45px 60px;
-  }
-
-
-  /* Footer Section */
-
-  .footer-section {
-    display: flex;
-    flex-direction: column;
-  }
-
-
-  /* Footer Heading */
-
-  .footer-section h3 {
-    margin-bottom: 15px;
-
-    font-family: var(--font-heading);
-
-    font-size: 18px;
-    font-weight: 700;
-
-    color: var(--footer-foreground);
-  }
-
-
-  /* Footer Logo */
-
-  .footer-logo {
-    width: 45px;
-    height: auto;
-
-    margin-bottom: 12px;
-  }
-
-
-  /* Footer Description */
-
-  .footer-section p {
-    max-width: 280px;
-
-    margin: 0;
-
-    font-family: var(--font-body);
-
-    font-size: 13px;
-    line-height: 1.6;
-
-    color: var(--footer-muted);
-  }
-
-
-  /* Footer Links */
-
-  .footer-section a {
-    width: fit-content;
-
-    margin-bottom: 9px;
-
-    color: var(--footer-muted);
-
-    text-decoration: none;
-
-    font-family: var(--font-body);
-
-    font-size: 13px;
-
-    transition: color 0.2s ease;
-  }
-
-  .footer-section a:hover {
-    color: var(--primary);
-  }
-
-
-  /* Footer Bottom */
-
-  .footer-bottom {
-    border-top:
-      1px solid rgba(255, 255, 255, 0.10);
-
-    padding: 18px 60px;
-
-    text-align: center;
-  }
-
-  .footer-bottom p {
-    margin: 0;
-
-    font-family: var(--font-body);
-
-    font-size: 12px;
-
-    color: var(--footer-muted);
-  }
+.footer-bottom p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--footer-muted);
+}

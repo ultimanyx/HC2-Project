@@ -11,7 +11,6 @@ html {
 /* =====================================================
    ROOT VARIABLES
 ===================================================== */
-
 :root {
   /* Main */
   --background: #f8f6f1;
@@ -57,8 +56,9 @@ html {
   --link-hover: #2c536d;
 
   /* Shadows */
-  --shadow:
+  --boxshadow:
     0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
+  --text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 
   /* Footer */
   --footer-background: #1a1826;
@@ -76,7 +76,6 @@ html {
 /* =====================================================
    FONTS
 ===================================================== */
-
 @font-face {
   font-family: "Plus_Jakarta_Sans";
   src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
@@ -92,7 +91,6 @@ html {
 /* =====================================================
    BODY
 ===================================================== */
-
 body {
   font-family: var(--font-heading);
   background-color: var(--background);
@@ -106,17 +104,13 @@ a {
 /* =====================================================
    NAVBAR
 ===================================================== */
-
 .navbar {
   width: 100%;
   height: 60px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   padding: 0 40px;
-
   background-color: var(--card-background);
   border-bottom: 1px solid var(--border);
 }
@@ -124,7 +118,6 @@ a {
 /* =====================================================
    LOGO
 ===================================================== */
-
 .nav-logo {
   display: flex;
   align-items: center;
@@ -140,7 +133,6 @@ a {
 /* =====================================================
    NAVIGATION LINKS
 ===================================================== */
-
 .nav-links {
   display: flex;
   align-items: center;
@@ -149,16 +141,12 @@ a {
 
 .nav-links a {
   position: relative;
-
   color: var(--foreground);
   text-decoration: none;
-
   font-family: var(--font-body);
   font-size: 15px;
   font-weight: 500;
-
   padding: 10px 0;
-
   transition: color 0.2s ease;
 }
 
@@ -167,20 +155,14 @@ a {
 }
 
 /* Underline */
-
 .nav-links a::after {
   content: "";
-
   position: absolute;
-
   left: 0;
   bottom: 2px;
-
   width: 0;
   height: 2px;
-
   background-color: var(--primary);
-
   transition: width 0.2s ease;
 }
 
@@ -201,21 +183,15 @@ a {
 /* =====================================================
    SEARCH
 ===================================================== */
-
 .nav-search {
   width: 220px;
   height: 35px;
-
   display: flex;
   align-items: center;
-
   border: 1px solid var(--border);
   border-radius: 20px;
-
   background-color: var(--input-background);
-
   overflow: hidden;
-
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease;
@@ -223,20 +199,14 @@ a {
 
 .nav-search input {
   flex: 1;
-
   width: 100%;
   height: 100%;
-
   padding: 0 15px;
-
   border: none;
   outline: none;
-
   background: transparent;
-
   font-family: var(--font-body);
   font-size: 14px;
-
   color: var(--foreground);
 }
 
@@ -247,20 +217,15 @@ a {
 /* =====================================================
    SEARCH BUTTON
 ===================================================== */
-
 .nav-search button {
   width: 42px;
   height: 100%;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   border: none;
   outline: none;
-
   background: transparent;
-
   cursor: pointer;
 }
 
@@ -272,17 +237,14 @@ a {
 /* =====================================================
    SEARCH FOCUS
 ===================================================== */
-
 .nav-search:focus-within {
   border-color: var(--ring);
-
   box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
 /* =====================================================
    USER & DROPDOWN
 ===================================================== */
-
 .nav-user-dropdown {
   position: relative;
   display: inline-block;
@@ -334,7 +296,7 @@ a {
   background: var(--card-background);
   border-radius: 12px;
   padding: 8px 0;
-  box-shadow: var(--shadow);
+  box-shadow: var(--boxshadow); /* UPDATED: uses --boxshadow */
   border: 1px solid var(--border);
   opacity: 0;
   visibility: hidden;
@@ -366,6 +328,7 @@ a {
 .nav-links .dropdown-menu a::after {
   display: none;
 }
+
 .nav-links .dropdown-menu a:hover::after {
   width: 0;
 }
@@ -396,7 +359,9 @@ a {
   background: var(--muted);
 }
 
-/* ============ Header Top ===============*/
+/* =====================================================
+   HEADER TOP
+===================================================== */
 .header-container {
   display: flex;
   align-items: flex-start;
@@ -428,7 +393,6 @@ a {
 .header span {
   display: inline-flex;
   align-items: center;
-
   gap: 5px;
   margin-right: 20px;
 }
@@ -460,12 +424,15 @@ a {
   font-size: 1.1rem;
   line-height: 1.5;
 }
-/*============== Star =============*/
+
+/* =====================================================
+   STAR RATING
+===================================================== */
 .star {
   margin-top: 8px;
   width: 200px;
   padding: 15px;
-  border: var(--border) solid 2px;
+  border: 2px solid var(--border); /* FIXED: Correct CSS border syntax */
   border-radius: 8px;
 }
 
@@ -512,8 +479,9 @@ a {
   print-color-adjust: exact;
 }
 
-/* ============= STAR-RATING =============*/
-
+/* =====================================================
+   BUTTONS
+===================================================== */
 .button-container {
   margin-top: 10px;
   display: flex;
@@ -556,7 +524,6 @@ a {
 /* =====================================================
    CHAPTER TABLE HEADER
 ===================================================== */
-
 .chapter-container {
   display: flex;
   flex-direction: column;
@@ -572,7 +539,7 @@ a {
   background-color: var(--primary-muted);
   color: var(--accent-foreground);
   border-radius: 12px 12px 0 0;
-  border-bottom: #ffffff solid 1px;
+  border-bottom: 1px solid #ffffff; /* FIXED: Correct CSS border syntax */
   display: flex;
   flex-direction: row;
   gap: 30px;
@@ -593,7 +560,6 @@ a {
 /* =====================================================
    CHAPTER TABLE
 ===================================================== */
-
 .chapter-table {
   width: 100%;
   border-collapse: collapse;
@@ -603,7 +569,7 @@ a {
   border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: var(--shadow);
+  box-shadow: var(--boxshadow); /* UPDATED: uses --boxshadow */
 }
 
 .chapter-table tbody tr {
@@ -642,14 +608,12 @@ a {
   gap: 16px;
   padding: 25px 30px;
   margin-top: 2px;
-
   border-top: 1px solid var(--border);
   background-color: var(--foreground);
-  border-radius: 0px 0px 12px 12px;
+  border-radius: 0 0 12px 12px;
 }
 
 /* --- Buttons (Previous / Next) --- */
-
 .container-footer button {
   background-color: var(--primary);
   color: var(--primary-foreground);
@@ -687,86 +651,60 @@ a {
 /* =====================================================
    FOOTER
 ===================================================== */
-
 .footer {
   margin-top: 60px;
-
   background-color: var(--footer-background);
-
   color: var(--footer-foreground);
 }
 
 /* Footer Content */
-
 .footer-content {
   display: grid;
-
   grid-template-columns: 3fr 1fr 1fr;
-
   gap: 50px;
-
   padding: 45px 60px;
 }
 
 /* Footer Section */
-
 .footer-section {
   display: flex;
   flex-direction: column;
 }
 
 /* Footer Heading */
-
 .footer-section h3 {
   margin-bottom: 15px;
-
   font-family: var(--font-heading);
-
   font-size: 18px;
   font-weight: 700;
-
   color: var(--footer-foreground);
 }
 
 /* Footer Logo */
-
 .footer-logo {
   width: 45px;
   height: auto;
-
   margin-bottom: 12px;
 }
 
 /* Footer Description */
-
 .footer-section p {
   max-width: 280px;
-
   margin: 0;
-
   font-family: var(--font-body);
-
   font-size: 13px;
   line-height: 1.6;
-
   color: var(--footer-muted);
 }
 
 /* Footer Links */
-
 .footer-section a {
   width: fit-content;
-
   margin-bottom: 9px;
-
   color: var(--footer-muted);
-
   text-decoration: none;
-
   font-family: var(--font-body);
-
   font-size: 13px;
-
   transition: color 0.2s ease;
 }
 
@@ -775,21 +713,15 @@ a {
 }
 
 /* Footer Bottom */
-
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-
   padding: 18px 60px;
-
   text-align: center;
 }
 
 .footer-bottom p {
   margin: 0;
-
   font-family: var(--font-body);
-
   font-size: 12px;
-
   color: var(--footer-muted);
 }

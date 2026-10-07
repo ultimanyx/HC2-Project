@@ -69,11 +69,13 @@
   font-family: "Poppins";
   src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype");
 }
+
 @font-face {
   font-family: "Plus_Jakarta_Sans";
   src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
     format("truetype");
 }
+
 @font-face {
   font-family: "Fraunces";
   src: url("../font/Fraunces/static/Fraunces_72pt-Regular.ttf")
@@ -321,6 +323,7 @@ a {
   background: var(--primary);
   color: #ffffff;
 }
+
 .btn-primary:hover {
   background: #9a5f16;
 }
@@ -416,14 +419,17 @@ tbody tr:last-child td {
   padding: 3px 12px;
   border-radius: 20px;
 }
+
 .badge.active {
   background-color: rgba(63, 125, 79, 0.15);
   color: #2f5d3a;
 }
+
 .badge.paused {
   background-color: rgba(184, 114, 31, 0.15);
   color: #8a5410;
 }
+
 .badge.completed {
   background-color: #ede9e1;
   color: #6b6680;
@@ -524,6 +530,7 @@ tbody tr:last-child td {
   font-weight: 600;
   text-decoration: none;
 }
+
 .link-primary:hover {
   text-decoration: underline;
 }
