@@ -442,10 +442,16 @@ a {
 
 /* ICONS */
 .header .book-icon,
-.header .chapter-icon {
-  width: 18px;
-  height: 18px;
+.header .chapter-icon,
+.header .author-icon {
+  width: 22px;
+  height: 22px;
   margin: 0;
+}
+
+.header .author {
+  font-style: italic;
+  color: var(--muted-foreground);
 }
 
 /* Synopsis */

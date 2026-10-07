@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Charles Dickens · Author</title>
+
+    <link rel="stylesheet" href="../css/author_profile.css" />
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="../image/logo-nobackground-circle.png"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="#" class="nav-logo">
+        <img src="../image/logo.png" alt="Logo" />
+      </a>
+      <div class="nav-links">
+        <a href="home.html" id="select">Home</a>
+        <a href="browse.html">Browse</a>
+        <a href="library.html">My Library</a>
+        <a href="ranking.html">Ranking</a>
+
+        <div class="nav-search">
+          <input type="text" placeholder="Search..." />
+          <button type="button" aria-label="Search">
+            <img src="../icons/search.svg" alt="search-btn" />
+          </button>
+        </div>
+
+        <div class="nav-user-dropdown">
+          <div class="nav-user" tabindex="0" role="button" aria-haspopup="true">
+            <img
+              src="../icons/person-circle.svg"
+              class="user-icon"
+              alt="User-Icon"
+            />
+            <span>Welcome User</span>
+            <span class="dropdown-arrow"
+              ><img src="../icons/caret-down-fill.svg" alt="triangle-down"
+            /></span>
+          </div>
+
+          <div class="dropdown-menu" role="menu">
+            <div class="dropdown-divider"></div>
+            <a
+              href="#"
+              role="menuitem"
+              class="logout-item"
+              id="logout"
+              data-role="reader"
+              >Logout</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ============= AUTHOR HERO ============= -->
+    <section class="author-hero">
+      <div class="author-hero-inner">
+        <div class="author-info">
+          <h1 class="author-name">Charles Dickens</h1>
+          <div class="author-stats">
+            <div class="stat">
+              <span class="stat-value">20+</span>
+              <span class="stat-label">Books</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value">1.2M</span>
+              <span class="stat-label">Readers</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value">4.8</span>
+              <span class="stat-label">Avg. Rating</span>
+            </div>
+          </div>
+
+          <!-- Social links -->
+          <div class="author-socials">
+            <a
+              href="https://twitter.com/"
+              target="_blank"
+              rel="noopener"
+              class="social-btn"
+              aria-label="Twitter"
+            >
+              <img src="../icons/twitter.svg" alt="Twitter" />
+            </a>
+            <a
+              href="https://facebook.com/"
+              target="_blank"
+              rel="noopener"
+              class="social-btn"
+              aria-label="Facebook"
+            >
+              <img src="../icons/facebook.svg" alt="Facebook" />
+            </a>
+            <a
+              href="https://instagram.com/"
+              target="_blank"
+              rel="noopener"
+              class="social-btn"
+              aria-label="Instagram"
+            >
+              <img src="../icons/instagram.svg" alt="Instagram" />
+            </a>
+            <a
+              href="mailto:contact@example.com"
+              class="social-btn"
+              aria-label="Email"
+            >
+              <img src="../icons/gmail.svg" alt="Email" />
+            </a>
+            <a
+              href="https://charlesdickens.com"
+              target="_blank"
+              rel="noopener"
+              class="social-btn"
+              aria-label="Website"
+            >
+              <img src="../icons/patreon.svg" alt="Website" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= BIOGRAPHY ============= -->
+    <section class="author-section">
+      <div class="section-header">
+        <img src="../icons/author.svg" alt="" class="section-icon" />
+        <h2>Biography</h2>
+      </div>
+      <p class="author-bio">
+        Wordsmith, social observer, and chronicler of modern life. After getting
+        a harsh taste of the real world at age 12—working grueling shifts at a
+        local packaging warehouse while my dad was locked up over mounting
+        credit debt—I quickly learned that the best stories come from the rawest
+        experiences. That trial by fire sparked my passion for giving a voice to
+        the overlooked, the underdogs, and the dreamers.
+      </p>
+      <p class="author-bio">
+        Now, after going back to finish my education and cutting my teeth with
+        freelance content writing and journalism, I’m fully focused on writing
+        long-form fiction. My mission is simple: craft unforgettable characters
+        and hold up a mirror to today's society through gripping, deeply human
+        narrative.
+      </p>
+    </section>
+
+    <!-- ============= BOOKS BY AUTHOR ============= -->
+    <section class="author-section">
+      <div class="section-header">
+        <img src="../icons/book-half.svg" alt="" class="section-icon" />
+        <h2>Books by Charles Dickens</h2>
+      </div>
+
+      <div class="books-grid">
+        <a href="novel-page.html" class="book-card">
+          <img
+            src="../books/Historical/A Tale of Two Cities by Charles Dickens/a-tale-of-two-cities-9781416503064_lg.jpg"
+            alt="A Tale of Two Cities"
+            class="book-cover"
+          />
+          <div class="book-meta">
+            <h3 class="book-title">A Tale of Two Cities</h3>
+            <span class="book-rating">★ 4.8</span>
+          </div>
+        </a>
+
+        <a href="#" class="book-card">
+          <img
+            src="../books/Classic/Great Expectations/cover.jpg"
+            alt="Great Expectations"
+            class="book-cover"
+          />
+          <div class="book-meta">
+            <h3 class="book-title">Great Expectations</h3>
+            <span class="book-rating">★ 4.6</span>
+          </div>
+        </a>
+
+        <a href="#" class="book-card">
+          <img
+            src="../books/Classic/Oliver Twist/cover.jpg"
+            alt="Oliver Twist"
+            class="book-cover"
+          />
+          <div class="book-meta">
+            <h3 class="book-title">Oliver Twist</h3>
+            <span class="book-rating">★ 4.5</span>
+          </div>
+        </a>
+
+        <a href="#" class="book-card">
+          <img
+            src="../books/Classic/A Christmas Carol/cover.jpg"
+            alt="A Christmas Carol"
+            class="book-cover"
+          />
+          <div class="book-meta">
+            <h3 class="book-title">A Christmas Carol</h3>
+            <span class="book-rating">★ 4.7</span>
+          </div>
+        </a>
+
+        <a href="#" class="book-card">
+          <img
+            src="../books/Classic/David Copperfield/cover.jpg"
+            alt="David Copperfield"
+            class="book-cover"
+          />
+          <div class="book-meta">
+            <h3 class="book-title">David Copperfield</h3>
+            <span class="book-rating">★ 4.6</span>
+          </div>
+        </a>
+
+        <a href="#" class="book-card">
+          <img
+            src="../books/Classic/Bleak House/cover.jpg"
+            alt="Bleak House"
+            class="book-cover"
+          />
+          <div class="book-meta">
+            <h3 class="book-title">Bleak House</h3>
+            <span class="book-rating">★ 4.4</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============= CONTACT ============= -->
+    <section class="author-section">
+      <div class="section-header">
+        <img src="../icons/gmail.svg" alt="" class="section-icon" />
+        <h2>Contact &amp; Social</h2>
+      </div>
+
+      <div class="contact-grid">
+        <a href="mailto:contact@example.com" class="contact-card">
+          <img src="../icons/gmail.svg" alt="" />
+          <div>
+            <span class="contact-label">Email</span>
+            <span class="contact-value">contact@example.com</span>
+          </div>
+        </a>
+
+        <a
+          href="https://twitter.com/"
+          target="_blank"
+          rel="noopener"
+          class="contact-card"
+        >
+          <img src="../icons/twitter.svg" alt="" />
+          <div>
+            <span class="contact-label">Twitter</span>
+            <span class="contact-value">@charlesdickens</span>
+          </div>
+        </a>
+
+        <a
+          href="https://facebook.com/"
+          target="_blank"
+          rel="noopener"
+          class="contact-card"
+        >
+          <img src="../icons/facebook.svg" alt="" />
+          <div>
+            <span class="contact-label">Facebook</span>
+            <span class="contact-value">/charlesdickens</span>
+          </div>
+        </a>
+
+        <a
+          href="https://instagram.com/"
+          target="_blank"
+          rel="noopener"
+          class="contact-card"
+        >
+          <img src="../icons/instagram.svg" alt="" />
+          <div>
+            <span class="contact-label">Instagram</span>
+            <span class="contact-value">@charlesdickens</span>
+          </div>
+        </a>
+
+        <a
+          href="https://patreon.com"
+          target="_blank"
+          rel="noopener"
+          class="contact-card"
+        >
+          <img src="../icons/patreon.svg" alt="" />
+          <div>
+            <span class="contact-label">Patreon</span>
+            <span class="contact-value">patreon/charlesdickens</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <img src="../image/logo.png" alt="Logo" class="footer-logo" />
+          <p>
+            Discover your next story and explore novels worth getting lost in.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Hot Genres</h3>
+          <a href="#">Action</a>
+          <a href="#">Romance</a>
+          <a href="#">Fantasy</a>
+          <a href="#">Mystery</a>
+        </div>
+
+        <div class="footer-section">
+          <h3>About</h3>
+          <a href="#">About Us</a>
+          <a href="#">Contact</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Novel Library. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/logout.js"></script>
+  </body>
+</html>
