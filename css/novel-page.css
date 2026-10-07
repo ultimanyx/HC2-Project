@@ -296,7 +296,7 @@ a {
   background: var(--card-background);
   border-radius: 12px;
   padding: 8px 0;
-  box-shadow: var(--boxshadow); /* UPDATED: uses --boxshadow */
+  box-shadow: var(--boxshadow);
   border: 1px solid var(--border);
   opacity: 0;
   visibility: hidden;
@@ -360,6 +360,49 @@ a {
 }
 
 /* =====================================================
+   BACK BUTTON
+===================================================== */
+.back-button {
+  align-self: flex-start;
+  margin: 30px 0 0 20px;
+  flex-shrink: 0;
+
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--primary);
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 6px 16px -4px rgba(184, 114, 31, 0.5);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.back-button img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  /* Force icon to white */
+  filter: brightness(0) invert(1);
+}
+
+.back-button:hover {
+  background-color: var(--primary-muted);
+  transform: translateX(-3px);
+  box-shadow: 0 8px 20px -4px rgba(184, 114, 31, 0.6);
+}
+
+.back-button:active {
+  transform: translateX(-1px) scale(0.96);
+}
+/* =====================================================
    HEADER TOP
 ===================================================== */
 .header-container {
@@ -370,8 +413,8 @@ a {
   background-color: var(--primary-foreground);
 }
 
-/* BOOK COVER */
-.header-container img {
+/* BOOK COVER (only direct child — excludes back-button icon) */
+.header-container > img {
   width: 300px;
   height: 400px;
   margin-left: 20px;
@@ -432,7 +475,7 @@ a {
   margin-top: 8px;
   width: 200px;
   padding: 15px;
-  border: 2px solid var(--border); /* FIXED: Correct CSS border syntax */
+  border: 2px solid var(--border);
   border-radius: 8px;
 }
 
@@ -539,7 +582,7 @@ a {
   background-color: var(--primary-muted);
   color: var(--accent-foreground);
   border-radius: 12px 12px 0 0;
-  border-bottom: 1px solid #ffffff; /* FIXED: Correct CSS border syntax */
+  border-bottom: 1px solid #ffffff;
   display: flex;
   flex-direction: row;
   gap: 30px;
@@ -569,7 +612,7 @@ a {
   border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: var(--boxshadow); /* UPDATED: uses --boxshadow */
+  box-shadow: var(--boxshadow);
 }
 
 .chapter-table tbody tr {
