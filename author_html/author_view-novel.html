@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shadows of the Crown · View Novel</title>
+    <link rel="stylesheet" href="../css/author_view-novel.css" />
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="../image/logo-nobackground-circle.png"
+    />
+  </head>
+  <body>
+    <div class="layout">
+      <!-- ============= SIDEBAR ============= -->
+      <aside class="sidebar">
+        <div class="brand">
+          <img src="../image/logocopy.png" alt="brandlogo" />
+          NovelNest
+        </div>
+        <nav class="nav">
+          <a href="author_dashboard.html" class="nav-item sub">
+            <span class="nav-icon"></span>
+            Dashboard
+          </a>
+          <a href="author_all-novel.html" class="nav-item sub active">
+            All Novels
+          </a>
+          <a href="author_create-novel.html" class="nav-item sub">
+            Create Novel
+          </a>
+          <a href="author_draft-novel.html" class="nav-item sub">
+            Draft Novel
+          </a>
+          <a href="author_earnings.html" class="nav-item sub">Earnings</a>
+          <a href="author_archive.html" class="nav-item sub">Archive</a>
+        </nav>
+        <a href="#" class="logout" id="logout" data-role="author">Logout</a>
+      </aside>
+
+      <!-- ============= MAIN ============= -->
+      <main class="main">
+        <!-- Topbar -->
+        <div class="topbar">
+          <div class="topbar-left">
+            <a href="author_all-novel.html" class="back-link">← All Novels</a>
+            <h1>Shadows of the Crown</h1>
+          </div>
+          <div class="user-chip">
+            <span>Sarah J.</span>
+            <span class="avatar">SJ</span>
+          </div>
+        </div>
+
+        <!-- Action bar -->
+        <div class="action-bar">
+          <div class="action-left">
+            <span class="badge active">Ongoing</span>
+            <span class="meta-text">Last updated 2 days ago</span>
+          </div>
+          <div class="action-right">
+            <a href="author_view-chapter.html" class="btn btn-outline"
+              >Preview as Reader</a
+            >
+            <button class="btn btn-primary" id="editToggleBtn">
+              ✎ Edit Novel
+            </button>
+          </div>
+        </div>
+
+        <!-- ============================================
+             NOVEL HEADER
+             ============================================ -->
+        <section class="novel-header">
+          <div class="novel-cover">
+            <img
+              src="../books/Fantasy/Shadows of the Crown/cover.jpg"
+              alt="Cover"
+            />
+          </div>
+
+          <div class="novel-details">
+            <!-- ============ VIEW MODE ============ -->
+            <div id="viewMode">
+              <h2 id="titleView">Shadows of the Crown</h2>
+              <p class="novel-subtitle" id="subtitleView">
+                A Tale of Fire and Blood
+              </p>
+
+              <div class="meta-row">
+                <span class="meta-item">
+                  <img src="../icons/person-fill.svg" alt="" />
+                  <span id="authorView">Sarah J.</span>
+                </span>
+                <span class="meta-item">
+                  <img src="../icons/book-half.svg" alt="" />
+                  <span id="genreView">Fantasy</span>
+                </span>
+                <span class="meta-item">
+                  <img src="../icons/journal-text.svg" alt="" />
+                  <span id="chaptersView">24 Chapters</span>
+                </span>
+                <span class="meta-item">
+                  <img src="../icons/eye-fill.svg" alt="" />
+                  <span id="readsView">12,843 reads</span>
+                </span>
+                <span class="meta-item">
+                  <img
+                    src="../icons/star-fill.svg"
+                    alt=""
+                    class="star-rating"
+                  />
+                  <span id="ratingView">4.8</span>
+                </span>
+              </div>
+
+              <div class="tags-row" id="tagsView">
+                <span class="tag">enemies to lovers</span>
+                <span class="tag">magic</span>
+                <span class="tag">adventure</span>
+              </div>
+
+              <h3 class="section-title">Synopsis</h3>
+              <p class="synopsis" id="synopsisView">
+                In a kingdom where magic is forbidden and crowns are won by
+                blood, a young outcast discovers she is the last heir to a
+                forgotten throne. Hunted by the very people who murdered her
+                family, she must decide whether to flee or fight — and in doing
+                so, awaken a power that could burn the world to ash.
+              </p>
+            </div>
+
+            <!-- ============ EDIT MODE ============ -->
+            <div id="editMode" class="edit-form" hidden>
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label>Title</label>
+                  <input
+                    type="text"
+                    id="editTitle"
+                    value="Shadows of the Crown"
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Subtitle</label>
+                  <input
+                    type="text"
+                    id="editSubtitle"
+                    value="A Tale of Fire and Blood"
+                  />
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label>Genre</label>
+                  <select id="editGenre">
+                    <option>Fantasy</option>
+                    <option>Romance</option>
+                    <option>Sci-Fi</option>
+                    <option>Mystery</option>
+                    <option>Thriller</option>
+                    <option>Literary Fiction</option>
+                    <option>Young Adult</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Tags / Keywords</label>
+                  <input
+                    type="text"
+                    id="editTags"
+                    value="enemies to lovers, magic, adventure"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Synopsis</label>
+                <textarea id="editSynopsis" class="chapter-textarea">
+In a kingdom where magic is forbidden and crowns are won by blood, a young outcast discovers she is the last heir to a forgotten throne. Hunted by the very people who murdered her family, she must decide whether to flee or fight — and in doing so, awaken a power that could burn the world to ash.</textarea
+                >
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label>Publishing Status</label>
+                  <select id="editStatus">
+                    <option>Ongoing</option>
+                    <option>Completed</option>
+                    <option>Draft</option>
+                    <option>Pending Review</option>
+                    <option>On Hiatus</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Cover Image</label>
+                  <div class="upload-zone cover-upload">
+                    <p><strong>Click to upload new</strong></p>
+                    <p class="sub">PNG, JPG, WEBP · Max 5MB</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="edit-actions">
+                <button class="btn btn-outline" id="cancelEditBtn">
+                  Cancel
+                </button>
+                <button class="btn btn-primary" id="saveEditBtn">
+                  Save Changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================
+             CHAPTER LIST
+             ============================================ -->
+        <section class="table-card">
+          <div class="chapter-card-header">
+            <h2>Chapters</h2>
+            <button class="btn btn-primary btn-sm" id="addChapterBtn">
+              + Add Chapter
+            </button>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 60px">#</th>
+                <th>Chapter Title</th>
+                <th style="width: 140px">Status</th>
+                <th style="width: 120px">Words</th>
+                <th style="width: 160px">Last Updated</th>
+                <th style="width: 260px">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="chapterTableBody">
+              <tr>
+                <td>1</td>
+                <td><strong>The Fall of House Veyra</strong></td>
+                <td><span class="badge active">Published</span></td>
+                <td>3,412</td>
+                <td>2 days ago</td>
+                <td>
+                  <a href="author_edit-chapter.html">
+                    <button class="btn btn-sm">Edit</button>
+                  </a>
+                  <button class="btn btn-sm preview-chapter-btn">
+                    Preview
+                  </button>
+                  <button class="btn btn-sm btn-danger delete-chapter-btn">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td><strong>A Crown of Ash</strong></td>
+                <td><span class="badge active">Published</span></td>
+                <td>2,980</td>
+                <td>5 days ago</td>
+                <td>
+                  <a href="author_edit-chapter.html">
+                    <button class="btn btn-sm">Edit</button>
+                  </a>
+                  <button class="btn btn-sm preview-chapter-btn">
+                    Preview
+                  </button>
+                  <button class="btn btn-sm btn-danger delete-chapter-btn">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td><strong>The Wolf at the Door</strong></td>
+                <td><span class="badge active">Published</span></td>
+                <td>3,105</td>
+                <td>1 week ago</td>
+                <td>
+                  <a href="author_edit-chapter.html">
+                    <button class="btn btn-sm">Edit</button>
+                  </a>
+                  <button class="btn btn-sm preview-chapter-btn">
+                    Preview
+                  </button>
+                  <button class="btn btn-sm btn-danger delete-chapter-btn">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td><strong>Shadows in the Keep</strong></td>
+                <td><span class="badge paused">Broken Content</span></td>
+                <td>1,224</td>
+                <td>2 weeks ago</td>
+                <td>
+                  <a href="author_edit-chapter.html">
+                    <button class="btn btn-sm">Edit</button>
+                  </a>
+                  <button class="btn btn-sm preview-chapter-btn">
+                    Preview
+                  </button>
+                  <button class="btn btn-sm btn-danger delete-chapter-btn">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td><strong>The Ember Crown</strong></td>
+                <td><span class="badge draft">Draft</span></td>
+                <td>—</td>
+                <td>Just now</td>
+                <td>
+                  <a href="author_edit-chapter.html">
+                    <button class="btn btn-sm">Edit</button>
+                  </a>
+                  <button class="btn btn-sm preview-chapter-btn">
+                    Preview
+                  </button>
+                  <button class="btn btn-sm btn-danger delete-chapter-btn">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td><strong>Where the River Ends</strong></td>
+                <td><span class="badge pending">Pending Review</span></td>
+                <td>2,750</td>
+                <td>3 days ago</td>
+                <td>
+                  <a href="author_edit-chapter.html">
+                    <button class="btn btn-sm">Edit</button>
+                  </a>
+                  <button class="btn btn-sm preview-chapter-btn">
+                    Preview
+                  </button>
+                  <button class="btn btn-sm btn-danger delete-chapter-btn">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+
+    <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/author_view-novel.js"></script>
+    <script src="../javascript/logout.js"></script>
+  </body>
+</html>

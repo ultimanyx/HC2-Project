@@ -118,7 +118,6 @@
               </tr>
             </thead>
             <tbody>
-              <!-- ===== PUBLISHED / ONGOING ===== -->
               <tr>
                 <td><strong>Shadows of the Crown</strong></td>
                 <td><span class="badge active">Ongoing</span></td>
@@ -134,8 +133,14 @@
                   4.8
                 </td>
                 <td>
-                  <button class="btn btn-sm">Edit</button>
-                  <button class="btn btn-primary btn-sm">View</button>
+                  <a href="author_view-novel.html"
+                    ><button
+                      class="btn btn-primary btn-sm view-novel-btn"
+                      data-novel-id="1"
+                    >
+                      View
+                    </button></a
+                  >
                   <button class="btn btn-sm btn-danger">Delete</button>
                 </td>
               </tr>
@@ -154,8 +159,12 @@
                   4.6
                 </td>
                 <td>
-                  <button class="btn btn-sm">Edit</button>
-                  <button class="btn btn-primary btn-sm">View</button>
+                  <button
+                    class="btn btn-primary btn-sm view-novel-btn"
+                    data-novel-id="2"
+                  >
+                    View
+                  </button>
                   <button class="btn btn-sm btn-danger">Delete</button>
                 </td>
               </tr>
@@ -174,8 +183,12 @@
                   4.2
                 </td>
                 <td>
-                  <button class="btn btn-sm">Edit</button>
-                  <button class="btn btn-primary btn-sm">View</button>
+                  <button
+                    class="btn btn-primary btn-sm view-novel-btn"
+                    data-novel-id="3"
+                  >
+                    View
+                  </button>
                   <button class="btn btn-sm btn-danger">Delete</button>
                 </td>
               </tr>
@@ -194,8 +207,46 @@
                   3.9
                 </td>
                 <td>
-                  <button class="btn btn-sm">Edit</button>
-                  <button class="btn btn-primary btn-sm">View</button>
+                  <button
+                    class="btn btn-primary btn-sm view-novel-btn"
+                    data-novel-id="4"
+                  >
+                    View
+                  </button>
+                  <button class="btn btn-sm btn-danger">Delete</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>The Lost Kingdom</strong></td>
+                <td><span class="badge draft">Draft</span></td>
+                <td>Fantasy</td>
+                <td>6</td>
+                <td>—</td>
+                <td>—</td>
+                <td>
+                  <button
+                    class="btn btn-primary btn-sm view-novel-btn"
+                    data-novel-id="5"
+                  >
+                    View
+                  </button>
+                  <button class="btn btn-sm btn-danger">Delete</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>The Silent Oath</strong></td>
+                <td><span class="badge pending">Pending Review</span></td>
+                <td>Thriller</td>
+                <td>8</td>
+                <td>—</td>
+                <td>—</td>
+                <td>
+                  <button
+                    class="btn btn-primary btn-sm view-novel-btn"
+                    data-novel-id="6"
+                  >
+                    View
+                  </button>
                   <button class="btn btn-sm btn-danger">Delete</button>
                 </td>
               </tr>
@@ -214,38 +265,12 @@
                   4.0
                 </td>
                 <td>
-                  <button class="btn btn-sm">Edit</button>
-                  <button class="btn btn-primary btn-sm">View</button>
-                  <button class="btn btn-sm btn-danger">Delete</button>
-                </td>
-              </tr>
-
-              <!-- ===== PENDING PUBLICATION ===== -->
-              <tr>
-                <td><strong>The Silent Oath</strong></td>
-                <td><span class="badge pending">Pending Review</span></td>
-                <td>Thriller</td>
-                <td>8</td>
-                <td>—</td>
-                <td>—</td>
-                <td>
-                  <button class="btn btn-sm">Edit</button>
-                  <button class="btn btn-primary btn-sm">View</button>
-                  <button class="btn btn-sm btn-danger">Delete</button>
-                </td>
-              </tr>
-
-              <!-- ===== DRAFT ===== -->
-              <tr>
-                <td><strong>The Lost Kingdom</strong></td>
-                <td><span class="badge draft">Draft</span></td>
-                <td>Fantasy</td>
-                <td>6</td>
-                <td>—</td>
-                <td>—</td>
-                <td>
-                  <button class="btn btn-sm">Edit</button>
-                  <button class="btn btn-primary btn-sm">View</button>
+                  <button
+                    class="btn btn-primary btn-sm view-novel-btn"
+                    data-novel-id="7"
+                  >
+                    View
+                  </button>
                   <button class="btn btn-sm btn-danger">Delete</button>
                 </td>
               </tr>
@@ -255,8 +280,59 @@
       </main>
     </div>
 
+    <!-- ============================================
+         VIEW NOVEL MODAL — Chapter Reader
+         ============================================ -->
+    <div class="modal-overlay" id="novelModal" aria-hidden="true">
+      <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalTitle"
+      >
+        <!-- Header -->
+        <div class="modal-header">
+          <div class="modal-header-left">
+            <h3 id="modalNovelTitle">—</h3>
+            <p class="modal-subtitle" id="modalSubtitle">—</p>
+          </div>
+          <button class="modal-close" id="modalCloseBtn" aria-label="Close">
+            ✕
+          </button>
+        </div>
+
+        <!-- Meta chips -->
+        <div class="modal-meta-bar">
+          <span class="badge active" id="modalStatus">—</span>
+          <span class="meta-chip" id="modalGenre">—</span>
+          <span class="meta-chip" id="modalChapters">—</span>
+          <span class="meta-chip" id="modalReads">—</span>
+          <span class="meta-chip" id="modalRating">—</span>
+        </div>
+
+        <!-- Chapters -->
+        <div class="modal-body">
+          <h3 class="modal-section-title">Chapters</h3>
+          <ul class="chapter-reader-list" id="modalChapterList"></ul>
+        </div>
+
+        <!-- Footer -->
+        <div class="modal-footer">
+          <button class="btn btn-outline" id="modalCancelBtn">Close</button>
+          <a
+            href="author_view-novel.html"
+            class="btn btn-primary"
+            id="modalManageBtn"
+          >
+            Manage Novel →
+          </a>
+        </div>
+      </div>
+    </div>
+
     <script src="../javascript/sweetalert2.all.min.js"></script>
     <script src="../javascript/author-browse.js"></script>
+    <script src="../javascript/author_view-modal.js"></script>
     <script src="../javascript/logout.js"></script>
   </body>
 </html>
