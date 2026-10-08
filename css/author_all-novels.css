@@ -5,9 +5,8 @@
 }
 
 /* =====================================================
-   ROOT VARIABLES 
+   ROOT VARIABLES
 ===================================================== */
-
 :root {
   /* Main */
   --background: #f8f6f1;
@@ -68,7 +67,6 @@
 /* =====================================================
    FONTS
 ===================================================== */
-
 @font-face {
   font-family: "Poppins";
   src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype");
@@ -86,7 +84,9 @@
     format("truetype");
 }
 
-/* ============ Body ==========*/
+/* =====================================================
+   BODY
+===================================================== */
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   background-color: #f8f6f1;
@@ -99,13 +99,17 @@ a {
   color: inherit;
 }
 
-/* ---------- Layout ---------- */
+/* =====================================================
+   LAYOUT
+===================================================== */
 .layout {
   display: flex;
   min-height: 100vh;
 }
 
-/* ---------- Sidebar ---------- */
+/* =====================================================
+   SIDEBAR
+===================================================== */
 .sidebar {
   width: 270px;
   background-color: #ffffff;
@@ -202,7 +206,9 @@ a {
   background-color: rgba(220, 38, 38, 0.08);
 }
 
-/* ---------- Main content ---------- */
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
 .main {
   flex: 1;
   padding: 24px 32px;
@@ -243,7 +249,9 @@ a {
   font-size: 14px;
 }
 
-/* ---------- Filter Bar ---------- */
+/* =====================================================
+   FILTER BAR
+===================================================== */
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -294,7 +302,9 @@ a {
   gap: 6px;
 }
 
-/* ---------- Generic button style ---------- */
+/* =====================================================
+   BUTTONS
+===================================================== */
 .btn {
   padding: 8px 16px;
   border-radius: 6px;
@@ -320,13 +330,11 @@ a {
   background: #9a5f16;
 }
 
-/* ---------- Utility Classes ---------- */
 .btn-sm {
   padding: 4px 12px;
   font-size: 13px;
 }
 
-/* Danger / Delete button */
 .btn-danger {
   background: rgba(220, 38, 38, 0.1);
   color: #991b1b;
@@ -336,12 +344,13 @@ a {
   background: rgba(220, 38, 38, 0.18);
 }
 
-/* Muted text color */
 .text-muted {
   color: var(--muted-foreground);
 }
 
-/* ---------- Stat cards ---------- */
+/* =====================================================
+   STAT CARDS
+===================================================== */
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -382,7 +391,9 @@ a {
   color: #b8721f;
 }
 
-/* ---------- Table card ---------- */
+/* =====================================================
+   TABLE CARD
+===================================================== */
 .table-card {
   margin-top: 10px;
   background-color: #ffffff;
@@ -429,7 +440,9 @@ tbody tr:last-child td {
     hue-rotate(326deg) brightness(85%) contrast(89%);
 }
 
-/* ---------- Badge / status pills ---------- */
+/* =====================================================
+   BADGES / STATUS PILLS
+===================================================== */
 .badge {
   display: inline-block;
   font-size: 13px;
@@ -453,7 +466,19 @@ tbody tr:last-child td {
   color: #6b6680;
 }
 
-/* ---------- Form Container ---------- */
+.badge.draft {
+  background-color: rgba(109, 40, 217, 0.1);
+  color: #5b21b6;
+}
+
+.badge.pending {
+  background-color: rgba(59, 111, 145, 0.15);
+  color: #2c536d;
+}
+
+/* =====================================================
+   FORM CONTAINER
+===================================================== */
 .form-container {
   background: var(--card-background);
   border: 1px solid var(--border);
@@ -462,7 +487,9 @@ tbody tr:last-child td {
   box-shadow: var(--shadow);
 }
 
-/* ---------- Grid Layouts ---------- */
+/* =====================================================
+   FORM GRID LAYOUTS
+===================================================== */
 .form-grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -521,7 +548,9 @@ tbody tr:last-child td {
   resize: vertical;
 }
 
-/* ---------- Upload Zone ---------- */
+/* =====================================================
+   UPLOAD ZONE
+===================================================== */
 .upload-zone {
   border: 2px dashed var(--border);
   border-radius: 8px;
@@ -554,7 +583,9 @@ tbody tr:last-child td {
   color: var(--muted-foreground);
 }
 
-/* ---------- Form Actions ---------- */
+/* =====================================================
+   FORM ACTIONS
+===================================================== */
 .form-actions {
   display: flex;
   flex-wrap: wrap;
