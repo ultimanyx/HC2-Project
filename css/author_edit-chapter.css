@@ -203,20 +203,26 @@ a {
 }
 
 .back-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 14px;
   font-weight: 600;
   color: var(--muted-foreground);
   padding: 6px 12px;
   border-radius: 6px;
   border: 1px solid var(--border);
-  transition:
-    background 0.15s ease,
-    color 0.15s ease;
 }
 
 .back-link:hover {
   background: var(--secondary);
   color: var(--primary);
+}
+
+.back-link img {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
 }
 
 .topbar h1 {

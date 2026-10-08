@@ -55,15 +55,43 @@
             <div class="stat-value">4</div>
             <div class="stat-change positive">↑ 2 new this month</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-label">Published</div>
-            <div class="stat-value">3</div>
-            <div class="stat-change positive">All active</div>
-          </div>
+
           <div class="stat-card">
             <div class="stat-label">Pending Review</div>
             <div class="stat-value">1</div>
-            <div class="stat-change warning">Awaiting approval</div>
+            <div class="stat-change warning">Waiting for approval</div>
+          </div>
+
+          <div class="stat-card stat-card--reported">
+            <div class="stat-label">Reported Novels</div>
+
+            <ul class="report-breakdown">
+              <li>
+                <div class="report-info">
+                  <span class="report-book">Shadows of the Crown</span>
+                  <span class="report-chapter"
+                    >Ch. 4 · Shadows in the Keep</span
+                  >
+                  <span class="report-reason">Broken content</span>
+                </div>
+              </li>
+
+              <li>
+                <div class="report-info">
+                  <span class="report-book">Ember &amp; Ash</span>
+                  <span class="report-chapter">Ch. 12 · Ashes and Oaths</span>
+                  <span class="report-reason">Inappropriate content</span>
+                </div>
+              </li>
+
+              <li>
+                <div class="report-info">
+                  <span class="report-book">The Silent Oath</span>
+                  <span class="report-chapter">Ch. 3 · A Quiet Meeting</span>
+                  <span class="report-reason">Missing content</span>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
 
@@ -79,7 +107,7 @@
           <div class="filter-group">
             <label for="status-filter">Status</label>
             <select id="status-filter">
-              <option>All Statuses</option>
+              <option>All</option>
               <option>Ongoing</option>
               <option>Completed</option>
               <option>Draft</option>
@@ -90,7 +118,6 @@
           <div class="filter-group">
             <label for="sort-novel">Sort by</label>
             <select id="sort-novel">
-              <option>Last Updated</option>
               <option>Title</option>
               <option>Reads</option>
               <option>Rating</option>
@@ -206,52 +233,6 @@
           </table>
         </div>
       </main>
-    </div>
-
-    <!-- ============================================
-         VIEW NOVEL MODAL — Chapter Reader
-         ============================================ -->
-    <div class="modal-overlay" id="novelModal" aria-hidden="true">
-      <div
-        class="modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modalTitle"
-      >
-        <div class="modal-header">
-          <div class="modal-header-left">
-            <h3 id="modalNovelTitle">—</h3>
-            <p class="modal-subtitle" id="modalSubtitle">—</p>
-          </div>
-          <button class="modal-close" id="modalCloseBtn" aria-label="Close">
-            ✕
-          </button>
-        </div>
-
-        <div class="modal-meta-bar">
-          <span class="badge active" id="modalStatus">—</span>
-          <span class="meta-chip" id="modalGenre">—</span>
-          <span class="meta-chip" id="modalChapters">—</span>
-          <span class="meta-chip" id="modalReads">—</span>
-          <span class="meta-chip" id="modalRating">—</span>
-        </div>
-
-        <div class="modal-body">
-          <h3 class="modal-section-title">Chapters</h3>
-          <ul class="chapter-reader-list" id="modalChapterList"></ul>
-        </div>
-
-        <div class="modal-footer">
-          <button class="btn btn-outline" id="modalCancelBtn">Close</button>
-          <a
-            href="author_view-novel.html"
-            class="btn btn-primary"
-            id="modalManageBtn"
-          >
-            Manage Novel →
-          </a>
-        </div>
-      </div>
     </div>
 
     <script src="../javascript/sweetalert2.all.min.js"></script>

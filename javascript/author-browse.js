@@ -18,12 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const title = row.cells[0]?.textContent.trim().toLowerCase() || "";
       const status = row.cells[1]?.textContent.trim().toLowerCase() || "";
 
-      const matchesSearch =
-        searchText === "" || title.includes(searchText);
+      const matchesSearch = searchText === "" || title.includes(searchText);
 
       const matchesStatus =
-        selectedStatus === "all statuses" ||
-        status === selectedStatus;
+        selectedStatus === "all" || status === selectedStatus;
 
       if (matchesSearch && matchesStatus) {
         row.style.display = "";
@@ -43,23 +41,17 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       if (selectedSort === "Reads") {
-        const readsA = parseInt(
-          a.cells[4].textContent.replace(/,/g, "")
-        ) || 0;
+        const readsA = parseInt(a.cells[4].textContent.replace(/,/g, "")) || 0;
 
-        const readsB = parseInt(
-          b.cells[4].textContent.replace(/,/g, "")
-        ) || 0;
+        const readsB = parseInt(b.cells[4].textContent.replace(/,/g, "")) || 0;
 
         return readsB - readsA;
       }
 
       if (selectedSort === "Rating") {
-        const ratingA =
-          parseFloat(a.cells[5].textContent.trim()) || 0;
+        const ratingA = parseFloat(a.cells[5].textContent.trim()) || 0;
 
-        const ratingB =
-          parseFloat(b.cells[5].textContent.trim()) || 0;
+        const ratingB = parseFloat(b.cells[5].textContent.trim()) || 0;
 
         return ratingB - ratingA;
       }
