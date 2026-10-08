@@ -52,12 +52,12 @@
         <div class="stats">
           <div class="stat-card">
             <div class="stat-label">Total Novels</div>
-            <div class="stat-value">7</div>
-            <div class="stat-change positive">↑ 3 new this month</div>
+            <div class="stat-value">4</div>
+            <div class="stat-change positive">↑ 2 new this month</div>
           </div>
           <div class="stat-card">
             <div class="stat-label">Published</div>
-            <div class="stat-value">4</div>
+            <div class="stat-value">3</div>
             <div class="stat-change positive">All active</div>
           </div>
           <div class="stat-card">
@@ -133,19 +133,19 @@
                   4.8
                 </td>
                 <td>
-                  <a href="author_view-novel.html"
-                    ><button
+                  <a href="author_view-novel.html">
+                    <button
                       class="btn btn-primary btn-sm view-novel-btn"
                       data-novel-id="1"
                     >
                       View
-                    </button></a
-                  >
+                    </button>
+                  </a>
                   <button class="btn btn-sm btn-danger">Delete</button>
                 </td>
               </tr>
               <tr>
-                <td><strong>Ember & Ash</strong></td>
+                <td><strong>Ember &amp; Ash</strong></td>
                 <td><span class="badge completed">Completed</span></td>
                 <td>Romance</td>
                 <td>32</td>
@@ -169,54 +169,6 @@
                 </td>
               </tr>
               <tr>
-                <td><strong>The Last Prophecy</strong></td>
-                <td><span class="badge active">Ongoing</span></td>
-                <td>Sci-Fi</td>
-                <td>18</td>
-                <td>5,672</td>
-                <td>
-                  <img
-                    src="../icons/star-fill.svg"
-                    alt="star-rating"
-                    class="star-rating"
-                  />
-                  4.2
-                </td>
-                <td>
-                  <button
-                    class="btn btn-primary btn-sm view-novel-btn"
-                    data-novel-id="3"
-                  >
-                    View
-                  </button>
-                  <button class="btn btn-sm btn-danger">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>Starlight Drive</strong></td>
-                <td><span class="badge paused">On Hiatus</span></td>
-                <td>Young Adult</td>
-                <td>12</td>
-                <td>3,401</td>
-                <td>
-                  <img
-                    src="../icons/star-fill.svg"
-                    alt="star-rating"
-                    class="star-rating"
-                  />
-                  3.9
-                </td>
-                <td>
-                  <button
-                    class="btn btn-primary btn-sm view-novel-btn"
-                    data-novel-id="4"
-                  >
-                    View
-                  </button>
-                  <button class="btn btn-sm btn-danger">Delete</button>
-                </td>
-              </tr>
-              <tr>
                 <td><strong>The Lost Kingdom</strong></td>
                 <td><span class="badge draft">Draft</span></td>
                 <td>Fantasy</td>
@@ -226,7 +178,7 @@
                 <td>
                   <button
                     class="btn btn-primary btn-sm view-novel-btn"
-                    data-novel-id="5"
+                    data-novel-id="3"
                   >
                     View
                   </button>
@@ -243,31 +195,7 @@
                 <td>
                   <button
                     class="btn btn-primary btn-sm view-novel-btn"
-                    data-novel-id="6"
-                  >
-                    View
-                  </button>
-                  <button class="btn btn-sm btn-danger">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>Beneath the Veil</strong></td>
-                <td><span class="badge completed">Completed</span></td>
-                <td>Mystery</td>
-                <td>20</td>
-                <td>1,950</td>
-                <td>
-                  <img
-                    src="../icons/star-fill.svg"
-                    alt="star-rating"
-                    class="star-rating"
-                  />
-                  4.0
-                </td>
-                <td>
-                  <button
-                    class="btn btn-primary btn-sm view-novel-btn"
-                    data-novel-id="7"
+                    data-novel-id="4"
                   >
                     View
                   </button>
@@ -290,7 +218,6 @@
         aria-modal="true"
         aria-labelledby="modalTitle"
       >
-        <!-- Header -->
         <div class="modal-header">
           <div class="modal-header-left">
             <h3 id="modalNovelTitle">—</h3>
@@ -301,7 +228,6 @@
           </button>
         </div>
 
-        <!-- Meta chips -->
         <div class="modal-meta-bar">
           <span class="badge active" id="modalStatus">—</span>
           <span class="meta-chip" id="modalGenre">—</span>
@@ -310,13 +236,11 @@
           <span class="meta-chip" id="modalRating">—</span>
         </div>
 
-        <!-- Chapters -->
         <div class="modal-body">
           <h3 class="modal-section-title">Chapters</h3>
           <ul class="chapter-reader-list" id="modalChapterList"></ul>
         </div>
 
-        <!-- Footer -->
         <div class="modal-footer">
           <button class="btn btn-outline" id="modalCancelBtn">Close</button>
           <a

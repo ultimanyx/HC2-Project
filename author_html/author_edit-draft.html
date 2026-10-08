@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shadows of the Crown · View Novel</title>
+    <title>Edit Draft · The Lost Kingdom</title>
     <link rel="stylesheet" href="../css/author_view-novel.css" />
     <link rel="stylesheet" href="../css/sweetalert2.min.css" />
 
@@ -26,13 +26,11 @@
             <span class="nav-icon"></span>
             Dashboard
           </a>
-          <a href="author_all-novel.html" class="nav-item sub active">
-            All Novels
-          </a>
+          <a href="author_all-novel.html" class="nav-item sub"> All Novels </a>
           <a href="author_create-novel.html" class="nav-item sub">
             Create Novel
           </a>
-          <a href="author_draft-novel.html" class="nav-item sub">
+          <a href="author_draft-novel.html" class="nav-item sub active">
             Draft Novel
           </a>
           <a href="author_earnings.html" class="nav-item sub">Earnings</a>
@@ -46,9 +44,12 @@
         <!-- Topbar -->
         <div class="topbar">
           <div class="topbar-left">
-            <a href="author_all-novel.html" class="back-link">← All Novels</a>
-            <h1>Shadows of the Crown</h1>
+            <a href="author_draft-novel.html" class="back-link"
+              >← Draft Novels</a
+            >
+            <h1>Edit Draft</h1>
           </div>
+
           <div class="user-chip">
             <span>Sarah J.</span>
             <span class="avatar">SJ</span>
@@ -58,90 +59,41 @@
         <!-- Action bar -->
         <div class="action-bar">
           <div class="action-left">
-            <span class="badge active">Ongoing</span>
-            <span class="meta-text">Last updated 2 days ago</span>
+            <span class="badge draft">Draft</span>
+            <span class="meta-text">Last edited today at 2:30 PM</span>
+          </div>
+
+          <div class="action-right">
+            <button class="btn btn-primary" id="editToggleBtn">
+              Publish Book
+            </button>
           </div>
         </div>
 
         <!-- ============================================
-             NOVEL HEADER
+             NOVEL HEADER (always in edit mode)
              ============================================ -->
         <section class="novel-header">
           <div class="novel-cover">
             <img
-              src="../books/Fantasy/A_Tangled_Tale by Lewis_Carroll (Unzipped Files)/A_Tangled_Tale- cover art.png"
+              src="../books/Action/A_Farewell_to_Arms by Ernest_Hemingway (Unzipped Files)/A_Farewell_to_Arms cover art.png"
               alt="Cover"
             />
           </div>
 
           <div class="novel-details">
-            <!-- ============ VIEW MODE ============ -->
-            <div id="viewMode">
-              <h2 id="titleView">Shadows of the Crown</h2>
-              <p class="novel-subtitle" id="subtitleView">
-                A Tale of Fire and Blood
-              </p>
-
-              <div class="meta-row">
-                <span class="meta-item">
-                  <img src="../icons/person-fill.svg" alt="" />
-                  <span id="authorView">Sarah J.</span>
-                </span>
-                <span class="meta-item">
-                  <img src="../icons/book-half.svg" alt="" />
-                  <span id="genreView">Fantasy</span>
-                </span>
-                <span class="meta-item">
-                  <img src="../icons/journal-text.svg" alt="" />
-                  <span id="chaptersView">24 Chapters</span>
-                </span>
-                <span class="meta-item">
-                  <img src="../icons/eye-fill.svg" alt="" />
-                  <span id="readsView">12,843 reads</span>
-                </span>
-                <span class="meta-item">
-                  <img
-                    src="../icons/star-fill.svg"
-                    alt=""
-                    class="star-rating"
-                  />
-                  <span id="ratingView">4.8</span>
-                </span>
-              </div>
-
-              <div class="tags-row" id="tagsView">
-                <span class="tag">enemies to lovers</span>
-                <span class="tag">magic</span>
-                <span class="tag">adventure</span>
-              </div>
-
-              <h3 class="section-title">Synopsis</h3>
-              <p class="synopsis" id="synopsisView">
-                In a kingdom where magic is forbidden and crowns are won by
-                blood, a young outcast discovers she is the last heir to a
-                forgotten throne. Hunted by the very people who murdered her
-                family, she must decide whether to flee or fight — and in doing
-                so, awaken a power that could burn the world to ash.
-              </p>
-            </div>
-
-            <!-- ============ EDIT MODE ============ -->
-            <div id="editMode" class="edit-form" hidden>
+            <div class="edit-form">
               <div class="form-grid-2">
                 <div class="form-group">
                   <label>Title</label>
-                  <input
-                    type="text"
-                    id="editTitle"
-                    value="Shadows of the Crown"
-                  />
+                  <input type="text" id="editTitle" value="The Lost Kingdom" />
                 </div>
                 <div class="form-group">
                   <label>Subtitle</label>
                   <input
                     type="text"
                     id="editSubtitle"
-                    value="A Tale of Fire and Blood"
+                    value="A throne unclaimed"
                   />
                 </div>
               </div>
@@ -164,7 +116,7 @@
                   <input
                     type="text"
                     id="editTags"
-                    value="enemies to lovers, magic, adventure"
+                    value="epic fantasy, royalty, war"
                   />
                 </div>
               </div>
@@ -172,21 +124,11 @@
               <div class="form-group">
                 <label>Synopsis</label>
                 <textarea id="editSynopsis" class="chapter-textarea">
-In a kingdom where magic is forbidden and crowns are won by blood, a young outcast discovers she is the last heir to a forgotten throne. Hunted by the very people who murdered her family, she must decide whether to flee or fight — and in doing so, awaken a power that could burn the world to ash.</textarea
+An heir believed dead. A throne left empty. A kingdom on the brink of war. The Lost Kingdom is the first book in an epic fantasy saga.</textarea
                 >
               </div>
 
               <div class="form-grid-2">
-                <div class="form-group">
-                  <label>Publishing Status</label>
-                  <select id="editStatus">
-                    <option>Ongoing</option>
-                    <option>Completed</option>
-                    <option>Draft</option>
-                    <option>Pending Review</option>
-                    <option>On Hiatus</option>
-                  </select>
-                </div>
                 <div class="form-group">
                   <label>Cover Image</label>
                   <div class="upload-zone cover-upload">
@@ -197,9 +139,7 @@ In a kingdom where magic is forbidden and crowns are won by blood, a young outca
               </div>
 
               <div class="edit-actions">
-                <button class="btn btn-outline" id="cancelEditBtn">
-                  Cancel
-                </button>
+                <button class="btn btn-outline" id="resetEditBtn">Reset</button>
                 <button class="btn btn-primary" id="saveEditBtn">
                   Save Changes
                 </button>
@@ -214,10 +154,12 @@ In a kingdom where magic is forbidden and crowns are won by blood, a young outca
         <section class="table-card">
           <div class="chapter-card-header">
             <h2>Chapters</h2>
-            <a href="author_addchapter-ongoing.html">
-              <button class="btn btn-primary btn-sm" id="addChapterBtn">
-                + Add Chapter
-              </button>
+            <a
+              href="author_addchapter-draft.html"
+              class="btn btn-primary btn-sm"
+              id="addChapterBtn"
+            >
+              + Add Chapter
             </a>
           </div>
 
@@ -235,12 +177,12 @@ In a kingdom where magic is forbidden and crowns are won by blood, a young outca
             <tbody id="chapterTableBody">
               <tr>
                 <td>1</td>
-                <td><strong>The Fall of House Veyra</strong></td>
-                <td><span class="badge active">Published</span></td>
-                <td>3,412</td>
-                <td>2 days ago</td>
+                <td><strong>Prologue: The Empty Throne</strong></td>
+                <td><span class="badge draft">Draft</span></td>
+                <td>1,120</td>
+                <td>Today</td>
                 <td>
-                  <a href="author_edit-chapter.html">
+                  <a href="author_editchapter-draft.html">
                     <button class="btn btn-sm">Edit</button>
                   </a>
                   <button class="btn btn-sm btn-danger delete-chapter-btn">
@@ -250,10 +192,10 @@ In a kingdom where magic is forbidden and crowns are won by blood, a young outca
               </tr>
               <tr>
                 <td>2</td>
-                <td><strong>A Crown of Ash</strong></td>
-                <td><span class="badge active">Published</span></td>
-                <td>2,980</td>
-                <td>5 days ago</td>
+                <td><strong>A Kingdom Without a King</strong></td>
+                <td><span class="badge draft">Draft</span></td>
+                <td>1,890</td>
+                <td>Yesterday</td>
                 <td>
                   <a href="author_edit-chapter.html">
                     <button class="btn btn-sm">Edit</button>
@@ -265,10 +207,10 @@ In a kingdom where magic is forbidden and crowns are won by blood, a young outca
               </tr>
               <tr>
                 <td>3</td>
-                <td><strong>The Wolf at the Door</strong></td>
-                <td><span class="badge active">Published</span></td>
-                <td>3,105</td>
-                <td>1 week ago</td>
+                <td><strong>The Broken Oath</strong></td>
+                <td><span class="badge draft">Draft</span></td>
+                <td>2,340</td>
+                <td>3 days ago</td>
                 <td>
                   <a href="author_edit-chapter.html">
                     <button class="btn btn-sm">Edit</button>
@@ -280,40 +222,10 @@ In a kingdom where magic is forbidden and crowns are won by blood, a young outca
               </tr>
               <tr>
                 <td>4</td>
-                <td><strong>Shadows in the Keep</strong></td>
-                <td><span class="badge paused">Broken Content</span></td>
-                <td>1,224</td>
-                <td>2 weeks ago</td>
-                <td>
-                  <a href="author_edit-chapter.html">
-                    <button class="btn btn-sm">Edit</button>
-                  </a>
-                  <button class="btn btn-sm btn-danger delete-chapter-btn">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td><strong>The Ember Crown</strong></td>
+                <td><strong>Untitled Chapter</strong></td>
                 <td><span class="badge draft">Draft</span></td>
                 <td>—</td>
                 <td>Just now</td>
-                <td>
-                  <a href="author_edit-chapter.html">
-                    <button class="btn btn-sm">Edit</button>
-                  </a>
-                  <button class="btn btn-sm btn-danger delete-chapter-btn">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td><strong>Where the River Ends</strong></td>
-                <td><span class="badge pending">Pending Review</span></td>
-                <td>2,750</td>
-                <td>3 days ago</td>
                 <td>
                   <a href="author_edit-chapter.html">
                     <button class="btn btn-sm">Edit</button>
@@ -330,7 +242,7 @@ In a kingdom where magic is forbidden and crowns are won by blood, a young outca
     </div>
 
     <script src="../javascript/sweetalert2.all.min.js"></script>
-    <script src="../javascript/author_view-novel.js"></script>
+    <script src="../javascript/author_edit-draft.js"></script>
     <script src="../javascript/logout.js"></script>
   </body>
 </html>

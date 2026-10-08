@@ -40,28 +40,10 @@
 
       <main class="main">
         <div class="topbar">
-          <h1>Draft Books</h1>
+          <h1>Draft Novels</h1>
           <div class="user-chip">
             <span>Sarah J.</span>
             <span class="avatar">SJ</span>
-          </div>
-        </div>
-
-        <div class="stats">
-          <div class="stat-card">
-            <div class="stat-label">Total Drafts</div>
-            <div class="stat-value">4</div>
-            <div class="stat-change positive">+2 this week</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">Last Edited</div>
-            <div class="stat-value">The Lost Kingdom</div>
-            <div class="stat-change text-muted">Today</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">Ready to Publish</div>
-            <div class="stat-value">1</div>
-            <div class="stat-change warning">Needs final review</div>
           </div>
         </div>
 
@@ -81,9 +63,6 @@
               <option>Title</option>
               <option>Date Created</option>
             </select>
-          </div>
-          <div class="filter-actions">
-            <button class="btn btn-primary">+ New Draft</button>
           </div>
         </div>
 
@@ -106,9 +85,11 @@
                 <td>Today, 2:30 PM</td>
                 <td>20</td>
                 <td>
-                  <button class="btn btn-sm">Edit</button>
+                  <a href="author_edit-draft.html">
+                    <button class="btn btn-sm">Edit</button>
+                  </a>
                   <button class="btn btn-primary btn-sm">Publish</button>
-                  <!-- <button class="btn btn-sm btn-danger"></button> -->
+                  <button class="btn btn-sm btn-danger">Delete</button>
                 </td>
               </tr>
               <tr>
@@ -119,29 +100,7 @@
                 <td>
                   <button class="btn btn-sm">Edit</button>
                   <button class="btn btn-primary btn-sm">Publish</button>
-                  <!-- <button class="btn btn-sm btn-danger"></button> -->
-                </td>
-              </tr>
-              <tr>
-                <td><strong>Whispers in the Dark</strong></td>
-                <td><span class="badge paused">Draft</span></td>
-                <td>Sep 05, 2026</td>
-                <td>10</td>
-                <td>
-                  <button class="btn btn-sm">Edit</button>
-                  <button class="btn btn-primary btn-sm">Publish</button>
-                  <!-- <button class="btn btn-sm btn-danger"></button> -->
-                </td>
-              </tr>
-              <tr>
-                <td><strong>Starlight Drive (untitled)</strong></td>
-                <td><span class="badge paused">Draft</span></td>
-                <td>Aug 28, 2026</td>
-                <td>0</td>
-                <td>
-                  <button class="btn btn-sm">Edit</button>
-                  <button class="btn btn-primary btn-sm">Publish</button>
-                  <!-- <button class="btn btn-sm btn-danger"></button> -->
+                  <button class="btn btn-sm btn-danger">Delete</button>
                 </td>
               </tr>
             </tbody>

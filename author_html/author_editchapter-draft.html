@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Chapter · The Lost Kingdom (Draft)</title>
+    <link rel="stylesheet" href="../css/author_edit-chapter.css" />
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="../image/logo-nobackground-circle.png"
+    />
+  </head>
+  <body>
+    <div class="layout">
+      <!-- ============= SIDEBAR ============= -->
+      <aside class="sidebar">
+        <div class="brand">
+          <img src="../image/logocopy.png" alt="brandlogo" />
+          NovelNest
+        </div>
+        <nav class="nav">
+          <a href="author_dashboard.html" class="nav-item sub">
+            <span class="nav-icon"></span>
+            Dashboard
+          </a>
+          <a href="author_all-novel.html" class="nav-item sub"> All Novels </a>
+          <a href="author_create-novel.html" class="nav-item sub">
+            Create Novel
+          </a>
+          <a href="author_draft-novel.html" class="nav-item sub active">
+            Draft Novel
+          </a>
+          <a href="author_earnings.html" class="nav-item sub">Earnings</a>
+          <a href="author_archive.html" class="nav-item sub">Archive</a>
+        </nav>
+        <a href="#" class="logout" id="logout" data-role="author">Logout</a>
+      </aside>
+
+      <!-- ============= MAIN ============= -->
+      <main class="main">
+        <!-- Topbar -->
+        <div class="topbar">
+          <div class="topbar-left">
+            <a href="author_edit-draft.html" class="back-link"
+              >← Back to Draft</a
+            >
+            <h1>Edit Chapter</h1>
+          </div>
+          <div class="user-chip">
+            <span>Sarah J.</span>
+            <span class="avatar">SJ</span>
+          </div>
+        </div>
+
+        <!-- ============================================
+             CHAPTER META BAR
+             ============================================ -->
+        <div class="meta-bar">
+          <div class="meta-left">
+            <span class="chapter-num">Chapter 1</span>
+            <span class="meta-sep">·</span>
+            <span class="novel-name">The Lost Kingdom</span>
+            <span class="badge draft" id="statusBadge">Draft</span>
+          </div>
+          <div class="meta-right">
+            <span class="save-status" id="saveStatus">All changes saved</span>
+          </div>
+        </div>
+
+        <!-- ============================================
+             CHAPTER FORM
+             ============================================ -->
+        <div class="form-container">
+          <!-- Chapter Title -->
+          <div class="form-group">
+            <label for="chapterTitle"
+              >Chapter Title
+              <span style="color: var(--destructive)">*</span></label
+            >
+            <input
+              type="text"
+              id="chapterTitle"
+              placeholder="e.g. Prologue: The Empty Throne"
+              value="Prologue: The Empty Throne"
+            />
+          </div>
+
+          <!-- Chapter Number + Author's Note -->
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="chapterNumber">Chapter Number</label>
+              <input type="number" id="chapterNumber" min="1" value="1" />
+              <span class="hint"
+                >Determines its position in the chapter list.</span
+              >
+            </div>
+            <div class="form-group">
+              <label for="authorNote">Author's Note (Optional)</label>
+              <textarea
+                id="authorNote"
+                class="note-textarea"
+                placeholder="Add a short note to appear at the end of the chapter…"
+              ></textarea>
+              <span class="hint"
+                >Great for updates, thank-yous, or upcoming schedule.</span
+              >
+            </div>
+          </div>
+
+          <!-- ============================================
+               CHAPTER CONTENT TOOLBAR
+               ============================================ -->
+          <div class="form-group-full">
+            <div class="editor-label-row">
+              <label for="chapterContent"
+                >Chapter Content
+                <span style="color: var(--destructive)">*</span></label
+              >
+              <div class="editor-toolbar">
+                <button
+                  type="button"
+                  class="tool-btn"
+                  data-action="bold"
+                  title="Bold"
+                >
+                  <strong>B</strong>
+                </button>
+                <button
+                  type="button"
+                  class="tool-btn"
+                  data-action="italic"
+                  title="Italic"
+                >
+                  <em>I</em>
+                </button>
+                <button
+                  type="button"
+                  class="tool-btn"
+                  data-action="underline"
+                  title="Underline"
+                >
+                  <u>U</u>
+                </button>
+                <span class="tool-divider"></span>
+                <button
+                  type="button"
+                  class="tool-btn"
+                  data-action="insertUnorderedList"
+                  title="Bullet list"
+                >
+                  • List
+                </button>
+                <button
+                  type="button"
+                  class="tool-btn"
+                  data-action="formatBlock"
+                  data-value="blockquote"
+                  title="Blockquote"
+                >
+                  ❝
+                </button>
+                <button
+                  type="button"
+                  class="tool-btn"
+                  data-action="insertHorizontalRule"
+                  title="Divider"
+                >
+                  —
+                </button>
+                <span class="tool-divider"></span>
+                <button
+                  type="button"
+                  class="tool-btn"
+                  id="clearFormatBtn"
+                  title="Clear formatting"
+                >
+                  Clear
+                </button>
+              </div>
+            </div>
+
+            <!-- Editable content area (draft example) -->
+            <div
+              id="chapterContent"
+              class="editor-area"
+              contenteditable="true"
+              spellcheck="true"
+            >
+              <p>
+                The throne room had stood empty for a hundred years. Dust
+                gathered on the obsidian seat like snow that would never melt,
+                and the great banners of House Aldren — a silver stag on a field
+                of deep blue — hung motionless in the still air.
+              </p>
+              <p>
+                No one had dared to sit there since the last king fell. No one
+                had dared to claim it, either — not when the prophecy still
+                whispered through every tavern from the coast to the highlands:
+                <em
+                  >when the stag returns, the kingdom will burn before it
+                  bows.</em
+                >
+              </p>
+              <p>
+                And yet, on the coldest morning of the year, a stranger walked
+                through the broken gates of the capital, dressed in travelling
+                clothes and carrying nothing but a sword that had seen better
+                days. She did not stop at the inn. She did not stop at the
+                market. She walked straight to the castle, past the guards who
+                did not recognise her, and stopped before the empty throne.
+              </p>
+              <p>
+                [Draft — scene continues here. Need to introduce the stranger's
+                name and reveal the first hint of her claim.]
+              </p>
+            </div>
+
+            <!-- Word / char count -->
+            <div class="editor-footer">
+              <span
+                ><strong id="wordCount">0</strong> words ·
+                <span id="charCount">0</span> characters</span
+              >
+              <span><strong id="readTime">0</strong> min read</span>
+            </div>
+          </div>
+
+          <!-- ============================================
+               ACTIONS
+               ============================================ -->
+          <div class="form-actions">
+            <button class="btn btn-outline" id="cancelBtn">Cancel</button>
+            <button class="btn" id="saveDraftBtn">Save as Draft</button>
+            <span class="spacer"></span>
+            <button class="btn btn-danger" id="deleteBtn">
+              Delete Chapter
+            </button>
+            <button class="btn btn-primary btn-lg" id="saveBtn">
+              Save &amp; Publish Chapter
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/logout.js"></script>
+    <script src="../javascript/author_edit-draft-chapter.js"></script>
+  </body>
+</html>
