@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>All Novels - NovelNest</title>
+    <title>Archive · NovelNest</title>
     <link rel="stylesheet" href="../css/author_archive.css" />
     <link rel="stylesheet" href="../css/sweetalert2.min.css" />
     <link
@@ -37,216 +37,91 @@
         </nav>
         <a href="#" class="logout" id="logout" data-role="author">Logout</a>
       </aside>
+
       <!-- ================= MAIN CONTENT ================= -->
       <main class="main">
         <!-- TOPBAR -->
         <div class="topbar">
-          <h1>All Novels</h1>
+          <h1>Archive</h1>
           <div class="user-chip">
             <span>Sarah J.</span>
             <span class="avatar">SJ</span>
           </div>
         </div>
+
         <!-- ================= STATS ================= -->
         <div class="stats">
           <div class="stat-card">
-            <div class="stat-label">Total Novels</div>
-            <div class="stat-value">6</div>
-            <div class="stat-change positive">↑ 2 new this month</div>
+            <div class="stat-label">Archived Novels</div>
+            <div class="stat-value">4</div>
+            <div class="stat-change warning">Currently archived</div>
           </div>
           <div class="stat-card">
-            <div class="stat-label">Published</div>
-            <div class="stat-value">3</div>
-            <div class="stat-change positive">All active</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">Total Reads</div>
-            <div class="stat-value">32,076</div>
-            <div class="stat-change positive">↑ 12.5% from last month</div>
+            <div class="stat-label">Restored This Month</div>
+            <div class="stat-value">2</div>
+            <div class="stat-change positive">Back on your shelf</div>
           </div>
         </div>
-        <!-- ================= FILTER BAR ================= -->
-        <div class="filter-bar">
-          <div class="filter-group">
-            <label for="search-novel">Search</label>
-            <input
-              type="text"
-              id="search-novel"
-              placeholder="Search by title..."
-            />
-          </div>
-          <div class="filter-group">
-            <label for="status-filter">Status</label>
-            <select id="status-filter">
-              <option value="" selected>All Statuses</option>
-              <option value="Ongoing">Ongoing</option>
-              <option value="Completed">Completed</option>
-              <option value="Draft">Draft</option>
-              <option value="On Hiatus">On Hiatus</option>
-            </select>
-          </div>
-          <div class="filter-group">
-            <label for="sort-novel">Sort by</label>
-            <select id="sort-novel">
-              <option value="last_updated" selected>Last Updated</option>
-              <option value="title">Title</option>
-              <option value="reads">Reads</option>
-              <option value="rating">Rating</option>
-            </select>
-          </div>
-          <div class="filter-actions">
-            <a href="author_create-novel.html" class="btn btn-primary">
-              + Create New Novel
-            </a>
-          </div>
-        </div>
-        <!-- ================= NOVELS TABLE ================= -->
+
+        <!-- ================= ARCHIVED NOVELS TABLE ================= -->
         <div class="table-card">
-          <h2>Your Novels</h2>
+          <h2>Archived Novels</h2>
           <table>
             <thead>
               <tr>
                 <th>Title</th>
-                <th>Status</th>
-                <th>Genre</th>
-                <th>Chapters</th>
-                <th>Reads</th>
-                <th>Rating</th>
+                <th>Chapter</th>
+                <th>Archived On</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Shadows of the Crown</strong></td>
-                <td><span class="badge active">Ongoing</span></td>
-                <td>Fantasy</td>
+                <td><strong>The Hollow Crown</strong></td>
+                <td>14</td>
+                <td>Sep 12, 2026</td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-sm">
+                    Restore
+                  </button>
+                  <button type="button" class="btn btn-danger btn-sm">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Winter's Ember</strong></td>
+                <td>22</td>
+                <td>Aug 28, 2026</td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-sm">
+                    Restore
+                  </button>
+                  <button type="button" class="btn btn-danger btn-sm">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Echoes of the Void</strong></td>
+                <td>8</td>
+                <td>Aug 14, 2026</td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-sm">
+                    Restore
+                  </button>
+                  <button type="button" class="btn btn-danger btn-sm">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>The Crimson Veil</strong></td>
                 <td>24</td>
-                <td>12,843</td>
+                <td>Jul 30, 2026</td>
                 <td>
-                  <img
-                    src="../icons/star-fill.svg"
-                    alt="star-rating"
-                    class="star-rating"
-                  />
-                  4.8
-                </td>
-                <td>
-                  <button type="button" class="btn btn-sm">Edit</button>
                   <button type="button" class="btn btn-primary btn-sm">
-                    View
-                  </button>
-                  <button type="button" class="btn btn-danger btn-sm">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>Ember &amp; Ash</strong></td>
-                <td><span class="badge completed">Completed</span></td>
-                <td>Romance</td>
-                <td>32</td>
-                <td>8,210</td>
-                <td>
-                  <img
-                    src="../icons/star-fill.svg"
-                    alt="star-rating"
-                    class="star-rating"
-                  />
-                  4.6
-                </td>
-                <td>
-                  <button type="button" class="btn btn-sm">Edit</button>
-                  <button type="button" class="btn btn-primary btn-sm">
-                    View
-                  </button>
-                  <button type="button" class="btn btn-danger btn-sm">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>The Last Prophecy</strong></td>
-                <td><span class="badge active">Ongoing</span></td>
-                <td>Sci-Fi</td>
-                <td>18</td>
-                <td>5,672</td>
-                <td>
-                  <img
-                    src="../icons/star-fill.svg"
-                    alt="star-rating"
-                    class="star-rating"
-                  />
-                  4.2
-                </td>
-                <td>
-                  <button type="button" class="btn btn-sm">Edit</button>
-                  <button type="button" class="btn btn-primary btn-sm">
-                    View
-                  </button>
-                  <button type="button" class="btn btn-danger btn-sm">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>Starlight Drive</strong></td>
-                <td><span class="badge paused">On Hiatus</span></td>
-                <td>Young Adult</td>
-                <td>12</td>
-                <td>3,401</td>
-                <td>
-                  <img
-                    src="../icons/star-fill.svg"
-                    alt="star-rating"
-                    class="star-rating"
-                  />
-                  3.9
-                </td>
-                <td>
-                  <button type="button" class="btn btn-sm">Edit</button>
-                  <button type="button" class="btn btn-primary btn-sm">
-                    View
-                  </button>
-                  <button type="button" class="btn btn-danger btn-sm">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>The Lost Kingdom</strong></td>
-                <td><span class="badge draft">Draft</span></td>
-                <td>Fantasy</td>
-                <td>6</td>
-                <td>—</td>
-                <td>—</td>
-                <td>
-                  <button type="button" class="btn btn-sm">Edit</button>
-                  <button type="button" class="btn btn-primary btn-sm">
-                    View
-                  </button>
-                  <button type="button" class="btn btn-danger btn-sm">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>Beneath the Veil</strong></td>
-                <td><span class="badge completed">Completed</span></td>
-                <td>Mystery</td>
-                <td>20</td>
-                <td>1,950</td>
-                <td>
-                  <img
-                    src="../icons/star-fill.svg"
-                    alt="star-rating"
-                    class="star-rating"
-                  />
-                  4.0
-                </td>
-                <td>
-                  <button type="button" class="btn btn-sm">Edit</button>
-                  <button type="button" class="btn btn-primary btn-sm">
-                    View
+                    Restore
                   </button>
                   <button type="button" class="btn btn-danger btn-sm">
                     Delete
@@ -258,6 +133,7 @@
         </div>
       </main>
     </div>
+
     <!-- ================= SCRIPTS ================= -->
     <script src="../javascript/sweetalert2.all.min.js"></script>
     <script src="../javascript/author-browse.js"></script>

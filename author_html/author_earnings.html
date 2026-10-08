@@ -12,7 +12,6 @@
       href="../image/logo-nobackground-circle.png"
     />
   </head>
-
   <body>
     <div class="layout">
       <!-- ================= SIDEBAR ================= -->
@@ -40,18 +39,16 @@
         </nav>
         <a href="#" class="logout" id="logout" data-role="author">Logout</a>
       </aside>
-
       <!-- ================= MAIN CONTENT ================= -->
       <main class="main">
         <!-- TOPBAR -->
         <div class="topbar">
           <h1>Earnings</h1>
           <div class="user-chip">
-            <span>Ashley Jane</span>
-            <span class="avatar">AJ</span>
+            <span>Sarah J.</span>
+            <span class="avatar">SJ</span>
           </div>
         </div>
-
         <!-- ================= EARNINGS HEADER ================= -->
         <div class="earnings-header">
           <div>
@@ -60,60 +57,46 @@
               Track your novel earnings, reads, pending balance, and payouts.
             </p>
           </div>
-          <button type="button" class="btn btn-primary" id="withraw-btn">
-            Withdraw Funds
-          </button>
         </div>
-
         <!-- ================= STATS ================= -->
         <div class="stats">
           <div class="stat-card">
             <div class="stat-label">Total Lifetime Earnings</div>
-            <div class="stat-value">₱15,284.50</div>
+            <div class="stat-value">₱3,284.50</div>
             <div class="stat-change positive">Lifetime earnings</div>
           </div>
-
           <div class="stat-card">
             <div class="stat-label">Pending Balance</div>
             <div class="stat-value">₱312.00</div>
             <div class="stat-change warning">Pending payout</div>
           </div>
-
           <div class="stat-card">
             <div class="stat-label">Active Novels</div>
-            <div class="stat-value">6</div>
+            <div class="stat-value">4</div>
             <div class="stat-change positive">Currently active</div>
           </div>
         </div>
-
         <!-- ================= FILTER BAR ================= -->
         <div class="filter-bar">
-          <!-- PERIOD -->
           <div class="filter-group">
             <label for="period">Period</label>
             <select id="period">
               <option selected>All Time</option>
+              <option>October 2026</option>
               <option>September 2026</option>
               <option>August 2026</option>
-              <option>July 2026</option>
-              <option>June 2026</option>
             </select>
           </div>
-
-          <!-- BOOK -->
           <div class="filter-group">
             <label for="book-filter">Book</label>
             <select id="book-filter">
               <option selected>All Novels</option>
               <option>Shadows of the Crown</option>
               <option>Ember &amp; Ash</option>
-              <option>The Last Prophecy</option>
-              <option>Starlight Drive</option>
-              <option>Beneath the Veil</option>
+              <option>The Lost Kingdom</option>
+              <option>The Silent Oath</option>
             </select>
           </div>
-
-          <!-- BUTTONS -->
           <div class="filter-actions">
             <button type="button" class="btn" id="reset-filter">Reset</button>
             <button type="button" class="btn btn-primary" id="apply-filter">
@@ -121,11 +104,15 @@
             </button>
           </div>
         </div>
-
+        <!-- ================= WITHDRAW ROW (right-aligned) ================= -->
+        <div class="withdraw-row">
+          <button type="button" class="btn btn-primary" id="withdraw-btn">
+            Withdraw Funds
+          </button>
+        </div>
         <!-- ================= EARNINGS TABLE ================= -->
         <div class="table-card">
           <h2>Earnings Reports</h2>
-
           <table>
             <thead>
               <tr>
@@ -138,190 +125,297 @@
                 <th>Last Payout</th>
               </tr>
             </thead>
-
             <tbody>
-              <!-- 1 -->
-              <tr data-period="August 2026">
-                <td><strong>The Last Prophecy</strong></td>
-                <td><span class="badge active">Ongoing</span></td>
-                <td>August 2026</td>
-                <td>1,920</td>
-                <td>₱274.80</td>
-                <td>₱65.00</td>
-                <td>Aug 15, 2026</td>
-              </tr>
-
-              <!-- 2 -->
-              <tr data-period="July 2026">
+              <!-- Shadows of the Crown -->
+              <tr data-period="October 2026">
                 <td><strong>Shadows of the Crown</strong></td>
                 <td><span class="badge active">Ongoing</span></td>
-                <td>July 2026</td>
-                <td>3,210</td>
-                <td>₱455.40</td>
-                <td>₱72.00</td>
-                <td>Jul 01, 2026</td>
-              </tr>
-
-              <!-- 3 -->
-              <tr data-period="September 2026">
-                <td><strong>Beneath the Veil</strong></td>
-                <td><span class="badge completed">Completed</span></td>
-                <td>September 2026</td>
-                <td>850</td>
-                <td>₱72.00</td>
-                <td>—</td>
-                <td>Sep 10, 2026</td>
-              </tr>
-
-              <!-- 4 -->
-              <tr data-period="July 2026">
-                <td><strong>Ember &amp; Ash</strong></td>
-                <td><span class="badge completed">Completed</span></td>
-                <td>July 2026</td>
-                <td>2,640</td>
-                <td>₱386.50</td>
-                <td>—</td>
-                <td>Jul 15, 2026</td>
-              </tr>
-
-              <!-- 5 -->
-              <tr data-period="September 2026">
-                <td><strong>Starlight Drive</strong></td>
-                <td><span class="badge paused">On Hiatus</span></td>
-                <td>September 2026</td>
-                <td>1,120</td>
-                <td>₱145.50</td>
-                <td>₱42.00</td>
-                <td>Sep 01, 2026</td>
-              </tr>
-
-              <!-- 6 -->
-              <tr data-period="September 2026">
-                <td><strong>Shadows of the Crown</strong></td>
-                <td><span class="badge active">Ongoing</span></td>
-                <td>September 2026</td>
+                <td>October 2026</td>
                 <td>4,320</td>
                 <td>₱620.50</td>
                 <td>₱112.00</td>
+                <td>Oct 01, 2026</td>
+              </tr>
+              <tr data-period="September 2026">
+                <td><strong>Shadows of the Crown</strong></td>
+                <td><span class="badge active">Ongoing</span></td>
+                <td>September 2026</td>
+                <td>3,850</td>
+                <td>₱540.25</td>
+                <td>₱85.00</td>
                 <td>Sep 01, 2026</td>
               </tr>
-
-              <!-- 7 -->
-              <tr data-period="September 2026">
-                <td><strong>Ember &amp; Ash</strong></td>
-                <td><span class="badge completed">Completed</span></td>
-                <td>September 2026</td>
-                <td>2,840</td>
-                <td>₱420.75</td>
-                <td>—</td>
-                <td>Sep 15, 2026</td>
-              </tr>
-
-              <!-- 8 -->
-              <tr data-period="July 2026">
-                <td><strong>The Last Prophecy</strong></td>
-                <td><span class="badge active">Ongoing</span></td>
-                <td>July 2026</td>
-                <td>1,602</td>
-                <td>₱199.20</td>
-                <td>₱42.00</td>
-                <td>Jul 15, 2026</td>
-              </tr>
-
-              <!-- 9 -->
-              <tr data-period="August 2026">
-                <td><strong>Beneath the Veil</strong></td>
-                <td><span class="badge completed">Completed</span></td>
-                <td>August 2026</td>
-                <td>650</td>
-                <td>₱60.00</td>
-                <td>—</td>
-                <td>Aug 10, 2026</td>
-              </tr>
-
-              <!-- 10 -->
-              <tr data-period="August 2026">
-                <td><strong>Starlight Drive</strong></td>
-                <td><span class="badge paused">On Hiatus</span></td>
-                <td>August 2026</td>
-                <td>980</td>
-                <td>₱112.25</td>
-                <td>₱30.00</td>
-                <td>Aug 01, 2026</td>
-              </tr>
-
-              <!-- 11 -->
-              <tr data-period="September 2026">
-                <td><strong>The Last Prophecy</strong></td>
-                <td><span class="badge active">Ongoing</span></td>
-                <td>September 2026</td>
-                <td>2,150</td>
-                <td>₱310.20</td>
-                <td>₱98.50</td>
-                <td>Sep 15, 2026</td>
-              </tr>
-
-              <!-- 12 -->
               <tr data-period="August 2026">
                 <td><strong>Shadows of the Crown</strong></td>
                 <td><span class="badge active">Ongoing</span></td>
                 <td>August 2026</td>
-                <td>3,850</td>
-                <td>₱540.25</td>
-                <td>₱85.00</td>
+                <td>3,210</td>
+                <td>₱455.40</td>
+                <td>₱72.00</td>
                 <td>Aug 01, 2026</td>
               </tr>
-
-              <!-- 13 -->
+              <!-- Ember & Ash -->
+              <tr data-period="October 2026">
+                <td><strong>Ember &amp; Ash</strong></td>
+                <td><span class="badge completed">Completed</span></td>
+                <td>October 2026</td>
+                <td>2,840</td>
+                <td>₱420.75</td>
+                <td>—</td>
+                <td>Oct 15, 2026</td>
+              </tr>
+              <tr data-period="September 2026">
+                <td><strong>Ember &amp; Ash</strong></td>
+                <td><span class="badge completed">Completed</span></td>
+                <td>September 2026</td>
+                <td>2,730</td>
+                <td>₱398.50</td>
+                <td>—</td>
+                <td>Sep 15, 2026</td>
+              </tr>
               <tr data-period="August 2026">
                 <td><strong>Ember &amp; Ash</strong></td>
                 <td><span class="badge completed">Completed</span></td>
                 <td>August 2026</td>
-                <td>2,730</td>
-                <td>₱398.50</td>
+                <td>2,640</td>
+                <td>₱386.50</td>
                 <td>—</td>
                 <td>Aug 15, 2026</td>
               </tr>
-
-              <!-- 14 -->
-              <tr data-period="June 2026">
-                <td><strong>Beneath the Veil</strong></td>
-                <td><span class="badge completed">Completed</span></td>
-                <td>June 2026</td>
-                <td>450</td>
-                <td>₱45.00</td>
-                <td>—</td>
-                <td>Jun 10, 2026</td>
+              <!-- The Silent Oath -->
+              <tr data-period="October 2026">
+                <td><strong>The Silent Oath</strong></td>
+                <td><span class="badge pending">Pending Review</span></td>
+                <td>October 2026</td>
+                <td>2,150</td>
+                <td>₱310.20</td>
+                <td>₱98.50</td>
+                <td>Oct 15, 2026</td>
               </tr>
-
-              <!-- 15 -->
-              <tr data-period="July 2026">
-                <td><strong>Starlight Drive</strong></td>
-                <td><span class="badge paused">On Hiatus</span></td>
-                <td>July 2026</td>
-                <td>1,301</td>
-                <td>₱84.40</td>
-                <td>₱42.00</td>
-                <td>Jul 01, 2026</td>
+              <tr data-period="September 2026">
+                <td><strong>The Silent Oath</strong></td>
+                <td><span class="badge pending">Pending Review</span></td>
+                <td>September 2026</td>
+                <td>1,920</td>
+                <td>₱274.80</td>
+                <td>₱65.00</td>
+                <td>Sep 15, 2026</td>
+              </tr>
+              <!-- The Lost Kingdom -->
+              <tr data-period="October 2026">
+                <td><strong>The Lost Kingdom</strong></td>
+                <td><span class="badge draft">Draft</span></td>
+                <td>October 2026</td>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
+              </tr>
+              <tr data-period="September 2026">
+                <td><strong>The Lost Kingdom</strong></td>
+                <td><span class="badge draft">Draft</span></td>
+                <td>September 2026</td>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
               </tr>
             </tbody>
           </table>
-
-          <div class="table-footer">
-            <span>Showing earnings reports</span>
-            <span>
-              <a href="author_dashboard.html" class="link-primary"
-                >Back to Dashboard →</a
-              >
-            </span>
-          </div>
         </div>
       </main>
     </div>
-
+    <!-- ============================================
+     WITHDRAW FUNDS MODAL
+     ============================================ -->
+    <div class="modal-overlay" id="withdrawModal" aria-hidden="true">
+      <div
+        class="modal modal--withdraw"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="withdrawModalTitle"
+      >
+        <!-- Header -->
+        <div class="modal-header">
+          <div>
+            <h3 id="withdrawModalTitle">Withdraw Funds</h3>
+          </div>
+          <button class="modal-close" id="withdrawCloseBtn" aria-label="Close">
+            ✕
+          </button>
+        </div>
+        <!-- Body -->
+        <div class="modal-body">
+          <!-- Available balance strip -->
+          <div class="balance-strip">
+            <div>
+              <span class="balance-label">Available to withdraw</span>
+              <span class="balance-value" id="availableBalance">₱312.00</span>
+            </div>
+            <span class="balance-note"
+              >Minimum ₱100.00 · 2% processing fee</span
+            >
+          </div>
+          <!-- Two-column form -->
+          <form class="checkout-grid" id="withdrawForm" novalidate>
+            <!-- ============ LEFT COLUMN — Billing Details ============ -->
+            <div class="checkout-col">
+              <h4 class="col-title">Billing Details</h4>
+              <div class="form-group">
+                <label for="wFullName">Full Name:</label>
+                <input
+                  type="text"
+                  id="wFullName"
+                  placeholder="Enter Your Full Name"
+                  autocomplete="name"
+                />
+              </div>
+              <div class="form-group">
+                <label for="wEmail">Email:</label>
+                <input
+                  type="email"
+                  id="wEmail"
+                  placeholder="Enter Email Address"
+                  autocomplete="email"
+                />
+              </div>
+              <div class="form-group">
+                <label for="wAddress">Address:</label>
+                <input
+                  type="text"
+                  id="wAddress"
+                  placeholder="Enter Address"
+                  autocomplete="street-address"
+                />
+              </div>
+              <div class="form-group">
+                <label for="wCity">City:</label>
+                <input
+                  type="text"
+                  id="wCity"
+                  placeholder="Enter City"
+                  autocomplete="address-level2"
+                />
+              </div>
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="wState">State:</label>
+                  <input
+                    type="text"
+                    id="wState"
+                    placeholder="Enter State"
+                    autocomplete="address-level1"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="wZip">Zip Code:</label>
+                  <input
+                    type="text"
+                    id="wZip"
+                    placeholder="123 456"
+                    autocomplete="postal-code"
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- ============ RIGHT COLUMN — Withdraw Details ============ -->
+            <div class="checkout-col">
+              <h4 class="col-title">Withdraw Method</h4>
+              <!-- Method chips -->
+              <div class="form-group">
+                <label>Methods Accepted:</label>
+                <div class="method-chips" id="methodChips">
+                  <button
+                    type="button"
+                    class="method-chip selected"
+                    data-method="gcash"
+                  >
+                    GCash
+                  </button>
+                  <button type="button" class="method-chip" data-method="bank">
+                    Bank Transfer
+                  </button>
+                  <button
+                    type="button"
+                    class="method-chip"
+                    data-method="paypal"
+                  >
+                    PayPal
+                  </button>
+                </div>
+              </div>
+              <!-- Amount -->
+              <div class="form-group">
+                <label for="wAmount">
+                  Amount: <span style="color: var(--destructive)">*</span>
+                </label>
+                <div class="amount-input-row">
+                  <span class="currency-prefix">₱</span>
+                  <input
+                    type="number"
+                    id="wAmount"
+                    min="100"
+                    step="0.01"
+                    placeholder="0.00"
+                  />
+                  <button
+                    type="button"
+                    class="btn btn-outline btn-sm"
+                    id="wMaxBtn"
+                  >
+                    Max
+                  </button>
+                </div>
+                <span class="hint" id="wAmountHint">
+                  Minimum withdrawal: ₱100.00
+                </span>
+              </div>
+              <!-- Account name -->
+              <div class="form-group">
+                <label for="wAccountName">Name on Account:</label>
+                <input
+                  type="text"
+                  id="wAccountName"
+                  placeholder="Enter Account Name"
+                />
+              </div>
+              <!-- Account number -->
+              <div class="form-group">
+                <label for="wAccountNumber">
+                  Account Number / Email:
+                  <span style="color: var(--destructive)">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="wAccountNumber"
+                  placeholder="0917 123 4567 or you@email.com"
+                />
+              </div>
+              <!-- Ref / Notes -->
+              <div class="form-row-3">
+                <div class="form-group">
+                  <label for="wRefId">Ref. ID:</label>
+                  <input type="text" id="wRefId" placeholder="Optional" />
+                </div>
+                <div class="form-group">
+                  <label for="wNotes">Notes:</label>
+                  <input type="text" id="wNotes" placeholder="Optional" />
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer--full form-footer">
+              <button type="submit" class="cta-btn" id="withdrawSubmitBtn">
+                Proceed To Withdraw
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
     <!-- ================= JAVASCRIPT ================= -->
     <script src="../javascript/sweetalert2.all.min.js"></script>
     <script src="../javascript/author-filter.js"></script>
+    <script src="../javascript/withdraw.js"></script>
     <script src="../javascript/logout.js"></script>
   </body>
 </html>
