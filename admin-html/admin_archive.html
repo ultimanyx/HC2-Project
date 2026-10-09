@@ -32,9 +32,11 @@
             >Reported Novels</a
           >
 
-          <a href="admin_admanage-user.html" class="nav-item sub">Users</a>
+          <a href="admin_admanage-user.html" class="nav-item sub"
+            >Manage Users</a
+          >
           <a href="admin_usermanage-author.html" class="nav-item sub"
-            >Authors</a
+            >Manage Authors</a
           >
 
           <a href="admin_ad-management.html" class="nav-item sub"
@@ -66,14 +68,14 @@
             <div class="stat-change positive">All time</div>
           </div>
           <div class="stat-card">
-            <div class="stat-label">Restored</div>
-            <div class="stat-value">6</div>
-            <div class="stat-change positive">↑ This month</div>
+            <div class="stat-label">Archived Novels</div>
+            <div class="stat-value">24</div>
+            <div class="stat-change warning">65% of total</div>
           </div>
           <div class="stat-card">
-            <div class="stat-label">Auto-Archived</div>
-            <div class="stat-value">12</div>
-            <div class="stat-change warning">Inactive 90+ days</div>
+            <div class="stat-label">Archived Ads</div>
+            <div class="stat-value">13</div>
+            <div class="stat-change warning">35% of total</div>
           </div>
         </div>
 
@@ -83,108 +85,39 @@
             <input
               type="text"
               id="search-archive"
-              placeholder="Search archived novels..."
+              placeholder="Search archived items..."
             />
           </div>
           <div class="filter-group">
-            <label for="reason-filter">Reason</label>
-            <select id="reason-filter">
-              <option>All Reasons</option>
-              <option>Manual</option>
-              <option>Inactive</option>
-              <option>Reported</option>
-              <option>Completed</option>
+            <label for="type-filter">Type</label>
+            <select id="type-filter">
+              <option>All Types</option>
+              <option>Novel</option>
+              <option>Ad</option>
             </select>
-          </div>
-          <div class="filter-actions">
-            <button class="btn btn-primary">Export</button>
           </div>
         </div>
 
         <div class="table-card">
-          <h2>Archived Novels</h2>
+          <h2>Archived Items</h2>
           <table>
             <thead>
               <tr>
-                <th>Novel Title</th>
-                <th>Author</th>
-                <th>Genre</th>
+                <th>Title</th>
+                <th>Type</th>
+                <th>Owner</th>
                 <th>Archived Date</th>
-                <th>Reason</th>
                 <th>Status</th>
                 <th style="text-align: right">Actions</th>
               </tr>
             </thead>
             <tbody>
-              <!-- Row 1 -->
+              <!-- Row 1 — Novel -->
               <tr>
-                <td><strong>Starlight Drive</strong></td>
-                <td>George R.R. Martin</td>
-                <td>Young Adult</td>
-                <td>Aug 22, 2026</td>
-                <td>Completed</td>
-                <td>
-                  <span class="badge completed">
-                    <img src="../icons/check2.svg" alt="" class="badge-icon" />
-                    Completed
-                  </span>
-                </td>
-                <td style="text-align: right">
-                  <div class="action-group">
-                    <button class="btn btn-success" id="restore-starlight">
-                      <img src="../icons/play.svg" alt="" class="btn-icon" />
-                      Restore
-                    </button>
-                    <button class="btn btn-danger" id="delete-starlight">
-                      <img
-                        src="../icons/delete.svg"
-                        alt="delete"
-                        class="btn-icon"
-                      />
-                      Delete
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
-              <!-- Row 2 -->
-              <tr>
-                <td><strong>The Forgotten Path</strong></td>
-                <td>Juan Cruz</td>
-                <td>Mystery</td>
-                <td>Aug 15, 2026</td>
-                <td>Inactive 90+ days</td>
-                <td>
-                  <span class="badge paused">
-                    <img src="../icons/pause.svg" alt="" class="badge-icon" />
-                    Inactive
-                  </span>
-                </td>
-                <td style="text-align: right">
-                  <div class="action-group">
-                    <button class="btn btn-success" id="restore-forgotten">
-                      <img src="../icons/play.svg" alt="" class="btn-icon" />
-                      Restore
-                    </button>
-                    <button class="btn btn-danger" id="delete-forgotten">
-                      <img
-                        src="../icons/delete.svg"
-                        alt="delete"
-                        class="btn-icon"
-                      />
-                      Delete
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
-              <!-- Row 3 -->
-              <tr>
-                <td><strong>Midnight Reverie</strong></td>
-                <td>Maria Santos</td>
-                <td>Romance</td>
-                <td>Aug 09, 2026</td>
-                <td>Manual archive</td>
+                <td><strong>Shadows of the Crown</strong></td>
+                <td>Novel</td>
+                <td>Sarah J. Maas</td>
+                <td>Sept 8, 2026</td>
                 <td>
                   <span class="badge paused">
                     <img src="../icons/pause.svg" alt="" class="badge-icon" />
@@ -193,11 +126,11 @@
                 </td>
                 <td style="text-align: right">
                   <div class="action-group">
-                    <button class="btn btn-success" id="restore-midnight">
+                    <button class="btn btn-success" id="restore-shadows">
                       <img src="../icons/play.svg" alt="" class="btn-icon" />
                       Restore
                     </button>
-                    <button class="btn btn-danger" id="delete-midnight">
+                    <button class="btn btn-danger" id="delete-shadows">
                       <img
                         src="../icons/delete.svg"
                         alt="delete"
@@ -209,21 +142,84 @@
                 </td>
               </tr>
 
-              <!-- Row 4 -->
+              <!-- Row 2 — Ad -->
               <tr>
-                <td><strong>Beneath the Veil</strong></td>
-                <td>Sarah J. Maas</td>
-                <td>Fantasy</td>
-                <td>Jul 28, 2026</td>
-                <td>Reported content</td>
+                <td><strong>Nestle Milo Drink</strong></td>
+                <td>Ad</td>
+                <td>Nestlé Philippines</td>
+                <td>Sept 6, 2026</td>
                 <td>
-                  <span class="badge active">
-                    <img src="../icons/dot.svg" alt="" class="badge-icon" />
-                    Restored
+                  <span class="badge completed">
+                    <img src="../icons/check2.svg" alt="" class="badge-icon" />
+                    Completed
                   </span>
                 </td>
                 <td style="text-align: right">
                   <div class="action-group">
+                    <button class="btn btn-success" id="restore-nestle">
+                      <img src="../icons/play.svg" alt="" class="btn-icon" />
+                      Restore
+                    </button>
+                    <button class="btn btn-danger" id="delete-nestle">
+                      <img
+                        src="../icons/delete.svg"
+                        alt="delete"
+                        class="btn-icon"
+                      />
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 3 — Ad -->
+              <tr>
+                <td><strong>Scatter67</strong></td>
+                <td>Ad</td>
+                <td>Scatter Gaming</td>
+                <td>Sept 4, 2026</td>
+                <td>
+                  <span class="badge paused">
+                    <img src="../icons/pause.svg" alt="" class="badge-icon" />
+                    Archived
+                  </span>
+                </td>
+                <td style="text-align: right">
+                  <div class="action-group">
+                    <button class="btn btn-success" id="restore-scatter">
+                      <img src="../icons/play.svg" alt="" class="btn-icon" />
+                      Restore
+                    </button>
+                    <button class="btn btn-danger" id="delete-scatter">
+                      <img
+                        src="../icons/delete.svg"
+                        alt="delete"
+                        class="btn-icon"
+                      />
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 4 — Novel -->
+              <tr>
+                <td><strong>Beneath the Veil</strong></td>
+                <td>Novel</td>
+                <td>Sarah J. Maas</td>
+                <td>Aug 30, 2026</td>
+                <td>
+                  <span class="badge paused">
+                    <img src="../icons/pause.svg" alt="" class="badge-icon" />
+                    Archived
+                  </span>
+                </td>
+                <td style="text-align: right">
+                  <div class="action-group">
+                    <button class="btn btn-success" id="restore-beneath">
+                      <img src="../icons/play.svg" alt="" class="btn-icon" />
+                      Restore
+                    </button>
                     <button class="btn btn-danger" id="delete-beneath">
                       <img
                         src="../icons/delete.svg"
@@ -236,13 +232,38 @@
                 </td>
               </tr>
 
-              <!-- Row 5 -->
+              <!-- Row 5 — Novel (already restored) -->
               <tr>
-                <td><strong>A Broken Vow</strong></td>
-                <td>Ana Garcia</td>
-                <td>Drama</td>
-                <td>Jul 12, 2026</td>
-                <td>Completed</td>
+                <td><strong>Starlight Drive</strong></td>
+                <td>Novel</td>
+                <td>George R.R. Martin</td>
+                <td>Aug 22, 2026</td>
+                <td>
+                  <span class="badge active">
+                    <img src="../icons/dot.svg" alt="" class="badge-icon" />
+                    Restored
+                  </span>
+                </td>
+                <td style="text-align: right">
+                  <div class="action-group">
+                    <button class="btn btn-danger" id="delete-starlight">
+                      <img
+                        src="../icons/delete.svg"
+                        alt="delete"
+                        class="btn-icon"
+                      />
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 6 — Ad -->
+              <tr>
+                <td><strong>Coca Cola Coke</strong></td>
+                <td>Ad</td>
+                <td>Coca-Cola Beverages PH</td>
+                <td>Aug 18, 2026</td>
                 <td>
                   <span class="badge completed">
                     <img src="../icons/check2.svg" alt="" class="badge-icon" />
@@ -251,11 +272,11 @@
                 </td>
                 <td style="text-align: right">
                   <div class="action-group">
-                    <button class="btn btn-success" id="restore-vow">
+                    <button class="btn btn-success" id="restore-coke">
                       <img src="../icons/play.svg" alt="" class="btn-icon" />
                       Restore
                     </button>
-                    <button class="btn btn-danger" id="delete-vow">
+                    <button class="btn btn-danger" id="delete-coke">
                       <img
                         src="../icons/delete.svg"
                         alt="delete"
