@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Revenue Reports</title>
     <link rel="stylesheet" href="../css/admin_revenue-reports.css" />
-    <link rel="stylesheet" href="../css/sweetalert2.min.css">
-    
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
+
     <link
       rel="icon"
       type="image/png"
@@ -17,26 +17,27 @@
     <div class="layout">
       <!-- Sidebar -->
       <aside class="sidebar">
-        <div class="brand"><img
-            src="../image/logocopy.png"
-            alt="brandlogo"
-          />NovelNest</div>
+        <div class="brand">
+          <img src="../image/logocopy.png" alt="brandlogo" />NovelNest
+        </div>
 
         <nav class="nav">
-          <a href="admin.html" class="nav-item sub">
+          <a href="admin.html" class="nav-item">
             <span class="nav-icon"></span> Dashboard
           </a>
-
-          <div class="nav-section">Novel Management</div>
           <a href="admin_all-novels.html" class="nav-item sub">All Novels</a>
-          <a href="admin_pending-novel.html" class="nav-item sub">Pending Novels</a>
-          <a href="admin_reported-novels.html" class="nav-item sub">Reported Novels</a>
+          <a href="admin_pending-novel.html" class="nav-item sub"
+            >Pending Novels</a
+          >
+          <a href="admin_reported-novels.html" class="nav-item sub"
+            >Reported Novels</a
+          >
 
-          <div class="nav-section">User Management</div>
           <a href="admin_admanage-user.html" class="nav-item sub">Users</a>
-          <a href="admin_usermanage-author.html" class="nav-item sub">Authors</a>
+          <a href="admin_usermanage-author.html" class="nav-item sub"
+            >Authors</a
+          >
 
-          <div class="nav-section">Advertisement</div>
           <a href="admin_ad-management.html" class="nav-item sub"
             >Ad Management</a
           >
@@ -44,14 +45,13 @@
             >Revenue Reports</a
           >
 
-          <!-- <a href="#" class="nav-item"> Profile / Settings</a>
-        </nav> -->
+          <a href="admin_archive.html" class="nav-item sub">Archive</a>
+        </nav>
 
         <a href="#" class="logout" id="logout" data-role="admin"> Logout</a>
       </aside>
 
       <main class="main">
-
         <div class="topbar">
           <h1>Advertisement Management</h1>
           <div class="user-chip">
@@ -84,7 +84,6 @@
           </div>
         </div>
 
-   
         <div class="stats">
           <div class="stat-card">
             <div class="stat-label">
@@ -156,7 +155,16 @@
                 <td class="text-right">29,400</td>
                 <td class="text-right">₱94,100</td>
                 <td class="text-right">₱96.02</td>
-                <td><span class="badge paused"><img src="../icons/pause.svg" alt="pause-icon" class="pause-icon"> Paused</span></td>
+                <td>
+                  <span class="badge paused"
+                    ><img
+                      src="../icons/pause.svg"
+                      alt="pause-icon"
+                      class="pause-icon"
+                    />
+                    Paused</span
+                  >
+                </td>
               </tr>
               <tr>
                 <td><span class="fw-600">CTV Holiday Special</span></td>
@@ -165,7 +173,16 @@
                 <td class="text-right">11,160</td>
                 <td class="text-right">₱21,800</td>
                 <td class="text-right">₱35.16</td>
-                <td><span class="badge completed"><img src="../icons/check2.svg" alt="check-icon" class="check-icon">  Completed</span></td>
+                <td>
+                  <span class="badge completed"
+                    ><img
+                      src="../icons/check2.svg"
+                      alt="check-icon"
+                      class="check-icon"
+                    />
+                    Completed</span
+                  >
+                </td>
               </tr>
               <tr>
                 <td><span class="fw-600">Coca Cola Coke</span></td>
@@ -182,7 +199,7 @@
       </main>
     </div>
 
-  <script src="../javascript/sweetalert2.all.min.js"></script>
-  <script src="../javascript/logout.js"></script>
+    <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/logout.js"></script>
   </body>
 </html>

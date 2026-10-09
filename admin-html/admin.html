@@ -1,133 +1,128 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Dashboard</title>
-<link rel="stylesheet" href="../css/admin_.css">
-<link rel="stylesheet" href="../css/sweetalert2.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../css/admin_.css" />
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
 
- <link
+    <link
       rel="icon"
       type="image/png"
       href="../image/logo-nobackground-circle.png"
     />
-</head>
-<body>
- 
-  <div class="layout">
- 
-
-    <aside class="sidebar">
-      <div class="brand"><img
-            src="../image/logocopy.png"
-            alt="brandlogo"
-          />NovelNest</div>
- 
-      <nav class="nav">
-        <a href="admin.html" class="nav-item active">
-          <span class="nav-icon"></span> Dashboard
-        </a>
- 
-        <div class="nav-section">Novel Management</div>
-        <a href="admin_all-novels.html" class="nav-item sub">All Novels</a>
-        <a href="admin_pending-novel.html" class="nav-item sub">Pending Novels</a>
-        <a href="admin_reported-novels.html" class="nav-item sub">Reported Novels</a>
- 
-        <div class="nav-section">User Management</div>
-        <a href="admin_admanage-user.html" class="nav-item sub">Users</a>
-        <a href="admin_usermanage-author.html" class="nav-item sub">Authors</a>
- 
-        <div class="nav-section">Advertisement</div>
-        <a href="admin_ad-management.html" class="nav-item sub">Ad Management</a>
-        <a href="admin_revenue-reports.html" class="nav-item sub">Revenue Reports</a>
-        
-        <!-- <a href="#" class="nav-item"> Profile / Settings</a>
-      </nav>
-  -->
- 
-      <a href="#" class="logout" id="logout" data-role="admin"> Logout</a>
-    </aside>
-
-
-    <main class="main">
- 
-      <header class="topbar">
-        <h1>Overview</h1>
-        <div class="user-chip">
-          <span>Welcome, Admin</span>
-          <span class="avatar">A</span>
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <img src="../image/logocopy.png" alt="brandlogo" />NovelNest
         </div>
-      </header>
- 
 
-      <section class="stats">
-        <div class="stat-card">
-          <p class="stat-label">Total Novels</p>
-          <p class="stat-value">48</p>
-          <p class="stat-change positive">+12% this week</p>
-        </div>
- 
-        <div class="stat-card">
-          <p class="stat-label">Pending Approvals</p>
-          <p class="stat-value">5</p>
-          <p class="stat-change warning">Needs action</p>
-        </div>
- 
-        <div class="stat-card">
-          <p class="stat-label">Active Users</p>
-          <p class="stat-value">8,520</p>
-          <p class="stat-change positive">+5% this month</p>
-        </div>
- 
-        <div class="stat-card">
-          <p class="stat-label">Monthly Revenue</p>
-          <p class="stat-value">₱24,250</p>
-          <p class="stat-change positive">+18% increase</p>
-        </div>
-      </section>
- 
+        <nav class="nav">
+          <a href="admin.html" class="nav-item active"
+            ><span class="nav-icon"></span> Dashboard
+          </a>
+          <a href="admin_all-novels.html" class="nav-item sub">All Novels</a>
+          <a href="admin_pending-novel.html" class="nav-item sub"
+            >Pending Novels</a
+          >
+          <a href="admin_reported-novels.html" class="nav-item sub"
+            >Reported Novels</a
+          >
 
-      <section class="table-card">
-        <h2>Recently Submitted Novels</h2>
- 
-        <table>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Category</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Shadows of Eldoria</td>
-              <td>J.R. Walker</td>
-              <td>Fantasy</td>
-              <td><span class="badge pending">Pending</span></td>
-            </tr>
-            <tr>
-              <td>Cyber Genesis</td>
-              <td>Aria Chen</td>
-              <td>Sci-Fi</td>
-              <td><span class="badge approved">Approved</span></td>
-            </tr>
-            <tr>
-              <td>Love in Verona</td>
-              <td>Elena Rostova</td>
-              <td>Romance</td>
-              <td><span class="badge approved">Approved</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </section>  
- 
-    </main>
-  </div>
- 
-  <script src="../javascript/sweetalert2.all.min.js"></script>
-  <script src="../javascript/logout.js"></script>
-</body>
+          <a href="admin_admanage-user.html" class="nav-item sub">Users</a>
+          <a href="admin_usermanage-author.html" class="nav-item sub"
+            >Authors</a
+          >
+
+          <a href="admin_ad-management.html" class="nav-item sub"
+            >Ad Management</a
+          >
+          <a href="admin_revenue-reports.html" class="nav-item sub"
+            >Revenue Reports</a
+          >
+
+          <a href="admin_archive.html" class="nav-item sub">Archive</a>
+        </nav>
+
+        <a href="#" class="logout" id="logout" data-role="admin"> Logout</a>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <h1>Overview</h1>
+          <div class="user-chip">
+            <span>Welcome, Admin</span>
+            <span class="avatar">A</span>
+          </div>
+        </header>
+
+        <section class="stats">
+          <div class="stat-card">
+            <p class="stat-label">Total Novels</p>
+            <p class="stat-value">48</p>
+            <p class="stat-change positive">+12% this week</p>
+          </div>
+
+          <div class="stat-card">
+            <p class="stat-label">Pending Approvals</p>
+            <p class="stat-value">5</p>
+            <p class="stat-change warning">Needs action</p>
+          </div>
+
+          <div class="stat-card">
+            <p class="stat-label">Active Users</p>
+            <p class="stat-value">8,520</p>
+            <p class="stat-change positive">+5% this month</p>
+          </div>
+
+          <div class="stat-card">
+            <p class="stat-label">Monthly Revenue</p>
+            <p class="stat-value">₱24,250</p>
+            <p class="stat-change positive">+18% increase</p>
+          </div>
+        </section>
+
+        <section class="table-card">
+          <h2>Recently Submitted Novels</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Category</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Shadows of Eldoria</td>
+                <td>J.R. Walker</td>
+                <td>Fantasy</td>
+                <td><span class="badge pending">Pending</span></td>
+              </tr>
+              <tr>
+                <td>Cyber Genesis</td>
+                <td>Aria Chen</td>
+                <td>Sci-Fi</td>
+                <td><span class="badge approved">Approved</span></td>
+              </tr>
+              <tr>
+                <td>Love in Verona</td>
+                <td>Elena Rostova</td>
+                <td>Romance</td>
+                <td><span class="badge approved">Approved</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+
+    <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/logout.js"></script>
+  </body>
 </html>
- 

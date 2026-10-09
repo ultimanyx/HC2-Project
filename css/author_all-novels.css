@@ -46,21 +46,25 @@
   src: url("../font/Fraunces/static/Fraunces_72pt-Regular.ttf")
     format("truetype");
 }
+
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   background-color: var(--background);
   color: var(--foreground);
   font-size: 15px;
-  line-height: 1.4; /* FIX: tighter line spacing */
+  line-height: 1.4;
 }
+
 a {
   text-decoration: none;
   color: inherit;
 }
+
 .layout {
   display: flex;
   min-height: 100vh;
 }
+
 .sidebar {
   width: 270px;
   background-color: var(--card-background);
@@ -69,6 +73,7 @@ a {
   display: flex;
   flex-direction: column;
 }
+
 .brand {
   display: flex;
   justify-content: center;
@@ -81,10 +86,12 @@ a {
   color: var(--foreground);
   gap: 8px;
 }
+
 .brand img {
   width: 50px;
   height: 50px;
 }
+
 .nav {
   display: flex;
   flex-direction: column;
@@ -145,6 +152,7 @@ a {
   color: var(--destructive);
   background-color: rgba(220, 38, 38, 0.08);
 }
+
 .main {
   flex: 1;
   padding: 24px 32px;
@@ -227,9 +235,13 @@ a {
 }
 .stat-change.positive {
   color: #3f7d4f;
+  filter: brightness(0) saturate(100%) invert(45%) sepia(20%) saturate(943%)
+    hue-rotate(83deg) brightness(90%) contrast(91%);
 }
 .stat-change.warning {
   color: var(--primary);
+  filter: brightness(0) saturate(100%) invert(44%) sepia(68%) saturate(567%)
+    hue-rotate(352deg) brightness(95%) contrast(86%);
 }
 .stat-card--reported {
   display: flex;
