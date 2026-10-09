@@ -363,10 +363,14 @@ a {
 
 .stat-change.positive {
   color: #3f7d4f;
+  filter: brightness(0) saturate(100%) invert(43%) sepia(16%) saturate(1181%)
+    hue-rotate(83deg) brightness(93%) contrast(90%);
 }
 
 .stat-change.warning {
   color: #b8721f;
+  filter: brightness(0) saturate(100%) invert(44%) sepia(83%) saturate(437%)
+    hue-rotate(352deg) brightness(92%) contrast(94%);
 }
 
 /* ---------- Table card ---------- */
@@ -533,4 +537,15 @@ tbody tr:last-child td {
 
 .link-primary:hover {
   text-decoration: underline;
+}
+
+/* =====================================================
+   SWEETALERT — must sit above the withdraw modal
+===================================================== */
+.swal2-container {
+  z-index: 9999 !important;
+}
+
+.swal2-popup {
+  z-index: 10000 !important;
 }

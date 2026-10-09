@@ -483,3 +483,14 @@ tbody tr:last-child td {
   background: rgba(220, 38, 38, 0.1);
   color: #b91c1c;
 }
+
+/* =====================================================
+   SWEETALERT — must sit above the withdraw modal
+===================================================== */
+.swal2-container {
+  z-index: 9999 !important;
+}
+
+.swal2-popup {
+  z-index: 10000 !important;
+}

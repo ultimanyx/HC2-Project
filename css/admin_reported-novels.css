@@ -427,3 +427,14 @@ tbody tr:last-child td {
   flex-wrap: wrap;
   justify-content: flex-end;
 }
+
+/* =====================================================
+   SWEETALERT — must sit above the withdraw modal
+===================================================== */
+.swal2-container {
+  z-index: 9999 !important;
+}
+
+.swal2-popup {
+  z-index: 10000 !important;
+}
