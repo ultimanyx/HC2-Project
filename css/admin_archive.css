@@ -4,63 +4,34 @@
   box-sizing: border-box;
 }
 
-/* =====================================================
-   ROOT VARIABLES
-===================================================== */
+/* --- ROOT ---*/
 
 :root {
-  /* Main */
   --background: #f8f6f1;
   --foreground: #1a1826;
-
-  /* Cards */
   --card-background: #ffffff;
   --card-foreground: #1a1826;
-
-  /* Primary */
   --primary: #b8721f;
   --primary-foreground: #ffffff;
-
-  /* Secondary */
   --secondary: #ede9e1;
   --secondary-foreground: #1a1826;
-
-  /* Muted */
   --muted: #ede9e1;
   --muted-foreground: #6b6680;
-
-  /* Accent */
   --accent: #6d28d9;
   --accent-foreground: #ffffff;
-
-  /* Border */
   --border: rgba(26, 24, 38, 0.1);
-
-  /* Input */
   --input-background: #ede9e1;
-
-  /* Focus */
   --ring: #b8721f;
   --focus-ring: rgba(184, 114, 31, 0.18);
-
-  /* Destructive */
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
-
-  /* Links */
   --link: #3b6f91;
   --link-hover: #2c536d;
-
-  /* Shadows */
   --shadow:
     0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
-
-  /* Footer */
   --footer-background: #1a1826;
   --footer-foreground: #ffffff;
   --footer-muted: #d8d0c8;
-
-  /* Fonts */
   --font-body: "Plus_Jakarta_Sans", sans-serif;
   --font-heading: "Fraunces", serif;
 
@@ -68,7 +39,7 @@
   --status-active-bg: rgba(63, 125, 79, 0.15);
   --status-active-fg: #2f5d3a;
 
-  /* Status — Paused (amber) */
+  /* Status — Paused / Archived (amber) */
   --status-paused-bg: rgba(184, 114, 31, 0.15);
   --status-paused-fg: #8a5410;
 
@@ -77,9 +48,7 @@
   --status-completed-fg: #6b6680;
 }
 
-/* =====================================================
-   FONTS
-===================================================== */
+/* --- Font ---*/
 
 @font-face {
   font-family: "Poppins";
@@ -227,7 +196,7 @@ a {
 .user-chip {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   font-size: 16px;
   color: #6b6680;
 }
@@ -245,80 +214,7 @@ a {
   font-size: 14px;
 }
 
-/* ---------- Filter Bar ---------- */
-.filter-bar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px 16px;
-  background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 12px 20px;
-  margin-bottom: 20px;
-}
-
-.filter-group {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.filter-group label {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--muted-foreground);
-}
-
-.filter-group select,
-.filter-group input {
-  background: var(--input-background);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  margin-right: 0;
-  padding: 6px 12px;
-  font-size: 15px;
-  font-family: var(--font-body);
-  color: var(--foreground);
-  outline: none;
-  transition: 0.15s;
-}
-
-.filter-group select:focus,
-.filter-group input:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px var(--focus-ring);
-}
-
-.filter-actions {
-  margin-left: auto;
-  display: flex;
-  gap: 6px;
-}
-
-/* button style */
-.btn {
-  padding: 14px 20px;
-  border-radius: 6px;
-  font-size: 15px;
-  font-weight: 600;
-  border: none;
-  background: var(--secondary);
-  color: var(--secondary-foreground);
-  transition: 0.15s;
-  cursor: pointer;
-}
-
-.btn-primary {
-  background: var(--primary);
-  color: #ffffff;
-}
-
-.btn-primary:hover {
-  background: #9a5f16;
-}
-
-/* ---------- Stat cards ---------- */
+/* ---------- Stats cards ---------- */
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -359,6 +255,82 @@ a {
   color: #b8721f;
 }
 
+/* ---------- Filter Bar ---------- */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.filter-group label {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--muted-foreground);
+}
+
+.filter-group select,
+.filter-group input {
+  background: var(--input-background);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 15px;
+  font-family: var(--font-body);
+  color: var(--foreground);
+  outline: none;
+  transition: 0.15s;
+}
+
+.filter-group input {
+  width: 260px;
+}
+
+.filter-group select:focus,
+.filter-group input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.filter-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 6px;
+}
+
+/* ---------- Buttons (filter actions) ---------- */
+.btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-body), sans-serif;
+  border: none;
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #ffffff;
+}
+.btn-primary:hover {
+  background: #9a5f16;
+}
+
 /* ---------- Table card ---------- */
 .table-card {
   margin-top: 10px;
@@ -378,6 +350,7 @@ a {
 table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 900px;
 }
 
 thead th {
@@ -387,15 +360,16 @@ thead th {
   letter-spacing: 0.03em;
   color: #6b6680;
   font-weight: 600;
-  padding: 0 24px 10px 0;
+  padding: 0 20px 10px 0;
   border-bottom: 1px solid rgba(26, 24, 38, 0.1);
 }
 
 tbody td {
   font-size: 16px;
-  padding: 12px 24px 12px 0;
+  padding: 12px 20px 12px 0;
   border-bottom: 1px solid rgba(26, 24, 38, 0.06);
   color: #1a1826;
+  vertical-align: middle;
 }
 
 thead th:last-child,
@@ -405,14 +379,6 @@ tbody td:last-child {
 
 tbody tr:last-child td {
   border-bottom: none;
-}
-
-.fw-600 {
-  font-weight: 600;
-}
-
-.text-right {
-  text-align: right;
 }
 
 /* =====================================================
@@ -431,12 +397,11 @@ tbody tr:last-child td {
 }
 
 .badge-icon {
-  width: 8px; /* small dot */
+  width: 8px;
   height: 8px;
   flex-shrink: 0;
 }
 
-/* Active — uses --status-active-* */
 .badge.active {
   background-color: var(--status-active-bg);
   color: var(--status-active-fg);
@@ -446,7 +411,6 @@ tbody tr:last-child td {
     hue-rotate(85deg) brightness(94%) contrast(90%);
 }
 
-/* Paused — uses --status-paused-* */
 .badge.paused {
   background-color: var(--status-paused-bg);
   color: var(--status-paused-fg);
@@ -458,7 +422,6 @@ tbody tr:last-child td {
     hue-rotate(3deg) brightness(91%) contrast(91%);
 }
 
-/* Completed — uses --status-completed-* */
 .badge.completed {
   background-color: var(--status-completed-bg);
   color: var(--status-completed-fg);
@@ -468,6 +431,47 @@ tbody tr:last-child td {
   height: 12px;
   filter: brightness(0) saturate(100%) invert(46%) sepia(6%) saturate(607%)
     hue-rotate(215deg) brightness(92%) contrast(86%);
+}
+
+/* =====================================================
+   ACTION BUTTONS — small, fixed width, with icon
+===================================================== */
+
+.action-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.btn-success,
+.btn-danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 105px;
+  padding: 6px 0;
+  border: none;
+  border-radius: 6px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-success {
+  background: #3f7d4f;
+}
+.btn-danger {
+  background: #dc2626;
+}
+
+.btn-icon {
+  width: 13px;
+  height: 13px;
+  filter: brightness(0) invert(1);
 }
 
 /* =====================================================
