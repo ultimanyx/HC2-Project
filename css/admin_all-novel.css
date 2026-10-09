@@ -300,7 +300,7 @@ a {
   gap: 6px;
 }
 
-/* --- Button ---*/
+/* --- Buttons ---*/
 
 .btn {
   padding: 8px 16px;
@@ -333,6 +333,11 @@ a {
   color: #ffffff;
 }
 
+.btn-success-muted {
+  background: #33683f;
+  color: #ffffff;
+}
+
 .btn-success:hover {
   background: #2f5d3a;
 }
@@ -358,10 +363,6 @@ a {
 .btn-sm {
   padding: 4px 12px;
   font-size: 13px;
-}
-
-.btn-sm + .btn-sm {
-  margin-left: 4px;
 }
 
 /* --- Table ---*/

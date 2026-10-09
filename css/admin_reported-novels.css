@@ -375,38 +375,69 @@ tbody tr:last-child td {
   color: #6b6680;
 }
 
-/* ---------- Buttons ---------- */
+/* --- Buttons ---*/
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+  transition: 0.15s;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  background: #ddd7cb;
+}
 
 .btn-primary {
   background: var(--primary);
-  color: #fff;
-  border: none;
-  padding: 9px 20px;
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: 600;
-  font-family: var(--font-body), sans-serif;
-  cursor: pointer;
+  color: #ffffff;
 }
 
 .btn-primary:hover {
   background: #9a5f16;
 }
 
-.btn-secondary {
-  background: #ede9e1;
-  color: #1a1826;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  font-family: var(--font-body), sans-serif;
-  cursor: pointer;
+.btn-success {
+  background: #3f7d4f;
+  color: #ffffff;
 }
 
-.btn-secondary:hover {
-  background: #ddd7cb;
+.btn-success-muted {
+  background: #33683f;
+  color: #ffffff;
+}
+
+.btn-success:hover {
+  background: #2f5d3a;
+}
+
+.btn-warning {
+  background: #d18a24;
+  color: #ffffff;
+}
+
+.btn-warning:hover {
+  background: #b8721f;
+}
+
+.btn-danger {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.btn-danger:hover {
+  background: #b91c1c;
+}
+
+.btn-sm {
+  padding: 4px 12px;
+  font-size: 13px;
 }
 
 .action-group {
@@ -414,7 +445,6 @@ tbody tr:last-child td {
   align-items: center;
   gap: 6px;
   flex-wrap: wrap;
-  justify-content: flex-end;
 }
 
 /* =====================================================

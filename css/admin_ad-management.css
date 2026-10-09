@@ -385,94 +385,47 @@ tbody tr:last-child td {
   background: #ddd7cb;
 }
 
-.btn-danger {
-  background: rgba(220, 38, 38, 0.1);
-  color: #b91c1c;
-  border: none;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  font-family: var(--font-body), sans-serif;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.btn-danger:hover {
-  background: rgba(220, 38, 38, 0.18);
-}
-
-.btn-success {
-  background: rgba(63, 125, 79, 0.15);
-  color: #2f5d3a;
-  border: none;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  font-family: var(--font-body), sans-serif;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.btn-success:hover {
-  background: rgba(63, 125, 79, 0.25);
-}
-
-.btn-warning {
-  background: rgba(184, 114, 31, 0.15);
-  color: #8a5410;
-  border: none;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  font-family: var(--font-body), sans-serif;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.btn-warning:hover {
-  background: rgba(184, 114, 31, 0.25);
-}
+/* =====================================================
+   ACTION BUTTONS — small, fixed width, with icon
+===================================================== */
 
 .action-group {
   display: flex;
   align-items: center;
   gap: 6px;
-  flex-wrap: wrap;
   justify-content: flex-end;
 }
 
-.btn-sm {
-  padding: 3px 10px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  font-family: var(--font-body), sans-serif;
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 105px;
+  padding: 6px 0;
   border: none;
-  display: inline-block;
+  border-radius: 6px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
   cursor: pointer;
-  transition: opacity 0.2s;
 }
 
-.btn-sm:hover {
-  opacity: 0.8;
+.btn-warning {
+  background: #d18a24;
+}
+.btn-success {
+  background: #3f7d4f;
+}
+.btn-danger {
+  background: #dc2626;
 }
 
-.btn-pause {
-  background: rgba(184, 114, 31, 0.15);
-  color: #8a5410;
-}
-
-.btn-resume {
-  background: rgba(63, 125, 79, 0.15);
-  color: #2f5d3a;
-}
-
-.btn-remove {
-  background: rgba(220, 38, 38, 0.1);
-  color: #b91c1c;
+.btn-icon {
+  width: 13px;
+  height: 13px;
+  filter: brightness(0) invert(1);
 }
 
 /* =====================================================
