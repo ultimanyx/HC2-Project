@@ -78,19 +78,15 @@ a {
   color: inherit;
 }
 
-/* --- Layout ---*/
-
 .layout {
   display: flex;
   min-height: 100vh;
 }
 
-/* --- Sidebar ---*/
-
 .sidebar {
   width: 270px;
-  background-color: #ffffff;
-  border-right: 1px solid rgba(26, 24, 38, 0.1);
+  background-color: var(--card-background);
+  border-right: 1px solid var(--border);
   padding: 20px 14px;
   display: flex;
   flex-direction: column;
@@ -103,9 +99,9 @@ a {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 20px;
-  padding-left: 0px;
+  padding-left: 0;
   padding-right: 60px;
-  color: #1a1826;
+  color: var(--foreground);
   gap: 8px;
 }
 
@@ -117,57 +113,49 @@ a {
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 10px;
   flex: 1;
 }
-
 .nav-item {
   font-size: 18px;
   font-weight: 400;
   margin-top: 3px;
-  color: #6b6680;
+  color: var(--muted-foreground);
   padding: 7px 10px;
   border-radius: 6px;
 }
-
 .nav-item.sub {
   padding-left: 16px;
-  color: #6b6680;
+  color: var(--muted-foreground);
   font-size: 16px;
+  font-weight: 400;
 }
-
 .nav-item.active {
   background-color: rgba(184, 114, 31, 0.12);
-  color: #b8721f;
+  color: var(--primary);
   font-weight: 600;
   font-size: 16px;
 }
-
 .nav-item:hover {
-  background-color: #ede9e1;
+  background-color: var(--secondary);
 }
-
 .nav-icon {
   margin-right: 6px;
 }
-
 .nav-section {
   font-size: 21px;
   font-weight: 600;
-  color: #1a1826;
+  color: var(--foreground);
   margin-top: 14px;
   margin-bottom: 3px;
   padding-left: 10px;
 }
-
-/* --- Log 0ut ---*/
-
 .logout {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 15px;
-  color: #6b6680;
+  color: var(--muted-foreground);
   padding: 10px 14px;
   margin-top: auto;
   border-top: 1px solid var(--border);
@@ -178,9 +166,8 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
-
 .logout:hover {
-  color: #dc2626;
+  color: var(--destructive);
   background-color: rgba(220, 38, 38, 0.08);
 }
 
@@ -358,6 +345,13 @@ tbody tr:last-child td {
   font-weight: 600;
 }
 
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
 /* =====================================================
    STATUS BADGE
 ===================================================== */
@@ -388,42 +382,74 @@ tbody tr:last-child td {
   color: #6b6680;
 }
 
-/* =====================================================
-   BUTTONS
-===================================================== */
+/* --- Buttons ---*/
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 105px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: pointer;
+  transition: 0.15s;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  background: #ddd7cb;
+}
 
 .btn-primary {
   background: var(--primary);
   color: #ffffff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  font-family: var(--font-body), sans-serif;
-  cursor: pointer;
-  transition: 0.15s;
 }
 
 .btn-primary:hover {
   background: #9a5f16;
 }
 
-.btn-secondary {
-  background: #ede9e1;
-  color: #1a1826;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  font-family: var(--font-body), sans-serif;
-  cursor: pointer;
-  transition: 0.15s;
+.btn-success {
+  background: #3f7d4f;
+  color: #ffffff;
 }
 
-.btn-secondary:hover {
-  background: #ddd7cb;
+.btn-success-muted {
+  background: #33683f;
+  color: #ffffff;
+}
+
+.btn-success:hover {
+  background: #2f5d3a;
+}
+
+.btn-warning {
+  background: #d18a24;
+  color: #ffffff;
+}
+
+.btn-warning:hover {
+  background: #b8721f;
+}
+
+.btn-danger {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.btn-danger:hover {
+  background: #b91c1c;
+}
+
+.btn-sm {
+  padding: 4px 12px;
+  font-size: 13px;
 }
 
 /* =====================================================
@@ -435,4 +461,19 @@ tbody tr:last-child td {
   align-items: center;
   gap: 6px;
   flex-wrap: wrap;
+}
+
+.action {
+  margin-left: 45px;
+}
+
+/* =====================================================
+   SWEETALERT — must sit above the withdraw modal
+===================================================== */
+.swal2-container {
+  z-index: 9999 !important;
+}
+
+.swal2-popup {
+  z-index: 10000 !important;
 }

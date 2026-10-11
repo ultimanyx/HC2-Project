@@ -5,7 +5,7 @@
 }
 
 /* =====================================================
-   ROOT VARIABLES 
+   ROOT VARIABLES
 ===================================================== */
 
 :root {
@@ -63,6 +63,18 @@
   /* Fonts */
   --font-body: "Plus_Jakarta_Sans", sans-serif;
   --font-heading: "Fraunces", serif;
+
+  /* Status — Active (green) */
+  --status-active-bg: rgba(63, 125, 79, 0.15);
+  --status-active-fg: #2f5d3a;
+
+  /* Status — Paused (amber) */
+  --status-paused-bg: rgba(184, 114, 31, 0.15);
+  --status-paused-fg: #8a5410;
+
+  /* Status — Completed (gray) */
+  --status-completed-bg: #ede9e1;
+  --status-completed-fg: #6b6680;
 }
 
 /* =====================================================
@@ -91,7 +103,7 @@ body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   background-color: #f8f6f1;
   color: #1a1826;
-  font-size: 15px; /* was 17px */
+  font-size: 15px;
 }
 
 a {
@@ -99,17 +111,15 @@ a {
   color: inherit;
 }
 
-/* ---------- Layout ---------- */
 .layout {
   display: flex;
   min-height: 100vh;
 }
 
-/* ---------- Sidebar ---------- */
 .sidebar {
   width: 270px;
-  background-color: #ffffff;
-  border-right: 1px solid rgba(26, 24, 38, 0.1);
+  background-color: var(--card-background);
+  border-right: 1px solid var(--border);
   padding: 20px 14px;
   display: flex;
   flex-direction: column;
@@ -122,9 +132,9 @@ a {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 20px;
-  padding-left: 0px;
+  padding-left: 0;
   padding-right: 60px;
-  color: #1a1826;
+  color: var(--foreground);
   gap: 8px;
 }
 
@@ -136,55 +146,49 @@ a {
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 10px;
   flex: 1;
 }
-
 .nav-item {
   font-size: 18px;
   font-weight: 400;
   margin-top: 3px;
-  color: #6b6680;
+  color: var(--muted-foreground);
   padding: 7px 10px;
   border-radius: 6px;
 }
-
 .nav-item.sub {
   padding-left: 16px;
-  color: #6b6680;
+  color: var(--muted-foreground);
   font-size: 16px;
+  font-weight: 400;
 }
-
 .nav-item.active {
   background-color: rgba(184, 114, 31, 0.12);
-  color: #b8721f;
+  color: var(--primary);
   font-weight: 600;
   font-size: 16px;
 }
-
 .nav-item:hover {
-  background-color: #ede9e1;
+  background-color: var(--secondary);
 }
-
 .nav-icon {
   margin-right: 6px;
 }
-
 .nav-section {
   font-size: 21px;
   font-weight: 600;
-  color: #1a1826;
+  color: var(--foreground);
   margin-top: 14px;
   margin-bottom: 3px;
   padding-left: 10px;
 }
-
 .logout {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 15px;
-  color: #6b6680;
+  color: var(--muted-foreground);
   padding: 10px 14px;
   margin-top: auto;
   border-top: 1px solid var(--border);
@@ -195,9 +199,8 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
-
 .logout:hover {
-  color: #dc2626;
+  color: var(--destructive);
   background-color: rgba(220, 38, 38, 0.08);
 }
 
@@ -295,7 +298,7 @@ a {
 
 /* button style */
 .btn {
-  padding: 8px 16px;
+  padding: 14px 20px;
   border-radius: 6px;
   font-size: 15px;
   font-weight: 600;
@@ -303,6 +306,7 @@ a {
   background: var(--secondary);
   color: var(--secondary-foreground);
   transition: 0.15s;
+  cursor: pointer;
 }
 
 .btn-primary {
@@ -355,11 +359,6 @@ a {
   color: #b8721f;
 }
 
-.check-icon {
-  filter: brightness(0) saturate(100%) invert(50%) sepia(22%) saturate(1336%)
-    hue-rotate(70deg) brightness(98%) contrast(100%);
-}
-
 /* ---------- Table card ---------- */
 .table-card {
   margin-top: 10px;
@@ -367,6 +366,7 @@ a {
   border: 1px solid rgba(26, 24, 38, 0.1);
   border-radius: 10px;
   padding: 20px;
+  overflow-x: auto;
 }
 
 .table-card h2 {
@@ -387,41 +387,98 @@ thead th {
   letter-spacing: 0.03em;
   color: #6b6680;
   font-weight: 600;
-  padding-bottom: 10px;
+  padding: 0 24px 10px 0;
   border-bottom: 1px solid rgba(26, 24, 38, 0.1);
 }
 
 tbody td {
   font-size: 16px;
-  padding: 12px 0;
+  padding: 12px 24px 12px 0;
   border-bottom: 1px solid rgba(26, 24, 38, 0.06);
   color: #1a1826;
+}
+
+thead th:last-child,
+tbody td:last-child {
+  padding-right: 0;
 }
 
 tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* Badge / status pills */
+.fw-600 {
+  font-weight: 600;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+/* =====================================================
+   BADGES 
+===================================================== */
 .badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 108px;
+  height: 28px;
+  padding: 0 12px;
   font-size: 13px;
   font-weight: 600;
-  padding: 3px 12px;
+  line-height: 1;
   border-radius: 20px;
+  white-space: nowrap;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.badge-icon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  object-fit: contain;
 }
 
 .badge.active {
-  background-color: rgba(63, 125, 79, 0.15);
-  color: #2f5d3a;
+  background-color: var(--status-active-bg);
+  color: var(--status-active-fg);
+}
+.badge.active .badge-icon {
+  filter: brightness(0) saturate(100%) invert(31%) sepia(14%) saturate(1134%)
+    hue-rotate(85deg) brightness(94%) contrast(90%);
 }
 
 .badge.paused {
-  background-color: rgba(184, 114, 31, 0.15);
-  color: #8a5410;
+  background-color: var(--status-paused-bg);
+  color: var(--status-paused-fg);
+}
+.badge.paused .badge-icon {
+  filter: brightness(0) saturate(100%) invert(38%) sepia(51%) saturate(721%)
+    hue-rotate(3deg) brightness(91%) contrast(91%);
 }
 
 .badge.completed {
-  background-color: #ede9e1;
-  color: #6b6680;
+  background-color: var(--status-completed-bg);
+  color: var(--status-completed-fg);
+}
+.badge.completed .badge-icon {
+  filter: brightness(0) saturate(100%) invert(46%) sepia(6%) saturate(607%)
+    hue-rotate(215deg) brightness(92%) contrast(86%);
+}
+
+/* =====================================================
+   SWEETALERT — must sit above the withdraw modal
+===================================================== */
+.swal2-container {
+  z-index: 9999 !important;
+}
+
+.swal2-popup {
+  z-index: 10000 !important;
 }

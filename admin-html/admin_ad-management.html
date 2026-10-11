@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Advertisment Management</title>
     <link rel="stylesheet" href="../css/admin_ad-management.css" />
-    <link rel="stylesheet" href="../css/sweetalert2.min.css">
-    
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
+
     <link
       rel="icon"
       type="image/png"
@@ -15,79 +15,79 @@
   </head>
   <body>
     <div class="layout">
-
       <aside class="sidebar">
-        <div class="brand"><img
-            src="../image/logocopy.png"
-            alt="brandlogo"
-          />NovelNest</div>
+        <div class="brand">
+          <img src="../image/logocopy.png" alt="brandlogo" />NovelNest
+        </div>
 
         <nav class="nav">
-          <a href="admin.html" class="nav-item sub">
+          <a href="admin.html" class="nav-item">
             <span class="nav-icon"></span> Dashboard
           </a>
-
-          <div class="nav-section">Novel Management</div>
           <a href="admin_all-novels.html" class="nav-item sub">All Novels</a>
-          <a href="admin_pending-novel.html" class="nav-item sub">Pending Novels</a>
-          <a href="admin_reported-novels.html" class="nav-item sub">Reported Novels</a>
+          <a href="admin_pending-novel.html" class="nav-item sub"
+            >Pending Novels</a
+          >
+          <a href="admin_reported-novels.html" class="nav-item sub"
+            >Reported Novels</a
+          >
 
-          <div class="nav-section">User Management</div>
-          <a href="admin_admanage-user.html" class="nav-item sub">Users</a>
-          <a href="admin_usermanage-author.html" class="nav-item sub">Authors</a>
+          <a href="admin_admanage-user.html" class="nav-item sub"
+            >Manage Users</a
+          >
+          <a href="admin_usermanage-author.html" class="nav-item sub"
+            >Manage Authors</a
+          >
 
-          <div class="nav-section">Advertisement</div>
-          <a href="admin_revenue-reports.html" class="nav-item sub active"
+          <a href="admin_ad-management.html" class="nav-item sub active"
             >Ad Management</a
           >
           <a href="admin_revenue-reports.html" class="nav-item sub"
             >Revenue Reports</a
           >
 
-          <!-- <a href="#" class="nav-item"> Profile / Settings</a>
-        </nav> -->
+          <a href="admin_archive.html" class="nav-item sub">Archive</a>
+        </nav>
 
         <a href="#" class="logout" id="logout" data-role="admin"> Logout</a>
       </aside>
 
       <main class="main">
-      <header class="topbar">
-         <h1>Ad Management</h1>
-        <div class="user-chip">
-          <span>Welcome, Admin</span>
-          <span class="avatar">A</span>
-        </div>
-      </header>
- 
-        
+        <header class="topbar">
+          <h1>Ad Management</h1>
+          <div class="user-chip">
+            <span>Welcome, Admin</span>
+            <span class="avatar">A</span>
+          </div>
+        </header>
+
         <div class="stats" id="statsContainer">
           <div class="stat-card">
             <div class="stat-label">Total Ads</div>
             <div class="stat-value" id="statTotal">5</div>
-            <div class="stat-change positive">All campaigns</div>
+            <div class="stat-change positive"></div>
           </div>
           <div class="stat-card">
             <div class="stat-label">Active</div>
             <div class="stat-value" id="statActive">3</div>
-            <div class="stat-change positive">● Running</div>
+            <div class="stat-change positive">
+              <img src="../icons/dot.svg" alt="dot" /> Running
+            </div>
           </div>
           <div class="stat-card">
             <div class="stat-label">Paused</div>
             <div class="stat-value" id="statPaused">1</div>
-            <div class="stat-change warning">⏸ On hold</div>
+            <div class="stat-change warning">
+              <img src="../icons/pause.svg" alt="pause" /> On hold
+            </div>
           </div>
         </div>
 
-
-        
         <div class="ad-toolbar">
-          <div class="left">
-           
-          </div>
+          <div class="left"></div>
           <button class="btn-primary" id="openAddModalBtn">+ Add New Ad</button>
         </div>
 
-        
         <div class="table-card">
           <h2>All Campaigns</h2>
           <table>
@@ -97,76 +97,129 @@
                 <th>Format</th>
                 <th>Views</th>
                 <th>Status</th>
-                <th style="text-align: right">Actions</th>
+                <th class="text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
-
-
               <tr>
                 <td><strong>Nestle Milo Drink</strong></td>
                 <td>Video</td>
                 <td>1,240,000</td>
                 <td><span class="badge active">Active</span></td>
-                <td style="text-align: right">
+                <td>
                   <div class="action-group">
-                    <span class="btn-sm btn-pause">⏸ Pause</span>
-                    <span class="btn-sm btn-remove">✕ Remove</span>
+                    <button
+                      class="btn btn-warning btn-sm"
+                      id="pause-nestle-milo"
+                    >
+                      <img src="../icons/pause.svg" alt="" class="btn-icon" />
+                      Pause
+                    </button>
+                    <button
+                      class="btn btn-danger btn-sm"
+                      id="remove-nestle-milo"
+                    >
+                      <img
+                        src="../icons/delete.svg"
+                        alt="delete"
+                        class="btn-icon"
+                      />
+                      Remove
+                    </button>
                   </div>
                 </td>
               </tr>
-
 
               <tr>
                 <td><strong>Datu Puti</strong></td>
                 <td>Video</td>
                 <td>2,100,000</td>
                 <td><span class="badge active">Active</span></td>
-                <td style="text-align: right">
+                <td>
                   <div class="action-group">
-                    <span class="btn-sm btn-pause">⏸ Pause</span>
-                    <span class="btn-sm btn-remove">✕ Remove</span>
+                    <button class="btn btn-warning btn-sm" id="pause-datu-puti">
+                      <img src="../icons/pause.svg" alt="" class="btn-icon" />
+                      Pause
+                    </button>
+                    <button class="btn btn-danger btn-sm" id="remove-datu-puti">
+                      <img
+                        src="../icons/delete.svg"
+                        alt="delete"
+                        class="btn-icon"
+                      />
+                      Remove
+                    </button>
                   </div>
                 </td>
               </tr>
-
 
               <tr>
                 <td><strong>Scatter67</strong></td>
                 <td>Video</td>
                 <td>980,000</td>
                 <td><span class="badge paused">Paused</span></td>
-                <td style="text-align: right">
-                  <div class="action-group">
-                    <span class="btn-sm btn-resume">▶ Continue</span>
-                    <span class="btn-sm btn-remove">✕ Remove</span>
+                <td>
+                  <div class="text-right">
+                    <button
+                      class="btn btn-success btn-sm"
+                      id="resume-scatter67"
+                    >
+                      <img src="../icons/play.svg" alt="" class="btn-icon" />
+                      Continue
+                    </button>
+                    <button class="btn btn-danger btn-sm" id="remove-scatter67">
+                      <img
+                        src="../icons/delete.svg"
+                        alt="delete"
+                        class="btn-icon"
+                      />
+                      Remove
+                    </button>
                   </div>
                 </td>
               </tr>
-
 
               <tr>
                 <td><strong>CTV Holiday Special</strong></td>
                 <td>Banner</td>
                 <td>620,000</td>
                 <td><span class="badge completed">Completed</span></td>
-                <td style="text-align: right">
+                <td>
                   <div class="action-group">
-                    <span class="btn-sm btn-remove">✕ Remove</span>
+                    <button
+                      class="btn btn-danger btn-sm"
+                      id="remove-ctv-holiday"
+                    >
+                      <img
+                        src="../icons/delete.svg"
+                        alt="delete"
+                        class="btn-icon"
+                      />
+                      Remove
+                    </button>
                   </div>
                 </td>
               </tr>
-
 
               <tr>
                 <td><strong>Coca Cola Coke</strong></td>
                 <td>Banner</td>
                 <td>450,000</td>
                 <td><span class="badge active">Active</span></td>
-                <td style="text-align: right">
+                <td>
                   <div class="action-group">
-                    <span class="btn-sm btn-pause">⏸ Pause</span>
-                    <span class="btn-sm btn-remove">✕ Remove</span>
+                    <button class="btn btn-warning btn-sm" id="pause-coca-cola">
+                      <img src="../icons/pause.svg" alt="" class="btn-icon" />
+                      Pause
+                    </button>
+                    <button class="btn btn-danger btn-sm" id="remove-coca-cola">
+                      <img
+                        src="../icons/delete.svg"
+                        alt="delete"
+                        class="btn-icon"
+                      />
+                      Remove
+                    </button>
                   </div>
                 </td>
               </tr>
@@ -176,7 +229,7 @@
       </main>
     </div>
 
-  <script src="../javascript/sweetalert2.all.min.js"></script>
-  <script src="../javascript/logout.js"></script>
+    <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/logout.js"></script>
   </body>
 </html>

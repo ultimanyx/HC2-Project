@@ -68,17 +68,15 @@ a {
   color: inherit;
 }
 
-/* ---------- Layout ---------- */
 .layout {
   display: flex;
   min-height: 100vh;
 }
 
-/* ---------- Sidebar ---------- */
 .sidebar {
   width: 270px;
-  background-color: #ffffff;
-  border-right: 1px solid rgba(26, 24, 38, 0.1);
+  background-color: var(--card-background);
+  border-right: 1px solid var(--border);
   padding: 20px 14px;
   display: flex;
   flex-direction: column;
@@ -91,9 +89,9 @@ a {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 20px;
-  padding-left: 0px;
+  padding-left: 0;
   padding-right: 60px;
-  color: #1a1826;
+  color: var(--foreground);
   gap: 8px;
 }
 
@@ -105,55 +103,49 @@ a {
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 10px;
   flex: 1;
 }
-
 .nav-item {
   font-size: 18px;
   font-weight: 400;
   margin-top: 3px;
-  color: #6b6680;
+  color: var(--muted-foreground);
   padding: 7px 10px;
   border-radius: 6px;
 }
-
 .nav-item.sub {
   padding-left: 16px;
-  color: #6b6680;
+  color: var(--muted-foreground);
   font-size: 16px;
+  font-weight: 400;
 }
-
 .nav-item.active {
   background-color: rgba(184, 114, 31, 0.12);
-  color: #b8721f;
+  color: var(--primary);
   font-weight: 600;
   font-size: 16px;
 }
-
 .nav-item:hover {
-  background-color: #ede9e1;
+  background-color: var(--secondary);
 }
-
 .nav-icon {
   margin-right: 6px;
 }
-
 .nav-section {
   font-size: 21px;
   font-weight: 600;
-  color: #1a1826;
+  color: var(--foreground);
   margin-top: 14px;
   margin-bottom: 3px;
   padding-left: 10px;
 }
-
 .logout {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 15px;
-  color: #6b6680;
+  color: var(--muted-foreground);
   padding: 10px 14px;
   margin-top: auto;
   border-top: 1px solid var(--border);
@@ -164,9 +156,8 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
-
 .logout:hover {
-  color: #dc2626;
+  color: var(--destructive);
   background-color: rgba(220, 38, 38, 0.08);
 }
 
@@ -239,19 +230,29 @@ a {
   margin-bottom: 6px;
   color: #1a1826;
 }
+.stat-change img {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+  vertical-align: middle;
+  margin-right: 4px;
+  flex-shrink: 0;
+}
 
 .stat-change {
-  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
 }
 
-.stat-change.positive {
-  color: #3f7d4f;
+.stat-change.positive img {
+  filter: brightness(0) saturate(100%) invert(31%) sepia(14%) saturate(1134%)
+    hue-rotate(85deg) brightness(94%) contrast(90%);
 }
 
-.stat-change.warning {
-  color: #b8721f;
+.stat-change.warning img {
+  filter: brightness(0) saturate(100%) invert(38%) sepia(51%) saturate(721%)
+    hue-rotate(3deg) brightness(91%) contrast(91%);
 }
-
 /* ---------- Table card ---------- */
 .table-card {
   margin-top: 10px;
@@ -293,6 +294,14 @@ tbody td {
 
 tbody tr:last-child td {
   border-bottom: none;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
 }
 
 /* ---------- Badges (status pills) ---------- */
@@ -394,92 +403,56 @@ tbody tr:last-child td {
   background: #ddd7cb;
 }
 
-.btn-danger {
-  background: rgba(220, 38, 38, 0.1);
-  color: #b91c1c;
-  border: none;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  font-family: var(--font-body), sans-serif;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.btn-danger:hover {
-  background: rgba(220, 38, 38, 0.18);
-}
-
-.btn-success {
-  background: rgba(63, 125, 79, 0.15);
-  color: #2f5d3a;
-  border: none;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  font-family: var(--font-body), sans-serif;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.btn-success:hover {
-  background: rgba(63, 125, 79, 0.25);
-}
-
-.btn-warning {
-  background: rgba(184, 114, 31, 0.15);
-  color: #8a5410;
-  border: none;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  font-family: var(--font-body), sans-serif;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.btn-warning:hover {
-  background: rgba(184, 114, 31, 0.25);
-}
+/* =====================================================
+   ACTION BUTTONS — small, fixed width, with icon
+===================================================== */
 
 .action-group {
   display: flex;
   align-items: center;
   gap: 6px;
-  flex-wrap: wrap;
   justify-content: flex-end;
 }
 
-.btn-sm {
-  padding: 3px 10px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  font-family: var(--font-body), sans-serif;
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 105px;
+  padding: 6px 0;
   border: none;
-  display: inline-block;
+  border-radius: 6px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
   cursor: pointer;
-  transition: opacity 0.2s;
 }
 
-.btn-sm:hover {
-  opacity: 0.8;
+.btn-warning {
+  background: #d18a24;
+}
+.btn-success {
+  background: #3f7d4f;
+}
+.btn-danger {
+  background: #dc2626;
 }
 
-.btn-pause {
-  background: rgba(184, 114, 31, 0.15);
-  color: #8a5410;
+.btn-icon {
+  width: 13px;
+  height: 13px;
+  filter: brightness(0) invert(1);
 }
 
-.btn-resume {
-  background: rgba(63, 125, 79, 0.15);
-  color: #2f5d3a;
+/* =====================================================
+   SWEETALERT — must sit above the withdraw modal
+===================================================== */
+.swal2-container {
+  z-index: 9999 !important;
 }
 
-.btn-remove {
-  background: rgba(220, 38, 38, 0.1);
-  color: #b91c1c;
+.swal2-popup {
+  z-index: 10000 !important;
 }

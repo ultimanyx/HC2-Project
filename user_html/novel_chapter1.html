@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>A TALE OF TWO CITIES CH:1</title>
 
-
     <link rel="stylesheet" href="../css/user_chapter.css" />
-    <link rel="stylesheet" href="../css/sweetalert2.min.css">
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
 
     <link
       rel="icon"
@@ -15,12 +14,14 @@
       href="../image/logo-nobackground-circle.png"
     />
   </head>
-  <body data-book-id="a-tale-of-two-cities"  
-        data-book-title="A Tale of Two Cities"
-        data-book-author="Charles Dickens"
-        data-book-cover="../books/Historical/A Tale of Two Cities by Charles Dickens/a-tale-of-two-cities-9781416503064_lg.jpg"
-        data-book-rating="4.8"
-        data-total-chapters="47">
+  <body
+    data-book-id="a-tale-of-two-cities"
+    data-book-title="A Tale of Two Cities"
+    data-book-author="Charles Dickens"
+    data-book-cover="../books/Historical/A Tale of Two Cities by Charles Dickens/a-tale-of-two-cities-9781416503064_lg.jpg"
+    data-book-rating="4.8"
+    data-total-chapters="47"
+  >
     <nav class="navbar">
       <a href="#" class="nav-logo">
         <img src="../image/logo.png" alt="Logo" />
@@ -40,32 +41,59 @@
 
         <div class="nav-user-dropdown">
           <div class="nav-user" tabindex="0" role="button" aria-haspopup="true">
-            <img src="../icons/person-circle.svg" class="user-icon" alt="User-Icon" />
+            <img
+              src="../icons/person-circle.svg"
+              class="user-icon"
+              alt="User-Icon"
+            />
             <span>Welcome User</span>
-            <span class="dropdown-arrow"><img src="../icons/caret-down-fill.svg" alt="triangle-down"></span>
+            <span class="dropdown-arrow"
+              ><img src="../icons/caret-down-fill.svg" alt="triangle-down"
+            /></span>
           </div>
 
-          <!-- Dropdown Menu -->
           <div class="dropdown-menu" role="menu">
             <div class="dropdown-divider"></div>
-            <a href="#" role="menuitem" class="logout-item" id="logout" data-role="reader">Logout</a>
+            <a
+              href="#"
+              role="menuitem"
+              class="logout-item"
+              id="logout"
+              data-role="reader"
+              >Logout</a
+            >
           </div>
         </div>
-
       </div>
     </nav>
 
     <div class="chapter-container">
       <div class="top-button">
-<button class="bookmark-btn" id="bookmarkBtn" aria-label="Bookmark this chapter">
-            <img src="../icons/bookmark.svg" alt="bookmark" class="bookmark-icon">
-            </svg>
-            <span class="bookmark-text">Bookmark</span>
-          </button>
-          <button class="report-btn" id="reportBtn" aria-label="Report issue with this chapter">
-            <img src="../icons/flag.svg" alt="report flag" class="report-icon" />
-            Report
-          </button>
+        <a href="javascript:history.back()" class="back-button">
+          <img src="../icons/back.svg" alt="Back" />
+        </a>
+
+        <button
+          class="bookmark-btn"
+          id="bookmarkBtn"
+          aria-label="Bookmark this chapter"
+        >
+          <img
+            src="../icons/bookmark.svg"
+            alt="bookmark"
+            class="bookmark-icon"
+          />
+          <span class="bookmark-text">Bookmark</span>
+        </button>
+
+        <button
+          class="report-btn"
+          id="reportBtn"
+          aria-label="Report issue with this chapter"
+        >
+          <img src="../icons/flag.svg" alt="report flag" class="report-icon" />
+          Report
+        </button>
       </div>
 
       <div class="chapter-header">
@@ -188,13 +216,13 @@
       </div>
     </div>
 
-
-
     <footer class="footer">
       <div class="footer-content">
         <div class="footer-section">
           <img src="../image/logo.png" alt="Logo" class="footer-logo" />
-          <p>Discover your next story and explore novels worth getting lost in.</p>
+          <p>
+            Discover your next story and explore novels worth getting lost in.
+          </p>
         </div>
 
         <div class="footer-section">
@@ -219,11 +247,8 @@
       </div>
     </footer>
 
-
-
     <div class="ad-overlay" id="adOverlay">
       <div class="ad-card">
-        <!-- Ad Header -->
         <div class="ad-header">
           <div class="ad-header-left">
             <span class="ad-label">Ad</span>
@@ -238,20 +263,16 @@
           </div>
         </div>
 
-
         <div class="progress-wrap">
           <div class="progress-bar" id="progressBar"></div>
         </div>
 
-
-        <div class="ad-content" id="adContent">
-
-        </div>
-
+        <div class="ad-content" id="adContent"></div>
 
         <div class="ad-footer">
           <div class="ad-info">
-            <span><img src="../icons/clock-fill.svg" alt=""></span> Ad ends in <span id="footerTimer">10</span>s
+            <span><img src="../icons/clock-fill.svg" alt="" /></span> Ad ends in
+            <span id="footerTimer">10</span>s
           </div>
           <button class="btn-exit" id="exitBtn">Next Chapter</button>
         </div>
@@ -259,70 +280,76 @@
     </div>
 
     <!-- ===== Report Modal ===== -->
-<div class="report-modal-overlay" id="reportModalOverlay" aria-hidden="true" >
-  <div
-    class="report-modal"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="reportModalTitle"
-  >
-    <div class="report-modal-header">
-      <h3 id="reportModalTitle" class="report-modal-title">Report Chapter</h3>
-      <button
-        type="button"
-        class="report-modal-close"
-        id="reportModalClose"
-        aria-label="Close report dialog"
+    <div
+      class="report-modal-overlay"
+      id="reportModalOverlay"
+      aria-hidden="true"
+    >
+      <div
+        class="report-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="reportModalTitle"
       >
-        <img src="../icons/x-lg.svg" alt="" />
-      </button>
-    </div>
+        <div class="report-modal-header">
+          <h3 id="reportModalTitle" class="report-modal-title">
+            Report Chapter
+          </h3>
+          <button
+            type="button"
+            class="report-modal-close"
+            id="reportModalClose"
+            aria-label="Close report dialog"
+          >
+            <img src="../icons/x-lg.svg" alt="" />
+          </button>
+        </div>
 
-    <div class="report-modal-body">
-      <label for="reportReason" class="report-modal-label">
-        Reason <span class="required">*</span>
-      </label>
-      <select id="reportReason" class="report-modal-select">
-        <option value="">Select a reason</option>
-        <option value="Broken content">Broken content</option>
-        <option value="Missing content">Missing content</option>
-        <option value="Wrong chapter">Wrong chapter</option>
-        <option value="Inappropriate content">Inappropriate content</option>
-        <option value="Other">Other</option>
-      </select>
-      <p class="report-modal-error" id="reportReasonError" role="alert">
-        Please select a reason.
-      </p>
+        <div class="report-modal-body">
+          <label for="reportReason" class="report-modal-label">
+            Reason <span class="required">*</span>
+          </label>
+          <select id="reportReason" class="report-modal-select">
+            <option value="">Select a reason</option>
+            <option value="Broken content">Broken content</option>
+            <option value="Missing content">Missing content</option>
+            <option value="Wrong chapter">Wrong chapter</option>
+            <option value="Inappropriate content">Inappropriate content</option>
+            <option value="Other">Other</option>
+          </select>
+          <p class="report-modal-error" id="reportReasonError" role="alert">
+            Please select a reason.
+          </p>
 
-      <label for="reportDetails" class="report-modal-label">
-        Additional details <span class="optional">(optional)</span>
-      </label>
-      <textarea
-        id="reportDetails"
-        class="report-modal-textarea"
-        placeholder="Tell us anything else that might help…"
-        maxlength="500"
-      ></textarea>
-    </div>
+          <label for="reportDetails" class="report-modal-label">
+            Additional details <span class="optional">(optional)</span>
+          </label>
+          <textarea
+            id="reportDetails"
+            class="report-modal-textarea"
+            placeholder="Tell us anything else that might help…"
+            maxlength="500"
+          ></textarea>
+        </div>
 
-    <div class="report-modal-footer">
-      <button
-        type="button"
-        class="report-modal-btn report-modal-btn-cancel"
-        id="reportModalCancel"
-      >
-        Cancel
-      </button>
-      <button
-        type="button"
-        class="report-modal-btn report-modal-btn-submit"
-        id="reportModalSubmit"
-      >
-        Submit Report
-      </button>
+        <div class="report-modal-footer">
+          <button
+            type="button"
+            class="report-modal-btn report-modal-btn-cancel"
+            id="reportModalCancel"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            class="report-modal-btn report-modal-btn-submit"
+            id="reportModalSubmit"
+          >
+            Submit Report
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
     <script src="../javascript/sweetalert2.all.min.js"></script>
     <script src="../javascript/ad.js"></script>

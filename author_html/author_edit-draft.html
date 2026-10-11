@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Draft · The Lost Kingdom</title>
+    <link rel="stylesheet" href="../css/author_view-novel.css" />
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="../image/logo-nobackground-circle.png"
+    />
+  </head>
+  <body>
+    <div class="layout">
+      <!-- ============= SIDEBAR ============= -->
+      <aside class="sidebar">
+        <div class="brand">
+          <img src="../image/logocopy.png" alt="brandlogo" />
+          NovelNest
+        </div>
+        <nav class="nav">
+          <a href="author_dashboard.html" class="nav-item sub">
+            <span class="nav-icon"></span>
+            Dashboard
+          </a>
+          <a href="author_all-novel.html" class="nav-item sub"> All Novels </a>
+          <a href="author_create-novel.html" class="nav-item sub">
+            Create Novel
+          </a>
+          <a href="author_draft-novel.html" class="nav-item sub active">
+            Draft Novel
+          </a>
+          <a href="author_earnings.html" class="nav-item sub">Earnings</a>
+          <a href="author_archive.html" class="nav-item sub">Archive</a>
+        </nav>
+        <a href="#" class="logout" id="logout" data-role="author">Logout</a>
+      </aside>
+
+      <!-- ============= MAIN ============= -->
+      <main class="main">
+        <!-- Topbar -->
+        <div class="topbar">
+          <div class="topbar-left">
+            <a href="author_draft-novel.html" class="back-link">
+              <img src="../icons/backbtn.svg" alt="backbtn" />Draft Novels</a
+            >
+            <h1>Edit Draft</h1>
+          </div>
+
+          <div class="user-chip">
+            <span>Sarah J.</span>
+            <span class="avatar">SJ</span>
+          </div>
+        </div>
+
+        <!-- Action bar -->
+        <div class="action-bar">
+          <div class="action-left">
+            <span class="badge draft">Draft</span>
+            <span class="meta-text">Last edited today at 2:30 PM</span>
+          </div>
+
+          <div class="action-right">
+            <button class="btn btn-primary" id="editToggleBtn">
+              Publish Book
+            </button>
+          </div>
+        </div>
+
+        <section class="novel-header">
+          <div class="novel-cover">
+            <img
+              src="../books/Action/A_Farewell_to_Arms by Ernest_Hemingway (Unzipped Files)/A_Farewell_to_Arms cover art.png"
+              alt="Cover"
+            />
+          </div>
+
+          <div class="novel-details">
+            <div class="edit-form">
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label>Title</label>
+                  <input type="text" id="editTitle" value="The Lost Kingdom" />
+                </div>
+                <div class="form-group">
+                  <label>Subtitle</label>
+                  <input
+                    type="text"
+                    id="editSubtitle"
+                    value="A throne unclaimed"
+                  />
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label>Genre</label>
+                  <select id="editGenre">
+                    <option>Fantasy</option>
+                    <option>Romance</option>
+                    <option>Sci-Fi</option>
+                    <option>Mystery</option>
+                    <option>Thriller</option>
+                    <option>Literary Fiction</option>
+                    <option>Young Adult</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Tags / Keywords</label>
+                  <input
+                    type="text"
+                    id="editTags"
+                    value="epic fantasy, royalty, war"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Synopsis</label>
+                <textarea id="editSynopsis" class="chapter-textarea">
+An heir believed dead. A throne left empty. A kingdom on the brink of war. The Lost Kingdom is the first book in an epic fantasy saga.</textarea
+                >
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label>Cover Image</label>
+                  <div class="upload-zone cover-upload">
+                    <p><strong>Click to upload new</strong></p>
+                    <p class="sub">PNG, JPG, WEBP · Max 5MB</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="edit-actions">
+                <button class="btn btn-outline" id="resetEditBtn">Reset</button>
+                <button class="btn btn-primary" id="saveEditBtn">
+                  Save Changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================
+             CHAPTER LIST
+             ============================================ -->
+        <section class="table-card">
+          <div class="chapter-card-header">
+            <h2>Chapters</h2>
+            <a
+              href="author_addchapter-draft.html"
+              class="btn btn-primary btn-sm"
+              id="addChapterBtn"
+            >
+              + Add Chapter
+            </a>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 60px">#</th>
+                <th>Chapter Title</th>
+                <th style="width: 140px">Status</th>
+                <th style="width: 120px">Words</th>
+                <th style="width: 160px">Last Updated</th>
+                <th style="width: 260px">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="chapterTableBody">
+              <tr>
+                <td>1</td>
+                <td><strong>Prologue: The Empty Throne</strong></td>
+                <td><span class="badge draft">Draft</span></td>
+                <td>1,120</td>
+                <td>Today</td>
+                <td>
+                  <a href="author_editchapter-draft.html">
+                    <button class="btn btn-sm">Edit</button>
+                  </a>
+                  <button class="btn btn-sm btn-danger delete-chapter-btn">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td><strong>A Kingdom Without a King</strong></td>
+                <td><span class="badge draft">Draft</span></td>
+                <td>1,890</td>
+                <td>Yesterday</td>
+                <td>
+                  <a href="author_edit-chapter.html">
+                    <button class="btn btn-sm">Edit</button>
+                  </a>
+                  <button class="btn btn-sm btn-danger delete-chapter-btn">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td><strong>The Broken Oath</strong></td>
+                <td><span class="badge draft">Draft</span></td>
+                <td>2,340</td>
+                <td>3 days ago</td>
+                <td>
+                  <a href="author_edit-chapter.html">
+                    <button class="btn btn-sm">Edit</button>
+                  </a>
+                  <button class="btn btn-sm btn-danger delete-chapter-btn">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td><strong>Untitled Chapter</strong></td>
+                <td><span class="badge draft">Draft</span></td>
+                <td>—</td>
+                <td>Just now</td>
+                <td>
+                  <a href="author_edit-chapter.html">
+                    <button class="btn btn-sm">Edit</button>
+                  </a>
+                  <button class="btn btn-sm btn-danger delete-chapter-btn">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+
+    <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/author_edit-draft.js"></script>
+    <script src="../javascript/logout.js"></script>
+  </body>
+</html>

@@ -1,0 +1,490 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- ROOT ---*/
+
+:root {
+  --background: #f8f6f1;
+  --foreground: #1a1826;
+  --card-background: #ffffff;
+  --card-foreground: #1a1826;
+  --primary: #b8721f;
+  --primary-foreground: #ffffff;
+  --secondary: #ede9e1;
+  --secondary-foreground: #1a1826;
+  --muted: #ede9e1;
+  --muted-foreground: #6b6680;
+  --accent: #6d28d9;
+  --accent-foreground: #ffffff;
+  --border: rgba(26, 24, 38, 0.1);
+  --input-background: #ede9e1;
+  --ring: #b8721f;
+  --focus-ring: rgba(184, 114, 31, 0.18);
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --link: #3b6f91;
+  --link-hover: #2c536d;
+  --shadow:
+    0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
+  --footer-background: #1a1826;
+  --footer-foreground: #ffffff;
+  --footer-muted: #d8d0c8;
+  --font-body: "Plus_Jakarta_Sans", sans-serif;
+  --font-heading: "Fraunces", serif;
+
+  /* Status — Active (green) */
+  --status-active-bg: rgba(63, 125, 79, 0.15);
+  --status-active-fg: #2f5d3a;
+
+  /* Status — Paused / Archived (amber) */
+  --status-paused-bg: rgba(184, 114, 31, 0.15);
+  --status-paused-fg: #8a5410;
+
+  /* Status — Completed (gray) */
+  --status-completed-bg: #ede9e1;
+  --status-completed-fg: #6b6680;
+}
+
+/* --- Font ---*/
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Plus_Jakarta_Sans";
+  src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("../font/Fraunces/static/Fraunces_72pt-Regular.ttf")
+    format("truetype");
+}
+
+/* ============ Body ==========*/
+body {
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+  background-color: #f8f6f1;
+  color: #1a1826;
+  font-size: 15px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 270px;
+  background-color: var(--card-background);
+  border-right: 1px solid var(--border);
+  padding: 20px 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-left: 0;
+  padding-right: 60px;
+  color: var(--foreground);
+  gap: 8px;
+}
+
+.brand img {
+  width: 50px;
+  height: 50px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+.nav-item {
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: 3px;
+  color: var(--muted-foreground);
+  padding: 7px 10px;
+  border-radius: 6px;
+}
+.nav-item.sub {
+  padding-left: 16px;
+  color: var(--muted-foreground);
+  font-size: 16px;
+  font-weight: 400;
+}
+.nav-item.active {
+  background-color: rgba(184, 114, 31, 0.12);
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 16px;
+}
+.nav-item:hover {
+  background-color: var(--secondary);
+}
+.nav-icon {
+  margin-right: 6px;
+}
+.nav-section {
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-top: 14px;
+  margin-bottom: 3px;
+  padding-left: 10px;
+}
+.logout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  color: var(--muted-foreground);
+  padding: 10px 14px;
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  border-radius: 6px;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+.logout:hover {
+  color: var(--destructive);
+  background-color: rgba(220, 38, 38, 0.08);
+}
+
+/* ---------- Main content ---------- */
+.main {
+  flex: 1;
+  padding: 24px 32px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+  gap: 16px;
+}
+
+.topbar h1 {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.user-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  color: #6b6680;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(184, 114, 31, 0.12);
+  color: #b8721f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* ---------- Stats cards ---------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background-color: #ffffff;
+  border: 1px solid rgba(26, 24, 38, 0.1);
+  border-radius: 10px;
+  padding: 18px 16px;
+}
+
+.stat-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #6b6680;
+  margin-bottom: 6px;
+}
+
+.stat-value {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #1a1826;
+}
+
+.stat-change {
+  font-size: 13px;
+}
+
+.stat-change.positive {
+  color: #3f7d4f;
+}
+
+.stat-change.warning {
+  color: #b8721f;
+}
+
+/* ---------- Filter Bar ---------- */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.filter-group label {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--muted-foreground);
+}
+
+.filter-group select,
+.filter-group input {
+  background: var(--input-background);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 15px;
+  font-family: var(--font-body);
+  color: var(--foreground);
+  outline: none;
+  transition: 0.15s;
+}
+
+.filter-group input {
+  width: 260px;
+}
+
+.filter-group select:focus,
+.filter-group input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.filter-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 6px;
+}
+
+/* ---------- Buttons (filter actions) ---------- */
+.btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-body), sans-serif;
+  border: none;
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #ffffff;
+}
+.btn-primary:hover {
+  background: #9a5f16;
+}
+
+/* ---------- Table card ---------- */
+.table-card {
+  margin-top: 10px;
+  background-color: #ffffff;
+  border: 1px solid rgba(26, 24, 38, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  overflow-x: auto;
+}
+
+.table-card h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 950px;
+}
+
+thead th {
+  text-align: left;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #6b6680;
+  font-weight: 600;
+  padding: 0 20px 10px 0;
+  border-bottom: 1px solid rgba(26, 24, 38, 0.1);
+}
+
+tbody td {
+  font-size: 16px;
+  padding: 12px 20px 12px 0;
+  border-bottom: 1px solid rgba(26, 24, 38, 0.06);
+  color: #1a1826;
+  vertical-align: middle;
+}
+
+thead th:last-child,
+tbody td:last-child {
+  padding-right: 0;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.text-centers {
+  text-align: center;
+}
+
+/* =====================================================
+   BADGES (status pills) — with icon
+===================================================== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.badge-icon {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+}
+
+.badge.active {
+  background-color: var(--status-active-bg);
+  color: var(--status-active-fg);
+}
+.badge.active .badge-icon {
+  filter: brightness(0) saturate(100%) invert(31%) sepia(14%) saturate(1134%)
+    hue-rotate(85deg) brightness(94%) contrast(90%);
+}
+
+.badge.paused {
+  background-color: var(--status-paused-bg);
+  color: var(--status-paused-fg);
+}
+.badge.paused .badge-icon {
+  width: 12px;
+  height: 12px;
+  filter: brightness(0) saturate(100%) invert(38%) sepia(51%) saturate(721%)
+    hue-rotate(3deg) brightness(91%) contrast(91%);
+}
+
+.badge.completed {
+  background-color: var(--status-completed-bg);
+  color: var(--status-completed-fg);
+}
+.badge.completed .badge-icon {
+  width: 12px;
+  height: 12px;
+  filter: brightness(0) saturate(100%) invert(46%) sepia(6%) saturate(607%)
+    hue-rotate(215deg) brightness(92%) contrast(86%);
+}
+
+/* =====================================================
+   ACTION BUTTONS — small, fixed width, with icon
+===================================================== */
+
+.action-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.btn-success,
+.btn-danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 105px;
+  padding: 6px 0;
+  border: none;
+  border-radius: 6px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-success {
+  background: #3f7d4f;
+}
+.btn-danger {
+  background: #dc2626;
+}
+
+.btn-icon {
+  width: 13px;
+  height: 13px;
+  filter: brightness(0) invert(1);
+}
+
+/* =====================================================
+   SWEETALERT — must sit above the withdraw modal
+===================================================== */
+.swal2-container {
+  z-index: 9999 !important;
+}
+
+.swal2-popup {
+  z-index: 10000 !important;
+}
