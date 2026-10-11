@@ -355,7 +355,7 @@ body {
 .browse-header {
   width: 100%;
   height: 300px;
-  background-color: var(--primary);
+  background-image: url("../image/COROUSEL.jpeg");
   font-family: var(--font-heading);
   color: white;
   display: flex;
