@@ -204,9 +204,7 @@ a {
   font-size: 14px;
 }
 
-/* =====================================================
-   STAT CARDS
-===================================================== */
+/* --- Stat ---*/
 
 .stats {
   display: grid;
@@ -234,6 +232,39 @@ a {
   font-weight: 700;
   margin-bottom: 6px;
   color: #1a1826;
+}
+
+.stat-change {
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-change img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+.stat-change.positive {
+  color: #3f7d4f;
+}
+
+.stat-change.positive img {
+  filter: brightness(0) saturate(100%) invert(31%) sepia(14%) saturate(1134%)
+    hue-rotate(85deg) brightness(94%) contrast(90%);
+}
+
+.stat-change.warning {
+  color: #b8721f;
+}
+
+.stat-change.warning img {
+  filter: brightness(0) saturate(100%) invert(38%) sepia(51%) saturate(721%)
+    hue-rotate(3deg) brightness(91%) contrast(91%);
 }
 
 .stat-change {
