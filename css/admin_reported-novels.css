@@ -378,16 +378,19 @@ tbody tr:last-child td {
 /* --- Buttons ---*/
 
 .btn {
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 105px;
+  padding: 6px 0;
   border: none;
-  background: var(--secondary);
-  color: var(--secondary-foreground);
-  transition: 0.15s;
+  border-radius: 6px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
   cursor: pointer;
-  white-space: nowrap;
 }
 
 .btn:hover {

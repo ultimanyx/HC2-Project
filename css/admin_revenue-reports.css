@@ -415,28 +415,36 @@ tbody tr:last-child td {
   text-align: right;
 }
 
+.text-center {
+  text-align: center;
+}
 /* =====================================================
-   BADGES (status pills) — with icon
+   BADGES 
 ===================================================== */
 .badge {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
+  min-width: 108px;
+  height: 28px;
+  padding: 0 12px;
   font-size: 13px;
   font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 20px;
   line-height: 1;
+  border-radius: 20px;
   white-space: nowrap;
+  vertical-align: middle;
+  box-sizing: border-box;
 }
 
 .badge-icon {
-  width: 8px; /* small dot */
-  height: 8px;
+  width: 12px;
+  height: 12px;
   flex-shrink: 0;
+  object-fit: contain;
 }
 
-/* Active — uses --status-active-* */
 .badge.active {
   background-color: var(--status-active-bg);
   color: var(--status-active-fg);
@@ -446,26 +454,20 @@ tbody tr:last-child td {
     hue-rotate(85deg) brightness(94%) contrast(90%);
 }
 
-/* Paused — uses --status-paused-* */
 .badge.paused {
   background-color: var(--status-paused-bg);
   color: var(--status-paused-fg);
 }
 .badge.paused .badge-icon {
-  width: 12px;
-  height: 12px;
   filter: brightness(0) saturate(100%) invert(38%) sepia(51%) saturate(721%)
     hue-rotate(3deg) brightness(91%) contrast(91%);
 }
 
-/* Completed — uses --status-completed-* */
 .badge.completed {
   background-color: var(--status-completed-bg);
   color: var(--status-completed-fg);
 }
 .badge.completed .badge-icon {
-  width: 12px;
-  height: 12px;
   filter: brightness(0) saturate(100%) invert(46%) sepia(6%) saturate(607%)
     hue-rotate(215deg) brightness(92%) contrast(86%);
 }

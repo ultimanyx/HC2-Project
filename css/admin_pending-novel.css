@@ -345,6 +345,13 @@ tbody tr:last-child td {
   font-weight: 600;
 }
 
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
 /* =====================================================
    STATUS BADGE
 ===================================================== */
@@ -376,17 +383,22 @@ tbody tr:last-child td {
 }
 
 /* --- Buttons ---*/
-
 .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 105px;
   padding: 8px 16px;
+  border: none;
   border-radius: 6px;
+  font-family: var(--font-body), sans-serif;
   font-size: 14px;
   font-weight: 600;
-  border: none;
-  background: var(--secondary);
   color: var(--secondary-foreground);
-  transition: 0.15s;
+  background: var(--secondary);
   cursor: pointer;
+  transition: 0.15s;
   white-space: nowrap;
 }
 
@@ -449,6 +461,10 @@ tbody tr:last-child td {
   align-items: center;
   gap: 6px;
   flex-wrap: wrap;
+}
+
+.action {
+  margin-left: 45px;
 }
 
 /* =====================================================

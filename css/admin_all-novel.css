@@ -427,6 +427,14 @@ tbody tr:hover {
   background-color: #f8f6f1;
 }
 
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
 /* --- Badges ---*/
 
 .badge {

@@ -381,6 +381,10 @@ tbody tr:last-child td {
   border-bottom: none;
 }
 
+.text-centers {
+  text-align: center;
+}
+
 /* =====================================================
    BADGES (status pills) — with icon
 ===================================================== */
