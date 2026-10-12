@@ -375,11 +375,13 @@ body {
   padding-left: 40px;
   margin-bottom: 8px;
   font-size: 2.5rem;
+  text-shadow: var(--text-shadow);
 }
 
 .browse-header p {
   padding-left: 40px;
   font-size: 16px;
+  text-shadow: var(--text-shadow);
 }
 
 /* =====================================================
@@ -409,7 +411,7 @@ body {
   align-items: flex-start;
   gap: 7px;
   padding: 0;
-  margin: 0;
+  margin-left: 10px;
   min-width: 150px;
 }
 
@@ -448,6 +450,9 @@ body {
     background-color 0.2s ease;
 }
 
+.filter-input {
+  width: 380 px;
+}
 /* =====================================================
    INPUT FOCUS
 ===================================================== */
@@ -456,13 +461,6 @@ body {
   border-color: var(--ring);
   box-shadow: 0 0 0 3px var(--focus-ring);
   background-color: var(--card-background);
-}
-
-/* =====================================================
-   MINIMUM RATING
-===================================================== */
-#min-rating {
-  width: 100px;
 }
 
 /* =====================================================
@@ -497,7 +495,7 @@ body {
 }
 
 #apply-filter:hover {
-  background-color: var(--link-hover);
+  background-color: #9a5f1a; /* darker orange, matches theme */
   transform: translateY(-2px);
   box-shadow: var(--boxshadow);
 }
@@ -600,11 +598,6 @@ body {
   font-size: 14px;
   color: #666;
   margin: 0;
-}
-
-.novel-card span p:first-child::after {
-  color: #333;
-  font-weight: 500;
 }
 
 .novel-card span .star {

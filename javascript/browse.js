@@ -1,29 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // ==========================================
-  // FILTER CONTROLS
-  // ==========================================
   const titleSearchInput = document.getElementById("title-search");
   const genreSelect = document.getElementById("genre");
   const sortSelect = document.getElementById("sort-choice");
-  const minRatingInput = document.getElementById("min-rating");
 
   const applyFilterButton = document.getElementById("apply-filter");
   const resetFilterButton = document.getElementById("reset-filter");
 
-  // ==========================================
-  // CARD CONTAINER
-  // ==========================================
   const cardContainer = document.querySelector(".card-container");
 
   if (!cardContainer) return;
 
-  const cardLinks = Array.from(
-    cardContainer.querySelectorAll(":scope > a")
-  );
+  const cardLinks = Array.from(cardContainer.querySelectorAll(":scope > a"));
 
-  // ==========================================
-  // FILTER + SORT FUNCTION
-  // ==========================================
+  function debounce(func, delay = 150) {
+    let timer;
+    return function (...args) {
+      clearTimeout(timer);
+      timer = setTimeout(() => func.apply(this, args), delay);
+    };
+  }
+
   function filterAndSortNovels() {
     const titleQuery = titleSearchInput
       ? titleSearchInput.value.trim().toLowerCase()
@@ -33,82 +29,50 @@ document.addEventListener("DOMContentLoaded", () => {
       ? genreSelect.value.toLowerCase()
       : "all-genre";
 
-    const minRating = minRatingInput
-      ? parseFloat(minRatingInput.value) || 0
-      : 0;
-
-    const selectedSort = sortSelect
-      ? sortSelect.value
-      : "popularity";
+    const selectedSort = sortSelect ? sortSelect.value : "popularity";
 
     const visibleCards = [];
 
-    // ==========================================
-    // CHECK EACH NOVEL
-    // ==========================================
     cardLinks.forEach((link) => {
       const card = link.querySelector(".novel-card");
 
       if (!card) return;
 
-      // Novel title
       const titleText =
-        card.querySelector("h1")
-          ?.textContent
-          .trim()
-          .toLowerCase() || "";
+        card.querySelector("h1")?.textContent.trim().toLowerCase() || "";
 
-      // IMPORTANT:
-      // Get genre from the actual genre text,
-      // NOT from the image folder.
       const genreText =
-        card.querySelector("#genre-block h3")
-          ?.textContent
-          .trim()
+        card
+          .querySelector("#genre-block h3")
+          ?.textContent.trim()
           .toLowerCase() || "";
 
-      // Rating
-      const ratingText =
-        card.querySelector("span p:last-child")
-          ?.textContent || "0";
-
-      const rating = parseFloat(ratingText) || 0;
-
-      // ==========================================
-      // MATCHING
-      // ==========================================
-      const matchesTitle =
-        !titleQuery || titleText.includes(titleQuery);
+      const matchesTitle = !titleQuery || titleText.includes(titleQuery);
 
       const matchesGenre =
         selectedGenre === "all-genre" || genreText === selectedGenre;
 
-      const matchesRating = rating >= minRating;
+      // Rating filter removed – all ratings are allowed
 
-      // ==========================================
-      // SHOW / HIDE
-      // ==========================================
-      if (matchesTitle && matchesGenre && matchesRating) {
+      if (matchesTitle && matchesGenre) {
         link.style.display = "";
 
         visibleCards.push({
           element: link,
-          rating: rating,
-          title: titleText
+          title: titleText,
+          // We still need rating for sorting, so we read it
+          rating:
+            parseFloat(
+              card.querySelector("span p:last-child")?.textContent || "0",
+            ) || 0,
         });
       } else {
         link.style.display = "none";
       }
     });
 
-    // ==========================================
-    // SORT
-    // ==========================================
     visibleCards.sort((a, b) => {
-      if (
-        selectedSort === "popularity" ||
-        selectedSort === "newest"
-      ) {
+      if (selectedSort === "popularity" || selectedSort === "newest") {
         return b.rating - a.rating;
       }
 
@@ -119,33 +83,27 @@ document.addEventListener("DOMContentLoaded", () => {
       return 0;
     });
 
-    // ==========================================
-    // UPDATE DOM ORDER
-    // ==========================================
     visibleCards.forEach((item) => {
       cardContainer.appendChild(item.element);
     });
   }
 
-  // ==========================================
-  // APPLY FILTER
-  // ==========================================
+  const debouncedFilter = debounce(filterAndSortNovels, 150);
+
+  if (titleSearchInput) {
+    titleSearchInput.addEventListener("input", debouncedFilter);
+  }
+
   if (applyFilterButton) {
     applyFilterButton.addEventListener("click", filterAndSortNovels);
   }
 
-  // ==========================================
-  // RESET FILTER
-  // ==========================================
   if (resetFilterButton) {
     resetFilterButton.addEventListener("click", () => {
-      // Reset input values
       if (titleSearchInput) titleSearchInput.value = "";
       if (genreSelect) genreSelect.value = "all-genre";
       if (sortSelect) sortSelect.value = "popularity";
-      if (minRatingInput) minRatingInput.value = "0";
 
-      // Show all novels and return cards to original DOM position
       cardLinks.forEach((link) => {
         link.style.display = "";
         cardContainer.appendChild(link);
@@ -153,8 +111,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ==========================================
-  // INITIAL LOAD
-  // ==========================================
   filterAndSortNovels();
 });
