@@ -107,7 +107,7 @@
             </div>
           </div>
 
-          <!-- Row 3: Cover Image (small) / Publishing Status -->
+          <!-- Row 3: Cover Image / Synopsis -->
           <div class="form-grid-2">
             <div class="form-group">
               <label>Cover Image</label>
@@ -131,13 +131,23 @@
             </div>
           </div>
 
-          <!-- Row 5: First Chapter -->
+          <!-- ============================================== -->
+          <!-- Row 5: Chapter 1 (Title + Content)             -->
+          <!-- ============================================== -->
           <div class="form-group-full">
             <div class="form-group">
+              <label for="chapter1Title">Chapter 1 Title</label>
+              <input
+                type="text"
+                id="First Chapter Title"
+                placeholder="e.g. The Fall of House Veyra"
+              />
+              <span class="hint">Give your opening chapter a name.</span>
+            </div>
+
+            <div class="form-group" style="margin-top: 16px">
               <label for="firstChapter"
-                >First Chapter
-                <span style="color: var(--destructive)">*</span></label
-              >
+                >Chapter Content
               <textarea
                 id="firstChapter"
                 class="chapter-textarea"
@@ -145,7 +155,7 @@
               ></textarea>
               <span class="hint"
                 >Paste your opening chapter. You can add more chapters later
-                from your all novel page.</span
+                from your All Novels page.</span
               >
             </div>
           </div>

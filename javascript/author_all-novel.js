@@ -104,11 +104,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (visible.length === 0) {
       tbody.innerHTML = `
-        <tr>
-          <td colspan="7" style="text-align:center;padding:28px;color:var(--muted-foreground);">
-            No novels match your filters.
-          </td>
-        </tr>`;
+          <tr>
+            <td colspan="7" style="text-align:center;padding:28px;color:var(--muted-foreground);">
+              No novels match your filters.
+            </td>
+          </tr>`;
       return;
     }
 
@@ -123,17 +123,17 @@ document.addEventListener("DOMContentLoaded", () => {
       tr.dataset.id = n.id;
       tr.dataset.isStatic = n.isStatic ? "true" : "false";
       tr.innerHTML = `
-        <td><strong>${escapeHtml(n.title)}</strong></td>
-        <td><span class="badge ${badgeCls}">${escapeHtml(n.statusLabel)}</span></td>
-        <td>${escapeHtml(n.genre || "—")}</td>
-        <td>${n.chapters ?? 1}</td>
-        <td>${readsCell}</td>
-        <td>${ratingCell}</td>
-        <td>
-          <button class="btn btn-primary btn-sm view-novel-btn" data-novel-id="${n.id}">View</button>
-          <button class="btn btn-sm btn-danger delete-novel-btn" data-novel-id="${n.id}">Delete</button>
-        </td>
-      `;
+          <td><strong>${escapeHtml(n.title)}</strong></td>
+          <td><span class="badge ${badgeCls}">${escapeHtml(n.statusLabel)}</span></td>
+          <td>${escapeHtml(n.genre || "—")}</td>
+          <td>${n.chapters ?? 1}</td>
+          <td>${readsCell}</td>
+          <td>${ratingCell}</td>
+          <td>
+          <a class="btn btn-primary btn-sm view-novel-btn" href="author_view-novel.html?id=${n.id}">View</a>
+            <button class="btn btn-sm btn-danger delete-novel-btn" data-novel-id="${n.id}">Delete</button>
+          </td>
+        `;
       tbody.appendChild(tr);
     });
   }
