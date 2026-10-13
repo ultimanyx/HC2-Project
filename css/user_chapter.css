@@ -1256,6 +1256,120 @@ body {
   background-color: var(--destructive-hover);
   border-color: var(--destructive-hover);
 }
+
+/* =====================================================
+   AUTO-SCROLL CONTROLS
+===================================================== */
+.autoscroll {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background: var(--card-background);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  box-shadow: var(--boxshadow);
+  z-index: 9000;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.autoscroll.autoscroll-hidden {
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
+.autoscroll-btn {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--secondary);
+  color: var(--foreground);
+  border: 1px solid transparent;
+  border-radius: 50%;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.autoscroll-btn:hover {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.autoscroll-btn:active {
+  transform: scale(0.94);
+}
+
+.autoscroll-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.autoscroll-play {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  width: 44px;
+  height: 44px;
+}
+
+.autoscroll-play:hover {
+  background: var(--primary-hover);
+}
+
+.autoscroll-speed {
+  min-width: 34px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--foreground);
+  user-select: none;
+}
+
+/* Show/hide play & pause icons based on state */
+.autoscroll-icon-pause {
+  display: none;
+}
+.autoscroll.is-playing .autoscroll-icon-play {
+  display: none;
+}
+.autoscroll.is-playing .autoscroll-icon-pause {
+  display: block;
+}
+
+/* Hide on small screens where it would clutter */
+@media (max-width: 600px) {
+  .autoscroll {
+    right: 12px;
+    bottom: 12px;
+    padding: 6px 8px;
+    gap: 4px;
+  }
+  .autoscroll-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+  .autoscroll-play {
+    width: 40px;
+    height: 40px;
+  }
+}
 /* =====================================================
    SWEETALERT — must sit above the withdraw modal
 ===================================================== */
