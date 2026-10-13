@@ -85,11 +85,20 @@
                 <td>Today, 2:30 PM</td>
                 <td>20</td>
                 <td>
-                  <a href="author_edit-draft.html">
-                    <button class="btn btn-sm">Edit</button>
-                  </a>
-                  <button class="btn btn-primary btn-sm">Publish</button>
-                  <button class="btn btn-sm btn-danger">Delete</button>
+                  <a
+                    class="btn btn-sm edit-draft-btn"
+                    href="author_edit-draft.html?id=draft-seed-0"
+                    >Edit</a
+                  >
+                  <button class="btn btn-primary btn-sm publish-draft-btn">
+                    Publish
+                  </button>
+                  <button
+                    class="btn btn-sm btn-danger archive-draft-btn"
+                    data-id="draft-seed-0"
+                  >
+                    Archive
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -98,17 +107,24 @@
                 <td>Yesterday, 6:15 PM</td>
                 <td>18</td>
                 <td>
-                  <button class="btn btn-sm">Edit</button>
-                  <button class="btn btn-primary btn-sm">Publish</button>
-                  <button class="btn btn-sm btn-danger">Delete</button>
+                  <a
+                    class="btn btn-sm edit-draft-btn"
+                    href="author_edit-draft.html?id=draft-seed-1"
+                    >Edit</a
+                  >
+                  <button class="btn btn-primary btn-sm publish-draft-btn">
+                    Publish
+                  </button>
+                  <button
+                    class="btn btn-sm btn-danger archive-draft-btn"
+                    data-id="draft-seed-1"
+                  >
+                    Archive
+                  </button>
                 </td>
               </tr>
             </tbody>
           </table>
-          <!-- <div class="text-muted" style="margin-top: 16px; border-top: 1px solid var(--border); padding-top: 14px; display: flex; justify-content: space-between; font-size: 14px;">
-                <span>Showing 4 drafts</span>
-                <span>💡 Drafts are private – only you can see them.</span>
-            </div> -->
         </div>
       </main>
     </div>

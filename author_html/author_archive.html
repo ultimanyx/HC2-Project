@@ -14,7 +14,6 @@
   </head>
   <body>
     <div class="layout">
-      <!-- ================= SIDEBAR ================= -->
       <aside class="sidebar">
         <div class="brand">
           <img src="../image/logocopy.png" alt="brandlogo" />
@@ -38,9 +37,7 @@
         <a href="#" class="logout" id="logout" data-role="author">Logout</a>
       </aside>
 
-      <!-- ================= MAIN CONTENT ================= -->
       <main class="main">
-        <!-- TOPBAR -->
         <div class="topbar">
           <h1>Archive</h1>
           <div class="user-chip">
@@ -49,21 +46,19 @@
           </div>
         </div>
 
-        <!-- ================= STATS ================= -->
         <div class="stats">
           <div class="stat-card">
             <div class="stat-label">Archived Novels</div>
-            <div class="stat-value">4</div>
+            <div class="stat-value" id="stat-archived">0</div>
             <div class="stat-change warning">Currently archived</div>
           </div>
           <div class="stat-card">
             <div class="stat-label">Restored This Month</div>
-            <div class="stat-value">2</div>
+            <div class="stat-value" id="stat-restored">0</div>
             <div class="stat-change positive">Back on your shelf</div>
           </div>
         </div>
 
-        <!-- ================= ARCHIVED NOVELS TABLE ================= -->
         <div class="table-card">
           <h2>Archived Novels</h2>
           <table>
@@ -75,68 +70,14 @@
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td><strong>The Hollow Crown</strong></td>
-                <td>14</td>
-                <td>Sep 12, 2026</td>
-                <td>
-                  <button type="button" class="btn btn-primary btn-sm">
-                    Restore
-                  </button>
-                  <button type="button" class="btn btn-danger btn-sm">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>Winter's Ember</strong></td>
-                <td>22</td>
-                <td>Aug 28, 2026</td>
-                <td>
-                  <button type="button" class="btn btn-primary btn-sm">
-                    Restore
-                  </button>
-                  <button type="button" class="btn btn-danger btn-sm">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>Echoes of the Void</strong></td>
-                <td>8</td>
-                <td>Aug 14, 2026</td>
-                <td>
-                  <button type="button" class="btn btn-primary btn-sm">
-                    Restore
-                  </button>
-                  <button type="button" class="btn btn-danger btn-sm">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>The Crimson Veil</strong></td>
-                <td>24</td>
-                <td>Jul 30, 2026</td>
-                <td>
-                  <button type="button" class="btn btn-primary btn-sm">
-                    Restore
-                  </button>
-                  <button type="button" class="btn btn-danger btn-sm">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            </tbody>
+            <tbody></tbody>
           </table>
         </div>
       </main>
     </div>
 
-    <!-- ================= SCRIPTS ================= -->
     <script src="../javascript/sweetalert2.all.min.js"></script>
-    <script src="../javascript/author-browse.js"></script>
+    <script src="../javascript/author_archive.js"></script>
     <script src="../javascript/logout.js"></script>
   </body>
 </html>

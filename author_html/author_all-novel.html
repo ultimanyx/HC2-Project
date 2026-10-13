@@ -51,16 +51,16 @@
         <div class="stats">
           <div class="stat-card">
             <div class="stat-label">Total Novels</div>
-            <div class="stat-value">4</div>
+            <div class="stat-value" id="stat-total">0</div>
             <div class="stat-change positive">
-              <img src="../icons/arrow-up-short.svg" alt="up" /> 2 new this
-              month
+              <img src="../icons/arrow-up-short.svg" alt="up" /> Active on your
+              shelf
             </div>
           </div>
 
           <div class="stat-card">
             <div class="stat-label">Pending Review</div>
-            <div class="stat-value">1</div>
+            <div class="stat-value" id="stat-pending">0</div>
             <div class="stat-change warning">Waiting for approval</div>
           </div>
 
@@ -162,15 +162,17 @@
                   4.8
                 </td>
                 <td>
-                  <a href="author_view-novel.html">
-                    <button
-                      class="btn btn-primary btn-sm view-novel-btn"
-                      data-novel-id="1"
-                    >
-                      View
-                    </button>
-                  </a>
-                  <button class="btn btn-sm btn-danger">Delete</button>
+                  <a
+                    class="btn btn-primary btn-sm view-novel-btn"
+                    href="author_view-novel.html?id=seed-0"
+                    >View</a
+                  >
+                  <button
+                    class="btn btn-sm btn-danger archive-novel-btn"
+                    data-novel-id="seed-0"
+                  >
+                    Archive
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -188,13 +190,17 @@
                   4.6
                 </td>
                 <td>
-                  <button
+                  <a
                     class="btn btn-primary btn-sm view-novel-btn"
-                    data-novel-id="2"
+                    href="author_view-novel.html?id=seed-1"
+                    >View</a
                   >
-                    View
+                  <button
+                    class="btn btn-sm btn-danger archive-novel-btn"
+                    data-novel-id="seed-1"
+                  >
+                    Archive
                   </button>
-                  <button class="btn btn-sm btn-danger">Delete</button>
                 </td>
               </tr>
               <tr>
@@ -205,13 +211,17 @@
                 <td></td>
                 <td></td>
                 <td>
-                  <button
+                  <a
                     class="btn btn-primary btn-sm view-novel-btn"
-                    data-novel-id="3"
+                    href="author_view-novel.html?id=seed-2"
+                    >View</a
                   >
-                    View
+                  <button
+                    class="btn btn-sm btn-danger archive-novel-btn"
+                    data-novel-id="seed-2"
+                  >
+                    Archive
                   </button>
-                  <button class="btn btn-sm btn-danger">Delete</button>
                 </td>
               </tr>
               <tr>
@@ -222,13 +232,17 @@
                 <td></td>
                 <td></td>
                 <td>
-                  <button
+                  <a
                     class="btn btn-primary btn-sm view-novel-btn"
-                    data-novel-id="4"
+                    href="author_view-novel.html?id=seed-3"
+                    >View</a
                   >
-                    View
+                  <button
+                    class="btn btn-sm btn-danger archive-novel-btn"
+                    data-novel-id="seed-3"
+                  >
+                    Archive
                   </button>
-                  <button class="btn btn-sm btn-danger">Delete</button>
                 </td>
               </tr>
             </tbody>
@@ -238,7 +252,6 @@
     </div>
 
     <script src="../javascript/sweetalert2.all.min.js"></script>
-    <script src="../javascript/author-browse.js"></script>
     <script src="../javascript/author_all-novel.js"></script>
     <script src="../javascript/logout.js"></script>
   </body>
