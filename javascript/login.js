@@ -1,4 +1,4 @@
-// Get the form on the page
+// -------------------- LOGIN / SIGNUP FORM HANDLER --------------------
 const form = document.querySelector(".login-form");
 
 if (form) {
@@ -177,16 +177,16 @@ function login(role) {
   }
 }
 
-//admin login
+// -------------------- ADMIN LOGIN --------------------
 const ADMIN = {
   email: "admin@gmail.com",
   password: "admin123",
   redirect: "../admin-html/admin.html", // ← change to your admin page
 };
 
+// Only attach the admin listener if the admin form fields exist on this page
 const adminForm = document.querySelector(".login-form");
-
-if (adminForm) {
+if (adminForm && document.getElementById("admin_email")) {
   adminForm.addEventListener("submit", function (event) {
     event.preventDefault();
     adminLogin();
@@ -196,6 +196,9 @@ if (adminForm) {
 function adminLogin() {
   const emailInput = document.getElementById("admin_email");
   const passwordInput = document.getElementById("admin_password");
+
+  // Safety guard in case this is not the admin page
+  if (!emailInput || !passwordInput) return;
 
   const email = emailInput.value.trim();
   const password = passwordInput.value.trim();
@@ -226,3 +229,27 @@ function adminLogin() {
     });
   }
 }
+
+// -------------------- PASSWORD TOGGLE (EYE ICON) --------------------
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".toggle-password").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const input = document.getElementById(btn.dataset.target);
+      if (!input) return;
+
+      const isPassword = input.type === "password";
+
+      // Toggle input type
+      input.type = isPassword ? "text" : "password";
+
+      // Toggle button state (CSS swaps the icons)
+      btn.classList.toggle("is-visible", isPassword);
+
+      // Accessibility
+      btn.setAttribute(
+        "aria-label",
+        isPassword ? "Hide password" : "Show password",
+      );
+    });
+  });
+});

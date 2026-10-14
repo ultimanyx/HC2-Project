@@ -30,6 +30,7 @@
           Free stories that come alive and free knowledge that finds its home.
         </p>
       </div>
+
       <div class="login-card" role="main" aria-label="Login card">
         <div class="login-header">
           <h1>Welcome Back Author</h1>
@@ -38,7 +39,7 @@
 
         <form class="login-form" autocomplete="on" data-role="author">
           <div class="input-group">
-            <label for="email">Email address</label>
+            <label for="author_email">Email address</label>
             <input
               type="email"
               id="author_email"
@@ -49,14 +50,29 @@
           </div>
 
           <div class="input-group">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              id="author_password"
-              name="password"
-              placeholder="Enter your password"
-              minlength="6"
-            />
+            <label for="author_password">Password</label>
+            <div class="password-wrapper">
+              <input
+                type="password"
+                id="author_password"
+                name="password"
+                placeholder="Enter your password"
+                minlength="6"
+              />
+              <button
+                type="button"
+                class="toggle-password"
+                data-target="author_password"
+                aria-label="Show password"
+              >
+                <span class="icon-show">
+                  <img src="../icons/eye-opened.svg" alt="" />
+                </span>
+                <span class="icon-hide">
+                  <img src="../icons/eye-closed.svg" alt="" />
+                </span>
+              </button>
+            </div>
           </div>
 
           <div class="login-options">

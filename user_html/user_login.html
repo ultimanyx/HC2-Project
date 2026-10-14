@@ -57,15 +57,29 @@
 
           <div class="input-group">
             <label for="reader_password">Password</label>
-            <input
-              type="password"
-              id="reader_password"
-              name="password"
-              placeholder="Enter your password"
-              minlength="6"
-            />
+            <div class="password-wrapper">
+              <input
+                type="password"
+                id="reader_password"
+                name="password"
+                placeholder="Enter your password"
+                minlength="6"
+              />
+              <button
+                type="button"
+                class="toggle-password"
+                data-target="reader_password"
+                aria-label="Show password"
+              >
+                <span class="icon-show">
+                  <img src="../icons/eye-opened.svg" alt="" />
+                </span>
+                <span class="icon-hide">
+                  <img src="../icons/eye-closed.svg" alt="" />
+                </span>
+              </button>
+            </div>
           </div>
-
           <div class="login-options">
             <label class="remember-me">
               <input type="checkbox" name="remember" checked />
@@ -82,9 +96,7 @@
           <a href="user_signup.html">Create one</a>
         </div>
       </div>
-      <!-- end login-card -->
     </div>
-    <!-- end login-wrapper -->
 
     <script src="../javascript/sweetalert2.all.min.js"></script>
     <script src="../javascript/login.js"></script>

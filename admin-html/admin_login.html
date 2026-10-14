@@ -31,6 +31,7 @@
           Free stories that come alive and free knowledge that finds its home.
         </p>
       </div>
+
       <div class="login-card" role="main" aria-label="Login card">
         <div class="login-header">
           <h1>Welcome Back Admin</h1>
@@ -39,7 +40,7 @@
 
         <form class="login-form" autocomplete="on" data-role="admin">
           <div class="input-group">
-            <label for="email">Email address</label>
+            <label for="admin_email">Email address</label>
             <input
               type="email"
               id="admin_email"
@@ -50,14 +51,29 @@
           </div>
 
           <div class="input-group">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              id="admin_password"
-              name="password"
-              placeholder="Enter your password"
-              minlength="6"
-            />
+            <label for="admin_password">Password</label>
+            <div class="password-wrapper">
+              <input
+                type="password"
+                id="admin_password"
+                name="password"
+                placeholder="Enter your password"
+                minlength="6"
+              />
+              <button
+                type="button"
+                class="toggle-password"
+                data-target="admin_password"
+                aria-label="Show password"
+              >
+                <span class="icon-show">
+                  <img src="../icons/eye-opened.svg" alt="" />
+                </span>
+                <span class="icon-hide">
+                  <img src="../icons/eye-closed.svg" alt="" />
+                </span>
+              </button>
+            </div>
           </div>
 
           <div class="login-options">
@@ -72,11 +88,12 @@
         </form>
 
         <!-- <div class="login-footer">
-      Don't have an account?
-      <a href="signup.html">Create one</a>
-    </div> -->
+          Don't have an account?
+          <a href="signup.html">Create one</a>
+        </div> -->
       </div>
     </div>
+
     <script src="../javascript/sweetalert2.all.min.js"></script>
     <script src="../javascript/login.js"></script>
   </body>

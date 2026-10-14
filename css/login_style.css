@@ -250,6 +250,63 @@ body {
   box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
+/* -------------------- PASSWORD WRAPPER + EYE TOGGLE -------------------- */
+
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* leave room on the right so the typed password doesn't run under the icon */
+.password-wrapper input {
+  width: 100%;
+  padding-right: 45px;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: #888;
+  transition: color 0.2s ease;
+  line-height: 0;
+}
+
+.toggle-password:hover {
+  color: #333;
+}
+
+/* size both inline SVG and <img> icons consistently */
+.toggle-password svg,
+.toggle-password img {
+  width: 20px;
+  height: 20px;
+  display: block;
+  object-fit: contain;
+  pointer-events: none; /* ensures the button receives the click, not the image */
+}
+
+/* hide the "eye closed" icon by default */
+.toggle-password .icon-hide {
+  display: none;
+}
+
+/* when the password is visible, swap which icon is shown */
+.toggle-password.is-visible .icon-show {
+  display: none;
+}
+
+.toggle-password.is-visible .icon-hide {
+  display: block;
+}
+
 /* login options */
 
 .login-options {
@@ -392,7 +449,8 @@ body {
 .signup-header .login-link:hover {
   color: var(--link-hover);
 }
-/* SweetAlert z-index para top ang sweetalert*/
+
+/* SweetAlert z-index para top ang sweetalert */
 .swal2-container {
   z-index: 9999 !important;
 }
