@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
       tr.dataset.id = n.id;
       tr.innerHTML = `
         <td><strong>${escapeHtml(n.title)}</strong></td>
-        <td><span class="badge paused">Draft</span></td>
+        <td><span class="badge draft">Draft</span></td>
         <td>${formatDate(n.lastEdited)}</td>
         <td>${n.chapters ?? 0}</td>
         <td>

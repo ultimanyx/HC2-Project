@@ -456,6 +456,11 @@ tbody tr:last-child td {
   color: #6b6680;
 }
 
+.badge.draft {
+  background-color: rgba(109, 40, 217, 0.1);
+  color: #5b21b6;
+}
+
 /* form container */
 
 .form-container {
