@@ -451,7 +451,7 @@ body {
 }
 
 .filter-input {
-  width: 380 px;
+  width: 380px; /* Fixed typo from 380 px */
 }
 /* =====================================================
    INPUT FOCUS
@@ -539,16 +539,27 @@ body {
 .card-container a {
   text-decoration: none;
   color: black;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 /* =====================================================
-   NOVEL CARD – simple & clean
+   NOVEL CARD – fixed layout
 ===================================================== */
 .novel-card {
   background: white;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 25px;
+  height: 100%; /* Stretch to fill the grid cell */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column; /* Allows footer to be pushed to bottom */
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease,
+    transform 0.3s ease;
 }
 
 .novel-card .cover {
@@ -558,6 +569,7 @@ body {
   object-fit: cover;
   display: block;
   border-bottom: 1px solid #ddd;
+  flex-shrink: 0; /* Prevent image from shrinking */
 }
 
 .novel-card h1 {
@@ -565,6 +577,12 @@ body {
   font-weight: bold;
   margin: 8px 14px 4px 14px;
   color: #222;
+  min-height: 44px; /* Reserves space for 2 lines of text */
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limit title to 2 lines max */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #genre-block {
@@ -572,6 +590,7 @@ body {
   padding: 0;
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 
 #genre-block img {
@@ -587,24 +606,31 @@ body {
   margin-bottom: 2px;
 }
 
-.novel-card span {
-  display: block;
+/* =====================================================
+   CARD FOOTER – Flexbox layout
+===================================================== */
+.novel-card .card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 10px 14px 14px 14px;
   border-top: 1px solid #eee;
+  margin-top: auto; /* Pushes the footer to the bottom of the card */
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.novel-card span p:first-child {
-  display: inline;
+.novel-card .card-footer p:first-child {
   font-size: 14px;
   color: #666;
   margin: 0;
+  flex-grow: 1; /* Pushes the rating to the right */
 }
 
-.novel-card span .star {
+.novel-card .card-footer .star {
   width: 16px;
   height: 16px;
-  float: right;
-  margin-top: 2px;
+  margin-right: 4px;
 }
 
 .star {
@@ -612,14 +638,11 @@ body {
     hue-rotate(352deg) brightness(92%) contrast(86%);
 }
 
-.novel-card span p:last-child {
-  display: inline;
+.novel-card .card-footer p:last-child {
   font-size: 14px;
   font-weight: bold;
   color: #333;
   margin: 0;
-  float: right;
-  margin-right: 4px;
 }
 
 .novel-card:hover {
