@@ -91,14 +91,22 @@ document.addEventListener("DOMContentLoaded", () => {
       const tr = document.createElement("tr");
       tr.dataset.id = n.id;
       tr.innerHTML = `
-        <td><strong>${escapeHtml(n.title)}</strong></td>
-        <td>${n.chapters ?? 0}</td>
-        <td>${formatDate(n.archivedAt)}</td>
-        <td>
-          <button type="button" class="btn btn-primary btn-sm restore-novel-btn" data-novel-id="${n.id}">Restore</button>
-          <button type="button" class="btn btn-danger btn-sm delete-novel-btn" data-novel-id="${n.id}">Delete</button>
-        </td>
-      `;
+    <td><strong>${escapeHtml(n.title)}</strong></td>
+    <td>${n.chapters ?? 0}</td>
+    <td>${formatDate(n.archivedAt)}</td>
+    <td style="text-align: center">
+      <div class="action-group">
+        <button type="button" class="btn btn-success restore-novel-btn" data-novel-id="${n.id}">
+          <img src="../icons/restore.svg" alt="" class="btn-icon" />
+          Restore
+        </button>
+        <button type="button" class="btn btn-danger delete-novel-btn" data-novel-id="${n.id}">
+          <img src="../icons/delete.svg" alt="delete" class="btn-icon" />
+          Delete
+        </button>
+      </div>
+    </td>
+  `;
       tbody.appendChild(tr);
     });
 

@@ -400,6 +400,9 @@ tbody tr:last-child td {
   text-align: center;
 }
 
+.text-right {
+  text-align: right;
+}
 /* badges (status pills with icon) */
 
 .badge {
