@@ -1,6 +1,4 @@
-/* =====================================================
-   BASE
-===================================================== */
+/* Base */
 html {
   overflow-y: scroll;
 }
@@ -15,9 +13,7 @@ html {
   display: none !important;
 }
 
-/* =====================================================
-   ROOT 
-===================================================== */
+/* Root variables */
 :root {
   /* Main */
   --background: #f8f6f1;
@@ -76,9 +72,7 @@ html {
   --font-heading: "Fraunces", serif;
 }
 
-/* =====================================================
-   FONTS
-===================================================== */
+/* Fonts */
 @font-face {
   font-family: "Plus_Jakarta_Sans";
   src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
@@ -91,18 +85,14 @@ html {
     format("truetype");
 }
 
-/* =====================================================
-   BODY
-===================================================== */
+/* Body */
 body {
   font-family: var(--font-body);
   background-color: var(--background);
   color: var(--foreground);
 }
 
-/* =====================================================
-   NAVBAR
-===================================================== */
+/* Navbar */
 .navbar {
   width: 100%;
   height: 60px;
@@ -114,9 +104,7 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
-/* =====================================================
-   LOGO
-===================================================== */
+/* Logo */
 .nav-logo {
   display: flex;
   align-items: center;
@@ -129,9 +117,7 @@ body {
   object-fit: contain;
 }
 
-/* =====================================================
-   NAVIGATION LINKS
-===================================================== */
+/* Nav links */
 .nav-links {
   display: flex;
   align-items: center;
@@ -174,14 +160,12 @@ body {
   border-bottom: 2px solid var(--primary);
 }
 
-/* Don't show the hover underline on the active link */
+/* Active link: no hover underline */
 .nav-links a#select:hover::after {
   width: 0;
 }
 
-/* =====================================================
-   SEARCH
-===================================================== */
+/* Search */
 .nav-search {
   width: 220px;
   height: 35px;
@@ -213,9 +197,7 @@ body {
   color: var(--muted-foreground);
 }
 
-/* =====================================================
-   SEARCH BUTTON
-===================================================== */
+/* Search button */
 .nav-search button {
   width: 42px;
   height: 100%;
@@ -233,18 +215,13 @@ body {
   height: 18px;
 }
 
-/* =====================================================
-   SEARCH FOCUS
-===================================================== */
+/* Search focus */
 .nav-search:focus-within {
   border-color: var(--ring);
   box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
-/* =====================================================
-   USER DROPDOWN – FULLY INTEGRATED
-===================================================== */
-/* Container – must be positioned relative for the absolute menu */
+/* User dropdown */
 .nav-user-dropdown {
   position: relative;
   display: inline-block;
@@ -287,7 +264,7 @@ body {
   transition: transform 0.25s ease;
 }
 
-/* ── Hide dropdown by default ── */
+/* Hide dropdown by default */
 .dropdown-menu {
   position: absolute;
   top: calc(100% + 8px);
@@ -296,7 +273,7 @@ body {
   background: var(--card-background);
   border-radius: 12px;
   padding: 8px 0;
-  box-shadow: var(--boxshadow); /* UPDATED: uses --boxshadow */
+  box-shadow: var(--boxshadow);
   border: 1px solid var(--border);
   opacity: 0;
   visibility: hidden;
@@ -309,7 +286,7 @@ body {
   pointer-events: none;
 }
 
-/* ── Show on hover / focus / active (mobile support) ── */
+/* Show on hover/focus/active */
 .nav-user-dropdown:hover .dropdown-menu,
 .nav-user-dropdown:focus-within .dropdown-menu,
 .nav-user-dropdown:active .dropdown-menu {
@@ -319,14 +296,14 @@ body {
   pointer-events: auto;
 }
 
-/* ── Rotate arrow on open ── */
+/* Rotate arrow when open */
 .nav-user-dropdown:hover .dropdown-arrow,
 .nav-user-dropdown:focus-within .dropdown-arrow,
 .nav-user-dropdown:active .dropdown-arrow {
   transform: rotate(180deg);
 }
 
-/* ── Remove underline effect from dropdown links ── */
+/* Remove dropdown link underline */
 .nav-links .dropdown-menu a::after {
   display: none;
 }
@@ -360,14 +337,12 @@ body {
   color: var(--destructive);
 }
 
-/* ── Keep dropdown open when interacting with menu items ── */
+/* Keep dropdown open on focus */
 .dropdown-menu a:focus-within {
   background: var(--muted);
 }
 
-/* =====================================================
-   NO-BOOK
-===================================================== */
+/* No books */
 .no-book {
   display: flex;
   justify-content: center;
@@ -385,9 +360,7 @@ body {
   text-decoration: none;
 }
 
-/* =====================================================
-   WITH-BOOK
-===================================================== */
+/* Library header */
 .library-header {
   display: flex;
   flex-wrap: wrap;
@@ -401,24 +374,24 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
-/* ─── title ─── */
+/* Title */
 .library-title h2 {
   font-size: 32px;
   font-weight: 700;
   color: var(--accent-foreground);
   margin: 0 0 4px 0;
   letter-spacing: -0.5px;
-  text-shadow: var(--text-shadow); /* ADDED: Applies text shadow to title */
+  text-shadow: var(--text-shadow);
 }
 
 .library-title p {
   font-size: 15px;
   color: var(--accent-foreground);
   margin: 0;
-  text-shadow: var(--text-shadow); /* ADDED: Applies text shadow to subtitle */
+  text-shadow: var(--text-shadow);
 }
 
-/* ─── stats ─── */
+/* Stats */
 .library-stats {
   display: flex;
   gap: 14px;
@@ -451,9 +424,7 @@ body {
   margin-top: 2px;
 }
 
-/* =====================================================
-   BOOK GRID – 4 columns
-===================================================== */
+/* Book grid – 4 columns */
 .book-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -467,7 +438,7 @@ body {
   text-decoration: none;
 }
 
-/* ─── Book Card ─── */
+/* Book card */
 .book-card {
   background: var(--card-background);
   border-radius: 12px;
@@ -481,10 +452,10 @@ body {
 
 .book-card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--boxshadow); /* UPDATED: uses --boxshadow */
+  box-shadow: var(--boxshadow);
 }
 
-/* ─── Cover ─── */
+/* Cover */
 .book-cover {
   position: relative;
   aspect-ratio: 2 / 3;
@@ -500,7 +471,7 @@ body {
   transition: transform 0.4s ease;
 }
 
-/* ─── Status Badge ─── */
+/* Status badge */
 .book-status-reading,
 .book-status-completed {
   position: absolute;
@@ -524,7 +495,7 @@ body {
   background: var(--ring);
 }
 
-/* ─── Info ─── */
+/* Info */
 .book-info {
   padding: 16px 16px 18px;
   display: flex;
@@ -570,7 +541,7 @@ body {
   font-weight: 500;
 }
 
-/* ─── Progress Bar ─── */
+/* Progress bar */
 .progress-bar {
   width: 100%;
   height: 6px;
@@ -586,9 +557,7 @@ body {
   transition: width 0.6s ease;
 }
 
-/* =====================================================
-   LIBRARY TOOLBAR
-===================================================== */
+/* Library toolbar */
 .library-toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -631,16 +600,13 @@ body {
   color: var(--primary-foreground);
 }
 
-/* =====================================================
-   FOOTER
-===================================================== */
+/* Footer */
 .footer {
   margin-top: 60px;
   background-color: var(--footer-background);
   color: var(--footer-foreground);
 }
 
-/* Footer Content */
 .footer-content {
   display: grid;
   grid-template-columns: 3fr 1fr 1fr;
@@ -648,13 +614,11 @@ body {
   padding: 45px 60px;
 }
 
-/* Footer Section */
 .footer-section {
   display: flex;
   flex-direction: column;
 }
 
-/* Footer Heading */
 .footer-section h3 {
   margin-bottom: 15px;
   font-family: var(--font-heading);
@@ -663,14 +627,12 @@ body {
   color: var(--footer-foreground);
 }
 
-/* Footer Logo */
 .footer-logo {
   width: 45px;
   height: auto;
   margin-bottom: 12px;
 }
 
-/* Footer Description */
 .footer-section p {
   max-width: 280px;
   margin: 0;
@@ -680,7 +642,6 @@ body {
   color: var(--footer-muted);
 }
 
-/* Footer Links */
 .footer-section a {
   width: fit-content;
   margin-bottom: 9px;
@@ -695,7 +656,6 @@ body {
   color: var(--primary);
 }
 
-/* Footer Bottom */
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding: 18px 60px;
@@ -709,9 +669,7 @@ body {
   color: var(--footer-muted);
 }
 
-/* =====================================================
-   SWEETALERT — must sit above the withdraw modal
-===================================================== */
+/* SweetAlert z-index para top ang sweetalert*/
 .swal2-container {
   z-index: 9999 !important;
 }

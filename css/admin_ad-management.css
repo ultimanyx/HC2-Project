@@ -446,9 +446,7 @@ tbody tr:last-child td {
   filter: brightness(0) invert(1);
 }
 
-/* =====================================================
-   SWEETALERT — must sit above the withdraw modal
-===================================================== */
+/* SweetAlert z-index para top ang sweetalert*/
 .swal2-container {
   z-index: 9999 !important;
 }

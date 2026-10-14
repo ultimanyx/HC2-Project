@@ -8,64 +8,63 @@ html {
   overflow-y: scroll;
 }
 
-/* =====================================================
-   ROOT VARIABLES
-===================================================== */
+/* root variables */
+
 :root {
-  /* Main */
+  /* main */
   --background: #f8f6f1;
   --foreground: #1a1826;
 
-  /* Cards */
+  /* cards */
   --card-background: #ffffff;
   --card-foreground: #1a1826;
 
-  /* Primary */
+  /* primary */
   --primary: #b8721f;
   --primary-muted: #926022;
   --primary-foreground: #ffffff;
 
-  /* Secondary */
+  /* secondary */
   --secondary: #ede9e1;
   --secondary-foreground: #1a1826;
 
-  /* Muted */
+  /* muted */
   --muted: #ede9e1;
   --muted-foreground: #6b6680;
 
-  /* Accent */
+  /* accent */
   --accent: #6d28d9;
   --accent-foreground: #ffffff;
 
-  /* Border */
+  /* border */
   --border: rgba(26, 24, 38, 0.1);
 
-  /* Input */
+  /* input */
   --input-background: #ede9e1;
 
-  /* Focus */
+  /* focus */
   --ring: #b8721f;
   --focus-ring: rgba(184, 114, 31, 0.18);
 
-  /* Destructive */
+  /* destructive */
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
 
-  /* Links */
+  /* links */
   --link: #3b6f91;
   --link-hover: #2c536d;
 
-  /* Shadows */
+  /* shadows */
   --boxshadow:
     0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
   --text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 
-  /* Footer */
+  /* footer */
   --footer-background: #1a1826;
   --footer-foreground: #ffffff;
   --footer-muted: #d8d0c8;
 
-  /* Fonts */
+  /* fonts */
   --font-body: "Plus_Jakarta_Sans", sans-serif;
   --font-heading: "Fraunces", serif;
 
@@ -73,9 +72,8 @@ html {
   --star-empty: var(--muted, #ede9e1);
 }
 
-/* =====================================================
-   FONTS
-===================================================== */
+/* fonts */
+
 @font-face {
   font-family: "Plus_Jakarta_Sans";
   src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
@@ -88,9 +86,8 @@ html {
     format("truetype");
 }
 
-/* =====================================================
-   BODY
-===================================================== */
+/* body */
+
 body {
   font-family: var(--font-heading);
   background-color: var(--background);
@@ -101,9 +98,8 @@ a {
   text-decoration: none;
 }
 
-/* =====================================================
-   NAVBAR
-===================================================== */
+/* navbar */
+
 .navbar {
   width: 100%;
   height: 60px;
@@ -115,9 +111,8 @@ a {
   border-bottom: 1px solid var(--border);
 }
 
-/* =====================================================
-   LOGO
-===================================================== */
+/* logo */
+
 .nav-logo {
   display: flex;
   align-items: center;
@@ -130,9 +125,8 @@ a {
   object-fit: contain;
 }
 
-/* =====================================================
-   NAVIGATION LINKS
-===================================================== */
+/* navigation links */
+
 .nav-links {
   display: flex;
   align-items: center;
@@ -154,7 +148,8 @@ a {
   color: var(--primary);
 }
 
-/* Underline */
+/* underline */
+
 .nav-links a::after {
   content: "";
   position: absolute;
@@ -175,14 +170,14 @@ a {
   border-bottom: 2px solid var(--primary);
 }
 
-/* Don't show the hover underline on the active link */
+/* don't show the hover underline on the active link */
+
 .nav-links a#select:hover::after {
   width: 0;
 }
 
-/* =====================================================
-   SEARCH
-===================================================== */
+/* search */
+
 .nav-search {
   width: 220px;
   height: 35px;
@@ -214,9 +209,8 @@ a {
   color: var(--muted-foreground);
 }
 
-/* =====================================================
-   SEARCH BUTTON
-===================================================== */
+/* search button */
+
 .nav-search button {
   width: 42px;
   height: 100%;
@@ -234,17 +228,15 @@ a {
   height: 18px;
 }
 
-/* =====================================================
-   SEARCH FOCUS
-===================================================== */
+/* search focus */
+
 .nav-search:focus-within {
   border-color: var(--ring);
   box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
-/* =====================================================
-   USER & DROPDOWN
-===================================================== */
+/* user & dropdown */
+
 .nav-user-dropdown {
   position: relative;
   display: inline-block;
@@ -287,7 +279,8 @@ a {
   transition: transform 0.25s ease;
 }
 
-/* ── hide dropdown by default ── */
+/* hide dropdown by default */
+
 .dropdown-menu {
   position: absolute;
   top: calc(100% + 8px);
@@ -309,7 +302,8 @@ a {
   pointer-events: none;
 }
 
-/* ── show on hover ── */
+/* show on hover */
+
 .nav-user-dropdown:active .dropdown-menu,
 .nav-user-dropdown:focus-within .dropdown-menu {
   opacity: 1;
@@ -318,13 +312,15 @@ a {
   pointer-events: auto;
 }
 
-/* ── rotate arrow on open ── */
+/* rotate arrow on open */
+
 .nav-user-dropdown:active .dropdown-arrow,
 .nav-user-dropdown:focus-within .dropdown-arrow {
   transform: rotate(180deg);
 }
 
-/* ── Remove underline effect from dropdown links ── */
+/* remove underline effect from dropdown links */
+
 .nav-links .dropdown-menu a::after {
   display: none;
 }
@@ -354,14 +350,14 @@ a {
   color: var(--destructive);
 }
 
-/* ── Keep dropdown open when interacting with menu items ── */
+/* keep dropdown open when interacting with menu items */
+
 .dropdown-menu a:focus-within {
   background: var(--muted);
 }
 
-/* =====================================================
-   BACK BUTTON
-===================================================== */
+/* back button */
+
 .back-button {
   align-self: flex-start;
   margin: 30px 0 0 20px;
@@ -389,7 +385,7 @@ a {
   width: 22px;
   height: 22px;
   object-fit: contain;
-  /* Force icon to white */
+  /* force icon to white */
   filter: brightness(0) invert(1);
 }
 
@@ -402,9 +398,9 @@ a {
 .back-button:active {
   transform: translateX(-1px) scale(0.96);
 }
-/* =====================================================
-   HEADER TOP
-===================================================== */
+
+/* header top */
+
 .header-container {
   display: flex;
   align-items: flex-start;
@@ -413,7 +409,8 @@ a {
   background-color: var(--primary-foreground);
 }
 
-/* BOOK COVER (only direct child — excludes back-button icon) */
+/* book cover (only direct child — excludes back-button icon) */
+
 .header-container > img {
   width: 300px;
   height: 400px;
@@ -422,17 +419,20 @@ a {
   object-fit: cover;
 }
 
-/* RIGHT SIDE */
+/* right side */
+
 .header {
   padding: 20px;
 }
 
-/* Title */
+/* title */
+
 .header h1 {
   margin: 0 0 15px;
 }
 
-/* Genre + chapter */
+/* genre + chapter */
+
 .header span {
   display: inline-flex;
   align-items: center;
@@ -440,7 +440,8 @@ a {
   margin-right: 20px;
 }
 
-/* ICONS */
+/* icons */
+
 .header .book-icon,
 .header .chapter-icon,
 .header .author-icon {
@@ -454,7 +455,8 @@ a {
   color: var(--muted-foreground);
 }
 
-/* Synopsis */
+/* synopsis */
+
 .description {
   display: flex;
   flex-direction: column;
@@ -474,9 +476,8 @@ a {
   line-height: 1.5;
 }
 
-/* =====================================================
-   STAR RATING
-===================================================== */
+/* star rating */
+
 .star {
   margin-top: 8px;
   width: 200px;
@@ -509,7 +510,8 @@ a {
   border: 0;
 }
 
-/* Chrome & Safari */
+/* chrome & safari */
+
 .star-rating::-webkit-slider-runnable-track {
   height: 100%;
   mask: var(--mask);
@@ -519,7 +521,8 @@ a {
   print-color-adjust: exact;
 }
 
-/* Firefox */
+/* firefox */
+
 .star-rating::-moz-range-track {
   height: 100%;
   mask: var(--mask);
@@ -528,9 +531,8 @@ a {
   print-color-adjust: exact;
 }
 
-/* =====================================================
-   BUTTONS
-===================================================== */
+/* buttons */
+
 .button-container {
   margin-top: 10px;
   display: flex;
@@ -570,9 +572,8 @@ a {
   transition: background-color 0.2s ease;
 }
 
-/* =====================================================
-   CHAPTER TABLE HEADER
-===================================================== */
+/* chapter table header */
+
 .chapter-container {
   display: flex;
   flex-direction: column;
@@ -606,9 +607,8 @@ a {
   letter-spacing: 1.5px;
 }
 
-/* =====================================================
-   CHAPTER TABLE
-===================================================== */
+/* chapter table */
+
 .chapter-table {
   width: 100%;
   border-collapse: collapse;
@@ -629,7 +629,8 @@ a {
   border-bottom: none;
 }
 
-/* Zebra striping for readability */
+/* zebra striping for readability */
+
 .chapter-table tbody tr:nth-child(even) {
   background-color: var(--secondary);
 }
@@ -662,7 +663,8 @@ a {
   border-radius: 0 0 12px 12px;
 }
 
-/* --- Buttons (Previous / Next) --- */
+/* buttons (previous / next) */
+
 .container-footer button {
   background-color: var(--primary);
   color: var(--primary-foreground);
@@ -697,16 +699,16 @@ a {
   opacity: 0.6;
 }
 
-/* =====================================================
-   FOOTER
-===================================================== */
+/* footer */
+
 .footer {
   margin-top: 60px;
   background-color: var(--footer-background);
   color: var(--footer-foreground);
 }
 
-/* Footer Content */
+/* footer content */
+
 .footer-content {
   display: grid;
   grid-template-columns: 3fr 1fr 1fr;
@@ -714,13 +716,15 @@ a {
   padding: 45px 60px;
 }
 
-/* Footer Section */
+/* footer section */
+
 .footer-section {
   display: flex;
   flex-direction: column;
 }
 
-/* Footer Heading */
+/* footer heading */
+
 .footer-section h3 {
   margin-bottom: 15px;
   font-family: var(--font-heading);
@@ -729,14 +733,16 @@ a {
   color: var(--footer-foreground);
 }
 
-/* Footer Logo */
+/* footer logo */
+
 .footer-logo {
   width: 45px;
   height: auto;
   margin-bottom: 12px;
 }
 
-/* Footer Description */
+/* footer description */
+
 .footer-section p {
   max-width: 280px;
   margin: 0;
@@ -746,7 +752,8 @@ a {
   color: var(--footer-muted);
 }
 
-/* Footer Links */
+/* footer links */
+
 .footer-section a {
   width: fit-content;
   margin-bottom: 9px;
@@ -761,7 +768,8 @@ a {
   color: var(--primary);
 }
 
-/* Footer Bottom */
+/* footer bottom */
+
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding: 18px 60px;
@@ -774,10 +782,7 @@ a {
   font-size: 12px;
   color: var(--footer-muted);
 }
-
-/* =====================================================
-   SWEETALERT — must sit above the withdraw modal
-===================================================== */
+/* SweetAlert z-index para top ang sweetalert*/
 .swal2-container {
   z-index: 9999 !important;
 }

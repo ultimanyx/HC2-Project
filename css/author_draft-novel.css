@@ -4,70 +4,66 @@
   box-sizing: border-box;
 }
 
-/* =====================================================
-   ROOT VARIABLES
-===================================================== */
+/* root variables */
 
 :root {
-  /* Main */
+  /* main */
   --background: #f8f6f1;
   --foreground: #1a1826;
 
-  /* Cards */
+  /* cards */
   --card-background: #ffffff;
   --card-foreground: #1a1826;
 
-  /* Primary */
+  /* primary */
   --primary: #b8721f;
   --primary-foreground: #ffffff;
 
-  /* Secondary */
+  /* secondary */
   --secondary: #ede9e1;
   --secondary-foreground: #1a1826;
 
-  /* Muted */
+  /* muted */
   --muted: #ede9e1;
   --muted-foreground: #6b6680;
 
-  /* Accent */
+  /* accent */
   --accent: #6d28d9;
   --accent-foreground: #ffffff;
 
-  /* Border */
+  /* border */
   --border: rgba(26, 24, 38, 0.1);
 
-  /* Input */
+  /* input */
   --input-background: #ede9e1;
 
-  /* Focus */
+  /* focus */
   --ring: #b8721f;
   --focus-ring: rgba(184, 114, 31, 0.18);
 
-  /* Destructive */
+  /* destructive */
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
 
-  /* Links */
+  /* links */
   --link: #3b6f91;
   --link-hover: #2c536d;
 
-  /* Shadows */
+  /* shadows */
   --shadow:
     0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
 
-  /* Footer */
+  /* footer */
   --footer-background: #1a1826;
   --footer-foreground: #ffffff;
   --footer-muted: #d8d0c8;
 
-  /* Fonts */
+  /* fonts */
   --font-body: "Plus_Jakarta_Sans", sans-serif;
   --font-heading: "Fraunces", serif;
 }
 
-/* =====================================================
-   FONTS
-===================================================== */
+/* fonts */
 
 @font-face {
   font-family: "Poppins";
@@ -86,7 +82,8 @@
     format("truetype");
 }
 
-/* ============ Body ==========*/
+/* base */
+
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   background-color: #f8f6f1;
@@ -99,13 +96,15 @@ a {
   color: inherit;
 }
 
-/* ---------- Layout ---------- */
+/* layout */
+
 .layout {
   display: flex;
   min-height: 100vh;
 }
 
-/* ---------- Sidebar ---------- */
+/* sidebar */
+
 .sidebar {
   width: 270px;
   background-color: #ffffff;
@@ -202,7 +201,8 @@ a {
   background-color: rgba(220, 38, 38, 0.08);
 }
 
-/* ---------- Main content ---------- */
+/* main content */
+
 .main {
   flex: 1;
   padding: 24px 32px;
@@ -243,7 +243,8 @@ a {
   font-size: 14px;
 }
 
-/* ---------- Filter Bar ---------- */
+/* filter bar */
+
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -294,7 +295,8 @@ a {
   gap: 6px;
 }
 
-/* ---------- Generic button style ---------- */
+/* buttons */
+
 .btn {
   padding: 8px 16px;
   border-radius: 6px;
@@ -320,13 +322,15 @@ a {
   background: #9a5f16;
 }
 
-/* ---------- Utility Classes ---------- */
+/* utility classes */
+
 .btn-sm {
   padding: 4px 12px;
   font-size: 13px;
 }
 
-/* Danger / Delete button */
+/* danger / delete button */
+
 .btn-danger {
   background: rgba(220, 38, 38, 0.1);
   color: #991b1b;
@@ -336,12 +340,14 @@ a {
   background: rgba(220, 38, 38, 0.18);
 }
 
-/* Muted text color */
+/* muted text color */
+
 .text-muted {
   color: var(--muted-foreground);
 }
 
-/* ---------- Stat cards ---------- */
+/* stat cards */
+
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -382,7 +388,8 @@ a {
   color: #b8721f;
 }
 
-/* ---------- Table card ---------- */
+/* table card */
+
 .table-card {
   margin-top: 10px;
   background-color: #ffffff;
@@ -424,7 +431,8 @@ tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* ---------- Badge / status pills ---------- */
+/* badge / status pills */
+
 .badge {
   display: inline-block;
   font-size: 13px;
@@ -448,7 +456,8 @@ tbody tr:last-child td {
   color: #6b6680;
 }
 
-/* ---------- Form Container ---------- */
+/* form container */
+
 .form-container {
   background: var(--card-background);
   border: 1px solid var(--border);
@@ -457,7 +466,8 @@ tbody tr:last-child td {
   box-shadow: var(--shadow);
 }
 
-/* ---------- Grid Layouts ---------- */
+/* grid layouts */
+
 .form-grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -516,7 +526,8 @@ tbody tr:last-child td {
   resize: vertical;
 }
 
-/* ---------- Upload Zone ---------- */
+/* upload zone */
+
 .upload-zone {
   border: 2px dashed var(--border);
   border-radius: 8px;
@@ -549,7 +560,8 @@ tbody tr:last-child td {
   color: var(--muted-foreground);
 }
 
-/* ---------- Form Actions ---------- */
+/* form actions */
+
 .form-actions {
   display: flex;
   flex-wrap: wrap;
@@ -579,10 +591,7 @@ tbody tr:last-child td {
 .btn-outline:hover {
   background: var(--secondary);
 }
-
-/* =====================================================
-   SWEETALERT — must sit above the withdraw modal
-===================================================== */
+/* SweetAlert z-index para top ang sweetalert*/
 .swal2-container {
   z-index: 9999 !important;
 }

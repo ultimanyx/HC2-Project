@@ -8,9 +8,8 @@ html {
   overflow-y: scroll;
 }
 
-/* =====================================================
-   ROOT VARIABLES
-===================================================== */
+/* root variables */
+
 :root {
   --background: #f8f6f1;
   --foreground: #1a1826;
@@ -66,9 +65,8 @@ html {
     format("truetype");
 }
 
-/* =====================================================
-   BODY
-===================================================== */
+/* base */
+
 body {
   font-family: var(--font-heading);
   background-color: var(--background);
@@ -80,9 +78,8 @@ a {
   color: inherit;
 }
 
-/* =====================================================
-   NAVBAR (same as other pages)
-===================================================== */
+/* navbar (same as other pages) */
+
 .navbar {
   width: 100%;
   height: 60px;
@@ -200,9 +197,8 @@ a {
   box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
-/* =====================================================
-   USER DROPDOWN
-===================================================== */
+/* user dropdown */
+
 .nav-user-dropdown {
   position: relative;
   display: inline-block;
@@ -283,9 +279,8 @@ a {
   background: var(--muted);
 }
 
-/* =====================================================
-   AUTHOR HERO
-===================================================== */
+/* author hero */
+
 .author-hero {
   background: linear-gradient(
     135deg,
@@ -337,7 +332,8 @@ a {
   margin-bottom: 22px;
 }
 
-/* Stats row */
+/* stats row */
+
 .author-stats {
   display: flex;
   gap: 35px;
@@ -366,7 +362,8 @@ a {
   margin-top: 4px;
 }
 
-/* Social circle buttons */
+/* social circle buttons */
+
 .author-socials {
   display: flex;
   gap: 12px;
@@ -398,9 +395,8 @@ a {
   transform: translateY(-3px);
 }
 
-/* =====================================================
-   SECTIONS
-===================================================== */
+/* sections */
+
 .author-section {
   max-width: 1100px;
   margin: 40px auto;
@@ -430,7 +426,8 @@ a {
   color: var(--foreground);
 }
 
-/* Bio */
+/* bio */
+
 .author-bio {
   font-family: var(--font-body);
   font-size: 1rem;
@@ -440,9 +437,8 @@ a {
   text-align: justify;
 }
 
-/* =====================================================
-   BOOKS GRID
-===================================================== */
+/* books grid */
+
 .books-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -498,9 +494,8 @@ a {
   font-weight: 600;
 }
 
-/* =====================================================
-   CONTACT GRID
-===================================================== */
+/* contact grid */
+
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -559,9 +554,8 @@ a {
   white-space: nowrap;
 }
 
-/* =====================================================
-   FOOTER
-===================================================== */
+/* footer */
+
 .footer {
   margin-top: 60px;
   background-color: var(--footer-background);
@@ -626,10 +620,7 @@ a {
   font-size: 12px;
   color: var(--footer-muted);
 }
-
-/* =====================================================
-   SWEETALERT — must sit above the withdraw modal
-===================================================== */
+/* SweetAlert z-index para top ang sweetalert*/
 .swal2-container {
   z-index: 9999 !important;
 }

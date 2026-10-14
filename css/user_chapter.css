@@ -1,3 +1,4 @@
+/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -8,11 +9,9 @@ html {
   overflow-y: scroll;
 }
 
-/* =====================================================
-   ROOT VARIABLES — all colors live here
-===================================================== */
+/* Theme variables */
 :root {
-  /* ---- Existing (novel site) ---- */
+  /* Novel site colors */
   --background: #f8f6f1;
   --foreground: #1a1826;
   --card-background: #ffffff;
@@ -49,7 +48,7 @@ html {
   --font-body: "Plus_Jakarta_Sans", sans-serif;
   --font-heading: "Fraunces", serif;
 
-  /* ---- New: Ad overlay colors ---- */
+  /* Ad overlay colors */
   --ad-overlay-backdrop: rgba(0, 0, 0, 0.75);
   --ad-card-bg: #0b0e14;
   --ad-card-border: #2d3540;
@@ -99,9 +98,7 @@ body {
   color: var(--foreground);
 }
 
-/* =====================================================
-   NAVBAR
-===================================================== */
+/* Navbar */
 .navbar {
   width: 100%;
   height: 60px;
@@ -222,9 +219,7 @@ body {
   box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
-/* =====================================================
-   USER & DROPDOWN
-===================================================== */
+/* User and dropdown */
 .nav-user-dropdown {
   position: relative;
   display: inline-block;
@@ -267,7 +262,7 @@ body {
   transition: transform 0.25s ease;
 }
 
-/* ── hide dropdown by default ── */
+/* Hide dropdown by default */
 .dropdown-menu {
   position: absolute;
   top: calc(100% + 8px);
@@ -289,7 +284,7 @@ body {
   pointer-events: none;
 }
 
-/* ── show on hover ── */
+/* Show on hover/focus */
 .nav-user-dropdown:active .dropdown-menu,
 .nav-user-dropdown:focus-within .dropdown-menu {
   opacity: 1;
@@ -298,13 +293,13 @@ body {
   pointer-events: auto;
 }
 
-/* ── rotate arrow on open ── */
+/* Rotate arrow when open */
 .nav-user-dropdown:active .dropdown-arrow,
 .nav-user-dropdown:focus-within .dropdown-arrow {
   transform: rotate(180deg);
 }
 
-/* ── Remove underline effect from dropdown links ── */
+/* Remove dropdown link underline */
 .nav-links .dropdown-menu a::after {
   display: none;
 }
@@ -334,14 +329,12 @@ body {
   color: var(--destructive);
 }
 
-/* ── Keep dropdown open when interacting with menu items ── */
+/* Keep dropdown open on focus */
 .dropdown-menu a:focus-within {
   background: var(--muted);
 }
 
-/* =====================================================
-   CHAPTER HEADER & BUTTONS
-===================================================== */
+/* Chapter header and buttons */
 .chapter-header {
   display: flex;
   flex-wrap: wrap;
@@ -368,20 +361,16 @@ body {
   margin-bottom: 6px;
 }
 
-/* =====================================================
-   TOP BUTTONS ROW
-===================================================== */
+/* Top buttons row */
 .top-button {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 20px;
-  /* NO justify-content here */
+  /* no justify-content here */
 }
 
-/* =====================================================
-   BACK BUTTON (far LEFT)
-===================================================== */
+/* Back button */
 .back-button {
   flex-shrink: 0;
 
@@ -419,11 +408,9 @@ body {
   transform: translateX(-1px) scale(0.96);
 }
 
-/* =====================================================
-   BOOKMARK + REPORT (pushed to the RIGHT)
-===================================================== */
+/* Bookmark and report pushed right */
 .bookmark-btn {
-  margin-left: auto; /* ⬅ pushes the pair to the right */
+  margin-left: auto; /* pushes the pair to the right */
 }
 
 .bookmark-btn,
@@ -457,9 +444,7 @@ body {
   height: 16px;
 }
 
-/* =====================================================
-   TOP BUTTON BAR
-===================================================== */
+/* Top button bar */
 .top-button {
   display: flex;
   justify-content: flex-end;
@@ -470,9 +455,7 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
-/* =====================================================
-   BOOKMARK BUTTON
-===================================================== */
+/* Bookmark button */
 .bookmark-btn {
   display: flex;
   align-items: center;
@@ -534,9 +517,7 @@ body {
   box-shadow: 0 4px 16px rgba(184, 114, 31, 0.4);
 }
 
-/* =====================================================
-   REPORT BUTTON 
-===================================================== */
+/* Report button */
 .report-btn {
   display: flex;
   align-items: center;
@@ -578,9 +559,7 @@ body {
   transition: filter 0.2s ease;
 }
 
-/* =====================================================
-   CHAPTER CONTAINER
-===================================================== */
+/* Chapter container */
 .chapter-container {
   width: 90%;
   max-width: 780px;
@@ -688,9 +667,7 @@ body {
   transform: none;
 }
 
-/* =====================================================
-   FOOTER
-===================================================== */
+/* Footer */
 .footer {
   margin-top: 60px;
   background-color: var(--footer-background);
@@ -759,9 +736,7 @@ body {
   color: var(--footer-muted);
 }
 
-/* ============================================================
-   AD OVERLAY STYLES — all colors from :root
-============================================================ */
+/* Ad overlay */
 .ad-overlay {
   position: fixed;
   top: 0;
@@ -906,7 +881,7 @@ body {
   border: 1px solid var(--ad-content-border);
 }
 
-/* ----- Banner ad ----- */
+/* Banner ad */
 .banner-ad {
   width: 100%;
   height: 100%;
@@ -979,7 +954,7 @@ body {
   border: 1px solid var(--ad-cta-border);
 }
 
-/* ----- Image ad ----- */
+/* Image ad */
 .banner-ad .banner-content .banner-image {
   width: 100%;
   height: 100%;
@@ -989,7 +964,7 @@ body {
   margin: 0;
 }
 
-/* ----- Video ad ----- */
+/* Video ad */
 .video-ad {
   width: 100%;
   min-height: 520px;
@@ -1027,7 +1002,7 @@ body {
   font-size: 15px;
 }
 
-/* ----- Ad footer ----- */
+/* Ad footer */
 .ad-footer {
   display: flex;
   justify-content: space-between;
@@ -1087,9 +1062,7 @@ body {
   transform: scale(0.97);
 }
 
-/* ============================================================
-   REPORT MODAL — all styles from :root, no animations
-============================================================ */
+/* Report modal */
 .report-modal-overlay {
   position: fixed;
   top: 0;
@@ -1257,9 +1230,7 @@ body {
   border-color: var(--destructive-hover);
 }
 
-/* =====================================================
-   AUTO-SCROLL CONTROLS
-===================================================== */
+/* Auto-scroll controls */
 .autoscroll {
   position: fixed;
   right: 24px;
@@ -1341,7 +1312,7 @@ body {
   user-select: none;
 }
 
-/* Show/hide play & pause icons based on state */
+/* Show/hide play and pause icons */
 .autoscroll-icon-pause {
   display: none;
 }
@@ -1352,7 +1323,7 @@ body {
   display: block;
 }
 
-/* Hide on small screens where it would clutter */
+/* Hide on small screens */
 @media (max-width: 600px) {
   .autoscroll {
     right: 12px;
@@ -1370,9 +1341,8 @@ body {
     height: 40px;
   }
 }
-/* =====================================================
-   SWEETALERT — must sit above the withdraw modal
-===================================================== */
+
+/* SweetAlert z-index para top ang sweetalert*/
 .swal2-container {
   z-index: 9999 !important;
 }

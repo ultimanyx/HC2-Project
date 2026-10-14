@@ -1,80 +1,77 @@
-/* =====================================================
-   RESET
-===================================================== */
+/* reset */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* =====================================================
-   ROOT VARIABLES
-===================================================== */
+/* root variables */
+
 :root {
-  /* Main */
+  /* main */
   --background: #f8f6f1;
   --foreground: #1a1826;
 
-  /* Cards */
+  /* cards */
   --card-background: #ffffff;
   --card-foreground: #1a1826;
 
-  /* Primary */
+  /* primary */
   --primary: #b8721f;
   --primary-hover: #9a5f16;
   --primary-soft: rgba(184, 114, 31, 0.12);
   --primary-foreground: #ffffff;
 
-  /* Secondary */
+  /* secondary */
   --secondary: #ede9e1;
   --secondary-hover: #ddd7cb;
   --secondary-foreground: #1a1826;
 
-  /* Muted */
+  /* muted */
   --muted: #ede9e1;
   --muted-foreground: #6b6680;
 
-  /* Accent */
+  /* accent */
   --accent: #6d28d9;
   --accent-foreground: #ffffff;
 
-  /* Border */
+  /* border */
   --border: rgba(26, 24, 38, 0.1);
   --border-strong: rgba(26, 24, 38, 0.16);
 
-  /* Input */
+  /* input */
   --input-background: #ede9e1;
   --input-background-focus: #ffffff;
 
-  /* Focus */
+  /* focus */
   --focus-ring: rgba(184, 114, 31, 0.18);
 
-  /* Destructive */
+  /* destructive */
   --destructive: #dc2626;
   --destructive-soft: rgba(220, 38, 38, 0.1);
   --destructive-strong: #991b1b;
 
-  /* Success */
+  /* success */
   --success: #3f7d4f;
   --success-soft: rgba(63, 125, 79, 0.15);
   --success-strong: #2f5d3a;
 
-  /* Links */
+  /* links */
   --link: #3b6f91;
   --link-hover: #2c536d;
 
-  /* Shadows */
+  /* shadows */
   --shadow:
     0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
 
-  /* Fonts */
+  /* fonts */
   --font-body: "Plus_Jakarta_Sans", sans-serif;
   --font-heading: "Fraunces", serif;
 }
 
-/* =====================================================
-   FONTS
-===================================================== */
+/* fonts */
+
 @font-face {
   font-family: "Poppins";
   src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype");
@@ -92,9 +89,8 @@
     format("truetype");
 }
 
-/* =====================================================
-   BASE
-===================================================== */
+/* base */
+
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   background-color: #f8f6f1;
@@ -107,17 +103,15 @@ a {
   color: inherit;
 }
 
-/* =====================================================
-   LAYOUT
-===================================================== */
+/* layout */
+
 .layout {
   display: flex;
   min-height: 100vh;
 }
 
-/* =====================================================
-   SIDEBAR
-===================================================== */
+/* sidebar */
+
 .sidebar {
   width: 270px;
   background-color: #ffffff;
@@ -214,9 +208,8 @@ a {
   background-color: rgba(220, 38, 38, 0.08);
 }
 
-/* =====================================================
-   MAIN CONTENT
-===================================================== */
+/* main content */
+
 .main {
   flex: 1;
   padding: 24px 32px;
@@ -257,9 +250,8 @@ a {
   font-size: 14px;
 }
 
-/* =====================================================
-   FILTER BAR
-===================================================== */
+/* filter bar */
+
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -310,9 +302,8 @@ a {
   gap: 6px;
 }
 
-/* =====================================================
-   BUTTONS
-===================================================== */
+/* buttons */
+
 .btn {
   padding: 8px 16px;
   border-radius: 6px;
@@ -356,9 +347,8 @@ a {
   color: var(--muted-foreground);
 }
 
-/* =====================================================
-   STAT CARDS
-===================================================== */
+/* stat cards */
+
 .stats {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -399,9 +389,8 @@ a {
   color: #b8721f;
 }
 
-/* =====================================================
-   TABLE CARD
-===================================================== */
+/* table card */
+
 .table-card {
   margin-top: 10px;
   background-color: #ffffff;
@@ -448,9 +437,8 @@ tbody tr:last-child td {
     hue-rotate(326deg) brightness(85%) contrast(89%);
 }
 
-/* =====================================================
-   BADGES / STATUS PILLS
-===================================================== */
+/* badges */
+
 .badge {
   display: inline-block;
   font-size: 13px;
@@ -479,9 +467,8 @@ tbody tr:last-child td {
   color: #5b21b6;
 }
 
-/* =====================================================
-   FORM CONTAINER
-===================================================== */
+/* form container */
+
 .form-container {
   background: var(--card-background);
   border: 1px solid var(--border);
@@ -490,9 +477,8 @@ tbody tr:last-child td {
   box-shadow: var(--shadow);
 }
 
-/* =====================================================
-   FORM GRID LAYOUTS
-===================================================== */
+/* form grid layouts */
+
 .form-grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -551,9 +537,8 @@ tbody tr:last-child td {
   resize: vertical;
 }
 
-/* =====================================================
-   UPLOAD ZONE
-===================================================== */
+/* upload zone */
+
 .upload-zone {
   border: 2px dashed var(--border);
   border-radius: 8px;
@@ -586,9 +571,8 @@ tbody tr:last-child td {
   color: var(--muted-foreground);
 }
 
-/* =====================================================
-   FORM ACTIONS
-===================================================== */
+/* form actions */
+
 .form-actions {
   display: flex;
   flex-wrap: wrap;
@@ -618,10 +602,7 @@ tbody tr:last-child td {
 .btn-outline:hover {
   background: var(--secondary);
 }
-
-/* =====================================================
-   SWEETALERT — must sit above the withdraw modal
-===================================================== */
+/* SweetAlert z-index para top ang sweetalert*/
 .swal2-container {
   z-index: 9999 !important;
 }

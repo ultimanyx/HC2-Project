@@ -51,6 +51,7 @@
 }
 
 /* ============ Body ==========*/
+
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   background-color: #f8f6f1;
@@ -101,6 +102,7 @@ a {
   gap: 10px;
   flex: 1;
 }
+
 .nav-item {
   font-size: 18px;
   font-weight: 400;
@@ -109,24 +111,29 @@ a {
   padding: 7px 10px;
   border-radius: 6px;
 }
+
 .nav-item.sub {
   padding-left: 16px;
   color: var(--muted-foreground);
   font-size: 16px;
   font-weight: 400;
 }
+
 .nav-item.active {
   background-color: rgba(184, 114, 31, 0.12);
   color: var(--primary);
   font-weight: 600;
   font-size: 16px;
 }
+
 .nav-item:hover {
   background-color: var(--secondary);
 }
+
 .nav-icon {
   margin-right: 6px;
 }
+
 .nav-section {
   font-size: 21px;
   font-weight: 600;
@@ -135,6 +142,7 @@ a {
   margin-bottom: 3px;
   padding-left: 10px;
 }
+
 .logout {
   display: flex;
   align-items: center;
@@ -151,12 +159,14 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
+
 .logout:hover {
   color: var(--destructive);
   background-color: rgba(220, 38, 38, 0.08);
 }
 
 /* --- Main ---*/
+
 .main {
   flex: 1;
   padding: 24px 32px;
@@ -499,9 +509,7 @@ tbody tr:hover {
   color: var(--muted-foreground);
 }
 
-/* =====================================================
-   SWEETALERT — must sit above the withdraw modal
-===================================================== */
+/* SweetAlert z-index para top ang sweetalert*/
 .swal2-container {
   z-index: 9999 !important;
 }

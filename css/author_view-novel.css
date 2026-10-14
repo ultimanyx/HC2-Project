@@ -4,9 +4,8 @@
   box-sizing: border-box;
 }
 
-/* =====================================================
-   ROOT VARIABLES
-===================================================== */
+/* root variables */
+
 :root {
   --background: #f8f6f1;
   --foreground: #1a1826;
@@ -45,9 +44,8 @@
   --font-heading: "Fraunces", serif;
 }
 
-/* =====================================================
-   FONTS
-===================================================== */
+/* fonts */
+
 @font-face {
   font-family: "Poppins";
   src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype");
@@ -65,9 +63,8 @@
     format("truetype");
 }
 
-/* =====================================================
-   BODY
-===================================================== */
+/* base */
+
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   background-color: #f8f6f1;
@@ -80,17 +77,15 @@ a {
   color: inherit;
 }
 
-/* =====================================================
-   LAYOUT
-===================================================== */
+/* layout */
+
 .layout {
   display: flex;
   min-height: 100vh;
 }
 
-/* =====================================================
-   SIDEBAR
-===================================================== */
+/* sidebar */
+
 .sidebar {
   width: 270px;
   background-color: #ffffff;
@@ -176,18 +171,16 @@ a {
   background-color: rgba(220, 38, 38, 0.08);
 }
 
-/* =====================================================
-   MAIN CONTENT
-===================================================== */
+/* main content */
+
 .main {
   flex: 1;
   padding: 24px 32px;
   min-width: 0;
 }
 
-/* =====================================================
-   TOPBAR
-===================================================== */
+/* topbar */
+
 .topbar {
   display: flex;
   align-items: center;
@@ -252,9 +245,8 @@ a {
   font-size: 14px;
 }
 
-/* =====================================================
-   ACTION BAR
-===================================================== */
+/* action bar */
+
 .action-bar {
   display: flex;
   align-items: center;
@@ -284,9 +276,8 @@ a {
   gap: 10px;
 }
 
-/* =====================================================
-   NOVEL HEADER
-===================================================== */
+/* novel header */
+
 .novel-header {
   display: flex;
   gap: 28px;
@@ -330,7 +321,8 @@ a {
   margin-bottom: 16px;
 }
 
-/* Meta row */
+/* meta row */
+
 .meta-row {
   display: flex;
   flex-wrap: wrap;
@@ -359,7 +351,8 @@ a {
     hue-rotate(326deg) brightness(85%) contrast(89%);
 }
 
-/* Tags */
+/* tags */
+
 .tags-row {
   display: flex;
   flex-wrap: wrap;
@@ -377,7 +370,8 @@ a {
   letter-spacing: 0.02em;
 }
 
-/* Section title */
+/* section title */
+
 .section-title {
   font-family: var(--font-heading);
   font-size: 17px;
@@ -393,9 +387,8 @@ a {
   text-align: justify;
 }
 
-/* =====================================================
-   EDIT MODE
-===================================================== */
+/* edit mode */
+
 .edit-form {
   display: flex;
   flex-direction: column;
@@ -449,7 +442,8 @@ a {
   line-height: 1.6;
 }
 
-/* Cover upload (small) */
+/* cover upload */
+
 .cover-upload {
   border: 2px dashed var(--border);
   border-radius: 8px;
@@ -480,7 +474,8 @@ a {
   font-size: 12px;
 }
 
-/* Edit actions */
+/* edit actions */
+
 .edit-actions {
   display: flex;
   justify-content: flex-end;
@@ -489,9 +484,8 @@ a {
   padding-top: 18px;
 }
 
-/* =====================================================
-   BUTTONS
-===================================================== */
+/* buttons */
+
 .btn {
   padding: 8px 16px;
   border-radius: 6px;
@@ -549,9 +543,8 @@ a {
   background: var(--secondary);
 }
 
-/* =====================================================
-   TABLE CARD / CHAPTER LIST
-===================================================== */
+/* table card / chapter list */
+
 .table-card {
   background-color: #ffffff;
   border: 1px solid rgba(26, 24, 38, 0.1);
@@ -603,9 +596,8 @@ tbody td strong {
   font-weight: 600;
 }
 
-/* =====================================================
-   BADGES / STATUS PILLS
-===================================================== */
+/* badges / status pills */
+
 .badge {
   display: inline-block;
   font-size: 13px;
@@ -638,10 +630,7 @@ tbody td strong {
   background-color: rgba(59, 111, 145, 0.15);
   color: #2c536d;
 }
-
-/* =====================================================
-   SWEETALERT — must sit above the withdraw modal
-===================================================== */
+/* SweetAlert z-index para top ang sweetalert*/
 .swal2-container {
   z-index: 9999 !important;
 }

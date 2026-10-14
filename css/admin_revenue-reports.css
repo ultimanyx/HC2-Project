@@ -4,82 +4,78 @@
   box-sizing: border-box;
 }
 
-/* =====================================================
-   ROOT VARIABLES
-===================================================== */
+/* root variables */
 
 :root {
-  /* Main */
+  /* main */
   --background: #f8f6f1;
   --foreground: #1a1826;
 
-  /* Cards */
+  /* cards */
   --card-background: #ffffff;
   --card-foreground: #1a1826;
 
-  /* Primary */
+  /* primary */
   --primary: #b8721f;
   --primary-foreground: #ffffff;
 
-  /* Secondary */
+  /* secondary */
   --secondary: #ede9e1;
   --secondary-foreground: #1a1826;
 
-  /* Muted */
+  /* muted */
   --muted: #ede9e1;
   --muted-foreground: #6b6680;
 
-  /* Accent */
+  /* accent */
   --accent: #6d28d9;
   --accent-foreground: #ffffff;
 
-  /* Border */
+  /* border */
   --border: rgba(26, 24, 38, 0.1);
 
-  /* Input */
+  /* input */
   --input-background: #ede9e1;
 
-  /* Focus */
+  /* focus */
   --ring: #b8721f;
   --focus-ring: rgba(184, 114, 31, 0.18);
 
-  /* Destructive */
+  /* destructive */
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
 
-  /* Links */
+  /* links */
   --link: #3b6f91;
   --link-hover: #2c536d;
 
-  /* Shadows */
+  /* shadows */
   --shadow:
     0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
 
-  /* Footer */
+  /* footer */
   --footer-background: #1a1826;
   --footer-foreground: #ffffff;
   --footer-muted: #d8d0c8;
 
-  /* Fonts */
+  /* fonts */
   --font-body: "Plus_Jakarta_Sans", sans-serif;
   --font-heading: "Fraunces", serif;
 
-  /* Status — Active (green) */
+  /* status - active (green) */
   --status-active-bg: rgba(63, 125, 79, 0.15);
   --status-active-fg: #2f5d3a;
 
-  /* Status — Paused (amber) */
+  /* status - paused (amber) */
   --status-paused-bg: rgba(184, 114, 31, 0.15);
   --status-paused-fg: #8a5410;
 
-  /* Status — Completed (gray) */
+  /* status - completed (gray) */
   --status-completed-bg: #ede9e1;
   --status-completed-fg: #6b6680;
 }
 
-/* =====================================================
-   FONTS
-===================================================== */
+/* fonts */
 
 @font-face {
   font-family: "Poppins";
@@ -98,7 +94,8 @@
     format("truetype");
 }
 
-/* ============ Body ==========*/
+/* base */
+
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   background-color: #f8f6f1;
@@ -149,6 +146,7 @@ a {
   gap: 10px;
   flex: 1;
 }
+
 .nav-item {
   font-size: 18px;
   font-weight: 400;
@@ -157,24 +155,29 @@ a {
   padding: 7px 10px;
   border-radius: 6px;
 }
+
 .nav-item.sub {
   padding-left: 16px;
   color: var(--muted-foreground);
   font-size: 16px;
   font-weight: 400;
 }
+
 .nav-item.active {
   background-color: rgba(184, 114, 31, 0.12);
   color: var(--primary);
   font-weight: 600;
   font-size: 16px;
 }
+
 .nav-item:hover {
   background-color: var(--secondary);
 }
+
 .nav-icon {
   margin-right: 6px;
 }
+
 .nav-section {
   font-size: 21px;
   font-weight: 600;
@@ -183,6 +186,7 @@ a {
   margin-bottom: 3px;
   padding-left: 10px;
 }
+
 .logout {
   display: flex;
   align-items: center;
@@ -199,12 +203,14 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
+
 .logout:hover {
   color: var(--destructive);
   background-color: rgba(220, 38, 38, 0.08);
 }
 
-/* ---------- Main content ---------- */
+/* main content */
+
 .main {
   flex: 1;
   padding: 24px 32px;
@@ -245,7 +251,8 @@ a {
   font-size: 14px;
 }
 
-/* ---------- Filter Bar ---------- */
+/* filter bar */
+
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -296,7 +303,8 @@ a {
   gap: 6px;
 }
 
-/* button style */
+/* buttons */
+
 .btn {
   padding: 14px 20px;
   border-radius: 6px;
@@ -318,7 +326,8 @@ a {
   background: #9a5f16;
 }
 
-/* ---------- Stat cards ---------- */
+/* stat cards */
+
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -359,7 +368,8 @@ a {
   color: #b8721f;
 }
 
-/* ---------- Table card ---------- */
+/* table card */
+
 .table-card {
   margin-top: 10px;
   background-color: #ffffff;
@@ -374,6 +384,8 @@ a {
   font-weight: 700;
   margin-bottom: 14px;
 }
+
+/* table */
 
 table {
   width: 100%;
@@ -418,9 +430,9 @@ tbody tr:last-child td {
 .text-center {
   text-align: center;
 }
-/* =====================================================
-   BADGES 
-===================================================== */
+
+/* badges */
+
 .badge {
   display: inline-flex;
   align-items: center;
@@ -449,6 +461,7 @@ tbody tr:last-child td {
   background-color: var(--status-active-bg);
   color: var(--status-active-fg);
 }
+
 .badge.active .badge-icon {
   filter: brightness(0) saturate(100%) invert(31%) sepia(14%) saturate(1134%)
     hue-rotate(85deg) brightness(94%) contrast(90%);
@@ -458,6 +471,7 @@ tbody tr:last-child td {
   background-color: var(--status-paused-bg);
   color: var(--status-paused-fg);
 }
+
 .badge.paused .badge-icon {
   filter: brightness(0) saturate(100%) invert(38%) sepia(51%) saturate(721%)
     hue-rotate(3deg) brightness(91%) contrast(91%);
@@ -467,14 +481,13 @@ tbody tr:last-child td {
   background-color: var(--status-completed-bg);
   color: var(--status-completed-fg);
 }
+
 .badge.completed .badge-icon {
   filter: brightness(0) saturate(100%) invert(46%) sepia(6%) saturate(607%)
     hue-rotate(215deg) brightness(92%) contrast(86%);
 }
 
-/* =====================================================
-   SWEETALERT — must sit above the withdraw modal
-===================================================== */
+/* SweetAlert z-index para top ang sweetalert*/
 .swal2-container {
   z-index: 9999 !important;
 }

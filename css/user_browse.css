@@ -8,9 +8,7 @@ html {
   overflow-y: scroll;
 }
 
-/* =====================================================
-   ROOT VARIABLES
-===================================================== */
+/* Root variables */
 :root {
   /* Main */
   --background: #f8f6f1;
@@ -69,9 +67,7 @@ html {
   --font-heading: "Fraunces", serif;
 }
 
-/* =====================================================
-   FONTS
-===================================================== */
+/* Fonts */
 @font-face {
   font-family: "Plus_Jakarta_Sans";
   src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
@@ -84,18 +80,14 @@ html {
     format("truetype");
 }
 
-/* =====================================================
-   BODY
-===================================================== */
+/* Body */
 body {
   font-family: var(--font-body);
   background-color: var(--background);
   color: var(--foreground);
 }
 
-/* =====================================================
-   NAVBAR
-===================================================== */
+/* Navbar */
 .navbar {
   width: 100%;
   height: 60px;
@@ -107,9 +99,7 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
-/* =====================================================
-   LOGO
-===================================================== */
+/* Logo */
 .nav-logo {
   display: flex;
   align-items: center;
@@ -122,9 +112,7 @@ body {
   object-fit: contain;
 }
 
-/* =====================================================
-   NAVIGATION LINKS
-===================================================== */
+/* Nav links */
 .nav-links {
   display: flex;
   align-items: center;
@@ -146,7 +134,7 @@ body {
   color: var(--primary);
 }
 
-/* Underline */
+/* Hover underline */
 .nav-links a::after {
   content: "";
   position: absolute;
@@ -167,14 +155,12 @@ body {
   border-bottom: 2px solid var(--primary);
 }
 
-/* Don't show the hover underline on the active link */
+/* Active link: no hover underline */
 .nav-links a#select:hover::after {
   width: 0;
 }
 
-/* =====================================================
-   SEARCH
-===================================================== */
+/* Search */
 .nav-search {
   width: 220px;
   height: 35px;
@@ -206,9 +192,7 @@ body {
   color: var(--muted-foreground);
 }
 
-/* =====================================================
-   SEARCH BUTTON
-===================================================== */
+/* Search button */
 .nav-search button {
   width: 42px;
   height: 100%;
@@ -226,17 +210,13 @@ body {
   height: 18px;
 }
 
-/* =====================================================
-   SEARCH FOCUS
-===================================================== */
+/* Search focus */
 .nav-search:focus-within {
   border-color: var(--ring);
   box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
-/* =====================================================
-   USER DROPDOWN – FULLY INTEGRATED
-===================================================== */
+/* User dropdown */
 .nav-user-dropdown {
   position: relative;
   display: inline-block;
@@ -279,7 +259,7 @@ body {
   transition: transform 0.25s ease;
 }
 
-/* Hide dropdown by default */
+/* Hidden by default */
 .dropdown-menu {
   position: absolute;
   top: calc(100% + 8px);
@@ -301,7 +281,7 @@ body {
   pointer-events: none;
 }
 
-/* Show on hover / focus / active */
+/* Show on hover/focus */
 .nav-user-dropdown:hover .dropdown-menu,
 .nav-user-dropdown:focus-within .dropdown-menu,
 .nav-user-dropdown:active .dropdown-menu {
@@ -311,14 +291,14 @@ body {
   pointer-events: auto;
 }
 
-/* Rotate arrow on open */
+/* Rotate arrow */
 .nav-user-dropdown:hover .dropdown-arrow,
 .nav-user-dropdown:focus-within .dropdown-arrow,
 .nav-user-dropdown:active .dropdown-arrow {
   transform: rotate(180deg);
 }
 
-/* Remove underline effect from dropdown links */
+/* Remove dropdown underline */
 .nav-links .dropdown-menu a::after {
   display: none;
 }
@@ -352,14 +332,12 @@ body {
   color: var(--destructive);
 }
 
-/* Keep dropdown open when interacting with menu items */
+/* Keep open on focus */
 .dropdown-menu a:focus-within {
   background: var(--muted);
 }
 
-/* =====================================================
-   BROWSE HEADER
-===================================================== */
+/* Browse header */
 .browse-header {
   width: 100%;
   height: 300px;
@@ -384,9 +362,7 @@ body {
   text-shadow: var(--text-shadow);
 }
 
-/* =====================================================
-   FILTER BAR
-===================================================== */
+/* Filter bar */
 .filter {
   width: 90%;
   max-width: 1400px;
@@ -402,9 +378,7 @@ body {
   font-family: var(--font-body);
 }
 
-/* =====================================================
-   FILTER GROUP
-===================================================== */
+/* Filter group */
 .filter-group {
   display: flex;
   flex-direction: column;
@@ -419,9 +393,7 @@ body {
   flex: 1;
 }
 
-/* =====================================================
-   FILTER LABEL
-===================================================== */
+/* Filter label */
 .filter-group label {
   font-family: var(--font-body);
   font-size: 13px;
@@ -429,9 +401,7 @@ body {
   color: var(--foreground);
 }
 
-/* =====================================================
-   INPUT + SELECT
-===================================================== */
+/* Inputs and selects */
 .filter-group select,
 .filter-group input {
   width: 100%;
@@ -451,11 +421,10 @@ body {
 }
 
 .filter-input {
-  width: 380px; /* Fixed typo from 380 px */
+  width: 380px; /* fixed spacing typo */
 }
-/* =====================================================
-   INPUT FOCUS
-===================================================== */
+
+/* Input focus */
 .filter-group select:focus,
 .filter-group input:focus {
   border-color: var(--ring);
@@ -463,9 +432,7 @@ body {
   background-color: var(--card-background);
 }
 
-/* =====================================================
-   FILTER ACTIONS
-===================================================== */
+/* Filter actions */
 .filter-actions {
   display: flex;
   align-items: flex-end;
@@ -474,9 +441,7 @@ body {
   padding-top: 20px;
 }
 
-/* =====================================================
-   APPLY BUTTON
-===================================================== */
+/* Apply button */
 #apply-filter {
   height: 40px;
   padding: 0 20px;
@@ -500,9 +465,7 @@ body {
   box-shadow: var(--boxshadow);
 }
 
-/* =====================================================
-   RESET BUTTON
-===================================================== */
+/* Reset button */
 #reset-filter {
   height: 40px;
   padding: 0 20px;
@@ -526,9 +489,7 @@ body {
   transform: translateY(-2px);
 }
 
-/* =====================================================
-   CARD CONTAINER
-===================================================== */
+/* Card grid */
 .card-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -544,18 +505,16 @@ body {
   height: 100%;
 }
 
-/* =====================================================
-   NOVEL CARD – fixed layout
-===================================================== */
+/* Novel card */
 .novel-card {
   background: white;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 25px;
-  height: 100%; /* Stretch to fill the grid cell */
+  height: 100%; /* stretch to fill grid cell */
   box-sizing: border-box;
   display: flex;
-  flex-direction: column; /* Allows footer to be pushed to bottom */
+  flex-direction: column; /* footer can sit at bottom */
   transition:
     border-color 0.3s ease,
     background 0.3s ease,
@@ -569,7 +528,7 @@ body {
   object-fit: cover;
   display: block;
   border-bottom: 1px solid #ddd;
-  flex-shrink: 0; /* Prevent image from shrinking */
+  flex-shrink: 0; /* prevent image from shrinking */
 }
 
 .novel-card h1 {
@@ -577,9 +536,9 @@ body {
   font-weight: bold;
   margin: 8px 14px 4px 14px;
   color: #222;
-  min-height: 44px; /* Reserves space for 2 lines of text */
+  min-height: 44px; /* reserve space for 2 lines */
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* Limit title to 2 lines max */
+  -webkit-line-clamp: 2; /* max 2 lines */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -606,16 +565,14 @@ body {
   margin-bottom: 2px;
 }
 
-/* =====================================================
-   CARD FOOTER – Flexbox layout
-===================================================== */
+/* Card footer */
 .novel-card .card-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px 14px 14px 14px;
   border-top: 1px solid #eee;
-  margin-top: auto; /* Pushes the footer to the bottom of the card */
+  margin-top: auto; /* push footer to bottom */
   width: 100%;
   box-sizing: border-box;
 }
@@ -624,7 +581,7 @@ body {
   font-size: 14px;
   color: #666;
   margin: 0;
-  flex-grow: 1; /* Pushes the rating to the right */
+  flex-grow: 1; /* push rating right */
 }
 
 .novel-card .card-footer .star {
@@ -651,9 +608,7 @@ body {
   transform: translateY(-8px);
 }
 
-/* =====================================================
-   FOOTER
-===================================================== */
+/* Footer */
 .footer {
   margin-top: 60px;
   background-color: var(--footer-background);
@@ -722,9 +677,7 @@ body {
   color: var(--footer-muted);
 }
 
-/* =====================================================
-   SWEETALERT — must sit above the withdraw modal
-===================================================== */
+/* SweetAlert z-index para top ang sweetalert*/
 .swal2-container {
   z-index: 9999 !important;
 }

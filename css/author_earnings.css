@@ -3,6 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+/* root variables */
+
 :root {
   --background: #f8f6f1;
   --foreground: #1a1826;
@@ -32,26 +35,35 @@
   --font-body: "Plus_Jakarta_Sans", sans-serif;
   --font-heading: "Fraunces", serif;
 }
+
+/* fonts */
+
 @font-face {
   font-family: "Poppins";
   src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype");
 }
+
 @font-face {
   font-family: "Plus_Jakarta_Sans";
   src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
     format("truetype");
 }
+
 @font-face {
   font-family: "Fraunces";
   src: url("../font/Fraunces/static/Fraunces_72pt-Regular.ttf")
     format("truetype");
 }
+
+/* base */
+
 html,
 body {
   height: 100%;
   margin: 0;
   overflow: hidden;
 }
+
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   background-color: #f8f6f1;
@@ -59,15 +71,22 @@ body {
   font-size: 15px;
   line-height: 1.4;
 }
+
 a {
   text-decoration: none;
   color: inherit;
 }
+
+/* layout */
+
 .layout {
   display: flex;
   height: 100vh;
   overflow: hidden;
 }
+
+/* sidebar */
+
 .sidebar {
   width: 270px;
   background-color: #ffffff;
@@ -79,6 +98,7 @@ a {
   height: 100vh;
   overflow-y: auto;
 }
+
 .brand {
   display: flex;
   justify-content: center;
@@ -91,16 +111,19 @@ a {
   color: #1a1826;
   gap: 8px;
 }
+
 .brand img {
   width: 50px;
   height: 50px;
 }
+
 .nav {
   display: flex;
   flex-direction: column;
   gap: 10px;
   flex: 1;
 }
+
 .nav-item {
   font-size: 18px;
   font-weight: 400;
@@ -109,24 +132,29 @@ a {
   padding: 7px 10px;
   border-radius: 6px;
 }
+
 .nav-item.sub {
   padding-left: 16px;
   color: #6b6680;
   font-size: 16px;
   font-weight: 400;
 }
+
 .nav-item.active {
   background-color: rgba(184, 114, 31, 0.12);
   color: #b8721f;
   font-weight: 600;
   font-size: 16px;
 }
+
 .nav-item:hover {
   background-color: #ede9e1;
 }
+
 .nav-icon {
   margin-right: 6px;
 }
+
 .nav-section {
   font-size: 21px;
   font-weight: 600;
@@ -135,6 +163,7 @@ a {
   margin-bottom: 3px;
   padding-left: 10px;
 }
+
 .logout {
   display: flex;
   align-items: center;
@@ -151,16 +180,23 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
+
 .logout:hover {
   color: #dc2626;
   background-color: rgba(220, 38, 38, 0.08);
 }
+
+/* main content */
+
 .main {
   flex: 1;
   padding: 24px 32px;
   height: 100vh;
   overflow-y: auto;
 }
+
+/* topbar */
+
 .topbar {
   display: flex;
   align-items: center;
@@ -168,11 +204,13 @@ a {
   margin-bottom: 22px;
   gap: 16px;
 }
+
 .topbar h1 {
   font-size: 26px;
   font-weight: 700;
   letter-spacing: -0.3px;
 }
+
 .user-chip {
   display: flex;
   align-items: center;
@@ -180,6 +218,7 @@ a {
   font-size: 16px;
   color: #6b6680;
 }
+
 .avatar {
   width: 32px;
   height: 32px;
@@ -192,6 +231,9 @@ a {
   font-weight: 600;
   font-size: 14px;
 }
+
+/* earnings header */
+
 .earnings-header {
   display: flex;
   align-items: center;
@@ -199,29 +241,35 @@ a {
   gap: 16px;
   margin-bottom: 20px;
 }
+
 .earnings-header h2 {
   font-size: 22px;
   font-weight: 700;
   margin-bottom: 5px;
 }
+
 .earnings-header p {
   font-size: 14px;
   color: var(--muted-foreground);
 }
-/* =====================================================
-   WITHDRAW BUTTON ROW (right-aligned)
-===================================================== */
+
+/* withdraw button row */
+
 .withdraw-row {
   display: flex;
   justify-content: flex-end;
   margin-top: 4px;
   margin-bottom: 16px;
 }
+
 #withdraw-btn {
   padding: 10px 24px;
   font-size: 16px;
   cursor: pointer;
 }
+
+/* filter bar */
+
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -233,16 +281,19 @@ a {
   padding: 12px 20px;
   margin-bottom: 20px;
 }
+
 .filter-group {
   display: flex;
   align-items: center;
   gap: 20px;
 }
+
 .filter-group label {
   font-size: 15px;
   font-weight: 600;
   color: var(--muted-foreground);
 }
+
 .filter-group select,
 .filter-group input {
   background: var(--input-background);
@@ -256,16 +307,21 @@ a {
   outline: none;
   transition: 0.15s;
 }
+
 .filter-group select:focus,
 .filter-group input:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 3px var(--focus-ring);
 }
+
 .filter-actions {
   margin-left: auto;
   display: flex;
   gap: 6px;
 }
+
+/* buttons */
+
 .btn {
   padding: 8px 16px;
   border-radius: 6px;
@@ -277,46 +333,60 @@ a {
   transition: 0.15s;
   cursor: pointer;
 }
+
 .btn-primary {
   background: var(--primary);
   color: #ffffff;
 }
+
 .btn-primary:hover {
   background: #9a5f16;
 }
+
+/* stat cards */
+
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   margin-bottom: 24px;
 }
+
 .stat-card {
   background-color: #ffffff;
   border: 1px solid rgba(26, 24, 38, 0.1);
   border-radius: 10px;
   padding: 18px 16px;
 }
+
 .stat-label {
   font-size: 15px;
   font-weight: 600;
   color: #6b6680;
   margin-bottom: 6px;
 }
+
 .stat-value {
   font-size: 26px;
   font-weight: 700;
   margin-bottom: 6px;
   color: #1a1826;
 }
+
 .stat-change {
   font-size: 13px;
 }
+
 .stat-change.positive {
   color: #3f7d4f;
 }
+
 .stat-change.warning {
   color: #b8721f;
 }
+
+/* table card */
+
 .table-card {
   margin-top: 10px;
   background-color: #ffffff;
@@ -324,15 +394,18 @@ a {
   border-radius: 10px;
   padding: 20px;
 }
+
 .table-card h2 {
   font-size: 18px;
   font-weight: 700;
   margin-bottom: 14px;
 }
+
 table {
   width: 100%;
   border-collapse: collapse;
 }
+
 thead th {
   text-align: left;
   font-size: 15px;
@@ -343,18 +416,24 @@ thead th {
   padding-bottom: 10px;
   border-bottom: 1px solid rgba(26, 24, 38, 0.1);
 }
+
 tbody td {
   font-size: 16px;
   padding: 12px 0;
   border-bottom: 1px solid rgba(26, 24, 38, 0.06);
   color: #1a1826;
 }
+
 tbody tr:last-child td {
   border-bottom: none;
 }
+
 tbody td strong {
   font-weight: 600;
 }
+
+/* badges */
+
 .badge {
   display: inline-block;
   font-size: 13px;
@@ -362,26 +441,34 @@ tbody td strong {
   padding: 3px 12px;
   border-radius: 20px;
 }
+
 .badge.active {
   background-color: rgba(63, 125, 79, 0.15);
   color: #2f5d3a;
 }
+
 .badge.paused {
   background-color: rgba(184, 114, 31, 0.15);
   color: #8a5410;
 }
+
 .badge.completed {
   background-color: #ede9e1;
   color: #6b6680;
 }
+
 .badge.draft {
   background-color: rgba(109, 40, 217, 0.1);
   color: #5b21b6;
 }
+
 .badge.pending {
   background-color: rgba(59, 111, 145, 0.15);
   color: var(--link-hover);
 }
+
+/* table footer */
+
 .table-footer {
   margin-top: 14px;
   border-top: 1px solid var(--border);
@@ -391,17 +478,19 @@ tbody td strong {
   font-size: 13px;
   color: var(--muted-foreground);
 }
+
 .link-primary {
   color: var(--primary);
   font-weight: 600;
   text-decoration: none;
 }
+
 .link-primary:hover {
   text-decoration: underline;
 }
-/* =====================================================
-   WITHDRAW MODAL — CHECKOUT-STYLE
-===================================================== */
+
+/* withdraw modal */
+
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -418,10 +507,12 @@ tbody td strong {
     opacity 0.22s ease,
     visibility 0.22s ease;
 }
+
 .modal-overlay.open {
   opacity: 1;
   visibility: visible;
 }
+
 .modal {
   background: var(--card-background);
   border: 1px solid var(--border);
@@ -434,13 +525,16 @@ tbody td strong {
   transform: translateY(12px) scale(0.98);
   transition: transform 0.25s ease;
 }
+
 .modal-overlay.open .modal {
   transform: translateY(0) scale(1);
 }
+
 .modal--withdraw {
   max-width: 900px;
   max-height: 92vh;
 }
+
 .modal-header {
   display: flex;
   align-items: flex-start;
@@ -449,6 +543,7 @@ tbody td strong {
   padding: 20px 28px 14px;
   border-bottom: 1px solid var(--border);
 }
+
 .modal-header h3 {
   font-family: var(--font-heading);
   font-size: 22px;
@@ -457,10 +552,12 @@ tbody td strong {
   color: var(--foreground);
   margin-bottom: 2px;
 }
+
 .modal-subtitle {
   font-size: 13.5px;
   color: var(--muted-foreground);
 }
+
 .modal-close {
   background: transparent;
   border: none;
@@ -475,15 +572,18 @@ tbody td strong {
     color 0.15s ease;
   flex-shrink: 0;
 }
+
 .modal-close:hover {
   background: var(--secondary);
   color: var(--destructive);
 }
+
 .modal-body {
   padding: 18px 28px 8px;
   overflow-y: auto;
   flex: 1;
 }
+
 .balance-strip {
   display: flex;
   align-items: center;
@@ -495,11 +595,13 @@ tbody td strong {
   margin-bottom: 22px;
   flex-wrap: wrap;
 }
+
 .balance-strip > div {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
+
 .balance-label {
   font-size: 12.5px;
   font-weight: 600;
@@ -507,32 +609,38 @@ tbody td strong {
   letter-spacing: 0.02em;
   text-transform: uppercase;
 }
+
 .balance-value {
   font-size: 22px;
   font-weight: 700;
   color: var(--primary);
 }
+
 .balance-note {
   font-size: 12.5px;
   color: var(--muted-foreground);
 }
+
 .checkout-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 32px 40px;
 }
+
 @media (max-width: 720px) {
   .checkout-grid {
     grid-template-columns: 1fr;
     gap: 24px;
   }
 }
+
 .checkout-col {
   display: flex;
   flex-direction: column;
   gap: 14px;
   min-width: 0;
 }
+
 .col-title {
   font-family: var(--font-heading);
   font-size: 18px;
@@ -541,17 +649,20 @@ tbody td strong {
   margin-bottom: 6px;
   letter-spacing: -0.2px;
 }
+
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
+
 .form-group label {
   font-size: 13.5px;
   font-weight: 600;
   color: var(--muted-foreground);
   letter-spacing: 0.01em;
 }
+
 .form-group input,
 .form-group select {
   background: #ffffff;
@@ -565,37 +676,45 @@ tbody td strong {
   transition: 0.15s;
   width: 100%;
 }
+
 .form-group input::placeholder {
   color: #b3b0bc;
 }
+
 .form-group input:focus,
 .form-group select:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 3px var(--focus-ring);
 }
+
 .form-group .hint {
   font-size: 12.5px;
   color: var(--muted-foreground);
 }
+
 .form-group .hint.error {
   color: var(--destructive);
   font-weight: 600;
 }
+
 .form-row-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
 }
+
 .form-row-3 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
 }
+
 .method-chips {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
+
 .method-chip {
   padding: 8px 14px;
   background: #ffffff;
@@ -611,15 +730,18 @@ tbody td strong {
     border-color 0.15s ease,
     color 0.15s ease;
 }
+
 .method-chip:hover {
   border-color: var(--primary);
   color: var(--primary);
 }
+
 .method-chip.selected {
   background: var(--primary);
   border-color: var(--primary);
   color: #ffffff;
 }
+
 .amount-input-row {
   display: flex;
   align-items: center;
@@ -629,16 +751,19 @@ tbody td strong {
   padding: 0 6px 0 14px;
   transition: 0.15s;
 }
+
 .amount-input-row:focus-within {
   border-color: var(--primary);
   box-shadow: 0 0 0 3px var(--focus-ring);
 }
+
 .currency-prefix {
   font-size: 16px;
   font-weight: 700;
   color: var(--muted-foreground);
   margin-right: 4px;
 }
+
 .amount-input-row input {
   flex: 1;
   border: none;
@@ -651,15 +776,18 @@ tbody td strong {
   font-family: var(--font-body);
   min-width: 0;
 }
+
 .amount-input-row input:focus {
   box-shadow: none;
   border: none;
 }
+
 .amount-input-row .btn-sm {
   padding: 5px 12px;
   font-size: 12.5px;
   flex-shrink: 0;
 }
+
 .modal-footer--full {
   padding: 16px 28px 20px;
   border-top: 1px solid var(--border);
@@ -668,6 +796,7 @@ tbody td strong {
   justify-content: center;
   grid-column: 1 / -1;
 }
+
 .cta-btn {
   width: 100%;
   max-width: 420px;
@@ -686,24 +815,25 @@ tbody td strong {
     transform 0.1s ease;
   box-shadow: 0 4px 12px rgba(31, 157, 79, 0.25);
 }
+
 .cta-btn:hover {
   background: #178a42;
 }
+
 .cta-btn:active {
   transform: translateY(1px);
 }
+
 .cta-btn:disabled {
   background: #9bbba6;
   cursor: not-allowed;
   box-shadow: none;
 }
+
 body.modal-open {
   overflow: hidden;
 }
-
-/* =====================================================
-   SWEETALERT — must sit above the withdraw modal
-===================================================== */
+/* SweetAlert z-index para top ang sweetalert*/
 .swal2-container {
   z-index: 9999 !important;
 }

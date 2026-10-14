@@ -4,8 +4,7 @@
   box-sizing: border-box;
 }
 
-/* --- ROOT ---*/
-
+/* theme colors */
 :root {
   --background: #f8f6f1;
   --foreground: #1a1826;
@@ -36,8 +35,7 @@
   --font-heading: "Fraunces", serif;
 }
 
-/* --- Font ---*/
-
+/* fonts */
 @font-face {
   font-family: "Poppins";
   src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype");
@@ -55,7 +53,7 @@
     format("truetype");
 }
 
-/* ============ Body ==========*/
+/* base styles */
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   background-color: #f8f6f1;
@@ -106,6 +104,7 @@ a {
   gap: 10px;
   flex: 1;
 }
+
 .nav-item {
   font-size: 18px;
   font-weight: 400;
@@ -114,24 +113,29 @@ a {
   padding: 7px 10px;
   border-radius: 6px;
 }
+
 .nav-item.sub {
   padding-left: 16px;
   color: var(--muted-foreground);
   font-size: 16px;
   font-weight: 400;
 }
+
 .nav-item.active {
   background-color: rgba(184, 114, 31, 0.12);
   color: var(--primary);
   font-weight: 600;
   font-size: 18px;
 }
+
 .nav-item:hover {
   background-color: var(--secondary);
 }
+
 .nav-icon {
   margin-right: 6px;
 }
+
 .nav-section {
   font-size: 21px;
   font-weight: 600;
@@ -140,6 +144,7 @@ a {
   margin-bottom: 3px;
   padding-left: 10px;
 }
+
 .logout {
   display: flex;
   align-items: center;
@@ -156,12 +161,13 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
+
 .logout:hover {
   color: var(--destructive);
   background-color: rgba(220, 38, 38, 0.08);
 }
 
-/* ---------- Main content ---------- */
+/* main content */
 .main {
   flex: 1;
   padding: 24px 32px;
@@ -200,7 +206,7 @@ a {
   font-size: 14px;
 }
 
-/* ---------- Stat cards ---------- */
+/* stat cards */
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -241,7 +247,7 @@ a {
   color: #b8721f;
 }
 
-/* ---------- Table card ---------- */
+/* table card */
 .table-card {
   margin-top: 10px;
   background-color: #ffffff;
@@ -283,7 +289,7 @@ tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* ---------- Badges ---------- */
+/* badges */
 .badge {
   display: inline-block;
   font-size: 13px;
@@ -317,7 +323,7 @@ tbody tr:last-child td {
   color: #6b6680;
 }
 
-/* ---------- Ad management toolbar  ---------- */
+/* ad toolbar */
 .ad-toolbar {
   display: flex;
   align-items: center;
@@ -472,9 +478,7 @@ tbody tr:last-child td {
   color: #b91c1c;
 }
 
-/* =====================================================
-   SWEETALERT — must sit above the withdraw modal
-===================================================== */
+/* SweetAlert z-index para top ang sweetalert*/
 .swal2-container {
   z-index: 9999 !important;
 }

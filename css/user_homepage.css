@@ -1,3 +1,4 @@
+/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -8,10 +9,7 @@ html {
   overflow-y: scroll;
 }
 
-/* =====================================================
-   ROOT VARIABLES
-===================================================== */
-
+/* Root variables */
 :root {
   /* Main */
   --background: #f8f6f1;
@@ -70,10 +68,7 @@ html {
   --font-heading: "Fraunces", serif;
 }
 
-/* =====================================================
-   FONTS
-===================================================== */
-
+/* Fonts */
 @font-face {
   font-family: "Plus_Jakarta_Sans";
   src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
@@ -86,20 +81,14 @@ html {
     format("truetype");
 }
 
-/* =====================================================
-   BODY
-===================================================== */
-
+/* Body */
 body {
   font-family: var(--font-body);
   background-color: var(--background);
   color: var(--foreground);
 }
 
-/* =====================================================
-   NAVBAR
-===================================================== */
-
+/* Navbar */
 .navbar {
   width: 100%;
   height: 60px;
@@ -114,10 +103,7 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
-/* =====================================================
-   LOGO
-===================================================== */
-
+/* Logo */
 .nav-logo {
   display: flex;
   align-items: center;
@@ -130,10 +116,7 @@ body {
   object-fit: contain;
 }
 
-/* =====================================================
-   NAVIGATION LINKS
-===================================================== */
-
+/* Nav links */
 .nav-links {
   display: flex;
   align-items: center;
@@ -181,15 +164,12 @@ body {
   border-bottom: 2px solid var(--primary);
 }
 
-/* Don't show the hover underline on the active link */
+/* Active link: no hover underline */
 .nav-links a#select:hover::after {
   width: 0;
 }
 
-/* =====================================================
-   SEARCH
-===================================================== */
-
+/* Search */
 .nav-search {
   width: 220px;
   height: 35px;
@@ -258,10 +238,7 @@ body {
   box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
-/* =====================================================
-   USER & DROPDOWN
-===================================================== */
-
+/* User & dropdown */
 .nav-user-dropdown {
   position: relative;
   display: inline-block;
@@ -304,7 +281,7 @@ body {
   transition: transform 0.25s ease;
 }
 
-/* ── hide dropdown by default ── */
+/* Hidden by default */
 .dropdown-menu {
   position: absolute;
   top: calc(100% + 8px);
@@ -326,7 +303,7 @@ body {
   pointer-events: none;
 }
 
-/* ── show on hover ── */
+/* Show on hover/focus */
 .nav-user-dropdown:active .dropdown-menu,
 .nav-user-dropdown:focus-within .dropdown-menu {
   opacity: 1;
@@ -335,13 +312,13 @@ body {
   pointer-events: auto;
 }
 
-/* ── rotate arrow on open ── */
+/* Rotate arrow when open */
 .nav-user-dropdown:active .dropdown-arrow,
 .nav-user-dropdown:focus-within .dropdown-arrow {
   transform: rotate(180deg);
 }
 
-/* ── Remove underline effect from dropdown links ── */
+/* Remove dropdown link underline */
 .nav-links .dropdown-menu a::after {
   display: none;
 }
@@ -370,16 +347,12 @@ body {
   color: var(--destructive);
 }
 
-/* ── Keep dropdown open when interacting with menu items ── */
+/* Keep dropdown open on focus */
 .dropdown-menu a:focus-within {
   background: var(--muted);
 }
 
-/* =====================================================
-   Banner Carousel
-===================================================== */
-
-/* Slideshow container */
+/* Banner carousel */
 .slideshow-container {
   min-width: 100%;
   min-width: 400px;
@@ -388,12 +361,12 @@ body {
   overflow: hidden;
 }
 
-/* Hide the images by default */
+/* Hide slides by default */
 .mySlides {
   display: none;
 }
 
-/* Next & previous buttons */
+/* Prev/next buttons */
 .prev,
 .next {
   cursor: pointer;
@@ -410,13 +383,13 @@ body {
   user-select: none;
 }
 
-/* Position the "next button" to the right */
+/* Next button position */
 .next {
   right: 0;
   border-radius: 3px 0 0 3px;
 }
 
-/* On hover, add a black background color with a little bit see-through */
+/* Button hover */
 .prev:hover,
 .next:hover {
   background-color: rgba(0, 0, 0, 0.8);
@@ -453,7 +426,7 @@ body {
   text-shadow: var(--textshadow);
 }
 
-/* The dots/bullets/indicators */
+/* Dots */
 .dot {
   cursor: pointer;
   height: 15px;
@@ -470,7 +443,7 @@ body {
   background-color: #717171;
 }
 
-/* Fading animation */
+/* Fade animation */
 .fade {
   animation-name: fade;
   animation-duration: 1.5s;
@@ -485,10 +458,7 @@ body {
   }
 }
 
-/* =====================================================
-   HERO BANNER
-===================================================== */
-
+/* Hero banner */
 .hero-banner {
   width: 100%;
   height: 400px;
@@ -517,10 +487,7 @@ body {
   line-height: 1.6;
 }
 
-/* =====================================================
-   WEEKLY BOOKS – FIXED LAYOUT (row, equal cards)
-===================================================== */
-
+/* Weekly books */
 #weekly-books {
   margin-top: 40px;
   margin-left: 40px;
@@ -566,8 +533,8 @@ body {
 .weekly-card img {
   width: 100%;
   max-width: 200px;
-  height: 280px; /* fixed height – won't stretch card */
-  object-fit: contain; /* keeps proportions, no distortion */
+  height: 280px; /* fixed height */
+  object-fit: contain; /* keep proportions */
   display: block;
   border-radius: 6px;
   flex-shrink: 0;
@@ -593,10 +560,7 @@ body {
   flex: 0 0 auto;
 }
 
-/* =====================================================
-   TOP 10 – IMAGES HAVE FIXED SIZE
-===================================================== */
-
+/* Top 10 */
 .top10 {
   width: 100%;
 
@@ -661,10 +625,7 @@ body {
   color: var(--foreground);
 }
 
-/* =====================================================
-   FOOTER
-===================================================== */
-
+/* Footer */
 .footer {
   margin-top: 60px;
 
@@ -757,10 +718,7 @@ body {
   color: var(--footer-muted);
 }
 
-/* =====================================================
-   BUTTONS – (unused in current HTML, see notes below)
-===================================================== */
-
+/* Buttons */
 .btn-primary {
   padding: 10px 20px;
 
@@ -835,9 +793,7 @@ body {
   cursor: pointer;
 }
 
-/* =====================================================
-   SWEETALERT — must sit above the withdraw modal
-===================================================== */
+/* SweetAlert z-index para top ang sweetalert*/
 .swal2-container {
   z-index: 9999 !important;
 }

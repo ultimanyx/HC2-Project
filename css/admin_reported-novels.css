@@ -4,9 +4,7 @@
   box-sizing: border-box;
 }
 
-/* =====================================================
-   ROOT VARIABLES
-===================================================== */
+/* root variables */
 
 :root {
   --background: #f8f6f1;
@@ -51,9 +49,7 @@
   --font-heading: "Fraunces", serif;
 }
 
-/* =====================================================
-   FONTS
-===================================================== */
+/* fonts */
 
 @font-face {
   font-family: "Poppins";
@@ -72,7 +68,7 @@
     format("truetype");
 }
 
-/* ============ Body ==========*/
+/* base */
 
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
@@ -124,6 +120,7 @@ a {
   gap: 10px;
   flex: 1;
 }
+
 .nav-item {
   font-size: 18px;
   font-weight: 400;
@@ -132,24 +129,29 @@ a {
   padding: 7px 10px;
   border-radius: 6px;
 }
+
 .nav-item.sub {
   padding-left: 16px;
   color: var(--muted-foreground);
   font-size: 16px;
   font-weight: 400;
 }
+
 .nav-item.active {
   background-color: rgba(184, 114, 31, 0.12);
   color: var(--primary);
   font-weight: 600;
   font-size: 16px;
 }
+
 .nav-item:hover {
   background-color: var(--secondary);
 }
+
 .nav-icon {
   margin-right: 6px;
 }
+
 .nav-section {
   font-size: 21px;
   font-weight: 600;
@@ -158,6 +160,7 @@ a {
   margin-bottom: 3px;
   padding-left: 10px;
 }
+
 .logout {
   display: flex;
   align-items: center;
@@ -174,12 +177,13 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
+
 .logout:hover {
   color: var(--destructive);
   background-color: rgba(220, 38, 38, 0.08);
 }
 
-/* ---------- Main Content ---------- */
+/* main content */
 
 .main {
   flex: 1;
@@ -221,7 +225,7 @@ a {
   font-size: 14px;
 }
 
-/* ---------- Reported Novels Toolbar ---------- */
+/* reported novels toolbar */
 
 .ad-toolbar {
   display: flex;
@@ -254,7 +258,7 @@ a {
   font-weight: 500;
 }
 
-/* ---------- Search / Filter Bar ---------- */
+/* search / filter bar */
 
 .filter-bar {
   display: flex;
@@ -298,7 +302,7 @@ a {
   box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
-/* ---------- Table Card ---------- */
+/* table card */
 
 .table-card {
   margin-top: 10px;
@@ -315,7 +319,7 @@ a {
   margin-bottom: 14px;
 }
 
-/* ---------- Table ---------- */
+/* table */
 
 table {
   width: 100%;
@@ -344,13 +348,13 @@ tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* ---------- Novel Title ---------- */
+/* novel title */
 
 .fw-600 {
   font-weight: 600;
 }
 
-/* ---------- Status Badges ---------- */
+/* status badges */
 
 .badge {
   display: inline-block;
@@ -375,7 +379,7 @@ tbody tr:last-child td {
   color: #6b6680;
 }
 
-/* --- Buttons ---*/
+/* buttons */
 
 .btn {
   display: inline-flex;
@@ -450,9 +454,7 @@ tbody tr:last-child td {
   flex-wrap: wrap;
 }
 
-/* =====================================================
-   SWEETALERT — must sit above the withdraw modal
-===================================================== */
+/* SweetAlert z-index para top ang sweetalert*/
 .swal2-container {
   z-index: 9999 !important;
 }

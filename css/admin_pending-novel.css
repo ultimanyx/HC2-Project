@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-/* --- ROOT ---*/
+/* root */
 
 :root {
   --background: #f8f6f1;
@@ -45,7 +45,7 @@
   --font-heading: "Fraunces", serif;
 }
 
-/* --- Fonts ---*/
+/* fonts */
 
 @font-face {
   font-family: "Poppins";
@@ -64,7 +64,7 @@
     format("truetype");
 }
 
-/* ============ Body ==========*/
+/* base */
 
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
@@ -116,6 +116,7 @@ a {
   gap: 10px;
   flex: 1;
 }
+
 .nav-item {
   font-size: 18px;
   font-weight: 400;
@@ -124,24 +125,29 @@ a {
   padding: 7px 10px;
   border-radius: 6px;
 }
+
 .nav-item.sub {
   padding-left: 16px;
   color: var(--muted-foreground);
   font-size: 16px;
   font-weight: 400;
 }
+
 .nav-item.active {
   background-color: rgba(184, 114, 31, 0.12);
   color: var(--primary);
   font-weight: 600;
   font-size: 16px;
 }
+
 .nav-item:hover {
   background-color: var(--secondary);
 }
+
 .nav-icon {
   margin-right: 6px;
 }
+
 .nav-section {
   font-size: 21px;
   font-weight: 600;
@@ -150,6 +156,7 @@ a {
   margin-bottom: 3px;
   padding-left: 10px;
 }
+
 .logout {
   display: flex;
   align-items: center;
@@ -166,19 +173,20 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
+
 .logout:hover {
   color: var(--destructive);
   background-color: rgba(220, 38, 38, 0.08);
 }
 
-/* --- Main ---*/
+/* main */
 
 .main {
   flex: 1;
   padding: 24px 32px;
 }
 
-/* --- TopBar ---*/
+/* topbar */
 
 .topbar {
   display: flex;
@@ -215,7 +223,7 @@ a {
   font-size: 14px;
 }
 
-/* --- ToolBar ---*/
+/* toolbar */
 
 .ad-toolbar {
   display: flex;
@@ -248,7 +256,8 @@ a {
   font-weight: 500;
 }
 
-/* --- Search ---*/
+/* search */
+
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -291,9 +300,7 @@ a {
   box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
-/* =====================================================
-   TABLE CARD
-===================================================== */
+/* table card */
 
 .table-card {
   margin-top: 10px;
@@ -310,9 +317,7 @@ a {
   margin-bottom: 14px;
 }
 
-/* =====================================================
-   TABLE
-===================================================== */
+/* table */
 
 table {
   width: 100%;
@@ -352,9 +357,8 @@ tbody tr:last-child td {
 .text-right {
   text-align: right;
 }
-/* =====================================================
-   STATUS BADGE
-===================================================== */
+
+/* status badge */
 
 .badge {
   display: inline-block;
@@ -364,25 +368,29 @@ tbody tr:last-child td {
   border-radius: 20px;
 }
 
-/* Pending */
+/* pending */
+
 .badge.paused {
   background-color: rgba(184, 114, 31, 0.15);
   color: #8a5410;
 }
 
-/* Active / Approved */
+/* active / approved */
+
 .badge.active {
   background-color: rgba(63, 125, 79, 0.15);
   color: #2f5d3a;
 }
 
-/* Completed */
+/* completed */
+
 .badge.completed {
   background-color: #ede9e1;
   color: #6b6680;
 }
 
-/* --- Buttons ---*/
+/* buttons */
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -452,9 +460,7 @@ tbody tr:last-child td {
   font-size: 13px;
 }
 
-/* =====================================================
-   ACTION BUTTONS
-===================================================== */
+/* action buttons */
 
 .action-group {
   display: flex;
@@ -467,9 +473,7 @@ tbody tr:last-child td {
   margin-left: 45px;
 }
 
-/* =====================================================
-   SWEETALERT — must sit above the withdraw modal
-===================================================== */
+/* SweetAlert z-index para top ang sweetalert*/
 .swal2-container {
   z-index: 9999 !important;
 }
