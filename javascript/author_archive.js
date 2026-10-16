@@ -125,15 +125,42 @@ document.addEventListener("DOMContentLoaded", () => {
       const id = restoreBtn.closest("tr")?.dataset.id;
       if (!id) return;
 
-      const list = loadNovels();
-      const novel = list.find((n) => n.id === id);
-      if (novel) {
-        novel.archived = false;
-        delete novel.archivedAt;
-        novel.restoredAt = Date.now();
-        saveNovels(list);
-      }
-      render();
+      const novel = loadNovels().find((n) => n.id === id);
+      if (!novel) return;
+
+      Swal.fire({
+        title: "Are you sure?",
+        text: `"${novel.title}" will be moved back to your library.`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, restore it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const list = loadNovels();
+          const target = list.find((n) => n.id === id);
+          if (target) {
+            target.archived = false;
+            delete target.archivedAt;
+            target.restoredAt = Date.now();
+            saveNovels(list);
+          }
+          render();
+
+          Swal.fire({
+            title: "Restored!",
+            text: `"${novel.title}" is back in your library.`,
+            icon: "success",
+          });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire({
+            title: "Cancelled",
+            text: "Your novel is still archived :)",
+            icon: "error",
+          });
+        }
+      });
       return;
     }
 
@@ -142,18 +169,34 @@ document.addEventListener("DOMContentLoaded", () => {
       const id = deleteBtn.closest("tr")?.dataset.id;
       if (!id) return;
 
+      const novel = loadNovels().find((n) => n.id === id);
+      if (!novel) return;
+
       Swal.fire({
-        title: "Delete permanently?",
-        text: "This cannot be undone.",
+        title: "Are you sure?",
+        text: `"${novel.title}" will be deleted permanently. You won't be able to revert this!`,
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Delete",
-        cancelButtonText: "Cancel",
-        confirmButtonColor: "#dc2626",
-      }).then((res) => {
-        if (!res.isConfirmed) return;
-        saveNovels(loadNovels().filter((n) => n.id !== id));
-        render();
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          saveNovels(loadNovels().filter((n) => n.id !== id));
+          render();
+
+          Swal.fire({
+            title: "Deleted!",
+            text: `"${novel.title}" has been deleted.`,
+            icon: "success",
+          });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire({
+            title: "Cancelled",
+            text: "Your novel is safe :)",
+            icon: "error",
+          });
+        }
       });
     }
   });

@@ -206,47 +206,82 @@ document.addEventListener("DOMContentLoaded", () => {
     const archiveBtn = e.target.closest(".archive-novel-btn");
     const deleteBtn = e.target.closest(".delete-novel-btn");
 
+    // ---------- ARCHIVE ----------
     if (archiveBtn) {
       const id = archiveBtn.closest("tr")?.dataset.id;
       if (!id) return;
 
+      const novel = loadNovels().find((n) => n.id === id);
+      if (!novel) return;
+
       Swal.fire({
-        title: "Archive this novel?",
-        text: "You can restore it later from the Archive page.",
+        title: "Are you sure?",
+        text: `"${novel.title}" will be moved to your Archive.`,
         icon: "question",
         showCancelButton: true,
-        confirmButtonText: "Archive",
-        cancelButtonText: "Cancel",
+        confirmButtonText: "Yes, archive it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
       }).then((res) => {
-        if (!res.isConfirmed) return;
-        const list = loadNovels();
-        const novel = list.find((n) => n.id === id);
-        if (novel) {
-          novel.archived = true;
-          novel.archivedAt = Date.now();
-          saveNovels(list);
+        if (res.isConfirmed) {
+          const list = loadNovels();
+          const target = list.find((n) => n.id === id);
+          if (target) {
+            target.archived = true;
+            target.archivedAt = Date.now();
+            saveNovels(list);
+          }
+          applyFilters();
+
+          Swal.fire({
+            title: "Archived!",
+            text: `"${novel.title}" has been moved to your Archive.`,
+            icon: "success",
+          });
+        } else if (res.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire({
+            title: "Cancelled",
+            text: "Your novel is safe :)",
+            icon: "error",
+          });
         }
-        applyFilters();
       });
       return;
     }
 
+    // ---------- DELETE ----------
     if (deleteBtn) {
       const id = deleteBtn.closest("tr")?.dataset.id;
       if (!id) return;
 
+      const novel = loadNovels().find((n) => n.id === id);
+      if (!novel) return;
+
       Swal.fire({
-        title: "Delete this novel?",
-        text: "This action cannot be undone.",
+        title: "Are you sure?",
+        text: `"${novel.title}" will be deleted permanently. You won't be able to revert this!`,
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Delete",
-        cancelButtonText: "Cancel",
-        confirmButtonColor: "#dc2626",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
       }).then((res) => {
-        if (!res.isConfirmed) return;
-        saveNovels(loadNovels().filter((n) => n.id !== id));
-        applyFilters();
+        if (res.isConfirmed) {
+          saveNovels(loadNovels().filter((n) => n.id !== id));
+          applyFilters();
+
+          Swal.fire({
+            title: "Deleted!",
+            text: `"${novel.title}" has been deleted.`,
+            icon: "success",
+          });
+        } else if (res.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire({
+            title: "Cancelled",
+            text: "Your novel is safe :)",
+            icon: "error",
+          });
+        }
       });
     }
   });
