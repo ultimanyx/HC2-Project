@@ -32,48 +32,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // FIX 1: Load raw data without destroying the chapters array
   function loadNovels() {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]").map((n) => ({
-      ...n,
-      chapters: Array.isArray(n.chapters)
-        ? n.chapters.length
-        : Number(n.chapters) || 0,
-      archived: !!n.archived,
-    }));
+    try {
+      const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      return Array.isArray(raw) ? raw : [];
+    } catch {
+      return [];
+    }
   }
 
   function saveNovels(list) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
   }
 
-  // ==========================================
-  // SEED HARDCODED DRAFT ROWS (once)
-  // ==========================================
-  function seedStaticDrafts() {
-    const rows = Array.from(tbody.querySelectorAll("tr")).map((tr, i) => {
-      const tds = tr.querySelectorAll("td");
-      return {
-        id: `draft-seed-${i}`,
-        title: tds[0]?.textContent.trim() || "",
-        status: "draft",
-        genre: "Fantasy",
-        chapters: Number(tds[3]?.textContent) || 0,
-        reads: 0,
-        rating: null,
-        lastEdited: Date.now(),
-        archived: false,
-      };
-    });
-
-    const existing = loadNovels();
-    const titles = new Set(existing.map((n) => (n.title || "").toLowerCase()));
-    const toAdd = rows.filter(
-      (r) => r.title && !titles.has(r.title.toLowerCase()),
-    );
-    if (toAdd.length > 0) saveNovels([...existing, ...toAdd]);
-  }
-
-  seedStaticDrafts();
+  // (Removed the seedStaticDrafts function entirely)
 
   // ==========================================
   // FILTERS + RENDER
@@ -82,13 +55,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const sortSelect = document.getElementById("sort-draft");
 
   function applyFilters() {
+    // Only show drafts that are not archived
     let list = loadNovels().filter((n) => n.status === "draft" && !n.archived);
 
     const q = (searchInput?.value || "").trim().toLowerCase();
-    if (q) list = list.filter((n) => n.title.toLowerCase().includes(q));
+    if (q) list = list.filter((n) => (n.title || "").toLowerCase().includes(q));
 
     const sort = sortSelect?.value || "Last Edited";
-    if (sort === "Title") list.sort((a, b) => a.title.localeCompare(b.title));
+    if (sort === "Title")
+      list.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
     else if (sort === "Date Created")
       list.sort((a, b) => String(a.id).localeCompare(String(b.id)));
     else list.sort((a, b) => (b.lastEdited || 0) - (a.lastEdited || 0));
@@ -110,13 +85,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     list.forEach((n) => {
+      // FIX 2: Count chapters safely for display without destroying data
+      const chapterCount = Array.isArray(n.chapters)
+        ? n.chapters.length
+        : Number(n.chapters) || 0;
+
       const tr = document.createElement("tr");
       tr.dataset.id = n.id;
       tr.innerHTML = `
         <td><strong>${escapeHtml(n.title)}</strong></td>
         <td><span class="badge draft">Draft</span></td>
         <td>${formatDate(n.lastEdited)}</td>
-        <td>${n.chapters ?? 0}</td>
+        <td>${chapterCount}</td>
         <td>
           <a class="btn btn-sm edit-draft-btn" href="author_edit-draft.html?id=${n.id}">Edit</a>
           <button class="btn btn-primary btn-sm publish-draft-btn" data-id="${n.id}">Publish</button>
