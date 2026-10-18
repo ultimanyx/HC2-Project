@@ -833,6 +833,7 @@ tbody td strong {
 body.modal-open {
   overflow: hidden;
 }
+
 /* SweetAlert z-index para top ang sweetalert*/
 .swal2-container {
   z-index: 9999 !important;

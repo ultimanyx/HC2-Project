@@ -89,6 +89,8 @@ body {
   background-color: #f8f6f1;
   color: #1a1826;
   font-size: 15px;
+  height: 100%; /* Added */
+  overflow: hidden; /* Added */
 }
 
 a {
@@ -100,7 +102,8 @@ a {
 
 .layout {
   display: flex;
-  min-height: 100vh;
+  height: 100vh; /* Changed from min-height */
+  overflow: hidden; /* Added */
 }
 
 /* sidebar */
@@ -112,6 +115,9 @@ a {
   padding: 20px 14px;
   display: flex;
   flex-direction: column;
+  height: 100vh; /* Added */
+  overflow-y: auto; /* Added */
+  flex-shrink: 0; /* Added so it doesn't squish */
 }
 
 .brand {
@@ -206,6 +212,8 @@ a {
 .main {
   flex: 1;
   padding: 24px 32px;
+  height: 100vh; /* Added */
+  overflow-y: auto; /* Added */
 }
 
 .topbar {
@@ -622,6 +630,7 @@ tbody tr:last-child td {
 .btn-outline:hover {
   background: var(--secondary);
 }
+
 /* SweetAlert z-index para top ang sweetalert*/
 .swal2-container {
   z-index: 9999 !important;

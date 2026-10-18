@@ -50,6 +50,14 @@
     format("truetype");
 }
 
+/* lock page to prevent whole-page scroll */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
 /* base */
 
 body {
@@ -66,7 +74,8 @@ a {
 
 .layout {
   display: flex;
-  min-height: 100vh;
+  height: 100vh; /* Changed from min-height */
+  overflow: hidden; /* Added */
 }
 
 .sidebar {
@@ -76,6 +85,9 @@ a {
   padding: 20px 14px;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0; /* Added */
+  height: 100vh; /* Added */
+  overflow-y: auto; /* Added */
 }
 
 .brand {
@@ -170,6 +182,8 @@ a {
 .main {
   flex: 1;
   padding: 24px 32px;
+  height: 100vh; /* Added */
+  overflow-y: auto; /* Added */
 }
 
 .topbar {
