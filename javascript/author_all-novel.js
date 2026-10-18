@@ -63,13 +63,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function updateStats() {
     const list = loadNovels().filter((n) => !n.archived);
-
     const total = list.length;
     const pending = list.filter((n) => n.status === "pending").length;
 
     const totalEl = document.getElementById("stat-total");
     const pendingEl = document.getElementById("stat-pending");
-
     if (totalEl) totalEl.textContent = total;
     if (pendingEl) pendingEl.textContent = pending;
   }
@@ -138,6 +136,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const readsCell = n.reads ? n.reads.toLocaleString() : "";
       const badgeCls = badgeClassFor(n.statusLabel);
 
+      // ⬇ Demo rows (seed-* AND draft-seed-*) → View disabled, same blue color
+      const idStr = String(n.id);
+      const isDemo = /seed-/i.test(idStr) && idStr !== "seed-0";
+      const viewCell = isDemo
+        ? `<span class="btn btn-primary btn-sm" role="button"
+                 aria-disabled="true"
+                 title="Demo row — not viewable"
+                 style="cursor:default;">View</span>`
+        : `<a class="btn btn-primary btn-sm view-novel-btn"
+                 href="author_view-novel.html?id=${encodeURIComponent(n.id)}">View</a>`;
+
       const tr = document.createElement("tr");
       tr.dataset.id = n.id;
       tr.innerHTML = `
@@ -148,9 +157,10 @@ document.addEventListener("DOMContentLoaded", () => {
         <td>${readsCell}</td>
         <td>${ratingCell}</td>
         <td>
-  <a class="btn btn-primary btn-sm view-novel-btn" href="author_view-novel.html?id=${n.id}">View</a>
-  <button class="btn btn-sm btn-danger archive-novel-btn" data-novel-id="${n.id}">Archive</button>
-</td>
+          ${viewCell}
+          <button class="btn btn-sm btn-danger archive-novel-btn"
+                  data-novel-id="${n.id}">Archive</button>
+        </td>
       `;
       tbody.appendChild(tr);
     });
@@ -203,6 +213,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // ARCHIVE + DELETE
   // ==========================================
   tbody.addEventListener("click", (e) => {
+    if (typeof Swal === "undefined") {
+      console.warn("[all-novels] SweetAlert2 not loaded — check script order.");
+      return;
+    }
+
     const archiveBtn = e.target.closest(".archive-novel-btn");
     const deleteBtn = e.target.closest(".delete-novel-btn");
 
@@ -211,7 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const id = archiveBtn.closest("tr")?.dataset.id;
       if (!id) return;
 
-      const novel = loadNovels().find((n) => n.id === id);
+      const novel = loadNovels().find((n) => String(n.id) === String(id));
       if (!novel) return;
 
       Swal.fire({
@@ -224,12 +239,12 @@ document.addEventListener("DOMContentLoaded", () => {
         reverseButtons: true,
       }).then((res) => {
         if (res.isConfirmed) {
-          const list = loadNovels();
-          const target = list.find((n) => n.id === id);
+          const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+          const target = raw.find((n) => String(n.id) === String(id));
           if (target) {
             target.archived = true;
             target.archivedAt = Date.now();
-            saveNovels(list);
+            saveNovels(raw);
           }
           applyFilters();
 
@@ -254,7 +269,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const id = deleteBtn.closest("tr")?.dataset.id;
       if (!id) return;
 
-      const novel = loadNovels().find((n) => n.id === id);
+      const novel = loadNovels().find((n) => String(n.id) === String(id));
       if (!novel) return;
 
       Swal.fire({
@@ -267,7 +282,8 @@ document.addEventListener("DOMContentLoaded", () => {
         reverseButtons: true,
       }).then((res) => {
         if (res.isConfirmed) {
-          saveNovels(loadNovels().filter((n) => n.id !== id));
+          const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+          saveNovels(raw.filter((n) => String(n.id) !== String(id)));
           applyFilters();
 
           Swal.fire({

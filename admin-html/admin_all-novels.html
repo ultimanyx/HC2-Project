@@ -3,10 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Users</title>
+    <title>Admin · All Novels</title>
     <link rel="stylesheet" href="../css/admin_all-novel.css" />
     <link rel="stylesheet" href="../css/sweetalert2.min.css" />
-
     <link
       rel="icon"
       type="image/png"
@@ -51,7 +50,7 @@
           <a href="admin_archive.html" class="nav-item sub">Archive</a>
         </nav>
 
-        <a href="#" class="logout" id="logout" data-role="admin"> Logout</a>
+        <a href="#" class="logout" id="logout" data-role="admin">Logout</a>
       </aside>
 
       <main class="main">
@@ -66,7 +65,7 @@
         <div class="stats">
           <div class="stat-card">
             <div class="stat-label">Total Novels</div>
-            <div class="stat-value">284</div>
+            <div class="stat-value" id="statTotal">0</div>
             <div class="stat-change positive">
               <img src="../icons/arrow-up-short.svg" alt="up" /> 12 new this
               month
@@ -74,12 +73,12 @@
           </div>
           <div class="stat-card">
             <div class="stat-label">Published</div>
-            <div class="stat-value">156</div>
+            <div class="stat-value" id="statPublished">0</div>
             <div class="stat-change positive">55% of total</div>
           </div>
           <div class="stat-card">
             <div class="stat-label">Total Reads</div>
-            <div class="stat-value">1.2M</div>
+            <div class="stat-value" id="statReads">0</div>
             <div class="stat-change positive">
               <img src="../icons/arrow-up-short.svg" alt="up" /> 18% from last
               month
@@ -144,139 +143,23 @@
                 <th class="text-center">Actions</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="novelsTableBody">
               <tr>
-                <td>#001</td>
-                <td><strong>Shadows of the Crown</strong></td>
-                <td>Sarah J. Maas</td>
-                <td>Fantasy</td>
-                <td><span class="badge active">Published</span></td>
-                <td>24</td>
-                <td>12,843</td>
-                <td>
-                  <img
-                    src="../icons/star-fill.svg"
-                    alt="star-rating"
-                    class="star-rating"
-                  />
-                  4.8
-                </td>
-                <td>
-                  <a href="admin-view-novel.html"
-                    ><button class="btn btn-primary btn-sm">View</button></a
-                  >
-                  <button class="btn btn-danger btn-sm">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>#002</td>
-                <td><strong>Ember & Ash</strong></td>
-                <td>Stephen King</td>
-                <td>Romance</td>
-                <td><span class="badge active">Published</span></td>
-                <td>32</td>
-                <td>8,210</td>
-                <td>
-                  <img
-                    src="../icons/star-fill.svg"
-                    alt="star-rating"
-                    class="star-rating"
-                  />
-                  4.6
-                </td>
-                <td>
-                  <button class="btn btn-primary btn-sm">View</button>
-                  <button class="btn btn-danger btn-sm">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>#003</td>
-                <td><strong>The Last Prophecy</strong></td>
-                <td>J.K. Rowling</td>
-                <td>Sci-Fi</td>
-                <td><span class="badge paused">Pending</span></td>
-                <td>18</td>
-                <td>5,672</td>
-                <td>
-                  <img
-                    src="../icons/star-fill.svg"
-                    alt="star-rating"
-                    class="star-rating"
-                  />
-                  4.2
-                </td>
-                <td>
-                  <button class="btn btn-primary btn-sm">View</button>
-                  <button class="btn btn-danger btn-sm">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>#004</td>
-                <td><strong>Starlight Drive</strong></td>
-                <td>George R.R. Martin</td>
-                <td>Young Adult</td>
-                <td><span class="badge completed">Archived</span></td>
-                <td>12</td>
-                <td>3,401</td>
-                <td>
-                  <img
-                    src="../icons/star-fill.svg"
-                    alt="star-rating"
-                    class="star-rating"
-                  />
-                  3.9
-                </td>
-                <td>
-                  <button class="btn btn-primary btn-sm">View</button>
-                  <button class="btn btn-danger btn-sm">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>#005</td>
-                <td><strong>The Lost Kingdom</strong></td>
-                <td>J.R.R. Tolkien</td>
-                <td>Fantasy</td>
-                <td><span class="badge paused">Draft</span></td>
-                <td>6</td>
-                <td>—</td>
-                <td>—</td>
-                <td>
-                  <button class="btn btn-primary btn-sm">View</button>
-                  <button class="btn btn-danger btn-sm">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>#006</td>
-                <td><strong>Beneath the Veil</strong></td>
-                <td>Sarah J. Maas</td>
-                <td>Mystery</td>
-                <td><span class="badge active">Published</span></td>
-                <td>20</td>
-                <td>1,950</td>
-                <td>
-                  <img
-                    src="../icons/star-fill.svg"
-                    alt="star-rating"
-                    class="star-rating"
-                  />
-                  4.0
-                </td>
-                <td>
-                  <button class="btn btn-primary btn-sm">View</button>
-                  <button class="btn btn-danger btn-sm">Delete</button>
+                <td
+                  colspan="9"
+                  style="text-align: center; padding: 24px; color: #888"
+                >
+                  Loading…
                 </td>
               </tr>
             </tbody>
           </table>
-          <!-- <div class="table-footer">
-            <span>Showing 6 of 284 novels</span>
-            <span>💡 Click <strong>View</strong> to see the public-facing page.</span>
-        </div> -->
         </div>
       </main>
     </div>
 
     <script src="../javascript/sweetalert2.all.min.js"></script>
     <script src="../javascript/logout.js"></script>
+    <script src="../javascript/admin_all-novels.js"></script>
   </body>
 </html>
