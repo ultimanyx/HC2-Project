@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const STORAGE_KEY = "novels";
+  const SEED_FLAG = "novels_seeded_v2";
   const tbody = document.querySelector(".table-card tbody");
   if (!tbody) return;
 
@@ -63,23 +64,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function updateStats() {
     const list = loadNovels().filter((n) => !n.archived);
-    const total = list.length;
     const pending = list.filter((n) => n.status === "pending").length;
-
     const totalEl = document.getElementById("stat-total");
     const pendingEl = document.getElementById("stat-pending");
-    if (totalEl) totalEl.textContent = total;
+    if (totalEl) totalEl.textContent = list.length;
     if (pendingEl) pendingEl.textContent = pending;
   }
 
   // ==========================================
-  // SEED HARDCODED ROWS INTO localStorage (once)
+  // ONE-TIME SEED
   // ==========================================
   function seedStaticRows() {
+    if (localStorage.getItem(SEED_FLAG)) return;
+
+    const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    const existingIds = new Set(existing.map((n) => String(n.id)));
+
     const rows = Array.from(tbody.querySelectorAll("tr")).map((tr, i) => {
       const tds = tr.querySelectorAll("td");
       const badge = tds[1]?.querySelector(".badge");
-      const statusText = badge?.textContent.trim() || "Ongoing";
+      const statusTxt = badge?.textContent.trim() || "Ongoing";
       const statusMap = {
         Ongoing: "published",
         Completed: "completed",
@@ -87,12 +91,12 @@ document.addEventListener("DOMContentLoaded", () => {
         "Pending Review": "pending",
         "On Hiatus": "hiatus",
       };
-      const ratingText = tds[5]?.textContent.trim() || "";
-      const ratingMatch = ratingText.match(/[\d.]+/);
+      const ratingTxt = tds[5]?.textContent.trim() || "";
+      const ratingMatch = ratingTxt.match(/[\d.]+/);
       return {
         id: `seed-${i}`,
         title: tds[0]?.textContent.trim() || "",
-        status: statusMap[statusText] || "published",
+        status: statusMap[statusTxt] || "published",
         genre: tds[2]?.textContent.trim() || "",
         chapters: Number(tds[3]?.textContent) || 0,
         reads: Number((tds[4]?.textContent || "").replace(/,/g, "")) || 0,
@@ -101,14 +105,11 @@ document.addEventListener("DOMContentLoaded", () => {
       };
     });
 
-    const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-    const existingTitles = new Set(
-      existing.map((n) => (n.title || "").toLowerCase()),
-    );
-    const toAdd = rows.filter(
-      (r) => r.title && !existingTitles.has(r.title.toLowerCase()),
-    );
+    // Skip rows whose deterministic id already exists in storage.
+    const toAdd = rows.filter((r) => r.title && !existingIds.has(r.id));
+
     if (toAdd.length > 0) saveNovels([...existing, ...toAdd]);
+    localStorage.setItem(SEED_FLAG, "1");
   }
 
   seedStaticRows();
@@ -136,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const readsCell = n.reads ? n.reads.toLocaleString() : "";
       const badgeCls = badgeClassFor(n.statusLabel);
 
-      // ⬇ Demo rows (seed-* AND draft-seed-*) → View disabled, same blue color
+      // Only seed-0 is fully viewable; others show a disabled pill.
       const idStr = String(n.id);
       const isDemo = /seed-/i.test(idStr) && idStr !== "seed-0";
       const viewCell = isDemo
@@ -221,11 +222,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const archiveBtn = e.target.closest(".archive-novel-btn");
     const deleteBtn = e.target.closest(".delete-novel-btn");
 
-    // ---------- ARCHIVE ----------
     if (archiveBtn) {
       const id = archiveBtn.closest("tr")?.dataset.id;
       if (!id) return;
-
       const novel = loadNovels().find((n) => String(n.id) === String(id));
       if (!novel) return;
 
@@ -247,7 +246,6 @@ document.addEventListener("DOMContentLoaded", () => {
             saveNovels(raw);
           }
           applyFilters();
-
           Swal.fire({
             title: "Archived!",
             text: `"${novel.title}" has been moved to your Archive.`,
@@ -264,11 +262,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // ---------- DELETE ----------
     if (deleteBtn) {
       const id = deleteBtn.closest("tr")?.dataset.id;
       if (!id) return;
-
       const novel = loadNovels().find((n) => String(n.id) === String(id));
       if (!novel) return;
 
@@ -285,7 +281,6 @@ document.addEventListener("DOMContentLoaded", () => {
           const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
           saveNovels(raw.filter((n) => String(n.id) !== String(id)));
           applyFilters();
-
           Swal.fire({
             title: "Deleted!",
             text: `"${novel.title}" has been deleted.`,
