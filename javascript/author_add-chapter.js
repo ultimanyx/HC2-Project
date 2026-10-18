@@ -8,16 +8,41 @@ document.addEventListener("DOMContentLoaded", () => {
   const wordCountEl = document.getElementById("wordCount");
   const charCountEl = document.getElementById("charCount");
 
-  // ---- Word/char counter ----
+  // ---- Word / char counter ----
   function updateCounts() {
     const text = editor.textContent.trim();
-    const words = text ? text.split(/\s+/).length : 0;
+    const words = text ? text.split(/\s+/).filter(Boolean).length : 0;
     if (wordCountEl) wordCountEl.textContent = words;
     if (charCountEl) charCountEl.textContent = text.length;
   }
   editor?.addEventListener("input", updateCounts);
+  updateCounts();
 
-  // ---- Determine save button (draft vs publish) ----
+  // ---- Compute the next chapter number for a novel ----
+  function getNextChapterNumber(novel) {
+    if (!novel) return 1;
+    if (Array.isArray(novel.chapters)) {
+      if (novel.chapters.length === 0) return 1;
+      const max = novel.chapters.reduce(
+        (m, c) => Math.max(m, Number(c.number) || 0),
+        0,
+      );
+      return max + 1;
+    }
+    return (Number(novel.chapters) || 0) + 1;
+  }
+
+  // ---- Pre-fill the chapter number input ----
+  let currentNovel = null;
+  if (novelId) {
+    const all = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    currentNovel = all.find((n) => String(n.id) === String(novelId)) || null;
+    if (currentNovel) {
+      numberInput.value = getNextChapterNumber(currentNovel);
+    }
+  }
+
+  // ---- Save buttons ----
   const draftBtn = document.getElementById("saveDraftBtn");
   const publishBtn = document.getElementById("saveBtn");
 
@@ -40,7 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
         icon: "warning",
         title: "Missing content",
         text: "Chapter title and content are required.",
-        confirmButtonColor: "#b8721f",
       });
       return;
     }
@@ -53,25 +77,43 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const novel = all[idx];
-    novel.chapters = novel.chapters || [];
 
-    const newNumber = Number(numberInput.value) || novel.chapters.length + 1;
+    // Ensure it's an array
+    if (!Array.isArray(novel.chapters)) novel.chapters = [];
 
+    const chosen = Number(numberInput.value);
+    const newNumber =
+      Number.isFinite(chosen) && chosen >= 1
+        ? chosen
+        : getNextChapterNumber(novel);
+
+    // Duplicate guard
+    if (novel.chapters.some((c) => Number(c.number) === newNumber)) {
+      Swal.fire({
+        icon: "warning",
+        title: "Chapter number already in use",
+        text: `Chapter ${newNumber} already exists.`,
+      });
+      return;
+    }
+
+    // Push the new chapter
     novel.chapters.push({
       number: newNumber,
       title,
-      body,
+      body, // view page uses `body`
+      content: body, // edit page uses `content`
       status,
-      words: bodyText.split(/\s+/).length,
-      lastUpdated: new Date().toISOString(),
+      words: bodyText.split(/\s+/).filter(Boolean).length,
+      lastUpdated: Date.now(),
     });
 
-    // If the chapter is published, ensure the novel itself is published
-    if (status === "published" && novel.status === "draft") {
-      // keep the novel as draft unless the author publishes separately
-    }
+    // Sort them correctly
+    novel.chapters.sort(
+      (a, b) => (Number(a.number) || 0) - (Number(b.number) || 0),
+    );
 
-    novel.lastEdited = new Date().toISOString();
+    novel.lastEdited = Date.now();
     all[idx] = novel;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
 
@@ -79,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
       icon: "success",
       title:
         status === "draft" ? "Chapter saved as draft" : "Chapter published",
-      confirmButtonColor: "#b8721f",
+      text: `Chapter ${newNumber} added.`,
     }).then(() => {
       location.href = `author_view-novel.html?id=${novelId}`;
     });

@@ -263,11 +263,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // "Save as Draft" — save and stay on page (any mode)
-  saveDraftBtn?.addEventListener("click", () => {
-    save("draft", { redirect: false });
-  });
-
   // "Add Chapter" — save as draft then redirect to the novel's edit page
   saveBtn?.addEventListener("click", () => {
     const status = isEditMode ? chapter?.status || "draft" : "draft";
