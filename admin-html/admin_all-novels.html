@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin · All Novels</title>
-    <link rel="stylesheet" href="../css/admin_all-novel.css" />
+    <title>All Novels</title>
+    <link rel="stylesheet" href="../css/author_all-novels.css" />
     <link rel="stylesheet" href="../css/sweetalert2.min.css" />
+
     <link
       rel="icon"
       type="image/png"
@@ -50,39 +51,64 @@
           <a href="admin_archive.html" class="nav-item sub">Archive</a>
         </nav>
 
-        <a href="#" class="logout" id="logout" data-role="admin">Logout</a>
+        <a href="#" class="logout" id="logout" data-role="admin"> Logout</a>
       </aside>
 
       <main class="main">
         <div class="topbar">
           <h1>All Novels</h1>
           <div class="user-chip">
-            <span>Welcome, Admin</span>
-            <span class="avatar">A</span>
+            <span>Sarah J.</span>
+            <span class="avatar">SJ</span>
           </div>
         </div>
 
         <div class="stats">
           <div class="stat-card">
             <div class="stat-label">Total Novels</div>
-            <div class="stat-value" id="statTotal">0</div>
+            <div class="stat-value" id="stat-total">0</div>
             <div class="stat-change positive">
-              <img src="../icons/arrow-up-short.svg" alt="up" /> 12 new this
-              month
+              <img src="../icons/arrow-up-short.svg" alt="up" /> Active on your
+              shelf
             </div>
           </div>
+
           <div class="stat-card">
-            <div class="stat-label">Published</div>
-            <div class="stat-value" id="statPublished">0</div>
-            <div class="stat-change positive">55% of total</div>
+            <div class="stat-label">Pending Review</div>
+            <div class="stat-value" id="stat-pending">0</div>
+            <div class="stat-change warning">Waiting for approval</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-label">Total Reads</div>
-            <div class="stat-value" id="statReads">0</div>
-            <div class="stat-change positive">
-              <img src="../icons/arrow-up-short.svg" alt="up" /> 18% from last
-              month
-            </div>
+
+          <div class="stat-card stat-card--reported">
+            <div class="stat-label">Reported Novels</div>
+
+            <ul class="report-breakdown">
+              <li>
+                <div class="report-info">
+                  <span class="report-book">Shadows of the Crown</span>
+                  <span class="report-chapter"
+                    >Ch. 4 · Shadows in the Keep</span
+                  >
+                  <span class="report-reason">Broken content</span>
+                </div>
+              </li>
+
+              <li>
+                <div class="report-info">
+                  <span class="report-book">Ember &amp; Ash</span>
+                  <span class="report-chapter">Ch. 12 · Ashes and Oaths</span>
+                  <span class="report-reason">Inappropriate content</span>
+                </div>
+              </li>
+
+              <li>
+                <div class="report-info">
+                  <span class="report-book">The Silent Oath</span>
+                  <span class="report-chapter">Ch. 3 · A Quiet Meeting</span>
+                  <span class="report-reason">Missing content</span>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
 
@@ -92,64 +118,146 @@
             <input
               type="text"
               id="search-novel"
-              placeholder="Search by title or author..."
+              placeholder="Search by title..."
             />
-          </div>
-          <div class="filter-group">
-            <label for="genre-filter">Genre</label>
-            <select id="genre-filter">
-              <option>All Genres</option>
-              <option>Fantasy</option>
-              <option>Romance</option>
-              <option>Sci-Fi</option>
-              <option>Mystery</option>
-              <option>Thriller</option>
-              <option>Young Adult</option>
-            </select>
           </div>
           <div class="filter-group">
             <label for="status-filter">Status</label>
             <select id="status-filter">
-              <option>All Statuses</option>
-              <option>Published</option>
+              <option>All</option>
+              <option>Ongoing</option>
+              <option>Completed</option>
               <option>Draft</option>
-              <option>Pending</option>
+              <option>Pending Review</option>
+              <option>On Hiatus</option>
             </select>
           </div>
           <div class="filter-group">
             <label for="sort-novel">Sort by</label>
             <select id="sort-novel">
-              <option>Last Updated</option>
               <option>Title</option>
               <option>Reads</option>
               <option>Rating</option>
             </select>
           </div>
+          <div class="filter-actions">
+            <a href="author_create-novel.html" class="btn btn-primary"
+              >+ Create New Novel</a
+            >
+          </div>
         </div>
 
         <div class="table-card">
-          <h2>All Novels</h2>
+          <h2>Your Novels</h2>
           <table>
             <thead>
               <tr>
-                <th>ID</th>
                 <th>Title</th>
-                <th>Author</th>
-                <th>Genre</th>
                 <th>Status</th>
+                <th>Genre</th>
                 <th>Chapters</th>
                 <th>Reads</th>
                 <th>Rating</th>
-                <th class="text-center">Actions</th>
+                <th>Actions</th>
               </tr>
             </thead>
-            <tbody id="novelsTableBody">
+            <tbody>
               <tr>
-                <td
-                  colspan="9"
-                  style="text-align: center; padding: 24px; color: #888"
-                >
-                  Loading…
+                <td><strong>Shadows of the Crown</strong></td>
+                <td><span class="badge active">Ongoing</span></td>
+                <td>Fantasy</td>
+                <td>6</td>
+                <td>12,843</td>
+                <td>
+                  <img
+                    src="../icons/star-fill.svg"
+                    alt="star-rating"
+                    class="star-rating"
+                  />
+                  4.8
+                </td>
+                <td>
+                  <a
+                    class="btn btn-primary btn-sm view-novel-btn"
+                    href="author_view-novel.html?id=seed-0"
+                    >View</a
+                  >
+                  <button
+                    class="btn btn-sm btn-archive archive-novel-btn"
+                    data-novel-id="seed-0"
+                  >
+                    Archive
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Ember &amp; Ash</strong></td>
+                <td><span class="badge completed">Completed</span></td>
+                <td>Romance</td>
+                <td>32</td>
+                <td>8,210</td>
+                <td>
+                  <img
+                    src="../icons/star-fill.svg"
+                    alt="star-rating"
+                    class="star-rating"
+                  />
+                  4.6
+                </td>
+                <td>
+                  <a
+                    class="btn btn-primary btn-sm view-novel-btn"
+                    href="author_view-novel.html?id=seed-1"
+                    >View</a
+                  >
+                  <button
+                    class="btn btn-sm btn-archive archive-novel-btn"
+                    data-novel-id="seed-1"
+                  >
+                    Archive
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>The Lost Kingdom</strong></td>
+                <td><span class="badge draft">Draft</span></td>
+                <td>Fantasy</td>
+                <td>6</td>
+                <td></td>
+                <td></td>
+                <td>
+                  <a
+                    class="btn btn-primary btn-sm view-novel-btn"
+                    href="author_view-novel.html?id=seed-2"
+                    >View</a
+                  >
+                  <button
+                    class="btn btn-sm btn-archive archive-novel-btn"
+                    data-novel-id="seed-2"
+                  >
+                    Archive
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>The Silent Oath</strong></td>
+                <td><span class="badge pending">Pending Review</span></td>
+                <td>Thriller</td>
+                <td>8</td>
+                <td></td>
+                <td></td>
+                <td>
+                  <a
+                    class="btn btn-primary btn-sm view-novel-btn"
+                    href="author_view-novel.html?id=seed-3"
+                    >View</a
+                  >
+                  <button
+                    class="btn btn-sm btn-archive archive-novel-btn"
+                    data-novel-id="seed-3"
+                  >
+                    Archive
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -159,7 +267,7 @@
     </div>
 
     <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/"></script>
     <script src="../javascript/logout.js"></script>
-    <script src="../javascript/admin_all-novels.js"></script>
   </body>
 </html>

@@ -412,10 +412,75 @@ a {
 .btn-danger:hover {
   background: #b91c1c;
 }
-
+/* table action buttons — use root tokens */
 .btn-sm {
   padding: 4px 12px;
   font-size: 13px;
+}
+
+.btn-sm,
+.btn-view,
+.btn-archive {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 12px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+/* View — neutral / secondary */
+.btn-view {
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+  border-color: var(--border);
+}
+
+.btn-view:hover {
+  background: #ddd7cb;
+}
+
+.btn-view:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(26, 24, 38, 0.15);
+}
+
+/* Archive — uses primary accent from root */
+.btn-archive {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.btn-archive:hover {
+  background: #9a5f16;
+}
+
+.btn-archive:active {
+  background: #7d4c11;
+}
+
+.btn-archive:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+/* action cell layout (replaces the old inline justify-content) */
+.action-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 /* table */
