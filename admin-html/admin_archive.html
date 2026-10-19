@@ -6,7 +6,6 @@
     <title>Archive</title>
     <link rel="stylesheet" href="../css/admin_archive.css" />
     <link rel="stylesheet" href="../css/sweetalert2.min.css" />
-
     <link
       rel="icon"
       type="image/png"
@@ -31,21 +30,18 @@
           <a href="admin_reported-novels.html" class="nav-item sub"
             >Reported Novels</a
           >
-
           <a href="admin_admanage-user.html" class="nav-item sub"
             >Manage Users</a
           >
           <a href="admin_usermanage-author.html" class="nav-item sub"
             >Manage Authors</a
           >
-
           <a href="admin_ad-management.html" class="nav-item sub"
             >Ad Management</a
           >
           <a href="admin_revenue-reports.html" class="nav-item sub"
             >Revenue Reports</a
           >
-
           <a href="admin_archive.html" class="nav-item sub active">Archive</a>
         </nav>
 
@@ -64,18 +60,20 @@
         <div class="stats">
           <div class="stat-card">
             <div class="stat-label">Total Archived</div>
-            <div class="stat-value">37</div>
+            <div class="stat-value" id="stat-total">0</div>
             <div class="stat-change positive">All time</div>
           </div>
           <div class="stat-card">
             <div class="stat-label">Archived Novels</div>
-            <div class="stat-value">24</div>
-            <div class="stat-change warning">65% of total</div>
+            <div class="stat-value" id="stat-novels">0</div>
+            <div class="stat-change warning" id="stat-novels-pct">
+              0% of total
+            </div>
           </div>
           <div class="stat-card">
             <div class="stat-label">Archived Ads</div>
-            <div class="stat-value">13</div>
-            <div class="stat-change warning">35% of total</div>
+            <div class="stat-value" id="stat-ads">0</div>
+            <div class="stat-change warning" id="stat-ads-pct">0% of total</div>
           </div>
         </div>
 
@@ -91,9 +89,10 @@
           <div class="filter-group">
             <label for="type-filter">Type</label>
             <select id="type-filter">
-              <option>All Types</option>
-              <option>Novel</option>
-              <option>Ad</option>
+              <option value="">All Types</option>
+              <option value="Novel">Novel</option>
+              <option value="Chapter">Chapter</option>
+              <option value="Ad">Ad</option>
             </select>
           </div>
         </div>
@@ -110,147 +109,14 @@
                 <th style="text-align: center">Actions</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td><strong>Shadows of the Crown</strong></td>
-                <td>Novel</td>
-                <td>Sarah J. Maas</td>
-                <td>Sept 8, 2026</td>
-                <td style="text-align: right">
-                  <div class="action-group">
-                    <button class="btn btn-success" id="restore-shadows">
-                      <img src="../icons/restore.svg" alt="" class="btn-icon" />
-                      Restore
-                    </button>
-                    <button class="btn btn-danger" id="delete-shadows">
-                      <img
-                        src="../icons/delete.svg"
-                        alt="delete"
-                        class="btn-icon"
-                      />
-                      Delete
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td><strong>Nestle Milo Drink</strong></td>
-                <td>Ad</td>
-                <td>Nestlé Philippines</td>
-                <td>Sept 6, 2026</td>
-                <td style="text-align: right">
-                  <div class="action-group">
-                    <button class="btn btn-success" id="restore-nestle">
-                      <img src="../icons/restore.svg" alt="" class="btn-icon" />
-                      Restore
-                    </button>
-                    <button class="btn btn-danger" id="delete-nestle">
-                      <img
-                        src="../icons/delete.svg"
-                        alt="delete"
-                        class="btn-icon"
-                      />
-                      Delete
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td><strong>Scatter67</strong></td>
-                <td>Ad</td>
-                <td>Scatter Gaming</td>
-                <td>Sept 4, 2026</td>
-                <td style="text-align: right">
-                  <div class="action-group">
-                    <button class="btn btn-success" id="restore-scatter">
-                      <img src="../icons/restore.svg" alt="" class="btn-icon" />
-                      Restore
-                    </button>
-                    <button class="btn btn-danger" id="delete-scatter">
-                      <img
-                        src="../icons/delete.svg"
-                        alt="delete"
-                        class="btn-icon"
-                      />
-                      Delete
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td><strong>Beneath the Veil</strong></td>
-                <td>Novel</td>
-                <td>Sarah J. Maas</td>
-                <td>Aug 30, 2026</td>
-                <td style="text-align: right">
-                  <div class="action-group">
-                    <button class="btn btn-success" id="restore-beneath">
-                      <img src="../icons/restore.svg" alt="" class="btn-icon" />
-                      Restore
-                    </button>
-                    <button class="btn btn-danger" id="delete-beneath">
-                      <img
-                        src="../icons/delete.svg"
-                        alt="delete"
-                        class="btn-icon"
-                      />
-                      Delete
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td><strong>Starlight Drive</strong></td>
-                <td>Novel</td>
-                <td>George R.R. Martin</td>
-                <td>Aug 22, 2026</td>
-                <td style="text-align: right">
-                  <div class="action-group">
-                    <button class="btn btn-danger" id="delete-starlight">
-                      <img
-                        src="../icons/delete.svg"
-                        alt="delete"
-                        class="btn-icon"
-                      />
-                      Delete
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td><strong>Coca Cola Coke</strong></td>
-                <td>Ad</td>
-                <td>Coca-Cola Beverages PH</td>
-                <td>Aug 18, 2026</td>
-                <td style="text-align: right">
-                  <div class="action-group">
-                    <button class="btn btn-success" id="restore-coke">
-                      <img src="../icons/restore.svg" alt="" class="btn-icon" />
-                      Restore
-                    </button>
-                    <button class="btn btn-danger" id="delete-coke">
-                      <img
-                        src="../icons/delete.svg"
-                        alt="delete"
-                        class="btn-icon"
-                      />
-                      Delete
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
+            <tbody id="archiveTableBody"></tbody>
           </table>
         </div>
       </main>
     </div>
 
     <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/admin_archive.js"></script>
     <script src="../javascript/logout.js"></script>
   </body>
 </html>

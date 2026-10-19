@@ -1,8 +1,5 @@
-/* ==========================================================================
-   admin_all-novels.js  (simplified)
-   ========================================================================== */
-
 document.addEventListener("DOMContentLoaded", function () {
+  const STORAGE_KEY = "novels";
   const tbody = document.querySelector(".table-card table tbody");
   if (!tbody) return;
 
@@ -11,13 +8,23 @@ document.addEventListener("DOMContentLoaded", function () {
   const sort = document.getElementById("sort-novel");
   const buttons = document.querySelectorAll(".filter-actions .btn");
 
-  // The HTML has two buttons: "Reset" first, "Apply Filter" second.
   const applyBtn = Array.from(buttons).find((b) =>
     /apply/i.test(b.textContent),
   );
   const resetBtn = Array.from(buttons).find((b) =>
     /reset/i.test(b.textContent),
   );
+
+  const getNovels = () => {
+    try {
+      const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      return Array.isArray(raw) ? raw : [];
+    } catch {
+      return [];
+    }
+  };
+  const saveNovels = (list) =>
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
 
   const rows = () => Array.from(tbody.querySelectorAll("tr"));
 
@@ -27,6 +34,18 @@ document.addEventListener("DOMContentLoaded", function () {
   const badge = (row) => row.querySelector(".badge")?.textContent.trim() || "";
   const reads = (row) => parseFloat(text(row, 4).replace(/[^\d.]/g, "")) || 0;
   const rating = (row) => parseFloat(text(row, 5).replace(/[^\d.]/g, "")) || 0;
+
+  /* ---------- hide archived rows on load ---------- */
+  function hideArchivedRows() {
+    const archivedNovels = getNovels().filter((n) => n && n.archived);
+
+    rows().forEach((row) => {
+      const rowTitle = title(row);
+      if (archivedNovels.some((n) => n.title === rowTitle)) {
+        row.remove();
+      }
+    });
+  }
 
   /* ---------- stats ---------- */
   function updateStats() {
@@ -85,19 +104,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
     Swal.fire({
       title: "Archive this novel?",
-      text: `"${name}" will be moved to the archive.`,
+      text: `"${name}" will be moved to the archive page.`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Archive",
-      confirmButtonColor: "#c0392b",
+      confirmButtonColor: "#b8721f", // <-- Updated color
+      cancelButtonColor: "#6b6680", // <-- Added cancel color to match theme
     }).then((res) => {
       if (!res.isConfirmed) return;
+
+      const list = getNovels();
+      let target = list.find((n) => n.title === name);
+
+      if (!target) {
+        target = {
+          id: "demo-" + Date.now(),
+          title: name,
+          author: "Sarah J.",
+          status: badge(row) || "Ongoing",
+          chapters: [],
+          updatedAt: Date.now(),
+        };
+        list.push(target);
+      }
+
+      target.archived = true;
+      target.archivedAt = Date.now();
+      saveNovels(list);
+
+      // Remove from UI immediately
       row.remove();
       updateStats();
+
       Swal.fire({
         title: "Archived",
-        text: name,
+        text: `"${name}" is now in the Archive.`,
         icon: "success",
+        confirmButtonColor: "#b8721f", // <-- Updated color
         timer: 1500,
         showConfirmButton: false,
       });
@@ -117,5 +160,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (e.key === "Enter") apply();
   });
 
+  hideArchivedRows();
   updateStats();
 });
