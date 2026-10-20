@@ -61,7 +61,6 @@
 
           <div class="user-chip">
             <span>Welcome, Admin</span>
-
             <div class="avatar">A</div>
           </div>
         </div>
@@ -69,7 +68,6 @@
         <div class="filter-bar">
           <div class="filter-group">
             <label for="search"> Search </label>
-
             <input
               type="text"
               id="search"
@@ -93,99 +91,85 @@
               </tr>
             </thead>
 
-            <tbody>
-              <tr>
-                <td class="fw-600">The Last Promise</td>
-
-                <td>Juan Cruz</td>
-
-                <td>Romance</td>
-
-                <td>Sept 8, 2026</td>
-
-                <td>
-                  <span class="badge paused"> Pending </span>
-                </td>
-
-                <td>
-                  <div class="action-group action action">
-                    <button class="btn btn-secondary btn-sm">View</button>
-
-                    <button class="btn btn-primary btn-sm">Approve</button>
-
-                    <button class="btn btn-danger btn-sm">Reject</button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="fw-600">Shadows of Yesterday</td>
-
-                <td>Maria Santos</td>
-
-                <td>Mystery</td>
-
-                <td>Sept 7, 2026</td>
-
-                <td>
-                  <span class="badge paused"> Pending </span>
-                </td>
-
-                <td>
-                  <div class="action-group action">
-                    <button class="btn btn-secondary btn-sm">View</button>
-
-                    <button class="btn btn-primary btn-sm">Approve</button>
-
-                    <button class="btn btn-danger btn-sm">Reject</button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="fw-600">Beyond the Stars</td>
-
-                <td>Pedro Reyes</td>
-
+            <tbody id="pendingNovelBody">
+              <!-- Row 1 -->
+              <tr
+                data-novel-id="1"
+                data-title="Shadows of the Crown"
+                data-author="Lewis Carroll"
+                data-genre="Fantasy, Romance"
+                data-date="Sept 8, 2026"
+                data-synopsis="In a kingdom where magic is forbidden and crowns are won by blood, a young outcast discovers she is the last heir to a forgotten throne. Hunted by the very people who murdered her family, she must decide whether to flee or fight — and in doing so, awaken a power that could burn the world to ash."
+                data-cover="../image/sample2.jpeg"
+              >
+                <td class="fw-600">Shadows of the Crown</td>
+                <td>Lewis Carroll</td>
                 <td>Fantasy</td>
-
-                <td>Sept 6, 2026</td>
-
+                <td>Sept 8, 2026</td>
                 <td>
                   <span class="badge paused"> Pending </span>
                 </td>
-
                 <td>
                   <div class="action-group action">
-                    <button class="btn btn-secondary btn-sm">View</button>
-
-                    <button class="btn btn-primary btn-sm">Approve</button>
-
-                    <button class="btn btn-danger btn-sm">Reject</button>
+                    <button
+                      class="btn btn-secondary btn-sm view-btn"
+                      type="button"
+                    >
+                      View
+                    </button>
+                    <button
+                      class="btn btn-primary btn-sm approve-btn"
+                      type="button"
+                    >
+                      Approve
+                    </button>
+                    <button
+                      class="btn btn-danger btn-sm reject-btn"
+                      type="button"
+                    >
+                      Reject
+                    </button>
                   </div>
                 </td>
               </tr>
 
-              <tr>
-                <td class="fw-600">A Broken Vow</td>
-
-                <td>Ana Garcia</td>
-
-                <td>Drama</td>
-
-                <td>Sept 5, 2026</td>
-
+              <!-- Row 2 -->
+              <tr
+                data-novel-id="2"
+                data-title="The Last Promise"
+                data-author="Juan Cruz"
+                data-genre="Romance"
+                data-date="Sept 7, 2026"
+                data-synopsis="A sweeping romance about second chances, lost letters, and the promise of a new beginning. When Clara returns to her hometown after a decade, she finds a box of unsent letters from the boy she left behind."
+                data-cover="../image/sample1.jpeg"
+              >
+                <td class="fw-600">The Last Promise</td>
+                <td>Juan Cruz</td>
+                <td>Romance</td>
+                <td>Sept 7, 2026</td>
                 <td>
                   <span class="badge paused"> Pending </span>
                 </td>
-
                 <td>
                   <div class="action-group action">
-                    <button class="btn btn-secondary btn-sm">View</button>
-
-                    <button class="btn btn-primary btn-sm">Approve</button>
-
-                    <button class="btn btn-danger btn-sm">Reject</button>
+                    <button
+                      class="btn btn-secondary btn-sm view-btn"
+                      type="button"
+                    >
+                      View
+                    </button>
+                    <button
+                      class="btn btn-primary btn-sm approve-btn"
+                      type="button"
+                    >
+                      Approve
+                    </button>
+                    <button
+                      class="btn btn-danger btn-sm reject-btn"
+                      type="button"
+                    >
+                      Reject
+                    </button>
                   </div>
                 </td>
               </tr>
@@ -195,7 +179,119 @@
       </main>
     </div>
 
+    <!-- ================= NOVEL VIEW MODAL ================= -->
+    <div class="novel-modal-overlay" id="novelModalOverlay">
+      <div class="novel-modal" role="dialog" aria-modal="true">
+        <button
+          class="novel-modal-close"
+          id="novelModalClose"
+          type="button"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+
+        <div class="novel-modal-body">
+          <!-- Top Section: Cover & Details -->
+          <div class="novel-header-section">
+            <div class="novel-cover-container">
+              <img
+                id="novelModalCover"
+                src=""
+                alt="Book Cover"
+                class="novel-cover-img"
+              />
+            </div>
+
+            <div class="novel-info-container">
+              <h2 id="novelModalTitle" class="novel-title-main">Novel Title</h2>
+              <p class="novel-subtitle" id="novelModalSubtitle">
+                A Tale of Fire and Blood
+              </p>
+
+              <div class="novel-tags" id="novelModalTags">
+                <!-- Tags injected here -->
+              </div>
+
+              <div class="novel-author-line">
+                <span
+                  >By <strong id="novelModalAuthor">Author Name</strong></span
+                >
+                <span class="dot-separator">•</span>
+                <span id="novelModalDate">Sept 8, 2026</span>
+                <span class="dot-separator">•</span>
+                <span class="badge paused" id="novelModalStatus">Pending</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Synopsis Section -->
+          <div class="novel-section">
+            <h3>Synopsis</h3>
+            <p class="novel-synopsis" id="novelModalSynopsis">—</p>
+          </div>
+
+          <!-- Rejection Reason (Hidden by default) -->
+          <div
+            class="novel-section novel-reject-reason"
+            id="novelRejectSection"
+            style="display: none"
+          >
+            <h3 style="color: #dc2626">Rejection Reason</h3>
+            <p
+              class="novel-synopsis"
+              id="novelModalRejectReason"
+              style="
+                border-left-color: #dc2626;
+                color: #991b1b;
+                background: rgba(220, 38, 38, 0.06);
+              "
+            >
+              —
+            </p>
+          </div>
+
+          <!-- Chapters Section -->
+          <div class="novel-section">
+            <h3>
+              Chapters
+              <span class="chapter-badge" id="novelModalChapterCount">0</span>
+            </h3>
+            <ul class="chapter-list" id="novelModalChapterList">
+              <!-- Chapters injected via JS -->
+            </ul>
+          </div>
+        </div>
+
+        <!-- Footer (Actions) -->
+        <div class="novel-modal-footer">
+          <button
+            class="btn btn-secondary btn-sm"
+            id="novelModalCancel"
+            type="button"
+          >
+            Close
+          </button>
+          <button
+            class="btn btn-danger btn-sm"
+            id="novelModalReject"
+            type="button"
+          >
+            Reject
+          </button>
+          <button
+            class="btn btn-primary btn-sm"
+            id="novelModalApprove"
+            type="button"
+          >
+            Approve
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script src="../javascript/sweetalert2.all.min.js"></script>
     <script src="../javascript/logout.js"></script>
+    <script src="../javascript/admin_pending-novel.js"></script>
   </body>
 </html>
