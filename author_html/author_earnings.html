@@ -14,7 +14,6 @@
   </head>
   <body>
     <div class="layout">
-      <!-- ================= SIDEBAR ================= -->
       <aside class="sidebar">
         <div class="brand">
           <img src="../image/logocopy.png" alt="brandlogo" />
@@ -39,17 +38,14 @@
         </nav>
         <a href="#" class="logout" id="logout" data-role="author">Logout</a>
       </aside>
-      <!-- ================= MAIN CONTENT ================= -->
       <main class="main">
-        <!-- TOPBAR -->
         <div class="topbar">
           <h1>Earnings</h1>
           <div class="user-chip">
-            <span>Sarah J.</span>
-            <span class="avatar">SJ</span>
+            <span id="authorName">Sarah J.</span>
+            <span class="avatar" id="authorAvatar">SJ</span>
           </div>
         </div>
-        <!-- ================= EARNINGS HEADER ================= -->
         <div class="earnings-header">
           <div>
             <h2>Earnings Overview</h2>
@@ -58,7 +54,6 @@
             </p>
           </div>
         </div>
-        <!-- ================= STATS ================= -->
         <div class="stats">
           <div class="stat-card">
             <div class="stat-label">Total Lifetime Earnings</div>
@@ -76,7 +71,6 @@
             <div class="stat-change positive">Currently active</div>
           </div>
         </div>
-        <!-- ================= FILTER BAR ================= -->
         <div class="filter-bar">
           <div class="filter-group">
             <label for="period">Period</label>
@@ -104,13 +98,11 @@
             </button>
           </div>
         </div>
-        <!-- ================= WITHDRAW ROW (right-aligned) ================= -->
         <div class="withdraw-row">
           <button type="button" class="btn btn-primary" id="withdraw-btn">
             Withdraw Funds
           </button>
         </div>
-        <!-- ================= EARNINGS TABLE ================= -->
         <div class="table-card">
           <h2>Earnings Reports</h2>
           <table>
@@ -126,7 +118,6 @@
               </tr>
             </thead>
             <tbody>
-              <!-- Shadows of the Crown -->
               <tr data-period="October 2026">
                 <td><strong>Shadows of the Crown</strong></td>
                 <td><span class="badge active">Ongoing</span></td>
@@ -154,7 +145,6 @@
                 <td>₱72.00</td>
                 <td>Aug 01, 2026</td>
               </tr>
-              <!-- Ember & Ash -->
               <tr data-period="October 2026">
                 <td><strong>Ember &amp; Ash</strong></td>
                 <td><span class="badge completed">Completed</span></td>
@@ -182,7 +172,6 @@
                 <td>—</td>
                 <td>Aug 15, 2026</td>
               </tr>
-              <!-- The Silent Oath -->
               <tr data-period="October 2026">
                 <td><strong>The Silent Oath</strong></td>
                 <td><span class="badge pending">Pending Review</span></td>
@@ -201,7 +190,6 @@
                 <td>₱65.00</td>
                 <td>Sep 15, 2026</td>
               </tr>
-              <!-- The Lost Kingdom -->
               <tr data-period="October 2026">
                 <td><strong>The Lost Kingdom</strong></td>
                 <td><span class="badge draft">Draft</span></td>
@@ -225,9 +213,6 @@
         </div>
       </main>
     </div>
-    <!-- ============================================
-     WITHDRAW FUNDS MODAL
-     ============================================ -->
     <div class="modal-overlay" id="withdrawModal" aria-hidden="true">
       <div
         class="modal modal--withdraw"
@@ -235,7 +220,6 @@
         aria-modal="true"
         aria-labelledby="withdrawModalTitle"
       >
-        <!-- Header -->
         <div class="modal-header">
           <div>
             <h3 id="withdrawModalTitle">Withdraw Funds</h3>
@@ -244,9 +228,7 @@
             ✕
           </button>
         </div>
-        <!-- Body -->
         <div class="modal-body">
-          <!-- Available balance strip -->
           <div class="balance-strip">
             <div>
               <span class="balance-label">Available to withdraw</span>
@@ -256,9 +238,7 @@
               >Minimum ₱100.00 · 2% processing fee</span
             >
           </div>
-          <!-- Two-column form -->
           <form class="checkout-grid" id="withdrawForm" novalidate>
-            <!-- ============ LEFT COLUMN — Billing Details ============ -->
             <div class="checkout-col">
               <h4 class="col-title">Billing Details</h4>
               <div class="form-group">
@@ -318,10 +298,8 @@
                 </div>
               </div>
             </div>
-            <!-- ============ RIGHT COLUMN — Withdraw Details ============ -->
             <div class="checkout-col">
               <h4 class="col-title">Withdraw Method</h4>
-              <!-- Method chips -->
               <div class="form-group">
                 <label>Methods Accepted:</label>
                 <div class="method-chips" id="methodChips">
@@ -344,7 +322,6 @@
                   </button>
                 </div>
               </div>
-              <!-- Amount -->
               <div class="form-group">
                 <label for="wAmount">
                   Amount: <span style="color: var(--destructive)">*</span>
@@ -370,7 +347,6 @@
                   Minimum withdrawal: ₱100.00
                 </span>
               </div>
-              <!-- Account name -->
               <div class="form-group">
                 <label for="wAccountName">Name on Account:</label>
                 <input
@@ -379,7 +355,6 @@
                   placeholder="Enter Account Name"
                 />
               </div>
-              <!-- Account number -->
               <div class="form-group">
                 <label for="wAccountNumber">
                   Account Number / Email:
@@ -391,7 +366,6 @@
                   placeholder="0917 123 4567 or you@email.com"
                 />
               </div>
-              <!-- Ref / Notes -->
               <div class="form-row-3">
                 <div class="form-group">
                   <label for="wRefId">Ref. ID:</label>
@@ -412,8 +386,8 @@
         </div>
       </div>
     </div>
-    <!-- ================= JAVASCRIPT ================= -->
     <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/name-change.js"></script>
     <script src="../javascript/author-filter.js"></script>
     <script src="../javascript/withdraw.js"></script>
     <script src="../javascript/logout.js"></script>

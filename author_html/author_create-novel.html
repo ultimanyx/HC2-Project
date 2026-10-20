@@ -15,7 +15,6 @@
   </head>
   <body>
     <div class="layout">
-      <!-- Sidebar -->
       <aside class="sidebar">
         <div class="brand">
           <img src="../image/logocopy.png" alt="brandlogo" />
@@ -39,18 +38,16 @@
         <a href="#" class="logout" id="logout" data-role="author">Logout</a>
       </aside>
 
-      <!-- Main content -->
       <main class="main">
         <div class="topbar">
           <h1>Create New Novel</h1>
           <div class="user-chip">
-            <span>Sarah J.</span>
-            <span class="avatar">SJ</span>
+            <span id="authorName">Sarah J.</span>
+            <span class="avatar" id="authorAvatar">SJ</span>
           </div>
         </div>
 
         <div class="form-container">
-          <!-- Row 1: Title / Subtitle -->
           <div class="form-grid-2">
             <div class="form-group">
               <label for="title"
@@ -77,7 +74,6 @@
             </div>
           </div>
 
-          <!-- Row 2: Genre / Tags -->
           <div class="form-grid-2">
             <div class="form-group">
               <label for="genre"
@@ -107,7 +103,6 @@
             </div>
           </div>
 
-          <!-- Row 3: Cover Image / Synopsis -->
           <div class="form-grid-2">
             <div class="form-group">
               <label>Cover Image</label>
@@ -131,7 +126,6 @@
             </div>
           </div>
 
-          <!-- Row 5: Chapter 1 (Title + Content) -->
           <div class="form-group-full">
             <div class="form-group">
               <label for="chapter1Title">Chapter 1 Title</label>
@@ -157,7 +151,6 @@
             </div>
           </div>
 
-          <!-- Actions -->
           <div class="form-actions">
             <button class="btn">Save as Draft</button>
             <span class="spacer"></span>
@@ -168,6 +161,7 @@
     </div>
 
     <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/name-change.js"></script>
     <script src="../javascript/author_create-novel.js"></script>
     <script src="../javascript/logout.js"></script>
   </body>
