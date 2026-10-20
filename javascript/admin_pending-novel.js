@@ -82,6 +82,56 @@
   let activeRow = null;
 
   /* ----------------------------------------------------------
+     LOCAL STORAGE HELPERS (To remember status)
+     ---------------------------------------------------------- */
+  function getSavedStatus(id) {
+    const saved = localStorage.getItem("novel_status_" + id);
+    return saved ? JSON.parse(saved) : null;
+  }
+
+  function saveStatus(id, status, reason = "") {
+    const data = { status: status, reason: reason };
+    localStorage.setItem("novel_status_" + id, JSON.stringify(data));
+  }
+
+  // This runs on page load to apply any saved statuses
+  function applySavedStates() {
+    if (!tableBody) return;
+    const rows = tableBody.querySelectorAll("tr");
+
+    rows.forEach(function (row) {
+      const id = row.dataset.novelId;
+      const saved = getSavedStatus(id);
+
+      if (saved) {
+        const badge = row.querySelector(".badge");
+
+        if (saved.status === "approved") {
+          if (badge) {
+            badge.className = "badge active";
+            badge.textContent = "Approved";
+          }
+        } else if (saved.status === "rejected") {
+          if (badge) {
+            badge.className = "badge rejected";
+            badge.textContent = "Rejected";
+          }
+          row.dataset.rejectReason = saved.reason;
+        }
+
+        // Disable buttons
+        row.querySelectorAll(".action-group button").forEach(function (btn) {
+          btn.disabled = true;
+          btn.style.pointerEvents = "none";
+          btn.style.opacity = "0.45";
+        });
+
+        row.classList.add("row-processed");
+      }
+    });
+  }
+
+  /* ----------------------------------------------------------
      HELPERS
      ---------------------------------------------------------- */
   function getRowData(row) {
@@ -93,7 +143,7 @@
       date: row.dataset.date || "—",
       synopsis:
         row.dataset.synopsis || "No synopsis provided for this novel yet.",
-      cover: row.dataset.cover || "", // Defaults to empty if no cover provided
+      cover: row.dataset.cover || "",
       rejectReason: row.dataset.rejectReason || "",
     };
   }
@@ -254,12 +304,10 @@
         const header = document.createElement("div");
         header.className = "chapter-header";
 
-        // Left side (Chapter Number & Title)
         const left = document.createElement("div");
         left.className = "chapter-header-left";
         left.innerHTML = `<span class="chapter-num">Ch. ${ch.number}</span> <span class="chapter-name">${escapeHtml(ch.title)}</span>`;
 
-        // Right side (Status & Read Button)
         const right = document.createElement("div");
         right.className = "chapter-header-right";
 
@@ -272,12 +320,10 @@
         readBtn.type = "button";
         readBtn.textContent = "Read Chapter";
 
-        // Content Container (Hidden by default)
         const contentDiv = document.createElement("div");
         contentDiv.className = "chapter-content";
         contentDiv.innerHTML = ch.content;
 
-        // Toggle Read Chapter
         readBtn.addEventListener("click", function (e) {
           e.preventDefault();
           const isOpen = contentDiv.classList.contains("open");
@@ -294,21 +340,17 @@
 
         right.appendChild(status);
         right.appendChild(readBtn);
-
         header.appendChild(left);
         header.appendChild(right);
-
         li.appendChild(header);
         li.appendChild(contentDiv);
         modalChapterList.appendChild(li);
       });
     }
 
-    /* Disable action buttons if processed */
     modalApproveBtn.disabled = processed;
     modalRejectBtn.disabled = processed;
 
-    /* Show Modal */
     overlay.classList.add("active");
     document.body.style.overflow = "hidden";
   }
@@ -323,7 +365,7 @@
   }
 
   /* ----------------------------------------------------------
-     ROW ACTIONS (Approve / Reject)
+     ROW ACTIONS (Approve / Reject with LocalStorage save)
      ---------------------------------------------------------- */
   function approveRow(row) {
     if (!row || isRowProcessed(row)) return;
@@ -342,6 +384,10 @@
     });
 
     row.classList.add("row-processed");
+
+    // Save to localStorage so it persists on refresh
+    saveStatus(data.id, "approved");
+
     showApproved(data.title);
   }
 
@@ -367,6 +413,10 @@
       });
 
       row.classList.add("row-processed");
+
+      // Save to localStorage so it persists on refresh
+      saveStatus(data.id, "rejected", reason);
+
       showRejected(data.title, reason);
     });
   }
@@ -374,6 +424,9 @@
   /* ----------------------------------------------------------
      EVENT LISTENERS
      ---------------------------------------------------------- */
+
+  // Load saved states immediately on page load
+  applySavedStates();
 
   // Table Delegation
   if (tableBody) {

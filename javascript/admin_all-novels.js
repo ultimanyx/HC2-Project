@@ -108,8 +108,8 @@ document.addEventListener("DOMContentLoaded", function () {
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Archive",
-      confirmButtonColor: "#b8721f", // <-- Updated color
-      cancelButtonColor: "#6b6680", // <-- Added cancel color to match theme
+      confirmButtonColor: "#b8721f",
+      cancelButtonColor: "#6b6680",
     }).then((res) => {
       if (!res.isConfirmed) return;
 
@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
         title: "Archived",
         text: `"${name}" is now in the Archive.`,
         icon: "success",
-        confirmButtonColor: "#b8721f", // <-- Updated color
+        confirmButtonColor: "#b8721f",
         timer: 1500,
         showConfirmButton: false,
       });
