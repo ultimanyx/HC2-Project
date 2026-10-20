@@ -124,7 +124,6 @@ if (chapterSelect && previousButton && nextButton && chapterRows.length > 0) {
 
 const bookTitleElement = document.getElementById("titleBook");
 
-// Wrapped in a function so we can call it multiple times
 function highlightBookmarkedChapter() {
   if (!bookTitleElement) return;
 
@@ -146,11 +145,9 @@ function highlightBookmarkedChapter() {
 
     if (bookmark && bookmark.chapter) {
       chapterLinks.forEach(function (link) {
-        // Extract just the "Chapter X" part before the colon
         const linkText = link.textContent.trim();
         const chapterText = linkText.split(":")[0].trim();
 
-        // Check for an exact match
         if (chapterText === bookmark.chapter) {
           link.classList.add("bookmarked-chapter-highlight");
         }
@@ -161,21 +158,6 @@ function highlightBookmarkedChapter() {
 
 // Call on initial page load
 highlightBookmarkedChapter();
-
-// Call when page is restored from Back-Forward Cache (BFCache)
-window.addEventListener("pageshow", function (event) {
-  // event.persisted is true if the page was loaded from BFCache
-  if (event.persisted) {
-    highlightBookmarkedChapter();
-  }
-});
-
-// Call if localStorage changes in another tab
-window.addEventListener("storage", function (e) {
-  if (e.key === BOOKMARK_KEY) {
-    highlightBookmarkedChapter();
-  }
-});
 
 /* ============================================================
    NOVEL PAGE — ADD TO LIBRARY BUTTON
@@ -223,6 +205,9 @@ if (libraryButton && bookTitleElement) {
     }
   }
 
+  // Call on initial load
+  updateLibraryButton();
+
   libraryButton.addEventListener("click", function () {
     const result = toggleLibraryBook(book);
 
@@ -251,10 +236,31 @@ if (libraryButton && bookTitleElement) {
     });
 
     updateLibraryButton();
+    highlightBookmarkedChapter();
   });
-
-  updateLibraryButton();
 }
+
+/* ============================================================
+   SYNCHRONIZE UI ON BACK/FORWARD NAVIGATION & TAB SWITCHING
+   ============================================================ */
+
+// Call when page is restored from Back-Forward Cache (BFCache)
+window.addEventListener("pageshow", function (event) {
+  if (event.persisted) {
+    if (typeof updateLibraryButton === "function") updateLibraryButton();
+    if (typeof highlightBookmarkedChapter === "function")
+      highlightBookmarkedChapter();
+  }
+});
+
+// Call if localStorage changes in another tab
+window.addEventListener("storage", function (e) {
+  if (e.key === BOOKMARK_KEY || e.key === LIBRARY_KEY) {
+    if (typeof updateLibraryButton === "function") updateLibraryButton();
+    if (typeof highlightBookmarkedChapter === "function")
+      highlightBookmarkedChapter();
+  }
+});
 
 /* ============================================================
    LIBRARY PAGE — DISPLAY BOOKS
