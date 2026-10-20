@@ -46,39 +46,53 @@
               class="user-icon"
               alt="User-Icon"
             />
-            <span>Welcome User</span>
+            <span id="readerName">Welcome User</span>
             <span class="dropdown-arrow"
               ><img src="../icons/caret-down-fill.svg" alt="triangle-down"
             /></span>
           </div>
 
- 
           <div class="dropdown-menu" role="menu">
-            <!-- <a href="#" role="menuitem">Profile</a>
-            <a href="#" role="menuitem">Settings</a>
-            <a href="#" role="menuitem">Help</a> -->
             <div class="dropdown-divider"></div>
-            <a href="#" role="menuitem" class="logout-item" id="logout" data-role="reader">Logout</a>
+            <a
+              href="#"
+              role="menuitem"
+              class="logout-item"
+              id="logout"
+              data-role="reader"
+              >Logout</a
+            >
           </div>
         </div>
       </div>
     </nav>
 
     <div class="chapter-container">
-        <div class="top-button">
-          <a href="javascript:history.back()" class="back-button">
+      <div class="top-button">
+        <a href="javascript:history.back()" class="back-button">
           <img src="../icons/back.svg" alt="Back" />
         </a>
-        
-<button class="bookmark-btn" id="bookmarkBtn" aria-label="Bookmark this chapter">
-            <img src="../icons/bookmark.svg" alt="bookmark" class="bookmark-icon">
-            </svg>
-            <span class="bookmark-text">Bookmark</span>
-          </button>
-          <button class="report-btn" id="reportBtn" aria-label="Report issue with this chapter">
-            <img src="../icons/flag.svg" alt="report flag" class="report-icon" />
-            Report
-          </button>
+
+        <button
+          class="bookmark-btn"
+          id="bookmarkBtn"
+          aria-label="Bookmark this chapter"
+        >
+          <img
+            src="../icons/bookmark.svg"
+            alt="bookmark"
+            class="bookmark-icon"
+          />
+          <span class="bookmark-text">Bookmark</span>
+        </button>
+        <button
+          class="report-btn"
+          id="reportBtn"
+          aria-label="Report issue with this chapter"
+        >
+          <img src="../icons/flag.svg" alt="report flag" class="report-icon" />
+          Report
+        </button>
       </div>
       <div class="chapter-header">
         <div class="header-left">
@@ -193,7 +207,6 @@
 
     <footer class="footer">
       <div class="footer-content">
-
         <div class="footer-section">
           <img src="../image/logo.png" alt="Logo" class="footer-logo" />
 
@@ -202,7 +215,6 @@
           </p>
         </div>
 
-      
         <div class="footer-section">
           <h3>Hot Genres</h3>
 
@@ -211,7 +223,6 @@
           <a href="#">Fantasy</a>
           <a href="#">Mystery</a>
         </div>
-
 
         <div class="footer-section">
           <h3>About</h3>
@@ -228,11 +239,8 @@
       </div>
     </footer>
 
-
-
     <div class="ad-overlay" id="adOverlay">
       <div class="ad-card">
-        <!-- Ad Header -->
         <div class="ad-header">
           <div class="ad-header-left">
             <span class="ad-label">Ad</span>
@@ -247,17 +255,12 @@
           </div>
         </div>
 
-
         <div class="progress-wrap">
           <div class="progress-bar" id="progressBar"></div>
         </div>
 
+        <div class="ad-content" id="adContent"></div>
 
-        <div class="ad-content" id="adContent">
-
-        </div>
-
-  
         <div class="ad-footer">
           <div class="ad-info">
             <span><img src="../icons/clock-fill.svg" alt="" /></span> Ad ends in
@@ -268,9 +271,6 @@
       </div>
     </div>
 
-
-    
-    <!-- ===== Report Modal ===== -->
     <div
       class="report-modal-overlay"
       id="reportModalOverlay"
@@ -342,7 +342,6 @@
       </div>
     </div>
 
-    <!-- ===== Auto-scroll Controls ===== -->
     <div class="autoscroll" id="autoscroll">
       <button
         class="autoscroll-btn autoscroll-play"
@@ -392,6 +391,7 @@
       </button>
     </div>
     <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/name-change.js"></script>
     <script src="../javascript/ad.js"></script>
     <script src="../javascript/bookmark.js"></script>
     <script src="../javascript/report.js"></script>

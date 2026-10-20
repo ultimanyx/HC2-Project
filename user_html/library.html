@@ -16,7 +16,6 @@
   </head>
   <body>
     <nav class="navbar">
-      <!-- Logo -->
       <a href="#" class="nav-logo">
         <img src="../image/logo.png" alt="Logo" />
       </a>
@@ -41,17 +40,13 @@
               class="user-icon"
               alt="User-Icon"
             />
-            <span>Welcome User</span>
-            <!-- arrow using a simple text symbol – works without external SVG -->
+            <span id="readerName">Welcome User</span>
             <span class="dropdown-arrow"
               ><img src="../icons/caret-down-fill.svg" alt="triangle-down"
             /></span>
           </div>
 
           <div class="dropdown-menu" role="menu">
-            <!-- <a href="#" role="menuitem">Profile</a>
-            <a href="#" role="menuitem">Settings</a>
-            <a href="#" role="menuitem">Help</a> -->
             <div class="dropdown-divider"></div>
             <a
               href="#"
@@ -105,7 +100,6 @@
     </div>
     <footer class="footer">
       <div class="footer-content">
-        <!-- Logo / About -->
         <div class="footer-section">
           <img src="../image/logo.png" alt="Logo" class="footer-logo" />
           <p>
@@ -136,6 +130,7 @@
     </footer>
 
     <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/name-change.js"></script>
     <script src="../javascript/library_novelpage.js"></script>
     <script src="../javascript/logout.js"></script>
   </body>
