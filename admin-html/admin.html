@@ -21,8 +21,8 @@
         </div>
 
         <nav class="nav">
-          <a href="admin.html" class="nav-item active"
-            ><span class="nav-icon"></span> Dashboard
+          <a href="admin.html" class="nav-item active">
+            <span class="nav-icon"></span> Dashboard
           </a>
           <a href="admin_all-novels.html" class="nav-item sub">All Novels</a>
           <a href="admin_pending-novel.html" class="nav-item sub"
@@ -59,6 +59,7 @@
           </div>
         </header>
 
+        <!-- Top Stat Cards (Icons Removed) -->
         <section class="stats">
           <div class="stat-card">
             <p class="stat-label">Total Novels</p>
@@ -85,6 +86,75 @@
           </div>
         </section>
 
+        <!-- Middle Section: Chart & Quick Actions -->
+        <div class="dashboard-grid">
+          <!-- Weekly Activity Chart -->
+          <section class="table-card chart-card">
+            <h2>Weekly Platform Activity</h2>
+            <div class="chart-container">
+              <div class="y-axis">
+                <span class="y-axis-title">Visits</span>
+                <div class="y-axis-ticks">
+                  <span>10k</span>
+                  <span>7.5k</span>
+                  <span>5k</span>
+                  <span>2.5k</span>
+                  <span>0</span>
+                </div>
+              </div>
+              <div class="chart-plot">
+                <div class="chart-bars">
+                  <div class="bar" style="height: 40%"></div>
+                  <div class="bar" style="height: 65%"></div>
+                  <div class="bar" style="height: 55%"></div>
+                  <div class="bar" style="height: 80%"></div>
+                  <div class="bar" style="height: 95%"></div>
+                  <div class="bar" style="height: 70%"></div>
+                  <div class="bar" style="height: 50%"></div>
+                </div>
+                <div class="chart-x-axis">
+                  <span>Mon</span>
+                  <span>Tue</span>
+                  <span>Wed</span>
+                  <span>Thu</span>
+                  <span>Fri</span>
+                  <span>Sat</span>
+                  <span>Sun</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Quick Actions Panel -->
+          <section class="table-card quick-actions-card">
+            <h2>Quick Actions</h2>
+            <div class="quick-actions">
+              <a href="admin_pending-novel.html" class="action-btn btn-primary">
+                Review Pending Novels (5)
+              </a>
+              <a
+                href="admin_reported-novels.html"
+                class="action-btn btn-secondary"
+              >
+                Check Reported Novels
+              </a>
+              <a
+                href="admin_manage-author.html"
+                class="action-btn btn-secondary"
+              >
+                Manage Authors
+              </a>
+              <a
+                href="admin_ad-management.html"
+                class="action-btn btn-secondary"
+              >
+                Create New Ad
+              </a>
+            </div>
+          </section>
+        </div>
+
+        <!-- Bottom Table -->
         <section class="table-card">
           <h2>Recently Submitted Novels</h2>
 
@@ -95,26 +165,42 @@
                 <th>Author</th>
                 <th>Category</th>
                 <th>Status</th>
+                <th class="text-right">Action</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Shadows of Eldoria</td>
+                <td><span class="fw-600">Shadows of Eldoria</span></td>
                 <td>J.R. Walker</td>
                 <td>Fantasy</td>
                 <td><span class="badge pending">Pending</span></td>
+                <td class="text-right">
+                  <a href="admin_pending-novel.html" class="btn-sm btn-pause"
+                    >Review</a
+                  >
+                </td>
               </tr>
               <tr>
-                <td>Cyber Genesis</td>
+                <td><span class="fw-600">Cyber Genesis</span></td>
                 <td>Aria Chen</td>
                 <td>Sci-Fi</td>
                 <td><span class="badge approved">Approved</span></td>
+                <td class="text-right">
+                  <a href="admin_all-novels.html" class="btn-sm btn-resume"
+                    >View</a
+                  >
+                </td>
               </tr>
               <tr>
-                <td>Love in Verona</td>
+                <td><span class="fw-600">Love in Verona</span></td>
                 <td>Elena Rostova</td>
                 <td>Romance</td>
                 <td><span class="badge approved">Approved</span></td>
+                <td class="text-right">
+                  <a href="admin_all-novels.html" class="btn-sm btn-resume"
+                    >View</a
+                  >
+                </td>
               </tr>
             </tbody>
           </table>
