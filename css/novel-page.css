@@ -677,6 +677,22 @@ a {
   font-weight: 500;
 }
 
+/* Highlight for the bookmarked chapter */
+.bookmarked-chapter-highlight {
+  background-color: rgba(184, 114, 31, 0.15); /* Light primary color */
+  color: var(--primary) !important; /* Forces the text to turn orange */
+  font-weight: 700 !important;
+  border-radius: 6px;
+  padding: 4px 10px;
+  display: inline-block;
+  border: 1px solid rgba(184, 114, 31, 0.3);
+  transition: all 0.2s ease;
+}
+
+.bookmarked-chapter-highlight:hover {
+  background-color: rgba(184, 114, 31, 0.25);
+}
+
 .container-footer {
   display: flex;
   flex-wrap: wrap;

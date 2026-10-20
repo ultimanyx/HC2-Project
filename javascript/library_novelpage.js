@@ -5,87 +5,56 @@
 const LIBRARY_KEY = "libraryBooks";
 const BOOKMARK_KEY = "bookmarkedChapters";
 
-// Remove the bookmark entry for a book
 function removeBookmarkForBook(bookId) {
   const data = localStorage.getItem(BOOKMARK_KEY);
-
-  if (!data) {
-    return;
-  }
-
+  if (!data) return;
   const bookmarks = JSON.parse(data);
   delete bookmarks[bookId];
   localStorage.setItem(BOOKMARK_KEY, JSON.stringify(bookmarks));
 }
 
-// Get the list of books from localStorage
 function getLibraryBooks() {
   const data = localStorage.getItem(LIBRARY_KEY);
-
-  if (data) {
-    return JSON.parse(data);
-  }
-
+  if (data) return JSON.parse(data);
   return [];
 }
 
-// Save the list of books to localStorage
 function saveLibraryBooks(books) {
   localStorage.setItem(LIBRARY_KEY, JSON.stringify(books));
 }
 
-// Check if a book is already in the library
 function isInLibrary(bookId) {
   const books = getLibraryBooks();
-
   for (let i = 0; i < books.length; i++) {
-    if (books[i].id === bookId) {
-      return true;
-    }
+    if (books[i].id === bookId) return true;
   }
-
   return false;
 }
 
-// Add a book to the library
 function addBookToLibrary(book) {
   const books = getLibraryBooks();
-
-  if (isInLibrary(book.id)) {
-    return false;
-  }
-
+  if (isInLibrary(book.id)) return false;
   books.push(book);
   saveLibraryBooks(books);
   return true;
 }
 
-// Remove a book from the library
 function removeBookFromLibrary(bookId) {
   const books = getLibraryBooks();
   const updatedBooks = [];
-
   for (let i = 0; i < books.length; i++) {
-    if (books[i].id !== bookId) {
-      updatedBooks.push(books[i]);
-    }
+    if (books[i].id !== bookId) updatedBooks.push(books[i]);
   }
-
-  if (updatedBooks.length === books.length) {
-    return false;
-  }
-
+  if (updatedBooks.length === books.length) return false;
   saveLibraryBooks(updatedBooks);
   return true;
 }
 
-// Add or remove a book (used by the Add to Library button)
 function toggleLibraryBook(book) {
   if (isInLibrary(book.id)) {
     removeBookFromLibrary(book.id);
     return "removed";
   }
-
   addBookToLibrary(book);
   return "added";
 }
@@ -103,7 +72,6 @@ const chapterGroups = ["1-20", "21-40", "41-47"];
 
 if (chapterSelect && previousButton && nextButton && chapterRows.length > 0) {
   function showChapterGroup(group) {
-    // Show or hide each chapter row
     for (let i = 0; i < chapterRows.length; i++) {
       if (chapterRows[i].dataset.group === group) {
         chapterRows[i].style.display = "";
@@ -114,10 +82,8 @@ if (chapterSelect && previousButton && nextButton && chapterRows.length > 0) {
 
     chapterSelect.value = group;
 
-    // Find which group we are on
     const currentIndex = chapterGroups.indexOf(group);
 
-    // Disable Previous if first group, Next if last group
     if (currentIndex === 0) {
       previousButton.disabled = true;
     } else {
@@ -137,7 +103,6 @@ if (chapterSelect && previousButton && nextButton && chapterRows.length > 0) {
 
   previousButton.addEventListener("click", function () {
     const currentIndex = chapterGroups.indexOf(chapterSelect.value);
-
     if (currentIndex > 0) {
       showChapterGroup(chapterGroups[currentIndex - 1]);
     }
@@ -145,48 +110,95 @@ if (chapterSelect && previousButton && nextButton && chapterRows.length > 0) {
 
   nextButton.addEventListener("click", function () {
     const currentIndex = chapterGroups.indexOf(chapterSelect.value);
-
     if (currentIndex < chapterGroups.length - 1) {
       showChapterGroup(chapterGroups[currentIndex + 1]);
     }
   });
 
-  // Show the first group when the page loads
   showChapterGroup(chapterGroups[0]);
 }
+
+/* ============================================================
+   NOVEL PAGE — HIGHLIGHT BOOKMARKED CHAPTER
+   ============================================================ */
+
+const bookTitleElement = document.getElementById("titleBook");
+
+// Wrapped in a function so we can call it multiple times
+function highlightBookmarkedChapter() {
+  if (!bookTitleElement) return;
+
+  const bookTitle = bookTitleElement.textContent.trim();
+  const bookId = bookTitle.toLowerCase().replace(/\s+/g, "-");
+
+  // First, remove any existing highlights
+  const chapterLinks = document.querySelectorAll("#chapter-list td a");
+  chapterLinks.forEach(function (link) {
+    link.classList.remove("bookmarked-chapter-highlight");
+  });
+
+  // Check if this book has a bookmark
+  const bookmarksData = localStorage.getItem(BOOKMARK_KEY);
+
+  if (bookmarksData) {
+    const bookmarks = JSON.parse(bookmarksData);
+    const bookmark = bookmarks[bookId];
+
+    if (bookmark && bookmark.chapter) {
+      chapterLinks.forEach(function (link) {
+        // Extract just the "Chapter X" part before the colon
+        const linkText = link.textContent.trim();
+        const chapterText = linkText.split(":")[0].trim();
+
+        // Check for an exact match
+        if (chapterText === bookmark.chapter) {
+          link.classList.add("bookmarked-chapter-highlight");
+        }
+      });
+    }
+  }
+}
+
+// Call on initial page load
+highlightBookmarkedChapter();
+
+// Call when page is restored from Back-Forward Cache (BFCache)
+window.addEventListener("pageshow", function (event) {
+  // event.persisted is true if the page was loaded from BFCache
+  if (event.persisted) {
+    highlightBookmarkedChapter();
+  }
+});
+
+// Call if localStorage changes in another tab
+window.addEventListener("storage", function (e) {
+  if (e.key === BOOKMARK_KEY) {
+    highlightBookmarkedChapter();
+  }
+});
 
 /* ============================================================
    NOVEL PAGE — ADD TO LIBRARY BUTTON
    ============================================================ */
 
 const libraryButton = document.getElementById("add-library-button");
-const bookTitleElement = document.getElementById("titleBook");
 
 if (libraryButton && bookTitleElement) {
   const bookTitle = bookTitleElement.textContent.trim();
 
-  // Get author from .book-author if it exists
   let bookAuthor = "Unknown";
   const authorElement = document.querySelector(".book-author");
-  if (authorElement) {
-    bookAuthor = authorElement.textContent.trim();
-  }
+  if (authorElement) bookAuthor = authorElement.textContent.trim();
 
-  // Get cover from the header image if it exists
   let bookCover = "";
   const coverElement = document.querySelector(".header-container > img");
-  if (coverElement) {
-    bookCover = coverElement.src;
-  }
+  if (coverElement) bookCover = coverElement.src;
 
-  // Get rating from .book-rating if it exists
   let bookRating = "0.0";
   const ratingElement = document.querySelector(".book-rating");
-  if (ratingElement) {
+  if (ratingElement)
     bookRating = ratingElement.textContent.replace(/[^0-9.]/g, "");
-  }
 
-  // Build the book object
   const book = {
     id: bookTitle.toLowerCase().replace(/\s+/g, "-"),
     title: bookTitle,
@@ -217,6 +229,7 @@ if (libraryButton && bookTitleElement) {
     if (result === "removed") {
       removeBookmarkForBook(book.id);
     }
+
     let title = "";
     let text = "";
     let icon = "";
@@ -240,7 +253,6 @@ if (libraryButton && bookTitleElement) {
     updateLibraryButton();
   });
 
-  // Set the button state on page load
   updateLibraryButton();
 }
 
@@ -262,24 +274,18 @@ if (bookGrid) {
   function renderLibrary() {
     const books = getLibraryBooks();
 
-    // Count books for the statistics bar
     let readingCount = 0;
     let completedCount = 0;
 
     for (let i = 0; i < books.length; i++) {
-      if (books[i].status === "reading") {
-        readingCount++;
-      }
-      if (books[i].status === "completed") {
-        completedCount++;
-      }
+      if (books[i].status === "reading") readingCount++;
+      if (books[i].status === "completed") completedCount++;
     }
 
     totalBooks.textContent = books.length;
     readingBooks.textContent = readingCount;
     completedBooks.textContent = completedCount;
 
-    // Pick the books to show based on the current filter
     const filteredBooks = [];
 
     for (let i = 0; i < books.length; i++) {
@@ -290,7 +296,6 @@ if (bookGrid) {
       }
     }
 
-    // If there are no books to show, show the empty message
     if (filteredBooks.length === 0) {
       bookGrid.style.display = "none";
       emptyLibrary.hidden = false;
@@ -300,7 +305,6 @@ if (bookGrid) {
     bookGrid.style.display = "grid";
     emptyLibrary.hidden = true;
 
-    // Build the HTML for each book card
     let html = "";
 
     for (let i = 0; i < filteredBooks.length; i++) {
@@ -351,25 +355,17 @@ if (bookGrid) {
     bookGrid.innerHTML = html;
   }
 
-  // Filter buttons — click to switch between All / Reading / Completed
   for (let i = 0; i < filterButtons.length; i++) {
     filterButtons[i].addEventListener("click", function () {
-      // Turn off "active" on every button
       for (let j = 0; j < filterButtons.length; j++) {
         filterButtons[j].classList.remove("active");
       }
-
-      // Turn on "active" on the clicked button
       this.classList.add("active");
-
       currentFilter = this.dataset.filter;
       renderLibrary();
     });
   }
 
-  // Show books when the page loads
   renderLibrary();
-
-  // Update the grid if localStorage changes in another tab
   window.addEventListener("storage", renderLibrary);
 }
