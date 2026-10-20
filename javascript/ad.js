@@ -5,17 +5,18 @@ document.addEventListener("DOMContentLoaded", function () {
   const AD_DURATION = 15; // seconds
 
   // ==== CHAPTER NAVIGATION CONFIG ====
-  const CHAPTER_BASE = "novel_chapter"; // e.g., novel_chapter1.html, novel_chapter1.html
+  const CHAPTER_BASE = "novel_chapter";
   const CHAPTER_EXT = ".html";
-  const TOTAL_CHAPTERS = 47; // ← set this to the total number of chapters
+  const TOTAL_CHAPTERS = 47;
 
+  // Default Fallback Ads (If admin hasn't uploaded anything yet)
   const VIDEO_SOURCES = [
     "../advertisement/milo-ad.mp4",
     "../advertisement/datu-puti-ad.mp4",
     "../advertisement/temu_ad.mp4",
   ];
-
   const BANNER_IMAGES = ["../advertisement/scatter.png"];
+
   // ---------- STATE ----------
   const state = {
     timer: AD_DURATION,
@@ -64,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!nextBtn) return;
     if (isLastChapter()) {
       nextBtn.disabled = true;
-      nextBtn.textContent = "End"; // or 'No more chapters'
+      nextBtn.textContent = "End";
       nextBtn.title = "You have reached the last chapter";
     } else {
       nextBtn.disabled = false;
@@ -73,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // ---------- AD RENDERERS ----------
+  // ---------- RENDER DEFAULT ADS (Fallback) ----------
   function renderBanner() {
     adTypeLabel.textContent = "Banner Ad";
     const randomImage =
@@ -93,39 +94,59 @@ document.addEventListener("DOMContentLoaded", function () {
     adTypeLabel.textContent = "Video Ad";
     const randomVideo =
       VIDEO_SOURCES[Math.floor(Math.random() * VIDEO_SOURCES.length)];
+
     adContent.innerHTML = `
-    <div class="video-ad">
-      <video id="adVideo" muted playsinline preload="metadata">
-        <source src="${randomVideo}" type="video/mp4">
-        Your browser does not support video.
-      </video>
-      <div class="video-placeholder" id="videoPlaceholder" style="display:none;">
-        <span class="play-icon"></span>
-        <p>Video ad would play here.</p>
-        <p style="font-size:13px;color:#6b7a93;">(Sample video from W3Schools)</p>
+      <div class="video-ad">
+        <video id="adVideo" muted playsinline preload="auto">
+          <source src="${randomVideo}" type="video/mp4">
+          Your browser does not support video.
+        </video>
       </div>
-    </div>
-  `;
+    `;
 
     const video = document.getElementById("adVideo");
     if (video) {
-      video.addEventListener("loadedmetadata", function () {
-        video.play().catch(function () {});
-      });
-      video.addEventListener("error", function () {
-        const placeholder = document.getElementById("videoPlaceholder");
-        if (placeholder) placeholder.style.display = "block";
-        if (video) video.style.display = "none";
-      });
-      setTimeout(function () {
-        video.play().catch(function () {});
-      }, 400);
+      video.play().catch(function () {});
     }
   }
 
-  function renderAd(type) {
-    if (type === "banner") renderBanner();
-    else renderVideo();
+  // ---------- RENDER CUSTOM ADS (From Admin LocalStorage) ----------
+  function renderActiveAd(ad) {
+    adTypeLabel.textContent = ad.format + " Ad";
+
+    if (ad.format.toLowerCase() === "banner") {
+      // Render Custom Banner Image
+      adContent.innerHTML = `
+        <div class="banner-ad">
+          <div class="banner-bg"></div>
+          <div class="banner-content" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+             <img src="${ad.mediaData}" alt="${ad.campaign}" class="banner-image" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px;" /> 
+          </div>
+        </div>
+      `;
+    } else {
+      // Render Custom Video (FIXED: Direct src assignment works better for Base64)
+      adContent.innerHTML = `
+        <div class="video-ad" style="display: flex; justify-content: center; align-items: center; height: 100%; background: #000;">
+          <video id="adVideo" muted playsinline style="max-width: 100%; max-height: 100%; object-fit: contain;"></video>
+        </div>
+      `;
+
+      const video = document.getElementById("adVideo");
+      if (video) {
+        // Direct src assignment is much more reliable for Base64 data URIs
+        video.src = ad.mediaData;
+
+        video.addEventListener("error", function () {
+          console.warn("Failed to load custom video, falling back to default.");
+          renderVideo();
+        });
+
+        video.play().catch(function (error) {
+          console.log("Autoplay prevented or video failed:", error);
+        });
+      }
+    }
   }
 
   // ---------- TIMER ----------
@@ -172,11 +193,42 @@ document.addEventListener("DOMContentLoaded", function () {
     state.isRunning = false;
   }
 
-  // ---------- OVERLAY CONTROLS ----------
+  // ---------- OVERLAY CONTROLS (UPDATED LOGIC) ----------
   function showOverlay(type) {
     overlay.classList.add("active");
-    state.adType = type || (Math.random() < 0.5 ? "banner" : "video");
-    renderAd(state.adType);
+
+    // 1. Check if Admin has uploaded any active ads
+    let customAds = [];
+    const storedAds = localStorage.getItem("novelNestAds");
+
+    if (storedAds) {
+      try {
+        const ads = JSON.parse(storedAds);
+        customAds = ads.filter((a) => a.status === "Active" && a.mediaData);
+      } catch (e) {
+        console.error("Error reading custom ads:", e);
+      }
+    }
+
+    // 2. Decide what to show
+    if (customAds.length > 0) {
+      // Prioritize Custom Ads! Pick a random one from the active custom ads
+      const randomAd = customAds[Math.floor(Math.random() * customAds.length)];
+      state.adType = randomAd.format.toLowerCase();
+      renderActiveAd(randomAd);
+      console.log("Playing Custom Ad:", randomAd.campaign);
+    } else {
+      // Fallback to default random 50/50
+      state.adType = type || (Math.random() < 0.5 ? "banner" : "video");
+      if (state.adType === "banner") {
+        renderBanner();
+      } else {
+        renderVideo();
+      }
+      console.log("No custom ads found. Playing Default Ad:", state.adType);
+    }
+
+    // 3. Start Timer
     state.timer = AD_DURATION;
     updateUI();
     exitBtn.classList.remove("active");
@@ -189,23 +241,17 @@ document.addEventListener("DOMContentLoaded", function () {
     stopTimer();
   }
 
-  // ---------- PROCEED TO NEXT CHAPTER (DYNAMIC) ----------
+  // ---------- PROCEED TO NEXT CHAPTER ----------
   function proceedToNextChapter() {
     const nextUrl = getNextChapterUrl();
-    if (!nextUrl) {
-      console.warn("Could not determine next chapter URL.");
-      return;
-    }
+    if (!nextUrl) return;
 
-    // Check if we're on the last chapter
     if (isLastChapter()) {
       alert("You have reached the end of the book!");
       return;
     }
 
     hideOverlay();
-
-    // Navigate to the next chapter
     window.location.href = nextUrl;
   }
 
@@ -214,14 +260,13 @@ document.addEventListener("DOMContentLoaded", function () {
     nextBtn.addEventListener("click", function (e) {
       e.preventDefault();
 
-      // If it's the last chapter, show a message
       if (isLastChapter()) {
         alert("You have reached the end of the book!");
         return;
       }
 
-      const type = Math.random() < 0.5 ? "banner" : "video";
-      showOverlay(type);
+      // Trigger the overlay (it will figure out which ad to show)
+      showOverlay();
     });
   }
 
@@ -246,16 +291,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // ---------- INIT ----------
-  // Check if we're on the last chapter and update the button state
   updateNextButtonState();
 
-  console.log("Ad overlay with dynamic chapter navigation loaded.");
-  console.log("Current chapter: " + getCurrentChapterNumber());
-  console.log("Next chapter URL: " + getNextChapterUrl());
-  console.log(" Total chapters: " + TOTAL_CHAPTERS);
-  console.log(
-    ' Click "Next" to trigger a ' +
-      AD_DURATION +
-      's ad, then "Exit" to proceed.',
-  );
+  console.log("Ad overlay loaded. Ready to serve ads.");
 });

@@ -31,21 +31,16 @@
           <a href="admin_reported-novels.html" class="nav-item sub"
             >Reported Novels</a
           >
-
-          <a href="admin_admanage-user.html" class="nav-item sub"
-            >Manage Users</a
-          >
-          <a href="admin_usermanage-author.html" class="nav-item sub"
+          <a href="admin_manage-user.html" class="nav-item sub">Manage Users</a>
+          <a href="admin_manage-author.html" class="nav-item sub"
             >Manage Authors</a
           >
-
           <a href="admin_ad-management.html" class="nav-item sub active"
             >Ad Management</a
           >
           <a href="admin_revenue-reports.html" class="nav-item sub"
             >Revenue Reports</a
           >
-
           <a href="admin_archive.html" class="nav-item sub">Archive</a>
         </nav>
 
@@ -64,19 +59,19 @@
         <div class="stats" id="statsContainer">
           <div class="stat-card">
             <div class="stat-label">Total Ads</div>
-            <div class="stat-value" id="statTotal">5</div>
+            <div class="stat-value" id="statTotal">0</div>
             <div class="stat-change positive"></div>
           </div>
           <div class="stat-card">
             <div class="stat-label">Active</div>
-            <div class="stat-value" id="statActive">3</div>
+            <div class="stat-value" id="statActive">0</div>
             <div class="stat-change positive">
               <img src="../icons/dot.svg" alt="dot" /> Running
             </div>
           </div>
           <div class="stat-card">
             <div class="stat-label">Paused</div>
-            <div class="stat-value" id="statPaused">1</div>
+            <div class="stat-value" id="statPaused">0</div>
             <div class="stat-change warning">
               <img src="../icons/pause.svg" alt="pause" /> On hold
             </div>
@@ -100,136 +95,70 @@
                 <th class="text-right">Actions</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td><strong>Nestle Milo Drink</strong></td>
-                <td>Video</td>
-                <td>1,240,000</td>
-                <td><span class="badge active">Active</span></td>
-                <td>
-                  <div class="action-group">
-                    <button
-                      class="btn btn-warning btn-sm"
-                      id="pause-nestle-milo"
-                    >
-                      <img src="../icons/pause.svg" alt="" class="btn-icon" />
-                      Pause
-                    </button>
-                    <button
-                      class="btn btn-danger btn-sm"
-                      id="remove-nestle-milo"
-                    >
-                      <img
-                        src="../icons/delete.svg"
-                        alt="delete"
-                        class="btn-icon"
-                      />
-                      Remove
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td><strong>Datu Puti</strong></td>
-                <td>Video</td>
-                <td>2,100,000</td>
-                <td><span class="badge active">Active</span></td>
-                <td>
-                  <div class="action-group">
-                    <button class="btn btn-warning btn-sm" id="pause-datu-puti">
-                      <img src="../icons/pause.svg" alt="" class="btn-icon" />
-                      Pause
-                    </button>
-                    <button class="btn btn-danger btn-sm" id="remove-datu-puti">
-                      <img
-                        src="../icons/delete.svg"
-                        alt="delete"
-                        class="btn-icon"
-                      />
-                      Remove
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td><strong>Scatter67</strong></td>
-                <td>Video</td>
-                <td>980,000</td>
-                <td><span class="badge paused">Paused</span></td>
-                <td>
-                  <div class="text-right">
-                    <button
-                      class="btn btn-success btn-sm"
-                      id="resume-scatter67"
-                    >
-                      <img src="../icons/play.svg" alt="" class="btn-icon" />
-                      Continue
-                    </button>
-                    <button class="btn btn-danger btn-sm" id="remove-scatter67">
-                      <img
-                        src="../icons/delete.svg"
-                        alt="delete"
-                        class="btn-icon"
-                      />
-                      Remove
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td><strong>CTV Holiday Special</strong></td>
-                <td>Banner</td>
-                <td>620,000</td>
-                <td><span class="badge completed">Completed</span></td>
-                <td>
-                  <div class="action-group">
-                    <button
-                      class="btn btn-danger btn-sm"
-                      id="remove-ctv-holiday"
-                    >
-                      <img
-                        src="../icons/delete.svg"
-                        alt="delete"
-                        class="btn-icon"
-                      />
-                      Remove
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td><strong>Coca Cola Coke</strong></td>
-                <td>Banner</td>
-                <td>450,000</td>
-                <td><span class="badge active">Active</span></td>
-                <td>
-                  <div class="action-group">
-                    <button class="btn btn-warning btn-sm" id="pause-coca-cola">
-                      <img src="../icons/pause.svg" alt="" class="btn-icon" />
-                      Pause
-                    </button>
-                    <button class="btn btn-danger btn-sm" id="remove-coca-cola">
-                      <img
-                        src="../icons/delete.svg"
-                        alt="delete"
-                        class="btn-icon"
-                      />
-                      Remove
-                    </button>
-                  </div>
-                </td>
-              </tr>
+            <tbody id="adTableBody">
+              <!-- Rows will be generated by JS -->
             </tbody>
           </table>
         </div>
       </main>
     </div>
 
+    <!-- ================= ADD AD MODAL ================= -->
+    <div class="modal-overlay" id="addAdModal">
+      <div class="ad-modal">
+        <div class="ad-modal-header">
+          <h3>Create New Advertisement</h3>
+          <button class="modal-close" id="closeAddModalBtn">&times;</button>
+        </div>
+
+        <form id="addAdForm">
+          <div class="ad-modal-body">
+            <div class="form-group">
+              <label for="campaignName">Campaign Name</label>
+              <input
+                type="text"
+                id="campaignName"
+                placeholder="e.g. Summer Promo 2026"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="adFormat">Format</label>
+              <select id="adFormat" required>
+                <option value="Video">Video</option>
+                <option value="Banner">Banner</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="adFile">Upload Image or Video</label>
+              <input
+                type="file"
+                id="adFile"
+                accept="image/*,video/*"
+                required
+              />
+              <small style="color: #6b6680; margin-top: 4px; display: block"
+                >Max size: 4MB (due to browser storage limits)</small
+              >
+            </div>
+          </div>
+
+          <div class="ad-modal-footer">
+            <button type="button" class="btn-secondary" id="cancelAddBtn">
+              Cancel
+            </button>
+            <button type="submit" class="btn-primary">
+              Save Advertisement
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/admin_ad-management.js"></script>
     <script src="../javascript/logout.js"></script>
   </body>
 </html>
