@@ -59,16 +59,23 @@
           </div>
         </div>
 
+        <!-- Filter Bar -->
         <div class="filter-bar">
           <div class="filter-group">
             <label for="period">Period</label>
             <select id="period">
-              <option>Last 30 days</option>
-              <option selected>This month</option>
-              <option>Last quarter</option>
-              <option>Year to date</option>
+              <option value="all" selected>All Time</option>
+              <option value="last30">Last 30 days</option>
+              <option value="lastyear">Last year</option>
+              <option value="specific">Specific Month...</option>
             </select>
           </div>
+
+          <!-- Hidden by default. Only shows when 'Specific Month' is selected -->
+          <div class="filter-group" id="monthPickerGroup" style="display: none">
+            <input type="month" id="monthFilter" />
+          </div>
+
           <div class="filter-group">
             <label for="format">Ad Format</label>
             <select id="format">
@@ -101,13 +108,14 @@
           </div>
         </div>
 
-        <!-- TABLE (Ad Performance) -->
+        <!-- UNIFIED TABLE -->
         <div class="table-card">
-          <h2>Top Performing Ad Campaigns</h2>
+          <h2>Revenue & Ad Performance Reports</h2>
           <table>
             <thead>
               <tr>
-                <th>Campaign</th>
+                <th>Date</th>
+                <th>Campaign / Report</th>
                 <th>Format</th>
                 <th class="text-right">Views</th>
                 <th class="text-right">Clicks</th>
@@ -116,9 +124,10 @@
                 <th>Status</th>
               </tr>
             </thead>
-            <tbody id="revenueTableBody">
-              <!-- Row 1: Milo -->
-              <tr>
+            <tbody id="reportTableBody">
+              <!-- OCTOBER 2026 -->
+              <tr data-month="2026-10">
+                <td class="text-muted">Oct 20, 2026</td>
                 <td><span class="fw-600">Nestle Milo</span></td>
                 <td>Video</td>
                 <td class="text-right">1,240,000</td>
@@ -126,15 +135,14 @@
                 <td class="text-right">₱42,500</td>
                 <td class="text-right">₱34.27</td>
                 <td>
-                  <span class="badge active">
-                    <img src="../icons/dot.svg" alt="" class="badge-icon" />
-                    Active
-                  </span>
+                  <span class="badge active"
+                    ><img src="../icons/dot.svg" class="badge-icon" />
+                    Active</span
+                  >
                 </td>
               </tr>
-
-              <!-- Row 2: Datu Puti -->
-              <tr>
+              <tr data-month="2026-10">
+                <td class="text-muted">Oct 20, 2026</td>
                 <td><span class="fw-600">Datu Puti</span></td>
                 <td>Video</td>
                 <td class="text-right">2,100,000</td>
@@ -142,15 +150,14 @@
                 <td class="text-right">₱38,200</td>
                 <td class="text-right">₱18.19</td>
                 <td>
-                  <span class="badge active">
-                    <img src="../icons/dot.svg" alt="" class="badge-icon" />
-                    Active
-                  </span>
+                  <span class="badge active"
+                    ><img src="../icons/dot.svg" class="badge-icon" />
+                    Active</span
+                  >
                 </td>
               </tr>
-
-              <!-- Row 3: Temu -->
-              <tr>
+              <tr data-month="2026-10">
+                <td class="text-muted">Oct 20, 2026</td>
                 <td><span class="fw-600">Temu</span></td>
                 <td>Video</td>
                 <td class="text-right">980,000</td>
@@ -158,15 +165,14 @@
                 <td class="text-right">₱94,100</td>
                 <td class="text-right">₱96.02</td>
                 <td>
-                  <span class="badge paused">
-                    <img src="../icons/pause.svg" alt="" class="badge-icon" />
-                    Paused
-                  </span>
+                  <span class="badge paused"
+                    ><img src="../icons/pause.svg" class="badge-icon" />
+                    Paused</span
+                  >
                 </td>
               </tr>
-
-              <!-- Row 4: Scatter -->
-              <tr>
+              <tr data-month="2026-10">
+                <td class="text-muted">Oct 20, 2026</td>
                 <td><span class="fw-600">Scatter</span></td>
                 <td>Banner</td>
                 <td class="text-right">620,000</td>
@@ -174,11 +180,111 @@
                 <td class="text-right">₱21,800</td>
                 <td class="text-right">₱35.16</td>
                 <td>
-                  <span class="badge active">
-                    <img src="../icons/dot.svg" alt="" class="badge-icon" />
-                    Active
-                  </span>
+                  <span class="badge active"
+                    ><img src="../icons/dot.svg" class="badge-icon" />
+                    Active</span
+                  >
                 </td>
+              </tr>
+
+              <!-- CLEANED UP MONTHLY TOTALS -->
+              <tr data-month="2026-10">
+                <td class="text-muted">Oct 31, 2026</td>
+                <td><span class="fw-600">October 2026 Total</span></td>
+                <td>All</td>
+                <td class="text-right">4,940,000</td>
+                <td class="text-right">127,780</td>
+                <td class="text-right">₱196,600</td>
+                <td class="text-right">₱39.79</td>
+                <td><span class="badge trend-up">↑ Up</span></td>
+              </tr>
+
+              <tr data-month="2026-09">
+                <td class="text-muted">Sept 30, 2026</td>
+                <td><span class="fw-600">September 2026 Total</span></td>
+                <td>All</td>
+                <td class="text-right">4,690,000</td>
+                <td class="text-right">115,200</td>
+                <td class="text-right">₱181,700</td>
+                <td class="text-right">₱38.74</td>
+                <td><span class="badge trend-up">↑ Up</span></td>
+              </tr>
+
+              <tr data-month="2026-08">
+                <td class="text-muted">Aug 31, 2026</td>
+                <td><span class="fw-600">August 2026 Total</span></td>
+                <td>All</td>
+                <td class="text-right">3,850,000</td>
+                <td class="text-right">98,400</td>
+                <td class="text-right">₱145,200</td>
+                <td class="text-right">₱37.71</td>
+                <td><span class="badge trend-down">↓ Down</span></td>
+              </tr>
+
+              <tr data-month="2026-07">
+                <td class="text-muted">Jul 31, 2026</td>
+                <td><span class="fw-600">July 2026 Total</span></td>
+                <td>All</td>
+                <td class="text-right">4,100,000</td>
+                <td class="text-right">102,500</td>
+                <td class="text-right">₱155,800</td>
+                <td class="text-right">₱38.00</td>
+                <td><span class="badge trend-up">↑ Up</span></td>
+              </tr>
+
+              <tr data-month="2026-06">
+                <td class="text-muted">Jun 30, 2026</td>
+                <td><span class="fw-600">June 2026 Total</span></td>
+                <td>All</td>
+                <td class="text-right">3,200,000</td>
+                <td class="text-right">80,000</td>
+                <td class="text-right">₱120,000</td>
+                <td class="text-right">₱37.50</td>
+                <td><span class="badge trend-up">↑ Up</span></td>
+              </tr>
+
+              <tr data-month="2026-05">
+                <td class="text-muted">May 31, 2026</td>
+                <td><span class="fw-600">May 2026 Total</span></td>
+                <td>All</td>
+                <td class="text-right">2,950,000</td>
+                <td class="text-right">73,750</td>
+                <td class="text-right">₱110,625</td>
+                <td class="text-right">₱37.50</td>
+                <td><span class="badge trend-down">↓ Down</span></td>
+              </tr>
+
+              <tr data-month="2026-04">
+                <td class="text-muted">Apr 30, 2026</td>
+                <td><span class="fw-600">April 2026 Total</span></td>
+                <td>All</td>
+                <td class="text-right">2,800,000</td>
+                <td class="text-right">70,000</td>
+                <td class="text-right">₱105,000</td>
+                <td class="text-right">₱37.50</td>
+                <td><span class="badge trend-up">↑ Up</span></td>
+              </tr>
+
+              <tr data-month="2026-03">
+                <td class="text-muted">Mar 31, 2026</td>
+                <td><span class="fw-600">March 2026 Total</span></td>
+                <td>All</td>
+                <td class="text-right">2,500,000</td>
+                <td class="text-right">62,500</td>
+                <td class="text-right">₱93,750</td>
+                <td class="text-right">₱37.50</td>
+                <td><span class="badge trend-up">↑ Up</span></td>
+              </tr>
+
+              <tr data-month="2026-02">
+                <td class="text-muted">Feb 28, 2026</td>
+                <td><span class="fw-600">February 2026 Total</span></td>
+                <td>All</td>
+                <td class="text-right">2,200,000</td>
+                <td class="text-right">55,000</td>
+                <td class="text-right">₱82,500</td>
+                <td class="text-right">₱37.50</td>
+                <td><span class="badge trend-down">↓ Down</span></td>
               </tr>
             </tbody>
           </table>

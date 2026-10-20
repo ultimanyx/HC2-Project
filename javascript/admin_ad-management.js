@@ -10,45 +10,57 @@ document.addEventListener("DOMContentLoaded", function () {
   const cancelBtn = document.getElementById("cancelAddBtn");
   const addAdForm = document.getElementById("addAdForm");
 
-  // Get the file input and dropdown elements
   const fileInput = document.getElementById("adFile");
   const formatSelect = document.getElementById("adFormat");
 
-  const STORAGE_KEY = "novelNestAds_v2";
+  // CHANGED TO "ads" SO IT MATCHES YOUR archive.js
+  const STORAGE_KEY = "ads";
 
-  // Default Ads
+  // Default Ads (Added title and owner for the archive page)
   const defaultAds = [
     {
       id: "ad-1",
       campaign: "Nestle Milo",
+      title: "Nestle Milo",
+      owner: "Advertisement",
       format: "Video",
       views: 1240000,
       status: "Active",
       mediaData: "../advertisement/milo-ad.mp4",
+      archived: false,
     },
     {
       id: "ad-2",
       campaign: "Datu Puti",
+      title: "Datu Puti",
+      owner: "Advertisement",
       format: "Video",
       views: 2100000,
       status: "Active",
       mediaData: "../advertisement/datu-puti-ad.mp4",
+      archived: false,
     },
     {
       id: "ad-3",
       campaign: "Temu",
+      title: "Temu",
+      owner: "Advertisement",
       format: "Video",
       views: 980000,
       status: "Active",
       mediaData: "../advertisement/temu_ad.mp4",
+      archived: false,
     },
     {
       id: "ad-4",
       campaign: "Scatter",
+      title: "Scatter",
+      owner: "Advertisement",
       format: "Banner",
       views: 620000,
       status: "Active",
       mediaData: "../advertisement/scatter.png",
+      archived: false,
     },
   ];
 
@@ -74,7 +86,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // --- Render Table & Stats ---
   function renderTable() {
-    const ads = getAds();
+    const allAds = getAds();
+
+    // Only show ads that are NOT archived
+    const ads = allAds.filter((ad) => !ad.archived);
+
     tableBody.innerHTML = "";
 
     let activeCount = 0;
@@ -101,9 +117,10 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
       }
 
+      // Changed "Remove" to "Archive"
       actionButtons += `
-        <button class="btn btn-danger btn-sm remove-btn" data-id="${ad.id}">
-          <img src="../icons/delete.svg" alt="delete" class="btn-icon" /> Remove
+        <button class="btn btn-danger btn-sm archive-btn" data-id="${ad.id}">
+          <img src="../icons/delete.svg" alt="archive" class="btn-icon" /> Archive
         </button>
       `;
 
@@ -135,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function openModal() {
     modal.classList.add("active");
     addAdForm.reset();
-    formatSelect.dispatchEvent(new Event("change")); // Reset file input state
+    formatSelect.dispatchEvent(new Event("change"));
   }
 
   function closeModal() {
@@ -150,18 +167,17 @@ document.addEventListener("DOMContentLoaded", function () {
     if (e.target === modal) closeModal();
   });
 
-  // --- NEW: Dynamically change file input restrictions based on format ---
+  // --- Change allowed files based on format ---
   formatSelect.addEventListener("change", function () {
     if (this.value === "Video") {
-      fileInput.accept = "video/*"; // Only allow video files
-      fileInput.value = ""; // Clear any previously selected image
+      fileInput.accept = "video/*";
+      fileInput.value = "";
     } else if (this.value === "Banner") {
-      fileInput.accept = "image/*"; // Only allow image files
-      fileInput.value = ""; // Clear any previously selected video
+      fileInput.accept = "image/*";
+      fileInput.value = "";
     }
   });
 
-  // Trigger once on load to set the initial state
   formatSelect.dispatchEvent(new Event("change"));
 
   // --- Add New Ad Logic ---
@@ -174,7 +190,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!file) return;
 
-    // --- STRICT VALIDATION: Prevent bypassing the file picker ---
     const isImage = file.type.startsWith("image/");
     const isVideo = file.type.startsWith("video/");
 
@@ -182,7 +197,7 @@ document.addEventListener("DOMContentLoaded", function () {
       Swal.fire({
         icon: "error",
         title: "Invalid File Type",
-        text: "You selected 'Video' format, but uploaded an image. Please upload an MP4 or WebM file.",
+        text: "You selected 'Video', but uploaded an image.",
       });
       return;
     }
@@ -191,12 +206,11 @@ document.addEventListener("DOMContentLoaded", function () {
       Swal.fire({
         icon: "error",
         title: "Invalid File Type",
-        text: "You selected 'Banner' format, but uploaded a video. Please upload a JPG or PNG file.",
+        text: "You selected 'Banner', but uploaded a video.",
       });
       return;
     }
 
-    // Check file size limit (1.5MB to prevent local storage crash)
     if (file.size > 1.5 * 1024 * 1024) {
       Swal.fire({
         icon: "warning",
@@ -220,10 +234,13 @@ document.addEventListener("DOMContentLoaded", function () {
       const newAd = {
         id: "ad-" + Date.now(),
         campaign: campaign,
+        title: campaign, // Added for archive page
+        owner: "Advertisement", // Added for archive page
         format: format,
         views: 0,
         status: "Active",
         mediaData: fileData,
+        archived: false, // Make sure it starts unarchived
       };
 
       const ads = getAds();
@@ -244,7 +261,7 @@ document.addEventListener("DOMContentLoaded", function () {
     reader.readAsDataURL(file);
   });
 
-  // --- Table Action Logic (Pause, Resume, Remove) ---
+  // --- Table Action Logic (Pause, Resume, Archive) ---
   tableBody.addEventListener("click", function (e) {
     const btn = e.target.closest("button");
     if (!btn) return;
@@ -294,25 +311,29 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
-    // --- REMOVE ---
-    if (btn.classList.contains("remove-btn")) {
+    // --- ARCHIVE (Replaced Remove) ---
+    if (btn.classList.contains("archive-btn")) {
       Swal.fire({
-        title: "Remove Campaign?",
-        text: `Are you sure you want to permanently delete "${ad.campaign}"?`,
-        icon: "error",
+        title: "Archive Campaign?",
+        text: `Are you sure you want to move "${ad.campaign}" to the Archive? You can restore it later.`,
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Yes, remove",
+        confirmButtonText: "Yes, archive",
         confirmButtonColor: "#dc2626",
         cancelButtonColor: "#6b6680",
       }).then((result) => {
         if (result.isConfirmed) {
-          ads.splice(adIndex, 1);
+          // Instead of deleting, we flag it as archived
+          ads[adIndex].archived = true;
+          ads[adIndex].archivedAt = Date.now();
+
           saveAds(ads);
-          renderTable();
+          renderTable(); // This will remove it from the current table
+
           Swal.fire({
             icon: "success",
-            title: "Removed",
-            text: "The campaign has been deleted.",
+            title: "Archived",
+            text: "The campaign has been moved to the Archive.",
             confirmButtonColor: "#b8721f",
           });
         }

@@ -120,8 +120,8 @@ a {
 
 .layout {
   display: flex;
-  height: 100vh; /* Changed from min-height */
-  overflow: hidden; /* Added */
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* sidebar */
@@ -133,9 +133,9 @@ a {
   padding: 20px 14px;
   display: flex;
   flex-direction: column;
-  flex-shrink: 0; /* Added */
-  height: 100vh; /* Added */
-  overflow-y: auto; /* Added */
+  flex-shrink: 0;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .brand {
@@ -230,8 +230,8 @@ a {
 .main {
   flex: 1;
   padding: 24px 32px;
-  height: 100vh; /* Added */
-  overflow-y: auto; /* Added */
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .topbar {
@@ -505,11 +505,28 @@ tbody tr:last-child td {
     hue-rotate(215deg) brightness(92%) contrast(86%);
 }
 
-/* SweetAlert z-index para top ang sweetalert*/
+/* SweetAlert z-index */
 .swal2-container {
   z-index: 9999 !important;
 }
 
 .swal2-popup {
   z-index: 10000 !important;
+}
+
+/* =========================================
+   NEW ADDITIONS FOR THE UNIFIED TABLE
+   ========================================= */
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.badge.trend-up {
+  background-color: var(--status-active-bg);
+  color: var(--status-active-fg);
+}
+
+.badge.trend-down {
+  background-color: rgba(220, 38, 38, 0.12);
+  color: #991b1b;
 }
