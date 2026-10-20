@@ -21,8 +21,7 @@
         </div>
         <nav class="nav">
           <a href="author_dashboard.html" class="nav-item sub active">
-            <span class="nav-icon"></span>
-            Dashboard
+            <span class="nav-icon"></span> Dashboard
           </a>
           <a href="author_all-novel.html" class="nav-item sub"> All Novels </a>
           <a href="author_create-novel.html" class="nav-item sub">
@@ -48,14 +47,6 @@
 
         <div class="stats">
           <div class="stat-card">
-            <div class="stat-label">Total Novels</div>
-            <div class="stat-value">4</div>
-            <div class="stat-change positive">
-              <img src="../icons/arrow-up-short.svg" alt="up" /> 1 new this
-              month
-            </div>
-          </div>
-          <div class="stat-card">
             <div class="stat-label">Total Reads</div>
             <div class="stat-value">32,076</div>
             <div class="stat-change positive">
@@ -63,6 +54,7 @@
               month
             </div>
           </div>
+
           <div class="stat-card">
             <div class="stat-label">Total Earnings</div>
             <div class="stat-value">₱4,284</div>
@@ -87,8 +79,6 @@
                   <span>0</span>
                 </div>
               </div>
-
-              <!-- PLOT -->
               <div class="chart-plot">
                 <div class="chart-bars">
                   <div class="bar" style="height: 120px"></div>
@@ -110,6 +100,28 @@
                 </div>
               </div>
             </div>
+          </div>
+
+          <div class="table-card stat-card--reported" id="reportedNovelsCard">
+            <div class="stat-label">Reported Novels</div>
+            <ul class="report-breakdown" id="reportedList">
+              <li>
+                <div class="report-info">
+                  <span class="report-book">Shadows of the Crown</span>
+                  <span class="report-chapter"
+                    >Ch. 4 · Shadows in the Keep</span
+                  >
+                  <span class="report-reason">Broken content</span>
+                </div>
+              </li>
+              <li>
+                <div class="report-info">
+                  <span class="report-book">The Silent Oath</span>
+                  <span class="report-chapter">Ch. 3 · A Quiet Meeting</span>
+                  <span class="report-reason">Missing content</span>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
 
@@ -152,23 +164,10 @@
                 </td>
                 <td>₱1,205</td>
               </tr>
-              <tr>
-                <td><strong>The Last Prophecy</strong></td>
-                <td><span class="badge active">Ongoing</span></td>
-                <td>5,672</td>
-                <td>
-                  <img
-                    src="../icons/star-fill.svg"
-                    alt="star-rating"
-                    class="star-rating"
-                  />4.2
-                </td>
-                <td>₱784</td>
-              </tr>
             </tbody>
           </table>
           <div class="table-footer">
-            <span>Showing top 3 novels</span>
+            <span>Showing top 2 novels</span>
             <span
               ><a href="author_all-novel.html" class="link-primary"
                 >View all novels →</a
@@ -180,6 +179,7 @@
     </div>
 
     <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/author_dashboard.js"></script>
     <script src="../javascript/logout.js"></script>
   </body>
 </html>

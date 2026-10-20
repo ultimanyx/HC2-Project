@@ -5,77 +5,46 @@
 }
 
 /* root variables */
-
 :root {
-  /* main */
   --background: #f8f6f1;
   --foreground: #1a1826;
-
-  /* cards */
   --card-background: #ffffff;
   --card-foreground: #1a1826;
-
-  /* primary */
   --primary: #b8721f;
   --primary-foreground: #ffffff;
-
-  /* secondary */
   --secondary: #ede9e1;
   --secondary-foreground: #1a1826;
-
-  /* muted */
   --muted: #ede9e1;
   --muted-foreground: #6b6680;
-
-  /* accent */
   --accent: #6d28d9;
   --accent-foreground: #ffffff;
-
-  /* border */
   --border: rgba(26, 24, 38, 0.1);
-
-  /* input */
   --input-background: #ede9e1;
-
-  /* focus */
   --ring: #b8721f;
   --focus-ring: rgba(184, 114, 31, 0.18);
-
-  /* destructive */
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
-
-  /* links */
   --link: #3b6f91;
   --link-hover: #2c536d;
-
-  /* shadows */
   --shadow:
     0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
-
-  /* footer */
   --footer-background: #1a1826;
   --footer-foreground: #ffffff;
   --footer-muted: #d8d0c8;
-
-  /* fonts */
   --font-body: "Plus_Jakarta_Sans", sans-serif;
   --font-heading: "Fraunces", serif;
 }
 
 /* fonts */
-
 @font-face {
   font-family: "Poppins";
   src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype");
 }
-
 @font-face {
   font-family: "Plus_Jakarta_Sans";
   src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
     format("truetype");
 }
-
 @font-face {
   font-family: "Fraunces";
   src: url("../font/Fraunces/static/Fraunces_72pt-Regular.ttf")
@@ -83,7 +52,6 @@
 }
 
 /* lock sidebar */
-
 html,
 body {
   height: 100%;
@@ -104,15 +72,13 @@ a {
 }
 
 /* layout */
-
 .layout {
   display: flex;
   height: 100vh;
   overflow: hidden;
 }
 
-/* sidebar (fixed, won't move) */
-
+/* sidebar */
 .sidebar {
   width: 270px;
   background-color: #ffffff;
@@ -213,7 +179,6 @@ a {
 }
 
 /* main content */
-
 .main {
   flex: 1;
   padding: 24px 32px;
@@ -257,7 +222,6 @@ a {
 }
 
 /* filter bar */
-
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -309,7 +273,6 @@ a {
 }
 
 /* buttons */
-
 .btn {
   padding: 8px 16px;
   border-radius: 6px;
@@ -331,13 +294,12 @@ a {
   background: #9a5f16;
 }
 
-/* stat cards */
-
+/* top stat cards */
 .stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .stat-card {
@@ -378,9 +340,7 @@ a {
 }
 
 /* table card */
-
 .table-card {
-  margin-top: 10px;
   background-color: #ffffff;
   border: 1px solid rgba(26, 24, 38, 0.1);
   border-radius: 10px;
@@ -421,7 +381,6 @@ tbody tr:last-child td {
 }
 
 /* badges / status pills */
-
 .badge {
   display: inline-block;
   font-size: 13px;
@@ -450,17 +409,22 @@ tbody tr:last-child td {
     hue-rotate(326deg) brightness(85%) contrast(89%);
 }
 
-/* dashboard-specific styles */
-
+/* dashboard grid (Chart + Reported Novels) */
 .dashboard-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 2fr 1fr;
   gap: 16px;
   margin-bottom: 20px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* chart card */
-
 .chart-card {
   margin-top: 0;
 }
@@ -472,14 +436,12 @@ tbody tr:last-child td {
   padding-top: 8px;
 }
 
-/* y-axis */
-
 .y-axis {
   display: flex;
   align-items: center;
   gap: 6px;
   flex-shrink: 0;
-  height: 160px; /* must match .chart-bars height */
+  height: 160px;
 }
 
 .y-axis-title {
@@ -502,8 +464,6 @@ tbody tr:last-child td {
   text-align: right;
   color: var(--muted-foreground);
 }
-
-/* plot area */
 
 .chart-plot {
   flex: 1;
@@ -543,36 +503,7 @@ tbody tr:last-child td {
   color: var(--muted-foreground);
 }
 
-.chart-footer {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-  font-size: 13px;
-  color: var(--muted-foreground);
-}
-
-/* actions card */
-
-.actions-card {
-  margin-top: 0;
-}
-
-.quick-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.action-btn {
-  text-align: center;
-  display: block;
-  padding: 10px;
-  width: 100%;
-  font-size: 15px;
-}
-
 /* table footer */
-
 .table-footer {
   margin-top: 14px;
   border-top: 1px solid var(--border);
@@ -592,11 +523,117 @@ tbody tr:last-child td {
 .link-primary:hover {
   text-decoration: underline;
 }
-/* SweetAlert z-index para top ang sweetalert*/
+
+/* SweetAlert z-index */
 .swal2-container {
   z-index: 9999 !important;
 }
 
 .swal2-popup {
   z-index: 10000 !important;
+}
+
+/* =========================================
+   REPORTED NOVELS CARD & ALERTS
+   ========================================= */
+.stat-card--reported {
+  display: flex;
+  flex-direction: column;
+}
+
+.report-breakdown {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  overflow-y: auto;
+  max-height: 280px;
+}
+
+.report-breakdown li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.report-breakdown li:last-child {
+  border-bottom: none;
+}
+
+.report-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+
+.report-book {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--foreground);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.report-chapter {
+  font-size: 12px;
+  color: var(--muted-foreground);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.report-reason {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 3px;
+  padding: 2px 9px;
+  background: rgba(220, 38, 38, 0.08);
+  color: var(--destructive);
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 999px;
+  letter-spacing: 0.01em;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.report-reason::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--destructive);
+  flex-shrink: 0;
+}
+
+/* Action Button (Appeal) injected into list */
+.alert-action-btn {
+  background: var(--destructive);
+  color: #ffffff;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.15s;
+  margin-top: 6px;
+  align-self: flex-start;
+}
+
+.alert-action-btn:hover {
+  background: #b91c1c;
 }
