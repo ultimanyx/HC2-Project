@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     rows.forEach((row) => {
       const rowMonth = row.getAttribute("data-month");
+      // Format is at index 2
       const rowFormat = row.cells[2].textContent.trim().toLowerCase();
 
       // Check Format
