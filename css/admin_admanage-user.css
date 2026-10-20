@@ -76,8 +76,8 @@ a {
 
 .layout {
   display: flex;
-  height: 100vh; /* Changed from min-height */
-  overflow: hidden; /* Added */
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* sidebar */
@@ -89,9 +89,9 @@ a {
   padding: 20px 14px;
   display: flex;
   flex-direction: column;
-  flex-shrink: 0; /* Added */
-  height: 100vh; /* Added */
-  overflow-y: auto; /* Added */
+  flex-shrink: 0;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .brand {
@@ -186,8 +186,8 @@ a {
 .main {
   flex: 1;
   padding: 24px 32px;
-  height: 100vh; /* Added */
-  overflow-y: auto; /* Added */
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .topbar {
@@ -513,9 +513,14 @@ tbody tr:hover {
   color: #2f5d3a;
 }
 
-.badge.paused {
+.badge.suspended {
   background-color: rgba(184, 114, 31, 0.15);
   color: #8a5410;
+}
+
+.badge.banned {
+  background-color: rgba(220, 38, 38, 0.15);
+  color: #991b1b;
 }
 
 .badge.completed {
@@ -527,7 +532,7 @@ tbody tr:hover {
   color: var(--muted-foreground);
 }
 
-/* SweetAlert z-index para top ang sweetalert*/
+/* SweetAlert z-index */
 .swal2-container {
   z-index: 9999 !important;
 }

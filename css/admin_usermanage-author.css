@@ -74,8 +74,8 @@ a {
 
 .layout {
   display: flex;
-  height: 100vh; /* Changed from min-height */
-  overflow: hidden; /* Added */
+  height: 100vh;
+  overflow: hidden;
 }
 
 .sidebar {
@@ -85,9 +85,9 @@ a {
   padding: 20px 14px;
   display: flex;
   flex-direction: column;
-  flex-shrink: 0; /* Added */
-  height: 100vh; /* Added */
-  overflow-y: auto; /* Added */
+  flex-shrink: 0;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .brand {
@@ -182,8 +182,8 @@ a {
 .main {
   flex: 1;
   padding: 24px 32px;
-  height: 100vh; /* Added */
-  overflow-y: auto; /* Added */
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .topbar {
@@ -282,18 +282,6 @@ a {
 .stat-change.warning img {
   filter: brightness(0) saturate(100%) invert(38%) sepia(51%) saturate(721%)
     hue-rotate(3deg) brightness(91%) contrast(91%);
-}
-
-.stat-change {
-  font-size: 13px;
-}
-
-.stat-change.positive {
-  color: #3f7d4f;
-}
-
-.stat-change.warning {
-  color: #b8721f;
 }
 
 /* filter bar */
@@ -399,22 +387,8 @@ a {
   color: #ffffff;
 }
 
-.btn-success-muted {
-  background: #33683f;
-  color: #ffffff;
-}
-
 .btn-success:hover {
   background: #2f5d3a;
-}
-
-.btn-warning {
-  background: #d18a24;
-  color: #ffffff;
-}
-
-.btn-warning:hover {
-  background: #b8721f;
 }
 
 .btn-danger {
@@ -509,21 +483,21 @@ tbody tr:hover {
   color: #2f5d3a;
 }
 
-.badge.paused {
+.badge.suspended {
   background-color: rgba(184, 114, 31, 0.15);
   color: #8a5410;
 }
 
-.badge.completed {
-  background-color: #ede9e1;
-  color: #6b6680;
+.badge.banned {
+  background-color: rgba(220, 38, 38, 0.15);
+  color: #991b1b;
 }
 
 .text-muted {
   color: var(--muted-foreground);
 }
 
-/* SweetAlert z-index para top ang sweetalert*/
+/* SweetAlert z-index */
 .swal2-container {
   z-index: 9999 !important;
 }

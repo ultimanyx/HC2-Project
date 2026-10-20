@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Revenue Reports</title>
+    <title>Manage Authors</title>
     <link rel="stylesheet" href="../css/admin_usermanage-author.css" />
     <link rel="stylesheet" href="../css/sweetalert2.min.css" />
 
@@ -97,23 +97,22 @@
           <div class="filter-group">
             <label for="status-filter">Status</label>
             <select id="status-filter">
-              <option>All</option>
-              <option>Active</option>
-              <option>Suspended</option>
-              <option>Banned</option>
+              <option value="all">All</option>
+              <option value="active">Active</option>
+              <option value="suspended">Suspended</option>
+              <option value="banned">Banned</option>
             </select>
           </div>
         </div>
 
         <div class="table-card">
-          <h2>All Users</h2>
+          <h2>All Authors</h2>
           <table>
             <thead>
               <tr>
                 <th>ID</th>
                 <th>Username</th>
                 <th>Email</th>
-
                 <th>Status</th>
                 <th>Joined</th>
                 <th>Actions</th>
@@ -127,8 +126,7 @@
                 <td><span class="badge active">Active</span></td>
                 <td>Jan 12, 2026</td>
                 <td>
-                  <button class="btn btn-primary btn-sm">Edit</button>
-                  <button class="btn btn-danger btn-sm">Ban</button>
+                  <button class="btn btn-danger btn-sm ban-btn">Ban</button>
                 </td>
               </tr>
               <tr>
@@ -138,8 +136,7 @@
                 <td><span class="badge active">Active</span></td>
                 <td>Feb 3, 2026</td>
                 <td>
-                  <button class="btn btn-primary btn-sm">Edit</button>
-                  <button class="btn btn-danger btn-sm">Ban</button>
+                  <button class="btn btn-danger btn-sm ban-btn">Ban</button>
                 </td>
               </tr>
               <tr>
@@ -149,8 +146,7 @@
                 <td><span class="badge active">Active</span></td>
                 <td>Dec 20, 2025</td>
                 <td>
-                  <button class="btn btn-primary btn-sm">Edit</button>
-                  <button class="btn btn-danger btn-sm">Ban</button>
+                  <button class="btn btn-danger btn-sm ban-btn">Ban</button>
                 </td>
               </tr>
               <tr>
@@ -160,32 +156,29 @@
                 <td><span class="badge active">Active</span></td>
                 <td>Nov 5, 2025</td>
                 <td>
-                  <button class="btn btn-primary btn-sm">Edit</button>
-                  <button class="btn btn-danger btn-sm">Ban</button>
+                  <button class="btn btn-danger btn-sm ban-btn">Ban</button>
                 </td>
               </tr>
               <tr>
                 <td>#005</td>
                 <td><strong>J.R.R. Tolkien</strong></td>
                 <td>jrrtolkien@example.com</td>
-                <td><span class="badge completed">Banned</span></td>
+                <td><span class="badge banned">Banned</span></td>
                 <td>Oct 15, 2025</td>
                 <td>
-                  <button class="btn btn-primary btn-sm">Edit</button>
-                  <button class="btn btn-success btn-sm">Unban</button>
+                  <button class="btn btn-success btn-sm unban-btn">
+                    Unban
+                  </button>
                 </td>
               </tr>
             </tbody>
           </table>
-          <!-- <div class="text-muted" style="margin-top: 16px; border-top: 1px solid var(--border); padding-top: 14px; display: flex; justify-content: space-between; font-size: 14px;">
-                <span>Showing 5 of 1,284 users</span>
-                <span>💡 Click <strong>Edit</strong> to modify user details.</span>
-            </div> -->
         </div>
       </main>
     </div>
 
     <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/admin_usermanage-author.js"></script>
     <script src="../javascript/logout.js"></script>
   </body>
 </html>
