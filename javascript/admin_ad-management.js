@@ -10,17 +10,21 @@ document.addEventListener("DOMContentLoaded", function () {
   const cancelBtn = document.getElementById("cancelAddBtn");
   const addAdForm = document.getElementById("addAdForm");
 
-  const STORAGE_KEY = "novelNestAds";
+  // Get the file input and dropdown elements
+  const fileInput = document.getElementById("adFile");
+  const formatSelect = document.getElementById("adFormat");
 
-  // --- 1. Initial Data (Matches your HTML) ---
+  const STORAGE_KEY = "novelNestAds_v2";
+
+  // Default Ads
   const defaultAds = [
     {
       id: "ad-1",
-      campaign: "Nestle Milo Drink",
+      campaign: "Nestle Milo",
       format: "Video",
       views: 1240000,
       status: "Active",
-      mediaData: null,
+      mediaData: "../advertisement/milo-ad.mp4",
     },
     {
       id: "ad-2",
@@ -28,41 +32,30 @@ document.addEventListener("DOMContentLoaded", function () {
       format: "Video",
       views: 2100000,
       status: "Active",
-      mediaData: null,
+      mediaData: "../advertisement/datu-puti-ad.mp4",
     },
     {
       id: "ad-3",
-      campaign: "Scatter67",
+      campaign: "Temu",
       format: "Video",
       views: 980000,
-      status: "Paused",
-      mediaData: null,
+      status: "Active",
+      mediaData: "../advertisement/temu_ad.mp4",
     },
     {
       id: "ad-4",
-      campaign: "CTV Holiday Special",
+      campaign: "Scatter",
       format: "Banner",
       views: 620000,
-      status: "Completed",
-      mediaData: null,
-    },
-    {
-      id: "ad-5",
-      campaign: "Coca Cola Coke",
-      format: "Banner",
-      views: 450000,
       status: "Active",
-      mediaData: null,
+      mediaData: "../advertisement/scatter.png",
     },
   ];
 
-  // --- 2. State Management ---
+  // --- State Management ---
   function getAds() {
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      return JSON.parse(stored);
-    }
-    // Save defaults if nothing exists
+    if (stored) return JSON.parse(stored);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultAds));
     return defaultAds;
   }
@@ -74,12 +67,12 @@ document.addEventListener("DOMContentLoaded", function () {
       Swal.fire({
         icon: "error",
         title: "Storage Limit Reached",
-        text: "The video/image file is too large for browser storage. Please try a smaller file or implement a backend server for uploads.",
+        text: "The video/image file is too large for browser storage. Please try a smaller file.",
       });
     }
   }
 
-  // --- 3. Render Table & Stats ---
+  // --- Render Table & Stats ---
   function renderTable() {
     const ads = getAds();
     tableBody.innerHTML = "";
@@ -91,10 +84,8 @@ document.addEventListener("DOMContentLoaded", function () {
       if (ad.status === "Active") activeCount++;
       if (ad.status === "Paused") pausedCount++;
 
-      // Format views with commas
       const formattedViews = ad.views.toLocaleString();
 
-      // Determine which buttons to show based on status
       let actionButtons = "";
       if (ad.status === "Active") {
         actionButtons = `
@@ -110,7 +101,6 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
       }
 
-      // Always show Remove
       actionButtons += `
         <button class="btn btn-danger btn-sm remove-btn" data-id="${ad.id}">
           <img src="../icons/delete.svg" alt="delete" class="btn-icon" /> Remove
@@ -134,19 +124,18 @@ document.addEventListener("DOMContentLoaded", function () {
       tableBody.appendChild(tr);
     });
 
-    // Update Stats
     statTotal.textContent = ads.length;
     statActive.textContent = activeCount;
     statPaused.textContent = pausedCount;
   }
 
-  // Initial Render
   renderTable();
 
-  // --- 4. Modal Logic ---
+  // --- Modal Logic ---
   function openModal() {
     modal.classList.add("active");
     addAdForm.reset();
+    formatSelect.dispatchEvent(new Event("change")); // Reset file input state
   }
 
   function closeModal() {
@@ -161,28 +150,62 @@ document.addEventListener("DOMContentLoaded", function () {
     if (e.target === modal) closeModal();
   });
 
-  // --- 5. Add New Ad Logic ---
+  // --- NEW: Dynamically change file input restrictions based on format ---
+  formatSelect.addEventListener("change", function () {
+    if (this.value === "Video") {
+      fileInput.accept = "video/*"; // Only allow video files
+      fileInput.value = ""; // Clear any previously selected image
+    } else if (this.value === "Banner") {
+      fileInput.accept = "image/*"; // Only allow image files
+      fileInput.value = ""; // Clear any previously selected video
+    }
+  });
+
+  // Trigger once on load to set the initial state
+  formatSelect.dispatchEvent(new Event("change"));
+
+  // --- Add New Ad Logic ---
   addAdForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     const campaign = document.getElementById("campaignName").value;
-    const format = document.getElementById("adFormat").value;
-    const fileInput = document.getElementById("adFile");
+    const format = formatSelect.value;
     const file = fileInput.files[0];
 
     if (!file) return;
 
-    // Check file size (Local Storage limits ~5MB total, so limit to ~3MB per file)
-    if (file.size > 3 * 1024 * 1024) {
+    // --- STRICT VALIDATION: Prevent bypassing the file picker ---
+    const isImage = file.type.startsWith("image/");
+    const isVideo = file.type.startsWith("video/");
+
+    if (format === "Video" && !isVideo) {
       Swal.fire({
-        icon: "warning",
-        title: "File Too Large",
-        text: "Please select a file smaller than 3MB for this demo.",
+        icon: "error",
+        title: "Invalid File Type",
+        text: "You selected 'Video' format, but uploaded an image. Please upload an MP4 or WebM file.",
       });
       return;
     }
 
-    // Show loading state
+    if (format === "Banner" && !isImage) {
+      Swal.fire({
+        icon: "error",
+        title: "Invalid File Type",
+        text: "You selected 'Banner' format, but uploaded a video. Please upload a JPG or PNG file.",
+      });
+      return;
+    }
+
+    // Check file size limit (1.5MB to prevent local storage crash)
+    if (file.size > 1.5 * 1024 * 1024) {
+      Swal.fire({
+        icon: "warning",
+        title: "File Too Large",
+        text: "Please select a file smaller than 1.5MB for this demo.",
+      });
+      return;
+    }
+
     Swal.fire({
       title: "Processing...",
       text: "Reading file data",
@@ -190,7 +213,6 @@ document.addEventListener("DOMContentLoaded", function () {
       didOpen: () => Swal.showLoading(),
     });
 
-    // Read file as Data URL (Base64) to simulate saving
     const reader = new FileReader();
     reader.onload = function (event) {
       const fileData = event.target.result;
@@ -201,38 +223,20 @@ document.addEventListener("DOMContentLoaded", function () {
         format: format,
         views: 0,
         status: "Active",
-        mediaData: fileData, // Here is where the actual image/video data is stored
+        mediaData: fileData,
       };
 
-      /*
-        ====================================================================
-        BACKEND INTEGRATION NOTE:
-        Browsers cannot save directly to /mnt/Storage/Coding/HC2 Project/advertisement.
-        To do that, you would send this file to a server using FormData:
-        
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("campaign", campaign);
-        
-        fetch("/api/upload-ad", {
-          method: "POST",
-          body: formData
-        }).then(...)
-        ====================================================================
-      */
-
       const ads = getAds();
-      ads.unshift(newAd); // Add to top of list
+      ads.unshift(newAd);
       saveAds(ads);
 
       renderTable();
       closeModal();
 
-      // System Feedback - CENTERED
       Swal.fire({
         icon: "success",
         title: "Ad Created",
-        text: `"${campaign}" has been successfully added and is now active.`,
+        text: `"${campaign}" has been successfully added.`,
         confirmButtonColor: "#b8721f",
       });
     };
@@ -240,7 +244,7 @@ document.addEventListener("DOMContentLoaded", function () {
     reader.readAsDataURL(file);
   });
 
-  // --- 6. Table Action Logic (Pause, Resume, Remove) ---
+  // --- Table Action Logic (Pause, Resume, Remove) ---
   tableBody.addEventListener("click", function (e) {
     const btn = e.target.closest("button");
     if (!btn) return;

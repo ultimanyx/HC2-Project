@@ -72,31 +72,31 @@
           <div class="filter-group">
             <label for="format">Ad Format</label>
             <select id="format">
-              <option>All formats</option>
-              <option>Display</option>
-              <option>Video</option>
+              <option value="all">All formats</option>
+              <option value="video">Video</option>
+              <option value="banner">Banner</option>
             </select>
           </div>
           <div class="filter-actions">
-            <span class="btn">Reset</span>
-            <span class="btn btn-primary">Apply</span>
+            <button class="btn" id="resetBtn">Reset</button>
+            <button class="btn btn-primary" id="applyBtn">Apply</button>
           </div>
         </div>
 
         <div class="stats">
           <div class="stat-card">
             <div class="stat-label">Ad Revenue</div>
-            <div class="stat-value">₱142,800</div>
+            <div class="stat-value">₱196,600</div>
             <div class="stat-change positive">8.2% vs last month</div>
           </div>
           <div class="stat-card">
             <div class="stat-label">Total Views</div>
-            <div class="stat-value">6.4M</div>
+            <div class="stat-value">4.94M</div>
             <div class="stat-change positive">5.1% vs last month</div>
           </div>
           <div class="stat-card">
             <div class="stat-label">Avg. eCPM</div>
-            <div class="stat-value">₱22.31</div>
+            <div class="stat-value">₱39.79</div>
             <div class="stat-change positive">0.9% vs last month</div>
           </div>
         </div>
@@ -116,9 +116,10 @@
                 <th>Status</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="revenueTableBody">
+              <!-- Row 1: Milo -->
               <tr>
-                <td><span class="fw-600">Nestle Milo Drink</span></td>
+                <td><span class="fw-600">Nestle Milo</span></td>
                 <td>Video</td>
                 <td class="text-right">1,240,000</td>
                 <td class="text-right">34,720</td>
@@ -131,6 +132,8 @@
                   </span>
                 </td>
               </tr>
+
+              <!-- Row 2: Datu Puti -->
               <tr>
                 <td><span class="fw-600">Datu Puti</span></td>
                 <td>Video</td>
@@ -145,8 +148,10 @@
                   </span>
                 </td>
               </tr>
+
+              <!-- Row 3: Temu -->
               <tr>
-                <td><span class="fw-600">Scatter67</span></td>
+                <td><span class="fw-600">Temu</span></td>
                 <td>Video</td>
                 <td class="text-right">980,000</td>
                 <td class="text-right">29,400</td>
@@ -159,27 +164,15 @@
                   </span>
                 </td>
               </tr>
+
+              <!-- Row 4: Scatter -->
               <tr>
-                <td><span class="fw-600">CTV Holiday Special</span></td>
+                <td><span class="fw-600">Scatter</span></td>
                 <td>Banner</td>
                 <td class="text-right">620,000</td>
                 <td class="text-right">11,160</td>
                 <td class="text-right">₱21,800</td>
                 <td class="text-right">₱35.16</td>
-                <td>
-                  <span class="badge completed">
-                    <img src="../icons/check2.svg" alt="" class="badge-icon" />
-                    Completed
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td><span class="fw-600">Coca Cola Coke</span></td>
-                <td>Banner</td>
-                <td class="text-right">450,000</td>
-                <td class="text-right">6,750</td>
-                <td class="text-right">₱16,200</td>
-                <td class="text-right">₱36.00</td>
                 <td>
                   <span class="badge active">
                     <img src="../icons/dot.svg" alt="" class="badge-icon" />
@@ -194,6 +187,7 @@
     </div>
 
     <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/admin_revenue-reports.js"></script>
     <script src="../javascript/logout.js"></script>
   </body>
 </html>
