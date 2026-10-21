@@ -262,7 +262,6 @@ body {
   transition: transform 0.25s ease;
 }
 
-/* Hide dropdown by default */
 .dropdown-menu {
   position: absolute;
   top: calc(100% + 8px);
@@ -284,7 +283,6 @@ body {
   pointer-events: none;
 }
 
-/* Show on hover/focus */
 .nav-user-dropdown:active .dropdown-menu,
 .nav-user-dropdown:focus-within .dropdown-menu {
   opacity: 1;
@@ -293,13 +291,11 @@ body {
   pointer-events: auto;
 }
 
-/* Rotate arrow when open */
 .nav-user-dropdown:active .dropdown-arrow,
 .nav-user-dropdown:focus-within .dropdown-arrow {
   transform: rotate(180deg);
 }
 
-/* Remove dropdown link underline */
 .nav-links .dropdown-menu a::after {
   display: none;
 }
@@ -329,7 +325,6 @@ body {
   color: var(--destructive);
 }
 
-/* Keep dropdown open on focus */
 .dropdown-menu a:focus-within {
   background: var(--muted);
 }
@@ -367,20 +362,16 @@ body {
   align-items: center;
   gap: 12px;
   margin-bottom: 20px;
-  /* no justify-content here */
 }
 
 /* Back button */
 .back-button {
   flex-shrink: 0;
-
   width: 48px;
   height: 48px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   background-color: var(--primary);
   border: none;
   border-radius: 50%;
@@ -410,7 +401,7 @@ body {
 
 /* Bookmark and report pushed right */
 .bookmark-btn {
-  margin-left: auto; /* pushes the pair to the right */
+  margin-left: auto;
 }
 
 .bookmark-btn,
@@ -736,82 +727,102 @@ body {
   color: var(--footer-muted);
 }
 
-/* Ad overlay */
+/* =========================================
+   AD OVERLAY — viewport-covering interstitial
+   ========================================= */
 .ad-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
   background: var(--ad-overlay-backdrop);
   backdrop-filter: blur(8px);
   display: none;
-  align-items: center;
-  justify-content: center;
   z-index: 99999;
-  padding: 10px;
-  animation: overlayFadeIn 0.35s ease;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
 }
 
 .ad-overlay.active {
-  display: flex;
+  display: block;
+  animation: overlayFadeIn 0.35s ease;
 }
 
 @keyframes overlayFadeIn {
   from {
     opacity: 0;
-    transform: scale(0.96);
   }
   to {
     opacity: 1;
-    transform: scale(1);
   }
 }
 
+/* Card fills the screen, no floating look */
 .ad-card {
+  position: relative;
   width: 100%;
-  max-width: 1100px;
-  background: var(--ad-card-bg);
-  border-radius: 28px;
-  padding: 28px 30px 24px;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
-  border: 1px solid var(--ad-card-border);
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
   color: var(--ad-text);
-  max-height: 95vh;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  display: block;
 }
 
+/* Header floats at top with gradient - Space between left/right */
 .ad-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  padding: 20px 28px;
+  margin: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0));
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-.ad-header-left {
+/* Volume button */
+.volume-btn {
+  width: 44px;
+  height: 44px;
+  background: var(--ad-timer-bg);
+  border: 2px solid var(--ad-card-border);
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.1s ease;
 }
 
-.ad-label {
-  background: var(--ad-label-bg);
-  color: var(--ad-text);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 3px 14px;
-  border-radius: 4px;
-  text-transform: uppercase;
+.volume-btn:hover {
+  background: #374151; /* slightly lighter gray */
 }
 
-.ad-title {
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--ad-text);
+.volume-btn:active {
+  transform: scale(0.92);
+}
+
+.volume-btn img {
+  width: 22px;
+  height: 22px;
+  /* Makes the SVG white */
+  filter: brightness(0) invert(1);
 }
 
 .ad-timer {
@@ -846,13 +857,18 @@ body {
   margin-left: 1px;
 }
 
+/* Progress bar at very top */
 .progress-wrap {
-  width: 100%;
-  height: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  height: 4px;
+  margin: 0;
   background: var(--ad-progress-bg);
-  border-radius: 4px;
+  border-radius: 0;
   overflow: hidden;
-  margin-bottom: 18px;
 }
 
 .progress-bar {
@@ -863,29 +879,32 @@ body {
     var(--ad-progress-gradient-start),
     var(--ad-progress-gradient-end)
   );
-  border-radius: 4px;
+  border-radius: 0;
   transition: width 0.3s linear;
 }
 
+/* Content fills the whole viewport behind the chrome */
 .ad-content {
-  border-radius: 16px;
-  overflow: hidden;
-  background: var(--ad-content-bg);
-  min-height: 0;
-  flex: 1 1 auto;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: #000;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  margin-bottom: 16px;
-  border: 1px solid var(--ad-content-border);
+  overflow: hidden;
+  z-index: 1;
 }
 
 /* Banner ad */
 .banner-ad {
   width: 100%;
   height: 100%;
-  min-height: 0;
   padding: 0;
   position: relative;
   overflow: hidden;
@@ -954,7 +973,6 @@ body {
   border: 1px solid var(--ad-cta-border);
 }
 
-/* Image ad */
 .banner-ad .banner-content .banner-image {
   width: 100%;
   height: 100%;
@@ -967,7 +985,8 @@ body {
 /* Video ad */
 .video-ad {
   width: 100%;
-  min-height: 520px;
+  height: 100%;
+  min-height: 0;
   background: var(--ad-video-bg);
   display: flex;
   align-items: center;
@@ -977,9 +996,9 @@ body {
 
 .video-ad video {
   width: 100%;
-  height: auto;
-  max-height: 400px;
-  object-fit: cover;
+  height: 100%;
+  max-height: none;
+  object-fit: contain;
   background: var(--ad-video-bg);
   display: block;
 }
@@ -1002,28 +1021,40 @@ body {
   font-size: 15px;
 }
 
-/* Ad footer */
+/* Footer floats at bottom with gradient */
 .ad-footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  padding: 24px 28px 28px;
+  margin: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 4px;
 }
 
 .ad-footer .ad-info {
   font-size: 13px;
   color: var(--ad-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .ad-footer .ad-info span {
   color: var(--ad-text-muted);
+  display: inline-flex;
+  align-items: center;
 }
 
 .btn-exit {
   display: none;
-  padding: 12px 36px;
+  padding: 14px 44px;
   background: linear-gradient(
     135deg,
     var(--ad-exit-bg-start),
@@ -1031,7 +1062,7 @@ body {
   );
   color: var(--ad-exit-text);
   font-weight: 700;
-  font-size: 17px;
+  font-size: 18px;
   border: none;
   border-radius: 60px;
   cursor: pointer;
@@ -1043,7 +1074,7 @@ body {
   opacity: 0;
   transform: scale(0.9);
   pointer-events: none;
-  min-width: 120px;
+  min-width: 160px;
 }
 
 .btn-exit.active {
@@ -1323,26 +1354,7 @@ body {
   display: block;
 }
 
-/* Hide on small screens */
-@media (max-width: 600px) {
-  .autoscroll {
-    right: 12px;
-    bottom: 12px;
-    padding: 6px 8px;
-    gap: 4px;
-  }
-  .autoscroll-btn {
-    width: 34px;
-    height: 34px;
-    font-size: 16px;
-  }
-  .autoscroll-play {
-    width: 40px;
-    height: 40px;
-  }
-}
-
-/* SweetAlert z-index para top ang sweetalert*/
+/* SweetAlert z-index */
 .swal2-container {
   z-index: 9999 !important;
 }

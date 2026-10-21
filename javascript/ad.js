@@ -15,13 +15,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const overlay = document.getElementById("adOverlay");
   const adContent = document.getElementById("adContent");
-  const adTypeLabel = document.getElementById("adTypeLabel");
   const timerDisplay = document.getElementById("timerDisplay");
   const footerTimer = document.getElementById("footerTimer");
   const progressBar = document.getElementById("progressBar");
   const exitBtn = document.getElementById("exitBtn");
   const nextBtn = document.getElementById("nextChapterBtn");
   const chapterNumberEl = document.getElementById("chapter-number");
+
+  const volumeBtn = document.getElementById("volumeBtn");
+  const volumeIcon = document.getElementById("volumeIcon");
 
   function getCurrentChapterNumber() {
     if (!chapterNumberEl) return null;
@@ -56,29 +58,32 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function renderAd(ad) {
-    adTypeLabel.textContent = ad.format + " Ad";
-
     if (ad.format.toLowerCase() === "banner") {
       adContent.innerHTML = `
         <div class="banner-ad">
           <div class="banner-bg"></div>
-          <div class="banner-content" style="display: flex; justify-content: center; align-items: center; height: 100%;">
-             <img src="${ad.mediaData}" alt="${ad.campaign}" class="banner-image" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px;" /> 
+          <div class="banner-content">
+            <img src="${ad.mediaData}" alt="${ad.campaign}" class="banner-image" />
           </div>
         </div>
       `;
+      if (volumeBtn) volumeBtn.style.display = "none";
     } else {
       adContent.innerHTML = `
-        <div class="video-ad" style="display: flex; justify-content: center; align-items: center; height: 100%; background: #000;">
-          <video id="adVideo" muted playsinline style="max-width: 100%; max-height: 100%; object-fit: contain;"></video>
+        <div class="video-ad">
+          <video id="adVideo" playsinline></video>
         </div>
       `;
+
+      if (volumeBtn) volumeBtn.style.display = "flex";
 
       const video = document.getElementById("adVideo");
       if (video) {
         video.src = ad.mediaData;
 
-        // If the video fails to load, just log it. DO NOT fallback to a paused ad.
+        video.muted = true;
+        if (volumeIcon) volumeIcon.src = "../icons/volume-mute.svg";
+
         video.addEventListener("error", function () {
           console.warn(
             "Failed to load video ad. File might be too large or corrupted:",
@@ -134,53 +139,57 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function showOverlay() {
     overlay.classList.add("active");
+    document.body.style.overflow = "hidden";
 
     let ads = [];
-    const storedAds = localStorage.getItem("novelNestAds_v2");
+    const storedAds = localStorage.getItem("ads");
 
     if (storedAds) {
       ads = JSON.parse(storedAds);
     } else {
-      // Hardcoded default ads if LocalStorage is completely empty
       ads = [
         {
           campaign: "Milo",
           format: "Video",
           status: "Active",
+          archived: false,
           mediaData: "../advertisement/milo-ad.mp4",
         },
         {
           campaign: "Datu Puti",
           format: "Video",
           status: "Active",
+          archived: false,
           mediaData: "../advertisement/datu-puti-ad.mp4",
         },
         {
           campaign: "Temu",
           format: "Video",
           status: "Active",
+          archived: false,
           mediaData: "../advertisement/temu_ad.mp4",
         },
         {
           campaign: "Scatter",
           format: "Banner",
           status: "Active",
+          archived: false,
           mediaData: "../advertisement/scatter.png",
         },
       ];
     }
 
-    // Only filter for ACTIVE ads that have media data
-    const activeAds = ads.filter((a) => a.status === "Active" && a.mediaData);
+    const activeAds = ads.filter(
+      (a) => a.status === "Active" && !a.archived && a.mediaData,
+    );
 
     if (activeAds.length > 0) {
       const randomAd = activeAds[Math.floor(Math.random() * activeAds.length)];
       renderAd(randomAd);
       console.log("Playing Ad:", randomAd.campaign);
     } else {
-      // Admin paused EVERY single ad
-      adTypeLabel.textContent = "Notice";
       adContent.innerHTML = `<div style="padding:20px;text-align:center;color:#fff;font-size:16px;">No active ads available.</div>`;
+      if (volumeBtn) volumeBtn.style.display = "none";
     }
 
     state.timer = AD_DURATION;
@@ -192,7 +201,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function hideOverlay() {
     overlay.classList.remove("active");
+    document.body.style.overflow = "";
     stopTimer();
+
+    const adVideo = document.getElementById("adVideo");
+    if (adVideo) {
+      adVideo.pause();
+      adVideo.src = "";
+    }
   }
 
   function proceedToNextChapter() {
@@ -219,6 +235,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (exitBtn) {
     exitBtn.addEventListener("click", proceedToNextChapter);
+  }
+
+  // --- Volume Toggle Logic ---
+  if (volumeBtn && volumeIcon) {
+    volumeBtn.addEventListener("click", function () {
+      const video = document.getElementById("adVideo");
+      if (!video) return;
+
+      video.muted = !video.muted;
+
+      if (video.muted) {
+        volumeIcon.src = "../icons/volume-mute.svg";
+        volumeBtn.setAttribute("aria-label", "Unmute ad");
+      } else {
+        volumeIcon.src = "../icons/volume-full.svg";
+        volumeBtn.setAttribute("aria-label", "Mute ad");
+      }
+    });
   }
 
   document.addEventListener("keydown", function (e) {
