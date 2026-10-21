@@ -324,7 +324,7 @@ if (bookGrid) {
         statusText = "Reading";
       }
 
-      html += '<a href="novel-page.html?book=' + book.id + '">';
+      html += '<a href="a-tale-of-two-cities-page.html?book=' + book.id + '">';
       html += '  <div class="book-card">';
       html += '    <div class="book-cover">';
       html +=
