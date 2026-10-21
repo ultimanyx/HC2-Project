@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - NovelNest</title>
+
+    <link rel="stylesheet" href="./css/login_style.css" />
+    <link rel="stylesheet" href="./css/sweetalert2.min.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="./image/logo-nobackground-circle.png"
+    />
+  </head>
+  <body>
+    <div class="login-wrapper">
+      <!-- LEFT PANEL -->
+      <div class="left-panel" aria-label="left logo and description">
+        <div class="left-logo">
+          <a href="index.html">
+            <img
+              src="./image/logo-nobackground-circle.png"
+              alt="NovelNest logo"
+            />
+          </a>
+        </div>
+        <h2>NovelNest</h2>
+        <p>
+          Free stories that come alive and free knowledge that finds its home.
+        </p>
+      </div>
+
+      <!-- RIGHT PANEL: SIGNUP CARD -->
+      <div class="login-card" role="main" aria-label="Signup card">
+        <div class="signup-header">
+          <h1>Create Account</h1>
+          <p>Join us to read or write</p>
+        </div>
+
+        <form class="login-form" id="signup-form">
+          <div class="input-group">
+            <label for="signup_username">Username</label>
+            <input
+              type="text"
+              id="signup_username"
+              name="username"
+              placeholder="John Doe"
+              required
+              autofocus
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="signup_email">Email address</label>
+            <input
+              type="email"
+              id="signup_email"
+              name="email"
+              placeholder="you@example.com"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="signup_password">Password</label>
+            <div class="password-wrapper">
+              <input
+                type="password"
+                id="signup_password"
+                name="password"
+                placeholder="Create a password (min 6 chars)"
+                minlength="6"
+                required
+              />
+              <button
+                type="button"
+                class="toggle-password"
+                data-target="signup_password"
+              >
+                <span class="icon-show"
+                  ><img src="./icons/eye-opened.svg" alt="Show"
+                /></span>
+                <span class="icon-hide"
+                  ><img src="./icons/eye-closed.svg" alt="Hide"
+                /></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="signup_role">Register As</label>
+            <select id="signup_role" name="role" required>
+              <option value="reader">Reader</option>
+              <option value="author">Author</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn-login">Sign Up</button>
+        </form>
+
+        <div class="login-footer">
+          Already have an account? <a href="index.html">Login</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="./javascript/sweetalert2.all.min.js"></script>
+    <script src="./javascript/login.js"></script>
+  </body>
+</html>

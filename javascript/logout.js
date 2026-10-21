@@ -1,24 +1,30 @@
-document.getElementById("logout").addEventListener("click", function () {
-  const role = this.dataset.role;
+document.addEventListener("DOMContentLoaded", () => {
+  const logoutBtn = document.getElementById("logout");
 
-  Swal.fire({
-    title: "Are you sure?",
-    text: "You will be logged out!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, logout!",
-    cancelButtonText: "Cancel",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      const redirects = {
-        admin: "../admin-html/admin_login.html",
-        reader: "../user_html/user_login.html",
-        author: "../author_html/author_login.html",
-      };
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", function (e) {
+      e.preventDefault(); // Prevents the page from jumping to the top
 
-      window.location.href = redirects[role] || "../user_html/user_login.html";
-    }
-  });
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You will be logged out!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, logout!",
+        cancelButtonText: "Cancel",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // 1. Clear all user sessions
+          sessionStorage.removeItem("currentUser");
+          sessionStorage.removeItem("currentReader");
+          sessionStorage.removeItem("currentAuthor");
+          sessionStorage.removeItem("adminLoggedIn");
+
+          window.location.href = "../index.html";
+        }
+      });
+    });
+  }
 });

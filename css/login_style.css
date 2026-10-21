@@ -1,12 +1,11 @@
-/* base */
-
+/* ============================================================
+   BASE & VARIABLES
+   ============================================================ */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
-/* root variables */
 
 :root {
   --background: #f8f6f1;
@@ -26,8 +25,9 @@
   --link-hover: #2c536d;
 }
 
-/* fonts */
-
+/* ============================================================
+   FONTS
+   ============================================================ */
 @font-face {
   font-family: "Poppins";
   src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype");
@@ -45,8 +45,9 @@
     format("truetype");
 }
 
-/* body */
-
+/* ============================================================
+   BODY & LAYOUT WRAPPER
+   ============================================================ */
 body {
   font-family: "Plus_Jakarta_Sans", sans-serif;
   background-image: url(../image/background.jpeg);
@@ -60,8 +61,6 @@ body {
   color: var(--foreground);
 }
 
-/* wrapper (left logo + right form) */
-
 .login-wrapper {
   display: flex;
   width: 100%;
@@ -70,13 +69,14 @@ body {
   border-radius: 18px;
   box-shadow: var(--border-shadow);
   overflow: hidden;
-  min-height: 700px;
+  min-height: 650px;
 }
 
-/* left panel */
-
+/* ============================================================
+   LEFT PANEL
+   ============================================================ */
 .left-panel {
-  width: 60%;
+  width: 50%;
   background: var(--foreground);
   padding: 40px 29px;
   display: flex;
@@ -109,25 +109,11 @@ body {
   margin: 0 auto;
 }
 
-/* commented out left-tagline */
-
-/*
-.left-tagline {
-  margin-top: 24px;
-  font-size: 0.75rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--primary);
-  border-top: 1px solid rgba(184, 114, 31, 0.3);
-  padding-top: 16px;
-  width: 70px;
-}
-*/
-
-/* adjust the login-card to sit on the right side */
-
+/* ============================================================
+   RIGHT PANEL (LOGIN/SIGNUP CARD)
+   ============================================================ */
 .login-wrapper .login-card {
-  width: 60%;
+  width: 50%;
   max-width: none;
   border-radius: 0;
   border: none;
@@ -137,8 +123,6 @@ body {
   flex-direction: column;
   justify-content: center;
 }
-
-/* login card */
 
 .login-card {
   width: 100%;
@@ -150,14 +134,17 @@ body {
   box-shadow: var(--border-shadow);
 }
 
-/* login header */
-
-.login-header {
+/* ============================================================
+   HEADERS
+   ============================================================ */
+.login-header,
+.signup-header {
   text-align: center;
   margin-bottom: 32px;
 }
 
-.login-header h1 {
+.login-header h1,
+.signup-header h1 {
   font-family: "Fraunces", serif;
   font-size: 1.9rem;
   font-weight: 600;
@@ -166,41 +153,21 @@ body {
   margin-bottom: 3px;
 }
 
-.login-header p {
+.login-header p,
+.signup-header p {
   color: var(--primary);
   font-size: 0.95rem;
   font-weight: 400;
 }
 
-/* signup header */
-
-.signup-header {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.signup-header h1 {
-  font-family: "Fraunces", serif;
-  font-size: 1.9rem;
-  font-weight: 600;
-  color: var(--foreground);
-  margin-bottom: 3px;
-}
-
-.signup-header p {
-  color: var(--primary);
-  font-size: 0.95rem;
-}
-
-/* form */
-
+/* ============================================================
+   FORMS & INPUTS
+   ============================================================ */
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 20px;
 }
-
-/* input group */
 
 .input-group {
   display: flex;
@@ -215,9 +182,8 @@ body {
   margin-left: 3px;
 }
 
-/* input */
-
-.input-group input {
+.input-group input,
+.input-group select {
   width: 100%;
   padding: 14px 19px;
   font-family: "Plus_Jakarta_Sans", sans-serif;
@@ -234,7 +200,14 @@ body {
     background 0.2s ease;
 }
 
-/* placeholder */
+.input-group select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b6680' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 16px;
+}
 
 .input-group input::placeholder {
   color: var(--muted);
@@ -242,22 +215,21 @@ body {
   font-weight: 400;
 }
 
-/* input focus */
-
-.input-group input:focus {
+.input-group input:focus,
+.input-group select:focus {
   background: #f1eee9;
   border-color: var(--primary);
   box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
-/* -------------------- PASSWORD WRAPPER + EYE TOGGLE -------------------- */
-
+/* ============================================================
+   PASSWORD WRAPPER & EYE TOGGLE
+   ============================================================ */
 .password-wrapper {
   position: relative;
   width: 100%;
 }
 
-/* leave room on the right so the typed password doesn't run under the icon */
 .password-wrapper input {
   width: 100%;
   padding-right: 45px;
@@ -283,22 +255,19 @@ body {
   color: #333;
 }
 
-/* size both inline SVG and <img> icons consistently */
 .toggle-password svg,
 .toggle-password img {
   width: 20px;
   height: 20px;
   display: block;
   object-fit: contain;
-  pointer-events: none; /* ensures the button receives the click, not the image */
+  pointer-events: none;
 }
 
-/* hide the "eye closed" icon by default */
 .toggle-password .icon-hide {
   display: none;
 }
 
-/* when the password is visible, swap which icon is shown */
 .toggle-password.is-visible .icon-show {
   display: none;
 }
@@ -307,85 +276,16 @@ body {
   display: block;
 }
 
-/* login options */
-
-.login-options {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.85rem;
-  margin-top: -2px;
-  gap: 16px;
-}
-
-/* remember me */
-
-.remember-me {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #4f6280;
-  font-weight: 400;
-  cursor: pointer;
-}
-
-/* checkbox */
-
-.remember-me input[type="checkbox"] {
-  appearance: none;
-  width: 15px;
-  height: 15px;
-  flex-shrink: 0;
-  background: #ffffff;
-  border: 1.5px solid #c7c3bd;
-  border-radius: 3px;
-  cursor: pointer;
-  position: relative;
-  transition: 0.15s ease;
-}
-
-/* checked */
-
-.remember-me input[type="checkbox"]:checked {
-  background: var(--primary);
-  border-color: var(--primary);
-}
-
-/* check mark */
-
-.remember-me input[type="checkbox"]:checked::after {
-  content: "✓";
-  position: absolute;
-  left: 2px;
-  top: -2px;
-  color: white;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-/* forgot password */
-
-.forgot-link {
-  color: var(--primary);
-  font-weight: 500;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.forgot-link:hover {
-  color: #945b18;
-  text-decoration: none;
-}
-
-/* login button */
-
+/* ============================================================
+   BUTTONS
+   ============================================================ */
 .btn-login {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 14px 29px;
-  margin-top: 2px;
+  margin-top: 5px;
   background: var(--primary);
   color: var(--primary-foreground);
   border: none;
@@ -403,24 +303,21 @@ body {
     box-shadow 0.2s ease;
 }
 
-/* hover */
-
 .btn-login:hover {
   background: #a6661b;
   box-shadow: 0 5px 12px rgba(184, 114, 31, 0.2);
 }
 
-/* active */
-
 .btn-login:active {
   transform: scale(0.98);
 }
 
-/* footer */
-
+/* ============================================================
+   FOOTER LINKS
+   ============================================================ */
 .login-footer {
   text-align: center;
-  margin-top: 29px;
+  margin-top: 24px;
   color: #6b6680;
   font-size: 0.9rem;
   font-weight: 400;
@@ -438,19 +335,9 @@ body {
   color: #945b18;
 }
 
-/* signup login link */
-
-.signup-header .login-link {
-  color: var(--link);
-  font-weight: 500;
-  text-decoration: none;
-}
-
-.signup-header .login-link:hover {
-  color: var(--link-hover);
-}
-
-/* SweetAlert z-index para top ang sweetalert */
+/* ============================================================
+   SWEETALERT OVERRIDES
+   ============================================================ */
 .swal2-container {
   z-index: 9999 !important;
 }

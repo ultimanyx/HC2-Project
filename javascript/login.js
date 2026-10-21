@@ -1,250 +1,202 @@
-// -------------------- LOGIN / SIGNUP FORM HANDLER --------------------
-const form = document.querySelector(".login-form");
-
-if (form) {
-  form.addEventListener("submit", function (event) {
-    event.preventDefault(); // stop the page from reloading
-
-    // Get the role from the form's data-role attribute
-    const role = form.getAttribute("data-role"); // "author" or "reader"
-
-    // If there is a username field, it's the signup form
-    const usernameInput = document.getElementById(role + "_username");
-
-    if (usernameInput) {
-      signup(role);
-    } else {
-      login(role);
-    }
-  });
-}
-
-// -------------------- SIGNUP --------------------
-function signup(role) {
-  const usernameInput = document.getElementById(role + "_username");
-  const emailInput = document.getElementById(role + "_email");
-  const passwordInput = document.getElementById(role + "_password");
-  const numberInput = document.getElementById(role + "_number");
-  const authorNameInput = document.getElementById("author_name");
-
-  // Read the values
-  const username = usernameInput.value.trim();
-  const email = emailInput.value.trim();
-  const password = passwordInput.value.trim();
-  const phoneNumber = numberInput.value.trim();
-
-  let penName = "";
-  if (authorNameInput) {
-    penName = authorNameInput.value.trim();
-  }
-
-  // Check for empty fields
-  if (username === "" || email === "" || password === "") {
-    Swal.fire({
-      title: "Please Fill all Form Fields",
-      text: "All fields are required!",
-      icon: "error",
-    });
-    return;
-  }
-
-  if (phoneNumber === "") {
-    Swal.fire({
-      title: "Please enter a phone number",
-      text: "A phone number is required!",
-      icon: "error",
-    });
-    return;
-  }
-
-  // Get users from localStorage (or empty array)
-  const users = JSON.parse(localStorage.getItem("users")) || [];
-
-  // Check if email already exists
-  for (let i = 0; i < users.length; i++) {
-    if (users[i].email === email && users[i].role === role) {
-      Swal.fire({
-        title: "Email Already Registered",
-        text: "An account with this email already exists!",
-        icon: "error",
-      });
-      return;
-    }
-  }
-
-  // Check if phone number already exists
-  for (let j = 0; j < users.length; j++) {
-    let existingNumber;
-    if (role === "reader") {
-      existingNumber = users[j].readerNumber;
-    } else {
-      existingNumber = users[j].authorNumber;
-    }
-
-    if (existingNumber && existingNumber === phoneNumber) {
-      Swal.fire({
-        title: "Phone Number Already Registered",
-        text: "An account with this phone number already exists!",
-        icon: "error",
-      });
-      return;
-    }
-  }
-
-  // Create the new user
-  const newUser = {
-    role: role,
-    username: username,
-    email: email,
-    password: password,
-  };
-
-  if (role === "reader") {
-    newUser.readerNumber = phoneNumber;
-  } else if (role === "author") {
-    newUser.authorNumber = phoneNumber;
-  }
-
-  if (penName !== "") {
-    newUser.penName = penName;
-  }
-
-  // Save to localStorage
-  users.push(newUser);
-  localStorage.setItem("users", JSON.stringify(users));
-
-  Swal.fire({
-    title: "Account created!",
-    icon: "success",
-  }).then(function () {
-    if (role === "reader") {
-      window.location.href = "../user_html/user_login.html";
-    } else if (role === "author") {
-      window.location.href = "../author_html/author_login.html";
-    }
-  });
-}
-
-// -------------------- LOGIN --------------------
-function login(role) {
-  const emailInput = document.getElementById(role + "_email");
-  const passwordInput = document.getElementById(role + "_password");
-
-  const email = emailInput.value.trim();
-  const password = passwordInput.value.trim();
-
-  if (email === "" || password === "") {
-    Swal.fire({
-      title: "Please Fill all Form Fields",
-      text: "Email and password are required!",
-      icon: "error",
-    });
-    return;
-  }
-
-  const users = JSON.parse(localStorage.getItem("users")) || [];
-  let foundUser = null;
-
-  for (let i = 0; i < users.length; i++) {
-    if (
-      users[i].email === email &&
-      users[i].password === password &&
-      users[i].role === role
-    ) {
-      foundUser = users[i];
-      break;
-    }
-  }
-
-  if (foundUser) {
-    Swal.fire({
-      title: "Login successful!",
-      icon: "success",
-    }).then(function () {
-      // ⭐ THE FIX: SAVE THE USER TO SESSION STORAGE BEFORE REDIRECTING
-      if (role === "reader") {
-        sessionStorage.setItem("currentReader", JSON.stringify(foundUser));
-        window.location.href = "../user_html/home.html";
-      } else if (role === "author") {
-        sessionStorage.setItem("currentAuthor", JSON.stringify(foundUser));
-        window.location.href = "../author_html/author_dashboard.html";
-      }
-    });
-  } else {
-    Swal.fire({
-      title: "Login Failed",
-      text: "Wrong email or password!",
-      icon: "error",
-    });
-  }
-}
-
-// -------------------- ADMIN LOGIN --------------------
+// ============================================================
+// HARDCODED ADMIN (Kept in memory for security)
+// ============================================================
 const ADMIN = {
   email: "admin@gmail.com",
   password: "admin123",
-  redirect: "../admin-html/admin.html",
+  redirect: "./admin-html/admin.html",
 };
 
-const adminForm = document.querySelector(".login-form");
-if (adminForm && document.getElementById("admin_email")) {
-  adminForm.addEventListener("submit", function (event) {
+// ============================================================
+// DEFAULT ACCOUNTS (Will be saved to localStorage)
+// ============================================================
+const DEFAULT_READER = {
+  username: "Default Reader",
+  email: "reader@gmail.com",
+  password: "reader123",
+  role: "reader",
+};
+
+const DEFAULT_AUTHOR = {
+  username: "Default Author",
+  email: "author@gmail.com",
+  password: "author123",
+  role: "author",
+};
+
+// ============================================================
+// INITIALIZE / SEED DEFAULT ACCOUNTS
+// This runs automatically when the page loads.
+// ============================================================
+function seedDefaultAccounts() {
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+
+  // Check if Default Reader exists, if not, add them
+  const readerExists = users.find((u) => u.email === DEFAULT_READER.email);
+  if (!readerExists) {
+    users.push(DEFAULT_READER);
+  }
+
+  // Check if Default Author exists, if not, add them
+  const authorExists = users.find((u) => u.email === DEFAULT_AUTHOR.email);
+  if (!authorExists) {
+    users.push(DEFAULT_AUTHOR);
+  }
+
+  // Save the updated array back to localStorage
+  localStorage.setItem("users", JSON.stringify(users));
+}
+
+// Run the seeder immediately
+seedDefaultAccounts();
+
+// ============================================================
+// 1. SIGNUP LOGIC
+// ============================================================
+const signupForm = document.getElementById("signup-form");
+
+if (signupForm) {
+  signupForm.addEventListener("submit", function (event) {
     event.preventDefault();
-    adminLogin();
+
+    const username = document.getElementById("signup_username").value.trim();
+    const email = document.getElementById("signup_email").value.trim();
+    const password = document.getElementById("signup_password").value.trim();
+    const role = document.getElementById("signup_role").value;
+
+    if (!username || !email || !password) {
+      Swal.fire("Error", "Please fill in all fields.", "error");
+      return;
+    }
+
+    // Prevent using the Admin email (Admin is not in the user list)
+    if (email === ADMIN.email) {
+      Swal.fire("Error", "This email is reserved.", "error");
+      return;
+    }
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // Check if email already exists (This will catch the seeded default accounts too!)
+    const existingUser = users.find((u) => u.email === email);
+    if (existingUser) {
+      Swal.fire("Error", "An account with this email already exists.", "error");
+      return;
+    }
+
+    // Create new user
+    const newUser = { username, email, password, role };
+    users.push(newUser);
+    localStorage.setItem("users", JSON.stringify(users));
+
+    Swal.fire({
+      title: "Account Created!",
+      text: "You can now log in.",
+      icon: "success",
+    }).then(() => {
+      window.location.href = "index.html";
+    });
   });
 }
 
-function adminLogin() {
-  const emailInput = document.getElementById("admin_email");
-  const passwordInput = document.getElementById("admin_password");
+// ============================================================
+// 2. LOGIN LOGIC
+// ============================================================
+const loginForm = document.getElementById("login-form");
 
-  if (!emailInput || !passwordInput) return;
+if (loginForm) {
+  loginForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-  const email = emailInput.value.trim();
-  const password = passwordInput.value.trim();
+    const email = document.getElementById("login_email").value.trim();
+    const password = document.getElementById("login_password").value.trim();
 
-  if (email === "" || password === "") {
-    Swal.fire({
-      title: "Please Fill all Form Fields",
-      text: "Email and password are required!",
-      icon: "error",
-    });
-    return;
-  }
+    if (!email || !password) {
+      Swal.fire("Error", "Please fill in all fields.", "error");
+      return;
+    }
 
-  if (email === ADMIN.email && password === ADMIN.password) {
-    sessionStorage.setItem("adminLoggedIn", "true");
+    // --- A. CHECK ADMIN ---
+    if (email === ADMIN.email && password === ADMIN.password) {
+      sessionStorage.setItem("adminLoggedIn", "true");
+      Swal.fire("Login Successful", "Welcome Admin!", "success").then(() => {
+        window.location.href = ADMIN.redirect;
+      });
+      return;
+    }
 
-    Swal.fire({
-      title: "Login successful!",
-      icon: "success",
-    }).then(function () {
-      window.location.href = ADMIN.redirect;
-    });
-  } else {
-    Swal.fire({
-      title: "Login Failed",
-      text: "Wrong admin email or password!",
-      icon: "error",
-    });
-  }
+    // --- B. CHECK LOCALSTORAGE (Includes Defaults + New Users) ---
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const foundUser = users.find(
+      (u) => u.email === email && u.password === password,
+    );
+
+    if (foundUser) {
+      sessionStorage.setItem("currentUser", JSON.stringify(foundUser));
+
+      let redirectUrl = "";
+      if (foundUser.role === "reader") {
+        sessionStorage.setItem("currentReader", JSON.stringify(foundUser));
+        redirectUrl = "./user_html/home.html";
+      } else if (foundUser.role === "author") {
+        sessionStorage.setItem("currentAuthor", JSON.stringify(foundUser));
+        redirectUrl = "./author_html/author_dashboard.html";
+      }
+
+      Swal.fire(
+        "Login Successful",
+        `Welcome ${foundUser.username}!`,
+        "success",
+      ).then(() => {
+        window.location.href = redirectUrl;
+      });
+    } else {
+      Swal.fire("Login Failed", "Incorrect email or password.", "error");
+    }
+  });
 }
 
-// -------------------- PASSWORD TOGGLE (EYE ICON) --------------------
+// ============================================================
+// 3. PASSWORD TOGGLE
+// ============================================================
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".toggle-password").forEach((btn) => {
     btn.addEventListener("click", () => {
       const input = document.getElementById(btn.dataset.target);
       if (!input) return;
-
       const isPassword = input.type === "password";
-
       input.type = isPassword ? "text" : "password";
       btn.classList.toggle("is-visible", isPassword);
-      btn.setAttribute(
-        "aria-label",
-        isPassword ? "Hide password" : "Show password",
-      );
     });
   });
 });
+
+// ============================================================
+// 4. UNIFIED LOGOUT
+// ============================================================
+const logoutBtn = document.getElementById("logout");
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will be logged out!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, logout!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        sessionStorage.removeItem("currentUser");
+        sessionStorage.removeItem("currentReader");
+        sessionStorage.removeItem("currentAuthor");
+        sessionStorage.removeItem("adminLoggedIn");
+
+        window.location.href = "../index.html";
+      }
+    });
+  });
+}
