@@ -60,7 +60,7 @@ function toggleLibraryBook(book) {
 }
 
 /* ============================================================
-   NOVEL PAGE — DYNAMIC CHAPTER NAVIGATION
+   NOVEL PAGE — DYNAMIC CHAPTER NAVIGATION (ALWAYS 20 PER TABLE)
    ============================================================ */
 
 const chapterSelect = document.getElementById("chapter-number");
@@ -69,35 +69,59 @@ const nextButton = document.getElementById("nextBtn");
 const chapterRows = document.querySelectorAll("#chapter-list tr");
 
 if (chapterSelect && previousButton && nextButton && chapterRows.length > 0) {
-  // 1. Get total chapters from the body data attribute, or count rows as fallback
-  const bodyElement = document.body;
-  let totalChapters = parseInt(bodyElement.dataset.totalChapters) || 0;
-
-  if (totalChapters === 0) {
-    // Fallback: If no data attribute, just count unique chapter rows
-    totalChapters = chapterRows.length;
-  }
-
-  // 2. Generate the groups dynamically (e.g., 1-20, 21-40, 41-60, etc.)
   const chapterGroups = [];
-  const groupSize = 20; // Set to 20 chapters per page group
+  const rowsPerGroup = 10; // 10 rows = 20 chapters
 
-  for (let i = 1; i <= totalChapters; i += groupSize) {
-    let end = i + groupSize - 1;
-    if (end > totalChapters) end = totalChapters;
-    chapterGroups.push(`${i}-${end}`);
+  // Get the exact total chapters from the <body> tag
+  const totalChapters = parseInt(document.body.dataset.totalChapters) || 0;
+
+  let validRowCount = 0;
+
+  // 1. Assign groups based on valid rows (skipping empty ones)
+  for (let i = 0; i < chapterRows.length; i++) {
+    const row = chapterRows[i];
+
+    // Check if the row has actual chapter links (ignore empty hrefs)
+    const hasValidLink = Array.from(row.querySelectorAll("a")).some((a) =>
+      a.textContent.trim().match(/Chapter \d+/i),
+    );
+
+    if (!hasValidLink) {
+      // Hide completely empty rows
+      row.style.display = "none";
+      continue;
+    }
+
+    // Calculate which group this row belongs to
+    const groupIndex = Math.floor(validRowCount / rowsPerGroup);
+    validRowCount++;
+
+    let startChapter = groupIndex * 20 + 1;
+    let endChapter = (groupIndex + 1) * 20;
+
+    // Clamp the end chapter to the actual total chapters (fixes the 61-80 issue)
+    if (totalChapters > 0 && endChapter > totalChapters) {
+      endChapter = totalChapters;
+    }
+
+    const groupName = `${startChapter}-${endChapter}`;
+    row.dataset.group = groupName;
+
+    if (!chapterGroups.includes(groupName)) {
+      chapterGroups.push(groupName);
+    }
   }
 
-  // 3. Build the dropdown options dynamically
+  // 2. Build the dropdown options dynamically
   chapterSelect.innerHTML = "";
-  chapterGroups.forEach((group, index) => {
+  chapterGroups.forEach((group) => {
     const option = document.createElement("option");
     option.value = group;
     option.textContent = `Chapter: ${group}`;
     chapterSelect.appendChild(option);
   });
 
-  // 4. Function to switch between groups
+  // 3. Function to switch between groups
   function showChapterGroup(group) {
     // Hide all rows first
     for (let i = 0; i < chapterRows.length; i++) {
@@ -115,12 +139,11 @@ if (chapterSelect && previousButton && nextButton && chapterRows.length > 0) {
 
     // Disable/Enable Previous and Next buttons based on the current group's index
     const currentIndex = chapterGroups.indexOf(group);
-
     previousButton.disabled = currentIndex === 0;
     nextButton.disabled = currentIndex === chapterGroups.length - 1;
   }
 
-  // 5. Event Listeners
+  // 4. Event Listeners
   chapterSelect.addEventListener("change", function () {
     showChapterGroup(this.value);
   });

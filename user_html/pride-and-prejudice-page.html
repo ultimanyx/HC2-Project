@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PRIDE & PREJUDICE</title>
+
+    <link rel="stylesheet" href="../css/novel-page.css" />
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="../image/logo-nobackground-circle.png"
+    />
+  </head>
+  <body data-book-id="pride-and-prejudice" data-total-chapters="61">
+    <nav class="navbar">
+      <a href="#" class="nav-logo">
+        <img src="../image/logo.png" alt="Logo" />
+      </a>
+      <div class="nav-links">
+        <a href="home.html" id="select">Home</a>
+        <a href="browse.html">Browse</a>
+        <a href="library.html">My Library</a>
+        <a href="ranking.html">Ranking</a>
+
+        <div class="nav-search">
+          <input type="text" placeholder="Search..." />
+          <button type="button" aria-label="Search">
+            <img src="../icons/search.svg" alt="search-btn" />
+          </button>
+        </div>
+
+        <div class="nav-user-dropdown">
+          <div class="nav-user" tabindex="0" role="button" aria-haspopup="true">
+            <img
+              src="../icons/person-circle.svg"
+              class="user-icon"
+              alt="User-Icon"
+            />
+            <span id="readerName">Welcome User</span>
+            <span class="dropdown-arrow"
+              ><img src="../icons/caret-down-fill.svg" alt="triangle-down"
+            /></span>
+          </div>
+
+          <div class="dropdown-menu" role="menu">
+            <div class="dropdown-divider"></div>
+            <a
+              href="#"
+              role="menuitem"
+              class="logout-item"
+              id="logout"
+              data-role="reader"
+              >Logout</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="header-container">
+      <a href="javascript:history.back()" class="back-button">
+        <img src="../icons/back.svg" alt="Back" />
+      </a>
+
+      <img
+        src="../books/Romance/Pride and Prejudice by Jane Austen/pride-and-prejudice-9781471134746_hr.jpg"
+        alt="Pride and Prejudice Cover"
+      />
+      <div class="header">
+        <h1 id="titleBook">PRIDE & PREJUDICE</h1>
+        <span>
+          <img src="../icons/book-half.svg" alt="bookicon" class="book-icon" />
+          <p class="genre">Romance</p>
+        </span>
+        <span>
+          <img
+            src="../icons/journal-text.svg"
+            alt="chaptericon"
+            class="chapter-icon"
+          />
+          <p class="chapter-count">61 Chapters</p>
+        </span>
+        <span>
+          <img src="../icons/author.svg" alt="authoricon" class="author-icon" />
+          <a href="author_profile.html"><p class="author">Jane Austen</p></a>
+        </span>
+        <div class="description">
+          <h3>Synopsis</h3>
+          <p>
+            Pride and Prejudice is a romantic novel of manners written by Jane
+            Austen. The novel follows the character development of Elizabeth
+            Bennet, the dynamic protagonist of the book who learns about the
+            repercussions of hasty judgments and comes to appreciate the
+            difference between superficial goodness and actual goodness. When
+            the wealthy and aloof Mr. Darcy enters her life, pride and prejudice
+            collide, leading to a journey of self-discovery and unexpected love.
+          </p>
+        </div>
+
+        <div class="star-display" id="openRatingModalBtn">
+          <p>Rate this Book!</p>
+          <input
+            type="range"
+            min="0.5"
+            max="5"
+            step="0.5"
+            value="0"
+            class="star-rating"
+            id="displayRating"
+            disabled
+          />
+        </div>
+
+        <div class="button-container">
+          <a href="pride-and-prejudice-chapter1.html" class="read-button"
+            >Read First Chapter</a
+          >
+          <a href="#" id="add-library-button">+ Add to Library</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter-container">
+      <div class="container-header">
+        <img src="../icons/journal-text.svg" alt="chapter-list icon" />
+        <h3>Chapter List</h3>
+      </div>
+
+      <table class="chapter-table">
+        <tbody id="chapter-list">
+          <tr data-group="1-20">
+            <td>
+              <a href="pride-and-prejudice-chapter1.html">
+                Chapter 1: A Truth Universally Acknowledged
+              </a>
+            </td>
+            <td>
+              <a href="pride-and-prejudice-chapter2.html">
+                Chapter 2: The Visit
+              </a>
+            </td>
+          </tr>
+          <tr data-group="1-20">
+            <td>
+              <a href="pride-and-prejudice-chapter3.html">
+                Chapter 3: The Assembly Ball
+              </a>
+            </td>
+            <td><a href=""> Chapter 4: Jane and Bingley </a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href=""> Chapter 5: The Lucases </a></td>
+            <td><a href=""> Chapter 6: The Developing Affection </a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href=""> Chapter 7: The Netherfield Invitation </a></td>
+            <td><a href=""> Chapter 8: An Evening at Netherfield </a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href=""> Chapter 9: Mrs. Bennet's Visit </a></td>
+            <td><a href=""> Chapter 10: The Reel and the Book </a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href=""> Chapter 11: Miss Bingley's Pursuit </a></td>
+            <td><a href=""> Chapter 12: The Departure </a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href=""> Chapter 13: Mr. Collins Arrives </a></td>
+            <td><a href=""> Chapter 14: A Dinner with Mr. Collins </a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href=""> Chapter 15: Mr. Wickham's Introduction </a></td>
+            <td><a href=""> Chapter 16: Wickham's Tale </a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href=""> Chapter 17: The Netherfield Ball </a></td>
+            <td><a href=""> Chapter 18: The Ball </a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href=""> Chapter 19: Mr. Collins's Proposal </a></td>
+            <td><a href=""> Chapter 20: Mr. Bennet's Intervention </a></td>
+          </tr>
+
+          <tr data-group="21-40">
+            <td><a href=""> Chapter 21: The Letter from Netherfield </a></td>
+            <td><a href=""> Chapter 22: Charlotte's Engagement </a></td>
+          </tr>
+          <tr data-group="21-40">
+            <td><a href=""> Chapter 23: The Bennets' Reaction </a></td>
+            <td><a href=""> Chapter 24: The Bingley Sisters </a></td>
+          </tr>
+          <tr data-group="21-40">
+            <td><a href=""> Chapter 25: The Gardiners' Arrival </a></td>
+            <td><a href=""> Chapter 26: Jane's Disappointment </a></td>
+          </tr>
+          <tr data-group="21-40">
+            <td><a href=""> Chapter 27: The Journey to Kent </a></td>
+            <td><a href=""> Chapter 28: Arrival at Hunsford </a></td>
+          </tr>
+          <tr data-group="21-40">
+            <td><a href=""> Chapter 29: The Rosings Dinner </a></td>
+            <td><a href=""> Chapter 30: The First Weeks </a></td>
+          </tr>
+          <tr data-group="21-40">
+            <td><a href=""> Chapter 31: Colonel Fitzwilliam </a></td>
+            <td><a href=""> Chapter 32: Darcy's Visits </a></td>
+          </tr>
+          <tr data-group="21-40">
+            <td><a href=""> Chapter 33: The Piano Forte </a></td>
+            <td><a href=""> Chapter 34: The Proposal </a></td>
+          </tr>
+          <tr data-group="21-40">
+            <td><a href=""> Chapter 35: The Letter </a></td>
+            <td><a href=""> Chapter 36: Re-evaluation </a></td>
+          </tr>
+          <tr data-group="21-40">
+            <td><a href=""> Chapter 37: Leaving Rosings </a></td>
+            <td><a href=""> Chapter 38: The Farewell </a></td>
+          </tr>
+          <tr data-group="21-40">
+            <td><a href=""> Chapter 39: Return to Longbourn </a></td>
+            <td><a href=""> Chapter 40: News of the Militia </a></td>
+          </tr>
+
+          <tr data-group="41-61">
+            <td><a href=""> Chapter 41: Lydia's Departure </a></td>
+            <td><a href=""> Chapter 42: The Visit to Pemberley </a></td>
+          </tr>
+          <tr data-group="41-61">
+            <td><a href=""> Chapter 43: Arrival at Pemberley </a></td>
+            <td><a href=""> Chapter 44: The Meeting with Darcy </a></td>
+          </tr>
+          <tr data-group="41-61">
+            <td><a href=""> Chapter 45: The Gardiners' Impression </a></td>
+            <td><a href=""> Chapter 46: The Letters of Ruin </a></td>
+          </tr>
+          <tr data-group="41-61">
+            <td><a href=""> Chapter 47: The Flight of Lydia </a></td>
+            <td><a href=""> Chapter 48: Waiting for News </a></td>
+          </tr>
+          <tr data-group="41-61">
+            <td><a href=""> Chapter 49: Mr. Gardiner's Letter </a></td>
+            <td><a href=""> Chapter 50: The Bennets' Relief </a></td>
+          </tr>
+          <tr data-group="41-61">
+            <td><a href=""> Chapter 51: Lydia's Return </a></td>
+            <td><a href=""> Chapter 52: The Secret Unraveled </a></td>
+          </tr>
+          <tr data-group="41-61">
+            <td><a href=""> Chapter 53: The Bingley Return </a></td>
+            <td><a href=""> Chapter 54: The Dinner at Longbourn </a></td>
+          </tr>
+          <tr data-group="41-61">
+            <td><a href=""> Chapter 55: The Engagement </a></td>
+            <td><a href=""> Chapter 56: Lady Catherine's Visit </a></td>
+          </tr>
+          <tr data-group="41-61">
+            <td><a href=""> Chapter 57: The Rumours </a></td>
+            <td><a href=""> Chapter 58: The Second Proposal </a></td>
+          </tr>
+          <tr data-group="41-61">
+            <td><a href=""> Chapter 59: The Bennets' Joy </a></td>
+            <td><a href=""> Chapter 60: The Resolution </a></td>
+          </tr>
+          <tr data-group="41-61">
+            <td><a href=""> Chapter 61: Happily Ever After </a></td>
+            <td><a href=""> </a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="container-footer">
+        <button id="prevBtn" type="button">Previous</button>
+
+        <select name="chapter" id="chapter-number">
+          <option value="1-20">Chapter: 1-20</option>
+          <option value="21-40">Chapter: 21-40</option>
+          <option value="41-61">Chapter: 41-61</option>
+        </select>
+
+        <button id="nextBtn" type="button">Next</button>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <img src="../image/logo.png" alt="Logo" class="footer-logo" />
+          <p>
+            Discover your next story and explore novels worth getting lost in.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Explore</h3>
+          <a href="home.html">Home</a>
+          <a href="browse.html">Browse</a>
+          <a href="library.html">My Library</a>
+          <a href="ranking.html">Rankings</a>
+        </div>
+
+        <div class="footer-section">
+          <h3>About</h3>
+          <a href="about-us.html">About Us</a>
+          <a href="contact-us.html">Contact</a>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Novel Library. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- RATING MODAL -->
+    <div class="rating-modal-overlay" id="ratingModalOverlay">
+      <div class="rating-modal">
+        <div class="rating-modal-header">
+          <h3>Rate this Book</h3>
+          <button id="closeRatingModalBtn" class="close-btn">&times;</button>
+        </div>
+        <div class="rating-modal-body">
+          <p>How would you rate <strong>Pride & Prejudice</strong>?</p>
+          <input
+            type="range"
+            min="0.5"
+            max="5"
+            step="0.5"
+            value="0"
+            class="star-rating"
+            id="modalRatingSlider"
+          />
+        </div>
+        <div class="rating-modal-footer">
+          <button id="cancelRatingBtn" class="btn btn-secondary">Cancel</button>
+          <button id="submitRatingBtn" class="btn btn-primary">
+            Submit Rating
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/name-change.js"></script>
+    <script src="../javascript/library_novelpage.js"></script>
+    <script src="../javascript/rating.js"></script>
+    <script src="../javascript/logout.js"></script>
+  </body>
+</html>
