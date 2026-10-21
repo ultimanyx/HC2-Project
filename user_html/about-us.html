@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us · NovelNest</title>
+
+    <link rel="stylesheet" href="../css/about-us.css" />
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="../image/logo-nobackground-circle.png"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="#" class="nav-logo">
+        <img src="../image/logo.png" alt="Logo" />
+      </a>
+      <div class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="browse.html">Browse</a>
+        <a href="library.html">My Library</a>
+        <a href="ranking.html">Ranking</a>
+
+        <div class="nav-search">
+          <input type="text" placeholder="Search..." />
+          <button type="button" aria-label="Search">
+            <img src="../icons/search.svg" alt="search-btn" />
+          </button>
+        </div>
+
+        <div class="nav-user-dropdown">
+          <div class="nav-user" tabindex="0" role="button" aria-haspopup="true">
+            <img
+              src="../icons/person-circle.svg"
+              class="user-icon"
+              alt="User-Icon"
+            />
+            <span id="readerName">Welcome User</span>
+            <span class="dropdown-arrow"
+              ><img src="../icons/caret-down-fill.svg" alt="triangle-down"
+            /></span>
+          </div>
+
+          <div class="dropdown-menu" role="menu">
+            <div class="dropdown-divider"></div>
+            <a
+              href="#"
+              role="menuitem"
+              class="logout-item"
+              id="logout"
+              data-role="reader"
+              >Logout</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Editorial Header -->
+    <header class="about-header">
+      <span class="eyebrow">Our Story</span>
+      <h1>We believe good stories shouldn't be locked away.</h1>
+      <p class="intro-text">
+        NovelNest started with a simple frustration: the rising cost of reading.
+        We wanted to build a place where readers could explore thousands of
+        novels for free, without compromising the livelihood of the writers who
+        create them.
+      </p>
+    </header>
+
+    <!-- The Narrative -->
+    <section class="about-content">
+      <div class="text-column">
+        <h2>The Problem with Paywalls</h2>
+        <p>
+          In recent years, the internet became a place where you had to
+          subscribe to five different platforms just to read a few chapters. We
+          hated it. We also knew that authors deserved to be paid for their time
+          and creativity.
+        </p>
+        <p>
+          So, we asked ourselves: what if we could make the reading experience
+          completely free for the user, while still generating fair revenue for
+          the author?
+        </p>
+
+        <h2>How NovelNest Works</h2>
+        <p>
+          We introduced a simple, ad-supported model. When you read a chapter,
+          you'll occasionally see a brief advertisement. The revenue from those
+          ads goes directly back to the authors. This means readers never have
+          to pay a dime, and writers get paid based on how much their stories
+          are actually being read.
+        </p>
+        <p>
+          It’s a quiet, sustainable ecosystem. No aggressive subscription
+          pop-ups. No locked chapters. Just you, the reader, and the story.
+        </p>
+      </div>
+
+      <div class="side-column">
+        <div class="manifesto-card">
+          <h3>Our Principles</h3>
+          <ul>
+            <li>
+              <strong>Reading is free.</strong> Always. No hidden fees or
+              premium tiers.
+            </li>
+            <li>
+              <strong>Authors are paid.</strong> Ad revenue is shared
+              transparently with the writers.
+            </li>
+            <li>
+              <strong>Quality over noise.</strong> We manually review
+              submissions to ensure a great reading experience.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-numbers">
+      <div class="number-item">
+        <span class="number">10k+</span>
+        <span class="label">Stories published</span>
+      </div>
+      <div class="number-item">
+        <span class="number">150k+</span>
+        <span class="label">Monthly readers</span>
+      </div>
+      <div class="number-item">
+        <span class="number">2.5k+</span>
+        <span class="label">Active authors</span>
+      </div>
+    </section>
+
+    <section class="about-team">
+      <div class="team-header">
+        <h2>The People Behind NovelNest</h2>
+        <p>
+          We're a small, independent team of readers and writers building the
+          platform we always wanted.
+        </p>
+      </div>
+
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="member-image">
+            <img
+              src="../image/member1.jpeg"
+              alt="Daneil Benidict B. Ellevera"
+            />
+          </div>
+          <div class="member-info">
+            <h3>Daneil Benidict B. Ellevera</h3>
+            <span class="role">Project Manager</span>
+          </div>
+        </div>
+
+        <div class="team-member">
+          <div class="member-image">
+            <img src="../image/member3.jpeg" alt="Deejay S. Escobido" />
+          </div>
+          <div class="member-info">
+            <h3>Deejay S. Escobido</h3>
+            <span class="role">Lead Front-end Developer – HTML/CSS</span>
+          </div>
+        </div>
+
+        <div class="team-member">
+          <div class="member-image">
+            <img src="../image/member2.jpeg" alt="Reymark Q. Quiloman" />
+          </div>
+          <div class="member-info">
+            <h3>Reymark Q. Quiloman</h3>
+            <span class="role">JavaScript Developer – Logic/Interactivity</span>
+          </div>
+        </div>
+
+        <div class="team-member">
+          <div class="member-image">
+            <img src="../image/team4.jpg" alt="Ashley Jane D. Obida" />
+          </div>
+          <div class="member-info">
+            <h3>Ashley Jane D. Obida</h3>
+            <span class="role">QA Tester / Content Creator</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Closing Note -->
+    <section class="about-footer">
+      <p>
+        Whether you're here to escape into a fantasy world for an afternoon or
+        to build a following as a writer, we're glad you're here.
+      </p>
+      <p class="signature">— The NovelNest Team</p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section brand-section">
+          <img src="../image/logo.png" alt="Logo" class="footer-logo" />
+          <p>
+            Discover your next story and explore novels worth getting lost in.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Explore</h3>
+          <a href="home.html">Home</a>
+          <a href="browse.html">Browse</a>
+          <a href="library.html">My Library</a>
+          <a href="ranking.html">Ranking</a>
+        </div>
+
+        <div class="footer-section">
+          <h3>Support</h3>
+          <a href="about-us.html">About Us</a>
+          <a href="#">Contact</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Novel Library. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/name-change.js"></script>
+    <script src="../javascript/logout.js"></script>
+  </body>
+</html>

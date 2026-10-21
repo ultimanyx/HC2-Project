@@ -1,0 +1,520 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+/* Root variables */
+:root {
+  --background: #f8f6f1;
+  --foreground: #1a1826;
+  --card-background: #ffffff;
+  --primary: #b8721f;
+  --secondary: #ede9e1;
+  --muted-foreground: #6b6680;
+  --border: rgba(26, 24, 38, 0.1);
+  --input-background: #ede9e1;
+  --ring: #b8721f;
+  --focus-ring: rgba(184, 114, 31, 0.18);
+  --destructive: #dc2626;
+  --footer-background: #1a1826;
+  --footer-foreground: #ffffff;
+  --footer-muted: #d8d0c8;
+  --font-body: "Plus_Jakarta_Sans", sans-serif;
+  --font-heading: "Fraunces", serif;
+  --boxshadow:
+    0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
+}
+
+/* Fonts */
+@font-face {
+  font-family: "Plus_Jakarta_Sans";
+  src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("../font/Fraunces/static/Fraunces_72pt-Regular.ttf")
+    format("truetype");
+}
+
+/* Body */
+body {
+  font-family: var(--font-body);
+  background-color: var(--background);
+  color: var(--foreground);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* =========================================
+   NAVBAR (Standard)
+   ========================================= */
+.navbar {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  background-color: var(--card-background);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo img {
+  width: 40px;
+  height: auto;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links a {
+  color: var(--foreground);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px 0;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+/* =========================================
+   FIXED SEARCH BAR
+   ========================================= */
+.nav-search {
+  width: 220px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background-color: var(--input-background);
+  overflow: hidden;
+}
+
+.nav-search input {
+  flex: 1;
+  padding: 0 15px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  min-width: 0; /* Prevents input from pushing the button out */
+}
+
+.nav-search button {
+  width: 42px;
+  height: 100%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  /* FIX: Center the icon and remove default padding */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.nav-search button img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  display: block; /* Removes weird inline spacing */
+}
+
+/* =========================================
+   USER DROPDOWN
+   ========================================= */
+.nav-user-dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.nav-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-size: 14px;
+}
+
+.nav-user:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.user-icon {
+  width: 25px;
+  height: 25px;
+}
+
+.dropdown-arrow img {
+  width: 12px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 160px;
+  background: var(--card-background);
+  border-radius: 12px;
+  padding: 8px 0;
+  box-shadow: var(--boxshadow);
+  border: 1px solid var(--border);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: 0.2s ease;
+  z-index: 1000;
+}
+
+.nav-user-dropdown:hover .dropdown-menu,
+.nav-user-dropdown:focus-within .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu a {
+  display: flex;
+  padding: 10px 18px;
+  color: var(--foreground);
+  font-size: 0.9rem;
+}
+
+.dropdown-menu .logout-item {
+  color: var(--destructive);
+}
+
+/* =========================================
+   EDITORIAL ABOUT PAGE STYLES
+   ========================================= */
+
+.about-header {
+  max-width: 800px;
+  margin: 80px auto 60px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--primary);
+  margin-bottom: 16px;
+}
+
+.about-header h1 {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  line-height: 1.2;
+  color: var(--foreground);
+  margin-bottom: 24px;
+}
+
+.intro-text {
+  font-size: 1.2rem;
+  color: var(--muted-foreground);
+  line-height: 1.7;
+}
+
+/* Two Column Layout */
+.about-content {
+  max-width: 1000px;
+  margin: 0 auto 80px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.text-column h2 {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  color: var(--foreground);
+  margin: 40px 0 16px;
+}
+
+.text-column h2:first-child {
+  margin-top: 0;
+}
+
+.text-column p {
+  font-size: 1.05rem;
+  color: var(--muted-foreground);
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+
+/* Side Column Card */
+.manifesto-card {
+  background-color: var(--secondary);
+  padding: 30px;
+  border-radius: 12px;
+  border-left: 4px solid var(--primary);
+}
+
+.manifesto-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: var(--foreground);
+}
+
+.manifesto-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.manifesto-card li {
+  font-size: 1rem;
+  color: #4b4560;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  position: relative;
+  padding-left: 16px;
+}
+
+.manifesto-card li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+}
+
+.manifesto-card strong {
+  color: var(--foreground);
+}
+
+/* Stats Band */
+.about-numbers {
+  background-color: var(--card-background);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+}
+
+.number-item {
+  text-align: center;
+}
+
+.number-item .number {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 4px;
+}
+
+.number-item .label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--primary);
+}
+
+/* =========================================
+   MEET THE TEAM SECTION
+   ========================================= */
+.about-team {
+  max-width: 1100px;
+  margin: 90px auto;
+  padding: 0 20px;
+}
+
+.team-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.team-header h2 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: var(--foreground);
+  margin-bottom: 12px;
+}
+
+.team-header p {
+  font-size: 1.05rem;
+  color: var(--muted-foreground);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.team-member {
+  background-color: var(--card-background);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.team-member:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--boxshadow);
+}
+
+.member-image {
+  width: 100%;
+  height: 280px;
+  background-color: var(--primary);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.member-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+/* Member info: name + position only */
+.member-info {
+  padding: 20px 24px;
+  text-align: center;
+}
+
+.member-info h3 {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  color: var(--foreground);
+  margin-bottom: 4px;
+}
+
+.member-info .role {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0;
+}
+
+/* Closing Note */
+.about-footer {
+  max-width: 700px;
+  margin: 80px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.about-footer p {
+  font-size: 1.15rem;
+  color: var(--muted-foreground);
+  margin-bottom: 12px;
+}
+
+.about-footer .signature {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  color: var(--foreground);
+  margin-top: 24px;
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+.footer {
+  background-color: var(--footer-background);
+  color: var(--footer-foreground);
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
+  padding: 50px 60px;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-section h3 {
+  margin-bottom: 15px;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.footer-logo {
+  width: 50px;
+  margin-bottom: 12px;
+}
+
+.footer-section p {
+  max-width: 280px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--footer-muted);
+}
+
+.footer-section a {
+  width: fit-content;
+  margin-bottom: 9px;
+  color: var(--footer-muted);
+  font-size: 13px;
+  transition: color 0.2s ease;
+}
+
+.footer-section a:hover {
+  color: var(--primary);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--footer-muted);
+}
