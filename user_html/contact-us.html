@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us · NovelNest</title>
+
+    <link rel="stylesheet" href="../css/contact-us.css" />
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="../image/logo-nobackground-circle.png"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="#" class="nav-logo">
+        <img src="../image/logo.png" alt="Logo" />
+      </a>
+      <div class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="browse.html">Browse</a>
+        <a href="library.html">My Library</a>
+        <a href="ranking.html">Ranking</a>
+
+        <div class="nav-search">
+          <input type="text" placeholder="Search..." />
+          <button type="button" aria-label="Search">
+            <img src="../icons/search.svg" alt="search-btn" />
+          </button>
+        </div>
+
+        <div class="nav-user-dropdown">
+          <div class="nav-user" tabindex="0" role="button" aria-haspopup="true">
+            <img
+              src="../icons/person-circle.svg"
+              class="user-icon"
+              alt="User-Icon"
+            />
+            <span id="readerName">Welcome User</span>
+            <span class="dropdown-arrow"
+              ><img src="../icons/caret-down-fill.svg" alt="triangle-down"
+            /></span>
+          </div>
+
+          <div class="dropdown-menu" role="menu">
+            <div class="dropdown-divider"></div>
+            <a
+              href="#"
+              role="menuitem"
+              class="logout-item"
+              id="logout"
+              data-role="reader"
+              >Logout</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="contact-header">
+      <span class="eyebrow">Get in Touch</span>
+      <h1>We'd love to hear from you.</h1>
+      <p class="intro-text">
+        Whether you're a reader with feedback, an author with a question, or a
+        partner with an idea — drop us a line and we'll get back to you.
+      </p>
+    </header>
+
+    <!-- Contact Form + Info -->
+    <section class="contact-section">
+      <!-- Form -->
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Jane Doe"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="jane@example.com"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <select id="subject" name="subject" required>
+            <option value="" disabled selected>Choose a topic</option>
+            <option value="general">General Inquiry</option>
+            <option value="reader">Reader Support</option>
+            <option value="author">Author Support</option>
+            <option value="partnership">Partnership</option>
+            <option value="bug">Report a Bug</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Tell us what's on your mind..."
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Send Message</button>
+      </form>
+
+      <!-- Side Info -->
+      <aside class="contact-info">
+        <div class="info-card">
+          <h3>Reach Us Directly</h3>
+
+          <div class="info-item">
+            <span class="info-label">Email</span>
+            <span class="info-value">
+              <a href="mailto:hello@novelnest.com">hello@novelnest.com</a>
+            </span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">Author Support</span>
+            <span class="info-value">
+              <a href="mailto:authors@novelnest.com">authors@novelnest.com</a>
+            </span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">Response Time</span>
+            <span class="info-value">Within 24–48 hours</span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">Hours</span>
+            <span class="info-value">Mon–Fri, 9:00 AM – 6:00 PM</span>
+          </div>
+        </div>
+
+        <div class="info-note">
+          <h4>Before you write</h4>
+          <p>
+            Many common questions about reading, publishing, and ad revenue are
+            answered in our About page. It might save you a wait.
+          </p>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section brand-section">
+          <img src="../image/logo.png" alt="Logo" class="footer-logo" />
+          <p>
+            Discover your next story and explore novels worth getting lost in.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Explore</h3>
+          <a href="home.html">Home</a>
+          <a href="browse.html">Browse</a>
+          <a href="library.html">My Library</a>
+          <a href="ranking.html">Ranking</a>
+        </div>
+
+        <div class="footer-section">
+          <h3>Support</h3>
+          <a href="about-us.html">About Us</a>
+          <a href="contact-us.html">Contact</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Novel Library. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/name-change.js"></script>
+    <script src="../javascript/logout.js"></script>
+    <script src="../javascript/contact-us.js"></script>
+  </body>
+</html>
