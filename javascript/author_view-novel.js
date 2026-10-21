@@ -26,19 +26,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ---------- DOM refs ----------
-  const viewMode = document.getElementById("viewMode");
-  const editMode = document.getElementById("editMode");
-  const titleEl = document.getElementById("titleView");
-  const subtitleEl = document.getElementById("subtitleView");
-  const synopsisEl = document.getElementById("synopsisView");
-  const tagsEl = document.getElementById("tagsView");
-  const coverImg = document.querySelector(".novel-cover img");
   const statusBadge = document.querySelector(".action-bar .badge");
   const metaText = document.querySelector(".action-bar .meta-text");
-  const editNovelBtn = document.getElementById("editNovelBtn");
   const saveBtn = document.getElementById("saveEditBtn");
   const resetBtn = document.getElementById("cancelEditBtn");
   const coverZone = document.getElementById("coverUploadZone");
+  const mainCoverImg = document.querySelector(".novel-cover img"); // Added reference to big image
 
   const editTitle = document.getElementById("editTitle");
   const editSubtitle = document.getElementById("editSubtitle");
@@ -103,40 +96,11 @@ document.addEventListener("DOMContentLoaded", () => {
     return new Date(ts).toLocaleDateString();
   }
 
-  // ---------- Render view mode ----------
-  function renderView() {
-    if (titleEl) titleEl.textContent = novel.title || "";
-    if (subtitleEl) subtitleEl.textContent = novel.subtitle || "";
-    if (synopsisEl) synopsisEl.textContent = novel.synopsis || "";
-    if (coverImg && novel.coverImage) coverImg.src = novel.coverImage;
-
-    if (tagsEl) {
-      tagsEl.innerHTML = (novel.tags || [])
-        .map((t) => `<span class="tag">${escapeHtml(t)}</span>`)
-        .join("");
-    }
-
-    if (statusBadge) {
-      const s = normalizeStatus(novel.status);
-      statusBadge.textContent = STATUS_TO_LABEL[s];
-      statusBadge.className = `badge ${STATUS_BADGE_CLASS[s] || "active"}`;
-    }
-
-    if (metaText && novel.updatedAt) {
-      metaText.textContent = `Last updated ${timeAgo(novel.updatedAt)}`;
-    }
-
-    document.title = `${novel.title} · View Novel`;
-    wireAddChapterButton();
-  }
-
-  // ---------- Render chapters ----------
+  // ---------- Render Chapter Table ----------
   function renderChapters() {
     const tbody = document.getElementById("chapterTableBody");
     if (!tbody) return;
 
-    // If `novel.chapters` is NOT a real array (e.g., seed-0 stores the
-    // chapter *count* as a number), leave the hardcoded demo rows alone.
     if (!Array.isArray(novel.chapters)) return;
 
     const chapters = novel.chapters;
@@ -151,16 +115,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     chapters.forEach((ch) => {
       const tr = document.createElement("tr");
+
+      const chStatus = String(ch.status || "published").toLowerCase();
+      let badgeClass = "active";
+      let badgeText = "Published";
+
+      if (chStatus === "draft") {
+        badgeClass = "draft";
+        badgeText = "Draft";
+      } else if (chStatus === "pending") {
+        badgeClass = "pending";
+        badgeText = "Pending Review";
+      }
+
       tr.innerHTML = `
       <td>${ch.number ?? ""}</td>
       <td><strong>${escapeHtml(ch.title || "Untitled")}</strong></td>
-      <td><span class="badge ${ch.status === "draft" ? "draft" : "active"}">
-        ${ch.status === "draft" ? "Draft" : "Published"}
-      </span></td>
+      <td><span class="badge ${badgeClass}">${badgeText}</span></td>
       <td>${ch.words || "—"}</td>
       <td>${new Date(ch.lastUpdated || Date.now()).toLocaleDateString()}</td>
       <td>
-        <button class="btn btn-sm edit-chapter-btn"   data-chapter="${ch.number}">Edit</button>
+        <button class="btn btn-sm edit-chapter-btn" data-chapter="${ch.number}">Edit</button>
         <button class="btn btn-sm btn-danger delete-chapter-btn" data-chapter="${ch.number}">Delete</button>
       </td>`;
       tbody.appendChild(tr);
@@ -181,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
     else btn.onclick = () => (location.href = url);
   }
 
-  // ---------- Edit mode plumbing ----------
+  // ---------- Edit Form / Saving ----------
   let pendingCoverData = null;
 
   function renderCoverZone() {
@@ -198,33 +173,44 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function populateEditForm() {
-    editTitle.value = novel.title || "";
-    editSubtitle.value = novel.subtitle || "";
-    editGenre.value = novel.genre || "Fantasy";
-    editTags.value = (novel.tags || []).join(", ");
-    editSynopsis.value = novel.synopsis || "";
-    editStatus.value = STATUS_TO_LABEL[normalizeStatus(novel.status)];
+    let tagsString = "";
+    if (Array.isArray(novel.tags)) {
+      tagsString = novel.tags.join(", ");
+    } else if (novel.tags) {
+      tagsString = String(novel.tags);
+    }
+
+    // Update text fields
+    if (editTitle) editTitle.value = novel.title || "";
+    if (editSubtitle) editSubtitle.value = novel.subtitle || "";
+    if (editGenre) editGenre.value = novel.genre || "Fantasy";
+    if (editTags) editTags.value = tagsString;
+    if (editSynopsis) editSynopsis.value = novel.synopsis || "";
+    if (editStatus)
+      editStatus.value = STATUS_TO_LABEL[normalizeStatus(novel.status)];
+
+    // Update status badge & time
+    if (statusBadge) {
+      const s = normalizeStatus(novel.status);
+      statusBadge.textContent = STATUS_TO_LABEL[s];
+      statusBadge.className = `badge ${STATUS_BADGE_CLASS[s] || "active"}`;
+    }
+    if (metaText && novel.updatedAt) {
+      metaText.textContent = `Last updated ${timeAgo(novel.updatedAt)}`;
+    }
+
+    // Update the large cover image on the left
+    if (mainCoverImg && novel.coverImage) {
+      mainCoverImg.src = novel.coverImage;
+    }
+
+    document.title = `${novel.title} · View Novel`;
+
     pendingCoverData = null;
     renderCoverZone();
   }
 
-  function enterEditMode() {
-    populateEditForm();
-    viewMode.hidden = true;
-    editMode.hidden = false;
-    if (editNovelBtn) editNovelBtn.hidden = true;
-  }
-
-  function exitEditMode() {
-    viewMode.hidden = false;
-    editMode.hidden = true;
-    if (editNovelBtn) editNovelBtn.hidden = false;
-    pendingCoverData = null;
-  }
-
-  if (editNovelBtn) editNovelBtn.addEventListener("click", enterEditMode);
-
-  // Reset — revert fields to saved values (does NOT persist)
+  // Reset button (reverts form to saved data)
   if (resetBtn) {
     resetBtn.addEventListener("click", () => {
       populateEditForm();
@@ -237,7 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Save — persist + re-render + reflect on All Novels
+  // Save button
   if (saveBtn) {
     saveBtn.addEventListener("click", () => {
       const newTitle = editTitle.value.trim();
@@ -271,16 +257,15 @@ document.addEventListener("DOMContentLoaded", () => {
       } catch (err) {
         Swal.fire({
           title: "Couldn't save",
-          text: "Storage quota exceeded — the cover image is probably too large. Try a smaller file.",
+          text: "Storage quota exceeded — the cover image is probably too large. Try a smaller image.",
           icon: "error",
         });
         return;
       }
 
       novel = updated;
-      renderView();
-      renderChapters();
-      exitEditMode();
+      populateEditForm(); // Re-renders form fields & the large cover image
+      renderChapters(); // Re-renders chapters table
 
       Swal.fire({
         icon: "success",
@@ -298,6 +283,13 @@ document.addEventListener("DOMContentLoaded", () => {
   coverInput.style.display = "none";
   document.body.appendChild(coverInput);
 
+  // Allow clicking the big image on the left to upload
+  if (mainCoverImg) {
+    mainCoverImg.style.cursor = "pointer";
+    mainCoverImg.addEventListener("click", () => coverInput.click());
+  }
+
+  // Allow clicking the upload zone on the right to upload
   if (coverZone) {
     coverZone.style.cursor = "pointer";
     coverZone.addEventListener("click", () => coverInput.click());
@@ -323,6 +315,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ---------- Initial paint ----------
-  renderView();
+  populateEditForm(); // Fill the form immediately on page load
   renderChapters();
+  wireAddChapterButton();
 });

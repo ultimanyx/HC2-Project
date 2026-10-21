@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shadows of the Crown · View Novel</title>
+    <title>View Novel</title>
     <link rel="stylesheet" href="../css/author_view-novel.css" />
     <link rel="stylesheet" href="../css/sweetalert2.min.css" />
     <link
@@ -55,13 +55,6 @@
             <span class="badge active">Ongoing</span>
             <span class="meta-text">Last updated 2 days ago</span>
           </div>
-          <button
-            class="btn btn-outline btn-sm"
-            id="editNovelBtn"
-            style="margin-left: auto"
-          >
-            Edit Novel
-          </button>
         </div>
 
         <section class="novel-header">
@@ -73,29 +66,8 @@
           </div>
 
           <div class="novel-details">
-            <div id="viewMode">
-              <h2 id="titleView">Shadows of the Crown</h2>
-              <p class="novel-subtitle" id="subtitleView">
-                A Tale of Fire and Blood
-              </p>
-
-              <div class="tags-row" id="tagsView">
-                <span class="tag">enemies to lovers</span>
-                <span class="tag">magic</span>
-                <span class="tag">adventure</span>
-              </div>
-
-              <h3 class="section-title">Synopsis</h3>
-              <p class="synopsis" id="synopsisView">
-                In a kingdom where magic is forbidden and crowns are won by
-                blood, a young outcast discovers she is the last heir to a
-                forgotten throne. Hunted by the very people who murdered her
-                family, she must decide whether to flee or fight — and in doing
-                so, awaken a power that could burn the world to ash.
-              </p>
-            </div>
-
-            <div id="editMode" class="edit-form" hidden>
+            <!-- Edit mode is now always visible -->
+            <div id="editMode" class="edit-form">
               <div class="form-grid-2">
                 <div class="form-group">
                   <label>Title</label>
@@ -199,6 +171,7 @@ In a kingdom where magic is forbidden and crowns are won by blood, a young outca
               </tr>
             </thead>
             <tbody id="chapterTableBody">
+              <!-- Hardcoded rows left intact -->
               <tr>
                 <td>1</td>
                 <td><strong>The Fall of House Veyra</strong></td>
@@ -247,7 +220,7 @@ In a kingdom where magic is forbidden and crowns are won by blood, a young outca
               <tr>
                 <td>4</td>
                 <td><strong>Shadows in the Keep</strong></td>
-                <td><span class="badge paused">Broken Content</span></td>
+                <td><span class="badge active">Broken Content</span></td>
                 <td>1,224</td>
                 <td>2 weeks ago</td>
                 <td>
@@ -277,7 +250,7 @@ In a kingdom where magic is forbidden and crowns are won by blood, a young outca
               <tr>
                 <td>6</td>
                 <td><strong>Where the River Ends</strong></td>
-                <td><span class="badge pending">Pending Review</span></td>
+                <td><span class="badge draft">Draft</span></td>
                 <td>2,750</td>
                 <td>3 days ago</td>
                 <td>
