@@ -60,7 +60,7 @@ function toggleLibraryBook(book) {
 }
 
 /* ============================================================
-   NOVEL PAGE — CHAPTER NAVIGATION
+   NOVEL PAGE — DYNAMIC CHAPTER NAVIGATION
    ============================================================ */
 
 const chapterSelect = document.getElementById("chapter-number");
@@ -68,35 +68,59 @@ const previousButton = document.getElementById("prevBtn");
 const nextButton = document.getElementById("nextBtn");
 const chapterRows = document.querySelectorAll("#chapter-list tr");
 
-const chapterGroups = ["1-20", "21-40", "41-47"];
-
 if (chapterSelect && previousButton && nextButton && chapterRows.length > 0) {
+  // 1. Get total chapters from the body data attribute, or count rows as fallback
+  const bodyElement = document.body;
+  let totalChapters = parseInt(bodyElement.dataset.totalChapters) || 0;
+
+  if (totalChapters === 0) {
+    // Fallback: If no data attribute, just count unique chapter rows
+    totalChapters = chapterRows.length;
+  }
+
+  // 2. Generate the groups dynamically (e.g., 1-20, 21-40, 41-60, etc.)
+  const chapterGroups = [];
+  const groupSize = 20; // Set to 20 chapters per page group
+
+  for (let i = 1; i <= totalChapters; i += groupSize) {
+    let end = i + groupSize - 1;
+    if (end > totalChapters) end = totalChapters;
+    chapterGroups.push(`${i}-${end}`);
+  }
+
+  // 3. Build the dropdown options dynamically
+  chapterSelect.innerHTML = "";
+  chapterGroups.forEach((group, index) => {
+    const option = document.createElement("option");
+    option.value = group;
+    option.textContent = `Chapter: ${group}`;
+    chapterSelect.appendChild(option);
+  });
+
+  // 4. Function to switch between groups
   function showChapterGroup(group) {
+    // Hide all rows first
+    for (let i = 0; i < chapterRows.length; i++) {
+      chapterRows[i].style.display = "none";
+    }
+
+    // Show rows that match the selected group
     for (let i = 0; i < chapterRows.length; i++) {
       if (chapterRows[i].dataset.group === group) {
         chapterRows[i].style.display = "";
-      } else {
-        chapterRows[i].style.display = "none";
       }
     }
 
     chapterSelect.value = group;
 
+    // Disable/Enable Previous and Next buttons based on the current group's index
     const currentIndex = chapterGroups.indexOf(group);
 
-    if (currentIndex === 0) {
-      previousButton.disabled = true;
-    } else {
-      previousButton.disabled = false;
-    }
-
-    if (currentIndex === chapterGroups.length - 1) {
-      nextButton.disabled = true;
-    } else {
-      nextButton.disabled = false;
-    }
+    previousButton.disabled = currentIndex === 0;
+    nextButton.disabled = currentIndex === chapterGroups.length - 1;
   }
 
+  // 5. Event Listeners
   chapterSelect.addEventListener("change", function () {
     showChapterGroup(this.value);
   });
@@ -115,6 +139,7 @@ if (chapterSelect && previousButton && nextButton && chapterRows.length > 0) {
     }
   });
 
+  // Initialize the first group (e.g., 1-20)
   showChapterGroup(chapterGroups[0]);
 }
 

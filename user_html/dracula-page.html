@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dracula</title>
+
+    <link rel="stylesheet" href="../css/novel-page.css" />
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="../image/logo-nobackground-circle.png"
+    />
+  </head>
+  <body 
+  data-book-id="dracula"
+  data-total-chapters="27"
+>
+    <nav class="navbar">
+      <a href="#" class="nav-logo">
+        <img src="../image/logo.png" alt="Logo" />
+      </a>
+      <div class="nav-links">
+        <a href="home.html" id="select">Home</a>
+        <a href="browse.html">Browse</a>
+        <a href="library.html">My Library</a>
+        <a href="ranking.html">Ranking</a>
+
+        <div class="nav-search">
+          <input type="text" placeholder="Search..." />
+          <button type="button" aria-label="Search">
+            <img src="../icons/search.svg" alt="search-btn" />
+          </button>
+        </div>
+
+        <div class="nav-user-dropdown">
+          <div class="nav-user" tabindex="0" role="button" aria-haspopup="true">
+            <img
+              src="../icons/person-circle.svg"
+              class="user-icon"
+              alt="User-Icon"
+            />
+            <span id="readerName">Welcome User</span>
+            <span class="dropdown-arrow"
+              ><img src="../icons/caret-down-fill.svg" alt="triangle-down"
+            /></span>
+          </div>
+
+          <div class="dropdown-menu" role="menu">
+            <div class="dropdown-divider"></div>
+            <a
+              href="#"
+              role="menuitem"
+              class="logout-item"
+              id="logout"
+              data-role="reader"
+              >Logout</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="header-container">
+      <a href="javascript:history.back()" class="back-button">
+        <img src="../icons/back.svg" alt="Back" />
+      </a>
+
+      <img
+        src="../books/Horror(1)/Dracula by Bram Stoker/dracula-9781471141621_lg.jpg"
+        alt="Dracula Cover"
+      />
+      <div class="header">
+        <h1 id="titleBook">Dracula</h1>
+        <span>
+          <img src="../icons/book-half.svg" alt="bookicon" class="book-icon" />
+          <p class="genre">Horror</p>
+        </span>
+        <span>
+          <img
+            src="../icons/journal-text.svg"
+            alt="chaptericon"
+            class="chapter-icon"
+          />
+          <p class="chapter-count">27 Chapters</p>
+        </span>
+        <span>
+          <img src="../icons/author.svg" alt="authoricon" class="author-icon" />
+          <a href="author_profile.html"
+            ><p class="author">Bram Stoker</p></a
+          >
+        </span>
+        <div class="description">
+          <h3>Synopsis</h3>
+          <p>
+            Dracula is an 1897 Gothic horror novel by Irish author Bram Stoker. It introduced the character of Count Dracula and established many conventions of subsequent vampire fantasy. The novel tells the story of Dracula's attempt to move from Transylvania to England so that he may find new blood and spread the undead curse, and of the battle between Dracula and a small group of people led by Professor Abraham Van Helsing.
+          </p>
+        </div>
+
+        <div class="star-display" id="openRatingModalBtn">
+          <p>Rate this Book!</p>
+          <input
+            type="range"
+            min="0.5"
+            max="5"
+            step="0.5"
+            value="0"
+            class="star-rating"
+            id="displayRating"
+            disabled
+          />
+        </div>
+
+        <div class="button-container">
+          <a href="dracula-chapter1.html" class="read-button"
+            >Read First Chapter</a
+          >
+          <a href="#" id="add-library-button">+ Add to Library</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter-container">
+      <div class="container-header">
+        <img src="../icons/journal-text.svg" alt="chapter-list icon" />
+        <h3>Chapter List</h3>
+      </div>
+
+      <table class="chapter-table">
+        <tbody id="chapter-list">
+          <!-- Group 1: 1-20 -->
+          <tr data-group="1-20">
+            <td><a href="dracula-chapter1.html">Chapter 1: Jonathan Harker's Journal</a></td>
+            <td><a href="dracula-chapter2.html">Chapter 2: Jonathan Harker's Journal (Continued)</a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href="dracula-chapter3.html">Chapter 3: Jonathan Harker's Journal (Continued)</a></td>
+            <td><a href="#">Chapter 4: Jonathan Harker's Journal (Continued)</a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href="#">Chapter 5: Letter from Miss Mina Murray to Miss Lucy Westenra</a></td>
+            <td><a href="#">Chapter 6: Mina Murray's Journal</a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href="#">Chapter 7: Cutting from "The Dailygraph"</a></td>
+            <td><a href="#">Chapter 8: Mina Murray's Journal</a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href="#">Chapter 9: Letter, Mina Harker to Lucy Westenra</a></td>
+            <td><a href="#">Chapter 10: Letter, Dr. Seward to Hon. Arthur Holmwood</a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href="#">Chapter 11: Lucy Westenra's Diary</a></td>
+            <td><a href="#">Chapter 12: Dr. Seward's Diary</a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href="#">Chapter 13: Dr. Seward's Diary (Continued)</a></td>
+            <td><a href="#">Chapter 14: Mina Harker's Journal</a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href="#">Chapter 15: Dr. Seward's Diary (Continued)</a></td>
+            <td><a href="#">Chapter 16: Dr. Seward's Diary (Continued)</a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href="#">Chapter 17: Dr. Seward's Diary (Continued)</a></td>
+            <td><a href="#">Chapter 18: Dr. Seward's Diary (Continued)</a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href="#">Chapter 19: Jonathan Harker's Journal</a></td>
+            <td><a href="#">Chapter 20: Jonathan Harker's Journal (Continued)</a></td>
+          </tr>
+
+          <!-- Group 2: 21-27 -->
+          <tr data-group="21-27">
+            <td><a href="#">Chapter 21: Dr. Seward's Diary</a></td>
+            <td><a href="#">Chapter 22: Jonathan Harker's Journal</a></td>
+          </tr>
+          <tr data-group="21-27">
+            <td><a href="#">Chapter 23: Dr. Seward's Diary</a></td>
+            <td><a href="#">Chapter 24: Dr. Seward's Diary (Continued)</a></td>
+          </tr>
+          <tr data-group="21-27">
+            <td><a href="#">Chapter 25: Dr. Seward's Diary</a></td>
+            <td><a href="#">Chapter 26: Dr. Seward's Diary (Continued)</a></td>
+          </tr>
+          <tr data-group="21-27">
+            <td><a href="#">Chapter 27: Mina Harker's Journal</a></td>
+            <td><a href="#"></a></td>
+          </tr>
+          <tr data-group="21-27">
+            <td><a href="#"></a></td>
+            <td><a href="#"></a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="container-footer">
+        <button id="prevBtn" type="button">Previous</button>
+
+        <select name="chapter" id="chapter-number">
+          <option value="1-20">Chapter: 1-20</option>
+          <option value="21-27">Chapter: 21-27</option>
+        </select>
+
+        <button id="nextBtn" type="button">Next</button>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <img src="../image/logo.png" alt="Logo" class="footer-logo" />
+          <p>
+            Discover your next story and explore novels worth getting lost in.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Explore</h3>
+          <a href="home.html">Home</a>
+          <a href="browse.html">Browse</a>
+          <a href="library.html">My Library</a>
+          <a href="ranking.html">Rankings</a>
+        </div>
+
+        <div class="footer-section">
+          <h3>About</h3>
+          <a href="about-us.html">About Us</a>
+          <a href="contact-us.html">Contact</a>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Novel Library. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- RATING MODAL -->
+    <div class="rating-modal-overlay" id="ratingModalOverlay">
+      <div class="rating-modal">
+        <div class="rating-modal-header">
+          <h3>Rate this Book</h3>
+          <button id="closeRatingModalBtn" class="close-btn">&times;</button>
+        </div>
+        <div class="rating-modal-body">
+          <p>How would you rate <strong>Dracula</strong>?</p>
+          <input
+            type="range"
+            min="0.5"
+            max="5"
+            step="0.5"
+            value="0"
+            class="star-rating"
+            id="modalRatingSlider"
+          />
+        </div>
+        <div class="rating-modal-footer">
+          <button id="cancelRatingBtn" class="btn btn-secondary">Cancel</button>
+          <button id="submitRatingBtn" class="btn btn-primary">
+            Submit Rating
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/name-change.js"></script>
+    <script src="../javascript/library_novelpage.js"></script>
+    <script src="../javascript/rating.js"></script>
+    <script src="../javascript/logout.js"></script>
+  </body>
+</html>
