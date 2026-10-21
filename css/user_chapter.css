@@ -1353,6 +1353,83 @@ body {
 .autoscroll.is-playing .autoscroll-icon-pause {
   display: block;
 }
+/* =========================================
+   BOOKMARK — SELECT MODE UI + READING HIGHLIGHT
+   ========================================= */
+
+.bookmark-btn.selecting {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+  animation: bookmarkSelectPulse 1.4s ease-in-out infinite;
+}
+
+.bookmark-btn.selecting .bookmark-icon {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%)
+    hue-rotate(0deg) brightness(200%) contrast(100%);
+}
+
+@keyframes bookmarkSelectPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(184, 114, 31, 0.55);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(184, 114, 31, 0);
+  }
+}
+
+.bookmark-hint {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(184, 114, 31, 0.4);
+  z-index: 5000;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  max-width: 90vw;
+  text-align: center;
+}
+
+.bookmark-hint.active {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.reading-highlight {
+  background-color: rgba(184, 114, 31, 0.35);
+  border-radius: 3px;
+  padding: 1px 2px;
+  box-shadow: 0 0 0 2px rgba(184, 114, 31, 0.15);
+  animation: readingHighlightPulse 1.5s ease-in-out;
+}
+
+.reading-highlight-block {
+  background-color: rgba(184, 114, 31, 0.12);
+  border-left: 3px solid var(--primary);
+  border-radius: 4px;
+  padding-left: 10px;
+}
+
+@keyframes readingHighlightPulse {
+  0% {
+    background-color: rgba(184, 114, 31, 0.7);
+  }
+  100% {
+    background-color: rgba(184, 114, 31, 0.35);
+  }
+}
 
 /* SweetAlert z-index */
 .swal2-container {

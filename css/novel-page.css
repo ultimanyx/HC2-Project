@@ -676,21 +676,37 @@ a {
   font-size: 15px;
   font-weight: 500;
 }
-
-/* Highlight for the bookmarked chapter */
+/* Latest bookmark - Orange Pill + Icon */
 .bookmarked-chapter-highlight {
-  background-color: rgba(184, 114, 31, 0.15); /* Light primary color */
-  color: var(--primary) !important; /* Forces the text to turn orange */
+  background-color: rgba(184, 114, 31, 0.15);
+  color: var(--primary) !important;
   font-weight: 700 !important;
   border-radius: 6px;
   padding: 4px 10px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   border: 1px solid rgba(184, 114, 31, 0.3);
   transition: all 0.2s ease;
 }
 
 .bookmarked-chapter-highlight:hover {
   background-color: rgba(184, 114, 31, 0.25);
+}
+
+.chapter-has-bookmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* The icon itself */
+.chapter-bookmark-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  filter: brightness(0) saturate(100%) invert(48%) sepia(50%) saturate(1200%)
+    hue-rotate(15deg) brightness(90%) contrast(90%);
 }
 
 .container-footer {

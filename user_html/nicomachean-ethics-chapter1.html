@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NICOMACHEAN ETHICS CH:1</title>
+
+    <link rel="stylesheet" href="../css/user_chapter.css" />
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="../image/logo-nobackground-circle.png"
+    />
+  </head>
+  <body
+    data-book-id="nicomachean-ethics"
+    data-book-title="Nicomachean Ethics"
+    data-book-author="Aristotle"
+    data-book-cover="../books/Action/Nicomachean_Ethics by Aristotle (Unzipped Files)/Nicomachean_Ethics- cover art.png"
+    data-book-rating="4.6"
+    data-total-chapters="10"
+  >
+    <nav class="navbar">
+      <a href="#" class="nav-logo">
+        <img src="../image/logo.png" alt="Logo" />
+      </a>
+      <div class="nav-links">
+        <a href="home.html" id="select">Home</a>
+        <a href="browse.html">Browse</a>
+        <a href="library.html">My Library</a>
+        <a href="ranking.html">Ranking</a>
+
+        <div class="nav-search">
+          <input type="text" placeholder="Search..." />
+          <button type="button" aria-label="Search">
+            <img src="../icons/search.svg" alt="search-btn" />
+          </button>
+        </div>
+
+        <div class="nav-user-dropdown">
+          <div class="nav-user" tabindex="0" role="button" aria-haspopup="true">
+            <img
+              src="../icons/person-circle.svg"
+              class="user-icon"
+              alt="User-Icon"
+            />
+            <span id="readerName">Welcome User</span>
+            <span class="dropdown-arrow"
+              ><img src="../icons/caret-down-fill.svg" alt="triangle-down"
+            /></span>
+          </div>
+
+          <div class="dropdown-menu" role="menu">
+            <div class="dropdown-divider"></div>
+            <a
+              href="#"
+              role="menuitem"
+              class="logout-item"
+              id="logout"
+              data-role="reader"
+              >Logout</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="chapter-container">
+      <div class="top-button">
+        <a href="javascript:history.back()" class="back-button">
+          <img src="../icons/back.svg" alt="Back" />
+        </a>
+
+        <button
+          class="bookmark-btn"
+          id="bookmarkBtn"
+          aria-label="Bookmark this chapter"
+        >
+          <img
+            src="../icons/bookmark.svg"
+            alt="bookmark"
+            class="bookmark-icon"
+          />
+          <span class="bookmark-text">Bookmark</span>
+        </button>
+
+        <button
+          class="report-btn"
+          id="reportBtn"
+          aria-label="Report issue with this chapter"
+        >
+          <img src="../icons/flag.svg" alt="report flag" class="report-icon" />
+          Report
+        </button>
+      </div>
+
+      <div class="chapter-header">
+        <div class="header-left">
+          <h2 id="chapter-number">Book 1</h2>
+          <h2 id="chapter-title">The Good for Man</h2>
+        </div>
+      </div>
+
+      <div id="chapter-content">
+        <p>
+          Every art and every inquiry, and similarly every action and pursuit,
+          is thought to aim at some good; and for this reason the good has
+          rightly been declared to be that at which all things aim. But a
+          certain difference is found among ends; some are activities, others
+          are products apart from the activities that produce them. Where there
+          are ends apart from the actions, it is the nature of the products to
+          be better than the activities.
+        </p>
+
+        <p>
+          Now, as there are many actions, arts, and sciences, their ends also
+          are many; the end of the medical art is health, that of shipbuilding a
+          vessel, that of strategy victory, that of economics wealth. But where
+          such arts fall under a single capacity—as bridle-making and the other
+          arts concerned with the equipment of horses fall under the art of
+          riding, and this and every military action under strategy, in the same
+          way other arts fall under yet others—in all of these the ends of the
+          master arts are to be preferred to all the subordinate ends; for it is
+          for the sake of the former that the latter are pursued.
+        </p>
+
+        <p>
+          If, then, there is some end of the things we do, which we desire for
+          its own sake (everything else being desired for the sake of this), and
+          if we do not choose everything for the sake of something else (for at
+          that rate the process would go on to infinity, so that our desire
+          would be empty and vain), clearly this must be the good and the chief
+          good. Will not the knowledge of it, then, have a great influence on
+          life? Shall we not, like archers who have a mark to aim at, be more
+          likely to hit upon what is right?
+        </p>
+
+        <p>
+          Let us resume our inquiry and state, in view of the fact that all
+          knowledge and every pursuit aims at some good, what it is that we say
+          political science aims at and what is the highest of all goods
+          achievable by action. Verbally there is very general agreement; for
+          both the general run of men and people of superior refinement say that
+          it is happiness, and identify living well and doing well with being
+          happy; but with regard to what happiness is they differ, and the many
+          do not give the same account as the wise.
+        </p>
+
+        <div class="container-footer">
+          <button id="no-previous" disabled>Previous</button>
+          <button id="nextChapterBtn">Next</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <img src="../image/logo.png" alt="Logo" class="footer-logo" />
+          <p>
+            Discover your next story and explore novels worth getting lost in.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Explore</h3>
+          <a href="home.html">Home</a>
+          <a href="browse.html">Browse</a>
+          <a href="library.html">My Library</a>
+          <a href="ranking.html">Rankings</a>
+        </div>
+
+        <div class="footer-section">
+          <h3>About</h3>
+          <a href="about-us.html">About Us</a>
+          <a href="contact-us.html">Contact</a>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Novel Library. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- AD OVERLAY -->
+    <div class="ad-overlay" id="adOverlay">
+      <div class="ad-card">
+        <div class="ad-header">
+          <button class="volume-btn" id="volumeBtn" aria-label="Unmute ad">
+            <img src="../icons/volume-mute.svg" alt="muted" id="volumeIcon" />
+          </button>
+          <div class="ad-timer">
+            <span class="timer-label">Remaining</span>
+            <div class="timer-circle">
+              <span id="timerDisplay">10</span>
+              <span class="timer-suffix">s</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="ad-content" id="adContent"></div>
+
+        <div class="ad-footer">
+          <div class="ad-info">
+            <span><img src="../icons/clock-fill.svg" alt="" /></span> Ad ends in
+            <span id="footerTimer">10</span>s
+          </div>
+          <button class="btn-exit" id="exitBtn">Next Chapter</button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="report-modal-overlay"
+      id="reportModalOverlay"
+      aria-hidden="true"
+    >
+      <div
+        class="report-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="reportModalTitle"
+      >
+        <div class="report-modal-header">
+          <h3 id="reportModalTitle" class="report-modal-title">
+            Report Chapter
+          </h3>
+          <button
+            type="button"
+            class="report-modal-close"
+            id="reportModalClose"
+            aria-label="Close report dialog"
+          >
+            <img src="../icons/x-lg.svg" alt="" />
+          </button>
+        </div>
+
+        <div class="report-modal-body">
+          <label for="reportReason" class="report-modal-label">
+            Reason <span class="required">*</span>
+          </label>
+          <select id="reportReason" class="report-modal-select">
+            <option value="">Select a reason</option>
+            <option value="Broken content">Broken content</option>
+            <option value="Missing content">Missing content</option>
+            <option value="Wrong chapter">Wrong chapter</option>
+            <option value="Inappropriate content">Inappropriate content</option>
+            <option value="Other">Other</option>
+          </select>
+          <p class="report-modal-error" id="reportReasonError" role="alert">
+            Please select a reason.
+          </p>
+
+          <label for="reportDetails" class="report-modal-label">
+            Additional details <span class="optional">(optional)</span>
+          </label>
+          <textarea
+            id="reportDetails"
+            class="report-modal-textarea"
+            placeholder="Tell us anything else that might help…"
+            maxlength="500"
+          ></textarea>
+        </div>
+
+        <div class="report-modal-footer">
+          <button
+            type="button"
+            class="report-modal-btn report-modal-btn-cancel"
+            id="reportModalCancel"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            class="report-modal-btn report-modal-btn-submit"
+            id="reportModalSubmit"
+          >
+            Submit Report
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="autoscroll" id="autoscroll">
+      <button
+        class="autoscroll-btn autoscroll-play"
+        id="autoscrollToggle"
+        aria-label="Start auto-scroll"
+        type="button"
+      >
+        <svg
+          class="autoscroll-icon autoscroll-icon-play"
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          aria-hidden="true"
+        >
+          <polygon points="6,4 20,12 6,20" fill="currentColor" />
+        </svg>
+        <svg
+          class="autoscroll-icon autoscroll-icon-pause"
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          aria-hidden="true"
+        >
+          <rect x="6" y="4" width="4" height="16" fill="currentColor" />
+          <rect x="14" y="4" width="4" height="16" fill="currentColor" />
+        </svg>
+      </button>
+      <button
+        class="autoscroll-btn"
+        id="autoscrollSlower"
+        aria-label="Slower"
+        type="button"
+      >
+        −
+      </button>
+      <span class="autoscroll-speed" id="autoscrollSpeedLabel">2×</span>
+      <button
+        class="autoscroll-btn"
+        id="autoscrollFaster"
+        aria-label="Faster"
+        type="button"
+      >
+        +
+      </button>
+    </div>
+
+    <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/name-change.js"></script>
+    <script src="../javascript/ad.js"></script>
+    <script src="../javascript/bookmark.js"></script>
+    <script src="../javascript/report.js"></script>
+    <script src="../javascript/autoscroll.js"></script>
+    <script src="../javascript/logout.js"></script>
+  </body>
+</html>

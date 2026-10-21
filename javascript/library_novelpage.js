@@ -70,36 +70,33 @@ const chapterRows = document.querySelectorAll("#chapter-list tr");
 
 if (chapterSelect && previousButton && nextButton && chapterRows.length > 0) {
   const chapterGroups = [];
-  const rowsPerGroup = 10; // 10 rows = 20 chapters
+  const rowsPerGroup = 10;
 
-  // Get the exact total chapters from the <body> tag
   const totalChapters = parseInt(document.body.dataset.totalChapters) || 0;
 
   let validRowCount = 0;
 
-  // 1. Assign groups based on valid rows (skipping empty ones)
   for (let i = 0; i < chapterRows.length; i++) {
     const row = chapterRows[i];
 
-    // Check if the row has actual chapter links (ignore empty hrefs)
-    const hasValidLink = Array.from(row.querySelectorAll("a")).some((a) =>
-      a.textContent.trim().match(/Chapter \d+/i),
-    );
+    // FIXED: Check if the row has any TEXT inside its links,
+    // regardless of whether the href is empty or not.
+    const hasText = Array.from(row.querySelectorAll("a")).some((a) => {
+      return a.textContent.trim() !== "";
+    });
 
-    if (!hasValidLink) {
-      // Hide completely empty rows
+    if (!hasText) {
+      // Hide completely empty rows (like the padding row at the bottom)
       row.style.display = "none";
       continue;
     }
 
-    // Calculate which group this row belongs to
     const groupIndex = Math.floor(validRowCount / rowsPerGroup);
     validRowCount++;
 
     let startChapter = groupIndex * 20 + 1;
     let endChapter = (groupIndex + 1) * 20;
 
-    // Clamp the end chapter to the actual total chapters (fixes the 61-80 issue)
     if (totalChapters > 0 && endChapter > totalChapters) {
       endChapter = totalChapters;
     }
@@ -112,7 +109,6 @@ if (chapterSelect && previousButton && nextButton && chapterRows.length > 0) {
     }
   }
 
-  // 2. Build the dropdown options dynamically
   chapterSelect.innerHTML = "";
   chapterGroups.forEach((group) => {
     const option = document.createElement("option");
@@ -121,14 +117,10 @@ if (chapterSelect && previousButton && nextButton && chapterRows.length > 0) {
     chapterSelect.appendChild(option);
   });
 
-  // 3. Function to switch between groups
   function showChapterGroup(group) {
-    // Hide all rows first
     for (let i = 0; i < chapterRows.length; i++) {
       chapterRows[i].style.display = "none";
     }
-
-    // Show rows that match the selected group
     for (let i = 0; i < chapterRows.length; i++) {
       if (chapterRows[i].dataset.group === group) {
         chapterRows[i].style.display = "";
@@ -137,13 +129,11 @@ if (chapterSelect && previousButton && nextButton && chapterRows.length > 0) {
 
     chapterSelect.value = group;
 
-    // Disable/Enable Previous and Next buttons based on the current group's index
     const currentIndex = chapterGroups.indexOf(group);
     previousButton.disabled = currentIndex === 0;
     nextButton.disabled = currentIndex === chapterGroups.length - 1;
   }
 
-  // 4. Event Listeners
   chapterSelect.addEventListener("change", function () {
     showChapterGroup(this.value);
   });
@@ -162,12 +152,11 @@ if (chapterSelect && previousButton && nextButton && chapterRows.length > 0) {
     }
   });
 
-  // Initialize the first group (e.g., 1-20)
   showChapterGroup(chapterGroups[0]);
 }
 
 /* ============================================================
-   NOVEL PAGE — HIGHLIGHT BOOKMARKED CHAPTER
+   NOVEL PAGE — HIGHLIGHT + ICON FOR BOOKMARKED CHAPTER
    ============================================================ */
 
 const bookTitleElement = document.getElementById("titleBook");
@@ -178,33 +167,74 @@ function highlightBookmarkedChapter() {
   const bookTitle = bookTitleElement.textContent.trim();
   const bookId = bookTitle.toLowerCase().replace(/\s+/g, "-");
 
-  // First, remove any existing highlights
   const chapterLinks = document.querySelectorAll("#chapter-list td a");
+
+  // Reset previous state
   chapterLinks.forEach(function (link) {
     link.classList.remove("bookmarked-chapter-highlight");
+    link.classList.remove("chapter-has-bookmark");
+    const icon = link.querySelector(".chapter-bookmark-icon");
+    if (icon) icon.remove();
   });
 
-  // Check if this book has a bookmark
   const bookmarksData = localStorage.getItem(BOOKMARK_KEY);
+  if (!bookmarksData) return;
 
-  if (bookmarksData) {
-    const bookmarks = JSON.parse(bookmarksData);
-    const bookmark = bookmarks[bookId];
+  const allBookmarks = JSON.parse(bookmarksData);
+  const entry = allBookmarks[bookId];
+  if (!entry) return;
 
-    if (bookmark && bookmark.chapter) {
-      chapterLinks.forEach(function (link) {
-        const linkText = link.textContent.trim();
-        const chapterText = linkText.split(":")[0].trim();
-
-        if (chapterText === bookmark.chapter) {
-          link.classList.add("bookmarked-chapter-highlight");
-        }
-      });
-    }
+  // Normalize legacy / new format into a plain list
+  let bookmarks = [];
+  if (entry.bookmarks) {
+    bookmarks = entry.bookmarks;
+  } else if (entry.chapter) {
+    bookmarks = [entry];
   }
+
+  if (bookmarks.length === 0) return;
+
+  // Find all bookmarked chapters AND identify the latest one
+  const chaptersWithBookmarks = new Set();
+  let latestChapter = null;
+  let maxTime = -1;
+
+  bookmarks.forEach(function (bm) {
+    if (bm && bm.chapter) {
+      chaptersWithBookmarks.add(bm.chapter);
+      const time = bm.createdAt || 0;
+      if (time > maxTime) {
+        maxTime = time;
+        latestChapter = bm.chapter;
+      }
+    }
+  });
+
+  if (chaptersWithBookmarks.size === 0) return;
+
+  // Apply styles
+  chapterLinks.forEach(function (link) {
+    const linkText = link.textContent.trim();
+    const chapterText = linkText.split(":")[0].trim();
+
+    if (chaptersWithBookmarks.has(chapterText)) {
+      // 1. All bookmarked chapters get the icon and flex layout
+      link.classList.add("chapter-has-bookmark");
+
+      const img = document.createElement("img");
+      img.src = "../icons/bookmark.svg";
+      img.alt = "bookmarked chapter";
+      img.className = "chapter-bookmark-icon";
+      link.prepend(img);
+
+      // 2. Only the LATEST chapter gets the orange pill highlight
+      if (chapterText === latestChapter) {
+        link.classList.add("bookmarked-chapter-highlight");
+      }
+    }
+  });
 }
 
-// Call on initial page load
 highlightBookmarkedChapter();
 
 /* ============================================================
@@ -217,7 +247,7 @@ if (libraryButton && bookTitleElement) {
   const bookTitle = bookTitleElement.textContent.trim();
 
   let bookAuthor = "Unknown";
-  const authorElement = document.querySelector(".book-author");
+  const authorElement = document.querySelector(".author");
   if (authorElement) bookAuthor = authorElement.textContent.trim();
 
   let bookCover = "";
@@ -253,7 +283,6 @@ if (libraryButton && bookTitleElement) {
     }
   }
 
-  // Call on initial load
   updateLibraryButton();
 
   libraryButton.addEventListener("click", function () {
@@ -292,7 +321,6 @@ if (libraryButton && bookTitleElement) {
    SYNCHRONIZE UI ON BACK/FORWARD NAVIGATION & TAB SWITCHING
    ============================================================ */
 
-// Call when page is restored from Back-Forward Cache (BFCache)
 window.addEventListener("pageshow", function (event) {
   if (event.persisted) {
     if (typeof updateLibraryButton === "function") updateLibraryButton();
@@ -301,7 +329,6 @@ window.addEventListener("pageshow", function (event) {
   }
 });
 
-// Call if localStorage changes in another tab
 window.addEventListener("storage", function (e) {
   if (e.key === BOOKMARK_KEY || e.key === LIBRARY_KEY) {
     if (typeof updateLibraryButton === "function") updateLibraryButton();
@@ -324,7 +351,6 @@ if (bookGrid) {
   const filterButtons = document.querySelectorAll(".filter-btn");
 
   let currentFilter = "all";
-
   function renderLibrary() {
     const books = getLibraryBooks();
 
@@ -372,7 +398,9 @@ if (bookGrid) {
         statusText = "Reading";
       }
 
-      html += '<a href="a-tale-of-two-cities-page.html?book=' + book.id + '">';
+      // Dynamically build the URL using book.id
+      html += '<a href="' + book.id + '-page.html">';
+
       html += '  <div class="book-card">';
       html += '    <div class="book-cover">';
       html +=

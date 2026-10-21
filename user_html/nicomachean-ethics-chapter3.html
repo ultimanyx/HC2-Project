@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NICOMACHEAN ETHICS CH:3</title>
+
+    <link rel="stylesheet" href="../css/user_chapter.css" />
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="../image/logo-nobackground-circle.png"
+    />
+  </head>
+  <body
+    data-book-id="nicomachean-ethics"
+    data-book-title="Nicomachean Ethics"
+    data-book-author="Aristotle"
+    data-book-cover="../books/Action/Nicomachean_Ethics by Aristotle (Unzipped Files)/Nicomachean_Ethics- cover art.png"
+    data-book-rating="4.6"
+    data-total-chapters="10"
+  >
+    <nav class="navbar">
+      <a href="#" class="nav-logo">
+        <img src="../image/logo.png" alt="Logo" />
+      </a>
+      <div class="nav-links">
+        <a href="home.html" id="select">Home</a>
+        <a href="browse.html">Browse</a>
+        <a href="library.html">My Library</a>
+        <a href="ranking.html">Ranking</a>
+
+        <div class="nav-search">
+          <input type="text" placeholder="Search..." />
+          <button type="button" aria-label="Search">
+            <img src="../icons/search.svg" alt="search-btn" />
+          </button>
+        </div>
+
+        <div class="nav-user-dropdown">
+          <div class="nav-user" tabindex="0" role="button" aria-haspopup="true">
+            <img
+              src="../icons/person-circle.svg"
+              class="user-icon"
+              alt="User-Icon"
+            />
+            <span id="readerName">Welcome User</span>
+            <span class="dropdown-arrow"
+              ><img src="../icons/caret-down-fill.svg" alt="triangle-down"
+            /></span>
+          </div>
+
+          <div class="dropdown-menu" role="menu">
+            <div class="dropdown-divider"></div>
+            <a
+              href="#"
+              role="menuitem"
+              class="logout-item"
+              id="logout"
+              data-role="reader"
+              >Logout</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="chapter-container">
+      <div class="top-button">
+        <a href="javascript:history.back()" class="back-button">
+          <img src="../icons/back.svg" alt="Back" />
+        </a>
+
+        <button
+          class="bookmark-btn"
+          id="bookmarkBtn"
+          aria-label="Bookmark this chapter"
+        >
+          <img
+            src="../icons/bookmark.svg"
+            alt="bookmark"
+            class="bookmark-icon"
+          />
+          <span class="bookmark-text">Bookmark</span>
+        </button>
+        <button
+          class="report-btn"
+          id="reportBtn"
+          aria-label="Report issue with this chapter"
+        >
+          <img src="../icons/flag.svg" alt="report flag" class="report-icon" />
+          Report
+        </button>
+      </div>
+      <div class="chapter-header">
+        <div class="header-left">
+          <h2 id="chapter-number">Book 3</h2>
+          <h2 id="chapter-title">Voluntary Action and Choice</h2>
+        </div>
+      </div>
+      <div id="chapter-content">
+        <p>
+          Since virtue is concerned with passions and actions, and on voluntary
+          passions and actions praise and blame are bestowed, on those that are
+          involuntary pardon, and sometimes also pity, to distinguish the
+          voluntary and the involuntary is presumably necessary for those who
+          are studying the nature of virtue, and useful also for legislators
+          with a view to the assigning both of honours and of punishments.
+        </p>
+
+        <p>
+          Those things, then, are thought-involuntary, which take place under
+          compulsion or owing to ignorance; and that is compulsory of which the
+          moving principle is outside, being a principle in which nothing is
+          contributed by the person who is acting or is feeling the passion,
+          e.g. if he were to be carried somewhere by a wind, or by men who had
+          him in their power.
+        </p>
+
+        <p>
+          But with regard to the things that are done from fear of greater evils
+          or for some noble object (e.g. if a tyrant were to order one to do
+          something base, having one's parents and children in his power, and if
+          one did the action they were to be saved, but otherwise would be put
+          to death), it may be debated whether such actions are involuntary or
+          voluntary.
+        </p>
+
+        <p>
+          Something of the sort happens also with regard to the throwing of
+          goods overboard in a storm; for in the abstract no one throws goods
+          away voluntarily, but on condition of its securing the safety of
+          himself and his crew any sensible man does so. Such actions, then, are
+          mixed, but are more like voluntary actions; for they are worthy of
+          choice at the time when they are done, and the end of an action is
+          relative to the occasion. Both the terms, then, 'voluntary' and
+          'involuntary', must be used with reference to the moment of action.
+        </p>
+
+        <div class="container-footer">
+          <a href="nicomachean-ethics-chapter2.html"
+            ><button>Previous</button></a
+          >
+          <button id="nextChapterBtn">Next</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <img src="../image/logo.png" alt="Logo" class="footer-logo" />
+
+          <p>
+            Discover your next story and explore novels worth getting lost in.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Explore</h3>
+          <a href="home.html">Home</a>
+          <a href="browse.html">Browse</a>
+          <a href="library.html">My Library</a>
+          <a href="ranking.html">Rankings</a>
+        </div>
+
+        <div class="footer-section">
+          <h3>About</h3>
+
+          <a href="about-us.html">About Us</a>
+          <a href="contact-us.html">Contact</a>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Novel Library. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <div class="ad-overlay" id="adOverlay">
+      <div class="ad-card">
+        <div class="ad-header">
+          <div class="ad-timer">
+            <span class="timer-label">Remaining</span>
+            <div class="timer-circle">
+              <span id="timerDisplay">10</span>
+              <span class="timer-suffix">s</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="ad-content" id="adContent"></div>
+
+        <div class="ad-footer">
+          <div class="ad-info">
+            <span><img src="../icons/clock-fill.svg" alt="" /></span> Ad ends in
+            <span id="footerTimer">10</span>s
+          </div>
+          <button class="btn-exit" id="exitBtn">Next Chapter</button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="report-modal-overlay"
+      id="reportModalOverlay"
+      aria-hidden="true"
+    >
+      <div
+        class="report-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="reportModalTitle"
+      >
+        <div class="report-modal-header">
+          <h3 id="reportModalTitle" class="report-modal-title">
+            Report Chapter
+          </h3>
+          <button
+            type="button"
+            class="report-modal-close"
+            id="reportModalClose"
+            aria-label="Close report dialog"
+          >
+            <img src="../icons/x-lg.svg" alt="" />
+          </button>
+        </div>
+
+        <div class="report-modal-body">
+          <label for="reportReason" class="report-modal-label">
+            Reason <span class="required">*</span>
+          </label>
+          <select id="reportReason" class="report-modal-select">
+            <option value="">Select a reason</option>
+            <option value="Broken content">Broken content</option>
+            <option value="Missing content">Missing content</option>
+            <option value="Wrong chapter">Wrong chapter</option>
+            <option value="Inappropriate content">Inappropriate content</option>
+            <option value="Other">Other</option>
+          </select>
+          <p class="report-modal-error" id="reportReasonError" role="alert">
+            Please select a reason.
+          </p>
+
+          <label for="reportDetails" class="report-modal-label">
+            Additional details <span class="optional">(optional)</span>
+          </label>
+          <textarea
+            id="reportDetails"
+            class="report-modal-textarea"
+            placeholder="Tell us anything else that might help…"
+            maxlength="500"
+          ></textarea>
+        </div>
+
+        <div class="report-modal-footer">
+          <button
+            type="button"
+            class="report-modal-btn report-modal-btn-cancel"
+            id="reportModalCancel"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            class="report-modal-btn report-modal-btn-submit"
+            id="reportModalSubmit"
+          >
+            Submit Report
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="autoscroll" id="autoscroll">
+      <button
+        class="autoscroll-btn autoscroll-play"
+        id="autoscrollToggle"
+        aria-label="Start auto-scroll"
+        type="button"
+      >
+        <svg
+          class="autoscroll-icon autoscroll-icon-play"
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          aria-hidden="true"
+        >
+          <polygon points="6,4 20,12 6,20" fill="currentColor" />
+        </svg>
+        <svg
+          class="autoscroll-icon autoscroll-icon-pause"
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          aria-hidden="true"
+        >
+          <rect x="6" y="4" width="4" height="16" fill="currentColor" />
+          <rect x="14" y="4" width="4" height="16" fill="currentColor" />
+        </svg>
+      </button>
+      <button
+        class="autoscroll-btn"
+        id="autoscrollSlower"
+        aria-label="Slower"
+        type="button"
+      >
+        −
+      </button>
+      <span class="autoscroll-speed" id="autoscrollSpeedLabel">2×</span>
+      <button
+        class="autoscroll-btn"
+        id="autoscrollFaster"
+        aria-label="Faster"
+        type="button"
+      >
+        +
+      </button>
+    </div>
+
+    <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/name-change.js"></script>
+    <script src="../javascript/ad.js"></script>
+    <script src="../javascript/bookmark.js"></script>
+    <script src="../javascript/report.js"></script>
+    <script src="../javascript/autoscroll.js"></script>
+    <script src="../javascript/logout.js"></script>
+  </body>
+</html>

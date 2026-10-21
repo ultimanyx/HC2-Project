@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EMMA CH:2</title>
+
+    <link rel="stylesheet" href="../css/user_chapter.css" />
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="../image/logo-nobackground-circle.png"
+    />
+  </head>
+  <body
+    data-book-id="emma"
+    data-book-title="Emma"
+    data-book-author="Jane Austen"
+    data-book-cover="../books/Romance/Emma by Jane Austen/cvr9781416500285_9781416500285_lg.jpg"
+    data-book-rating="4.5"
+    data-total-chapters="55"
+  >
+    <nav class="navbar">
+      <a href="#" class="nav-logo">
+        <img src="../image/logo.png" alt="Logo" />
+      </a>
+      <div class="nav-links">
+        <a href="home.html" id="select">Home</a>
+        <a href="browse.html">Browse</a>
+        <a href="library.html">My Library</a>
+        <a href="ranking.html">Ranking</a>
+
+        <div class="nav-search">
+          <input type="text" placeholder="Search..." />
+          <button type="button" aria-label="Search">
+            <img src="../icons/search.svg" alt="search-btn" />
+          </button>
+        </div>
+
+        <div class="nav-user-dropdown">
+          <div class="nav-user" tabindex="0" role="button" aria-haspopup="true">
+            <img
+              src="../icons/person-circle.svg"
+              class="user-icon"
+              alt="User-Icon"
+            />
+            <span id="readerName">Welcome User</span>
+            <span class="dropdown-arrow"
+              ><img src="../icons/caret-down-fill.svg" alt="triangle-down"
+            /></span>
+          </div>
+
+          <div class="dropdown-menu" role="menu">
+            <div class="dropdown-divider"></div>
+            <a
+              href="#"
+              role="menuitem"
+              class="logout-item"
+              id="logout"
+              data-role="reader"
+              >Logout</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="chapter-container">
+      <div class="top-button">
+        <a href="javascript:history.back()" class="back-button">
+          <img src="../icons/back.svg" alt="Back" />
+        </a>
+
+        <button
+          class="bookmark-btn"
+          id="bookmarkBtn"
+          aria-label="Bookmark this chapter"
+        >
+          <img
+            src="../icons/bookmark.svg"
+            alt="bookmark"
+            class="bookmark-icon"
+          />
+          <span class="bookmark-text">Bookmark</span>
+        </button>
+        <button
+          class="report-btn"
+          id="reportBtn"
+          aria-label="Report issue with this chapter"
+        >
+          <img src="../icons/flag.svg" alt="report flag" class="report-icon" />
+          Report
+        </button>
+      </div>
+      <div class="chapter-header">
+        <div class="header-left">
+          <h2 id="chapter-number">Chapter 2</h2>
+          <h2 id="chapter-title">The Weston Wedding</h2>
+        </div>
+      </div>
+
+      <div id="chapter-content">
+        <p>
+          Mr. Weston was a native of Highbury, and born of a respectable family,
+          which for the last two or three generations had been rising into
+          gentility and property. He had received a good education, but, on
+          succeeding early in life to a small independence, had become
+          indisposed for any of the more homely pursuits in which his brothers
+          were engaged, and had satisfied an active, cheerful mind and social
+          temper by entering into the militia of his county, then embodied.
+        </p>
+
+        <p>
+          Captain Weston was a general favourite; and when the chances of his
+          military life had introduced him to Miss Churchill, of a great
+          Yorkshire family, and Miss Churchill fell in love with him, nobody was
+          surprised, except her brother and his wife, who had never seen him,
+          and who were full of pride and importance, which the connection would
+          offend.
+        </p>
+
+        <p>
+          Miss Churchill, however, being of age, and fully resolved to marry,
+          was not to be controlled. She married, and her brother and
+          sister-in-law were forced to give way. The marriage was not a happy
+          one. Mr. Weston was a man of unexceptionable character, easy fortune,
+          suitable age, and pleasant manners; and there was some satisfaction in
+          considering with what self-denying, generous friendship she had always
+          wished and promoted the match; but it was a black morning's work for
+          her. The want of Miss Churchill's fortune, the loss of her family's
+          favour, and the difficulties of her situation, had made her ill.
+        </p>
+
+        <p>
+          A child was born, and the mother died. Mr. Weston's grief was sincere.
+          He was a very affectionate man, and he felt the loss of his wife
+          deeply. But time and the cares of a young family soon restored his
+          spirits. He was a sanguine man, and he looked forward to the future
+          with hope.
+        </p>
+
+        <p>
+          He had a son, Frank, who was sent to live with his uncle and aunt, the
+          Churchills, who had no children of their own. Mr. Weston was left
+          alone, but he was not idle. He was a social man, and he loved company.
+          He was well received everywhere, and he was happy in the society of
+          his friends.
+        </p>
+
+        <div class="container-footer">
+          <a href="emma-chapter1.html"><button>Previous</button></a>
+          <button id="nextChapterBtn">Next</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <img src="../image/logo.png" alt="Logo" class="footer-logo" />
+
+          <p>
+            Discover your next story and explore novels worth getting lost in.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Explore</h3>
+          <a href="home.html">Home</a>
+          <a href="browse.html">Browse</a>
+          <a href="library.html">My Library</a>
+          <a href="ranking.html">Rankings</a>
+        </div>
+
+        <div class="footer-section">
+          <h3>About</h3>
+
+          <a href="about-us.html">About Us</a>
+          <a href="contact-us.html">Contact</a>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Novel Library. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <div class="ad-overlay" id="adOverlay">
+      <div class="ad-card">
+        <div class="ad-header">
+          <div class="ad-timer">
+            <span class="timer-label">Remaining</span>
+            <div class="timer-circle">
+              <span id="timerDisplay">10</span>
+              <span class="timer-suffix">s</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="ad-content" id="adContent"></div>
+
+        <div class="ad-footer">
+          <div class="ad-info">
+            <span><img src="../icons/clock-fill.svg" alt="" /></span> Ad ends in
+            <span id="footerTimer">10</span>s
+          </div>
+          <button class="btn-exit" id="exitBtn">Next Chapter</button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="report-modal-overlay"
+      id="reportModalOverlay"
+      aria-hidden="true"
+    >
+      <div
+        class="report-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="reportModalTitle"
+      >
+        <div class="report-modal-header">
+          <h3 id="reportModalTitle" class="report-modal-title">
+            Report Chapter
+          </h3>
+          <button
+            type="button"
+            class="report-modal-close"
+            id="reportModalClose"
+            aria-label="Close report dialog"
+          >
+            <img src="../icons/x-lg.svg" alt="" />
+          </button>
+        </div>
+
+        <div class="report-modal-body">
+          <label for="reportReason" class="report-modal-label">
+            Reason <span class="required">*</span>
+          </label>
+          <select id="reportReason" class="report-modal-select">
+            <option value="">Select a reason</option>
+            <option value="Broken content">Broken content</option>
+            <option value="Missing content">Missing content</option>
+            <option value="Wrong chapter">Wrong chapter</option>
+            <option value="Inappropriate content">Inappropriate content</option>
+            <option value="Other">Other</option>
+          </select>
+          <p class="report-modal-error" id="reportReasonError" role="alert">
+            Please select a reason.
+          </p>
+
+          <label for="reportDetails" class="report-modal-label">
+            Additional details <span class="optional">(optional)</span>
+          </label>
+          <textarea
+            id="reportDetails"
+            class="report-modal-textarea"
+            placeholder="Tell us anything else that might help…"
+            maxlength="500"
+          ></textarea>
+        </div>
+
+        <div class="report-modal-footer">
+          <button
+            type="button"
+            class="report-modal-btn report-modal-btn-cancel"
+            id="reportModalCancel"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            class="report-modal-btn report-modal-btn-submit"
+            id="reportModalSubmit"
+          >
+            Submit Report
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="autoscroll" id="autoscroll">
+      <button
+        class="autoscroll-btn autoscroll-play"
+        id="autoscrollToggle"
+        aria-label="Start auto-scroll"
+        type="button"
+      >
+        <svg
+          class="autoscroll-icon autoscroll-icon-play"
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          aria-hidden="true"
+        >
+          <polygon points="6,4 20,12 6,20" fill="currentColor" />
+        </svg>
+        <svg
+          class="autoscroll-icon autoscroll-icon-pause"
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          aria-hidden="true"
+        >
+          <rect x="6" y="4" width="4" height="16" fill="currentColor" />
+          <rect x="14" y="4" width="4" height="16" fill="currentColor" />
+        </svg>
+      </button>
+      <button
+        class="autoscroll-btn"
+        id="autoscrollSlower"
+        aria-label="Slower"
+        type="button"
+      >
+        −
+      </button>
+      <span class="autoscroll-speed" id="autoscrollSpeedLabel">2×</span>
+      <button
+        class="autoscroll-btn"
+        id="autoscrollFaster"
+        aria-label="Faster"
+        type="button"
+      >
+        +
+      </button>
+    </div>
+
+    <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/name-change.js"></script>
+    <script src="../javascript/ad.js"></script>
+    <script src="../javascript/bookmark.js"></script>
+    <script src="../javascript/report.js"></script>
+    <script src="../javascript/autoscroll.js"></script>
+    <script src="../javascript/logout.js"></script>
+  </body>
+</html>

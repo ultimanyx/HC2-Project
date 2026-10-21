@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FRANKENSTEIN CH:2</title>
+
+    <link rel="stylesheet" href="../css/user_chapter.css" />
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="../image/logo-nobackground-circle.png"
+    />
+  </head>
+  <body
+    data-book-id="frankenstein"
+    data-book-title="Frankenstein"
+    data-book-author="Mary Shelley"
+    data-book-cover="../books/Horror(1)/Frankenstein by Mary Shelley/frankenstein-9781398843707_lg.jpg"
+    data-book-rating="4.6"
+    data-total-chapters="24"
+  >
+    <nav class="navbar">
+      <a href="#" class="nav-logo">
+        <img src="../image/logo.png" alt="Logo" />
+      </a>
+      <div class="nav-links">
+        <a href="home.html" id="select">Home</a>
+        <a href="browse.html">Browse</a>
+        <a href="library.html">My Library</a>
+        <a href="ranking.html">Ranking</a>
+
+        <div class="nav-search">
+          <input type="text" placeholder="Search..." />
+          <button type="button" aria-label="Search">
+            <img src="../icons/search.svg" alt="search-btn" />
+          </button>
+        </div>
+
+        <div class="nav-user-dropdown">
+          <div class="nav-user" tabindex="0" role="button" aria-haspopup="true">
+            <img
+              src="../icons/person-circle.svg"
+              class="user-icon"
+              alt="User-Icon"
+            />
+            <span id="readerName">Welcome User</span>
+            <span class="dropdown-arrow"
+              ><img src="../icons/caret-down-fill.svg" alt="triangle-down"
+            /></span>
+          </div>
+
+          <div class="dropdown-menu" role="menu">
+            <div class="dropdown-divider"></div>
+            <a
+              href="#"
+              role="menuitem"
+              class="logout-item"
+              id="logout"
+              data-role="reader"
+              >Logout</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="chapter-container">
+      <div class="top-button">
+        <a href="javascript:history.back()" class="back-button">
+          <img src="../icons/back.svg" alt="Back" />
+        </a>
+
+        <button
+          class="bookmark-btn"
+          id="bookmarkBtn"
+          aria-label="Bookmark this chapter"
+        >
+          <img
+            src="../icons/bookmark.svg"
+            alt="bookmark"
+            class="bookmark-icon"
+          />
+          <span class="bookmark-text">Bookmark</span>
+        </button>
+        <button
+          class="report-btn"
+          id="reportBtn"
+          aria-label="Report issue with this chapter"
+        >
+          <img src="../icons/flag.svg" alt="report flag" class="report-icon" />
+          Report
+        </button>
+      </div>
+      <div class="chapter-header">
+        <div class="header-left">
+          <h2 id="chapter-number">Chapter 2</h2>
+          <h2 id="chapter-title">Letter II</h2>
+        </div>
+      </div>
+
+      <div id="chapter-content">
+        <p>
+          <em>To Mrs. Saville, England.</em>
+        </p>
+
+        <p>Archangel, 28th March, 17—.</p>
+
+        <p>
+          How slowly the time passes here, encompassed as I am by frost and
+          snow! Yet a second step is taken towards my enterprise. I have hired a
+          vessel and am occupied in collecting my sailors; those whom I have
+          already engaged appear to be men on whom I can depend and are
+          certainly possessed of dauntless courage.
+        </p>
+
+        <p>
+          But I have one want which I have never yet been able to satisfy, and
+          the absence of the object of which I now feel as a most severe evil. I
+          have no friend, Margaret: when I am glowing with the enthusiasm of
+          success, there will be none to participate my joy; if I am assailed by
+          disappointment, no one will endeavour to sustain me in dejection. I
+          shall commit my thoughts to paper, it is true; but that is a poor
+          medium for the communication of feeling. I desire the company of a man
+          who could sympathise with me, whose eyes would reply to mine.
+        </p>
+
+        <p>
+          You may deem me romantic, my dear sister, but I bitterly feel the want
+          of a friend. I have no one near me, gentle yet courageous, possessed
+          of a cultivated as well as of a capacious mind, whose tastes are like
+          my own, to approve or amend my plans. How would such a friend repair
+          the faults of your poor brother! I am too ardent in execution and too
+          impatient of difficulties. But it is a still greater evil to me that I
+          am self-educated: for the first fourteen years of my life I ran wild
+          on a common and read nothing but our Uncle Thomas’ books of voyages.
+          At that age I became acquainted with the celebrated poets of our own
+          country; but it was only when it had ceased to be in my power to
+          derive its most important benefits from such a conviction that I
+          perceived the necessity of becoming acquainted with more languages
+          than that of my native country.
+        </p>
+
+        <p>
+          Now I am twenty-eight and am in reality more illiterate than many
+          schoolboys of fifteen. It is true that I have thought more and that my
+          daydreams are more extended and magnificent, but they want (as the
+          painters call it) keeping; and I greatly need a friend who would have
+          sense enough not to despise me as romantic, and affection enough for
+          me to endeavour to regulate my mind.
+        </p>
+
+        <div class="container-footer">
+          <a href="frankenstein-chapter1.html"><button>Previous</button></a>
+          <button id="nextChapterBtn">Next</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <img src="../image/logo.png" alt="Logo" class="footer-logo" />
+
+          <p>
+            Discover your next story and explore novels worth getting lost in.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Explore</h3>
+          <a href="home.html">Home</a>
+          <a href="browse.html">Browse</a>
+          <a href="library.html">My Library</a>
+          <a href="ranking.html">Rankings</a>
+        </div>
+
+        <div class="footer-section">
+          <h3>About</h3>
+
+          <a href="about-us.html">About Us</a>
+          <a href="contact-us.html">Contact</a>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Novel Library. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <div class="ad-overlay" id="adOverlay">
+      <div class="ad-card">
+        <div class="ad-header">
+          <div class="ad-timer">
+            <span class="timer-label">Remaining</span>
+            <div class="timer-circle">
+              <span id="timerDisplay">10</span>
+              <span class="timer-suffix">s</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="ad-content" id="adContent"></div>
+
+        <div class="ad-footer">
+          <div class="ad-info">
+            <span><img src="../icons/clock-fill.svg" alt="" /></span> Ad ends in
+            <span id="footerTimer">10</span>s
+          </div>
+          <button class="btn-exit" id="exitBtn">Next Chapter</button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="report-modal-overlay"
+      id="reportModalOverlay"
+      aria-hidden="true"
+    >
+      <div
+        class="report-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="reportModalTitle"
+      >
+        <div class="report-modal-header">
+          <h3 id="reportModalTitle" class="report-modal-title">
+            Report Chapter
+          </h3>
+          <button
+            type="button"
+            class="report-modal-close"
+            id="reportModalClose"
+            aria-label="Close report dialog"
+          >
+            <img src="../icons/x-lg.svg" alt="" />
+          </button>
+        </div>
+
+        <div class="report-modal-body">
+          <label for="reportReason" class="report-modal-label">
+            Reason <span class="required">*</span>
+          </label>
+          <select id="reportReason" class="report-modal-select">
+            <option value="">Select a reason</option>
+            <option value="Broken content">Broken content</option>
+            <option value="Missing content">Missing content</option>
+            <option value="Wrong chapter">Wrong chapter</option>
+            <option value="Inappropriate content">Inappropriate content</option>
+            <option value="Other">Other</option>
+          </select>
+          <p class="report-modal-error" id="reportReasonError" role="alert">
+            Please select a reason.
+          </p>
+
+          <label for="reportDetails" class="report-modal-label">
+            Additional details <span class="optional">(optional)</span>
+          </label>
+          <textarea
+            id="reportDetails"
+            class="report-modal-textarea"
+            placeholder="Tell us anything else that might help…"
+            maxlength="500"
+          ></textarea>
+        </div>
+
+        <div class="report-modal-footer">
+          <button
+            type="button"
+            class="report-modal-btn report-modal-btn-cancel"
+            id="reportModalCancel"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            class="report-modal-btn report-modal-btn-submit"
+            id="reportModalSubmit"
+          >
+            Submit Report
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="autoscroll" id="autoscroll">
+      <button
+        class="autoscroll-btn autoscroll-play"
+        id="autoscrollToggle"
+        aria-label="Start auto-scroll"
+        type="button"
+      >
+        <svg
+          class="autoscroll-icon autoscroll-icon-play"
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          aria-hidden="true"
+        >
+          <polygon points="6,4 20,12 6,20" fill="currentColor" />
+        </svg>
+        <svg
+          class="autoscroll-icon autoscroll-icon-pause"
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          aria-hidden="true"
+        >
+          <rect x="6" y="4" width="4" height="16" fill="currentColor" />
+          <rect x="14" y="4" width="4" height="16" fill="currentColor" />
+        </svg>
+      </button>
+      <button
+        class="autoscroll-btn"
+        id="autoscrollSlower"
+        aria-label="Slower"
+        type="button"
+      >
+        −
+      </button>
+      <span class="autoscroll-speed" id="autoscrollSpeedLabel">2×</span>
+      <button
+        class="autoscroll-btn"
+        id="autoscrollFaster"
+        aria-label="Faster"
+        type="button"
+      >
+        +
+      </button>
+    </div>
+
+    <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/name-change.js"></script>
+    <script src="../javascript/ad.js"></script>
+    <script src="../javascript/bookmark.js"></script>
+    <script src="../javascript/report.js"></script>
+    <script src="../javascript/autoscroll.js"></script>
+    <script src="../javascript/logout.js"></script>
+  </body>
+</html>

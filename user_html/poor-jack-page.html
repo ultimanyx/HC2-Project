@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>POOR JACK</title>
+
+    <link rel="stylesheet" href="../css/novel-page.css" />
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="../image/logo-nobackground-circle.png"
+    />
+  </head>
+  <body data-book-id="poor-jack" data-total-chapters="55">
+    <nav class="navbar">
+      <a href="#" class="nav-logo">
+        <img src="../image/logo.png" alt="Logo" />
+      </a>
+      <div class="nav-links">
+        <a href="home.html" id="select">Home</a>
+        <a href="browse.html">Browse</a>
+        <a href="library.html">My Library</a>
+        <a href="ranking.html">Ranking</a>
+
+        <div class="nav-search">
+          <input type="text" placeholder="Search..." />
+          <button type="button" aria-label="Search">
+            <img src="../icons/search.svg" alt="search-btn" />
+          </button>
+        </div>
+
+        <div class="nav-user-dropdown">
+          <div class="nav-user" tabindex="0" role="button" aria-haspopup="true">
+            <img
+              src="../icons/person-circle.svg"
+              class="user-icon"
+              alt="User-Icon"
+            />
+            <span id="readerName">Welcome User</span>
+            <span class="dropdown-arrow"
+              ><img src="../icons/caret-down-fill.svg" alt="triangle-down"
+            /></span>
+          </div>
+
+          <div class="dropdown-menu" role="menu">
+            <div class="dropdown-divider"></div>
+            <a
+              href="#"
+              role="menuitem"
+              class="logout-item"
+              id="logout"
+              data-role="reader"
+              >Logout</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="header-container">
+      <a href="javascript:history.back()" class="back-button">
+        <img src="../icons/back.svg" alt="Back" />
+      </a>
+
+      <img
+        src="../books/Action/Poor_Jack by Frederick_Marryat (Unzipped Files)/Poor_Jack- cover art.png"
+        alt="Poor Jack Cover"
+      />
+      <div class="header">
+        <h1 id="titleBook">POOR JACK</h1>
+        <span>
+          <img src="../icons/book-half.svg" alt="bookicon" class="book-icon" />
+          <p class="genre">Adventure</p>
+        </span>
+        <span>
+          <img
+            src="../icons/journal-text.svg"
+            alt="chaptericon"
+            class="chapter-icon"
+          />
+          <p class="chapter-count">55 Chapters</p>
+        </span>
+        <span>
+          <img src="../icons/author.svg" alt="authoricon" class="author-icon" />
+          <a href="author_profile.html"
+            ><p class="author">Frederick Marryat</p></a
+          >
+        </span>
+        <div class="description">
+          <h3>Synopsis</h3>
+          <p>
+            Poor Jack is a novel by Frederick Marryat, first published in 1840.
+            The story follows the life and adventures of Thomas Saunders, a
+            young boy who is the son of a Greenwich pensioner. Known as "Poor
+            Jack" due to his ragged appearance, the novel chronicles his
+            struggles, his time at sea, and his eventual rise in fortune. It is
+            a classic nautical adventure tale, rich in maritime detail and
+            lively characters.
+          </p>
+        </div>
+
+        <div class="star-display" id="openRatingModalBtn">
+          <p>Rate this Book!</p>
+          <input
+            type="range"
+            min="0.5"
+            max="5"
+            step="0.5"
+            value="0"
+            class="star-rating"
+            id="displayRating"
+            disabled
+          />
+        </div>
+
+        <div class="button-container">
+          <a href="poor-jack-chapter1.html" class="read-button"
+            >Read First Chapter</a
+          >
+          <a href="#" id="add-library-button">+ Add to Library</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter-container">
+      <div class="container-header">
+        <img src="../icons/journal-text.svg" alt="chapter-list icon" />
+        <h3>Chapter List</h3>
+      </div>
+
+      <table class="chapter-table">
+        <tbody id="chapter-list">
+          <!-- Group 1: 1-20 -->
+          <tr data-group="1-20">
+            <td>
+              <a href="poor-jack-chapter1.html">
+                Chapter 1: The Author's Account of Himself
+              </a>
+            </td>
+            <td>
+              <a href="poor-jack-chapter2.html">
+                Chapter 2: In which the Author is introduced
+              </a>
+            </td>
+          </tr>
+          <tr data-group="1-20">
+            <td>
+              <a href="poor-jack-chapter3.html">
+                Chapter 3: A Chapter of Accidents
+              </a>
+            </td>
+            <td><a href=""> Chapter 4: The Old Pensioner </a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href=""> Chapter 5: The Hospital </a></td>
+            <td><a href=""> Chapter 6: The Funeral </a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href=""> Chapter 7: The Will </a></td>
+            <td><a href=""> Chapter 8: The New Home </a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href=""> Chapter 9: The River </a></td>
+            <td><a href=""> Chapter 10: The Wreck </a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href=""> Chapter 11: The Rescue </a></td>
+            <td><a href=""> Chapter 12: The Reward </a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href=""> Chapter 13: The Apprentice </a></td>
+            <td><a href=""> Chapter 14: The First Voyage </a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href=""> Chapter 15: The Storm </a></td>
+            <td><a href=""> Chapter 16: The Mutiny </a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href=""> Chapter 17: The Island </a></td>
+            <td><a href=""> Chapter 18: The Treasure </a></td>
+          </tr>
+          <tr data-group="1-20">
+            <td><a href=""> Chapter 19: The Return </a></td>
+            <td><a href=""> Chapter 20: The Trial </a></td>
+          </tr>
+
+          <!-- Group 2: 21-40 -->
+          <tr data-group="21-40">
+            <td><a href=""> Chapter 21: The Escape </a></td>
+            <td><a href=""> Chapter 22: The Rescue </a></td>
+          </tr>
+          <tr data-group="21-40">
+            <td><a href=""> Chapter 23: The Journey </a></td>
+            <td><a href=""> Chapter 24: The Homecoming </a></td>
+          </tr>
+          <tr data-group="21-40">
+            <td><a href=""> Chapter 25: The Reunion </a></td>
+            <td><a href=""> Chapter 26: The New Life </a></td>
+          </tr>
+          <tr data-group="21-40">
+            <td><a href=""> Chapter 27: The Secret </a></td>
+            <td><a href=""> Chapter 28: The Betrayal </a></td>
+          </tr>
+          <tr data-group="21-40">
+            <td><a href=""> Chapter 29: The Chase </a></td>
+            <td><a href=""> Chapter 30: The Capture </a></td>
+          </tr>
+          <tr data-group="21-40">
+            <td><a href=""> Chapter 31: The Trial </a></td>
+            <td><a href=""> Chapter 32: The Verdict </a></td>
+          </tr>
+          <tr data-group="21-40">
+            <td><a href=""> Chapter 33: The Prison </a></td>
+            <td><a href=""> Chapter 34: The Letter </a></td>
+          </tr>
+          <tr data-group="21-40">
+            <td><a href=""> Chapter 35: The Rescue </a></td>
+            <td><a href=""> Chapter 36: The Final Voyage </a></td>
+          </tr>
+          <tr data-group="21-40">
+            <td><a href=""> Chapter 37: The Shipwreck </a></td>
+            <td><a href=""> Chapter 38: The Island </a></td>
+          </tr>
+          <tr data-group="21-40">
+            <td><a href=""> Chapter 39: The Discovery </a></td>
+            <td><a href=""> Chapter 40: The Return </a></td>
+          </tr>
+
+          <!-- Group 3: 41-55 -->
+          <tr data-group="41-55">
+            <td><a href=""> Chapter 41: The Wedding </a></td>
+            <td><a href=""> Chapter 42: The Family </a></td>
+          </tr>
+          <tr data-group="41-55">
+            <td><a href=""> Chapter 43: The War </a></td>
+            <td><a href=""> Chapter 44: The Battle </a></td>
+          </tr>
+          <tr data-group="41-55">
+            <td><a href=""> Chapter 45: The Wound </a></td>
+            <td><a href=""> Chapter 46: The Hospital </a></td>
+          </tr>
+          <tr data-group="41-55">
+            <td><a href=""> Chapter 47: The Recovery </a></td>
+            <td><a href=""> Chapter 48: The Peace </a></td>
+          </tr>
+          <tr data-group="41-55">
+            <td><a href=""> Chapter 49: The New Era </a></td>
+            <td><a href=""> Chapter 50: The Legacy </a></td>
+          </tr>
+          <tr data-group="41-55">
+            <td><a href=""> Chapter 51: The Final Years </a></td>
+            <td><a href=""> Chapter 52: The End </a></td>
+          </tr>
+          <tr data-group="41-55">
+            <td><a href=""> Chapter 53: The Epilogue </a></td>
+            <td><a href=""> Chapter 54: The Conclusion </a></td>
+          </tr>
+          <tr data-group="41-55">
+            <td><a href=""> Chapter 55: The Farewell </a></td>
+            <td><a href=""> </a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="container-footer">
+        <button id="prevBtn" type="button">Previous</button>
+
+        <select name="chapter" id="chapter-number">
+          <option value="1-20">Chapter: 1-20</option>
+          <option value="21-40">Chapter: 21-40</option>
+          <option value="41-55">Chapter: 41-55</option>
+        </select>
+
+        <button id="nextBtn" type="button">Next</button>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <img src="../image/logo.png" alt="Logo" class="footer-logo" />
+          <p>
+            Discover your next story and explore novels worth getting lost in.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Explore</h3>
+          <a href="home.html">Home</a>
+          <a href="browse.html">Browse</a>
+          <a href="library.html">My Library</a>
+          <a href="ranking.html">Rankings</a>
+        </div>
+
+        <div class="footer-section">
+          <h3>About</h3>
+          <a href="about-us.html">About Us</a>
+          <a href="contact-us.html">Contact</a>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Novel Library. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- RATING MODAL -->
+    <div class="rating-modal-overlay" id="ratingModalOverlay">
+      <div class="rating-modal">
+        <div class="rating-modal-header">
+          <h3>Rate this Book</h3>
+          <button id="closeRatingModalBtn" class="close-btn">&times;</button>
+        </div>
+        <div class="rating-modal-body">
+          <p>How would you rate <strong>Poor Jack</strong>?</p>
+          <input
+            type="range"
+            min="0.5"
+            max="5"
+            step="0.5"
+            value="0"
+            class="star-rating"
+            id="modalRatingSlider"
+          />
+        </div>
+        <div class="rating-modal-footer">
+          <button id="cancelRatingBtn" class="btn btn-secondary">Cancel</button>
+          <button id="submitRatingBtn" class="btn btn-primary">
+            Submit Rating
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/name-change.js"></script>
+    <script src="../javascript/library_novelpage.js"></script>
+    <script src="../javascript/rating.js"></script>
+    <script src="../javascript/logout.js"></script>
+  </body>
+</html>
