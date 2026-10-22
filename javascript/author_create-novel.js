@@ -7,13 +7,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const titleInput = document.getElementById("title");
   const subtitleInput = document.getElementById("subtitle");
   const genreSelect = document.getElementById("genre");
-  const tagsInput = document.getElementById("tags");
   const synopsisInput = document.getElementById("synopsis");
   const chapterTitleInput = document.getElementById("chapter1Title");
   const chapterInput = document.getElementById("firstChapter");
 
-  // These are the buttons you pointed out
-  const saveDraftBtn = document.querySelector(".btn:not(.btn-primary)");
+  // Buttons (Updated to match the new classes in HTML)
+  const saveDraftBtn = document.querySelector(".btn-draft");
   const publishBtn = document.querySelector(".btn-primary");
 
   /* ---------- COVER IMAGE UPLOAD ---------- */
@@ -38,7 +37,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         coverImageDataUrl = e.target.result;
-        coverUpload.innerHTML = `<img src="${coverImageDataUrl}" style="width:100%;height:180px;object-fit:cover;border-radius:8px;display:block;">`;
+        // Show full preview in the box
+        coverUpload.innerHTML = `<img src="${coverImageDataUrl}" style="width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;">`;
       };
       reader.readAsDataURL(file);
     });
@@ -50,30 +50,24 @@ document.addEventListener("DOMContentLoaded", () => {
     existingNovel = all.find((n) => String(n.id) === String(editId));
 
     if (existingNovel) {
-      // Change page title & button text
       document.querySelector(".topbar h1").textContent = "Edit Novel";
       if (saveDraftBtn) saveDraftBtn.textContent = "Save Updates as Draft";
       if (publishBtn) publishBtn.textContent = "Publish Updates";
 
-      // Fill the form fields
       titleInput.value = existingNovel.title || "";
       subtitleInput.value = existingNovel.subtitle || "";
       genreSelect.value = existingNovel.genre || "";
-      tagsInput.value = Array.isArray(existingNovel.tags)
-        ? existingNovel.tags.join(", ")
-        : "";
       synopsisInput.value = existingNovel.synopsis || "";
 
-      // Fill Chapter 1 (if it exists)
       if (existingNovel.chapters && existingNovel.chapters.length > 0) {
         chapterTitleInput.value = existingNovel.chapters[0].title || "";
         chapterInput.value = existingNovel.chapters[0].body || "";
       }
 
-      // Fill Cover Image
       if (existingNovel.coverImage) {
         coverImageDataUrl = existingNovel.coverImage;
-        coverUpload.innerHTML = `<img src="${coverImageDataUrl}" style="width:100%;height:180px;object-fit:cover;border-radius:8px;display:block;">`;
+        // Show full preview in the box
+        coverUpload.innerHTML = `<img src="${coverImageDataUrl}" style="width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;">`;
       }
     }
   }
@@ -85,7 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const synopsis = synopsisInput.value.trim();
     const chapterBody = chapterInput.value.trim();
 
-    // Validation
     if (!title || !genre || !synopsis || !chapterBody || !coverImageDataUrl) {
       Swal.fire({
         icon: "warning",
@@ -106,20 +99,14 @@ document.addEventListener("DOMContentLoaded", () => {
       if (index !== -1) {
         const updated = all[index];
 
-        // Update main details
         updated.title = title;
         updated.subtitle = subtitleInput.value.trim();
         updated.genre = genre;
-        updated.tags = tagsInput.value
-          .split(",")
-          .map((t) => t.trim())
-          .filter(Boolean);
         updated.synopsis = synopsis;
         updated.status = status;
         updated.coverImage = coverImageDataUrl;
         updated.lastEdited = Date.now();
 
-        // Update only the FIRST chapter's text (leaves the rest of the table intact)
         if (!Array.isArray(updated.chapters)) updated.chapters = [];
         if (updated.chapters.length > 0) {
           updated.chapters[0].title = chapterTitle;
@@ -147,7 +134,6 @@ document.addEventListener("DOMContentLoaded", () => {
           text: `"${title}" details have been saved.`,
           confirmButtonColor: "#b8721f",
         }).then(() => {
-          // Return to the View page to see the changes
           window.location.href = `author_view-novel.html?id=${editId}`;
         });
       }
@@ -158,10 +144,6 @@ document.addEventListener("DOMContentLoaded", () => {
         title,
         subtitle: subtitleInput.value.trim(),
         genre,
-        tags: tagsInput.value
-          .split(",")
-          .map((t) => t.trim())
-          .filter(Boolean),
         synopsis,
         coverImage: coverImageDataUrl,
         status,
@@ -201,7 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Bind the buttons you specified
+  // Bind the buttons
   saveDraftBtn?.addEventListener("click", () => saveNovel("draft"));
   publishBtn?.addEventListener("click", () => saveNovel("published"));
 });

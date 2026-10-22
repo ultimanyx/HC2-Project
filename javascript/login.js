@@ -11,16 +11,16 @@ const ADMIN = {
 // DEFAULT ACCOUNTS (Will be saved to localStorage)
 // ============================================================
 const DEFAULT_READER = {
-  username: "Default Reader",
-  email: "reader@gmail.com",
-  password: "reader123",
+  username: "John Smith",
+  email: "john@gmail.com",
+  password: "johnsmith",
   role: "reader",
 };
 
 const DEFAULT_AUTHOR = {
-  username: "Default Author",
-  email: "author@gmail.com",
-  password: "author123",
+  username: "Bram Stoker",
+  email: "bramstoker@gmail.com",
+  password: "bramstoker",
   role: "author",
 };
 

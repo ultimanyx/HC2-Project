@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // FIX 1: Load raw data without destroying the chapters array
   function loadNovels() {
     try {
       const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
@@ -46,7 +45,81 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
   }
 
-  // (Removed the seedStaticDrafts function entirely)
+  // ==========================================
+  // SEED HARDCODED DRAFT & CLEANUP
+  // ==========================================
+  function seedHardcodedDraft() {
+    let novels = loadNovels();
+    let changed = false;
+
+    // 1. CLEANUP: Delete any dynamic duplicates named "The Lost Kingdom"
+    const filteredNovels = novels.filter((n) => {
+      const isDuplicate =
+        n.title.toLowerCase() === "the lost kingdom" &&
+        String(n.id) !== "draft-seed-0";
+
+      if (isDuplicate) {
+        changed = true;
+        return false; // Remove it
+      }
+      return true;
+    });
+
+    // 2. Seed the hardcoded book if it doesn't exist at all
+    if (!filteredNovels.some((n) => String(n.id) === "draft-seed-0")) {
+      filteredNovels.push({
+        id: "draft-seed-0",
+        title: "The Lost Kingdom",
+        subtitle: "A throne unclaimed",
+        genre: "Fantasy",
+        synopsis:
+          "An heir believed dead. A throne left empty. A kingdom on the brink of war. The Lost Kingdom is the first book in an epic fantasy saga.",
+        coverImage:
+          "../books/Action/A_Farewell_to_Arms by Ernest_Hemingway (Unzipped Files)/A_Farewell_to_Arms cover art.png",
+        status: "draft",
+        chapters: [
+          {
+            number: 1,
+            title: "Prologue: The Empty Throne",
+            status: "draft",
+            words: 1120,
+            lastUpdated: Date.now() - 86400000,
+          },
+          {
+            number: 2,
+            title: "A Kingdom Without a King",
+            status: "draft",
+            words: 1890,
+            lastUpdated: Date.now() - 172800000,
+          },
+          {
+            number: 3,
+            title: "The Broken Oath",
+            status: "draft",
+            words: 2340,
+            lastUpdated: Date.now() - 259200000,
+          },
+          {
+            number: 4,
+            title: "Untitled Chapter",
+            status: "draft",
+            words: 0,
+            lastUpdated: Date.now(),
+          },
+        ],
+        reads: 0,
+        rating: null,
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+        lastEdited: Date.now(),
+      });
+      changed = true;
+    }
+
+    if (changed) saveNovels(filteredNovels);
+  }
+
+  seedHardcodedDraft();
 
   // ==========================================
   // FILTERS + RENDER
@@ -55,7 +128,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const sortSelect = document.getElementById("sort-draft");
 
   function applyFilters() {
-    // Only show drafts that are not archived
     let list = loadNovels().filter((n) => n.status === "draft" && !n.archived);
 
     const q = (searchInput?.value || "").trim().toLowerCase();
@@ -72,30 +144,45 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function render(list) {
+    // Find the hardcoded row in the HTML
+    const hardcodedRow = tbody.querySelector('tr[data-id="draft-seed-0"]');
+
+    // Clear the table
     tbody.innerHTML = "";
+
+    // Check if the hardcoded book is currently active and not archived
+    const seedIsActive = list.some((n) => String(n.id) === "draft-seed-0");
+
+    // If it's active, put the hardcoded row back into the table
+    if (seedIsActive && hardcodedRow) {
+      tbody.appendChild(hardcodedRow);
+    }
 
     if (list.length === 0) {
       tbody.innerHTML = `
         <tr>
-          <td colspan="5" style="text-align:center;padding:28px;color:var(--muted-foreground);">
-            No drafts.
+          <td colspan="5" style="display: table-cell; text-align:center; padding: 48px; color:var(--muted-foreground); width: 100%;">
+            No drafts found.
           </td>
         </tr>`;
       return;
     }
 
     list.forEach((n) => {
-      // FIX 2: Count chapters safely for display without destroying data
+      // Skip the hardcoded row so we don't create exact duplicates
+      if (String(n.id) === "draft-seed-0") return;
+
       const chapterCount = Array.isArray(n.chapters)
-        ? n.chapters.length
-        : Number(n.chapters) || 0;
+        ? n.chapters.filter((c) => !c.archived).length
+        : 0;
 
       const tr = document.createElement("tr");
       tr.dataset.id = n.id;
+
       tr.innerHTML = `
         <td><strong>${escapeHtml(n.title)}</strong></td>
         <td><span class="badge draft">Draft</span></td>
-        <td>${formatDate(n.lastEdited)}</td>
+        <td>${n.lastEdited ? formatDate(n.lastEdited) : "Today"}</td>
         <td>${chapterCount}</td>
         <td>
           <a class="btn btn-sm edit-draft-btn" href="author_edit-draft.html?id=${n.id}">Edit</a>
@@ -123,19 +210,25 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target.classList.contains("publish-draft-btn")) {
       Swal.fire({
         title: "Publish this draft?",
+        text: "It will move to your All Novels page.",
         icon: "question",
         showCancelButton: true,
         confirmButtonText: "Publish",
         confirmButtonColor: "#b8721f",
       }).then((res) => {
         if (!res.isConfirmed) return;
-        const updated = loadNovels().map((n) =>
-          String(n.id) === String(id)
-            ? { ...n, status: "published", lastEdited: Date.now() }
-            : n,
-        );
+
+        const updated = loadNovels().map((n) => {
+          if (String(n.id) === String(id)) {
+            return { ...n, status: "published", lastEdited: Date.now() };
+          }
+          return n;
+        });
+
         saveNovels(updated);
         applyFilters();
+
+        Swal.fire("Published!", "Your novel is now live.", "success");
       });
       return;
     }
@@ -148,16 +241,23 @@ document.addEventListener("DOMContentLoaded", () => {
         icon: "question",
         showCancelButton: true,
         confirmButtonText: "Archive",
+        confirmButtonColor: "#b8721f",
         cancelButtonText: "Cancel",
       }).then((res) => {
         if (!res.isConfirmed) return;
-        const updated = loadNovels().map((n) =>
-          String(n.id) === String(id)
-            ? { ...n, archived: true, archivedAt: Date.now() }
-            : n,
-        );
+
+        const updated = loadNovels().map((n) => {
+          if (String(n.id) === String(id)) {
+            return { ...n, archived: true, archivedAt: Date.now() };
+          }
+          return n;
+        });
+
         saveNovels(updated);
+
         applyFilters();
+
+        Swal.fire("Archived!", "Draft moved to Archive.", "success");
       });
     }
   });

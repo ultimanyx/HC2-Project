@@ -25,18 +25,23 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  // Sanitize chapters array (prevents deletion bug on restore)
+  if (!Array.isArray(novel.chapters)) {
+    novel.chapters = [];
+  }
+
   // ---------- DOM refs ----------
   const statusBadge = document.querySelector(".action-bar .badge");
   const metaText = document.querySelector(".action-bar .meta-text");
   const saveBtn = document.getElementById("saveEditBtn");
   const resetBtn = document.getElementById("cancelEditBtn");
   const coverZone = document.getElementById("coverUploadZone");
-  const mainCoverImg = document.querySelector(".novel-cover img"); // Added reference to big image
+  const mainCoverImg = document.querySelector(".novel-cover img");
+  const tbody = document.getElementById("chapterTableBody");
 
   const editTitle = document.getElementById("editTitle");
   const editSubtitle = document.getElementById("editSubtitle");
   const editGenre = document.getElementById("editGenre");
-  const editTags = document.getElementById("editTags");
   const editSynopsis = document.getElementById("editSynopsis");
   const editStatus = document.getElementById("editStatus");
 
@@ -96,24 +101,48 @@ document.addEventListener("DOMContentLoaded", () => {
     return new Date(ts).toLocaleDateString();
   }
 
-  // ---------- Render Chapter Table ----------
+  // ==========================================
+  // RENDER CHAPTERS
+  // ==========================================
   function renderChapters() {
-    const tbody = document.getElementById("chapterTableBody");
     if (!tbody) return;
 
-    if (!Array.isArray(novel.chapters)) return;
+    // Force-update Dracula if it has less than 27 chapters
+    if (id === "seed-0" && novel.chapters.length < 27) {
+      const htmlRows = tbody.querySelectorAll("tr");
+      if (htmlRows.length >= 27) {
+        novel.chapters = Array.from(htmlRows).map((tr, index) => ({
+          number: index + 1,
+          title:
+            tr.querySelector("td:nth-child(2) strong")?.textContent.trim() ||
+            "Untitled",
+          status: "published",
+          words: tr.querySelector("td:nth-child(4)")?.textContent.trim() || "0",
+          lastUpdated: Date.now(),
+        }));
 
-    const chapters = novel.chapters;
+        const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        const idx = raw.findIndex((n) => String(n.id) === String(id));
+        if (idx >= 0) {
+          raw[idx].chapters = novel.chapters;
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(raw));
+        }
+      }
+    }
+
     tbody.innerHTML = "";
 
-    if (chapters.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:24px;">
-      No chapters yet. Click "+ Add Chapter" to create one.
-    </td></tr>`;
+    // Filter out archived chapters
+    const activeChapters = novel.chapters.filter((c) => !c.archived);
+
+    if (activeChapters.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:24px;color:#6b6680;">
+        No chapters yet. Click "+ Add Chapter" to create one.
+      </td></tr>`;
       return;
     }
 
-    chapters.forEach((ch) => {
+    activeChapters.forEach((ch) => {
       const tr = document.createElement("tr");
 
       const chStatus = String(ch.status || "published").toLowerCase();
@@ -126,19 +155,64 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (chStatus === "pending") {
         badgeClass = "pending";
         badgeText = "Pending Review";
+      } else if (chStatus === "paused") {
+        badgeClass = "paused";
+        badgeText = "Broken Content";
       }
 
       tr.innerHTML = `
-      <td>${ch.number ?? ""}</td>
-      <td><strong>${escapeHtml(ch.title || "Untitled")}</strong></td>
-      <td><span class="badge ${badgeClass}">${badgeText}</span></td>
-      <td>${ch.words || "—"}</td>
-      <td>${new Date(ch.lastUpdated || Date.now()).toLocaleDateString()}</td>
-      <td>
-        <button class="btn btn-sm edit-chapter-btn" data-chapter="${ch.number}">Edit</button>
-        <button class="btn btn-sm btn-danger delete-chapter-btn" data-chapter="${ch.number}">Delete</button>
-      </td>`;
+        <td>${ch.number}</td>
+        <td><strong>${escapeHtml(ch.title || "Untitled")}</strong></td>
+        <td><span class="badge ${badgeClass}">${badgeText}</span></td>
+        <td>${ch.words || "—"}</td>
+        <td>${ch.lastUpdated ? new Date(ch.lastUpdated).toLocaleDateString() : "Just now"}</td>
+        <td>
+          <a href="author_add-editchapter.html?novelId=${novel.id}&chapterNum=${ch.number}" class="btn btn-sm">Edit</a>
+          <button class="btn btn-sm btn-danger archive-chapter-btn" data-chapter="${ch.number}">Archive</button>
+        </td>`;
+
       tbody.appendChild(tr);
+    });
+  }
+
+  // ---------- Archive Chapter Logic ----------
+  if (tbody) {
+    tbody.addEventListener("click", (e) => {
+      const btn = e.target.closest(".archive-chapter-btn");
+      if (!btn) return;
+
+      const chapterNum = btn.dataset.chapter;
+      if (!chapterNum) return;
+
+      Swal.fire({
+        title: "Archive Chapter?",
+        text: "This chapter will be hidden from the list.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#b8721f",
+        cancelButtonColor: "#6b6680",
+        confirmButtonText: "Yes, archive it",
+      }).then((res) => {
+        if (res.isConfirmed) {
+          const chapter = novel.chapters.find(
+            (c) => String(c.number) === String(chapterNum),
+          );
+          if (chapter) {
+            chapter.archived = true;
+            chapter.archivedAt = Date.now();
+          }
+
+          const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+          const idx = raw.findIndex((n) => String(n.id) === String(id));
+          if (idx >= 0) {
+            raw[idx].chapters = novel.chapters;
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(raw));
+          }
+
+          renderChapters();
+          Swal.fire("Archived!", "The chapter has been archived.", "success");
+        }
+      });
     });
   }
 
@@ -147,11 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("addChapterBtn");
     if (!btn) return;
     const parentA = btn.closest("a") || btn;
-    const page =
-      normalizeStatus(novel.status) === "draft"
-        ? "author_addchapter-draft.html"
-        : "author_addchapter-ongoing.html";
-    const url = `${page}?novelId=${encodeURIComponent(novel.id)}`;
+    const url = `author_add-editchapter.html?novelId=${encodeURIComponent(novel.id)}`;
     if (parentA.tagName === "A") parentA.href = url;
     else btn.onclick = () => (location.href = url);
   }
@@ -161,35 +231,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderCoverZone() {
     if (!coverZone) return;
-    const src = pendingCoverData || novel.coverImage;
-    const preview = src
-      ? `<img src="${src}" alt="cover preview"
-              style="max-width:100%;max-height:120px;border-radius:8px;display:block;margin:8px auto 0;" />`
-      : "";
+
+    // The preview is now completely removed from the box
     const heading = pendingCoverData
       ? `<p><strong>New cover selected</strong></p><p class="sub">Click to replace</p>`
       : `<p><strong>Click to upload new</strong></p><p class="sub">PNG, JPG, WEBP · Max 5MB</p>`;
-    coverZone.innerHTML = heading + preview;
+
+    coverZone.innerHTML = heading;
   }
 
   function populateEditForm() {
-    let tagsString = "";
-    if (Array.isArray(novel.tags)) {
-      tagsString = novel.tags.join(", ");
-    } else if (novel.tags) {
-      tagsString = String(novel.tags);
-    }
-
-    // Update text fields
-    if (editTitle) editTitle.value = novel.title || "";
-    if (editSubtitle) editSubtitle.value = novel.subtitle || "";
+    if (editTitle)
+      editTitle.value =
+        novel.title !== undefined ? novel.title : editTitle.value;
+    if (editSubtitle)
+      editSubtitle.value =
+        novel.subtitle !== undefined ? novel.subtitle : editSubtitle.value;
     if (editGenre) editGenre.value = novel.genre || "Fantasy";
-    if (editTags) editTags.value = tagsString;
-    if (editSynopsis) editSynopsis.value = novel.synopsis || "";
+    if (editSynopsis)
+      editSynopsis.value =
+        novel.synopsis !== undefined ? novel.synopsis : editSynopsis.value;
+
     if (editStatus)
       editStatus.value = STATUS_TO_LABEL[normalizeStatus(novel.status)];
 
-    // Update status badge & time
     if (statusBadge) {
       const s = normalizeStatus(novel.status);
       statusBadge.textContent = STATUS_TO_LABEL[s];
@@ -199,7 +264,6 @@ document.addEventListener("DOMContentLoaded", () => {
       metaText.textContent = `Last updated ${timeAgo(novel.updatedAt)}`;
     }
 
-    // Update the large cover image on the left
     if (mainCoverImg && novel.coverImage) {
       mainCoverImg.src = novel.coverImage;
     }
@@ -210,7 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCoverZone();
   }
 
-  // Reset button (reverts form to saved data)
+  // Reset button
   if (resetBtn) {
     resetBtn.addEventListener("click", () => {
       populateEditForm();
@@ -223,7 +287,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Save button
+  // Save Novel button
   if (saveBtn) {
     saveBtn.addEventListener("click", () => {
       const newTitle = editTitle.value.trim();
@@ -237,10 +301,6 @@ document.addEventListener("DOMContentLoaded", () => {
         title: newTitle,
         subtitle: editSubtitle.value.trim(),
         genre: editGenre.value,
-        tags: editTags.value
-          .split(",")
-          .map((s) => s.trim())
-          .filter(Boolean),
         synopsis: editSynopsis.value.trim(),
         status:
           LABEL_TO_STATUS[editStatus.value] || normalizeStatus(novel.status),
@@ -255,24 +315,22 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(raw));
       } catch (err) {
-        Swal.fire({
-          title: "Couldn't save",
-          text: "Storage quota exceeded — the cover image is probably too large. Try a smaller image.",
-          icon: "error",
-        });
+        Swal.fire(
+          "Couldn't save",
+          "Storage quota exceeded. Try a smaller image.",
+          "error",
+        );
         return;
       }
 
       novel = updated;
-      populateEditForm(); // Re-renders form fields & the large cover image
-      renderChapters(); // Re-renders chapters table
+      populateEditForm();
 
-      Swal.fire({
-        icon: "success",
-        title: "Novel Updated",
-        text: `"${updated.title}" has been saved.`,
-        confirmButtonText: "OK",
-      });
+      Swal.fire(
+        "Novel Updated",
+        `"${updated.title}" has been saved.`,
+        "success",
+      );
     });
   }
 
@@ -283,13 +341,11 @@ document.addEventListener("DOMContentLoaded", () => {
   coverInput.style.display = "none";
   document.body.appendChild(coverInput);
 
-  // Allow clicking the big image on the left to upload
   if (mainCoverImg) {
     mainCoverImg.style.cursor = "pointer";
     mainCoverImg.addEventListener("click", () => coverInput.click());
   }
 
-  // Allow clicking the upload zone on the right to upload
   if (coverZone) {
     coverZone.style.cursor = "pointer";
     coverZone.addEventListener("click", () => coverInput.click());
@@ -308,6 +364,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const reader = new FileReader();
     reader.onload = () => {
       pendingCoverData = reader.result;
+
+      // Update the large cover on the left immediately
+      if (mainCoverImg) {
+        mainCoverImg.src = pendingCoverData;
+      }
+
       renderCoverZone();
     };
     reader.readAsDataURL(file);
@@ -315,7 +377,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ---------- Initial paint ----------
-  populateEditForm(); // Fill the form immediately on page load
+  populateEditForm();
   renderChapters();
   wireAddChapterButton();
 });

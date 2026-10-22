@@ -21,8 +21,7 @@
         </div>
         <nav class="nav">
           <a href="author_dashboard.html" class="nav-item sub">
-            <span class="nav-icon"></span>
-            Dashboard
+            <span class="nav-icon"></span>Dashboard
           </a>
           <a href="author_all-novel.html" class="nav-item sub"> All Novels </a>
           <a href="author_create-novel.html" class="nav-item sub">
@@ -48,24 +47,26 @@
 
         <div class="stats">
           <div class="stat-card">
-            <div class="stat-label">Archived Novels</div>
+            <div class="stat-label">Archived Items</div>
             <div class="stat-value" id="stat-archived">0</div>
             <div class="stat-change warning">Currently archived</div>
           </div>
           <div class="stat-card">
-            <div class="stat-label">Restored This Month</div>
-            <div class="stat-value" id="stat-restored">0</div>
-            <div class="stat-change positive">Back on your shelf</div>
+            <div class="stat-label">Recovery Bin</div>
+            <div class="stat-value" style="font-size: 18px; padding-top: 12px">
+              Soft Deleted
+            </div>
+            <div class="stat-change positive">Restore or Delete</div>
           </div>
         </div>
 
         <div class="table-card">
-          <h2>Archived Novels</h2>
+          <h2>Archived Items</h2>
           <table>
             <thead>
               <tr>
+                <th>Type</th>
                 <th>Title</th>
-                <th>Chapter</th>
                 <th>Archived On</th>
                 <th class="text-center">Actions</th>
               </tr>

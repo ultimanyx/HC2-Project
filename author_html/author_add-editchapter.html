@@ -3,10 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Edit Chapter · The Lost Kingdom (Draft)</title>
+    <title id="pageTitle">Chapter Editor</title>
     <link rel="stylesheet" href="../css/author_edit-chapter.css" />
     <link rel="stylesheet" href="../css/sweetalert2.min.css" />
-
     <link
       rel="icon"
       type="image/png"
@@ -42,9 +41,9 @@
         <div class="topbar">
           <div class="topbar-left">
             <a href="javascript:history.back()" class="back-link"
-              ><img src="../icons/backbtn.svg" alt="backbtn" />Back to Draft</a
+              ><img src="../icons/backbtn.svg" alt="backbtn" />Back to Novel</a
             >
-            <h1>Edit Chapter</h1>
+            <h1 id="headerTitle">Chapter Editor</h1>
           </div>
           <div class="user-chip">
             <span id="authorName">Sarah J.</span>
@@ -54,27 +53,24 @@
 
         <div class="meta-bar">
           <div class="meta-left">
-            <span class="chapter-num">Chapter 1</span>
+            <span class="chapter-num" id="metaChapterLabel">New Chapter</span>
             <span class="meta-sep">·</span>
-            <span class="novel-name">The Lost Kingdom</span>
+            <span class="novel-name" id="metaNovelName">Loading...</span>
             <span class="badge draft" id="statusBadge">Draft</span>
           </div>
           <div class="meta-right">
-            <span class="save-status" id="saveStatus">All changes saved</span>
+            <span class="save-status" id="saveStatus">Not saved yet</span>
           </div>
         </div>
 
         <div class="form-container">
           <div class="form-group">
-            <label for="chapterTitle"
-              >Chapter Title
-              <span style="color: var(--destructive)">*</span></label
-            >
+            <label for="chapterTitle">Chapter Title </label>
             <input
               type="text"
               id="chapterTitle"
-              placeholder="e.g. Prologue: The Empty Throne"
-              value="Prologue: The Empty Throne"
+              placeholder="e.g. The Fall of House Veyra"
+              value=""
             />
           </div>
 
@@ -101,10 +97,7 @@
 
           <div class="form-group-full">
             <div class="editor-label-row">
-              <label for="chapterContent"
-                >Chapter Content
-                <span style="color: var(--destructive)">*</span></label
-              >
+              <label for="chapterContent">Chapter Content</label>
               <div class="editor-toolbar">
                 <button
                   type="button"
@@ -173,35 +166,8 @@
               class="editor-area"
               contenteditable="true"
               spellcheck="true"
-            >
-              <p>
-                The throne room had stood empty for a hundred years. Dust
-                gathered on the obsidian seat like snow that would never melt,
-                and the great banners of House Aldren — a silver stag on a field
-                of deep blue — hung motionless in the still air.
-              </p>
-              <p>
-                No one had dared to sit there since the last king fell. No one
-                had dared to claim it, either — not when the prophecy still
-                whispered through every tavern from the coast to the highlands:
-                <em
-                  >when the stag returns, the kingdom will burn before it
-                  bows.</em
-                >
-              </p>
-              <p>
-                And yet, on the coldest morning of the year, a stranger walked
-                through the broken gates of the capital, dressed in travelling
-                clothes and carrying nothing but a sword that had seen better
-                days. She did not stop at the inn. She did not stop at the
-                market. She walked straight to the castle, past the guards who
-                did not recognise her, and stopped before the empty throne.
-              </p>
-              <p>
-                [Draft — scene continues here. Need to introduce the stranger's
-                name and reveal the first hint of her claim.]
-              </p>
-            </div>
+              data-placeholder="Start writing your chapter here…"
+            ></div>
 
             <div class="editor-footer">
               <span
@@ -213,13 +179,14 @@
           </div>
 
           <div class="form-actions">
-            <button class="btn" id="saveDraftBtn">Save as Draft</button>
             <span class="spacer"></span>
-            <button class="btn btn-danger" id="deleteBtn">
-              Delete Chapter
+            <!-- Save as Draft button (Using the new btn-draft class) -->
+            <button class="btn btn-draft btn-lg" id="saveDraftBtn">
+              Save as Draft
             </button>
+            <!-- Primary Button (Publish or Save) -->
             <button class="btn btn-primary btn-lg" id="saveBtn">
-              Add Chapter
+              Publish Chapter
             </button>
           </div>
         </div>
@@ -229,6 +196,6 @@
     <script src="../javascript/sweetalert2.all.min.js"></script>
     <script src="../javascript/name-change.js"></script>
     <script src="../javascript/logout.js"></script>
-    <script src="../javascript/author_edit-draft-chapter.js"></script>
+    <script src="../javascript/author_add-editchapter.js"></script>
   </body>
 </html>

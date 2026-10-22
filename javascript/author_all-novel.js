@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const STORAGE_KEY = "novels";
-  const SEED_FLAG = "novels_seeded_v3";
+  const SEED_FLAG = "novels_seeded_v8"; // Bumped to ensure the fix applies
   const tbody = document.querySelector(".table-card tbody");
   if (!tbody) return;
 
@@ -49,8 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]").map((n) => ({
       ...n,
       chapters: Array.isArray(n.chapters)
-        ? n.chapters.length
-        : Number(n.chapters) || 0,
+        ? n.chapters.filter((c) => !c.archived).length
+        : 0,
       reads: Number(n.reads) || 0,
       rating: n.rating != null ? Number(n.rating) : null,
       statusLabel: labelForStatus(n.status),
@@ -72,13 +72,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ==========================================
-  // ONE-TIME SEED (with real chapters for seed-0)
+  // ONE-TIME SEED (Dracula + Shadows of the Crown)
   // ==========================================
   function seedStaticRows() {
     if (localStorage.getItem(SEED_FLAG)) return;
 
-    const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-    const existingIds = new Set(existing.map((n) => String(n.id)));
+    // Clean out old seed data so we don't get duplicates
+    let existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    existing = existing.filter((n) => !String(n.id).startsWith("seed-"));
 
     const rows = Array.from(tbody.querySelectorAll("tr")).map((tr, i) => {
       const tds = tr.querySelectorAll("td");
@@ -94,51 +95,44 @@ document.addEventListener("DOMContentLoaded", () => {
       const ratingTxt = tds[5]?.textContent.trim() || "";
       const ratingMatch = ratingTxt.match(/[\d.]+/);
 
-      // Give the first novel (Shadows of the Crown) real chapters
-      let chaptersData = Number(tds[3]?.textContent) || 0;
+      // FIX: Always use an array for chapters. Provide 5 dummy chapters for Dracula.
+      let chaptersData = [];
       if (i === 0) {
         chaptersData = [
           {
             number: 1,
-            title: "The Fall of House Veyra",
+            title: "Jonathan Harker's Journal",
             status: "published",
-            words: 3412,
+            words: 4120,
             lastUpdated: Date.now() - 2 * 86400000,
           },
           {
             number: 2,
-            title: "A Crown of Ash",
+            title: "The Blood is the Life",
             status: "published",
-            words: 2980,
+            words: 3850,
             lastUpdated: Date.now() - 5 * 86400000,
           },
           {
             number: 3,
-            title: "The Wolf at the Door",
+            title: "The Grey Man",
             status: "published",
-            words: 3105,
+            words: 3210,
             lastUpdated: Date.now() - 7 * 86400000,
           },
           {
             number: 4,
-            title: "Shadows in the Keep",
-            status: "paused",
-            words: 1224,
+            title: "A Night in the Castle",
+            status: "pending",
+            words: 2100,
             lastUpdated: Date.now() - 14 * 86400000,
           },
           {
             number: 5,
-            title: "The Ember Crown",
+            title: "Letters from Mina",
             status: "draft",
             words: 0,
             lastUpdated: Date.now(),
-          },
-          {
-            number: 6,
-            title: "Where the River Ends",
-            status: "pending",
-            words: 2750,
-            lastUpdated: Date.now() - 3 * 86400000,
           },
         ];
       }
@@ -155,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
     });
 
-    const toAdd = rows.filter((r) => r.title && !existingIds.has(r.id));
+    const toAdd = rows.filter((r) => r.title);
     if (toAdd.length > 0) saveNovels([...existing, ...toAdd]);
     localStorage.setItem(SEED_FLAG, "1");
   }
@@ -185,9 +179,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const readsCell = n.reads ? n.reads.toLocaleString() : "";
       const badgeCls = badgeClassFor(n.statusLabel);
 
-      // Allow View for seed-0 and real novels. Block for other seed demos.
       const idStr = String(n.id);
-      const isDemo = /seed-/i.test(idStr) && idStr !== "seed-0";
+      const isDemo =
+        /seed-/i.test(idStr) && idStr !== "seed-0" && idStr !== "seed-1";
+
       const viewCell = isDemo
         ? `<span class="btn btn-primary btn-sm" role="button" aria-disabled="true" title="Demo row — not viewable" style="cursor:default;">View</span>`
         : `<a class="btn btn-primary btn-sm view-novel-btn" href="author_view-novel.html?id=${encodeURIComponent(n.id)}">View</a>`;
@@ -254,13 +249,12 @@ document.addEventListener("DOMContentLoaded", () => {
   applyFilters();
 
   // ==========================================
-  // ARCHIVE + DELETE
+  // ARCHIVE ACTION
   // ==========================================
   tbody.addEventListener("click", (e) => {
     if (typeof Swal === "undefined") return;
 
     const archiveBtn = e.target.closest(".archive-novel-btn");
-    const deleteBtn = e.target.closest(".delete-novel-btn");
 
     if (archiveBtn) {
       const id = archiveBtn.closest("tr")?.dataset.id;
@@ -294,34 +288,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
       return;
-    }
-
-    if (deleteBtn) {
-      const id = deleteBtn.closest("tr")?.dataset.id;
-      if (!id) return;
-      const novel = loadNovels().find((n) => String(n.id) === String(id));
-      if (!novel) return;
-
-      Swal.fire({
-        title: "Are you sure?",
-        text: `"${novel.title}" will be deleted permanently.`,
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Yes, delete it!",
-        cancelButtonText: "No, cancel!",
-        reverseButtons: true,
-      }).then((res) => {
-        if (res.isConfirmed) {
-          const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-          saveNovels(raw.filter((n) => String(n.id) !== String(id)));
-          applyFilters();
-          Swal.fire(
-            "Deleted!",
-            `"${novel.title}" has been deleted.`,
-            "success",
-          );
-        }
-      });
     }
   });
 });

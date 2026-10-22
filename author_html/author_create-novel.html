@@ -59,9 +59,6 @@
                 id="title"
                 placeholder="e.g. Shadows of the Crown"
               />
-              <span class="hint"
-                >Max 60 characters. This is what readers will see first.</span
-              >
             </div>
             <div class="form-group">
               <label for="subtitle">Subtitle (Optional)</label>
@@ -70,40 +67,24 @@
                 id="subtitle"
                 placeholder="e.g. A Tale of Fire and Blood"
               />
-              <span class="hint">A short secondary line to add context.</span>
             </div>
           </div>
 
           <div class="form-grid-2">
             <div class="form-group">
-              <label for="genre"
-                >Genre </label
-              >
+              <label for="genre">Genre</label>
               <select id="genre">
                 <option value="">Select primary genre…</option>
                 <option>Fantasy</option>
                 <option>Romance</option>
                 <option>Sci-Fi</option>
+                <option>Horror</option>
+                <option>Historical</option>
                 <option>Mystery</option>
                 <option>Thriller</option>
                 <option>Literary Fiction</option>
-                <option>Young Adult</option>
               </select>
             </div>
-            <div class="form-group">
-              <label for="tags">Tags / Keywords</label>
-              <input
-                type="text"
-                id="tags"
-                placeholder="e.g. enemies to lovers, magic, adventure"
-              />
-              <span class="hint"
-                >Separate with commas. Helps readers discover your book.</span
-              >
-            </div>
-          </div>
-
-          <div class="form-grid-2">
             <div class="form-group">
               <label>Cover Image</label>
               <div class="upload-zone cover-upload">
@@ -111,47 +92,41 @@
                 <p class="sub">PNG, JPG, WEBP · Max 5MB</p>
               </div>
             </div>
-            <div class="form-group">
-              <label for="synopsis"
-                >Synopsis</label
-              >
-              <textarea
-                id="synopsis"
-                placeholder="Write a compelling description that hooks potential readers…"
-              ></textarea>
-              <span class="hint"
-                >Aim for 150–300 words. This is your book's sales pitch.</span
-              >
-            </div>
           </div>
 
           <div class="form-group-full">
             <div class="form-group">
+              <label for="synopsis">Synopsis</label>
+              <textarea
+                id="synopsis"
+                class="synopsis-textarea"
+                placeholder="Write a compelling description that hooks potential readers…"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="form-group-full">
+            <div class="form-group" style="margin-bottom: 16px">
               <label for="chapter1Title">Chapter 1 Title</label>
               <input
                 type="text"
                 id="chapter1Title"
                 placeholder="e.g. The Fall of House Veyra"
               />
-              <span class="hint">Give your opening chapter a name.</span>
             </div>
 
-            <div class="form-group" style="margin-top: 16px">
+            <div class="form-group">
               <label for="firstChapter">Chapter Content</label>
               <textarea
                 id="firstChapter"
                 class="chapter-textarea"
                 placeholder="Paste or write your first chapter here…"
               ></textarea>
-              <span class="hint"
-                >Paste your opening chapter. You can add more chapters later
-                from your All Novels page.</span
-              >
             </div>
           </div>
 
           <div class="form-actions">
-            <button class="btn">Save as Draft</button>
+            <button class="btn btn-draft">Save as Draft</button>
             <span class="spacer"></span>
             <button class="btn btn-primary btn-lg">Published Book</button>
           </div>
