@@ -1,58 +1,5 @@
-/* ============================================================
-   Pending Novels – View Modal + Approve/Reject logic
-   ============================================================ */
-
-(function () {
-  "use strict";
-
-  /* ----------------------------------------------------------
-     CHAPTER DATA (Demo - Includes actual paragraphs to read)
-     ---------------------------------------------------------- */
-  const NOVEL_CHAPTERS = {
-    1: [
-      {
-        number: 1,
-        title: "A Tangled Tale",
-        status: "pending",
-        content:
-          '<p>The kingdom of Aethelgard was built on a lie. Or so the old women whispered as they scrubbed laundry by the river. Elara had heard the tales a thousand times: of the fire that consumed the royal family, of the blood that stained the marble floors of the castle.</p><p>But tales were just tales. Until the day the magic woke up inside her.</p><p>She was in the market, stealing a bruised apple from a cart, when the shadows around her suddenly solidified. They wrapped around her wrists like cool silk, hidden from the eyes of the merchants. Elara gasped, dropping the apple. The shadows vanished.</p><p>"You felt that, didn\'t you?" a voice whispered behind her.</p>',
-      },
-      {
-        number: 2,
-        title: "The Hidden Heir",
-        status: "pending",
-        content:
-          "<p>Kaelen was a hunter. He didn't believe in magic, mostly because his job was to execute anyone who used it. But tracking the girl with the shadow-touched eyes was proving to be difficult.</p><p>She had left the market in a hurry, leaving behind a trail of disturbed dust and frightened chickens. He followed her to the edge of the Whispering Woods—a place strictly forbidden by the King.</p><p>As he stepped past the first line of ancient oaks, the air grew cold. The magic here was old, older than the kingdom itself. And it was watching him.</p>",
-      },
-      {
-        number: 3,
-        title: "Awakening",
-        status: "pending",
-        content:
-          "<p>Elara didn't know why she ran into the woods. It was a death sentence. The King's Guards patrolled the borders, and the beasts inside were worse than any executioner.</p><p>She stopped at a clearing, her chest heaving. The shadows around her were dancing again, eager and restless. She reached out a hand, and for the first time, she didn't push them away.</p><p>The power rushed into her like a tidal wave, burning and freezing all at once. She screamed, but no sound came out. The trees around her groaned, bending away from the force of her awakening.</p><p>When she opened her eyes, the world was different. She could see the threads of magic weaving through the air, ancient and powerful. And at the center of it all, she saw the ghost of the woman who had killed her mother.</p>",
-      },
-    ],
-    2: [
-      {
-        number: 1,
-        title: "The Letter",
-        status: "pending",
-        content:
-          "<p>The letter was heavy in Clara's hands. It had been sitting in her grandmother's attic for ten years, unopened, waiting for the right moment.</p><p>She traced the familiar handwriting on the envelope. Julian. The boy who had promised her the world, and then vanished without a word the night before their high school graduation.</p><p>With a trembling breath, she broke the seal. Inside was a single sheet of paper, faded with age, and a dried daisy.</p><p>\"Clara,\" it began. \"If you're reading this, it means I didn't make it back. I'm sorry. I never meant to leave you...\"</p>",
-      },
-      {
-        number: 2,
-        title: "Echoes of the Past",
-        status: "pending",
-        content:
-          "<p>Clara sat on the porch swing, watching the sun dip below the old oak tree at the edge of the property. The letter was clutched in her hand.</p><p>He hadn't abandoned her. He had been drafted. A mix-up with his paperwork, a deployment he couldn't refuse. And then... silence.</p><p>She wiped a tear from her cheek. The anger she had carried for a decade suddenly felt hollow. She had built walls around her heart, married a man she didn't truly love, all because of a misunderstanding.</p><p>She looked at the daisy. It was fragile, yet somehow it had survived. Maybe it was time she did the same.</p>",
-      },
-    ],
-  };
-
-  /* ----------------------------------------------------------
-     DOM REFERENCES
-     ---------------------------------------------------------- */
+document.addEventListener("DOMContentLoaded", () => {
+  const STORAGE_KEY = "novels";
   const tableBody = document.getElementById("pendingNovelBody");
   const overlay = document.getElementById("novelModalOverlay");
 
@@ -78,226 +25,122 @@
   const modalApproveBtn = document.getElementById("novelModalApprove");
   const modalRejectBtn = document.getElementById("novelModalReject");
 
-  /* Currently open row */
-  let activeRow = null;
+  let activeNovelId = null;
 
-  /* ----------------------------------------------------------
-     LOCAL STORAGE HELPERS (To remember status)
-     ---------------------------------------------------------- */
-  function getSavedStatus(id) {
-    const saved = localStorage.getItem("novel_status_" + id);
-    return saved ? JSON.parse(saved) : null;
-  }
+  // ==========================================
+  // HELPERS
+  // ==========================================
+  const getNovels = () => {
+    try {
+      const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      return Array.isArray(raw) ? raw : [];
+    } catch {
+      return [];
+    }
+  };
 
-  function saveStatus(id, status, reason = "") {
-    const data = { status: status, reason: reason };
-    localStorage.setItem("novel_status_" + id, JSON.stringify(data));
-  }
-
-  // This runs on page load to apply any saved statuses
-  function applySavedStates() {
-    if (!tableBody) return;
-    const rows = tableBody.querySelectorAll("tr");
-
-    rows.forEach(function (row) {
-      const id = row.dataset.novelId;
-      const saved = getSavedStatus(id);
-
-      if (saved) {
-        const badge = row.querySelector(".badge");
-
-        if (saved.status === "approved") {
-          if (badge) {
-            badge.className = "badge active";
-            badge.textContent = "Approved";
-          }
-        } else if (saved.status === "rejected") {
-          if (badge) {
-            badge.className = "badge rejected";
-            badge.textContent = "Rejected";
-          }
-          row.dataset.rejectReason = saved.reason;
-        }
-
-        // Disable buttons
-        row.querySelectorAll(".action-group button").forEach(function (btn) {
-          btn.disabled = true;
-          btn.style.pointerEvents = "none";
-          btn.style.opacity = "0.45";
-        });
-
-        row.classList.add("row-processed");
-      }
-    });
-  }
-
-  /* ----------------------------------------------------------
-     HELPERS
-     ---------------------------------------------------------- */
-  function getRowData(row) {
-    return {
-      id: row.dataset.novelId || "",
-      title: row.dataset.title || "Untitled",
-      author: row.dataset.author || "Unknown",
-      genre: row.dataset.genre || "—",
-      date: row.dataset.date || "—",
-      synopsis:
-        row.dataset.synopsis || "No synopsis provided for this novel yet.",
-      cover: row.dataset.cover || "",
-      rejectReason: row.dataset.rejectReason || "",
-    };
-  }
-
-  function getChapters(id) {
-    return NOVEL_CHAPTERS[id] || [];
-  }
-
-  function isRowProcessed(row) {
-    return row.classList.contains("row-processed");
-  }
+  const saveNovels = (list) => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+  };
 
   function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
+    return String(str ?? "").replace(
+      /[&<>"']/g,
+      (c) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        })[c],
+    );
   }
 
-  /* ----------------------------------------------------------
-     SWEETALERTS
-     ---------------------------------------------------------- */
-  function showApproved(title) {
-    if (typeof Swal === "undefined") {
-      alert(`"${title}" has been approved.`);
+  // ==========================================
+  // RENDER TABLE
+  // ==========================================
+  function renderTable() {
+    const allNovels = getNovels();
+    const pendingNovels = allNovels.filter((n) => n.status === "pending");
+
+    tableBody.innerHTML = "";
+
+    if (pendingNovels.length === 0) {
+      tableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:28px;color:var(--muted-foreground);">No pending novels found.</td></tr>`;
       return;
     }
-    Swal.fire({
-      icon: "success",
-      title: "Approved",
-      text: `"${title}" has been approved.`,
-      confirmButtonText: "OK",
-      confirmButtonColor: "#b8721f",
+
+    pendingNovels.forEach((n) => {
+      const dateStr = n.createdAt
+        ? new Date(n.createdAt).toLocaleDateString()
+        : "Recently";
+
+      const tr = document.createElement("tr");
+      tr.dataset.novelId = n.id;
+
+      tr.innerHTML = `
+        <td class="fw-600">${escapeHtml(n.title)}</td>
+        <td>${escapeHtml(n.author || "Unknown")}</td>
+        <td>${escapeHtml(n.genre || "—")}</td>
+        <td>${dateStr}</td>
+        <td><span class="badge paused">Pending</span></td>
+        <td>
+          <div class="action-group action">
+            <button class="btn btn-secondary btn-sm view-btn" type="button">View</button>
+            <button class="btn btn-primary btn-sm approve-btn" type="button">Approve</button>
+            <button class="btn btn-danger btn-sm reject-btn" type="button">Reject</button>
+          </div>
+        </td>
+      `;
+      tableBody.appendChild(tr);
     });
   }
 
-  function showRejected(title, reason) {
-    if (typeof Swal === "undefined") {
-      alert(`"${title}" rejected. Reason: ${reason}`);
-      return;
-    }
-    Swal.fire({
-      icon: "error",
-      title: "Rejected",
-      html: `"${title}" has been rejected.<br><br><strong>Reason:</strong><br>
-             <div style="text-align:left;background:#f8f6f1;padding:10px;border-radius:8px;font-size:14px;margin-top:8px;">${escapeHtml(reason)}</div>`,
-      confirmButtonText: "OK",
-      confirmButtonColor: "#b8721f",
-    });
-  }
+  // ==========================================
+  // MODAL - OPEN & POPULATE
+  // ==========================================
+  function openModal(novelId) {
+    const novel = getNovels().find((n) => String(n.id) === String(novelId));
+    if (!novel) return;
 
-  function askRejectReason(title) {
-    return new Promise(function (resolve) {
-      if (typeof Swal === "undefined") {
-        return resolve(prompt(`Why reject "${title}"?`));
-      }
-      Swal.fire({
-        icon: "warning",
-        title: "Reject this novel?",
-        html: `You are rejecting <strong>"${escapeHtml(title)}"</strong>.<br><span style="font-size:13px;color:#6b6680;">Please state the reason. This will be sent to the author.</span>`,
-        input: "textarea",
-        inputPlaceholder:
-          "e.g. Plagiarism, poor formatting, inappropriate content...",
-        inputValidator: (value) =>
-          !value || value.trim().length < 5
-            ? "Please provide a valid reason."
-            : undefined,
-        showCancelButton: true,
-        confirmButtonText: "Reject",
-        cancelButtonText: "Cancel",
-        confirmButtonColor: "#dc2626",
-        cancelButtonColor: "#6b6680",
-        reverseButtons: true,
-      }).then((result) => {
-        resolve(result.isConfirmed ? result.value.trim() : null);
-      });
-    });
-  }
+    activeNovelId = novelId;
 
-  /* ----------------------------------------------------------
-     MODAL – OPEN & POPULATE
-     ---------------------------------------------------------- */
-  function openModal(row) {
-    activeRow = row;
-    const data = getRowData(row);
-    const chapters = getChapters(data.id);
-    const processed = isRowProcessed(row);
+    modalTitle.textContent = novel.title || "Untitled";
+    modalAuthor.textContent = novel.author || "Unknown";
+    modalDate.textContent = novel.createdAt
+      ? new Date(novel.createdAt).toLocaleDateString()
+      : "Recently";
+    modalSynopsis.textContent = novel.synopsis || "No synopsis provided.";
+    modalCover.src =
+      novel.coverImage || "../image/logo-nobackground-circle.png";
+    modalSubtitle.textContent = novel.subtitle || "A New Story";
 
-    /* Header / Cover */
-    modalTitle.textContent = data.title;
-    modalAuthor.textContent = data.author;
-    modalDate.textContent = data.date;
-    modalSynopsis.textContent = data.synopsis;
-    modalCover.src = data.cover;
-
-    /* Generate a random subtitle based on genre */
-    modalSubtitle.textContent = data.genre.includes("Fantasy")
-      ? "A Tale of Fire and Blood"
-      : "A Story of Love and Loss";
-
-    /* Tags (split genres) */
+    // Tags
     modalTags.innerHTML = "";
-    data.genre.split(",").forEach((tag) => {
-      const span = document.createElement("span");
-      span.className = "novel-tag";
-      span.textContent = tag.trim();
-      modalTags.appendChild(span);
-    });
-
-    /* Status Badge */
-    if (processed) {
-      const badge = row.querySelector(".badge");
-      const statusText = badge ? badge.textContent.trim() : "Processed";
-      modalStatus.textContent = statusText;
-      modalStatus.className = "badge";
-
-      if (statusText.toLowerCase().includes("approve")) {
-        modalStatus.classList.add("active");
-      } else if (statusText.toLowerCase().includes("reject")) {
-        modalStatus.classList.add("rejected");
-      } else {
-        modalStatus.classList.add("paused");
-      }
-    } else {
-      modalStatus.textContent = "Pending";
-      modalStatus.className = "badge paused";
+    if (novel.genre) {
+      novel.genre.split(",").forEach((tag) => {
+        const span = document.createElement("span");
+        span.className = "novel-tag";
+        span.textContent = tag.trim();
+        modalTags.appendChild(span);
+      });
     }
 
-    /* Rejection Reason Block */
-    if (
-      processed &&
-      data.rejectReason &&
-      row.querySelector(".badge.rejected")
-    ) {
-      modalRejectSection.style.display = "block";
-      modalRejectReason.textContent = data.rejectReason;
-    } else {
-      modalRejectSection.style.display = "none";
-    }
+    // Status
+    modalStatus.textContent = "Pending";
+    modalStatus.className = "badge paused";
+    modalRejectSection.style.display = "none";
 
-    /* Chapters */
+    // Chapters
+    const chapters = novel.chapters || [];
     modalChapterCount.textContent = chapters.length;
     modalChapterList.innerHTML = "";
 
     if (chapters.length === 0) {
-      const li = document.createElement("li");
-      li.textContent = "No chapters submitted yet.";
-      li.style.color = "#6b6680";
-      li.style.fontStyle = "italic";
-      modalChapterList.appendChild(li);
+      modalChapterList.innerHTML = `<li style="color:#6b6680;font-style:italic;">No chapters submitted yet.</li>`;
     } else {
-      chapters.forEach(function (ch) {
+      chapters.forEach((ch) => {
         const li = document.createElement("li");
         li.className = "chapter-item";
 
@@ -306,14 +149,14 @@
 
         const left = document.createElement("div");
         left.className = "chapter-header-left";
-        left.innerHTML = `<span class="chapter-num">Ch. ${ch.number}</span> <span class="chapter-name">${escapeHtml(ch.title)}</span>`;
+        left.innerHTML = `<span class="chapter-num">Ch. ${ch.number}</span> <span class="chapter-name">${escapeHtml(ch.title || "Untitled")}</span>`;
 
         const right = document.createElement("div");
         right.className = "chapter-header-right";
 
         const status = document.createElement("span");
         status.className = "chapter-status";
-        status.textContent = processed ? "reviewed" : ch.status || "pending";
+        status.textContent = ch.status || "pending";
 
         const readBtn = document.createElement("button");
         readBtn.className = "btn-read-chapter";
@@ -322,7 +165,8 @@
 
         const contentDiv = document.createElement("div");
         contentDiv.className = "chapter-content";
-        contentDiv.innerHTML = ch.content;
+        contentDiv.innerHTML =
+          ch.body || ch.content || "Content not available.";
 
         readBtn.addEventListener("click", function (e) {
           e.preventDefault();
@@ -348,138 +192,129 @@
       });
     }
 
-    modalApproveBtn.disabled = processed;
-    modalRejectBtn.disabled = processed;
+    modalApproveBtn.disabled = false;
+    modalRejectBtn.disabled = false;
 
     overlay.classList.add("active");
     document.body.style.overflow = "hidden";
   }
 
-  /* ----------------------------------------------------------
-     MODAL – CLOSE
-     ---------------------------------------------------------- */
   function closeModal() {
     overlay.classList.remove("active");
     document.body.style.overflow = "";
-    activeRow = null;
+    activeNovelId = null;
   }
 
-  /* ----------------------------------------------------------
-     ROW ACTIONS (Approve / Reject with LocalStorage save)
-     ---------------------------------------------------------- */
-  function approveRow(row) {
-    if (!row || isRowProcessed(row)) return;
-    const data = getRowData(row);
-    const badge = row.querySelector(".badge");
+  // ==========================================
+  // APPROVE & REJECT LOGIC
+  // ==========================================
+  function approveNovel(id) {
+    const list = getNovels();
+    const index = list.findIndex((n) => String(n.id) === String(id));
+    if (index === -1) return;
 
-    if (badge) {
-      badge.className = "badge active";
-      badge.textContent = "Approved";
+    list[index].status = "published";
+
+    // Also publish all its chapters
+    if (Array.isArray(list[index].chapters)) {
+      list[index].chapters.forEach((ch) => (ch.status = "published"));
     }
 
-    row.querySelectorAll(".action-group button").forEach(function (btn) {
-      btn.disabled = true;
-      btn.style.pointerEvents = "none";
-      btn.style.opacity = "0.45";
-    });
+    saveNovels(list);
+    renderTable();
+    closeModal();
 
-    row.classList.add("row-processed");
-
-    // Save to localStorage so it persists on refresh
-    saveStatus(data.id, "approved");
-
-    showApproved(data.title);
+    Swal.fire(
+      "Approved!",
+      "The novel has been published and is now visible to readers.",
+      "success",
+    );
   }
 
-  function rejectRow(row) {
-    if (!row || isRowProcessed(row)) return;
-    const data = getRowData(row);
+  function rejectNovel(id) {
+    Swal.fire({
+      icon: "warning",
+      title: "Reject this novel?",
+      text: "Please state the reason. This will be sent to the author.",
+      input: "textarea",
+      inputPlaceholder:
+        "e.g. Plagiarism, poor formatting, inappropriate content...",
+      inputValidator: (value) =>
+        !value || value.trim().length < 5
+          ? "Please provide a valid reason."
+          : undefined,
+      showCancelButton: true,
+      confirmButtonText: "Reject",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#dc2626",
+      cancelButtonColor: "#6b6680",
+    }).then((result) => {
+      if (!result.isConfirmed) return;
 
-    askRejectReason(data.title).then(function (reason) {
-      if (!reason) return;
+      const list = getNovels();
+      const index = list.findIndex((n) => String(n.id) === String(id));
+      if (index === -1) return;
 
-      row.dataset.rejectReason = reason;
-      const badge = row.querySelector(".badge");
+      list[index].status = "rejected";
+      list[index].rejectReason = result.value.trim();
 
-      if (badge) {
-        badge.className = "badge rejected";
-        badge.textContent = "Rejected";
-      }
+      saveNovels(list);
+      renderTable();
+      closeModal();
 
-      row.querySelectorAll(".action-group button").forEach(function (btn) {
-        btn.disabled = true;
-        btn.style.pointerEvents = "none";
-        btn.style.opacity = "0.45";
-      });
-
-      row.classList.add("row-processed");
-
-      // Save to localStorage so it persists on refresh
-      saveStatus(data.id, "rejected", reason);
-
-      showRejected(data.title, reason);
+      Swal.fire(
+        "Rejected",
+        "The novel has been rejected and sent back to the author.",
+        "success",
+      );
     });
   }
 
-  /* ----------------------------------------------------------
-     EVENT LISTENERS
-     ---------------------------------------------------------- */
-
-  // Load saved states immediately on page load
-  applySavedStates();
-
-  // Table Delegation
+  // ==========================================
+  // EVENT LISTENERS
+  // ==========================================
   if (tableBody) {
     tableBody.addEventListener("click", function (e) {
       const btn = e.target.closest("button");
       if (!btn) return;
       const row = btn.closest("tr");
       if (!row) return;
+      const id = row.dataset.novelId;
 
       if (btn.classList.contains("view-btn")) {
-        e.preventDefault();
-        openModal(row);
+        openModal(id);
       } else if (btn.classList.contains("approve-btn")) {
-        e.preventDefault();
-        approveRow(row);
+        approveNovel(id);
       } else if (btn.classList.contains("reject-btn")) {
-        e.preventDefault();
-        rejectRow(row);
+        rejectNovel(id);
       }
     });
   }
 
-  // Modal Controls
   if (modalCloseBtn) modalCloseBtn.addEventListener("click", closeModal);
   if (modalCancelBtn) modalCancelBtn.addEventListener("click", closeModal);
 
   if (overlay) {
-    overlay.addEventListener("click", function (e) {
+    overlay.addEventListener("click", (e) => {
       if (e.target === overlay) closeModal();
     });
   }
 
-  document.addEventListener("keydown", function (e) {
+  document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && overlay && overlay.classList.contains("active")) {
       closeModal();
     }
   });
 
-  // Modal Actions
   if (modalApproveBtn) {
-    modalApproveBtn.addEventListener("click", function () {
-      if (!activeRow) return;
-      approveRow(activeRow);
-      closeModal();
+    modalApproveBtn.addEventListener("click", () => {
+      if (activeNovelId) approveNovel(activeNovelId);
     });
   }
 
   if (modalRejectBtn) {
-    modalRejectBtn.addEventListener("click", function () {
-      if (!activeRow) return;
-      const row = activeRow;
-      closeModal();
-      rejectRow(row);
+    modalRejectBtn.addEventListener("click", () => {
+      if (activeNovelId) rejectNovel(activeNovelId);
     });
   }
 
@@ -489,11 +324,13 @@
     searchInput.addEventListener("input", function () {
       const query = this.value.toLowerCase().trim();
       const rows = tableBody.querySelectorAll("tr");
-
       rows.forEach(function (row) {
         const text = row.innerText.toLowerCase();
         row.style.display = text.includes(query) ? "" : "none";
       });
     });
   }
-})();
+
+  // Initial Load
+  renderTable();
+});

@@ -4,6 +4,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const editId = urlParams.get("id");
   let existingNovel = null;
 
+  // 🚨 GET CURRENT AUTHOR NAME FROM SESSION
+  const currentUser = JSON.parse(
+    sessionStorage.getItem("currentUser") ||
+      sessionStorage.getItem("currentAuthor") ||
+      "{}",
+  );
+  const authorName = currentUser.username || currentUser.penName || "Author";
+
   const titleInput = document.getElementById("title");
   const subtitleInput = document.getElementById("subtitle");
   const genreSelect = document.getElementById("genre");
@@ -11,7 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const chapterTitleInput = document.getElementById("chapter1Title");
   const chapterInput = document.getElementById("firstChapter");
 
-  // Buttons (Updated to match the new classes in HTML)
   const saveDraftBtn = document.querySelector(".btn-draft");
   const publishBtn = document.querySelector(".btn-primary");
 
@@ -37,7 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         coverImageDataUrl = e.target.result;
-        // Show full preview in the box
         coverUpload.innerHTML = `<img src="${coverImageDataUrl}" style="width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;">`;
       };
       reader.readAsDataURL(file);
@@ -52,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (existingNovel) {
       document.querySelector(".topbar h1").textContent = "Edit Novel";
       if (saveDraftBtn) saveDraftBtn.textContent = "Save Updates as Draft";
-      if (publishBtn) publishBtn.textContent = "Publish Updates";
+      if (publishBtn) publishBtn.textContent = "Submit Updates for Review";
 
       titleInput.value = existingNovel.title || "";
       subtitleInput.value = existingNovel.subtitle || "";
@@ -66,7 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (existingNovel.coverImage) {
         coverImageDataUrl = existingNovel.coverImage;
-        // Show full preview in the box
         coverUpload.innerHTML = `<img src="${coverImageDataUrl}" style="width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;">`;
       }
     }
@@ -105,6 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updated.synopsis = synopsis;
         updated.status = status;
         updated.coverImage = coverImageDataUrl;
+        updated.author = authorName; // 🚨 Make sure author is saved
         updated.lastEdited = Date.now();
 
         if (!Array.isArray(updated.chapters)) updated.chapters = [];
@@ -131,7 +137,10 @@ document.addEventListener("DOMContentLoaded", () => {
         Swal.fire({
           icon: "success",
           title: "Updated!",
-          text: `"${title}" details have been saved.`,
+          text:
+            status === "pending"
+              ? "Your novel is pending admin approval."
+              : `"${title}" details have been saved.`,
           confirmButtonColor: "#b8721f",
         }).then(() => {
           window.location.href = `author_view-novel.html?id=${editId}`;
@@ -147,6 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
         synopsis,
         coverImage: coverImageDataUrl,
         status,
+        author: authorName, // 🚨 Add author here
         chapters: [
           {
             number: 1,
@@ -174,8 +184,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       Swal.fire({
         icon: "success",
-        title: status === "draft" ? "Draft saved" : "Novel published",
-        text: `"${title}" has been saved.`,
+        title: status === "draft" ? "Draft saved" : "Submitted for Review",
+        text:
+          status === "draft"
+            ? `"${title}" has been saved.`
+            : `"${title}" is pending admin approval.`,
         confirmButtonColor: "#b8721f",
       }).then(() => {
         window.location.href = target;
@@ -185,5 +198,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Bind the buttons
   saveDraftBtn?.addEventListener("click", () => saveNovel("draft"));
-  publishBtn?.addEventListener("click", () => saveNovel("published"));
+  publishBtn?.addEventListener("click", () => saveNovel("pending"));
 });

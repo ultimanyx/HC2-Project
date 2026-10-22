@@ -1,148 +1,87 @@
 document.addEventListener("DOMContentLoaded", () => {
   const STORAGE_KEY = "novels";
-  const params = new URLSearchParams(location.search);
-  const novelId = params.get("novelId") || "demo-novel";
-  const chapterParam = params.get("chapter") || "1";
+  const urlParams = new URLSearchParams(window.location.search);
+  const novelId = urlParams.get("novelId");
+  const chapterNum = urlParams.get("chapter");
 
-  const $ = (id) => document.getElementById(id);
-  const SwalOK = typeof Swal !== "undefined";
+  if (!novelId || !chapterNum) {
+    Swal.fire("Error", "Missing chapter data.", "error").then(() => {
+      window.location.href = "admin_all-novels.html";
+    });
+    return;
+  }
 
-  const getNovels = () => {
-    try {
-      const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-      return Array.isArray(raw) ? raw : [];
-    } catch {
-      return [];
-    }
-  };
-  const saveNovels = (list) =>
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+  let novels = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+  let novel = novels.find((n) => String(n.id) === String(novelId));
+  let chapter = novel?.chapters?.find(
+    (c) => String(c.number) === String(chapterNum),
+  );
 
-  const VIEW_NOVEL_URL = "admin-view-novel.html";
-  const goToViewNovel = (id) =>
-    `${VIEW_NOVEL_URL}?novelId=${encodeURIComponent(id)}`;
+  if (!novel || !chapter) {
+    Swal.fire("Not Found", "This chapter does not exist.", "error").then(() => {
+      window.location.href = "admin_all-novels.html";
+    });
+    return;
+  }
 
-  /* ---------------------------------------------------------------
-     ARCHIVE BUTTON
-     --------------------------------------------------------------- */
-  $("deleteBtn")?.addEventListener("click", async () => {
-    let fresh = getNovels();
-    let freshNovel = fresh.find((n) => String(n.id) === String(novelId));
+  // Populate Header
+  document.getElementById("metaChapterNum").textContent =
+    `Chapter ${chapter.number}`;
+  document.getElementById("metaNovelName").textContent = novel.title;
 
-    if (!freshNovel) {
-      return SwalOK
-        ? Swal.fire({
-            icon: "error",
-            title: "Novel not found",
-            confirmButtonColor: "#b8721f",
-          })
-        : alert("Novel not found.");
-    }
+  const statusBadge = document.getElementById("statusBadge");
+  const s = (chapter.status || "").toLowerCase();
+  statusBadge.textContent =
+    s === "published"
+      ? "Published"
+      : s === "draft"
+        ? "Draft"
+        : s === "pending"
+          ? "Pending"
+          : "Published";
+  statusBadge.className = `badge ${s === "published" ? "active" : s === "draft" ? "draft" : s === "pending" ? "pending" : "active"}`;
 
-    const idx = freshNovel.chapters.findIndex(
-      (ch) => Number(ch.number) === Number(chapterParam),
-    );
-    if (idx === -1) return;
+  // Populate Form Fields
+  document.getElementById("chapterTitle").value = chapter.title || "";
+  document.getElementById("chapterNumber").value = chapter.number || 1;
+  document.getElementById("authorNote").value = chapter.authorNote || "";
+  document.getElementById("chapterContent").value =
+    chapter.body || chapter.content || "";
 
-    const target = freshNovel.chapters[idx];
-    const title = target.title || `Chapter ${chapterParam}`;
+  // Fix Back Button
+  const backBtn = document.getElementById("backToNovelBtn");
+  if (backBtn) {
+    backBtn.href = `admin-view-novel.html?novelId=${novelId}`;
+  }
 
-    const confirmed = SwalOK
-      ? (
-          await Swal.fire({
-            icon: "warning",
-            title: "Archive this chapter?",
-            text: `"${title}" will be removed from here and moved to the Archive page.`,
-            showCancelButton: true,
-            confirmButtonText: "Archive",
-            cancelButtonText: "Cancel",
-            confirmButtonColor: "#b8721f",
-            cancelButtonColor: "#6b6680",
-          })
-        ).isConfirmed
-      : confirm(`Archive "${title}"?`);
+  // Archive Chapter Logic
+  document.getElementById("archiveBtn").addEventListener("click", () => {
+    Swal.fire({
+      title: "Archive this chapter?",
+      text: "It will be moved to the Archive page.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Archive",
+      confirmButtonColor: "#b8721f",
+    }).then((res) => {
+      if (!res.isConfirmed) return;
 
-    if (!confirmed) return;
+      chapter.archived = true;
+      chapter.archivedAt = Date.now();
+      chapter.status = "archived";
 
-    target.previousStatus = target.status || "published";
-    target.archived = true;
-    target.archivedAt = Date.now();
-    target.status = "archived";
-    freshNovel.updatedAt = Date.now();
+      // Save to localStorage
+      const index = novels.findIndex((n) => String(n.id) === String(novelId));
+      if (index !== -1) {
+        novels[index].chapters = novel.chapters;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(novels));
+      }
 
-    saveNovels(fresh);
-
-    if (SwalOK) {
-      await Swal.fire({
-        icon: "success",
-        title: "Archived!",
-        text: `"${title}" has been moved to the Archive.`,
-        confirmButtonColor: "#b8721f",
-      });
-    }
-
-    location.href = goToViewNovel(novelId);
+      Swal.fire("Archived!", "Chapter moved to Archive.", "success").then(
+        () => {
+          window.location.href = `admin-view-novel.html?novelId=${novelId}`;
+        },
+      );
+    });
   });
-
-  /* ---------------------------------------------------------------
-     PREFILL
-     --------------------------------------------------------------- */
-  const list = getNovels();
-  const novel = list.find((n) => String(n.id) === String(novelId));
-
-  if (novel) {
-    const chapters = Array.isArray(novel.chapters) ? novel.chapters : [];
-    const chapter = chapters.find(
-      (ch) => Number(ch.number) === Number(chapterParam),
-    );
-
-    if (chapter) {
-      const chapterNumber = Number(chapter.number) || 1;
-
-      const titleEl = $("chapterTitle");
-      const numEl = $("chapterNumber");
-      const noteEl = $("authorNote");
-      const contentEl = $("chapterContent");
-
-      if (titleEl) titleEl.value = chapter.title || "";
-      if (numEl) numEl.value = chapterNumber;
-      if (noteEl) noteEl.value = chapter.authorNote || chapter.note || "";
-
-      // Inject the body
-      if (contentEl) {
-        contentEl.value = chapter.body || chapter.content || chapter.text || "";
-      }
-
-      const chapNumEl = document.querySelector(".chapter-num");
-      if (chapNumEl) chapNumEl.textContent = `Chapter ${chapterNumber}`;
-
-      const novelNameEl = document.querySelector(".novel-name");
-      if (novelNameEl) novelNameEl.textContent = novel.title || "Untitled";
-
-      const statusBadge = $("statusBadge");
-      if (statusBadge) {
-        const s = String(chapter.status || "").toLowerCase();
-        const map = {
-          draft: { label: "Draft", cls: "draft" },
-          pending: { label: "Pending Review", cls: "pending" },
-          broken: { label: "Broken Content", cls: "paused" },
-          published: { label: "Published", cls: "active" },
-          archived: { label: "Archived", cls: "completed" },
-        };
-        const info = map[s] || map.published;
-        statusBadge.textContent = info.label;
-        statusBadge.className = `badge ${info.cls}`;
-      }
-
-      document.title = `Chapter ${chapterNumber} · ${novel.title || "Novel"}`;
-    }
-  }
-
-  /* ----- Back link ----- */
-  const backLink = document.querySelector(".back-link");
-  if (backLink) {
-    const base = backLink.getAttribute("href") || VIEW_NOVEL_URL;
-    const sep = base.includes("?") ? "&" : "?";
-    backLink.href = `${base}${sep}novelId=${encodeURIComponent(novelId)}`;
-  }
 });

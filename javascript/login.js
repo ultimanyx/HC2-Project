@@ -13,7 +13,7 @@ const ADMIN = {
 const DEFAULT_READER = {
   username: "John Smith",
   email: "john@gmail.com",
-  password: "johnsmith",
+  password: "john123",
   role: "reader",
 };
 

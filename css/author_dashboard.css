@@ -415,7 +415,7 @@ tbody tr:last-child td {
   grid-template-columns: 2fr 1fr;
   gap: 16px;
   margin-bottom: 20px;
-  align-items: start;
+  /* Removed align-items: start; so they stretch to the same height */
 }
 
 @media (max-width: 900px) {
@@ -427,6 +427,8 @@ tbody tr:last-child td {
 /* chart card */
 .chart-card {
   margin-top: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .chart-container {
@@ -434,6 +436,7 @@ tbody tr:last-child td {
   align-items: flex-start;
   gap: 10px;
   padding-top: 8px;
+  flex: 1; /* Stretches inside the card */
 }
 
 .y-axis {
@@ -539,6 +542,7 @@ tbody tr:last-child td {
 .stat-card--reported {
   display: flex;
   flex-direction: column;
+  height: 100%; /* Forces the card to fill the grid height */
 }
 
 .report-breakdown {
@@ -547,9 +551,10 @@ tbody tr:last-child td {
   flex-direction: column;
   margin: 0;
   padding: 0;
-  flex: 1;
+  flex: 1; /* Takes up remaining space in the card */
+  min-height: 0; /* Crucial for flex children to scroll properly */
   overflow-y: auto;
-  max-height: 280px;
+  overflow-x: hidden;
 }
 
 .report-breakdown li {
@@ -636,4 +641,34 @@ tbody tr:last-child td {
 
 .alert-action-btn:hover {
   background: #b91c1c;
+}
+
+/* =========================================
+   EMPTY STATE FOR REPORTED NOVELS
+   ========================================= */
+.empty-report-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1; /* Pushes the content to center vertically */
+  border-bottom: none !important;
+  padding: 20px 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.empty-report-content {
+  text-align: center;
+  width: 100%;
+}
+
+.empty-report-content span {
+  color: var(--muted-foreground);
+  font-weight: 400;
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1.5;
+  white-space: normal;
+  word-wrap: break-word;
+  display: block;
 }

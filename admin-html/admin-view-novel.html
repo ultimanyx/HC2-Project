@@ -3,10 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shadows of the Crown · View Novel</title>
+    <title>View Novel</title>
     <link rel="stylesheet" href="../css/admin_view-novel.css" />
     <link rel="stylesheet" href="../css/sweetalert2.min.css" />
-
     <link
       rel="icon"
       type="image/png"
@@ -19,7 +18,6 @@
         <div class="brand">
           <img src="../image/logocopy.png" alt="brandlogo" />NovelNest
         </div>
-
         <nav class="nav">
           <a href="admin.html" class="nav-item">
             <span class="nav-icon"></span> Dashboard
@@ -33,34 +31,28 @@
           <a href="admin_reported-novels.html" class="nav-item sub"
             >Reported Novels</a
           >
-
           <a href="admin_manage-user.html" class="nav-item sub">Manage Users</a>
           <a href="admin_manage-author.html" class="nav-item sub"
             >Manage Authors</a
           >
-
           <a href="admin_ad-management.html" class="nav-item sub"
             >Ad Management</a
           >
           <a href="admin_revenue-reports.html" class="nav-item sub"
             >Revenue Reports</a
           >
-
           <a href="admin_archive.html" class="nav-item sub">Archive</a>
         </nav>
-
         <a href="#" class="logout" id="logout" data-role="admin"> Logout</a>
       </aside>
 
-      <!-- ============= MAIN ============= -->
       <main class="main">
-        <!-- Topbar -->
         <div class="topbar">
           <div class="topbar-left">
             <a href="admin_all-novels.html" class="back-link">
               <img src="../icons/backbtn.svg" alt="backbtn" />All Novels</a
             >
-            <h1>Shadows of the Crown</h1>
+            <h1 id="headerNovelTitle">Loading...</h1>
           </div>
           <div class="user-chip">
             <span>Welcome, Admin</span>
@@ -68,62 +60,55 @@
           </div>
         </div>
 
-        <!-- Action bar (Button removed) -->
         <div class="action-bar">
           <div class="action-left">
             <span class="badge active" id="novelStatusBadge">Ongoing</span>
             <span class="meta-text" id="novelMetaText"
-              >Last updated 2 days ago</span
+              >Last updated recently</span
             >
           </div>
         </div>
 
-        <!-- ============================================
-             NOVEL HEADER
-             ============================================ -->
         <fieldset disabled="disabled">
           <section class="novel-header">
             <div class="novel-cover">
               <img
-                src="../books/Fantasy/A_Tangled_Tale by Lewis_Carroll (Unzipped Files)/A_Tangled_Tale- cover art.png"
+                id="novelCoverImg"
+                src="../image/logo-nobackground-circle.png"
                 alt="Cover"
               />
             </div>
-
             <div class="novel-details">
               <div id="viewMode">
-                <h2 id="titleView">Shadows of the Crown</h2>
-                <p class="novel-subtitle" id="subtitleView">
-                  A Tale of Fire and Blood
-                </p>
+                <h2 id="titleView">Loading...</h2>
+                <p class="novel-subtitle" id="subtitleView"></p>
 
-                <div class="tags-row" id="tagsView">
-                  <span class="tag">enemies to lovers</span>
-                  <span class="tag">magic</span>
-                  <span class="tag">adventure</span>
+                <!-- Added Icons here using .meta-item -->
+                <div
+                  class="meta-row"
+                  style="margin-top: 12px; margin-bottom: 20px"
+                >
+                  <div class="meta-item">
+                    <img src="../icons/author.svg" alt="author icon" />
+                    <span id="novelAuthor"></span>
+                  </div>
+                  <div class="meta-item">
+                    <img src="../icons/book-half.svg" alt="genre icon" />
+                    <span id="novelGenre"></span>
+                  </div>
                 </div>
 
                 <h3 class="section-title">Synopsis</h3>
-                <p class="synopsis" id="synopsisView">
-                  In a kingdom where magic is forbidden and crowns are won by
-                  blood, a young outcast discovers she is the last heir to a
-                  forgotten throne. Hunted by the very people who murdered her
-                  family, she must decide whether to flee or fight — and in
-                  doing so, awaken a power that could burn the world to ash.
-                </p>
+                <p class="synopsis" id="synopsisView"></p>
               </div>
             </div>
           </section>
         </fieldset>
 
-        <!-- ============================================
-             CHAPTER LIST
-             ============================================ -->
         <section class="table-card">
           <div class="chapter-card-header">
             <h2>Chapters</h2>
           </div>
-
           <table>
             <thead>
               <tr>
@@ -136,115 +121,7 @@
               </tr>
             </thead>
             <tbody id="chapterTableBody">
-              <!-- Hardcoded Demo Rows -->
-              <tr data-chapter="1">
-                <td>1</td>
-                <td><strong>The Fall of House Veyra</strong></td>
-                <td><span class="badge active">Published</span></td>
-                <td>3,412</td>
-                <td>2 days ago</td>
-                <td>
-                  <a href="admin_view-chapter.html">
-                    <button class="btn btn-sm btn-primary">View</button>
-                  </a>
-                  <button
-                    class="btn btn-sm btn-danger archive-chapter-btn"
-                    data-number="1"
-                  >
-                    Archive
-                  </button>
-                </td>
-              </tr>
-              <tr data-chapter="2">
-                <td>2</td>
-                <td><strong>A Crown of Ash</strong></td>
-                <td><span class="badge active">Published</span></td>
-                <td>2,980</td>
-                <td>5 days ago</td>
-                <td>
-                  <a href="admin_view-chapter.html">
-                    <button class="btn btn-sm btn-primary">View</button>
-                  </a>
-                  <button
-                    class="btn btn-sm btn-danger archive-chapter-btn"
-                    data-number="2"
-                  >
-                    Archive
-                  </button>
-                </td>
-              </tr>
-              <tr data-chapter="3">
-                <td>3</td>
-                <td><strong>The Wolf at the Door</strong></td>
-                <td><span class="badge active">Published</span></td>
-                <td>3,105</td>
-                <td>1 week ago</td>
-                <td>
-                  <a href="admin_view-chapter.html">
-                    <button class="btn btn-sm btn-primary">View</button>
-                  </a>
-                  <button
-                    class="btn btn-sm btn-danger archive-chapter-btn"
-                    data-number="3"
-                  >
-                    Archive
-                  </button>
-                </td>
-              </tr>
-              <tr data-chapter="4">
-                <td>4</td>
-                <td><strong>Shadows in the Keep</strong></td>
-                <td><span class="badge paused">Broken Content</span></td>
-                <td>1,224</td>
-                <td>2 weeks ago</td>
-                <td>
-                  <a href="admin_view-chapter.html">
-                    <button class="btn btn-sm btn-primary">View</button>
-                  </a>
-                  <button
-                    class="btn btn-sm btn-danger archive-chapter-btn"
-                    data-number="4"
-                  >
-                    Archive
-                  </button>
-                </td>
-              </tr>
-              <tr data-chapter="5">
-                <td>5</td>
-                <td><strong>The Ember Crown</strong></td>
-                <td><span class="badge draft">Draft</span></td>
-                <td>—</td>
-                <td>Just now</td>
-                <td>
-                  <a href="admin_view-chapter.html">
-                    <button class="btn btn-sm btn-primary">View</button>
-                  </a>
-                  <button
-                    class="btn btn-sm btn-danger archive-chapter-btn"
-                    data-number="5"
-                  >
-                    Archive
-                  </button>
-                </td>
-              </tr>
-              <tr data-chapter="6">
-                <td>6</td>
-                <td><strong>Where the River Ends</strong></td>
-                <td><span class="badge pending">Pending Review</span></td>
-                <td>2,750</td>
-                <td>3 days ago</td>
-                <td>
-                  <a href="admin_view-chapter.html">
-                    <button class="btn btn-sm btn-primary">View</button>
-                  </a>
-                  <button
-                    class="btn btn-sm btn-danger archive-chapter-btn"
-                    data-number="6"
-                  >
-                    Archive
-                  </button>
-                </td>
-              </tr>
+              <!-- JS will populate this dynamically -->
             </tbody>
           </table>
         </section>

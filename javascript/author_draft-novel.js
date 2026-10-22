@@ -3,6 +3,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const tbody = document.querySelector(".table-card tbody");
   if (!tbody) return;
 
+  // 🚨 GET CURRENT AUTHOR NAME FROM SESSION
+  const currentUser = JSON.parse(
+    sessionStorage.getItem("currentUser") ||
+      sessionStorage.getItem("currentAuthor") ||
+      "{}",
+  );
+  const authorName = currentUser.username || currentUser.penName || "Author";
+
   // ==========================================
   // HELPERS
   // ==========================================
@@ -52,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let novels = loadNovels();
     let changed = false;
 
+    // Filter out duplicates
     const filteredNovels = novels.filter((n) => {
       const isDuplicate =
         n.title.toLowerCase() === "the lost kingdom" &&
@@ -59,12 +68,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (isDuplicate) {
         changed = true;
-        return false; // Remove it
+        return false;
       }
       return true;
     });
 
-    if (!filteredNovels.some((n) => String(n.id) === "draft-seed-0")) {
+    // The chapter data with actual content
+    const draftChapters = [
+      {
+        number: 1,
+        title: "Prologue: The Empty Throne",
+        status: "draft",
+        words: 1120,
+        lastUpdated: Date.now() - 86400000,
+        content:
+          "<p>The night the kingdom fell, the sky was bleeding. A crimson moon hung over the ruins of House Veyra, casting long, twisted shadows across the shattered cobblestones. Elara stood at the edge of the courtyard, her breath caught in her throat. The banners that had flown proudly for a thousand years were now nothing but ash, drifting like dark snow onto the corpses of her kin. She was the last. The only surviving heir to a throne that no longer existed.</p><p>She clutched the hilt of her father's broken sword, the cold metal biting into her palm. The usurper's soldiers were still searching the castle. She had minutes, perhaps seconds, before they found her hiding place behind the shattered fountain.</p><p>Taking a deep breath, she reached for the shadows. They had always whispered to her, but she had never dared to answer. Now, she had no choice. The darkness wrapped around her like a cloak, and she vanished into the night.</p>",
+      },
+      {
+        number: 2,
+        title: "A Kingdom Without a King",
+        status: "draft",
+        words: 1890,
+        lastUpdated: Date.now() - 172800000,
+        content:
+          "<p>Three days had passed since the coup. The usurper sat on the Obsidian Throne, his dark magic suffocating the land. In the quiet villages, the people whispered of the old kings and queens, their voices laced with fear. But in the shadows of the Whispering Woods, a spark of rebellion was kindling.</p><p>Kaelen, the disgraced knight, sharpened his blade by the fire, his eyes fixed on the distant towers of the capital. He had served the Veyra family for twenty years. He had failed them when it mattered most. He would not fail the girl.</p><p>'The heir lives,' a hooded figure said, stepping into the flickering light of the campfire. 'But she is hunted. We must reach her before the King's Guard does.'</p><p>Kaelen sheathed his sword. 'Then we ride at dawn.'</p>",
+      },
+      {
+        number: 3,
+        title: "The Broken Oath",
+        status: "draft",
+        words: 2340,
+        lastUpdated: Date.now() - 259200000,
+        content:
+          "<p>The oath was broken. Blood spilled on the altar of the Sun God, and the ancient magic that bound the realm began to unravel. Elara felt it—a cold, creeping dread that seeped into her bones. She knew what had to be done. The prophecy was clear: only a Veyra could reclaim the throne, but doing so would require a sacrifice she wasn't sure she was willing to make.</p><p>She stood before the ancient shrine, the stone carving of the First King staring down at her with hollow eyes. 'I am not a hero,' she whispered to the silence. 'I am just a girl who wants to go home.'</p><p>But the magic didn't care about her feelings. It surged forward, demanding a price. She felt the darkness tearing at her soul, reshaping her. When she opened her eyes, her irises were no longer brown. They were pools of liquid gold, burning with the fire of the ancients.</p>",
+      },
+      {
+        number: 4,
+        title: "Untitled Chapter",
+        status: "draft",
+        words: 0,
+        lastUpdated: Date.now(),
+        content: "",
+      },
+    ];
+
+    const existingIndex = filteredNovels.findIndex(
+      (n) => String(n.id) === "draft-seed-0",
+    );
+
+    if (existingIndex === -1) {
+      // Create it fresh
       filteredNovels.push({
         id: "draft-seed-0",
         title: "The Lost Kingdom",
@@ -74,36 +127,8 @@ document.addEventListener("DOMContentLoaded", () => {
           "An heir believed dead. A throne left empty. A kingdom on the brink of war. The Lost Kingdom is the first book in an epic fantasy saga.",
         coverImage: "../image/lostcrown.jpeg",
         status: "draft",
-        chapters: [
-          {
-            number: 1,
-            title: "Prologue: The Empty Throne",
-            status: "draft",
-            words: 1120,
-            lastUpdated: Date.now() - 86400000,
-          },
-          {
-            number: 2,
-            title: "A Kingdom Without a King",
-            status: "draft",
-            words: 1890,
-            lastUpdated: Date.now() - 172800000,
-          },
-          {
-            number: 3,
-            title: "The Broken Oath",
-            status: "draft",
-            words: 2340,
-            lastUpdated: Date.now() - 259200000,
-          },
-          {
-            number: 4,
-            title: "Untitled Chapter",
-            status: "draft",
-            words: 0,
-            lastUpdated: Date.now(),
-          },
-        ],
+        author: authorName,
+        chapters: draftChapters,
         reads: 0,
         rating: null,
         createdAt: Date.now(),
@@ -111,6 +136,14 @@ document.addEventListener("DOMContentLoaded", () => {
         lastEdited: Date.now(),
       });
       changed = true;
+    } else {
+      // Check if it's missing content
+      const existingChapters = filteredNovels[existingIndex].chapters || [];
+      if (existingChapters.length > 0 && !existingChapters[0].content) {
+        // Force update the chapters array
+        filteredNovels[existingIndex].chapters = draftChapters;
+        changed = true;
+      }
     }
 
     if (changed) saveNovels(filteredNovels);
@@ -197,29 +230,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const id = tr?.dataset.id;
     if (!id) return;
 
-    // ---------- PUBLISH BOOK ----------
+    // ---------- PUBLISH BOOK (Submit for Review) ----------
     if (e.target.classList.contains("publish-draft-btn")) {
       Swal.fire({
-        title: "Publish this book?",
-        text: "All chapters inside this book will also be published.",
+        title: "Submit for Review?",
+        text: "Your novel and all its chapters will be sent to the admin for approval.",
         icon: "question",
         showCancelButton: true,
-        confirmButtonText: "Publish",
+        confirmButtonText: "Submit",
         confirmButtonColor: "#b8721f",
       }).then((res) => {
         if (!res.isConfirmed) return;
 
         const updated = loadNovels().map((n) => {
           if (String(n.id) === String(id)) {
-            // 🚨 THE FIX: Cascading update. Publish the book AND all its chapters.
             const updatedChapters = (n.chapters || []).map((ch) => ({
               ...ch,
-              status: "published",
+              status: "pending",
             }));
 
             return {
               ...n,
-              status: "published",
+              status: "pending",
               chapters: updatedChapters,
               lastEdited: Date.now(),
             };
@@ -231,8 +263,8 @@ document.addEventListener("DOMContentLoaded", () => {
         applyFilters();
 
         Swal.fire(
-          "Published!",
-          "Your novel and all its chapters are now live.",
+          "Submitted!",
+          "Your novel is now pending admin approval.",
           "success",
         );
       });

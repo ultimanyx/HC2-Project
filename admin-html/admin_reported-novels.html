@@ -120,144 +120,19 @@
           <table>
             <thead>
               <tr>
-                <th style="width: 40px">
+                <th style="width: 44px">
                   <input type="checkbox" id="selectAllCheckbox" />
                 </th>
-                <th>Novel Title</th>
-                <th>Author</th>
-                <th>Report Reason</th>
-                <th>Reported By</th>
-                <th>Status</th>
-                <th>Action</th>
+                <th>Novel &amp; Chapter</th>
+                <th style="width: 170px">Report Reason</th>
+                <th style="width: 170px">Reported By</th>
+                <th style="width: 120px">Status</th>
+                <th style="width: 130px">Action</th>
               </tr>
             </thead>
 
             <tbody id="reportedTableBody">
-              <!-- Row 1 -->
-              <tr>
-                <td><input type="checkbox" class="row-checkbox" /></td>
-                <td><span class="fw-600">The Dark Room</span></td>
-                <td>Juan Cruz</td>
-                <td>Inappropriate Content</td>
-                <td>user123</td>
-                <td><span class="badge pending">Pending</span></td>
-                <td>
-                  <div class="action-group">
-                    <button
-                      class="btn btn-primary btn-sm view-btn"
-                      data-details="Chapter 4 contains extremely graphic and disturbing descriptions that violate the community guidelines."
-                    >
-                      View
-                    </button>
-                    <button class="btn btn-sm btn-quick warn-btn">Warn</button>
-                  </div>
-                </td>
-              </tr>
-
-              <!-- Row 2 -->
-              <tr>
-                <td><input type="checkbox" class="row-checkbox" /></td>
-                <td><span class="fw-600">Lost Memories</span></td>
-                <td>Maria Santos</td>
-                <td>Copyright Violation</td>
-                <td>user456</td>
-                <td><span class="badge pending">Pending</span></td>
-                <td>
-                  <div class="action-group">
-                    <button
-                      class="btn btn-primary btn-sm view-btn"
-                      data-details="This story is a direct word-for-word copy of a published novel by a well-known author. I have attached the original link in my profile."
-                    >
-                      View
-                    </button>
-                    <button class="btn btn-sm btn-quick warn-btn">Warn</button>
-                  </div>
-                </td>
-              </tr>
-
-              <!-- Row 3 -->
-              <tr>
-                <td><input type="checkbox" class="row-checkbox" /></td>
-                <td><span class="fw-600">Broken Hearts</span></td>
-                <td>Pedro Reyes</td>
-                <td>Spam</td>
-                <td>user789</td>
-                <td><span class="badge pending">Pending</span></td>
-                <td>
-                  <div class="action-group">
-                    <button
-                      class="btn btn-primary btn-sm view-btn"
-                      data-details="The author is constantly spamming their Patreon link in the middle of every paragraph."
-                    >
-                      View
-                    </button>
-                    <button class="btn btn-sm btn-quick warn-btn">Warn</button>
-                  </div>
-                </td>
-              </tr>
-
-              <!-- Row 4 -->
-              <tr>
-                <td><input type="checkbox" class="row-checkbox" /></td>
-                <td><span class="fw-600">Midnight Whispers</span></td>
-                <td>Clara Lim</td>
-                <td>Plagiarism</td>
-                <td>user101</td>
-                <td><span class="badge pending">Pending</span></td>
-                <td>
-                  <div class="action-group">
-                    <button
-                      class="btn btn-primary btn-sm view-btn"
-                      data-details="The plot and character names are identical to a popular Wattpad story published two years ago."
-                    >
-                      View
-                    </button>
-                    <button class="btn btn-sm btn-quick warn-btn">Warn</button>
-                  </div>
-                </td>
-              </tr>
-
-              <!-- Row 5 -->
-              <tr>
-                <td><input type="checkbox" class="row-checkbox" /></td>
-                <td><span class="fw-600">The Iron Fist</span></td>
-                <td>Mark Tan</td>
-                <td>Graphic Violence</td>
-                <td>user202</td>
-                <td><span class="badge pending">Pending</span></td>
-                <td>
-                  <div class="action-group">
-                    <button
-                      class="btn btn-primary btn-sm view-btn"
-                      data-details="Chapter 10 describes a torture scene in unnecessary and gruesome detail, violating our safe content policy."
-                    >
-                      View
-                    </button>
-                    <button class="btn btn-sm btn-quick warn-btn">Warn</button>
-                  </div>
-                </td>
-              </tr>
-
-              <!-- Row 6 -->
-              <tr>
-                <td><input type="checkbox" class="row-checkbox" /></td>
-                <td><span class="fw-600">Love in the Dark</span></td>
-                <td>Elena Rose</td>
-                <td>Inappropriate Content</td>
-                <td>user303</td>
-                <td><span class="badge pending">Pending</span></td>
-                <td>
-                  <div class="action-group">
-                    <button
-                      class="btn btn-primary btn-sm view-btn"
-                      data-details="Several chapters contain explicit sexual content that is not allowed under our platform's terms."
-                    >
-                      View
-                    </button>
-                    <button class="btn btn-sm btn-quick warn-btn">Warn</button>
-                  </div>
-                </td>
-              </tr>
+              <!-- JS will populate this dynamically -->
             </tbody>
           </table>
         </div>

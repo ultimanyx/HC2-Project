@@ -3,10 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Edit Chapter · Shadows of the Crown</title>
+    <title>View Chapter</title>
     <link rel="stylesheet" href="../css/admin_view-chapter.css" />
     <link rel="stylesheet" href="../css/sweetalert2.min.css" />
-
     <link
       rel="icon"
       type="image/png"
@@ -19,7 +18,6 @@
         <div class="brand">
           <img src="../image/logocopy.png" alt="brandlogo" />NovelNest
         </div>
-
         <nav class="nav">
           <a href="admin.html" class="nav-item">
             <span class="nav-icon"></span> Dashboard
@@ -33,32 +31,28 @@
           <a href="admin_reported-novels.html" class="nav-item sub"
             >Reported Novels</a
           >
-
           <a href="admin_manage-user.html" class="nav-item sub">Manage Users</a>
           <a href="admin_manage-author.html" class="nav-item sub"
             >Manage Authors</a
           >
-
           <a href="admin_ad-management.html" class="nav-item sub"
             >Ad Management</a
           >
           <a href="admin_revenue-reports.html" class="nav-item sub"
             >Revenue Reports</a
           >
-
           <a href="admin_archive.html" class="nav-item sub">Archive</a>
         </nav>
-
         <a href="#" class="logout" id="logout" data-role="admin"> Logout</a>
       </aside>
 
       <main class="main">
         <div class="topbar">
           <div class="topbar-left">
-            <a href="admin-view-novel.html" class="back-link">
+            <a href="#" class="back-link" id="backToNovelBtn">
               <img src="../icons/backbtn.svg" alt="backbtn" />Back to View</a
             >
-            <h1>Edit Chapter</h1>
+            <h1>View Chapter</h1>
           </div>
           <div class="user-chip">
             <span>Welcome, Admin</span>
@@ -70,44 +64,27 @@
           <div>
             <div class="meta-bar">
               <div class="meta-left">
-                <span class="chapter-num">Chapter 1</span>
+                <span class="chapter-num" id="metaChapterNum">Chapter 1</span>
                 <span class="meta-sep">·</span>
-                <span class="novel-name">Shadows of the Crown</span>
+                <span class="novel-name" id="metaNovelName">Loading...</span>
                 <span class="badge active" id="statusBadge">Published</span>
-              </div>
-              <div class="meta-right">
-                <span class="save-status" id="saveStatus"
-                  >All changes saved</span
-                >
               </div>
             </div>
 
             <div class="form-container">
               <div class="form-group">
-                <label for="chapterTitle"
-                  >Chapter Title
-                  <span style="color: var(--destructive)">*</span></label
-                >
-                <input
-                  type="text"
-                  id="chapterTitle"
-                  placeholder="e.g. The Fall of House Veyra"
-                  value="The Fall of House Veyra"
-                />
+                <label>Chapter Title</label>
+                <input type="text" id="chapterTitle" value="" />
               </div>
 
               <div class="form-grid-2">
                 <div class="form-group">
-                  <label for="chapterNumber">Chapter Number</label>
-                  <input type="number" id="chapterNumber" min="1" value="1" />
+                  <label>Chapter Number</label>
+                  <input type="number" id="chapterNumber" value="1" />
                 </div>
                 <div class="form-group">
-                  <label for="authorNote">Author's Note (Optional)</label>
-                  <textarea
-                    id="authorNote"
-                    class="note-textarea"
-                    placeholder="Add a short note to appear at the end of the chapter…"
-                  ></textarea>
+                  <label>Author's Note</label>
+                  <textarea id="authorNote" class="note-textarea"></textarea>
                 </div>
               </div>
 
@@ -116,20 +93,14 @@
                   id="chapterContent"
                   class="editor-area"
                   spellcheck="true"
-                >
-The night House Veyra fell, the sky above Kaldros turned the colour of old blood. Mara had been asleep when the horns first sounded — long, low, and wrong. She would remember that sound for the rest of her life.
-
-By the time she reached the courtyard, the great iron doors had already been breached. Torchlight danced across the faces of men she had known since childhood, men who now wore the crimson sash of the usurper. None of them met her eyes.
-
-She ran. Through corridors she had memorised as a girl, past portraits of ancestors whose names she would one day carry, past the library where her mother had taught her to read. She ran until the screams behind her faded into silence.</textarea
-                >
+                ></textarea>
               </div>
             </div>
           </div>
         </fieldset>
 
         <div class="form-actions">
-          <button type="button" class="btn btn-danger" id="deleteBtn">
+          <button type="button" class="btn btn-danger" id="archiveBtn">
             Archive Chapter
           </button>
           <span class="spacer"></span>

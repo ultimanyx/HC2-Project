@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const REPORT_KEY = "chapterReports";
+  const NOVELS_KEY = "novels";
+
   const tableBody = document.getElementById("reportedTableBody");
 
   // Modal Elements
@@ -30,6 +33,26 @@ document.addEventListener("DOMContentLoaded", function () {
   let activeRow = null;
 
   // --- 1. Helper Functions ---
+  function getReports() {
+    try {
+      return JSON.parse(localStorage.getItem(REPORT_KEY) || "[]");
+    } catch {
+      return [];
+    }
+  }
+
+  function saveReports(reports) {
+    localStorage.setItem(REPORT_KEY, JSON.stringify(reports));
+  }
+
+  function getNovels() {
+    try {
+      return JSON.parse(localStorage.getItem(NOVELS_KEY) || "[]");
+    } catch {
+      return [];
+    }
+  }
+
   function saveToAuthorDashboard(title, author, reason, status) {
     const authorStatusData = {
       status: status,
@@ -44,63 +67,193 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   }
 
-  function updateRowStatus(row, status, keepActions = false) {
+  function escapeHtml(str) {
+    return String(str ?? "").replace(
+      /[&<>"']/g,
+      (c) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        })[c],
+    );
+  }
+
+  function reasonClass(reason) {
+    const r = (reason || "").toLowerCase();
+    if (r.includes("copyright")) return "reason-copyright";
+    if (r.includes("spam")) return "reason-spam";
+    if (r.includes("plagiarism")) return "reason-plagiarism";
+    if (r.includes("violence")) return "reason-violence";
+    if (r.includes("inappropriate")) return "reason-inappropriate";
+    return "reason-default";
+  }
+
+  // --- 2. Render Table ---
+  function renderTable() {
+    if (!tableBody) return;
+
+    const reports = getReports();
+    const novels = getNovels();
+
+    tableBody.innerHTML = "";
+
+    if (reports.length === 0) {
+      tableBody.innerHTML = `
+        <tr>
+          <td colspan="6" style="text-align:center; padding: 36px; color: var(--muted-foreground);">
+            No reported novels at the moment.
+          </td>
+        </tr>`;
+      updateBulkBar();
+      return;
+    }
+
+    // Newest first
+    reports.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    reports.forEach((report) => {
+      const book = novels.find((n) => String(n.id) === String(report.bookId));
+
+      // Prefer values stored on the report itself
+      const authorName =
+        report.author || (book && book.author) || "Unknown Author";
+      const bookTitle = report.bookTitle || (book ? book.title : report.bookId);
+      const reportedBy = report.reportedBy || "Anonymous Reader";
+
+      const chapterText = `${report.chapter || ""}${
+        report.chapterTitle ? ": " + report.chapterTitle : ""
+      }`.trim();
+      const displayTitle = `${bookTitle} - ${chapterText}`;
+
+      const initial = (reportedBy || "?").trim().charAt(0).toUpperCase() || "?";
+      const rClass = reasonClass(report.reason);
+      const statusClass = (report.status || "pending").toLowerCase();
+
+      const tr = document.createElement("tr");
+      tr.dataset.id = report.id;
+      tr.dataset.bookId = report.bookId;
+      tr.dataset.bookTitle = bookTitle;
+      tr.dataset.author = authorName;
+      tr.dataset.displayTitle = displayTitle;
+      tr.dataset.reason = report.reason || "";
+      tr.dataset.reportedBy = reportedBy;
+      tr.dataset.status = report.status || "";
+      if (report.appealReason) tr.dataset.appealReason = report.appealReason;
+
+      tr.innerHTML = `
+        <td><input type="checkbox" class="row-checkbox" /></td>
+
+        <td>
+          <div class="novel-cell">
+            <span class="novel-title" title="${escapeHtml(bookTitle)}">${escapeHtml(bookTitle)}</span>
+            <span class="novel-meta" title="${escapeHtml(displayTitle)}">
+              ${escapeHtml(chapterText || "—")}
+              <span class="dot">·</span>
+              ${escapeHtml(authorName)}
+            </span>
+          </div>
+        </td>
+
+        <td>
+          <span class="reason-pill ${rClass}" title="${escapeHtml(report.reason)}">
+            ${escapeHtml(report.reason)}
+          </span>
+        </td>
+
+        <td>
+          <span class="reporter">
+            <span class="reporter-avatar">${escapeHtml(initial)}</span>
+            <span class="reporter-name" title="${escapeHtml(reportedBy)}">${escapeHtml(reportedBy)}</span>
+          </span>
+        </td>
+
+        <td>
+          <span class="badge ${statusClass}">${escapeHtml(report.status)}</span>
+        </td>
+
+        <td>
+          <div class="action-group">
+            <button class="btn btn-primary btn-sm btn-view view-btn"
+                    data-details="${escapeHtml(report.details)}">View</button>
+            <button class="icon-btn warn-btn" title="Warn author" aria-label="Warn author">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none"
+                   stroke="currentColor" stroke-width="2"
+                   stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                <line x1="12" y1="9" x2="12" y2="13"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+            </button>
+          </div>
+        </td>
+      `;
+
+      if (report.status !== "Pending") {
+        tr.querySelector(".action-group").innerHTML =
+          `<span class="status-processed">Processed</span>`;
+      }
+
+      tableBody.appendChild(tr);
+    });
+
+    filterTable();
+  }
+
+  // --- 3. Update Status Logic ---
+  function updateStatus(id, newStatus) {
+    const reports = getReports();
+    const reportIndex = reports.findIndex((r) => String(r.id) === String(id));
+
+    if (reportIndex === -1) return;
+
+    reports[reportIndex].status = newStatus;
+    saveReports(reports);
+
+    const row = tableBody.querySelector(`tr[data-id="${id}"]`);
+    if (!row) return;
+
+    row.dataset.status = newStatus;
+
     const badge = row.querySelector(".badge");
     if (badge) {
-      badge.className = `badge ${status.toLowerCase()}`;
-      badge.textContent = status;
+      badge.className = `badge ${newStatus.toLowerCase()}`;
+      badge.textContent = newStatus;
     }
 
-    const actionGroup = row.querySelector(".action-group");
-    if (actionGroup && !keepActions) {
-      actionGroup.innerHTML = `<span class="status-processed">Processed</span>`;
-    }
-  }
+    row.querySelector(".action-group").innerHTML =
+      `<span class="status-processed">Processed</span>`;
 
-  // --- 2. Check for Author Appeals on Load ---
-  function checkForAppeals() {
-    const savedAlert = localStorage.getItem("author_alert_status");
-    if (!savedAlert) return;
-
-    const data = JSON.parse(savedAlert);
-    if (data.status === "appealed") {
-      const rows = tableBody.querySelectorAll("tr");
-      rows.forEach((row) => {
-        const title = row.cells[1].innerText.trim();
-        if (title === data.novelTitle) {
-          updateRowStatus(row, "Appealed", true);
-          row.dataset.appealReason = data.appealReason || "";
-
-          const actionGroup = row.querySelector(".action-group");
-          if (actionGroup) {
-            actionGroup.innerHTML = `
-              <button class="btn btn-primary btn-sm view-btn" data-details="The author has filed an appeal.">Review Appeal</button>
-            `;
-          }
-        }
-      });
+    if (newStatus !== "Resolve" && newStatus !== "Resolved") {
+      saveToAuthorDashboard(
+        row.dataset.displayTitle || "",
+        row.dataset.author || "",
+        row.dataset.reason || "",
+        newStatus.toLowerCase(),
+      );
     }
   }
 
-  checkForAppeals();
-
-  // --- 3. Search & Filter Logic ---
+  // --- 4. Search & Filter Logic ---
   function filterTable() {
-    const query = searchInput.value.toLowerCase();
-    const status = statusFilter.value.toLowerCase();
-    const reason = reasonFilter.value.toLowerCase();
+    if (!tableBody) return;
+
+    const query = searchInput ? searchInput.value.toLowerCase() : "";
+    const status = statusFilter ? statusFilter.value.toLowerCase() : "all";
+    const reason = reasonFilter ? reasonFilter.value.toLowerCase() : "all";
     const rows = tableBody.querySelectorAll("tr");
 
     rows.forEach((row) => {
+      if (row.cells.length < 6) return; // empty-state row
+
       const rowText = row.innerText.toLowerCase();
-      const badge = row.querySelector(".badge");
-      const badgeText = badge ? badge.innerText.toLowerCase() : "";
-      const rowReason = row.cells[3]
-        ? row.cells[3].innerText.toLowerCase()
-        : "";
+      const rowStatus = (row.dataset.status || "").toLowerCase();
+      const rowReason = (row.dataset.reason || "").toLowerCase();
 
       const matchesSearch = rowText.includes(query);
-      const matchesStatus = status === "all" || badgeText.includes(status);
+      const matchesStatus = status === "all" || rowStatus === status;
       const matchesReason = reason === "all" || rowReason.includes(reason);
 
       if (matchesSearch && matchesStatus && matchesReason) {
@@ -118,7 +271,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (statusFilter) statusFilter.addEventListener("change", filterTable);
   if (reasonFilter) reasonFilter.addEventListener("change", filterTable);
 
-  // --- 4. Checkbox & Bulk Action Logic ---
+  // --- 5. Checkbox & Bulk Actions ---
   function updateBulkBar() {
     const checked = tableBody.querySelectorAll(".row-checkbox:checked");
     bulkCount.textContent = checked.length;
@@ -151,6 +304,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const checkedCheckboxes = tableBody.querySelectorAll(
       ".row-checkbox:checked",
     );
+    if (checkedCheckboxes.length === 0) return;
 
     Swal.fire({
       title: `Confirm Bulk ${action}`,
@@ -160,33 +314,23 @@ document.addEventListener("DOMContentLoaded", function () {
       confirmButtonText: `Yes, ${action}`,
       confirmButtonColor: action === "Resolve" ? "#3f7d4f" : "#dc2626",
     }).then((result) => {
-      if (result.isConfirmed) {
-        checkedCheckboxes.forEach((cb) => {
-          const row = cb.closest("tr");
-          const title = row.cells[1].innerText.trim();
-          const author = row.cells[2].innerText.trim();
-          const reason = row.cells[3].innerText.trim();
+      if (!result.isConfirmed) return;
 
-          updateRowStatus(row, action);
-          cb.checked = false;
+      checkedCheckboxes.forEach((cb) => {
+        const row = cb.closest("tr");
+        updateStatus(row.dataset.id, action);
+        cb.checked = false;
+      });
 
-          if (action !== "Resolve") {
-            saveToAuthorDashboard(title, author, reason, action.toLowerCase());
-          }
-        });
+      updateBulkBar();
 
-        updateBulkBar();
-        filterTable();
-
-        // System Feedback - CENTERED
-        Swal.fire({
-          icon: "success",
-          title: "Success",
-          text: `${checkedCheckboxes.length} reports ${action.toLowerCase()}d`,
-          showConfirmButton: false,
-          timer: 2000,
-        });
-      }
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: `${checkedCheckboxes.length} reports ${action.toLowerCase()}d`,
+        showConfirmButton: false,
+        timer: 2000,
+      });
     });
   }
 
@@ -197,16 +341,15 @@ document.addEventListener("DOMContentLoaded", function () {
   if (bulkResolveBtn)
     bulkResolveBtn.addEventListener("click", () => handleBulkAction("Resolve"));
 
-  // --- 5. Quick Inline Action (Warn) ---
+  // --- 6. Quick Inline Warn ---
   if (tableBody) {
     tableBody.addEventListener("click", function (e) {
       const warnBtn = e.target.closest(".warn-btn");
       if (!warnBtn) return;
 
       const row = warnBtn.closest("tr");
-      const title = row.cells[1].innerText.trim();
-      const author = row.cells[2].innerText.trim();
-      const reason = row.cells[3].innerText.trim();
+      const id = row.dataset.id;
+      const title = row.dataset.bookTitle || "this novel";
 
       Swal.fire({
         title: "Warn Author?",
@@ -216,26 +359,20 @@ document.addEventListener("DOMContentLoaded", function () {
         confirmButtonText: "Yes, warn",
         confirmButtonColor: "#b8721f",
       }).then((result) => {
-        if (result.isConfirmed) {
-          updateRowStatus(row, "Warned");
-          saveToAuthorDashboard(title, author, reason, "warn");
-
-          // System Feedback - CENTERED
-          Swal.fire({
-            icon: "success",
-            title: "Warning Issued",
-            text: "A warning has been sent to the author.",
-            showConfirmButton: false,
-            timer: 2000,
-          });
-
-          filterTable();
-        }
+        if (!result.isConfirmed) return;
+        updateStatus(id, "Warned");
+        Swal.fire({
+          icon: "success",
+          title: "Warning Issued",
+          text: "A warning has been sent to the author.",
+          showConfirmButton: false,
+          timer: 2000,
+        });
       });
     });
   }
 
-  // --- 6. View Modal Logic ---
+  // --- 7. View Modal ---
   if (tableBody) {
     tableBody.addEventListener("click", function (e) {
       const btn = e.target.closest(".view-btn");
@@ -246,14 +383,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
       activeRow = row;
 
-      const title = row.cells[1].innerText.trim();
-      const author = row.cells[2].innerText.trim();
-      const reason = row.cells[3].innerText.trim();
-      const user = row.cells[4].innerText.trim();
+      const title = row.dataset.displayTitle || row.dataset.bookTitle || "";
+      const author = row.dataset.author || "";
+      const reason = row.dataset.reason || "";
+      const user = row.dataset.reportedBy || "";
       const details =
         btn.getAttribute("data-details") || "No additional details provided.";
 
-      const isAppealed = row.querySelector(".badge").textContent === "Appealed";
+      const badge = row.querySelector(".badge");
+      const isAppealed = badge && badge.textContent === "Appealed";
       const appealReason = row.dataset.appealReason;
 
       modalNovel.textContent = title;
@@ -289,16 +427,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // --- 7. Modal Take Action / Dismiss ---
+  // --- 8. Modal Take Action / Dismiss ---
   if (modalActionBtn) {
     modalActionBtn.addEventListener("click", function () {
       if (!activeRow) return;
+      const id = activeRow.dataset.id;
       const title = modalNovel.textContent;
-      const author = modalAuthor.textContent;
-      const reason = modalReason.textContent;
-
-      const isAppealed =
-        activeRow.querySelector(".badge").textContent === "Appealed";
 
       let options = {
         archive: "Archive Novel",
@@ -306,6 +440,8 @@ document.addEventListener("DOMContentLoaded", function () {
         ban: "Ban Author",
       };
 
+      const isAppealed =
+        activeRow.querySelector(".badge").textContent === "Appealed";
       if (isAppealed) {
         options = {
           accept_appeal: "Accept Appeal (Restore Novel)",
@@ -327,44 +463,35 @@ document.addEventListener("DOMContentLoaded", function () {
           if (!value) return "You need to choose an action!";
         },
       }).then((result) => {
-        if (result.isConfirmed) {
-          const action = result.value;
+        if (!result.isConfirmed) return;
+        const action = result.value;
 
-          if (action === "accept_appeal" || action === "reject_appeal") {
-            localStorage.removeItem("author_alert_status");
-            updateRowStatus(activeRow, "Resolved");
-            closeModal();
-
-            // System Feedback - CENTERED
-            Swal.fire({
-              icon: "success",
-              title: "Appeal Reviewed",
-              text:
-                action === "accept_appeal"
-                  ? "The appeal has been accepted. The novel has been restored."
-                  : "The appeal has been rejected. The penalty is upheld.",
-            });
-            filterTable();
-            return;
-          }
-
-          const formattedStatus =
-            action.charAt(0).toUpperCase() + action.slice(1);
-
-          updateRowStatus(activeRow, formattedStatus);
-          saveToAuthorDashboard(title, author, reason, action);
-
+        if (action === "accept_appeal" || action === "reject_appeal") {
+          localStorage.removeItem("author_alert_status");
+          updateStatus(id, "Resolved");
           closeModal();
 
-          // System Feedback - CENTERED
           Swal.fire({
             icon: "success",
-            title: "Action Applied!",
-            text: `The novel has been ${formattedStatus.toLowerCase()}d.`,
+            title: "Appeal Reviewed",
+            text:
+              action === "accept_appeal"
+                ? "The appeal has been accepted. The novel has been restored."
+                : "The appeal has been rejected. The penalty is upheld.",
           });
-
-          filterTable();
+          return;
         }
+
+        const formattedStatus =
+          action.charAt(0).toUpperCase() + action.slice(1);
+        updateStatus(id, formattedStatus);
+        closeModal();
+
+        Swal.fire({
+          icon: "success",
+          title: "Action Applied!",
+          text: `The report has been marked as ${formattedStatus}.`,
+        });
       });
     });
   }
@@ -372,6 +499,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (modalDismissBtn) {
     modalDismissBtn.addEventListener("click", function () {
       if (!activeRow) return;
+      const id = activeRow.dataset.id;
 
       Swal.fire({
         title: "Resolve Report?",
@@ -382,24 +510,22 @@ document.addEventListener("DOMContentLoaded", function () {
         confirmButtonColor: "#3f7d4f",
         cancelButtonColor: "#6b6680",
       }).then((result) => {
-        if (result.isConfirmed) {
-          updateRowStatus(activeRow, "Resolved");
-          localStorage.removeItem("author_alert_status");
+        if (!result.isConfirmed) return;
+        updateStatus(id, "Resolved");
+        localStorage.removeItem("author_alert_status");
+        closeModal();
 
-          closeModal();
-
-          // System Feedback - CENTERED
-          Swal.fire({
-            icon: "success",
-            title: "Report Resolved",
-            text: "The report has been successfully dismissed.",
-            showConfirmButton: false,
-            timer: 2000,
-          });
-
-          filterTable();
-        }
+        Swal.fire({
+          icon: "success",
+          title: "Report Resolved",
+          text: "The report has been successfully dismissed.",
+          showConfirmButton: false,
+          timer: 2000,
+        });
       });
     });
   }
+
+  // --- 9. Initialize ---
+  renderTable();
 });

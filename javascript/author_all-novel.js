@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
   const STORAGE_KEY = "novels";
-  const SEED_FLAG = "novels_seeded_v8";
   const tbody = document.querySelector(".table-card tbody");
   if (!tbody) return;
 
@@ -45,58 +44,26 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
+  // 🚨 FIX: Force Dracula to always be published and visible
   function loadNovels() {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]").map((n) => ({
-      ...n,
-      chapters: Array.isArray(n.chapters)
-        ? n.chapters.filter((c) => !c.archived).length
-        : 0,
-      reads: Number(n.reads) || 0,
-      rating: n.rating != null ? Number(n.rating) : null,
-      statusLabel: labelForStatus(n.status),
-      archived: !!n.archived,
-    }));
-  }
+    let allNovels = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 
-  function saveNovels(list) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
-  }
+    let dracula = allNovels.find((n) => String(n.id) === "seed-0");
 
-  function updateStats() {
-    const list = loadNovels().filter((n) => !n.archived);
-    const pending = list.filter((n) => n.status === "pending").length;
-    const totalEl = document.getElementById("stat-total");
-    const pendingEl = document.getElementById("stat-pending");
-    if (totalEl) totalEl.textContent = list.length;
-    if (pendingEl) pendingEl.textContent = pending;
-  }
-
-  // ==========================================
-  // ONE-TIME SEED (Dracula + The Lost Kingdom)
-  // ==========================================
-  function seedStaticRows() {
-    if (localStorage.getItem(SEED_FLAG)) return;
-
-    let existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-    existing = existing.filter((n) => !String(n.id).startsWith("seed-"));
-
-    const rows = Array.from(tbody.querySelectorAll("tr")).map((tr, i) => {
-      const tds = tr.querySelectorAll("td");
-      const badge = tds[1]?.querySelector(".badge");
-      const statusTxt = badge?.textContent.trim() || "Ongoing";
-      const statusMap = {
-        Ongoing: "published",
-        Completed: "completed",
-        Draft: "draft",
-        "Pending Review": "pending",
-        "On Hiatus": "hiatus",
-      };
-      const ratingTxt = tds[5]?.textContent.trim() || "";
-      const ratingMatch = ratingTxt.match(/[\d.]+/);
-
-      let chaptersData = [];
-      if (i === 0) {
-        chaptersData = [
+    // Seed Dracula if it doesn't exist
+    if (!dracula) {
+      dracula = {
+        id: "seed-0",
+        title: "Dracula",
+        subtitle: "A Gothic Horror Classic",
+        author: "Bram Stoker",
+        genre: "Horror",
+        synopsis:
+          "Dracula is an 1897 Gothic horror novel by Irish author Bram Stoker...",
+        coverImage:
+          "../books/Horror(1)/Dracula by Bram Stoker/dracula-9781471141621_lg.jpg",
+        status: "published",
+        chapters: [
           {
             number: 1,
             title: "Jonathan Harker's Journal",
@@ -118,41 +85,47 @@ document.addEventListener("DOMContentLoaded", () => {
             words: 3210,
             lastUpdated: Date.now() - 7 * 86400000,
           },
-          {
-            number: 4,
-            title: "A Night in the Castle",
-            status: "pending",
-            words: 2100,
-            lastUpdated: Date.now() - 14 * 86400000,
-          },
-          {
-            number: 5,
-            title: "Letters from Mina",
-            status: "draft",
-            words: 0,
-            lastUpdated: Date.now(),
-          },
-        ];
-      }
-
-      return {
-        id: `seed-${i}`,
-        title: tds[0]?.textContent.trim() || "",
-        status: statusMap[statusTxt] || "published",
-        genre: tds[2]?.textContent.trim() || "",
-        chapters: chaptersData,
-        reads: Number((tds[4]?.textContent || "").replace(/,/g, "")) || 0,
-        rating: ratingMatch ? parseFloat(ratingMatch[0]) : null,
+        ],
+        reads: 12843,
+        rating: 4.8,
+        systemSeeded: false, // Ensure it bypasses the system filter
         archived: false,
       };
-    });
+      allNovels.push(dracula);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(allNovels));
+    } else {
+      // Force it back to published if it somehow became pending or draft
+      dracula.status = "published";
+      dracula.systemSeeded = false;
+    }
 
-    const toAdd = rows.filter((r) => r.title);
-    if (toAdd.length > 0) saveNovels([...existing, ...toAdd]);
-    localStorage.setItem(SEED_FLAG, "1");
+    // Return all novels, filtering out other system books and applying mapping
+    return allNovels
+      .filter((n) => !n.systemSeeded)
+      .map((n) => ({
+        ...n,
+        chapters: Array.isArray(n.chapters)
+          ? n.chapters.filter((c) => !c.archived).length
+          : 0,
+        reads: Number(n.reads) || 0,
+        rating: n.rating != null ? Number(n.rating) : null,
+        statusLabel: labelForStatus(n.status),
+        archived: !!n.archived,
+      }));
   }
 
-  seedStaticRows();
+  function saveNovels(list) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+  }
+
+  function updateStats() {
+    const list = loadNovels().filter((n) => !n.archived);
+    const pending = list.filter((n) => n.status === "pending").length;
+    const totalEl = document.getElementById("stat-total");
+    const pendingEl = document.getElementById("stat-pending");
+    if (totalEl) totalEl.textContent = list.length;
+    if (pendingEl) pendingEl.textContent = pending;
+  }
 
   // ==========================================
   // RENDER
@@ -178,20 +151,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const badgeCls = badgeClassFor(n.statusLabel);
 
       const idStr = String(n.id);
-
-      // FIX: Allow draft-seed-0 to be clickable
       const isDemo =
         /seed-/i.test(idStr) &&
         !["seed-0", "seed-1", "draft-seed-0"].includes(idStr);
 
-      // Dynamically choose the redirect URL based on the status
       let targetUrl = `author_view-novel.html?id=${encodeURIComponent(n.id)}`;
       if (n.status === "draft") {
         targetUrl = `author_edit-draft.html?id=${encodeURIComponent(n.id)}`;
       }
 
       const viewCell = isDemo
-        ? `<span class="btn btn-primary btn-sm" role="button" aria-disabled="true" title="Demo row — not viewable" style="cursor:default;">View</span>`
+        ? `<span class="btn btn-primary btn-sm" role="button" aria-disabled="true" title="Demo row" style="cursor:default;">View</span>`
         : `<a class="btn btn-primary btn-sm view-novel-btn" href="${targetUrl}">View</a>`;
 
       const tr = document.createElement("tr");
@@ -220,7 +190,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const sortSelect = document.getElementById("sort-novel");
 
   function applyFilters() {
-    let list = loadNovels().filter((n) => !n.archived);
+    // 🚨 Only show published/ongoing/completed/hiatus books.
+    // Drafts go to Draft page, Pending go to Admin.
+    let list = loadNovels().filter(
+      (n) => !n.archived && n.status !== "draft" && n.status !== "pending",
+    );
 
     const q = (searchInput?.value || "").trim().toLowerCase();
     if (q) list = list.filter((n) => n.title.toLowerCase().includes(q));

@@ -295,37 +295,151 @@ a {
   margin-bottom: 14px;
 }
 
-/* table */
+/* =========================================
+   TABLE
+   ========================================= */
 table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 thead th {
   text-align: left;
-  font-size: 15px;
+  font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.06em;
   color: #6b6680;
-  font-weight: 600;
-  padding-bottom: 10px;
+  font-weight: 700;
+  padding: 0 8px 12px;
   border-bottom: 1px solid rgba(26, 24, 38, 0.1);
+  white-space: nowrap;
 }
 
 tbody td {
-  font-size: 16px;
-  padding: 12px 0;
+  font-size: 15px;
+  padding: 14px 8px;
   border-bottom: 1px solid rgba(26, 24, 38, 0.06);
   color: #1a1826;
+  vertical-align: middle;
+}
+
+tbody tr {
+  transition: background 0.15s ease;
+}
+
+tbody tr:hover {
+  background: rgba(184, 114, 31, 0.04);
 }
 
 tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* novel title */
-.fw-600 {
+/* =========================================
+   NOVEL CELL (title + chapter · author)
+   ========================================= */
+.novel-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.novel-title {
   font-weight: 600;
+  font-size: 15px;
+  color: var(--foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.novel-meta {
+  font-size: 13px;
+  color: var(--muted-foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.novel-meta .dot {
+  margin: 0 6px;
+  opacity: 0.6;
+}
+
+/* =========================================
+   REASON PILL
+   ========================================= */
+.reason-pill {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+.reason-inappropriate {
+  background: rgba(220, 38, 38, 0.1);
+  color: #991b1b;
+}
+.reason-copyright {
+  background: rgba(109, 40, 217, 0.1);
+  color: #6d28d9;
+}
+.reason-spam {
+  background: rgba(184, 114, 31, 0.12);
+  color: #8a5410;
+}
+.reason-plagiarism {
+  background: rgba(59, 111, 145, 0.12);
+  color: #2c536d;
+}
+.reason-violence {
+  background: rgba(127, 29, 29, 0.1);
+  color: #7f1d1d;
+}
+.reason-default {
+  background: var(--secondary);
+  color: var(--muted-foreground);
+}
+
+/* =========================================
+   REPORTER (avatar + name)
+   ========================================= */
+.reporter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.reporter-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(59, 111, 145, 0.15);
+  color: var(--link-hover);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.reporter-name {
+  font-size: 14px;
+  color: var(--foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* =========================================
@@ -333,50 +447,45 @@ tbody tr:last-child td {
    ========================================= */
 .badge {
   display: inline-block;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   padding: 3px 12px;
   border-radius: 20px;
 }
 
-/* Pending - Yellow/Orange */
 .badge.pending {
   background-color: rgba(184, 114, 31, 0.15);
   color: #8a5410;
 }
 
-/* Resolved - Green */
 .badge.resolved {
   background-color: rgba(63, 125, 79, 0.15);
   color: #2f5d3a;
 }
 
-/* Warned - Red/Destructive */
 .badge.warned {
   background-color: rgba(220, 38, 38, 0.12);
   color: #991b1b;
 }
 
-/* Archived - Gray/Neutral */
 .badge.archived {
   background-color: var(--secondary);
   color: var(--muted-foreground);
 }
 
-/* Banned - Dark Red/Black */
 .badge.banned {
   background-color: #1a1826;
   color: #ffffff;
 }
 
-/* Appealed - Purple */
 .badge.appealed {
   background-color: rgba(109, 40, 217, 0.15);
   color: var(--accent);
 }
-/* ========================================= */
 
-/* buttons */
+/* =========================================
+   BUTTONS
+   ========================================= */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -391,10 +500,6 @@ tbody tr:last-child td {
   font-weight: 600;
   color: #fff;
   cursor: pointer;
-}
-
-.btn:hover {
-  background: #ddd7cb;
 }
 
 .btn-primary {
@@ -414,15 +519,44 @@ tbody tr:last-child td {
 .action-group {
   display: flex;
   align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.btn-view {
+  width: auto;
+  padding: 6px 16px;
+}
+
+.icon-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: 0.15s ease;
+}
+
+.icon-btn:hover {
+  background: rgba(184, 114, 31, 0.1);
+  color: var(--primary);
+  border-color: rgba(184, 114, 31, 0.35);
+}
+
+.icon-btn.warn-btn:hover {
+  background: rgba(220, 38, 38, 0.08);
+  color: var(--destructive);
+  border-color: rgba(220, 38, 38, 0.35);
 }
 
 /* =========================================
    BULK ACTIONS & CHECKBOXES
    ========================================= */
-
-/* Checkbox styling */
 input[type="checkbox"] {
   width: 16px;
   height: 16px;
@@ -430,7 +564,6 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
-/* Bulk Action Floating Bar */
 .bulk-action-bar {
   display: none;
   align-items: center;
@@ -487,17 +620,6 @@ input[type="checkbox"] {
   background: #b91c1c;
 }
 
-/* Quick Inline Warn Button */
-.btn-quick {
-  background: rgba(184, 114, 31, 0.1);
-  color: var(--primary);
-  border: 1px solid rgba(184, 114, 31, 0.2);
-  width: auto;
-}
-.btn-quick:hover {
-  background: rgba(184, 114, 31, 0.2);
-}
-
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -538,12 +660,10 @@ input[type="checkbox"] {
   font-style: normal;
   font-weight: bold;
 }
-/* ========================================= */
 
 /* =========================================
    REPORT MODAL STYLES
    ========================================= */
-
 .report-modal-overlay {
   position: fixed;
   top: 0;
@@ -644,6 +764,10 @@ input[type="checkbox"] {
   color: var(--foreground);
   margin: 0;
   line-height: 1.5;
+}
+
+.fw-600 {
+  font-weight: 600;
 }
 
 .text-danger {
