@@ -1,12 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const STORAGE_KEY = "novels";
 
-  // Get parameters from URL
   const urlParams = new URLSearchParams(window.location.search);
   const novelId = urlParams.get("novelId");
   const chapterNum = urlParams.get("chapterNum");
-
-  // If chapterNum exists, we are editing. If not, we are adding.
   const isEditing = !!chapterNum;
 
   if (!novelId) {
@@ -16,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // Load Novel
   let novels = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
   let novel = novels.find((n) => String(n.id) === String(novelId));
 
@@ -51,22 +47,19 @@ document.addEventListener("DOMContentLoaded", () => {
   // ---------- Initialize UI ----------
   metaNovelName.textContent = novel.title;
 
-  // Set Status Badge based on Novel
   if (isBookDraft) {
     statusBadge.textContent = "Draft Book";
     statusBadge.className = "badge draft";
-
     saveDraftBtn.style.display = "none";
     saveBtn.textContent = isEditing ? "Save Chapter" : "Add to Draft";
   } else {
     statusBadge.textContent = "Ongoing";
     statusBadge.className = "badge active";
-    // If the book is ongoing, we can publish or save as draft.
+    // 🚨 THE FIX: Allows the author to choose when the book is ongoing
     saveDraftBtn.style.display = "inline-block";
     saveBtn.textContent = isEditing ? "Save & Publish" : "Publish Chapter";
   }
 
-  // Setup Add vs Edit Mode
   if (isEditing) {
     headerTitle.textContent = "Edit Chapter";
     pageTitle.textContent = `Edit Chapter · ${novel.title}`;
@@ -89,8 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
     headerTitle.textContent = "Add Chapter";
     pageTitle.textContent = `Add Chapter · ${novel.title}`;
     metaChapterLabel.textContent = `New Chapter`;
-
-    // Auto-increment chapter number based on existing chapters
     const nextNum = (novel.chapters?.length || 0) + 1;
     numberInput.value = nextNum;
   }
@@ -110,7 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCounts();
   contentArea.addEventListener("input", updateCounts);
 
-  // Toolbar buttons
   document.querySelectorAll(".tool-btn").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
@@ -127,14 +117,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ---------- Save Logic ----------
-  // targetStatus can be "published" or "draft"
   function saveChapter(targetStatus) {
     const title = titleInput.value.trim();
     const number = parseInt(numberInput.value, 10);
     const note = noteInput.value.trim();
     const content = contentArea.innerHTML.trim();
 
-    // Validation
     if (!title) {
       Swal.fire("Missing Title", "Please enter a chapter title.", "warning");
       titleInput.focus();
@@ -161,7 +149,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!Array.isArray(novel.chapters)) novel.chapters = [];
 
-    // Check for duplicate chapter numbers
     const isDuplicate = novel.chapters.some((c) => {
       const isSameNumber = Number(c.number) === number;
       const isSameChapter =
@@ -183,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ? contentArea.innerText.trim().split(/\s+/).length
       : 0;
 
-    // Create the chapter object with the chosen status
+    // Create chapter object with the chosen status (from button click)
     const chapterData = {
       number: number,
       title: title,
@@ -195,21 +182,17 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     if (isEditing) {
-      // Update existing chapter
       const idx = novel.chapters.findIndex(
         (c) => String(c.number) === String(chapterNum),
       );
       if (idx !== -1) novel.chapters[idx] = chapterData;
     } else {
-      // Add new chapter
       novel.chapters.push(chapterData);
     }
 
-    // Sort chapters by number
     novel.chapters.sort((a, b) => a.number - b.number);
     novel.updatedAt = Date.now();
 
-    // Save back to localStorage
     const novelIndex = novels.findIndex(
       (n) => String(n.id) === String(novelId),
     );
@@ -218,7 +201,6 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(novels));
     }
 
-    // Success Message and Redirect
     const actionText = isEditing ? "Updated" : "Added";
     const statusText =
       targetStatus === "draft" ? "saved as draft" : "published";
@@ -229,7 +211,6 @@ document.addEventListener("DOMContentLoaded", () => {
       icon: "success",
       confirmButtonText: "Continue",
     }).then(() => {
-      // THE FIX: Redirect to the correct page based on whether it's a draft or published book
       if (isBookDraft) {
         window.location.href = `author_edit-draft.html?id=${novelId}`;
       } else {
@@ -240,10 +221,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Wire up the buttons
   if (isBookDraft) {
-    // If the book is a draft, the main button saves the chapter as a draft.
     saveBtn.addEventListener("click", () => saveChapter("draft"));
   } else {
-    // If the book is ongoing, the main button publishes, and the secondary button saves as draft.
     saveBtn.addEventListener("click", () => saveChapter("published"));
     saveDraftBtn.addEventListener("click", () => saveChapter("draft"));
   }

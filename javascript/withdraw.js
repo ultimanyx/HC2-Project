@@ -1,20 +1,11 @@
-/* =====================================================
-   AUTHOR · EARNINGS — WITHDRAW FORM (DEBUG)
-===================================================== */
-
-console.log("[withdraw] file loaded");
-
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("[withdraw] DOM ready");
-
-  /* ============================================
-     ELEMENTS
-  ============================================ */
+  // ============================================
+  // ELEMENTS
+  // ============================================
   var overlay = document.getElementById("withdrawModal");
   var openBtn = document.getElementById("withdraw-btn");
   var closeBtn = document.getElementById("withdrawCloseBtn");
   var form = document.getElementById("withdrawForm");
-  var submitBtn = document.getElementById("withdrawSubmitBtn");
   var amountInput = document.getElementById("wAmount");
   var maxBtn = document.getElementById("wMaxBtn");
   var amountHint = document.getElementById("wAmountHint");
@@ -24,50 +15,83 @@ document.addEventListener("DOMContentLoaded", function () {
   var accountNumInput = document.getElementById("wAccountNumber");
   var methodChips = document.querySelectorAll(".method-chip");
 
-  console.log("[withdraw] overlay:", overlay);
-  console.log("[withdraw] openBtn:", openBtn);
-  console.log("[withdraw] form:", form);
-  console.log("[withdraw] submitBtn:", submitBtn);
-  console.log("[withdraw] method chips found:", methodChips.length);
-  console.log("[withdraw] Swal loaded:", typeof window.Swal);
-
-  /* ============================================
-     SAFETY CHECK
-  ============================================ */
-  if (!overlay) {
-    console.error("[withdraw] FATAL: #withdrawModal not found in HTML");
-    return;
-  }
-  if (!openBtn) {
-    console.error("[withdraw] FATAL: #withdraw-btn not found in HTML");
-    return;
-  }
-  if (!form) {
-    console.error("[withdraw] FATAL: #withdrawForm not found in HTML");
-    return;
-  }
-  if (typeof window.Swal === "undefined") {
-    console.error("[withdraw] FATAL: SweetAlert2 (Swal) not loaded");
+  if (!overlay || !openBtn || !form || typeof window.Swal === "undefined") {
     return;
   }
 
-  /* ============================================
-     CONFIG
-  ============================================ */
+  // ============================================
+  // BALANCE MANAGEMENT (Dynamic)
+  // ============================================
   var MIN_WITHDRAW = 100;
   var FEE_RATE = 0.02;
-  var availableBalance = 312.0;
+
+  // Load balances from localStorage
+  var availableBalance =
+    parseFloat(localStorage.getItem("author_available_balance")) || 269.0;
+  var upcomingPayout =
+    parseFloat(localStorage.getItem("author_upcoming_payout")) || 0.0;
+
   var selectedMethod = "gcash";
 
   function pesos(amount) {
     return "₱" + amount.toFixed(2);
   }
 
-  /* ============================================
-     OPEN / CLOSE
-  ============================================ */
+  // Update the UI stat cards and modal strip
+  function updateBalanceUI() {
+    // 1. Update Center Card (Available to Withdraw)
+    var statAvailableEl = document.getElementById("stat-available");
+    if (statAvailableEl) statAvailableEl.textContent = pesos(availableBalance);
+
+    var centerNotice = document.getElementById("stat-available-notice");
+    if (centerNotice) {
+      if (availableBalance > 0) {
+        centerNotice.textContent = "Ready to withdraw";
+        centerNotice.className = "stat-change positive";
+      } else {
+        centerNotice.textContent = "No funds available";
+        centerNotice.className = "stat-change warning";
+      }
+    }
+
+    // 2. Update Right Card (Upcoming Payout)
+    var upcomingValEl = document.getElementById("stat-upcoming");
+    var upcomingNoticeEl = document.getElementById("stat-upcoming-notice");
+
+    if (upcomingValEl) upcomingValEl.textContent = pesos(upcomingPayout);
+
+    if (upcomingNoticeEl) {
+      if (upcomingPayout > 0) {
+        upcomingNoticeEl.textContent = "Processing payout";
+        upcomingNoticeEl.className = "stat-change warning";
+      } else {
+        upcomingNoticeEl.textContent = "No incoming funds";
+        upcomingNoticeEl.className = "stat-change positive";
+      }
+    }
+
+    // 3. Update Modal Display
+    var modalBalanceEl = document.getElementById("availableBalance");
+    if (modalBalanceEl) modalBalanceEl.textContent = pesos(availableBalance);
+  }
+
+  // Initial sync on load
+  updateBalanceUI();
+
+  // ============================================
+  // OPEN / CLOSE
+  // ============================================
   function openModal() {
-    console.log("[withdraw] opening modal");
+    // If balance is 0, don't open modal
+    if (availableBalance <= 0) {
+      Swal.fire(
+        "No Funds",
+        "You do not have any available balance to withdraw.",
+        "info",
+      );
+      return;
+    }
+
     form.reset();
     selectedMethod = "gcash";
 
@@ -81,8 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
       amountHint.classList.remove("error");
     }
 
-    var balanceEl = document.getElementById("availableBalance");
-    if (balanceEl) balanceEl.textContent = pesos(availableBalance);
+    updateBalanceUI();
 
     overlay.classList.add("open");
     document.body.classList.add("modal-open");
@@ -93,7 +116,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function closeModal() {
-    console.log("[withdraw] closing modal");
     overlay.classList.remove("open");
     document.body.classList.remove("modal-open");
   }
@@ -109,9 +131,9 @@ document.addEventListener("DOMContentLoaded", function () {
     if (e.key === "Escape" && overlay.classList.contains("open")) closeModal();
   });
 
-  /* ============================================
-     METHOD CHIPS
-  ============================================ */
+  // ============================================
+  // METHOD CHIPS
+  // ============================================
   methodChips.forEach(function (chip) {
     chip.addEventListener("click", function () {
       methodChips.forEach(function (c) {
@@ -122,9 +144,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  /* ============================================
-     MAX BUTTON
-  ============================================ */
+  // ============================================
+  // MAX BUTTON & LIVE HINT
+  // ============================================
   if (maxBtn) {
     maxBtn.addEventListener("click", function () {
       amountInput.value = availableBalance.toFixed(2);
@@ -132,9 +154,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  /* ============================================
-     LIVE HINT
-  ============================================ */
   function updateHint() {
     if (!amountHint) return;
     var amount = parseFloat(amountInput.value) || 0;
@@ -168,12 +187,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (amountInput) amountInput.addEventListener("input", updateHint);
 
-  /* ============================================
-     SUBMIT
-  ============================================ */
+  // ============================================
+  // SUBMIT & DEDUCT BALANCE
+  // ============================================
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    console.log("[withdraw] form submitted");
 
     var amount = parseFloat(amountInput.value);
     var fullName = nameInput.value.trim();
@@ -183,7 +201,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* -------- VALIDATION -------- */
     function fail(title, text, focusEl) {
-      console.warn("[withdraw] validation failed:", title);
       Swal.fire({
         icon: "error",
         title: title,
@@ -236,7 +253,6 @@ document.addEventListener("DOMContentLoaded", function () {
           : "PayPal";
 
     /* -------- CONFIRM -------- */
-    console.log("[withdraw] showing confirmation");
     Swal.fire({
       icon: "question",
       title: "Confirm Withdrawal",
@@ -263,10 +279,7 @@ document.addEventListener("DOMContentLoaded", function () {
       cancelButtonText: "Cancel",
       confirmButtonColor: "#1f9d4f",
     }).then(function (result) {
-      if (!result.isConfirmed) {
-        console.log("[withdraw] cancelled by user");
-        return;
-      }
+      if (!result.isConfirmed) return;
 
       closeModal();
 
@@ -280,7 +293,19 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       setTimeout(function () {
-        console.log("[withdraw] SUCCESS");
+        // Deduct the withdrawn amount from available balance
+        availableBalance -= amount;
+
+        // Add the amount to upcoming payout
+        upcomingPayout += amount;
+
+        // Save the new balances to localStorage
+        localStorage.setItem("author_available_balance", availableBalance);
+        localStorage.setItem("author_upcoming_payout", upcomingPayout);
+
+        // Update the UI immediately
+        updateBalanceUI();
+
         Swal.fire({
           icon: "success",
           title: "Withdrawal Requested",
@@ -291,6 +316,4 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 1000);
     });
   });
-
-  console.log("[withdraw] all listeners attached");
 });

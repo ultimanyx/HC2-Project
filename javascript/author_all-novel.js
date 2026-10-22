@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const STORAGE_KEY = "novels";
-  const SEED_FLAG = "novels_seeded_v8"; // Bumped to ensure the fix applies
+  const SEED_FLAG = "novels_seeded_v8";
   const tbody = document.querySelector(".table-card tbody");
   if (!tbody) return;
 
@@ -72,12 +72,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ==========================================
-  // ONE-TIME SEED (Dracula + Shadows of the Crown)
+  // ONE-TIME SEED (Dracula + The Lost Kingdom)
   // ==========================================
   function seedStaticRows() {
     if (localStorage.getItem(SEED_FLAG)) return;
 
-    // Clean out old seed data so we don't get duplicates
     let existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
     existing = existing.filter((n) => !String(n.id).startsWith("seed-"));
 
@@ -95,7 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const ratingTxt = tds[5]?.textContent.trim() || "";
       const ratingMatch = ratingTxt.match(/[\d.]+/);
 
-      // FIX: Always use an array for chapters. Provide 5 dummy chapters for Dracula.
       let chaptersData = [];
       if (i === 0) {
         chaptersData = [
@@ -180,12 +178,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const badgeCls = badgeClassFor(n.statusLabel);
 
       const idStr = String(n.id);
+
+      // FIX: Allow draft-seed-0 to be clickable
       const isDemo =
-        /seed-/i.test(idStr) && idStr !== "seed-0" && idStr !== "seed-1";
+        /seed-/i.test(idStr) &&
+        !["seed-0", "seed-1", "draft-seed-0"].includes(idStr);
+
+      // Dynamically choose the redirect URL based on the status
+      let targetUrl = `author_view-novel.html?id=${encodeURIComponent(n.id)}`;
+      if (n.status === "draft") {
+        targetUrl = `author_edit-draft.html?id=${encodeURIComponent(n.id)}`;
+      }
 
       const viewCell = isDemo
         ? `<span class="btn btn-primary btn-sm" role="button" aria-disabled="true" title="Demo row — not viewable" style="cursor:default;">View</span>`
-        : `<a class="btn btn-primary btn-sm view-novel-btn" href="author_view-novel.html?id=${encodeURIComponent(n.id)}">View</a>`;
+        : `<a class="btn btn-primary btn-sm view-novel-btn" href="${targetUrl}">View</a>`;
 
       const tr = document.createElement("tr");
       tr.dataset.id = n.id;

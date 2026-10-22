@@ -52,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let novels = loadNovels();
     let changed = false;
 
-    // 1. CLEANUP: Delete any dynamic duplicates named "The Lost Kingdom"
     const filteredNovels = novels.filter((n) => {
       const isDuplicate =
         n.title.toLowerCase() === "the lost kingdom" &&
@@ -65,7 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return true;
     });
 
-    // 2. Seed the hardcoded book if it doesn't exist at all
     if (!filteredNovels.some((n) => String(n.id) === "draft-seed-0")) {
       filteredNovels.push({
         id: "draft-seed-0",
@@ -74,8 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
         genre: "Fantasy",
         synopsis:
           "An heir believed dead. A throne left empty. A kingdom on the brink of war. The Lost Kingdom is the first book in an epic fantasy saga.",
-        coverImage:
-          "../books/Action/A_Farewell_to_Arms by Ernest_Hemingway (Unzipped Files)/A_Farewell_to_Arms cover art.png",
+        coverImage: "../image/lostcrown.jpeg",
         status: "draft",
         chapters: [
           {
@@ -144,16 +141,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function render(list) {
-    // Find the hardcoded row in the HTML
     const hardcodedRow = tbody.querySelector('tr[data-id="draft-seed-0"]');
-
-    // Clear the table
     tbody.innerHTML = "";
 
-    // Check if the hardcoded book is currently active and not archived
     const seedIsActive = list.some((n) => String(n.id) === "draft-seed-0");
 
-    // If it's active, put the hardcoded row back into the table
     if (seedIsActive && hardcodedRow) {
       tbody.appendChild(hardcodedRow);
     }
@@ -169,7 +161,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     list.forEach((n) => {
-      // Skip the hardcoded row so we don't create exact duplicates
       if (String(n.id) === "draft-seed-0") return;
 
       const chapterCount = Array.isArray(n.chapters)
@@ -206,11 +197,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const id = tr?.dataset.id;
     if (!id) return;
 
-    // ---------- PUBLISH ----------
+    // ---------- PUBLISH BOOK ----------
     if (e.target.classList.contains("publish-draft-btn")) {
       Swal.fire({
-        title: "Publish this draft?",
-        text: "It will move to your All Novels page.",
+        title: "Publish this book?",
+        text: "All chapters inside this book will also be published.",
         icon: "question",
         showCancelButton: true,
         confirmButtonText: "Publish",
@@ -220,7 +211,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const updated = loadNovels().map((n) => {
           if (String(n.id) === String(id)) {
-            return { ...n, status: "published", lastEdited: Date.now() };
+            // 🚨 THE FIX: Cascading update. Publish the book AND all its chapters.
+            const updatedChapters = (n.chapters || []).map((ch) => ({
+              ...ch,
+              status: "published",
+            }));
+
+            return {
+              ...n,
+              status: "published",
+              chapters: updatedChapters,
+              lastEdited: Date.now(),
+            };
           }
           return n;
         });
@@ -228,12 +230,16 @@ document.addEventListener("DOMContentLoaded", () => {
         saveNovels(updated);
         applyFilters();
 
-        Swal.fire("Published!", "Your novel is now live.", "success");
+        Swal.fire(
+          "Published!",
+          "Your novel and all its chapters are now live.",
+          "success",
+        );
       });
       return;
     }
 
-    // ---------- ARCHIVE ----------
+    // ---------- ARCHIVE BOOK ----------
     if (e.target.classList.contains("archive-draft-btn")) {
       Swal.fire({
         title: "Archive this draft?",
@@ -254,7 +260,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         saveNovels(updated);
-
         applyFilters();
 
         Swal.fire("Archived!", "Draft moved to Archive.", "success");
