@@ -12,14 +12,12 @@
       type="image/png"
       href="../image/logo-nobackground-circle.png"
     />
+    <script src="../javascript/darkmode.js"></script>
   </head>
- <body 
-  data-book-id="sense-and-sensibility"
-  data-total-chapters="50"
->
+  <body data-book-id="sense-and-sensibility" data-total-chapters="50">
     <nav class="navbar">
       <a href="#" class="nav-logo">
-        <img src="../image/logo.png" alt="Logo" />
+        <img src="../image/logo-nobackground-circle.png" alt="Logo" />
       </a>
       <div class="nav-links">
         <a href="home.html" id="select">Home</a>
@@ -48,6 +46,10 @@
           </div>
 
           <div class="dropdown-menu" role="menu">
+            <a href="#" role="menuitem" class="theme-toggle" id="themeToggle">
+              <img src="../icons/dark-mode.svg" alt="Theme" id="themeIcon" />
+              <span id="themeText">Dark Mode</span>
+            </a>
             <div class="dropdown-divider"></div>
             <a
               href="#"
@@ -87,14 +89,23 @@
         </span>
         <span>
           <img src="../icons/author.svg" alt="authoricon" class="author-icon" />
-          <a href="author_profile.html"
-            ><p class="author">Jane Austen</p></a
-          >
+          <a href="author_profile.html"><p class="author">Jane Austen</p></a>
         </span>
         <div class="description">
           <h3>Synopsis</h3>
           <p>
-            Sense and Sensibility is a novel by Jane Austen, published in 1811. It was published anonymously; By A Lady appears on the title page where the author's name might have been. It tells the story of the Dashwood sisters, Elinor (age 19) and Marianne (age 16½) as they come of age. They have an older half-brother, John, and a younger sister, Margaret (age 13). The novel follows the three Dashwood sisters as they must move with their widowed mother from the estate on which they grew up, Norland Park. Because Norland is passed down to John, the product of Mr. Dashwood's first marriage, and his young son, the four Dashwood women need to look for a new home. The novel explores the contrast between sense (Elinor) and sensibility (Marianne).
+            Sense and Sensibility is a novel by Jane Austen, published in 1811.
+            It was published anonymously; By A Lady appears on the title page
+            where the author's name might have been. It tells the story of the
+            Dashwood sisters, Elinor (age 19) and Marianne (age 16½) as they
+            come of age. They have an older half-brother, John, and a younger
+            sister, Margaret (age 13). The novel follows the three Dashwood
+            sisters as they must move with their widowed mother from the estate
+            on which they grew up, Norland Park. Because Norland is passed down
+            to John, the product of Mr. Dashwood's first marriage, and his young
+            son, the four Dashwood women need to look for a new home. The novel
+            explores the contrast between sense (Elinor) and sensibility
+            (Marianne).
           </p>
         </div>
 
@@ -131,11 +142,23 @@
         <tbody id="chapter-list">
           <!-- Group 1: 1-20 -->
           <tr data-group="1-20">
-            <td><a href="sense-and-sensibility-chapter1.html"> Chapter 1: The Dashwood Inheritance </a></td>
-            <td><a href="sense-and-sensibility-chapter2.html"> Chapter 2: The New Mistress of Norland </a></td>
+            <td>
+              <a href="sense-and-sensibility-chapter1.html">
+                Chapter 1: The Dashwood Inheritance
+              </a>
+            </td>
+            <td>
+              <a href="sense-and-sensibility-chapter2.html">
+                Chapter 2: The New Mistress of Norland
+              </a>
+            </td>
           </tr>
           <tr data-group="1-20">
-            <td><a href="sense-and-sensibility-chapter3.html"> Chapter 3: The Departure </a></td>
+            <td>
+              <a href="sense-and-sensibility-chapter3.html">
+                Chapter 3: The Departure
+              </a>
+            </td>
             <td><a href=""> Chapter 4: The Cottage at Barton </a></td>
           </tr>
           <tr data-group="1-20">
@@ -185,7 +208,9 @@
             <td><a href=""> Chapter 26: The Recovery </a></td>
           </tr>
           <tr data-group="21-40">
-            <td><a href=""> Chapter 27: The Letter from Colonel Brandon </a></td>
+            <td>
+              <a href=""> Chapter 27: The Letter from Colonel Brandon </a>
+            </td>
             <td><a href=""> Chapter 28: The Confession of Willoughby </a></td>
           </tr>
           <tr data-group="21-40">
@@ -253,7 +278,11 @@
     <footer class="footer">
       <div class="footer-content">
         <div class="footer-section">
-          <img src="../image/logo.png" alt="Logo" class="footer-logo" />
+          <img
+            src="../image/logo-nobackground-circle.png"
+            alt="Logo"
+            class="footer-logo"
+          />
           <p>
             Discover your next story and explore novels worth getting lost in.
           </p>

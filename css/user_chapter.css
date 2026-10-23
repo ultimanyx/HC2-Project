@@ -9,28 +9,39 @@ html {
   overflow-y: scroll;
 }
 
-/* Theme variables */
+/* =========================================
+   LIGHT MODE
+   ========================================= */
 :root {
   /* Novel site colors */
   --background: #f8f6f1;
   --foreground: #1a1826;
   --card-background: #ffffff;
   --card-foreground: #1a1826;
+  --card-hover-background: #fcf9f5;
+
   --primary: #b8721f;
   --primary-hover: #a0641a;
   --primary-foreground: #ffffff;
+
   --secondary: #ede9e1;
   --secondary-foreground: #1a1826;
+
   --muted: #ede9e1;
   --muted-foreground: #6b6680;
+
   --accent: #6d28d9;
   --accent-foreground: #ffffff;
+
   --border: rgba(26, 24, 38, 0.1);
   --input-background: #ede9e1;
   --ring: #b8721f;
   --focus-ring: rgba(184, 114, 31, 0.18);
+
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
+  --destructive-hover: #b91c1c;
+
   --link: #3b6f91;
   --link-hover: #2c536d;
 
@@ -42,6 +53,8 @@ html {
   --boxshadow:
     0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
   --text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  --floating-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
 
   /* Footer */
   --footer-background: #1a1826;
@@ -52,36 +65,172 @@ html {
   --font-body: "Plus_Jakarta_Sans", sans-serif;
   --font-heading: "Fraunces", serif;
 
-  /* Ad overlay colors */
+  /* Ad overlay colors (Light theme shares the same dark interstitial) */
   --ad-overlay-backdrop: rgba(0, 0, 0, 0.75);
-  --ad-card-bg: #0b0e14;
-  --ad-card-border: #2d3540;
-  --ad-text: #ffffff;
-  --ad-text-muted: #9aa4b8;
-  --ad-label-bg: #e74c3c;
-  --ad-timer-bg: #1f2937;
-  --ad-timer-color: #f7971e;
-  --ad-progress-bg: #1f2937;
-  --ad-progress-gradient-start: #f7971e;
-  --ad-progress-gradient-end: #ffd200;
-  --ad-content-bg: #0f141c;
-  --ad-content-border: #2d3540;
-  --ad-banner-bg-start: #1a1f2e;
-  --ad-banner-bg-end: #0f141c;
-  --ad-banner-glow: rgba(247, 151, 30, 0.15);
-  --ad-banner-text: #b0baca;
-  --ad-cta-bg: rgba(247, 151, 30, 0.2);
-  --ad-cta-color: #f7971e;
-  --ad-cta-border: rgba(247, 151, 30, 0.3);
-  --ad-video-bg: #0a0d12;
-  --ad-exit-bg-start: #f7971e;
-  --ad-exit-bg-end: #ffd200;
-  --ad-exit-text: #0b0e14;
-  --ad-exit-shadow: rgba(247, 151, 30, 0.35);
-  --ad-exit-shadow-hover: rgba(247, 151, 30, 0.5);
-
-  --destructive-hover: #b91c1c;
+  --ad-card-bg: #0d1117;
+  --ad-card-border: #30363d;
+  --ad-text: #e6edf3;
+  --ad-text-muted: #8b949e;
+  --ad-label-bg: #e5533d;
+  --ad-timer-bg: #21262d;
+  --ad-timer-color: #e8963a;
+  --ad-progress-bg: #21262d;
+  --ad-progress-gradient-start: #e8963a;
+  --ad-progress-gradient-end: #f5c451;
+  --ad-content-bg: #0d1117;
+  --ad-content-border: #30363d;
+  --ad-banner-bg-start: #161b22;
+  --ad-banner-bg-end: #0d1117;
+  --ad-banner-glow: rgba(232, 150, 58, 0.15);
+  --ad-banner-text: #9aa4b8;
+  --ad-cta-bg: rgba(232, 150, 58, 0.18);
+  --ad-cta-color: #e8963a;
+  --ad-cta-border: rgba(232, 150, 58, 0.3);
+  --ad-video-bg: #090c10;
+  --ad-exit-bg-start: #e8963a;
+  --ad-exit-bg-end: #f5c451;
+  --ad-exit-text: #0d1117;
+  --ad-exit-shadow: rgba(232, 150, 58, 0.35);
+  --ad-exit-shadow-hover: rgba(232, 150, 58, 0.5);
   --overlay-backdrop: rgba(0, 0, 0, 0.5);
+}
+
+/* =========================================
+   INDUSTRY STANDARD DARK MODE
+   Grey-white text, layered surfaces,
+   desaturated accents (GitHub / Linear / Radix)
+   ========================================= */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Main — layered, never pure black */
+  --background: #0d1117;
+  --foreground: #c9d1d9;
+
+  /* Cards */
+  --card-background: #161b22;
+  --card-foreground: #c9d1d9;
+  --card-hover-background: #1c2128;
+
+  /* Primary — desaturated orange, dark text on it */
+  --primary: #e8963a;
+  --primary-hover: #f5a94d;
+  --primary-foreground: #0d1117;
+
+  /* Surfaces */
+  --secondary: #21262d;
+  --secondary-foreground: #c9d1d9;
+
+  --muted: #21262d;
+  --muted-foreground: #8b949e;
+
+  /* Accent — softer purple, no neon glow */
+  --accent: #a78bfa;
+  --accent-foreground: #e6edf3;
+
+  /* Border */
+  --border: rgba(255, 255, 255, 0.08);
+
+  /* Input */
+  --input-background: #0d1117;
+
+  /* Focus */
+  --ring: #e8963a;
+  --focus-ring: rgba(232, 150, 58, 0.25);
+
+  /* Destructive — softer red */
+  --destructive: #f87171;
+  --destructive-foreground: #e6edf3;
+  --destructive-hover: #ef4444;
+
+  /* Links */
+  --link: #58a6ff;
+  --link-hover: #79c0ff;
+
+  /* Shadows */
+  --boxshadow:
+    0 16px 32px -8px rgba(0, 0, 0, 0.7), 0 8px 16px -4px rgba(0, 0, 0, 0.4);
+  --text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95), 0 0 20px rgba(0, 0, 0, 0.6);
+  --floating-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
+
+  /* Footer */
+  --footer-background: #090c10;
+  --footer-foreground: #c9d1d9;
+  --footer-muted: #8b949e;
+
+  /* Ad overlay — aligned to dark palette */
+  --ad-card-bg: #0d1117;
+  --ad-card-border: #30363d;
+  --ad-text: #c9d1d9;
+  --ad-text-muted: #8b949e;
+  --ad-timer-bg: #21262d;
+  --ad-timer-color: #e8963a;
+  --ad-progress-bg: #21262d;
+  --ad-progress-gradient-start: #e8963a;
+  --ad-progress-gradient-end: #f5c451;
+  --ad-content-bg: #0d1117;
+  --ad-content-border: #30363d;
+  --ad-banner-bg-start: #161b22;
+  --ad-banner-bg-end: #0d1117;
+  --ad-banner-glow: rgba(232, 150, 58, 0.12);
+  --ad-banner-text: #8b949e;
+  --ad-cta-bg: rgba(232, 150, 58, 0.16);
+  --ad-cta-color: #e8963a;
+  --ad-cta-border: rgba(232, 150, 58, 0.28);
+  --ad-video-bg: #090c10;
+  --ad-exit-bg-start: #e8963a;
+  --ad-exit-bg-end: #f5c451;
+  --ad-exit-text: #0d1117;
+  --ad-exit-shadow: rgba(232, 150, 58, 0.4);
+  --ad-exit-shadow-hover: rgba(232, 150, 58, 0.55);
+  --overlay-backdrop: rgba(0, 0, 0, 0.7);
+}
+
+/* Dark-mode scrollbar */
+[data-theme="dark"] {
+  scrollbar-color: #30363d #0d1117;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: #0d1117;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 5px;
+  border: 2px solid #0d1117;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: #484f58;
+}
+
+/* Dark-mode text selection */
+[data-theme="dark"] ::selection {
+  background: rgba(232, 150, 58, 0.3);
+  color: #e6edf3;
+}
+
+/* Global transitions for theme switching */
+body,
+.navbar,
+.dropdown-menu,
+.chapter-container,
+.container-footer,
+.reader-settings,
+.autoscroll,
+.report-modal,
+.footer {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 @font-face {
@@ -249,6 +398,10 @@ body {
   background: rgba(0, 0, 0, 0.05);
 }
 
+[data-theme="dark"] .nav-user:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
 .nav-user .user-icon {
   width: 25px;
   height: 25px;
@@ -287,6 +440,7 @@ body {
   pointer-events: none;
 }
 
+.nav-user-dropdown:hover .dropdown-menu,
 .nav-user-dropdown:active .dropdown-menu,
 .nav-user-dropdown:focus-within .dropdown-menu {
   opacity: 1;
@@ -295,6 +449,7 @@ body {
   pointer-events: auto;
 }
 
+.nav-user-dropdown:hover .dropdown-arrow,
 .nav-user-dropdown:active .dropdown-arrow,
 .nav-user-dropdown:focus-within .dropdown-arrow {
   transform: rotate(180deg);
@@ -319,6 +474,10 @@ body {
   border-left: 3px solid transparent;
 }
 
+.dropdown-menu a:hover {
+  background: var(--muted);
+}
+
 .dropdown-divider {
   height: 1px;
   background: var(--border);
@@ -331,6 +490,35 @@ body {
 
 .dropdown-menu a:focus-within {
   background: var(--muted);
+}
+
+/* =========================================
+   Theme Toggle Icon Fixes
+   ========================================= */
+.dropdown-menu .theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+}
+
+.dropdown-menu .theme-toggle img {
+  width: 20px !important;
+  height: 20px !important;
+  max-width: 20px !important;
+  max-height: 20px !important;
+  object-fit: contain;
+  flex-shrink: 0;
+  transition: filter 0.3s ease;
+}
+
+[data-theme="dark"] .dropdown-menu .theme-toggle img {
+  filter: brightness(0) invert(1);
+}
+
+[data-theme="dark"] .nav-search button img,
+[data-theme="dark"] .user-icon img {
+  filter: brightness(0) invert(1);
 }
 
 /* Chapter header and buttons */
@@ -364,8 +552,11 @@ body {
 .top-button {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 12px;
   margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
 }
 
 /* Back button */
@@ -394,9 +585,22 @@ body {
   filter: brightness(0) invert(1);
 }
 
+[data-theme="dark"] .back-button {
+  box-shadow: 0 6px 16px -4px rgba(232, 150, 58, 0.35);
+}
+
+/* Dark orange needs a dark arrow for contrast */
+[data-theme="dark"] .back-button img {
+  filter: brightness(0);
+}
+
 .back-button:hover {
   transform: translateX(-3px);
   box-shadow: 0 8px 20px -4px rgba(184, 114, 31, 0.6);
+}
+
+[data-theme="dark"] .back-button:hover {
+  box-shadow: 0 8px 20px -4px rgba(232, 150, 58, 0.45);
 }
 
 .back-button:active {
@@ -413,98 +617,78 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 18px;
-  background-color: var(--secondary);
+  padding: 6px 18px 6px 14px;
+  background-color: var(--card-background);
   color: var(--foreground);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 24px;
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .bookmark-btn:hover,
 .report-btn:hover {
   background-color: var(--primary);
-  color: var(--primary-foreground);
-}
-
-.bookmark-icon,
-.report-icon {
-  width: 16px;
-  height: 16px;
-}
-
-/* Top button bar */
-.top-button {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border);
-}
-
-/* Bookmark button */
-.bookmark-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--card-background);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 6px 18px 6px 14px;
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--foreground);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.bookmark-btn:hover {
-  background: var(--primary);
   border-color: var(--primary);
-  color: #ffffff;
+  color: var(--primary-foreground);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(184, 114, 31, 0.25);
 }
 
-.bookmark-btn:hover .bookmark-icon {
+[data-theme="dark"] .bookmark-btn:hover,
+[data-theme="dark"] .report-btn:hover {
+  box-shadow: 0 4px 12px rgba(232, 150, 58, 0.2);
+}
+
+.bookmark-icon,
+.report-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+  flex-shrink: 0;
+  transition: filter 0.2s ease;
+}
+
+/* Dark mode icon filter for default state (before hover) */
+[data-theme="dark"] .bookmark-icon,
+[data-theme="dark"] .report-icon {
+  filter: brightness(0) invert(1);
+}
+
+/* Hover & Active filters */
+.bookmark-btn:hover .bookmark-icon,
+.report-btn:hover .report-icon,
+.bookmark-btn.bookmarked .bookmark-icon,
+.bookmark-btn.selecting .bookmark-icon {
   filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%)
     hue-rotate(0deg) brightness(200%) contrast(100%);
 }
 
-.bookmark-btn:active {
-  transform: scale(0.96);
+/* On dark-mode orange, use a dark icon instead of white */
+[data-theme="dark"] .bookmark-btn:hover .bookmark-icon,
+[data-theme="dark"] .report-btn:hover .report-icon,
+[data-theme="dark"] .bookmark-btn.bookmarked .bookmark-icon,
+[data-theme="dark"] .bookmark-btn.selecting .bookmark-icon {
+  filter: brightness(0);
 }
 
-.bookmark-icon {
-  width: 20px;
-  height: 20px;
-  display: block;
-  flex-shrink: 0;
-  transition: filter 0.2s ease;
+.bookmark-btn:active,
+.report-btn:active {
+  transform: scale(0.96);
 }
 
 .bookmark-text {
   line-height: 1;
 }
 
-.bookmark-btn.bookmarked {
+.bookmark-btn.bookmarked,
+.bookmark-btn.selecting {
   background: var(--primary);
   border-color: var(--primary);
-  color: #ffffff;
-}
-
-.bookmark-btn.bookmarked .bookmark-icon {
-  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%)
-    hue-rotate(0deg) brightness(200%) contrast(100%);
+  color: var(--primary-foreground);
 }
 
 .bookmark-btn.bookmarked:hover {
@@ -512,46 +696,8 @@ body {
   box-shadow: 0 4px 16px rgba(184, 114, 31, 0.4);
 }
 
-/* Report button */
-.report-btn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--card-background);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 6px 16px 6px 12px;
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--foreground);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.report-btn:hover {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: #ffffff;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(184, 114, 31, 0.25);
-}
-
-.report-btn:hover .report-icon {
-  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%)
-    hue-rotate(0deg) brightness(200%) contrast(100%);
-}
-
-.report-btn:active {
-  transform: scale(0.96);
-}
-
-.report-btn .report-icon {
-  width: 18px;
-  height: 18px;
-  display: block;
-  flex-shrink: 0;
-  transition: filter 0.2s ease;
+[data-theme="dark"] .bookmark-btn.bookmarked:hover {
+  box-shadow: 0 4px 16px rgba(232, 150, 58, 0.3);
 }
 
 /* Chapter container */
@@ -635,6 +781,9 @@ body {
     background-color 0.2s,
     transform 0.15s;
 }
+
+/* NOTE: `--primary-foreground` is now dark (#0d1117) in dark mode, so
+   no forced-white override is needed — contrast is 7.9:1 on #e8963a. */
 
 .container-footer button:hover:not(:disabled) {
   background-color: var(--primary-hover);
@@ -763,7 +912,6 @@ body {
   }
 }
 
-/* Card fills the screen, no floating look */
 .ad-card {
   position: relative;
   width: 100%;
@@ -781,7 +929,6 @@ body {
   display: block;
 }
 
-/* Header floats at top with gradient */
 .ad-header {
   position: absolute;
   top: 0;
@@ -798,14 +945,13 @@ body {
   gap: 10px;
 }
 
-/* Volume button - Hidden by default, JS will show it */
 .volume-btn {
   width: 44px;
   height: 44px;
   background: var(--ad-timer-bg);
   border: 2px solid var(--ad-card-border);
   border-radius: 50%;
-  display: none; /* Added so it doesn't need inline styles */
+  display: none;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -817,7 +963,6 @@ body {
 .volume-btn:hover {
   background: #374151;
 }
-
 .volume-btn:active {
   transform: scale(0.92);
 }
@@ -825,12 +970,11 @@ body {
 .volume-btn img {
   width: 22px;
   height: 22px;
-  /* Makes the SVG white */
   filter: brightness(0) invert(1);
 }
 
 .ad-timer {
-  margin-left: auto; /* Pushes timer to the right */
+  margin-left: auto;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -862,7 +1006,6 @@ body {
   margin-left: 1px;
 }
 
-/* Progress bar at very top */
 .progress-wrap {
   position: absolute;
   top: 0;
@@ -888,7 +1031,6 @@ body {
   transition: width 0.3s linear;
 }
 
-/* Content fills the whole viewport behind the chrome */
 .ad-content {
   position: absolute;
   inset: 0;
@@ -906,7 +1048,6 @@ body {
   z-index: 1;
 }
 
-/* Banner ad */
 .banner-ad {
   width: 100%;
   height: 100%;
@@ -987,7 +1128,6 @@ body {
   margin: 0;
 }
 
-/* Video ad */
 .video-ad {
   width: 100%;
   height: 100%;
@@ -1026,7 +1166,6 @@ body {
   font-size: 15px;
 }
 
-/* Footer floats at bottom with gradient */
 .ad-footer {
   position: absolute;
   left: 0;
@@ -1057,7 +1196,6 @@ body {
   align-items: center;
 }
 
-/* Fixes the clock icon size via CSS instead of inline */
 .ad-footer .ad-info span img {
   width: 14px;
   height: 14px;
@@ -1166,6 +1304,10 @@ body {
 .report-modal-close img {
   width: 14px;
   height: 14px;
+}
+
+[data-theme="dark"] .report-modal-close img {
+  filter: brightness(0) invert(1);
 }
 
 .report-modal-body {
@@ -1287,7 +1429,6 @@ body {
   z-index: 9000;
 }
 
-/* Reader Settings */
 .reader-settings {
   display: flex;
   align-items: center;
@@ -1296,10 +1437,7 @@ body {
   background: var(--card-background);
   border: 1px solid var(--border);
   border-radius: 999px;
-  /* Added a more prominent drop shadow here */
-  box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.12),
-    0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--floating-shadow);
   transition:
     opacity 0.25s ease,
     transform 0.25s ease;
@@ -1336,7 +1474,6 @@ body {
   transform: scale(0.94);
 }
 
-/* Auto-scroll controls */
 .autoscroll {
   display: flex;
   align-items: center;
@@ -1345,10 +1482,7 @@ body {
   background: var(--card-background);
   border: 1px solid var(--border);
   border-radius: 999px;
-  /* Added the same prominent drop shadow here */
-  box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.12),
-    0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--floating-shadow);
   transition:
     opacity 0.25s ease,
     transform 0.25s ease;
@@ -1403,6 +1537,8 @@ body {
   height: 44px;
 }
 
+/* NOTE: `--primary-foreground` is dark in dark mode — no forced white needed */
+
 .autoscroll-play:hover {
   background: var(--primary-hover);
 }
@@ -1431,17 +1567,11 @@ body {
 /* =========================================
    BOOKMARK — SELECT MODE UI + READING HIGHLIGHT
    ========================================= */
-
 .bookmark-btn.selecting {
   background: var(--primary);
   border-color: var(--primary);
-  color: #ffffff;
+  color: var(--primary-foreground);
   animation: bookmarkSelectPulse 1.4s ease-in-out infinite;
-}
-
-.bookmark-btn.selecting .bookmark-icon {
-  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%)
-    hue-rotate(0deg) brightness(200%) contrast(100%);
 }
 
 @keyframes bookmarkSelectPulse {
@@ -1451,6 +1581,20 @@ body {
   }
   50% {
     box-shadow: 0 0 0 8px rgba(184, 114, 31, 0);
+  }
+}
+
+[data-theme="dark"] .bookmark-btn.selecting {
+  animation: bookmarkSelectPulseDark 1.4s ease-in-out infinite;
+}
+
+@keyframes bookmarkSelectPulseDark {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(232, 150, 58, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(232, 150, 58, 0);
   }
 }
 
@@ -1477,17 +1621,27 @@ body {
   text-align: center;
 }
 
+[data-theme="dark"] .bookmark-hint {
+  box-shadow: 0 8px 24px rgba(232, 150, 58, 0.3);
+}
+
 .bookmark-hint.active {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
 
+/* Reading highlight — muted orange tint */
 .reading-highlight {
   background-color: rgba(184, 114, 31, 0.35);
   border-radius: 3px;
   padding: 1px 2px;
   box-shadow: 0 0 0 2px rgba(184, 114, 31, 0.15);
   animation: readingHighlightPulse 1.5s ease-in-out;
+}
+
+[data-theme="dark"] .reading-highlight {
+  background-color: rgba(232, 150, 58, 0.28);
+  box-shadow: 0 0 0 2px rgba(232, 150, 58, 0.18);
 }
 
 .reading-highlight-block {
@@ -1497,12 +1651,29 @@ body {
   padding-left: 10px;
 }
 
+[data-theme="dark"] .reading-highlight-block {
+  background-color: rgba(232, 150, 58, 0.1);
+}
+
 @keyframes readingHighlightPulse {
   0% {
     background-color: rgba(184, 114, 31, 0.7);
   }
   100% {
     background-color: rgba(184, 114, 31, 0.35);
+  }
+}
+
+[data-theme="dark"] .reading-highlight {
+  animation: readingHighlightPulseDark 1.5s ease-in-out;
+}
+
+@keyframes readingHighlightPulseDark {
+  0% {
+    background-color: rgba(232, 150, 58, 0.55);
+  }
+  100% {
+    background-color: rgba(232, 150, 58, 0.28);
   }
 }
 

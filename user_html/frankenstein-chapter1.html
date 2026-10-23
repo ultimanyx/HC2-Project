@@ -13,6 +13,7 @@
       type="image/png"
       href="../image/logo-nobackground-circle.png"
     />
+    <script src="../javascript/darkmode.js"></script>
   </head>
   <body
     data-book-id="frankenstein"
@@ -24,7 +25,7 @@
   >
     <nav class="navbar">
       <a href="#" class="nav-logo">
-        <img src="../image/logo.png" alt="Logo" />
+        <img src="../image/logo-nobackground-circle.png" alt="Logo" />
       </a>
       <div class="nav-links">
         <a href="home.html" id="select">Home</a>
@@ -53,6 +54,10 @@
           </div>
 
           <div class="dropdown-menu" role="menu">
+            <a href="#" role="menuitem" class="theme-toggle" id="themeToggle">
+              <img src="../icons/dark-mode.svg" alt="Theme" id="themeIcon" />
+              <span id="themeText">Dark Mode</span>
+            </a>
             <div class="dropdown-divider"></div>
             <a
               href="#"
@@ -175,7 +180,11 @@
     <footer class="footer">
       <div class="footer-content">
         <div class="footer-section">
-          <img src="../image/logo.png" alt="Logo" class="footer-logo" />
+          <img
+            src="../image/logo-nobackground-circle.png"
+            alt="Logo"
+            class="footer-logo"
+          />
           <p>
             Discover your next story and explore novels worth getting lost in.
           </p>

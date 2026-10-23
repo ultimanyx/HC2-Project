@@ -9,7 +9,9 @@ html {
   overflow-y: scroll;
 }
 
-/* Root variables */
+/* =========================================
+   LIGHT MODE
+   ========================================= */
 :root {
   --background: #f8f6f1;
   --foreground: #1a1826;
@@ -29,6 +31,62 @@ html {
   --font-heading: "Fraunces", serif;
   --boxshadow:
     0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
+}
+
+/* =========================================
+   INDUSTRY STANDARD DARK MODE
+   Grey-white text, layered surfaces,
+   desaturated accents (GitHub / Linear style)
+   ========================================= */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --background: #0d1117;
+  --foreground: #c9d1d9;
+  --card-background: #161b22;
+  --primary: #e8963a;
+  --secondary: #21262d;
+  --muted-foreground: #8b949e;
+  --border: rgba(255, 255, 255, 0.08);
+  --input-background: #0d1117;
+  --ring: #e8963a;
+  --focus-ring: rgba(232, 150, 58, 0.25);
+  --destructive: #f87171;
+  --footer-background: #090c10;
+  --footer-foreground: #c9d1d9;
+  --footer-muted: #8b949e;
+  --boxshadow:
+    0 16px 32px -8px rgba(0, 0, 0, 0.7), 0 8px 16px -4px rgba(0, 0, 0, 0.4);
+}
+
+/* Dark-mode scrollbar */
+[data-theme="dark"] {
+  scrollbar-color: #30363d #0d1117;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: #0d1117;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 5px;
+  border: 2px solid #0d1117;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: #484f58;
+}
+
+/* Dark-mode text selection */
+[data-theme="dark"] ::selection {
+  background: rgba(232, 150, 58, 0.3);
+  color: #e6edf3;
 }
 
 /* Fonts */
@@ -125,7 +183,7 @@ a {
   border: none;
   background: transparent;
   cursor: pointer;
-  /* FIX: Center the icon and remove default padding */
+  /* Center the icon and remove default padding */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -137,7 +195,7 @@ a {
   width: 18px;
   height: 18px;
   object-fit: contain;
-  display: block; /* Removes weird inline spacing */
+  display: block;
 }
 
 /* =========================================
@@ -161,9 +219,18 @@ a {
   background: rgba(0, 0, 0, 0.05);
 }
 
+[data-theme="dark"] .nav-user:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
 .user-icon {
   width: 25px;
   height: 25px;
+}
+
+.dropdown-arrow {
+  display: flex;
+  align-items: center;
 }
 
 .dropdown-arrow img {
@@ -196,13 +263,58 @@ a {
 
 .dropdown-menu a {
   display: flex;
+  align-items: center; /* Ensures text and icons stay centered vertically */
   padding: 10px 18px;
   color: var(--foreground);
   font-size: 0.9rem;
+  transition: background 0.15s;
+}
+
+.dropdown-menu a:hover {
+  background-color: var(--secondary);
 }
 
 .dropdown-menu .logout-item {
   color: var(--destructive);
+}
+
+/* =========================================
+   DROPDOWN ICON FIXES (The Sun Icon Issue)
+   ========================================= */
+.dropdown-menu .theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap; /* Prevents text from wrapping */
+}
+
+/* Forces the sun icon to stay exactly 20x20px */
+.dropdown-menu .theme-toggle img {
+  width: 20px !important;
+  height: 20px !important;
+  max-width: 20px !important;
+  max-height: 20px !important;
+  object-fit: contain;
+  flex-shrink: 0; /* Prevents squishing */
+  transition: filter 0.3s ease;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 6px 12px;
+}
+
+/* =========================================
+   ROBUST DARK MODE ICON FILTERS
+   ========================================= */
+[data-theme="dark"] .dropdown-menu .theme-toggle img,
+[data-theme="dark"] .nav-search button img,
+[data-theme="dark"] .user-icon,
+[data-theme="dark"] .user-icon img,
+[data-theme="dark"] .dropdown-arrow img {
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.9; /* Softens pure white to match the grey-white text */
 }
 
 /* =========================================
@@ -292,7 +404,7 @@ a {
 
 .manifesto-card li {
   font-size: 1rem;
-  color: #4b4560;
+  color: var(--muted-foreground);
   margin-bottom: 16px;
   line-height: 1.5;
   position: relative;

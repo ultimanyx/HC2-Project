@@ -9,11 +9,16 @@ html {
   overflow-y: scroll;
 }
 
+/* =========================================
+   LIGHT MODE
+   ========================================= */
 :root {
   --background: #f8f6f1;
   --foreground: #1a1826;
   --card-background: #ffffff;
   --primary: #b8721f;
+  --primary-foreground: #ffffff;
+  --primary-hover: #9a5f1a;
   --secondary: #ede9e1;
   --muted-foreground: #6b6680;
   --border: rgba(26, 24, 38, 0.1);
@@ -28,6 +33,75 @@ html {
     0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
 }
 
+/* =========================================
+   INDUSTRY STANDARD DARK MODE
+   Grey-white text, layered surfaces,
+   desaturated accents (GitHub / Linear style)
+   ========================================= */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --background: #0d1117;
+  --foreground: #c9d1d9;
+  --card-background: #161b22;
+  --primary: #e8963a;
+  --primary-foreground: #0d1117;
+  --primary-hover: #f5a94d;
+  --secondary: #21262d;
+  --muted-foreground: #8b949e;
+  --border: rgba(255, 255, 255, 0.08);
+  --input-background: #0d1117;
+  --destructive: #f87171;
+  --footer-background: #090c10;
+  --footer-foreground: #c9d1d9;
+  --footer-muted: #8b949e;
+  --boxshadow:
+    0 16px 32px -8px rgba(0, 0, 0, 0.7), 0 8px 16px -4px rgba(0, 0, 0, 0.4);
+}
+
+/* Dark-mode scrollbar */
+[data-theme="dark"] {
+  scrollbar-color: #30363d #0d1117;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: #0d1117;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 5px;
+  border: 2px solid #0d1117;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: #484f58;
+}
+
+/* Dark-mode text selection */
+[data-theme="dark"] ::selection {
+  background: rgba(232, 150, 58, 0.3);
+  color: #e6edf3;
+}
+
+/* Global transitions for theme switching */
+body,
+.navbar,
+.dropdown-menu,
+.legal-toc,
+.footer {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* Fonts */
 @font-face {
   font-family: "Plus_Jakarta_Sans";
   src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
@@ -40,6 +114,7 @@ html {
     format("truetype");
 }
 
+/* Body */
 body {
   font-family: var(--font-body);
   background-color: var(--background);
@@ -89,6 +164,9 @@ a {
   color: var(--primary);
 }
 
+/* =========================================
+   FIXED SEARCH BAR
+   ========================================= */
 .nav-search {
   width: 220px;
   height: 35px;
@@ -130,6 +208,9 @@ a {
   display: block;
 }
 
+/* =========================================
+   USER DROPDOWN
+   ========================================= */
 .nav-user-dropdown {
   position: relative;
   cursor: pointer;
@@ -148,9 +229,18 @@ a {
   background: rgba(0, 0, 0, 0.05);
 }
 
+[data-theme="dark"] .nav-user:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
 .user-icon {
   width: 25px;
   height: 25px;
+}
+
+.dropdown-arrow {
+  display: flex;
+  align-items: center;
 }
 
 .dropdown-arrow img {
@@ -183,13 +273,58 @@ a {
 
 .dropdown-menu a {
   display: flex;
+  align-items: center;
   padding: 10px 18px;
   color: var(--foreground);
   font-size: 0.9rem;
+  transition: background 0.15s;
+}
+
+.dropdown-menu a:hover {
+  background-color: var(--secondary);
 }
 
 .dropdown-menu .logout-item {
   color: var(--destructive);
+}
+
+/* =========================================
+   DROPDOWN ICON FIXES
+   ========================================= */
+.dropdown-menu .theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+}
+
+/* Forces the sun icon to stay exactly 20x20px */
+.dropdown-menu .theme-toggle img {
+  width: 20px !important;
+  height: 20px !important;
+  max-width: 20px !important;
+  max-height: 20px !important;
+  object-fit: contain;
+  flex-shrink: 0;
+  transition: filter 0.3s ease;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 6px 12px;
+}
+
+/* =========================================
+   ROBUST DARK MODE ICON FILTERS
+   ========================================= */
+[data-theme="dark"] .dropdown-menu .theme-toggle img,
+[data-theme="dark"] .nav-search button img,
+[data-theme="dark"] .user-icon,
+[data-theme="dark"] .user-icon img,
+[data-theme="dark"] .dropdown-arrow img {
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.9; /* Softens pure white to match the grey-white text */
 }
 
 /* =========================================
@@ -248,6 +383,16 @@ a {
 
 .placeholder-note strong {
   color: #5c360a;
+}
+
+/* Dark mode overrides for the callout box */
+[data-theme="dark"] .placeholder-note {
+  background-color: rgba(232, 150, 58, 0.15);
+  color: #c9d1d9;
+}
+
+[data-theme="dark"] .placeholder-note strong {
+  color: var(--primary);
 }
 
 /* =========================================

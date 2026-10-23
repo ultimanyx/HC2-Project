@@ -9,7 +9,9 @@ html {
   box-sizing: border-box;
 }
 
-/* Theme variables */
+/* =========================================
+   LIGHT MODE
+   ========================================= */
 :root {
   /* Main */
   --background: #f8f6f1;
@@ -18,10 +20,12 @@ html {
   /* Cards */
   --card-background: #ffffff;
   --card-foreground: #1a1826;
+  --card-hover-background: #fcf9f5;
 
   /* Primary */
   --primary: #b8721f;
   --primary-foreground: #ffffff;
+  --primary-hover: #9a5f1a;
 
   /* Secondary */
   --secondary: #ede9e1;
@@ -40,6 +44,7 @@ html {
 
   /* Input */
   --input-background: #ede9e1;
+  --input-focus-background: #ffffff;
 
   /* Focus */
   --ring: #b8721f;
@@ -56,6 +61,7 @@ html {
   /* Shadows */
   --boxshadow:
     0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   --text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 
   /* Footer */
@@ -66,6 +72,111 @@ html {
   /* Fonts */
   --font-body: "Plus_Jakarta_Sans", sans-serif;
   --font-heading: "Fraunces", serif;
+}
+
+/* =========================================
+   INDUSTRY STANDARD DARK MODE
+   Grey-white text, layered surfaces,
+   desaturated accents (GitHub / Linear style)
+   ========================================= */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Main — layered, never pure black */
+  --background: #0d1117;
+  --foreground: #c9d1d9;
+
+  /* Cards */
+  --card-background: #161b22;
+  --card-foreground: #c9d1d9;
+  --card-hover-background: #1c2128;
+
+  /* Primary — desaturated orange, dark text on it */
+  --primary: #e8963a;
+  --primary-foreground: #0d1117;
+  --primary-hover: #f5a94d;
+
+  /* Secondary */
+  --secondary: #21262d;
+  --secondary-foreground: #c9d1d9;
+
+  /* Muted */
+  --muted: #21262d;
+  --muted-foreground: #8b949e;
+
+  /* Accent — softer purple, no neon glow */
+  --accent: #a78bfa;
+  --accent-foreground: #e6edf3;
+
+  /* Border */
+  --border: rgba(255, 255, 255, 0.08);
+
+  /* Input */
+  --input-background: #0d1117;
+  --input-focus-background: #161b22;
+
+  /* Focus */
+  --ring: #e8963a;
+  --focus-ring: rgba(232, 150, 58, 0.25);
+
+  /* Destructive — softer red */
+  --destructive: #f87171;
+  --destructive-foreground: #e6edf3;
+
+  /* Shadows */
+  --boxshadow:
+    0 16px 32px -8px rgba(0, 0, 0, 0.7), 0 8px 16px -4px rgba(0, 0, 0, 0.4);
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95), 0 0 20px rgba(0, 0, 0, 0.6);
+
+  /* Footer */
+  --footer-background: #090c10;
+  --footer-foreground: #c9d1d9;
+  --footer-muted: #8b949e;
+}
+
+/* Dark-mode scrollbar */
+[data-theme="dark"] {
+  scrollbar-color: #30363d #0d1117;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: #0d1117;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 5px;
+  border: 2px solid #0d1117;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: #484f58;
+}
+
+/* Dark-mode text selection */
+[data-theme="dark"] ::selection {
+  background: rgba(232, 150, 58, 0.3);
+  color: #e6edf3;
+}
+
+/* Global transitions for theme switching */
+body,
+.navbar,
+.dropdown-menu,
+.top-card,
+.remaining-ranking,
+.ranking-table,
+.footer {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 /* Fonts */
@@ -243,6 +354,10 @@ body {
   background: rgba(0, 0, 0, 0.05);
 }
 
+[data-theme="dark"] .nav-user:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
 .user-icon {
   width: 25px;
   height: 25px;
@@ -258,6 +373,14 @@ body {
   color: var(--muted-foreground);
   margin-left: 2px;
   transition: transform 0.25s ease;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-arrow img {
+  width: 12px;
+  height: 12px;
+  display: block;
 }
 
 /* Hidden by default */
@@ -338,6 +461,36 @@ body {
   background: var(--muted);
 }
 
+/* =========================================
+   Theme Toggle Icon & Layout Fixes
+   ========================================= */
+.dropdown-menu .theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+}
+
+.dropdown-menu .theme-toggle img {
+  width: 20px !important;
+  height: 20px !important;
+  max-width: 20px !important;
+  max-height: 20px !important;
+  object-fit: contain;
+  flex-shrink: 0;
+  transition: filter 0.3s ease;
+}
+
+/* Robust fix: Force all navbar icons (user, triangle, search, theme) to white in dark mode */
+[data-theme="dark"] .dropdown-menu .theme-toggle img,
+[data-theme="dark"] .nav-search button img,
+[data-theme="dark"] .user-icon,
+[data-theme="dark"] .user-icon img,
+[data-theme="dark"] .dropdown-arrow img {
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.9; /* Softens pure white to match the grey-white text */
+}
+
 /* Top cards */
 .top-cards {
   display: flex;
@@ -349,9 +502,10 @@ body {
 
 .top-card {
   width: 300px;
-  background: var(--primary-foreground);
+  background: var(--card-background);
+  border: 1px solid var(--border);
   border-radius: 160px 160px 0 0;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--card-shadow);
   overflow: hidden;
   font-family: var(--font-body);
   display: flex;
@@ -410,7 +564,7 @@ body {
   display: inline-block;
 }
 
-/* Read button */
+/* Read button — uses --primary-foreground (dark text in dark mode) */
 .read-button {
   display: inline-block;
   margin-top: 10px;
@@ -425,6 +579,10 @@ body {
   text-align: center;
   cursor: pointer;
   transition: background-color 0.2s ease;
+}
+
+.read-button:hover {
+  background-color: var(--primary-hover);
 }
 
 /* Remaining ranking */
@@ -549,8 +707,8 @@ body {
 }
 
 .star {
-  filter: brightness(0) saturate(100%) invert(95%) sepia(51%) saturate(2063%)
-    hue-rotate(326deg) brightness(85%) contrast(89%);
+  filter: brightness(0) saturate(100%) invert(73%) sepia(76%) saturate(1734%)
+    hue-rotate(332deg) brightness(102%) contrast(94%);
   display: flex;
   align-items: center;
   gap: 5px;
@@ -635,7 +793,6 @@ body {
   color: var(--footer-muted);
 }
 
-/* SweetAlert z-index para top ang sweetalert*/
 .swal2-container {
   z-index: 9999 !important;
 }
