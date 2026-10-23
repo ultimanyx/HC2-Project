@@ -103,19 +103,40 @@
 
       <div id="chapter-content">
         <p>
-          Yesterday afternoon set in misty and cold. I had half a mind to spend it by my study fire, instead of wading through heath and mud to Wuthering Heights. On coming up from dinner, however, (N.B.—I dine between twelve and one o'clock; the housekeeper, a matronly lady, taken as a fixture along with the house, could not, or would not, comprehend my request that I might be served at five)—on mounting the stairs with this lazy intention, and stepping into the room, I saw a servant-girl on her knees surrounded by brushes and coal-scuttles, and raising an infernal dust as she extinguished the flames with heaps of cinders. This spectacle drove me back immediately; I took my hat, and, after a four-miles' walk, arrived at Heathcliff's garden-gate just in time to escape the first feathery flakes of a snow-shower.
+          Yesterday afternoon set in misty and cold. I had half a mind to spend
+          it by my study fire, instead of wading through heath and mud to
+          Wuthering Heights. On coming up from dinner, however, (N.B.—I dine
+          between twelve and one o'clock; the housekeeper, a matronly lady,
+          taken as a fixture along with the house, could not, or would not,
+          comprehend my request that I might be served at five)—on mounting the
+          stairs with this lazy intention, and stepping into the room, I saw a
+          servant-girl on her knees surrounded by brushes and coal-scuttles, and
+          raising an infernal dust as she extinguished the flames with heaps of
+          cinders. This spectacle drove me back immediately; I took my hat, and,
+          after a four-miles' walk, arrived at Heathcliff's garden-gate just in
+          time to escape the first feathery flakes of a snow-shower.
         </p>
 
         <p>
-          On that bleak hill-top the earth was hard with a black frost, and the air made me shiver through every limb. Being unable to remove the chain, I jumped over, and, running up the flagged causeway bordered with straggling gooseberry-bushes, knocked vainly for admittance, till my knuckles tingled and the dogs howled.
+          On that bleak hill-top the earth was hard with a black frost, and the
+          air made me shiver through every limb. Being unable to remove the
+          chain, I jumped over, and, running up the flagged causeway bordered
+          with straggling gooseberry-bushes, knocked vainly for admittance, till
+          my knuckles tingled and the dogs howled.
         </p>
 
         <p>
-          "Wretched inmates!" I ejaculated, mentally, "you deserve perpetual isolation from your species for your churlish inhospitality. At least, I would not keep my doors barred in the day-time. I don't care—I will get in!" So resolved, I grasped the latch and shook it vehemently. Vinegar-faced Joseph projected his head from a round window of the barn.
+          "Wretched inmates!" I ejaculated, mentally, "you deserve perpetual
+          isolation from your species for your churlish inhospitality. At least,
+          I would not keep my doors barred in the day-time. I don't care—I will
+          get in!" So resolved, I grasped the latch and shook it vehemently.
+          Vinegar-faced Joseph projected his head from a round window of the
+          barn.
         </p>
 
         <p>
-          "What are ye for?" he shouted. "T' maister's down i' t' fowld. Go round by th' end o' t' laith, if ye went to spake to him."
+          "What are ye for?" he shouted. "T' maister's down i' t' fowld. Go
+          round by th' end o' t' laith, if ye went to spake to him."
         </p>
 
         <p>
@@ -123,15 +144,16 @@
         </p>
 
         <p>
-          "There's nobbut t' missis; and shoo'll not oppen 't an ye mak' yer flaysome dins till neeght."
+          "There's nobbut t' missis; and shoo'll not oppen 't an ye mak' yer
+          flaysome dins till neeght."
         </p>
 
-        <p>
-          "Why? Cannot you tell her whom I am, eh, Joseph?"
-        </p>
+        <p>"Why? Cannot you tell her whom I am, eh, Joseph?"</p>
 
         <div class="container-footer">
-          <a href="wuthering-heights-chapter1.html"><button>Previous</button></a>
+          <a href="wuthering-heights-chapter1.html"
+            ><button>Previous</button></a
+          >
           <button id="nextChapterBtn">Next</button>
         </div>
       </div>
@@ -173,6 +195,11 @@
     <div class="ad-overlay" id="adOverlay">
       <div class="ad-card">
         <div class="ad-header">
+          <!-- Added Volume Button -->
+          <button class="volume-btn" id="volumeBtn" aria-label="Unmute ad">
+            <img src="../icons/volume-mute.svg" alt="muted" id="volumeIcon" />
+          </button>
+
           <div class="ad-timer">
             <span class="timer-label">Remaining</span>
             <div class="timer-circle">
@@ -276,17 +303,43 @@
         aria-label="Start auto-scroll"
         type="button"
       >
-        <svg class="autoscroll-icon autoscroll-icon-play" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <svg
+          class="autoscroll-icon autoscroll-icon-play"
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          aria-hidden="true"
+        >
           <polygon points="6,4 20,12 6,20" fill="currentColor" />
         </svg>
-        <svg class="autoscroll-icon autoscroll-icon-pause" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <svg
+          class="autoscroll-icon autoscroll-icon-pause"
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          aria-hidden="true"
+        >
           <rect x="6" y="4" width="4" height="16" fill="currentColor" />
           <rect x="14" y="4" width="4" height="16" fill="currentColor" />
         </svg>
       </button>
-      <button class="autoscroll-btn" id="autoscrollSlower" aria-label="Slower" type="button">−</button>
+      <button
+        class="autoscroll-btn"
+        id="autoscrollSlower"
+        aria-label="Slower"
+        type="button"
+      >
+        −
+      </button>
       <span class="autoscroll-speed" id="autoscrollSpeedLabel">2×</span>
-      <button class="autoscroll-btn" id="autoscrollFaster" aria-label="Faster" type="button">+</button>
+      <button
+        class="autoscroll-btn"
+        id="autoscrollFaster"
+        aria-label="Faster"
+        type="button"
+      >
+        +
+      </button>
     </div>
 
     <script src="../javascript/sweetalert2.all.min.js"></script>

@@ -199,7 +199,9 @@
         </p>
 
         <div class="container-footer">
-          <a href="a-tale-of-two-cities-chapter2.html"><button>Previous</button></a>
+          <a href="a-tale-of-two-cities-chapter2.html"
+            ><button>Previous</button></a
+          >
           <button id="nextChapterBtn">Next</button>
         </div>
       </div>
@@ -241,6 +243,11 @@
     <div class="ad-overlay" id="adOverlay">
       <div class="ad-card">
         <div class="ad-header">
+          <!-- Added Volume Button -->
+          <button class="volume-btn" id="volumeBtn" aria-label="Unmute ad">
+            <img src="../icons/volume-mute.svg" alt="muted" id="volumeIcon" />
+          </button>
+
           <div class="ad-timer">
             <span class="timer-label">Remaining</span>
             <div class="timer-circle">
@@ -258,8 +265,8 @@
 
         <div class="ad-footer">
           <div class="ad-info">
-            <span><img src="../icons/clock-fill.svg" alt="" /></span> Ad ends in
-            <span id="footerTimer">10</span>s
+            <span><img src="../icons/clock-fill.svg" alt="" /></span>
+            Ad ends in <span id="footerTimer">10</span>s
           </div>
           <button class="btn-exit" id="exitBtn">Next Chapter</button>
         </div>
@@ -385,6 +392,7 @@
         +
       </button>
     </div>
+
     <script src="../javascript/sweetalert2.all.min.js"></script>
     <script src="../javascript/name-change.js"></script>
     <script src="../javascript/ad.js"></script>

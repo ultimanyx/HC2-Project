@@ -104,10 +104,10 @@
       <div id="chapter-content">
         <p>
           Petronius woke only about midday, and as usual greatly wearied. The
-          evening before he had been at Nero's, and had remained there late, till
-          the orgies had reached their highest point of madness and debauchery.
-          His body, accustomed to all luxuries, was suffering from the effects of
-          the wine and the late hours.
+          evening before he had been at Nero's, and had remained there late,
+          till the orgies had reached their highest point of madness and
+          debauchery. His body, accustomed to all luxuries, was suffering from
+          the effects of the wine and the late hours.
         </p>
 
         <p>
@@ -119,8 +119,8 @@
         </p>
 
         <p>
-          "Let the bath be prepared," said he. "And tell me, has any one inquired
-          for me?"
+          "Let the bath be prepared," said he. "And tell me, has any one
+          inquired for me?"
         </p>
 
         <p>
@@ -131,16 +131,17 @@
 
         <p>
           Petronius went to the bath, where he spent a long time in the tepid
-          water, surrounded by perfumes and the soft hands of his attendants. When
-          he returned to his chamber, refreshed and dressed, he found Vinicius
-          waiting for him. Vinicius was a young man of powerful build, with a face
-          that spoke of both courage and a certain youthful impetuosity.
+          water, surrounded by perfumes and the soft hands of his attendants.
+          When he returned to his chamber, refreshed and dressed, he found
+          Vinicius waiting for him. Vinicius was a young man of powerful build,
+          with a face that spoke of both courage and a certain youthful
+          impetuosity.
         </p>
 
         <p>
           "Greetings, Petronius," said Vinicius. "I have come to you for advice,
-          for you are the wisest man in Rome, and the most skilled in the ways of
-          the world."
+          for you are the wisest man in Rome, and the most skilled in the ways
+          of the world."
         </p>
 
         <p>
@@ -164,7 +165,9 @@
 
         <div class="container-footer">
           <button id="no-previous" disabled>Previous</button>
-          <a href="quo-vadis-chapter2.html"><button id="nextChapterBtn">Next</button></a>
+          <a href="quo-vadis-chapter2.html"
+            ><button id="nextChapterBtn">Next</button></a
+          >
         </div>
       </div>
     </div>
@@ -203,6 +206,9 @@
     <div class="ad-overlay" id="adOverlay">
       <div class="ad-card">
         <div class="ad-header">
+          <button class="volume-btn" id="volumeBtn" aria-label="Unmute ad">
+            <img src="../icons/volume-mute.svg" alt="muted" id="volumeIcon" />
+          </button>
           <div class="ad-timer">
             <span class="timer-label">Remaining</span>
             <div class="timer-circle">
@@ -225,16 +231,34 @@
       </div>
     </div>
 
-    <div class="report-modal-overlay" id="reportModalOverlay" aria-hidden="true">
-      <div class="report-modal" role="dialog" aria-modal="true" aria-labelledby="reportModalTitle">
+    <div
+      class="report-modal-overlay"
+      id="reportModalOverlay"
+      aria-hidden="true"
+    >
+      <div
+        class="report-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="reportModalTitle"
+      >
         <div class="report-modal-header">
-          <h3 id="reportModalTitle" class="report-modal-title">Report Chapter</h3>
-          <button type="button" class="report-modal-close" id="reportModalClose" aria-label="Close report dialog">
+          <h3 id="reportModalTitle" class="report-modal-title">
+            Report Chapter
+          </h3>
+          <button
+            type="button"
+            class="report-modal-close"
+            id="reportModalClose"
+            aria-label="Close report dialog"
+          >
             <img src="../icons/x-lg.svg" alt="" />
           </button>
         </div>
         <div class="report-modal-body">
-          <label for="reportReason" class="report-modal-label">Reason <span class="required">*</span></label>
+          <label for="reportReason" class="report-modal-label"
+            >Reason <span class="required">*</span></label
+          >
           <select id="reportReason" class="report-modal-select">
             <option value="">Select a reason</option>
             <option value="Broken content">Broken content</option>
@@ -243,30 +267,82 @@
             <option value="Inappropriate content">Inappropriate content</option>
             <option value="Other">Other</option>
           </select>
-          <p class="report-modal-error" id="reportReasonError" role="alert">Please select a reason.</p>
-          <label for="reportDetails" class="report-modal-label">Additional details <span class="optional">(optional)</span></label>
-          <textarea id="reportDetails" class="report-modal-textarea" placeholder="Tell us anything else that might help…" maxlength="500"></textarea>
+          <p class="report-modal-error" id="reportReasonError" role="alert">
+            Please select a reason.
+          </p>
+          <label for="reportDetails" class="report-modal-label"
+            >Additional details <span class="optional">(optional)</span></label
+          >
+          <textarea
+            id="reportDetails"
+            class="report-modal-textarea"
+            placeholder="Tell us anything else that might help…"
+            maxlength="500"
+          ></textarea>
         </div>
         <div class="report-modal-footer">
-          <button type="button" class="report-modal-btn report-modal-btn-cancel" id="reportModalCancel">Cancel</button>
-          <button type="button" class="report-modal-btn report-modal-btn-submit" id="reportModalSubmit">Submit Report</button>
+          <button
+            type="button"
+            class="report-modal-btn report-modal-btn-cancel"
+            id="reportModalCancel"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            class="report-modal-btn report-modal-btn-submit"
+            id="reportModalSubmit"
+          >
+            Submit Report
+          </button>
         </div>
       </div>
     </div>
 
     <div class="autoscroll" id="autoscroll">
-      <button class="autoscroll-btn autoscroll-play" id="autoscrollToggle" aria-label="Start auto-scroll" type="button">
-        <svg class="autoscroll-icon autoscroll-icon-play" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+      <button
+        class="autoscroll-btn autoscroll-play"
+        id="autoscrollToggle"
+        aria-label="Start auto-scroll"
+        type="button"
+      >
+        <svg
+          class="autoscroll-icon autoscroll-icon-play"
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          aria-hidden="true"
+        >
           <polygon points="6,4 20,12 6,20" fill="currentColor" />
         </svg>
-        <svg class="autoscroll-icon autoscroll-icon-pause" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <svg
+          class="autoscroll-icon autoscroll-icon-pause"
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          aria-hidden="true"
+        >
           <rect x="6" y="4" width="4" height="16" fill="currentColor" />
           <rect x="14" y="4" width="4" height="16" fill="currentColor" />
         </svg>
       </button>
-      <button class="autoscroll-btn" id="autoscrollSlower" aria-label="Slower" type="button">−</button>
+      <button
+        class="autoscroll-btn"
+        id="autoscrollSlower"
+        aria-label="Slower"
+        type="button"
+      >
+        −
+      </button>
       <span class="autoscroll-speed" id="autoscrollSpeedLabel">2×</span>
-      <button class="autoscroll-btn" id="autoscrollFaster" aria-label="Faster" type="button">+</button>
+      <button
+        class="autoscroll-btn"
+        id="autoscrollFaster"
+        aria-label="Faster"
+        type="button"
+      >
+        +
+      </button>
     </div>
 
     <script src="../javascript/sweetalert2.all.min.js"></script>

@@ -111,17 +111,17 @@
         </p>
 
         <p>
-          The house of Aulus Plautius was an old-fashioned Roman dwelling, simple
-          and severe in its architecture, unlike the luxurious palaces of the
-          newer nobles. It was here that the conqueror of Britain lived, a man
-          respected by all for his virtue and his old Roman simplicity.
+          The house of Aulus Plautius was an old-fashioned Roman dwelling,
+          simple and severe in its architecture, unlike the luxurious palaces of
+          the newer nobles. It was here that the conqueror of Britain lived, a
+          man respected by all for his virtue and his old Roman simplicity.
         </p>
 
         <p>
-          Vinicius was admitted by the doorkeeper, and found Aulus in the garden,
-          walking with his wife Pomponia. They greeted him kindly, for Vinicius
-          was a kinsman of Pomponia. But Vinicius, though he tried to be
-          courteous, could scarcely keep his eyes from searching for Lycia.
+          Vinicius was admitted by the doorkeeper, and found Aulus in the
+          garden, walking with his wife Pomponia. They greeted him kindly, for
+          Vinicius was a kinsman of Pomponia. But Vinicius, though he tried to
+          be courteous, could scarcely keep his eyes from searching for Lycia.
         </p>
 
         <p>
@@ -132,38 +132,41 @@
 
         <p>
           Vinicius accepted the invitation eagerly, hoping that Lycia would be
-          present. He was not disappointed. When they entered the dining chamber,
-          he saw her sitting beside Pomponia. She was dressed in a simple white
-          robe, and her hair was bound with a fillet. She was more beautiful than
-          he had remembered.
+          present. He was not disappointed. When they entered the dining
+          chamber, he saw her sitting beside Pomponia. She was dressed in a
+          simple white robe, and her hair was bound with a fillet. She was more
+          beautiful than he had remembered.
         </p>
 
         <p>
           During the meal, Vinicius tried to speak to her, but she answered only
-          in monosyllables, and her eyes were downcast. He felt a strange mixture
-          of desire and frustration. He was a Roman noble, accustomed to having
-          what he wanted, and this girl's coldness only inflamed his passion.
+          in monosyllables, and her eyes were downcast. He felt a strange
+          mixture of desire and frustration. He was a Roman noble, accustomed to
+          having what he wanted, and this girl's coldness only inflamed his
+          passion.
         </p>
 
         <p>
-          After the meal, Aulus took Vinicius aside. "Marcus," he said, "I see how
-          you look at Lycia. I must tell you that she is a Christian. She has been
-          baptized, and she follows the teachings of the Galilean. If you wish to
-          marry her, you must know that she will not consent to a union with a
-          pagan."
+          After the meal, Aulus took Vinicius aside. "Marcus," he said, "I see
+          how you look at Lycia. I must tell you that she is a Christian. She
+          has been baptized, and she follows the teachings of the Galilean. If
+          you wish to marry her, you must know that she will not consent to a
+          union with a pagan."
         </p>
 
         <p>
           Vinicius was taken aback. A Christian! He had heard of this strange
           sect, which was said to worship a crucified criminal and to practice
-          secret rites. He had never given them much thought, but now he felt that
-          this was an obstacle he could overcome. He would have Lycia, whatever
-          the cost.
+          secret rites. He had never given them much thought, but now he felt
+          that this was an obstacle he could overcome. He would have Lycia,
+          whatever the cost.
         </p>
 
         <div class="container-footer">
           <a href="quo-vadis-chapter1.html"><button>Previous</button></a>
-          <a href="quo-vadis-chapter3.html"><button id="nextChapterBtn">Next</button></a>
+          <a href="quo-vadis-chapter3.html"
+            ><button id="nextChapterBtn">Next</button></a
+          >
         </div>
       </div>
     </div>
@@ -202,6 +205,9 @@
     <div class="ad-overlay" id="adOverlay">
       <div class="ad-card">
         <div class="ad-header">
+          <button class="volume-btn" id="volumeBtn" aria-label="Unmute ad">
+            <img src="../icons/volume-mute.svg" alt="muted" id="volumeIcon" />
+          </button>
           <div class="ad-timer">
             <span class="timer-label">Remaining</span>
             <div class="timer-circle">
@@ -224,16 +230,34 @@
       </div>
     </div>
 
-    <div class="report-modal-overlay" id="reportModalOverlay" aria-hidden="true">
-      <div class="report-modal" role="dialog" aria-modal="true" aria-labelledby="reportModalTitle">
+    <div
+      class="report-modal-overlay"
+      id="reportModalOverlay"
+      aria-hidden="true"
+    >
+      <div
+        class="report-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="reportModalTitle"
+      >
         <div class="report-modal-header">
-          <h3 id="reportModalTitle" class="report-modal-title">Report Chapter</h3>
-          <button type="button" class="report-modal-close" id="reportModalClose" aria-label="Close report dialog">
+          <h3 id="reportModalTitle" class="report-modal-title">
+            Report Chapter
+          </h3>
+          <button
+            type="button"
+            class="report-modal-close"
+            id="reportModalClose"
+            aria-label="Close report dialog"
+          >
             <img src="../icons/x-lg.svg" alt="" />
           </button>
         </div>
         <div class="report-modal-body">
-          <label for="reportReason" class="report-modal-label">Reason <span class="required">*</span></label>
+          <label for="reportReason" class="report-modal-label"
+            >Reason <span class="required">*</span></label
+          >
           <select id="reportReason" class="report-modal-select">
             <option value="">Select a reason</option>
             <option value="Broken content">Broken content</option>
@@ -242,30 +266,82 @@
             <option value="Inappropriate content">Inappropriate content</option>
             <option value="Other">Other</option>
           </select>
-          <p class="report-modal-error" id="reportReasonError" role="alert">Please select a reason.</p>
-          <label for="reportDetails" class="report-modal-label">Additional details <span class="optional">(optional)</span></label>
-          <textarea id="reportDetails" class="report-modal-textarea" placeholder="Tell us anything else that might help…" maxlength="500"></textarea>
+          <p class="report-modal-error" id="reportReasonError" role="alert">
+            Please select a reason.
+          </p>
+          <label for="reportDetails" class="report-modal-label"
+            >Additional details <span class="optional">(optional)</span></label
+          >
+          <textarea
+            id="reportDetails"
+            class="report-modal-textarea"
+            placeholder="Tell us anything else that might help…"
+            maxlength="500"
+          ></textarea>
         </div>
         <div class="report-modal-footer">
-          <button type="button" class="report-modal-btn report-modal-btn-cancel" id="reportModalCancel">Cancel</button>
-          <button type="button" class="report-modal-btn report-modal-btn-submit" id="reportModalSubmit">Submit Report</button>
+          <button
+            type="button"
+            class="report-modal-btn report-modal-btn-cancel"
+            id="reportModalCancel"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            class="report-modal-btn report-modal-btn-submit"
+            id="reportModalSubmit"
+          >
+            Submit Report
+          </button>
         </div>
       </div>
     </div>
 
     <div class="autoscroll" id="autoscroll">
-      <button class="autoscroll-btn autoscroll-play" id="autoscrollToggle" aria-label="Start auto-scroll" type="button">
-        <svg class="autoscroll-icon autoscroll-icon-play" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+      <button
+        class="autoscroll-btn autoscroll-play"
+        id="autoscrollToggle"
+        aria-label="Start auto-scroll"
+        type="button"
+      >
+        <svg
+          class="autoscroll-icon autoscroll-icon-play"
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          aria-hidden="true"
+        >
           <polygon points="6,4 20,12 6,20" fill="currentColor" />
         </svg>
-        <svg class="autoscroll-icon autoscroll-icon-pause" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <svg
+          class="autoscroll-icon autoscroll-icon-pause"
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          aria-hidden="true"
+        >
           <rect x="6" y="4" width="4" height="16" fill="currentColor" />
           <rect x="14" y="4" width="4" height="16" fill="currentColor" />
         </svg>
       </button>
-      <button class="autoscroll-btn" id="autoscrollSlower" aria-label="Slower" type="button">−</button>
+      <button
+        class="autoscroll-btn"
+        id="autoscrollSlower"
+        aria-label="Slower"
+        type="button"
+      >
+        −
+      </button>
       <span class="autoscroll-speed" id="autoscrollSpeedLabel">2×</span>
-      <button class="autoscroll-btn" id="autoscrollFaster" aria-label="Faster" type="button">+</button>
+      <button
+        class="autoscroll-btn"
+        id="autoscrollFaster"
+        aria-label="Faster"
+        type="button"
+      >
+        +
+      </button>
     </div>
 
     <script src="../javascript/sweetalert2.all.min.js"></script>

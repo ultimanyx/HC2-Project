@@ -777,7 +777,7 @@ body {
   display: block;
 }
 
-/* Header floats at top with gradient - Space between left/right */
+/* Header floats at top with gradient */
 .ad-header {
   position: absolute;
   top: 0;
@@ -794,14 +794,14 @@ body {
   gap: 10px;
 }
 
-/* Volume button */
+/* Volume button - Hidden by default, JS will show it */
 .volume-btn {
   width: 44px;
   height: 44px;
   background: var(--ad-timer-bg);
   border: 2px solid var(--ad-card-border);
   border-radius: 50%;
-  display: flex;
+  display: none; /* Added so it doesn't need inline styles */
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -811,7 +811,7 @@ body {
 }
 
 .volume-btn:hover {
-  background: #374151; /* slightly lighter gray */
+  background: #374151;
 }
 
 .volume-btn:active {
@@ -826,6 +826,7 @@ body {
 }
 
 .ad-timer {
+  margin-left: auto; /* Pushes timer to the right */
   display: flex;
   align-items: center;
   gap: 12px;
@@ -1050,6 +1051,13 @@ body {
   color: var(--ad-text-muted);
   display: inline-flex;
   align-items: center;
+}
+
+/* Fixes the clock icon size via CSS instead of inline */
+.ad-footer .ad-info span img {
+  width: 14px;
+  height: 14px;
+  display: block;
 }
 
 .btn-exit {
