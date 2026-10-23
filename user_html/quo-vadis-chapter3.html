@@ -292,50 +292,87 @@
       </div>
     </div>
 
-    <div class="autoscroll" id="autoscroll">
-      <button
-        class="autoscroll-btn autoscroll-play"
-        id="autoscrollToggle"
-        aria-label="Start auto-scroll"
-        type="button"
-      >
-        <svg
-          class="autoscroll-icon autoscroll-icon-play"
-          viewBox="0 0 24 24"
-          width="18"
-          height="18"
-          aria-hidden="true"
+    <div class="floating-controls" id="floatingControls">
+      <div class="reader-settings" id="readerSettings">
+        <button
+          type="button"
+          class="setting-btn"
+          id="decreaseFont"
+          title="Decrease Font Size"
         >
-          <polygon points="6,4 20,12 6,20" fill="currentColor" />
-        </svg>
-        <svg
-          class="autoscroll-icon autoscroll-icon-pause"
-          viewBox="0 0 24 24"
-          width="18"
-          height="18"
-          aria-hidden="true"
+          A-
+        </button>
+        <button
+          type="button"
+          class="setting-btn"
+          id="increaseFont"
+          title="Increase Font Size"
         >
-          <rect x="6" y="4" width="4" height="16" fill="currentColor" />
-          <rect x="14" y="4" width="4" height="16" fill="currentColor" />
-        </svg>
-      </button>
-      <button
-        class="autoscroll-btn"
-        id="autoscrollSlower"
-        aria-label="Slower"
-        type="button"
-      >
-        −
-      </button>
-      <span class="autoscroll-speed" id="autoscrollSpeedLabel">2×</span>
-      <button
-        class="autoscroll-btn"
-        id="autoscrollFaster"
-        aria-label="Faster"
-        type="button"
-      >
-        +
-      </button>
+          A+
+        </button>
+        <button
+          type="button"
+          class="setting-btn"
+          id="decreaseLine"
+          title="Decrease Line Spacing"
+        >
+          ↕-
+        </button>
+        <button
+          type="button"
+          class="setting-btn"
+          id="increaseLine"
+          title="Increase Line Spacing"
+        >
+          ↕+
+        </button>
+      </div>
+
+      <div class="autoscroll" id="autoscroll">
+        <button
+          class="autoscroll-btn autoscroll-play"
+          id="autoscrollToggle"
+          aria-label="Start auto-scroll"
+          type="button"
+        >
+          <svg
+            class="autoscroll-icon autoscroll-icon-play"
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            aria-hidden="true"
+          >
+            <polygon points="6,4 20,12 6,20" fill="currentColor" />
+          </svg>
+          <svg
+            class="autoscroll-icon autoscroll-icon-pause"
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            aria-hidden="true"
+          >
+            <rect x="6" y="4" width="4" height="16" fill="currentColor" />
+            <rect x="14" y="4" width="4" height="16" fill="currentColor" />
+          </svg>
+        </button>
+        <button
+          class="autoscroll-btn"
+          id="autoscrollSlower"
+          aria-label="Slower"
+          type="button"
+        >
+          −
+        </button>
+        <span class="autoscroll-speed" id="autoscrollSpeedLabel">2×</span>
+        <button
+          class="autoscroll-btn"
+          id="autoscrollFaster"
+          aria-label="Faster"
+          type="button"
+        >
+          +
+        </button>
+      </div>
     </div>
 
     <script src="../javascript/sweetalert2.all.min.js"></script>
@@ -344,6 +381,7 @@
     <script src="../javascript/bookmark.js"></script>
     <script src="../javascript/report.js"></script>
     <script src="../javascript/autoscroll.js"></script>
+    <script src="../javascript/reader-settings.js"></script>
     <script src="../javascript/logout.js"></script>
   </body>
 </html>

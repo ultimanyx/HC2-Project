@@ -34,6 +34,10 @@ html {
   --link: #3b6f91;
   --link-hover: #2c536d;
 
+  /* Reader Settings Variables */
+  --reader-font-size: 19px;
+  --reader-line-height: 1.7;
+
   /* Shadows */
   --boxshadow:
     0 20px 40px -12px rgba(0, 20, 30, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.04);
@@ -592,9 +596,9 @@ body {
 
 #chapter-content p {
   font-family: var(--font-body);
-  font-size: 19px;
+  font-size: var(--reader-font-size);
   font-weight: 500;
-  line-height: 1.7;
+  line-height: var(--reader-line-height);
   text-align: justify;
   margin: 0 0 5px 0;
   padding: 0;
@@ -1269,11 +1273,71 @@ body {
   border-color: var(--destructive-hover);
 }
 
-/* Auto-scroll controls */
-.autoscroll {
+/* =========================================
+   FLOATING CONTROLS (Reader Settings & Autoscroll)
+   ========================================= */
+.floating-controls {
   position: fixed;
   right: 24px;
   bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  z-index: 9000;
+}
+
+/* Reader Settings */
+.reader-settings {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  background: var(--card-background);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  /* Added a more prominent drop shadow here */
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.08);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.setting-btn {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--secondary);
+  color: var(--foreground);
+  border: 1px solid transparent;
+  border-radius: 50%;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.setting-btn:hover {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.setting-btn:active {
+  transform: scale(0.94);
+}
+
+/* Auto-scroll controls */
+.autoscroll {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -1281,8 +1345,10 @@ body {
   background: var(--card-background);
   border: 1px solid var(--border);
   border-radius: 999px;
-  box-shadow: var(--boxshadow);
-  z-index: 9000;
+  /* Added the same prominent drop shadow here */
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.08);
   transition:
     opacity 0.25s ease,
     transform 0.25s ease;
@@ -1361,6 +1427,7 @@ body {
 .autoscroll.is-playing .autoscroll-icon-pause {
   display: block;
 }
+
 /* =========================================
    BOOKMARK — SELECT MODE UI + READING HIGHLIGHT
    ========================================= */
