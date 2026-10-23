@@ -66,9 +66,8 @@
 
           <div class="stat-card stat-card--reported">
             <div class="stat-label">Reported Novels</div>
-
-            <ul class="report-breakdown">
-              <!-- Empty State -->
+            <!-- JS will populate this (same logic as Dashboard) -->
+            <ul class="report-breakdown" id="reportedList">
               <li class="empty-report-state">
                 <div class="empty-report-content">
                   <span>None of your novels have been reported.</span>
@@ -128,8 +127,10 @@
               </tr>
             </thead>
             <tbody>
-              <!-- 1. HARDCODED PUBLISHED NOVEL (Dracula) -->
-              <tr>
+              <!-- ============================================
+                   HARDCODED DRACULA (always the first book)
+                   ============================================ -->
+              <tr data-id="seed-0" data-hardcoded="true">
                 <td><strong>Dracula</strong></td>
                 <td><span class="badge active">Ongoing</span></td>
                 <td>Horror</td>
@@ -152,29 +153,6 @@
                   <button
                     class="btn btn-sm btn-danger archive-novel-btn"
                     data-novel-id="seed-0"
-                  >
-                    Archive
-                  </button>
-                </td>
-              </tr>
-
-              <!-- 2. HARDCODED DRAFT NOVEL (The Lost Kingdom) -->
-              <tr>
-                <td><strong>The Lost Kingdom</strong></td>
-                <td><span class="badge draft">Draft</span></td>
-                <td>Fantasy</td>
-                <td>0</td>
-                <td>—</td>
-                <td>—</td>
-                <td>
-                  <a
-                    class="btn btn-primary btn-sm view-novel-btn"
-                    href="author_view-novel.html?id=seed-1"
-                    >View</a
-                  >
-                  <button
-                    class="btn btn-sm btn-danger archive-novel-btn"
-                    data-novel-id="seed-1"
                   >
                     Archive
                   </button>

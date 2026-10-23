@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const isBookDraft = novel.status === "draft";
+  const isBookPending = novel.status === "pending"; // 🚨 book is under admin review
 
   // ---------- DOM Elements ----------
   const headerTitle = document.getElementById("headerTitle");
@@ -52,10 +53,17 @@ document.addEventListener("DOMContentLoaded", () => {
     statusBadge.className = "badge draft";
     saveDraftBtn.style.display = "none";
     saveBtn.textContent = isEditing ? "Save Chapter" : "Add to Draft";
+  } else if (isBookPending) {
+    // 🚨 Book is pending → any new/edited chapter must also go through admin
+    statusBadge.textContent = "Pending Review";
+    statusBadge.className = "badge pending";
+    saveDraftBtn.style.display = "inline-block";
+    saveBtn.textContent = isEditing
+      ? "Save Chapter for Review"
+      : "Submit Chapter for Review";
   } else {
     statusBadge.textContent = "Ongoing";
     statusBadge.className = "badge active";
-    // 🚨 THE FIX: Allows the author to choose when the book is ongoing
     saveDraftBtn.style.display = "inline-block";
     saveBtn.textContent = isEditing ? "Save & Publish" : "Publish Chapter";
   }
@@ -170,14 +178,27 @@ document.addEventListener("DOMContentLoaded", () => {
       ? contentArea.innerText.trim().split(/\s+/).length
       : 0;
 
-    // Create chapter object with the chosen status (from button click)
+    // 🚨 If the parent novel is pending, a "publish" action is downgraded to "pending"
+    // so the admin must approve the chapter before it goes live.
+    let effectiveStatus = targetStatus;
+    let statusMessage = "";
+
+    if (isBookPending && targetStatus === "published") {
+      effectiveStatus = "pending";
+      statusMessage = "submitted for admin review";
+    } else if (targetStatus === "draft") {
+      statusMessage = "saved as draft";
+    } else {
+      statusMessage = "published";
+    }
+
     const chapterData = {
       number: number,
       title: title,
       content: content,
       authorNote: note,
       words: wordCount,
-      status: targetStatus, // "published" or "draft"
+      status: effectiveStatus,
       lastUpdated: Date.now(),
     };
 
@@ -202,12 +223,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const actionText = isEditing ? "Updated" : "Added";
-    const statusText =
-      targetStatus === "draft" ? "saved as draft" : "published";
 
     Swal.fire({
       title: `Chapter ${actionText}!`,
-      text: `"${title}" has been ${statusText}.`,
+      text: `"${title}" has been ${statusMessage}.`,
       icon: "success",
       confirmButtonText: "Continue",
     }).then(() => {
@@ -223,6 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (isBookDraft) {
     saveBtn.addEventListener("click", () => saveChapter("draft"));
   } else {
+    // For pending books the "publish" click saves as pending (see saveChapter).
     saveBtn.addEventListener("click", () => saveChapter("published"));
     saveDraftBtn.addEventListener("click", () => saveChapter("draft"));
   }

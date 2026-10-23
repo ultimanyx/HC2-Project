@@ -15,8 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const allNovels = getNovels();
 
-  // Filter for the author's active (non-archived) published books
-  // We include Dracula (seed-0) but exclude the other system books
   const myNovels = allNovels.filter((n) => {
     if (n.archived) return false;
     if (n.systemSeeded && String(n.id) !== "seed-0") return false;
@@ -31,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
     totalReads += Number(n.reads) || 0;
   });
 
-  // Let's assume the author earns ₱0.15 per read for this demo
   const totalEarnings = totalReads * 0.15;
 
   const readsEl = document.getElementById("dash-total-reads");
@@ -54,11 +51,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const showingText = document.getElementById("dash-showing-text");
 
   if (topTbody) {
-    // Sort by reads descending
     const sorted = [...myNovels].sort(
       (a, b) => (Number(b.reads) || 0) - (Number(a.reads) || 0),
     );
-    const topNovels = sorted.slice(0, 3); // Show top 3
+    const topNovels = sorted.slice(0, 3);
 
     if (topNovels.length === 0) {
       topTbody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:24px;color:#6b6680;">You haven't published any novels yet.</td></tr>`;
@@ -107,7 +103,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const reportedList = document.getElementById("reportedList");
 
   if (reportedList) {
-    // We will build the HTML for this section dynamically
     let listHtml = "";
 
     // --- A. Check LocalStorage for Admin Actions ---
@@ -132,7 +127,10 @@ document.addEventListener("DOMContentLoaded", function () {
         toastIcon = "info";
       }
 
-      if (toastTitle) {
+      // ✅ Fire the toast ONLY once per status change
+      const alreadyNotified = alertData.notified === alertData.status;
+
+      if (toastTitle && !alreadyNotified) {
         Swal.fire({
           toast: true,
           position: "top-end",
@@ -142,9 +140,13 @@ document.addEventListener("DOMContentLoaded", function () {
           timer: 4000,
           timerProgressBar: true,
         });
+
+        // Persist the flag so the toast never fires for this status again
+        alertData.notified = alertData.status;
+        localStorage.setItem("author_alert_status", JSON.stringify(alertData));
       }
 
-      // Build the Alert HTML
+      // Build the Alert HTML (row still shows every visit)
       if (alertData.status === "warn") {
         listHtml += `
           <li class="admin-action-item">
@@ -210,7 +212,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (listHtml !== "") {
       reportedList.innerHTML = listHtml;
     } else {
-      // Clean Empty State using CSS classes
       reportedList.innerHTML = `
         <li class="empty-report-state">
           <div class="empty-report-content">
@@ -240,15 +241,16 @@ document.addEventListener("DOMContentLoaded", function () {
           },
         }).then((result) => {
           if (result.isConfirmed) {
-            // Update Local Storage
             alertData.status = "appealed";
             alertData.appealReason = result.value.trim();
+            // ✅ Reset notified so a fresh "appealed" toast won't be skipped
+            // if you ever add one; the row still switches state here anyway.
+            alertData.notified = "appealed";
             localStorage.setItem(
               "author_alert_status",
               JSON.stringify(alertData),
             );
 
-            // Refresh the list section by updating the DOM directly
             const actionItem = document.querySelector(".admin-action-item");
             if (actionItem) {
               actionItem.innerHTML = `
@@ -260,7 +262,6 @@ document.addEventListener("DOMContentLoaded", function () {
               `;
             }
 
-            // System Feedback
             Swal.fire({
               icon: "success",
               title: "Appeal Submitted",
@@ -280,11 +281,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const chartBars = document.querySelectorAll("#dash-chart-bars .bar");
 
   if (chartBars.length > 0) {
-    // Generate random heights based on the total reads to make it look alive.
-    const baseReads = totalReads > 0 ? totalReads / 30 : 10; // scaling factor
+    const baseReads = totalReads > 0 ? totalReads / 30 : 10;
 
     chartBars.forEach((bar) => {
-      // Generate a random height between 30 and 150
       const randomHeight = Math.floor(Math.random() * (150 - 30 + 1)) + 30;
       bar.style.height = `${randomHeight}px`;
     });

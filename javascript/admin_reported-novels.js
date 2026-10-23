@@ -83,11 +83,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function reasonClass(reason) {
     const r = (reason || "").toLowerCase();
-    if (r.includes("copyright")) return "reason-copyright";
-    if (r.includes("spam")) return "reason-spam";
-    if (r.includes("plagiarism")) return "reason-plagiarism";
-    if (r.includes("violence")) return "reason-violence";
+    if (r.includes("broken")) return "reason-spam";
+    if (r.includes("missing")) return "reason-plagiarism";
+    if (r.includes("wrong")) return "reason-violence";
     if (r.includes("inappropriate")) return "reason-inappropriate";
+    if (r.includes("other")) return "reason-default";
     return "reason-default";
   }
 
@@ -117,7 +117,6 @@ document.addEventListener("DOMContentLoaded", function () {
     reports.forEach((report) => {
       const book = novels.find((n) => String(n.id) === String(report.bookId));
 
-      // Prefer values stored on the report itself
       const authorName =
         report.author || (book && book.author) || "Unknown Author";
       const bookTitle = report.bookTitle || (book ? book.title : report.bookId);
@@ -130,7 +129,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const initial = (reportedBy || "?").trim().charAt(0).toUpperCase() || "?";
       const rClass = reasonClass(report.reason);
-      const statusClass = (report.status || "pending").toLowerCase();
+
+      // Normalize status for display
+      let statusText = report.status || "Pending";
+      if (statusText === "Resolve") statusText = "Resolved";
+      const statusClass = statusText.toLowerCase();
 
       const tr = document.createElement("tr");
       tr.dataset.id = report.id;
@@ -140,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function () {
       tr.dataset.displayTitle = displayTitle;
       tr.dataset.reason = report.reason || "";
       tr.dataset.reportedBy = reportedBy;
-      tr.dataset.status = report.status || "";
+      tr.dataset.status = statusText; // Store normalized status
       if (report.appealReason) tr.dataset.appealReason = report.appealReason;
 
       tr.innerHTML = `
@@ -171,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
         </td>
 
         <td>
-          <span class="badge ${statusClass}">${escapeHtml(report.status)}</span>
+          <span class="badge ${statusClass}">${escapeHtml(statusText)}</span>
         </td>
 
         <td>
@@ -191,7 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
         </td>
       `;
 
-      if (report.status !== "Pending") {
+      if (statusText !== "Pending") {
         tr.querySelector(".action-group").innerHTML =
           `<span class="status-processed">Processed</span>`;
       }
@@ -209,31 +212,54 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (reportIndex === -1) return;
 
-    reports[reportIndex].status = newStatus;
+    let finalStatus = newStatus;
+    let isWarn = false;
+
+    // ✅ If the action is Warning, alert the author and resolve the report
+    if (newStatus === "Warn" || newStatus === "Warned") {
+      finalStatus = "Resolved";
+      isWarn = true;
+      saveToAuthorDashboard(
+        reports[reportIndex].bookTitle || "Unknown Novel",
+        reports[reportIndex].author || "Unknown Author",
+        reports[reportIndex].reason || "Guidelines violation",
+        "warn",
+      );
+    } else if (newStatus === "Resolve" || newStatus === "Resolved") {
+      finalStatus = "Resolved";
+    } else if (newStatus !== "Resolved") {
+      // For other statuses (Archive, Ban, etc.)
+      saveToAuthorDashboard(
+        reports[reportIndex].bookTitle || "Unknown Novel",
+        reports[reportIndex].author || "Unknown Author",
+        reports[reportIndex].reason || "Guidelines violation",
+        newStatus.toLowerCase(),
+      );
+    }
+
+    reports[reportIndex].status = finalStatus;
     saveReports(reports);
 
     const row = tableBody.querySelector(`tr[data-id="${id}"]`);
     if (!row) return;
 
-    row.dataset.status = newStatus;
+    row.dataset.status = finalStatus;
 
     const badge = row.querySelector(".badge");
     if (badge) {
-      badge.className = `badge ${newStatus.toLowerCase()}`;
-      badge.textContent = newStatus;
+      badge.className = `badge ${finalStatus.toLowerCase()}`;
+      badge.textContent = finalStatus;
     }
 
     row.querySelector(".action-group").innerHTML =
       `<span class="status-processed">Processed</span>`;
 
-    if (newStatus !== "Resolve" && newStatus !== "Resolved") {
-      saveToAuthorDashboard(
-        row.dataset.displayTitle || "",
-        row.dataset.author || "",
-        row.dataset.reason || "",
-        newStatus.toLowerCase(),
-      );
+    if (isWarn || finalStatus === "Resolved") {
+      row.style.display = "none"; // Hide immediately
     }
+
+    filterTable(); // Ensure everything stays filtered correctly
+    updateBulkBar();
   }
 
   // --- 4. Search & Filter Logic ---
@@ -252,8 +278,27 @@ document.addEventListener("DOMContentLoaded", function () {
       const rowStatus = (row.dataset.status || "").toLowerCase();
       const rowReason = (row.dataset.reason || "").toLowerCase();
 
+      // ✅ Treat these as "processed" and hide them from the default "All" view
+      const isProcessed =
+        rowStatus === "resolved" ||
+        rowStatus === "resolve" ||
+        rowStatus === "warned" ||
+        rowStatus === "archived" ||
+        rowStatus === "banned";
+
       const matchesSearch = rowText.includes(query);
-      const matchesStatus = status === "all" || rowStatus === status;
+
+      let matchesStatus = false;
+      if (status === "all") {
+        // Only show active/pending reports on the default view
+        matchesStatus = !isProcessed;
+      } else if (status === "resolved") {
+        // Include old "Resolve" and new "Resolved"
+        matchesStatus = rowStatus === "resolved" || rowStatus === "resolve";
+      } else {
+        matchesStatus = rowStatus === status;
+      }
+
       const matchesReason = reason === "all" || rowReason.includes(reason);
 
       if (matchesSearch && matchesStatus && matchesReason) {

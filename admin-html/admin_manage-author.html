@@ -33,7 +33,9 @@
             >Reported Novels</a
           >
 
-          <a href="admin_manage-user.html" class="nav-item sub">Manage Users</a>
+          <a href="admin_manage-user.html" class="nav-item sub"
+            >Manage Readers</a
+          >
           <a href="admin_manage-author.html" class="nav-item sub active"
             >Manage Authors</a
           >
@@ -63,19 +65,19 @@
         <div class="stats">
           <div class="stat-card">
             <div class="stat-label">Total Authors</div>
-            <div class="stat-value">84</div>
+            <div class="stat-value" id="stat-total">0</div>
             <div class="stat-change positive">
               <img src="../icons/arrow-up-short.svg" alt="up" /> 12% this month
             </div>
           </div>
           <div class="stat-card">
             <div class="stat-label">Active Authors</div>
-            <div class="stat-value">13</div>
+            <div class="stat-value" id="stat-active">0</div>
             <div class="stat-change positive">65% of total</div>
           </div>
           <div class="stat-card">
             <div class="stat-label">New Authors (30d)</div>
-            <div class="stat-value">4</div>
+            <div class="stat-value" id="stat-new">0</div>
             <div class="stat-change positive">
               <img src="../icons/arrow-up-short.svg" alt="up" /> 8% from last
               month
@@ -116,59 +118,8 @@
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>#001</td>
-                <td><strong>J.K. Rowling</strong></td>
-                <td>jkrowling@example.com</td>
-                <td><span class="badge active">Active</span></td>
-                <td>Jan 12, 2026</td>
-                <td>
-                  <button class="btn btn-danger btn-sm ban-btn">Ban</button>
-                </td>
-              </tr>
-              <tr>
-                <td>#002</td>
-                <td><strong>Stephen King</strong></td>
-                <td>stephen@example.com</td>
-                <td><span class="badge active">Active</span></td>
-                <td>Feb 3, 2026</td>
-                <td>
-                  <button class="btn btn-danger btn-sm ban-btn">Ban</button>
-                </td>
-              </tr>
-              <tr>
-                <td>#003</td>
-                <td><strong>Sarah J. Maas</strong></td>
-                <td>sarah@example.com</td>
-                <td><span class="badge active">Active</span></td>
-                <td>Dec 20, 2025</td>
-                <td>
-                  <button class="btn btn-danger btn-sm ban-btn">Ban</button>
-                </td>
-              </tr>
-              <tr>
-                <td>#004</td>
-                <td><strong>George R.R. Martin</strong></td>
-                <td>george@example.com</td>
-                <td><span class="badge active">Active</span></td>
-                <td>Nov 5, 2025</td>
-                <td>
-                  <button class="btn btn-danger btn-sm ban-btn">Ban</button>
-                </td>
-              </tr>
-              <tr>
-                <td>#005</td>
-                <td><strong>J.R.R. Tolkien</strong></td>
-                <td>jrrtolkien@example.com</td>
-                <td><span class="badge banned">Banned</span></td>
-                <td>Oct 15, 2025</td>
-                <td>
-                  <button class="btn btn-success btn-sm unban-btn">
-                    Unban
-                  </button>
-                </td>
-              </tr>
+            <tbody id="authorTableBody">
+              <!-- JS will inject the hardcoded + real authors here -->
             </tbody>
           </table>
         </div>

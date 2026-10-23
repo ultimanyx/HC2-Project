@@ -3,42 +3,52 @@ document.addEventListener("DOMContentLoaded", function () {
   const periodFilter = document.getElementById("period");
   const monthPickerGroup = document.getElementById("monthPickerGroup");
   const monthFilter = document.getElementById("monthFilter");
+  const itemFilter = document.getElementById("item-filter"); // ✅ NEW
   const formatFilter = document.getElementById("format");
   const applyBtn = document.getElementById("applyBtn");
   const resetBtn = document.getElementById("resetBtn");
 
   // --- 1. Show/Hide Month Picker based on Dropdown ---
-  periodFilter.addEventListener("change", function () {
-    if (this.value === "specific") {
-      monthPickerGroup.style.display = "flex"; // Show the month picker
-    } else {
-      monthPickerGroup.style.display = "none"; // Hide it
-      monthFilter.value = ""; // Clear previous selection
-    }
-  });
+  if (periodFilter) {
+    periodFilter.addEventListener("change", function () {
+      if (this.value === "specific") {
+        monthPickerGroup.style.display = "flex"; // Show the month picker
+      } else {
+        monthPickerGroup.style.display = "none"; // Hide it
+        monthFilter.value = ""; // Clear previous selection
+      }
+    });
+  }
 
   // --- 2. Filter Logic ---
   function filterTable() {
+    if (!tableBody) return;
+
     const selectedPeriod = periodFilter.value;
-    const selectedMonth = monthFilter.value; // Only used if period is "specific"
+    const selectedMonth = monthFilter.value;
+    const selectedItem = itemFilter.value.toLowerCase(); // ✅ NEW
     const selectedFormat = formatFilter.value.toLowerCase();
 
     const rows = tableBody.querySelectorAll("tr");
 
     rows.forEach((row) => {
       const rowMonth = row.getAttribute("data-month");
-      // Format is at index 2
+      // Format is at index 2 (0: Date, 1: Campaign, 2: Format)
       const rowFormat = row.cells[2].textContent.trim().toLowerCase();
+      // Campaign name is at index 1
+      const rowItem = row.cells[1].textContent.trim().toLowerCase(); // ✅ NEW
 
       // Check Format
       const matchesFormat =
         selectedFormat === "all" || rowFormat === selectedFormat;
 
+      // ✅ Check Item/Campaign
+      const matchesItem = selectedItem === "all" || rowItem === selectedItem;
+
       // Check Date
       let matchesDate = true;
 
       if (selectedPeriod === "specific") {
-        // If they picked "Specific Month", require a month to be chosen
         matchesDate = rowMonth === selectedMonth;
       } else if (selectedPeriod === "last30") {
         matchesDate = rowMonth === "2026-10";
@@ -49,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       // Show/Hide Row
-      if (matchesFormat && matchesDate) {
+      if (matchesFormat && matchesItem && matchesDate) {
         row.style.display = "";
       } else {
         row.style.display = "none";
@@ -79,6 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Reset dropdowns
       periodFilter.value = "all";
+      itemFilter.value = "all";
       formatFilter.value = "all";
 
       // Hide and clear month picker
