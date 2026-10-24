@@ -9,9 +9,6 @@ const reasonSelect = document.getElementById("reportReason");
 const detailsInput = document.getElementById("reportDetails");
 const reasonError = document.getElementById("reportReasonError");
 
-/* ---------------------------------------------------------------
-   Helpers — pull the logged-in reader's name from storage / DOM
-   --------------------------------------------------------------- */
 function readStoredName(key) {
   for (const store of [sessionStorage, localStorage]) {
     const raw = store.getItem(key);
@@ -30,7 +27,6 @@ function readStoredName(key) {
         return parsed.trim();
       }
     } catch {
-      // Not JSON → treat as a raw string
       return raw.trim();
     }
   }
@@ -38,7 +34,6 @@ function readStoredName(key) {
 }
 
 function getReaderName() {
-  // Try the common keys used by login / name-change scripts
   const keys = [
     "currentUser",
     "currentReader",
@@ -48,23 +43,16 @@ function getReaderName() {
     "reader",
     "readerName",
   ];
-
   for (const k of keys) {
     const name = readStoredName(k);
     if (name) return name;
   }
-
-  // Fallback: whatever the navbar is showing
   const el = document.getElementById("readerName");
   const domName = el ? el.textContent.trim() : "";
   if (domName && domName !== "Welcome User") return domName;
-
   return "Anonymous Reader";
 }
 
-/* ---------------------------------------------------------------
-   Open / close modal
-   --------------------------------------------------------------- */
 if (reportButton) {
   reportButton.addEventListener("click", function () {
     modalOverlay.classList.add("active");
@@ -82,9 +70,6 @@ function closeModal() {
 if (modalClose) modalClose.addEventListener("click", closeModal);
 if (modalCancel) modalCancel.addEventListener("click", closeModal);
 
-/* ---------------------------------------------------------------
-   Submit report
-   --------------------------------------------------------------- */
 if (modalSubmit) {
   modalSubmit.addEventListener("click", function () {
     const reason = reasonSelect.value;
@@ -96,13 +81,19 @@ if (modalSubmit) {
       return;
     }
 
-    // 🚨 Reader name (from login/name-change storage or navbar)
     const readerName = getReaderName();
-
-    // 🚨 Book + author from <body data-*>
     const bookId = document.body.dataset.bookId || "Unknown";
     const bookTitle = document.body.dataset.bookTitle || "Unknown Book";
     const bookAuthor = document.body.dataset.bookAuthor || "Unknown Author";
+
+    const chapterNumEl = document.getElementById("chapter-number");
+    const chapterTitleEl = document.getElementById("chapter-title");
+    const currentChapter = chapterNumEl
+      ? chapterNumEl.textContent.trim()
+      : "Unknown Chapter";
+    const currentChapterTitle = chapterTitleEl
+      ? chapterTitleEl.textContent.trim()
+      : "";
 
     const reports = JSON.parse(localStorage.getItem(REPORT_KEY)) || [];
 
@@ -110,10 +101,10 @@ if (modalSubmit) {
       id: Date.now(),
       bookId: bookId,
       bookTitle: bookTitle,
-      author: bookAuthor, // ✅ author copied from the chapter page
-      reportedBy: readerName, // ✅ reader username copied from login
-      chapter: document.getElementById("chapter-number").textContent.trim(),
-      chapterTitle: document.getElementById("chapter-title").textContent.trim(),
+      author: bookAuthor,
+      reportedBy: readerName,
+      chapter: currentChapter,
+      chapterTitle: currentChapterTitle,
       reason: reason,
       details: details,
       date: new Date().toISOString(),
@@ -121,6 +112,21 @@ if (modalSubmit) {
     });
 
     localStorage.setItem(REPORT_KEY, JSON.stringify(reports));
+
+    // Create the alert data for the Author
+    const authorStatusData = {
+      status: "warn",
+      novelTitle: bookTitle,
+      chapterTitle: currentChapterTitle,
+      chapter: currentChapter,
+      reportReason: reason,
+      reportDetails: details,
+      date: new Date().toLocaleDateString(),
+    };
+    localStorage.setItem(
+      "author_alert_status",
+      JSON.stringify(authorStatusData),
+    );
 
     closeModal();
 

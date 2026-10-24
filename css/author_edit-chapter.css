@@ -5,7 +5,6 @@
 }
 
 /* root variables */
-
 :root {
   --background: #f8f6f1;
   --foreground: #1a1826;
@@ -45,7 +44,6 @@
 }
 
 /* fonts */
-
 @font-face {
   font-family: "Poppins";
   src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype");
@@ -64,7 +62,6 @@
 }
 
 /* base */
-
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   background-color: #f8f6f1;
@@ -78,7 +75,6 @@ a {
 }
 
 /* layout */
-
 .layout {
   display: flex;
   height: 100vh;
@@ -86,7 +82,6 @@ a {
 }
 
 /* sidebar */
-
 .sidebar {
   width: 270px;
   background-color: #ffffff;
@@ -175,7 +170,6 @@ a {
 }
 
 /* main content */
-
 .main {
   flex: 1;
   padding: 24px 32px;
@@ -185,7 +179,6 @@ a {
 }
 
 /* topbar */
-
 .topbar {
   display: flex;
   align-items: center;
@@ -251,7 +244,6 @@ a {
 }
 
 /* meta bar */
-
 .meta-bar {
   display: flex;
   align-items: center;
@@ -296,7 +288,6 @@ a {
 }
 
 /* form container */
-
 .form-container {
   background: var(--card-background);
   border: 1px solid var(--border);
@@ -352,7 +343,6 @@ a {
 }
 
 /* author's note */
-
 .note-textarea {
   min-height: 80px;
   resize: vertical;
@@ -360,7 +350,6 @@ a {
 }
 
 /* grid */
-
 .form-grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -374,7 +363,6 @@ a {
 }
 
 /* editor toolbar */
-
 .editor-label-row {
   display: flex;
   align-items: center;
@@ -424,17 +412,20 @@ a {
   margin: 0 4px;
 }
 
-/* editable area */
-
+/* =========================================
+   EDITABLE AREA (FIXED OVERLAP)
+   ========================================= */
 .editor-area {
   min-height: 480px;
   padding: 22px 24px;
   background: var(--input-background);
   border: 1px solid var(--border);
   border-radius: 6px;
-  font-family: var(--font-heading);
-  font-size: 17px;
-  line-height: 1.85;
+  font-family: var(
+    --font-body
+  ); /* Changed from heading to body for readability */
+  font-size: 16px;
+  line-height: 1.8 !important; /* 🚨 Force readable line spacing */
   color: var(--foreground);
   outline: none;
   overflow-y: auto;
@@ -446,12 +437,15 @@ a {
   box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
+/* 🚨 Force spacing on the paragraphs inside the editor */
 .editor-area p {
-  margin-bottom: 16px;
+  margin-bottom: 16px !important;
+  line-height: 1.8 !important;
+  display: block;
 }
 
 .editor-area p:last-child {
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
 }
 
 .editor-area blockquote {
@@ -475,7 +469,6 @@ a {
 }
 
 /* editor footer (word count) */
-
 .editor-footer {
   display: flex;
   justify-content: space-between;
@@ -489,7 +482,6 @@ a {
 }
 
 /* buttons */
-
 .btn {
   padding: 8px 16px;
   border-radius: 6px;
@@ -535,17 +527,16 @@ a {
   background: var(--secondary);
 }
 
-/* Specific style for the Save as Draft button (Neutral Gray theme) */
 .btn-draft {
-  background-color: #f3f4f6; /* Neutral light gray */
-  color: #4b5563; /* Neutral dark gray text */
-  border: 1px solid #d1d5db; /* Subtle gray border */
+  background-color: #f3f4f6;
+  color: #4b5563;
+  border: 1px solid #d1d5db;
   transition: all 0.2s ease;
 }
 
 .btn-draft:hover {
-  background-color: #e5e7eb; /* Slightly darker on hover */
-  color: #1f2937; /* Darker text on hover */
+  background-color: #e5e7eb;
+  color: #1f2937;
   border-color: #9ca3af;
 }
 
@@ -556,7 +547,6 @@ a {
 }
 
 /* form actions */
-
 .form-actions {
   display: flex;
   flex-wrap: wrap;
@@ -572,7 +562,6 @@ a {
 }
 
 /* badges / status pills */
-
 .badge {
   display: inline-block;
   font-size: 13px;
@@ -606,7 +595,7 @@ a {
   color: #2c536d;
 }
 
-/* SweetAlert z-index para top ang sweetalert*/
+/* SweetAlert z-index */
 .swal2-container {
   z-index: 9999 !important;
 }

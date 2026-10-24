@@ -67,7 +67,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (existingNovel.chapters && existingNovel.chapters.length > 0) {
         chapterTitleInput.value = existingNovel.chapters[0].title || "";
-        chapterInput.value = existingNovel.chapters[0].body || "";
+        // Strip HTML tags for the plain textarea on the edit page
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML =
+          existingNovel.chapters[0].body ||
+          existingNovel.chapters[0].content ||
+          "";
+        chapterInput.value = tempDiv.textContent || tempDiv.innerText || "";
       }
 
       if (existingNovel.coverImage) {
@@ -82,9 +88,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const title = titleInput.value.trim();
     const genre = genreSelect.value;
     const synopsis = synopsisInput.value.trim();
-    const chapterBody = chapterInput.value.trim();
 
-    if (!title || !genre || !synopsis || !chapterBody || !coverImageDataUrl) {
+    // 🚨 FIX: Convert raw text line breaks into HTML paragraphs
+    const rawChapterBody = chapterInput.value.trim();
+    const paragraphs = rawChapterBody.split(/\n\s*\n/);
+    const chapterBody = paragraphs
+      .map((p) => {
+        if (!p.trim()) return "";
+        const inner = p.trim().replace(/\n/g, "<br>");
+        return `<p>${inner}</p>`;
+      })
+      .join("");
+
+    if (
+      !title ||
+      !genre ||
+      !synopsis ||
+      !rawChapterBody ||
+      !coverImageDataUrl
+    ) {
       Swal.fire({
         icon: "warning",
         title: "Missing information",
@@ -95,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const chapterTitle = (chapterTitleInput?.value || "").trim() || "Chapter 1";
-    const chapterWords = chapterBody.split(/\s+/).filter(Boolean).length;
+    const chapterWords = rawChapterBody.split(/\s+/).filter(Boolean).length;
     const all = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 
     if (editId && existingNovel) {
@@ -110,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updated.synopsis = synopsis;
         updated.status = status;
         updated.coverImage = coverImageDataUrl;
-        updated.author = authorName; // 🚨 Make sure author is saved
+        updated.author = authorName;
         updated.lastEdited = Date.now();
 
         if (!Array.isArray(updated.chapters)) updated.chapters = [];
@@ -156,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
         synopsis,
         coverImage: coverImageDataUrl,
         status,
-        author: authorName, // 🚨 Add author here
+        author: authorName,
         chapters: [
           {
             number: 1,

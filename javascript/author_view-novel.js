@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const STORAGE_KEY = "novels";
   const id = new URLSearchParams(location.search).get("id");
 
-  // ---------- Load novel ----------
   if (!id) {
     Swal.fire("Error", "No novel selected.", "error").then(() => {
       window.location.href = "author_all-novel.html";
@@ -25,12 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // Sanitize chapters array (prevents deletion bug on restore)
-  if (!Array.isArray(novel.chapters)) {
-    novel.chapters = [];
-  }
+  if (!Array.isArray(novel.chapters)) novel.chapters = [];
 
-  // ---------- DOM refs ----------
   const statusBadge = document.querySelector(".action-bar .badge");
   const metaText = document.querySelector(".action-bar .meta-text");
   const saveBtn = document.getElementById("saveEditBtn");
@@ -45,7 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const editSynopsis = document.getElementById("editSynopsis");
   const editStatus = document.getElementById("editStatus");
 
-  // ---------- Status helpers ----------
   const STATUS_TO_LABEL = {
     published: "Ongoing",
     completed: "Completed",
@@ -74,7 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return STATUS_TO_LABEL[low] ? low : "published";
   }
 
-  // ---------- Misc helpers ----------
   function escapeHtml(str) {
     return String(str ?? "").replace(
       /[&<>"']/g,
@@ -101,13 +94,9 @@ document.addEventListener("DOMContentLoaded", () => {
     return new Date(ts).toLocaleDateString();
   }
 
-  // ==========================================
-  // RENDER CHAPTERS
-  // ==========================================
   function renderChapters() {
     if (!tbody) return;
 
-    // Force-update Dracula if it has less than 27 chapters
     if (id === "seed-0" && novel.chapters.length < 27) {
       const htmlRows = tbody.querySelectorAll("tr");
       if (htmlRows.length >= 27) {
@@ -132,7 +121,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     tbody.innerHTML = "";
 
-    // Filter out archived chapters
+    const savedAlert = localStorage.getItem("author_alert_status");
+    let alertData = null;
+    if (savedAlert) {
+      try {
+        alertData = JSON.parse(savedAlert);
+      } catch {}
+    }
+
     const activeChapters = novel.chapters.filter((c) => !c.archived);
 
     if (activeChapters.length === 0) {
@@ -145,11 +141,26 @@ document.addEventListener("DOMContentLoaded", () => {
     activeChapters.forEach((ch) => {
       const tr = document.createElement("tr");
 
-      const chStatus = String(ch.status || "published").toLowerCase();
+      let chStatus = String(ch.status || "published").toLowerCase();
       let badgeClass = "active";
       let badgeText = "Published";
 
-      if (chStatus === "draft") {
+      // 🚨 FIX: Compare the chapter NUMBER from the alert to the chapter number in the row
+      const alertChapterStr =
+        alertData && alertData.chapter ? alertData.chapter : "";
+      const alertChapterNum = parseInt(alertChapterStr.replace(/\D/g, ""), 10);
+
+      const hasWarning =
+        alertData &&
+        alertData.status === "warn" &&
+        alertData.novelTitle === novel.title &&
+        alertChapterNum === ch.number;
+
+      if (hasWarning) {
+        chStatus = "warned";
+        badgeClass = "paused";
+        badgeText = "Needs Fix";
+      } else if (chStatus === "draft") {
         badgeClass = "draft";
         badgeText = "Draft";
       } else if (chStatus === "pending") {
@@ -175,7 +186,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ---------- Archive Chapter Logic ----------
   if (tbody) {
     tbody.addEventListener("click", (e) => {
       const btn = e.target.closest(".archive-chapter-btn");
@@ -216,7 +226,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ---------- Add Chapter link ----------
   function wireAddChapterButton() {
     const btn = document.getElementById("addChapterBtn");
     if (!btn) return;
@@ -226,17 +235,13 @@ document.addEventListener("DOMContentLoaded", () => {
     else btn.onclick = () => (location.href = url);
   }
 
-  // ---------- Edit Form / Saving ----------
   let pendingCoverData = null;
 
   function renderCoverZone() {
     if (!coverZone) return;
-
-    // The preview is now completely removed from the box
     const heading = pendingCoverData
       ? `<p><strong>New cover selected</strong></p><p class="sub">Click to replace</p>`
       : `<p><strong>Click to upload new</strong></p><p class="sub">PNG, JPG, WEBP · Max 5MB</p>`;
-
     coverZone.innerHTML = heading;
   }
 
@@ -251,7 +256,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (editSynopsis)
       editSynopsis.value =
         novel.synopsis !== undefined ? novel.synopsis : editSynopsis.value;
-
     if (editStatus)
       editStatus.value = STATUS_TO_LABEL[normalizeStatus(novel.status)];
 
@@ -263,18 +267,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (metaText && novel.updatedAt) {
       metaText.textContent = `Last updated ${timeAgo(novel.updatedAt)}`;
     }
-
     if (mainCoverImg && novel.coverImage) {
       mainCoverImg.src = novel.coverImage;
     }
-
     document.title = `${novel.title} · View Novel`;
-
     pendingCoverData = null;
     renderCoverZone();
   }
 
-  // Reset button
   if (resetBtn) {
     resetBtn.addEventListener("click", () => {
       populateEditForm();
@@ -287,7 +287,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Save Novel button
   if (saveBtn) {
     saveBtn.addEventListener("click", () => {
       const newTitle = editTitle.value.trim();
@@ -334,7 +333,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ---------- Cover upload ----------
   const coverInput = document.createElement("input");
   coverInput.type = "file";
   coverInput.accept = "image/png,image/jpeg,image/webp";
@@ -345,7 +343,6 @@ document.addEventListener("DOMContentLoaded", () => {
     mainCoverImg.style.cursor = "pointer";
     mainCoverImg.addEventListener("click", () => coverInput.click());
   }
-
   if (coverZone) {
     coverZone.style.cursor = "pointer";
     coverZone.addEventListener("click", () => coverInput.click());
@@ -364,19 +361,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const reader = new FileReader();
     reader.onload = () => {
       pendingCoverData = reader.result;
-
-      // Update the large cover on the left immediately
-      if (mainCoverImg) {
-        mainCoverImg.src = pendingCoverData;
-      }
-
+      if (mainCoverImg) mainCoverImg.src = pendingCoverData;
       renderCoverZone();
     };
     reader.readAsDataURL(file);
     coverInput.value = "";
   });
 
-  // ---------- Initial paint ----------
   populateEditForm();
   renderChapters();
   wireAddChapterButton();

@@ -3,8 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const NOVELS_KEY = "novels";
 
   const tableBody = document.getElementById("reportedTableBody");
-
-  // Modal Elements
   const modalOverlay = document.getElementById("viewReportModalOverlay");
   const modalCloseBtn = document.getElementById("viewReportModalClose");
   const modalCancelBtn = document.getElementById("modalCloseBtn");
@@ -19,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const appealReasonGroup = document.getElementById("appealReasonGroup");
   const modalAppealReason = document.getElementById("modalAppealReason");
 
-  // Bulk Actions & Filter Elements
   const selectAllCheckbox = document.getElementById("selectAllCheckbox");
   const bulkActionBar = document.getElementById("bulkActionBar");
   const bulkCount = document.getElementById("bulkCount");
@@ -32,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let activeRow = null;
 
-  // --- 1. Helper Functions ---
   function getReports() {
     try {
       return JSON.parse(localStorage.getItem(REPORT_KEY) || "[]");
@@ -40,11 +36,9 @@ document.addEventListener("DOMContentLoaded", function () {
       return [];
     }
   }
-
   function saveReports(reports) {
     localStorage.setItem(REPORT_KEY, JSON.stringify(reports));
   }
-
   function getNovels() {
     try {
       return JSON.parse(localStorage.getItem(NOVELS_KEY) || "[]");
@@ -53,12 +47,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  function saveToAuthorDashboard(title, author, reason, status) {
+  function saveToAuthorDashboard(
+    title,
+    author,
+    reason,
+    status,
+    chapter,
+    details,
+  ) {
     const authorStatusData = {
       status: status,
       novelTitle: title,
       authorName: author,
       reportReason: reason,
+      chapter: chapter || "Unknown",
+      reportDetails: details || "No additional details provided.",
       date: new Date().toLocaleDateString(),
     };
     localStorage.setItem(
@@ -91,46 +94,33 @@ document.addEventListener("DOMContentLoaded", function () {
     return "reason-default";
   }
 
-  // --- 2. Render Table ---
   function renderTable() {
     if (!tableBody) return;
-
     const reports = getReports();
     const novels = getNovels();
-
     tableBody.innerHTML = "";
 
     if (reports.length === 0) {
-      tableBody.innerHTML = `
-        <tr>
-          <td colspan="6" style="text-align:center; padding: 36px; color: var(--muted-foreground);">
-            No reported novels at the moment.
-          </td>
-        </tr>`;
+      tableBody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 36px; color: var(--muted-foreground);">No reported novels at the moment.</td></tr>`;
       updateBulkBar();
       return;
     }
 
-    // Newest first
     reports.sort((a, b) => new Date(b.date) - new Date(a.date));
 
     reports.forEach((report) => {
       const book = novels.find((n) => String(n.id) === String(report.bookId));
-
       const authorName =
         report.author || (book && book.author) || "Unknown Author";
       const bookTitle = report.bookTitle || (book ? book.title : report.bookId);
       const reportedBy = report.reportedBy || "Anonymous Reader";
 
-      const chapterText = `${report.chapter || ""}${
-        report.chapterTitle ? ": " + report.chapterTitle : ""
-      }`.trim();
+      const chapterText =
+        `${report.chapter || ""}${report.chapterTitle ? ": " + report.chapterTitle : ""}`.trim();
       const displayTitle = `${bookTitle} - ${chapterText}`;
-
       const initial = (reportedBy || "?").trim().charAt(0).toUpperCase() || "?";
       const rClass = reasonClass(report.reason);
 
-      // Normalize status for display
       let statusText = report.status || "Pending";
       if (statusText === "Resolve") statusText = "Resolved";
       const statusClass = statusText.toLowerCase();
@@ -140,54 +130,31 @@ document.addEventListener("DOMContentLoaded", function () {
       tr.dataset.bookId = report.bookId;
       tr.dataset.bookTitle = bookTitle;
       tr.dataset.author = authorName;
+      tr.dataset.chapter = report.chapter || "";
       tr.dataset.displayTitle = displayTitle;
       tr.dataset.reason = report.reason || "";
       tr.dataset.reportedBy = reportedBy;
-      tr.dataset.status = statusText; // Store normalized status
+      tr.dataset.status = statusText;
       if (report.appealReason) tr.dataset.appealReason = report.appealReason;
 
       tr.innerHTML = `
         <td><input type="checkbox" class="row-checkbox" /></td>
-
         <td>
           <div class="novel-cell">
             <span class="novel-title" title="${escapeHtml(bookTitle)}">${escapeHtml(bookTitle)}</span>
-            <span class="novel-meta" title="${escapeHtml(displayTitle)}">
-              ${escapeHtml(chapterText || "—")}
-              <span class="dot">·</span>
-              ${escapeHtml(authorName)}
-            </span>
+            <span class="novel-meta" title="${escapeHtml(displayTitle)}">${escapeHtml(chapterText || "—")} <span class="dot">·</span> ${escapeHtml(authorName)}</span>
           </div>
         </td>
-
-        <td>
-          <span class="reason-pill ${rClass}" title="${escapeHtml(report.reason)}">
-            ${escapeHtml(report.reason)}
-          </span>
-        </td>
-
-        <td>
-          <span class="reporter">
-            <span class="reporter-avatar">${escapeHtml(initial)}</span>
-            <span class="reporter-name" title="${escapeHtml(reportedBy)}">${escapeHtml(reportedBy)}</span>
-          </span>
-        </td>
-
-        <td>
-          <span class="badge ${statusClass}">${escapeHtml(statusText)}</span>
-        </td>
-
+        <td><span class="reason-pill ${rClass}" title="${escapeHtml(report.reason)}">${escapeHtml(report.reason)}</span></td>
+        <td><span class="reporter"><span class="reporter-avatar">${escapeHtml(initial)}</span><span class="reporter-name" title="${escapeHtml(reportedBy)}">${escapeHtml(reportedBy)}</span></span></td>
+        <td><span class="badge ${statusClass}">${escapeHtml(statusText)}</span></td>
         <td>
           <div class="action-group">
-            <button class="btn btn-primary btn-sm btn-view view-btn"
-                    data-details="${escapeHtml(report.details)}">View</button>
+            <button class="btn btn-primary btn-sm btn-view view-btn" data-details="${escapeHtml(report.details)}">View</button>
             <button class="icon-btn warn-btn" title="Warn author" aria-label="Warn author">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none"
-                   stroke="currentColor" stroke-width="2"
-                   stroke-linecap="round" stroke-linejoin="round">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                <line x1="12" y1="9" x2="12" y2="13"/>
-                <line x1="12" y1="17" x2="12.01" y2="17"/>
+                <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
               </svg>
             </button>
           </div>
@@ -198,112 +165,96 @@ document.addEventListener("DOMContentLoaded", function () {
         tr.querySelector(".action-group").innerHTML =
           `<span class="status-processed">Processed</span>`;
       }
-
       tableBody.appendChild(tr);
     });
-
     filterTable();
   }
 
-  // --- 3. Update Status Logic ---
   function updateStatus(id, newStatus) {
     const reports = getReports();
     const reportIndex = reports.findIndex((r) => String(r.id) === String(id));
-
     if (reportIndex === -1) return;
 
     let finalStatus = newStatus;
     let isWarn = false;
+    const report = reports[reportIndex];
 
-    // ✅ If the action is Warning, alert the author and resolve the report
     if (newStatus === "Warn" || newStatus === "Warned") {
       finalStatus = "Resolved";
       isWarn = true;
       saveToAuthorDashboard(
-        reports[reportIndex].bookTitle || "Unknown Novel",
-        reports[reportIndex].author || "Unknown Author",
-        reports[reportIndex].reason || "Guidelines violation",
+        report.bookTitle || "Unknown Novel",
+        report.author || "Unknown Author",
+        report.reason || "Guidelines violation",
         "warn",
+        report.chapter,
+        report.details,
       );
     } else if (newStatus === "Resolve" || newStatus === "Resolved") {
       finalStatus = "Resolved";
     } else if (newStatus !== "Resolved") {
-      // For other statuses (Archive, Ban, etc.)
       saveToAuthorDashboard(
-        reports[reportIndex].bookTitle || "Unknown Novel",
-        reports[reportIndex].author || "Unknown Author",
-        reports[reportIndex].reason || "Guidelines violation",
+        report.bookTitle || "Unknown Novel",
+        report.author || "Unknown Author",
+        report.reason || "Guidelines violation",
         newStatus.toLowerCase(),
+        report.chapter,
+        report.details,
       );
     }
 
-    reports[reportIndex].status = finalStatus;
+    report.status = finalStatus;
     saveReports(reports);
 
     const row = tableBody.querySelector(`tr[data-id="${id}"]`);
     if (!row) return;
 
     row.dataset.status = finalStatus;
-
     const badge = row.querySelector(".badge");
     if (badge) {
       badge.className = `badge ${finalStatus.toLowerCase()}`;
       badge.textContent = finalStatus;
     }
-
     row.querySelector(".action-group").innerHTML =
       `<span class="status-processed">Processed</span>`;
+    if (isWarn || finalStatus === "Resolved") row.style.display = "none";
 
-    if (isWarn || finalStatus === "Resolved") {
-      row.style.display = "none"; // Hide immediately
-    }
-
-    filterTable(); // Ensure everything stays filtered correctly
+    filterTable();
     updateBulkBar();
   }
 
-  // --- 4. Search & Filter Logic ---
   function filterTable() {
     if (!tableBody) return;
-
     const query = searchInput ? searchInput.value.toLowerCase() : "";
     const status = statusFilter ? statusFilter.value.toLowerCase() : "all";
     const reason = reasonFilter ? reasonFilter.value.toLowerCase() : "all";
     const rows = tableBody.querySelectorAll("tr");
 
     rows.forEach((row) => {
-      if (row.cells.length < 6) return; // empty-state row
-
+      if (row.cells.length < 6) return;
       const rowText = row.innerText.toLowerCase();
       const rowStatus = (row.dataset.status || "").toLowerCase();
       const rowReason = (row.dataset.reason || "").toLowerCase();
-
-      // ✅ Treat these as "processed" and hide them from the default "All" view
-      const isProcessed =
-        rowStatus === "resolved" ||
-        rowStatus === "resolve" ||
-        rowStatus === "warned" ||
-        rowStatus === "archived" ||
-        rowStatus === "banned";
-
+      const isProcessed = [
+        "resolved",
+        "resolve",
+        "warned",
+        "archived",
+        "banned",
+      ].includes(rowStatus);
       const matchesSearch = rowText.includes(query);
 
       let matchesStatus = false;
-      if (status === "all") {
-        // Only show active/pending reports on the default view
-        matchesStatus = !isProcessed;
-      } else if (status === "resolved") {
-        // Include old "Resolve" and new "Resolved"
+      if (status === "all") matchesStatus = !isProcessed;
+      else if (status === "resolved")
         matchesStatus = rowStatus === "resolved" || rowStatus === "resolve";
-      } else {
-        matchesStatus = rowStatus === status;
-      }
+      else matchesStatus = rowStatus === status;
 
       const matchesReason = reason === "all" || rowReason.includes(reason);
 
-      if (matchesSearch && matchesStatus && matchesReason) {
+      if (matchesSearch && matchesStatus && matchesReason)
         row.style.display = "";
-      } else {
+      else {
         row.style.display = "none";
         const cb = row.querySelector(".row-checkbox");
         if (cb) cb.checked = false;
@@ -316,13 +267,11 @@ document.addEventListener("DOMContentLoaded", function () {
   if (statusFilter) statusFilter.addEventListener("change", filterTable);
   if (reasonFilter) reasonFilter.addEventListener("change", filterTable);
 
-  // --- 5. Checkbox & Bulk Actions ---
   function updateBulkBar() {
     const checked = tableBody.querySelectorAll(".row-checkbox:checked");
     bulkCount.textContent = checked.length;
-    if (checked.length > 0) {
-      bulkActionBar.classList.add("active");
-    } else {
+    if (checked.length > 0) bulkActionBar.classList.add("active");
+    else {
       bulkActionBar.classList.remove("active");
       if (selectAllCheckbox) selectAllCheckbox.checked = false;
     }
@@ -360,15 +309,12 @@ document.addEventListener("DOMContentLoaded", function () {
       confirmButtonColor: action === "Resolve" ? "#3f7d4f" : "#dc2626",
     }).then((result) => {
       if (!result.isConfirmed) return;
-
       checkedCheckboxes.forEach((cb) => {
         const row = cb.closest("tr");
         updateStatus(row.dataset.id, action);
         cb.checked = false;
       });
-
       updateBulkBar();
-
       Swal.fire({
         icon: "success",
         title: "Success",
@@ -386,12 +332,10 @@ document.addEventListener("DOMContentLoaded", function () {
   if (bulkResolveBtn)
     bulkResolveBtn.addEventListener("click", () => handleBulkAction("Resolve"));
 
-  // --- 6. Quick Inline Warn ---
   if (tableBody) {
     tableBody.addEventListener("click", function (e) {
       const warnBtn = e.target.closest(".warn-btn");
       if (!warnBtn) return;
-
       const row = warnBtn.closest("tr");
       const id = row.dataset.id;
       const title = row.dataset.bookTitle || "this novel";
@@ -417,17 +361,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // --- 7. View Modal ---
   if (tableBody) {
     tableBody.addEventListener("click", function (e) {
       const btn = e.target.closest(".view-btn");
       if (!btn) return;
-
       const row = btn.closest("tr");
       if (!row) return;
 
       activeRow = row;
-
       const title = row.dataset.displayTitle || row.dataset.bookTitle || "";
       const author = row.dataset.author || "";
       const reason = row.dataset.reason || "";
@@ -465,14 +406,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (modalCloseBtn) modalCloseBtn.addEventListener("click", closeModal);
   if (modalCancelBtn) modalCancelBtn.addEventListener("click", closeModal);
-
   if (modalOverlay) {
     modalOverlay.addEventListener("click", function (e) {
       if (e.target === modalOverlay) closeModal();
     });
   }
 
-  // --- 8. Modal Take Action / Dismiss ---
   if (modalActionBtn) {
     modalActionBtn.addEventListener("click", function () {
       if (!activeRow) return;
@@ -484,15 +423,13 @@ document.addEventListener("DOMContentLoaded", function () {
         warn: "Warn Author",
         ban: "Ban Author",
       };
-
       const isAppealed =
         activeRow.querySelector(".badge").textContent === "Appealed";
-      if (isAppealed) {
+      if (isAppealed)
         options = {
           accept_appeal: "Accept Appeal (Restore Novel)",
           reject_appeal: "Reject Appeal (Uphold Penalty)",
         };
-      }
 
       Swal.fire({
         title: isAppealed ? "Review Appeal" : "Take Action",
@@ -515,7 +452,6 @@ document.addEventListener("DOMContentLoaded", function () {
           localStorage.removeItem("author_alert_status");
           updateStatus(id, "Resolved");
           closeModal();
-
           Swal.fire({
             icon: "success",
             title: "Appeal Reviewed",
@@ -531,7 +467,6 @@ document.addEventListener("DOMContentLoaded", function () {
           action.charAt(0).toUpperCase() + action.slice(1);
         updateStatus(id, formattedStatus);
         closeModal();
-
         Swal.fire({
           icon: "success",
           title: "Action Applied!",
@@ -545,7 +480,6 @@ document.addEventListener("DOMContentLoaded", function () {
     modalDismissBtn.addEventListener("click", function () {
       if (!activeRow) return;
       const id = activeRow.dataset.id;
-
       Swal.fire({
         title: "Resolve Report?",
         text: "Are you sure you want to dismiss this report?",
@@ -559,7 +493,6 @@ document.addEventListener("DOMContentLoaded", function () {
         updateStatus(id, "Resolved");
         localStorage.removeItem("author_alert_status");
         closeModal();
-
         Swal.fire({
           icon: "success",
           title: "Report Resolved",
@@ -571,6 +504,5 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // --- 9. Initialize ---
   renderTable();
 });

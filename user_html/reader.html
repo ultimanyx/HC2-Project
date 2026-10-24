@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reading...</title>
+    <link rel="stylesheet" href="../css/novel-page.css" />
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="../image/logo-nobackground-circle.png"
+    />
+    <script src="../javascript/darkmode.js"></script>
+  </head>
+  <body id="dynamicReaderBody">
+    <nav class="navbar">
+      <a href="#" class="nav-logo">
+        <img src="../image/logo-nobackground-circle.png" alt="Logo" />
+      </a>
+      <div class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="browse.html">Browse</a>
+        <a href="library.html">My Library</a>
+        <a href="ranking.html">Ranking</a>
+
+        <div class="nav-search">
+          <input type="text" placeholder="Search..." />
+          <button type="button" aria-label="Search">
+            <img src="../icons/search.svg" alt="search-btn" />
+          </button>
+        </div>
+
+        <div class="nav-user-dropdown">
+          <div class="nav-user" tabindex="0" role="button" aria-haspopup="true">
+            <img
+              src="../icons/person-circle.svg"
+              class="user-icon"
+              alt="User-Icon"
+            />
+            <span id="readerName">Welcome User</span>
+            <span class="dropdown-arrow"
+              ><img src="../icons/caret-down-fill.svg" alt="triangle-down"
+            /></span>
+          </div>
+          <div class="dropdown-menu" role="menu">
+            <a href="#" role="menuitem" class="theme-toggle" id="themeToggle">
+              <img src="../icons/dark-mode.svg" alt="Theme" id="themeIcon" />
+              <span id="themeText">Dark Mode</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a
+              href="#"
+              role="menuitem"
+              class="logout-item"
+              id="logout"
+              data-role="reader"
+              >Logout</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="header-container">
+      <a href="javascript:history.back()" class="back-button">
+        <img src="../icons/back.svg" alt="Back" />
+      </a>
+
+      <img id="bookCover" src="../image/logo.png" alt="Book Cover" />
+      <div class="header">
+        <h1 id="titleBook">Loading...</h1>
+        <span>
+          <img src="../icons/book-half.svg" alt="bookicon" class="book-icon" />
+          <p class="genre" id="bookGenre">Loading...</p>
+        </span>
+        <span>
+          <img
+            src="../icons/journal-text.svg"
+            alt="chaptericon"
+            class="chapter-icon"
+          />
+          <p class="chapter-count" id="bookChapterCount">Loading...</p>
+        </span>
+        <span>
+          <img src="../icons/author.svg" alt="authoricon" class="author-icon" />
+          <p class="author" id="bookAuthor">Loading...</p>
+        </span>
+        <div class="description">
+          <h3>Synopsis</h3>
+          <p id="bookSynopsis">Loading...</p>
+        </div>
+
+        <div class="star-display" id="openRatingModalBtn">
+          <p>Rate this Book!</p>
+          <input
+            type="range"
+            min="0.5"
+            max="5"
+            step="0.5"
+            value="0"
+            class="star-rating"
+            id="displayRating"
+            disabled
+          />
+        </div>
+
+        <div class="button-container">
+          <a href="#" id="readFirstBtn" class="read-button"
+            >Read First Chapter</a
+          >
+          <a href="#" id="add-library-button">+ Add to Library</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter-container">
+      <div class="container-header">
+        <img src="../icons/journal-text.svg" alt="chapter-list icon" />
+        <h3>Chapter List</h3>
+      </div>
+
+      <table class="chapter-table">
+        <tbody id="chapter-list">
+          <!-- JS will populate this -->
+        </tbody>
+      </table>
+
+      <div class="container-footer">
+        <button id="prevBtn" type="button">Previous</button>
+        <select name="chapter" id="chapter-number">
+          <!-- JS will populate this -->
+        </select>
+        <button id="nextBtn" type="button">Next</button>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-bottom">
+        <p>© 2026 Novel Library. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- RATING MODAL -->
+    <div class="rating-modal-overlay" id="ratingModalOverlay">
+      <div class="rating-modal">
+        <div class="rating-modal-header">
+          <h3>Rate this Book</h3>
+          <button id="closeRatingModalBtn" class="close-btn">&times;</button>
+        </div>
+        <div class="rating-modal-body">
+          <p>
+            How would you rate <strong id="modalBookTitle">this book</strong>?
+          </p>
+          <input
+            type="range"
+            min="0.5"
+            max="5"
+            step="0.5"
+            value="0"
+            class="star-rating"
+            id="modalRatingSlider"
+          />
+        </div>
+        <div class="rating-modal-footer">
+          <button id="cancelRatingBtn" class="btn btn-secondary">Cancel</button>
+          <button id="submitRatingBtn" class="btn btn-primary">
+            Submit Rating
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/name-change.js"></script>
+
+    <!-- DYNAMIC INJECTION SCRIPT (Runs immediately) -->
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const bookId = urlParams.get("id");
+
+      if (bookId) {
+        const novels = JSON.parse(localStorage.getItem("novels") || "[]");
+        const book = novels.find((n) => String(n.id) === String(bookId));
+
+        if (book) {
+          document.title = book.title;
+          document.body.dataset.bookId = book.id;
+
+          document.getElementById("titleBook").textContent = book.title;
+          document.getElementById("bookGenre").textContent =
+            book.genre || "Unknown";
+          document.getElementById("bookAuthor").textContent =
+            book.author || "Unknown";
+          document.getElementById("bookSynopsis").textContent =
+            book.synopsis || "No synopsis available.";
+          document.getElementById("bookCover").src =
+            book.coverImage || "../image/logo.png";
+          document.getElementById("modalBookTitle").textContent = book.title;
+
+          // 🚨 FIX: Filter the chapters so ONLY published/approved ones show up
+          const publishedChapters = (book.chapters || []).filter(
+            (ch) => ch.status === "published" || ch.status === undefined,
+          );
+
+          document.getElementById("bookChapterCount").textContent =
+            `${publishedChapters.length} Chapters`;
+
+          document.body.dataset.totalChapters = publishedChapters.length;
+
+          const tbody = document.getElementById("chapter-list");
+
+          if (publishedChapters.length > 0) {
+            document.getElementById("readFirstBtn").href =
+              `chapter.html?book=${book.id}&ch=${publishedChapters[0].number}`;
+
+            for (let i = 0; i < publishedChapters.length; i += 2) {
+              const ch1 = publishedChapters[i];
+              const ch2 = publishedChapters[i + 1];
+
+              const tr = document.createElement("tr");
+              let td1 = `<td><a href="chapter.html?book=${book.id}&ch=${ch1.number}">Chapter ${ch1.number}: ${ch1.title}</a></td>`;
+              let td2 = ch2
+                ? `<td><a href="chapter.html?book=${book.id}&ch=${ch2.number}">Chapter ${ch2.number}: ${ch2.title}</a></td>`
+                : "<td></td>";
+
+              tr.innerHTML = td1 + td2;
+              tbody.appendChild(tr);
+            }
+          } else {
+            tbody.innerHTML = `<tr><td colspan="2" style="text-align:center; padding: 20px;">No chapters published yet.</td></tr>`;
+            document.getElementById("readFirstBtn").style.display = "none";
+          }
+        }
+      }
+    </script>
+
+    <!-- LOAD STANDARD SCRIPTS -->
+    <script src="../javascript/library_novelpage.js"></script>
+    <script src="../javascript/rating.js"></script>
+    <script src="../javascript/logout.js"></script>
+  </body>
+</html>

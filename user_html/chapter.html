@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reading...</title>
+    <link rel="stylesheet" href="../css/user_chapter.css" />
+    <link rel="stylesheet" href="../css/sweetalert2.min.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="../image/logo-nobackground-circle.png"
+    />
+    <script src="../javascript/darkmode.js"></script>
+  </head>
+  <body id="dynamicChapterBody">
+    <nav class="navbar">
+      <a href="#" class="nav-logo">
+        <img src="../image/logo-nobackground-circle.png" alt="Logo" />
+      </a>
+      <div class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="browse.html">Browse</a>
+        <a href="library.html">My Library</a>
+        <a href="ranking.html">Ranking</a>
+
+        <div class="nav-search">
+          <input type="text" placeholder="Search..." />
+          <button type="button" aria-label="Search">
+            <img src="../icons/search.svg" alt="search-btn" />
+          </button>
+        </div>
+
+        <div class="nav-user-dropdown">
+          <div class="nav-user" tabindex="0" role="button" aria-haspopup="true">
+            <img
+              src="../icons/person-circle.svg"
+              class="user-icon"
+              alt="User-Icon"
+            />
+            <span id="readerName">Welcome User</span>
+            <span class="dropdown-arrow"
+              ><img src="../icons/caret-down-fill.svg" alt="triangle-down"
+            /></span>
+          </div>
+          <div class="dropdown-menu" role="menu">
+            <a href="#" role="menuitem" class="theme-toggle" id="themeToggle">
+              <img src="../icons/dark-mode.svg" alt="Theme" id="themeIcon" />
+              <span id="themeText">Dark Mode</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a
+              href="#"
+              role="menuitem"
+              class="logout-item"
+              id="logout"
+              data-role="reader"
+              >Logout</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="chapter-container">
+      <div class="top-button">
+        <a href="javascript:history.back()" class="back-button">
+          <img src="../icons/back.svg" alt="Back" />
+        </a>
+
+        <button
+          class="bookmark-btn"
+          id="bookmarkBtn"
+          aria-label="Bookmark this chapter"
+        >
+          <img
+            src="../icons/bookmark.svg"
+            alt="bookmark"
+            class="bookmark-icon"
+          />
+          <span class="bookmark-text">Bookmark</span>
+        </button>
+
+        <button
+          class="report-btn"
+          id="reportBtn"
+          aria-label="Report issue with this chapter"
+        >
+          <img src="../icons/flag.svg" alt="report flag" class="report-icon" />
+          Report
+        </button>
+      </div>
+
+      <div class="chapter-header">
+        <div class="header-left">
+          <h2 id="chapter-number">Loading...</h2>
+          <h2 id="chapter-title"></h2>
+        </div>
+      </div>
+
+      <div id="chapter-content">
+        <!-- Chapter paragraphs will be injected here -->
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-bottom">
+        <p>© 2026 Novel Library. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- AD OVERLAY -->
+    <div class="ad-overlay" id="adOverlay">
+      <div class="ad-card">
+        <div class="ad-header">
+          <button class="volume-btn" id="volumeBtn" aria-label="Unmute ad">
+            <img src="../icons/volume-mute.svg" alt="muted" id="volumeIcon" />
+          </button>
+          <div class="ad-timer">
+            <span class="timer-label">Remaining</span>
+            <div class="timer-circle">
+              <span id="timerDisplay">10</span>
+              <span class="timer-suffix">s</span>
+            </div>
+          </div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="ad-content" id="adContent"></div>
+        <div class="ad-footer">
+          <div class="ad-info">
+            <span><img src="../icons/clock-fill.svg" alt="" /></span> Ad ends in
+            <span id="footerTimer">10</span>s
+          </div>
+          <button class="btn-exit" id="exitBtn">Next Chapter</button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="report-modal-overlay"
+      id="reportModalOverlay"
+      aria-hidden="true"
+    >
+      <div class="report-modal" role="dialog" aria-modal="true">
+        <div class="report-modal-header">
+          <h3 class="report-modal-title">Report Chapter</h3>
+          <button
+            type="button"
+            class="report-modal-close"
+            id="reportModalClose"
+          >
+            <img src="../icons/x-lg.svg" alt="" />
+          </button>
+        </div>
+        <div class="report-modal-body">
+          <label for="reportReason" class="report-modal-label"
+            >Reason <span class="required">*</span></label
+          >
+          <select id="reportReason" class="report-modal-select">
+            <option value="">Select a reason</option>
+            <option value="Broken content">Broken content</option>
+            <option value="Missing content">Missing content</option>
+            <option value="Wrong chapter">Wrong chapter</option>
+            <option value="Inappropriate content">Inappropriate content</option>
+            <option value="Other">Other</option>
+          </select>
+          <p class="report-modal-error" id="reportReasonError" role="alert">
+            Please select a reason.
+          </p>
+          <label for="reportDetails" class="report-modal-label"
+            >Additional details <span class="optional">(optional)</span></label
+          >
+          <textarea
+            id="reportDetails"
+            class="report-modal-textarea"
+            placeholder="Tell us anything else that might help…"
+            maxlength="500"
+          ></textarea>
+        </div>
+        <div class="report-modal-footer">
+          <button
+            type="button"
+            class="report-modal-btn report-modal-btn-cancel"
+            id="reportModalCancel"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            class="report-modal-btn report-modal-btn-submit"
+            id="reportModalSubmit"
+          >
+            Submit Report
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="floating-controls" id="floatingControls">
+      <div class="reader-settings" id="readerSettings">
+        <button
+          type="button"
+          class="setting-btn"
+          id="decreaseFont"
+          title="Decrease Font Size"
+        >
+          A-
+        </button>
+        <button
+          type="button"
+          class="setting-btn"
+          id="increaseFont"
+          title="Increase Font Size"
+        >
+          A+
+        </button>
+        <button
+          type="button"
+          class="setting-btn"
+          id="decreaseLine"
+          title="Decrease Line Spacing"
+        >
+          ↕-
+        </button>
+        <button
+          type="button"
+          class="setting-btn"
+          id="increaseLine"
+          title="Increase Line Spacing"
+        >
+          ↕+
+        </button>
+      </div>
+
+      <div class="autoscroll" id="autoscroll">
+        <button
+          class="autoscroll-btn autoscroll-play"
+          id="autoscrollToggle"
+          aria-label="Start auto-scroll"
+          type="button"
+        >
+          <svg
+            class="autoscroll-icon autoscroll-icon-play"
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            aria-hidden="true"
+          >
+            <polygon points="6,4 20,12 6,20" fill="currentColor" />
+          </svg>
+          <svg
+            class="autoscroll-icon autoscroll-icon-pause"
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            aria-hidden="true"
+          >
+            <rect x="6" y="4" width="4" height="16" fill="currentColor" />
+            <rect x="14" y="4" width="4" height="16" fill="currentColor" />
+          </svg>
+        </button>
+        <button
+          class="autoscroll-btn"
+          id="autoscrollSlower"
+          aria-label="Slower"
+          type="button"
+        >
+          −
+        </button>
+        <span class="autoscroll-speed" id="autoscrollSpeedLabel">2×</span>
+        <button
+          class="autoscroll-btn"
+          id="autoscrollFaster"
+          aria-label="Faster"
+          type="button"
+        >
+          +
+        </button>
+      </div>
+    </div>
+
+    <script src="../javascript/sweetalert2.all.min.js"></script>
+    <script src="../javascript/name-change.js"></script>
+
+    <!-- DYNAMIC INJECTION SCRIPT (Runs immediately) -->
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const bookId = urlParams.get("book");
+      const chNum = parseInt(urlParams.get("ch"));
+
+      if (bookId && chNum) {
+        const novels = JSON.parse(localStorage.getItem("novels") || "[]");
+        const book = novels.find((n) => String(n.id) === String(bookId));
+
+        if (book && Array.isArray(book.chapters)) {
+          const chapter = book.chapters.find((c) => Number(c.number) === chNum);
+
+          if (chapter) {
+            document.title = `Chapter ${chNum}: ${chapter.title}`;
+
+            document.body.dataset.bookId = book.id;
+            document.body.dataset.bookTitle = book.title;
+            document.body.dataset.bookAuthor = book.author || "Unknown";
+            document.body.dataset.bookCover =
+              book.coverImage || "../image/logo.png";
+            document.body.dataset.bookRating = book.rating || "0.0";
+            document.body.dataset.totalChapters = book.chapters.length;
+
+            document.getElementById("chapter-number").textContent =
+              `Chapter ${chNum}`;
+            document.getElementById("chapter-title").textContent =
+              chapter.title;
+
+            const content =
+              chapter.content ||
+              chapter.body ||
+              "<p>Content not written yet.</p>";
+            const contentDiv = document.getElementById("chapter-content");
+            contentDiv.innerHTML = content;
+
+            const footer = document.createElement("div");
+            footer.className = "container-footer";
+
+            const prevBtn = document.createElement("button");
+            prevBtn.id = "prevBtn";
+            prevBtn.textContent = "Previous";
+            if (chNum <= 1) {
+              prevBtn.disabled = true;
+              prevBtn.style.opacity = "0.5";
+            } else {
+              prevBtn.onclick = () =>
+                (window.location.href = `chapter.html?book=${book.id}&ch=${chNum - 1}`);
+            }
+
+            const nextBtn = document.createElement("button");
+            nextBtn.id = "nextChapterBtn";
+            nextBtn.textContent = "Next";
+            // (ad.js will automatically attach the click handler to this)
+
+            footer.appendChild(prevBtn);
+            footer.appendChild(nextBtn);
+            contentDiv.appendChild(footer);
+          }
+        }
+      }
+    </script>
+
+    <!-- LOAD SCRIPTS -->
+    <script src="../javascript/ad.js"></script>
+    <script src="../javascript/bookmark.js"></script>
+    <script src="../javascript/report.js"></script>
+    <script src="../javascript/autoscroll.js"></script>
+    <script src="../javascript/reader-settings.js"></script>
+    <script src="../javascript/logout.js"></script>
+  </body>
+</html>

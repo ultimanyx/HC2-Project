@@ -104,11 +104,12 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       {
         number: 4,
-        title: "Untitled Chapter",
+        title: "Whispers in the Dark",
         status: "draft",
         words: 0,
         lastUpdated: Date.now(),
-        content: "",
+        content:
+          "<p>The golden fire in Elara's eyes receded, leaving behind a cold, unnerving clarity. The forest around the shrine was unnaturally still, as if the wild creatures themselves feared the ancient magic that had just reawoken within her. She flexed her fingers, watching faint wisps of golden light weave through her fingertips before dissipating into shadow.</p><p>A twig snapped in the thicket. Elara spun around, her shadow lengthening and rising like a defensive wall of obsidian spikes. Out from the gloom stepped a solitary figure clad in battered armor—a faded crest of House Veyra barely visible across his breastplate.</p><p>'Lady Elara?' Kaelen's voice cracked with disbelief as he dropped to one knee, bowing his head. 'By the First King... I thought I was too late.'</p><p>Elara looked down at the disgraced knight, her pulse hammering against her ribs. 'Rise, Kaelen,' she said, her voice carrying a resonance that was no longer entirely her own. 'House Veyra has not fallen yet. But we have a long way to go before dawn.'</p>",
       },
     ];
 

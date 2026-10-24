@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const isBookDraft = novel.status === "draft";
-  const isBookPending = novel.status === "pending"; // 🚨 book is under admin review
+  const isBookPending = novel.status === "pending";
 
   // ---------- DOM Elements ----------
   const headerTitle = document.getElementById("headerTitle");
@@ -54,7 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
     saveDraftBtn.style.display = "none";
     saveBtn.textContent = isEditing ? "Save Chapter" : "Add to Draft";
   } else if (isBookPending) {
-    // 🚨 Book is pending → any new/edited chapter must also go through admin
     statusBadge.textContent = "Pending Review";
     statusBadge.className = "badge pending";
     saveDraftBtn.style.display = "inline-block";
@@ -65,7 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
     statusBadge.textContent = "Ongoing";
     statusBadge.className = "badge active";
     saveDraftBtn.style.display = "inline-block";
-    saveBtn.textContent = isEditing ? "Save & Publish" : "Publish Chapter";
+    saveBtn.textContent = isEditing
+      ? "Submit Changes for Review"
+      : "Submit Chapter for Review";
   }
 
   if (isEditing) {
@@ -80,7 +81,21 @@ document.addEventListener("DOMContentLoaded", () => {
       titleInput.value = chapter.title || "";
       numberInput.value = chapter.number || 1;
       noteInput.value = chapter.authorNote || "";
-      contentArea.innerHTML = chapter.content || "";
+
+      // Check if the content is plain text (no HTML tags) and format it
+      let rawContent = chapter.content || chapter.body || "";
+
+      if (!rawContent.includes("<p>") && !rawContent.includes("<br>")) {
+        const paragraphs = rawContent.split(/\n\s*\n/);
+        rawContent = paragraphs
+          .map((p) => {
+            if (!p.trim()) return "";
+            return `<p>${p.trim().replace(/\n/g, "<br>")}</p>`;
+          })
+          .join("");
+      }
+
+      contentArea.innerHTML = rawContent;
     } else {
       Swal.fire("Not Found", "Chapter does not exist.", "error").then(() => {
         window.location.href = `author_view-novel.html?id=${novelId}`;
@@ -108,6 +123,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateCounts();
   contentArea.addEventListener("input", updateCounts);
+
+  // Intercept paste to keep paragraph line breaks
+  contentArea.addEventListener("paste", function (e) {
+    e.preventDefault();
+    let text = (e.originalEvent || e).clipboardData.getData("text/plain");
+    text = text.replace(/\r\n/g, "\n");
+    const paragraphs = text.split(/\n\s*\n/);
+    let html = paragraphs
+      .map((p) => {
+        if (!p.trim()) return "";
+        const inner = p.trim().replace(/\n/g, "<br>");
+        return `<p>${inner}</p>`;
+      })
+      .join("");
+    document.execCommand("insertHTML", false, html);
+  });
 
   document.querySelectorAll(".tool-btn").forEach((btn) => {
     btn.addEventListener("click", (e) => {
@@ -167,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isDuplicate) {
       Swal.fire(
         "Duplicate Number",
-        `Chapter ${number} already exists. Please choose a different number.`,
+        `Chapter ${number} already exists.`,
         "error",
       );
       numberInput.focus();
@@ -178,24 +209,19 @@ document.addEventListener("DOMContentLoaded", () => {
       ? contentArea.innerText.trim().split(/\s+/).length
       : 0;
 
-    // 🚨 If the parent novel is pending, a "publish" action is downgraded to "pending"
-    // so the admin must approve the chapter before it goes live.
-    let effectiveStatus = targetStatus;
-    let statusMessage = "";
+    let effectiveStatus = "draft";
+    let statusMessage = "saved as draft";
 
-    if (isBookPending && targetStatus === "published") {
+    if (targetStatus === "published") {
       effectiveStatus = "pending";
       statusMessage = "submitted for admin review";
-    } else if (targetStatus === "draft") {
-      statusMessage = "saved as draft";
-    } else {
-      statusMessage = "published";
     }
 
     const chapterData = {
       number: number,
       title: title,
       content: content,
+      body: content,
       authorNote: note,
       words: wordCount,
       status: effectiveStatus,
@@ -222,6 +248,9 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(novels));
     }
 
+    // 🚨 AUTOMATIC RESOLVE: Clear the warning because the author took action
+    localStorage.removeItem("author_alert_status");
+
     const actionText = isEditing ? "Updated" : "Added";
 
     Swal.fire({
@@ -238,12 +267,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Wire up the buttons
-  if (isBookDraft) {
-    saveBtn.addEventListener("click", () => saveChapter("draft"));
-  } else {
-    // For pending books the "publish" click saves as pending (see saveChapter).
-    saveBtn.addEventListener("click", () => saveChapter("published"));
-    saveDraftBtn.addEventListener("click", () => saveChapter("draft"));
-  }
+  saveBtn.addEventListener("click", () => saveChapter("published"));
+  saveDraftBtn.addEventListener("click", () => saveChapter("draft"));
 });

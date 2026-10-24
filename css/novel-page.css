@@ -1173,3 +1173,18 @@ a {
 .swal2-popup {
   z-index: 10000 !important;
 }
+
+/* =========================================
+   DARK MODE FOOTER FIX (Forced)
+   ========================================= */
+[data-theme="dark"] .container-footer {
+  background-color: var(--secondary);
+  border-top: 1px solid var(--border);
+}
+
+[data-theme="dark"] .container-footer select {
+  background-color: var(--card-background);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  font-family: var(--font-body);
+}

@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
           number: 4,
           title: "Untitled Chapter",
           status: "draft",
-          words: 0,
+          words: 169,
           lastUpdated: Date.now(),
         },
       ],

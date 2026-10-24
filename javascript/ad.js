@@ -23,14 +23,24 @@ document.addEventListener("DOMContentLoaded", function () {
   const volumeIcon = document.getElementById("volumeIcon");
 
   /* ============================================================
-     CHAPTER URL PARSING — works for any book
+     CHAPTER URL PARSING
      ============================================================ */
 
   function getChapterInfo() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("book") && urlParams.has("ch")) {
+      return {
+        isDynamic: true,
+        bookId: urlParams.get("book"),
+        current: parseInt(urlParams.get("ch"), 10),
+      };
+    }
+
     const filename = window.location.pathname.split(/[\\/]/).pop();
     const m = filename.match(/^(.*?)chapter(\d+)(\.html?)$/i);
     if (!m) return null;
     return {
+      isDynamic: false,
       prefix: m[1],
       numStr: m[2],
       suffix: m[3],
@@ -49,33 +59,74 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function getNextChapterUrl() {
     const current = getCurrentChapterNumber();
-    // If we are on chapter 3, there is no next URL
-    if (current === null || current >= 3) return null;
+    if (current === null) return null;
 
     const info = getChapterInfo();
     if (!info) return null;
 
-    const nextStr = String(info.current + 1).padStart(info.numStr.length, "0");
-    return info.prefix + "chapter" + nextStr + info.suffix;
+    if (info.isDynamic) {
+      return `chapter.html?book=${info.bookId}&ch=${info.current + 1}`;
+    }
+
+    const nextChapterNum = current + 1;
+    const nextLink = document.querySelector(
+      `#chapter-list a[href*="chapter${nextChapterNum}.html"]`,
+    );
+
+    if (
+      !nextLink ||
+      !nextLink.getAttribute("href") ||
+      nextLink.getAttribute("href") === ""
+    ) {
+      return null;
+    }
+
+    return nextLink.getAttribute("href");
+  }
+
+  function getTotalChapters() {
+    const n = parseInt(document.body.dataset.totalChapters, 10);
+    if (!isNaN(n) && n > 0) return n;
+    return 3;
   }
 
   function isLastChapter() {
     const current = getCurrentChapterNumber();
-    if (current === null) return false;
-    return current >= 3;
+    const total = getTotalChapters();
+    if (current === null || total <= 0) return false;
+
+    if (current >= total) return true;
+    const nextUrl = getNextChapterUrl();
+    return !nextUrl;
   }
 
   /* ============================================================
-     BUTTON STATE — Always visible as "Next"
+     BUTTON STATE
      ============================================================ */
 
   function updateNextButtonState() {
     if (!nextBtn) return;
-    // Keep it visible, enabled, and labeled "Next" everywhere
-    nextBtn.style.display = "";
-    nextBtn.disabled = false;
-    nextBtn.textContent = "Next";
-    nextBtn.title = "Continue to the next chapter";
+
+    const info = getChapterInfo();
+
+    // 🚨 FIX: Only show "End" if it's a DYNAMIC book.
+    // Hardcoded static pages will always show "Next".
+    if (info && info.isDynamic) {
+      if (isLastChapter()) {
+        nextBtn.disabled = true;
+        nextBtn.textContent = "End";
+        nextBtn.title = "You have reached the last available chapter";
+      } else {
+        nextBtn.disabled = false;
+        nextBtn.textContent = "Next";
+        nextBtn.title = "Continue to the next chapter";
+      }
+    } else {
+      // Static pages: Always say Next
+      nextBtn.disabled = false;
+      nextBtn.textContent = "Next";
+      nextBtn.title = "Continue";
+    }
   }
 
   /* ============================================================
@@ -241,13 +292,8 @@ document.addEventListener("DOMContentLoaded", function () {
      ============================================================ */
 
   function proceedToNextChapter() {
-    // If on chapter 3, just close the ad and stay on the page.
-    if (isLastChapter()) {
-      hideOverlay();
-      return;
-    }
-
     const nextUrl = getNextChapterUrl();
+
     if (!nextUrl) {
       hideOverlay();
       return;
@@ -264,7 +310,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (nextBtn) {
     nextBtn.addEventListener("click", function (e) {
       e.preventDefault();
-      // Always show the ad, even on chapter 3
+      if (nextBtn.disabled) return; // Don't open ad if it says "End"
       showOverlay();
     });
   }
@@ -273,7 +319,6 @@ document.addEventListener("DOMContentLoaded", function () {
     exitBtn.addEventListener("click", proceedToNextChapter);
   }
 
-  // --- Volume Toggle ---
   if (volumeBtn && volumeIcon) {
     volumeBtn.addEventListener("click", function () {
       const video = document.getElementById("adVideo");

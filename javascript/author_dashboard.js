@@ -1,14 +1,9 @@
 function loadDashboardData() {
   const STORAGE_KEY = "novels";
 
-  // ==========================================
-  // 1. SEED DATA EXACTLY LIKE AUTHOR_ALL-NOVEL.JS
-  // ==========================================
   let allNovels = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 
-  // If the array is empty or Dracula isn't there, create him
   let dracula = allNovels.find((n) => String(n.id) === "seed-0");
-
   if (!dracula) {
     dracula = {
       id: "seed-0",
@@ -56,25 +51,18 @@ function loadDashboardData() {
     dracula.systemSeeded = false;
   }
 
-  // ==========================================
-  // 2. FILTER NOVELS FOR DASHBOARD
-  // ==========================================
   const myNovels = allNovels.filter((n) => {
     if (n.archived) return false;
     if (n.systemSeeded && String(n.id) !== "seed-0") return false;
     return true;
   });
 
-  // ==========================================
-  // 3. CALCULATE STATS
-  // ==========================================
   let totalReads = 0;
   myNovels.forEach((n) => {
     totalReads += Number(n.reads) || 0;
   });
 
   const totalEarnings = totalReads * 0.15;
-
   const readsEl = document.getElementById("dash-total-reads");
   const earningsEl = document.getElementById("dash-total-earnings");
 
@@ -88,9 +76,6 @@ function loadDashboardData() {
       });
   }
 
-  // ==========================================
-  // 4. RENDER TOP PERFORMING NOVELS
-  // ==========================================
   const topTbody = document.getElementById("dash-top-novels");
   const showingText = document.getElementById("dash-showing-text");
 
@@ -118,7 +103,6 @@ function loadDashboardData() {
               : n.status === "completed"
                 ? "Completed"
                 : "Pending Review";
-
           const bookEarnings = (Number(n.reads) || 0) * 0.15;
           const rating = n.rating
             ? `<img src="../icons/star-fill.svg" alt="star" class="star-rating"> ${n.rating}`
@@ -141,14 +125,10 @@ function loadDashboardData() {
     }
   }
 
-  // ==========================================
-  // 5. RENDER REPORTED NOVELS & ADMIN ALERTS
-  // ==========================================
   const reportedList = document.getElementById("reportedList");
 
   if (reportedList) {
     let listHtml = "";
-
     const savedAlert = localStorage.getItem("author_alert_status");
     let alertData = null;
 
@@ -187,12 +167,16 @@ function loadDashboardData() {
       }
 
       if (alertData.status === "warn") {
+        const chapterDisplay = alertData.chapter
+          ? `(${alertData.chapter})`
+          : "";
         listHtml += `
           <li class="admin-action-item">
             <div class="report-info">
-              <span class="report-book">${alertData.novelTitle}</span>
+              <span class="report-book">${alertData.novelTitle} <strong style="color:var(--foreground);">${chapterDisplay}</strong></span>
               <span class="report-chapter" style="color: var(--destructive); font-weight: 600;">Warning Issued</span>
               <span class="report-reason">${alertData.reportReason || "Guidelines violation"}</span>
+              <span class="report-reason" style="background: transparent; padding-left: 0; color: var(--muted-foreground); font-style: italic; margin-top: 4px;">"${alertData.reportDetails || "No additional details"}"</span>
             </div>
           </li>
         `;
@@ -309,11 +293,7 @@ function loadDashboardData() {
     }
   }
 
-  // ==========================================
-  // 6. DYNAMIC WEEKLY READS CHART
-  // ==========================================
   const chartBars = document.querySelectorAll("#dash-chart-bars .bar");
-
   if (chartBars.length > 0) {
     chartBars.forEach((bar) => {
       const randomHeight = Math.floor(Math.random() * (150 - 30 + 1)) + 30;
@@ -322,12 +302,7 @@ function loadDashboardData() {
   }
 }
 
-// Run on initial load
 document.addEventListener("DOMContentLoaded", loadDashboardData);
-
-// Run if browser uses Back/Forward cache (fixes the login redirect issue)
 window.addEventListener("pageshow", function (event) {
-  if (event.persisted) {
-    loadDashboardData();
-  }
+  if (event.persisted) loadDashboardData();
 });

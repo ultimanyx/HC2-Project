@@ -47,7 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function loadNovels() {
     let allNovels = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 
-    // Ensure Dracula exists
     let dracula = allNovels.find((n) => String(n.id) === "seed-0");
     if (!dracula) {
       dracula = {
@@ -165,7 +164,6 @@ document.addEventListener("DOMContentLoaded", () => {
       let targetUrl = `author_view-novel.html?id=${encodeURIComponent(n.id)}`;
       let btnText = "View";
 
-      // Change View to Edit for drafts
       if (n.status === "draft") {
         targetUrl = `author_edit-draft.html?id=${encodeURIComponent(n.id)}`;
         btnText = "Edit";
@@ -251,13 +249,18 @@ document.addEventListener("DOMContentLoaded", () => {
           );
         }
 
+        // 🚨 UPDATED: Includes Chapter and Additional Details
         if (alertData.status === "warn") {
+          const chapterDisplay = alertData.chapter
+            ? `(${alertData.chapter})`
+            : "";
           listHtml += `
             <li class="admin-action-item">
               <div class="report-info">
-                <span class="report-book">${escapeHtml(alertData.novelTitle)}</span>
+                <span class="report-book">${escapeHtml(alertData.novelTitle)} <strong style="color:var(--foreground);">${chapterDisplay}</strong></span>
                 <span class="report-chapter" style="color: var(--destructive); font-weight: 600;">Warning Issued</span>
                 <span class="report-reason">${escapeHtml(alertData.reportReason || "Guidelines violation")}</span>
+                <span class="report-reason" style="background: transparent; padding-left: 0; color: var(--muted-foreground); font-style: italic; margin-top: 4px;">"${escapeHtml(alertData.reportDetails || "No additional details")}"</span>
               </div>
             </li>
           `;

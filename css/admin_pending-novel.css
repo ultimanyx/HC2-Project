@@ -5,7 +5,6 @@
 }
 
 /* root */
-
 :root {
   --background: #f8f6f1;
   --foreground: #1a1826;
@@ -46,7 +45,6 @@
 }
 
 /* fonts */
-
 @font-face {
   font-family: "Poppins";
   src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype");
@@ -73,7 +71,6 @@ body {
 }
 
 /* base */
-
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   background-color: #f8f6f1;
@@ -87,7 +84,6 @@ a {
 }
 
 /* layout */
-
 .layout {
   display: flex;
   height: 100vh;
@@ -95,7 +91,6 @@ a {
 }
 
 /* sidebar */
-
 .sidebar {
   width: 270px;
   background-color: var(--card-background);
@@ -187,7 +182,6 @@ a {
 }
 
 /* main */
-
 .main {
   flex: 1;
   padding: 24px 32px;
@@ -196,7 +190,6 @@ a {
 }
 
 /* topbar */
-
 .topbar {
   display: flex;
   align-items: center;
@@ -233,7 +226,6 @@ a {
 }
 
 /* search */
-
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -277,7 +269,6 @@ a {
 }
 
 /* table card */
-
 .table-card {
   margin-top: 10px;
   background-color: #ffffff;
@@ -294,7 +285,6 @@ a {
 }
 
 /* table */
-
 table {
   width: 100%;
   border-collapse: collapse;
@@ -316,6 +306,7 @@ tbody td {
   padding: 14px 8px 14px 0;
   border-bottom: 1px solid rgba(26, 24, 38, 0.06);
   color: #1a1826;
+  vertical-align: middle; /* Ensures buttons align properly */
 }
 
 tbody tr:last-child td {
@@ -331,7 +322,6 @@ tbody tr:last-child td {
 }
 
 /* status badge */
-
 .badge {
   display: inline-block;
   font-size: 13px;
@@ -356,13 +346,11 @@ tbody tr:last-child td {
 }
 
 /* buttons */
-
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 5px;
-  width: 105px;
   padding: 8px 16px;
   border: none;
   border-radius: 6px;
@@ -401,19 +389,20 @@ tbody tr:last-child td {
 }
 
 .btn-sm {
-  padding: 4px 12px;
+  padding: 6px 12px;
   font-size: 13px;
 }
 
+/* Action button alignment */
 .action-group {
   display: flex;
   align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 8px;
 }
 
 .action {
-  margin-left: 45px;
+  width: 100%;
 }
 
 /* SweetAlert z-index */
@@ -423,9 +412,8 @@ tbody tr:last-child td {
 .swal2-popup {
   z-index: 10000 !important;
 }
-
 /* ============================================================
-   NOVEL VIEW MODAL
+   NOVEL VIEW MODAL FIX
    ============================================================ */
 
 .novel-modal-overlay {
@@ -434,10 +422,12 @@ tbody tr:last-child td {
   background: rgba(26, 24, 38, 0.5);
   backdrop-filter: blur(3px);
   display: none;
+  /* Center it properly without cutting off the top */
   align-items: center;
   justify-content: center;
   padding: 20px;
   z-index: 9000;
+  overflow-y: auto;
 }
 
 .novel-modal-overlay.active {
@@ -449,13 +439,20 @@ tbody tr:last-child td {
   border-radius: 14px;
   width: 100%;
   max-width: 720px;
-  max-height: 90vh;
+  max-height: 85vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   box-shadow: var(--shadow);
   position: relative;
   animation: novelModalIn 0.2s ease;
+}
+
+.novel-modal-body {
+  padding: 28px 32px;
+  /* 🚨 FIX: Only the body scrolls, keeping the header and footer fixed */
+  overflow-y: auto;
+  flex: 1;
 }
 
 @keyframes novelModalIn {
@@ -508,7 +505,6 @@ tbody tr:last-child td {
   margin-bottom: 28px;
 }
 
-/* Increased size for better visibility */
 .novel-cover-container {
   flex-shrink: 0;
   width: 180px;

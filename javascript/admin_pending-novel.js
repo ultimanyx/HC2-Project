@@ -62,29 +62,40 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================================
   function renderTable() {
     const allNovels = getNovels();
-    const pendingNovels = allNovels.filter((n) => n.status === "pending");
+
+    const pendingNovels = allNovels.filter((n) => {
+      if (n.status === "pending") return true;
+      if (
+        Array.isArray(n.chapters) &&
+        n.chapters.some((c) => c.status === "pending")
+      )
+        return true;
+      return false;
+    });
 
     tableBody.innerHTML = "";
 
     if (pendingNovels.length === 0) {
-      tableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:28px;color:var(--muted-foreground);">No pending novels found.</td></tr>`;
+      tableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:28px;color:var(--muted-foreground);">No pending novels or chapters found.</td></tr>`;
       return;
     }
 
     pendingNovels.forEach((n) => {
-      const dateStr = n.createdAt
-        ? new Date(n.createdAt).toLocaleDateString()
+      const dateStr = n.updatedAt
+        ? new Date(n.updatedAt).toLocaleDateString()
         : "Recently";
-
       const tr = document.createElement("tr");
       tr.dataset.novelId = n.id;
+
+      const isBookPending = n.status === "pending";
+      const typeLabel = isBookPending ? "Novel" : "Chapter Update";
 
       tr.innerHTML = `
         <td class="fw-600">${escapeHtml(n.title)}</td>
         <td>${escapeHtml(n.author || "Unknown")}</td>
         <td>${escapeHtml(n.genre || "—")}</td>
         <td>${dateStr}</td>
-        <td><span class="badge paused">Pending</span></td>
+        <td><span class="badge paused">${typeLabel}</span></td>
         <td>
           <div class="action-group action">
             <button class="btn btn-secondary btn-sm view-btn" type="button">View</button>
@@ -108,10 +119,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     modalTitle.textContent = novel.title || "Untitled";
     modalAuthor.textContent = novel.author || "Unknown";
-    modalDate.textContent = novel.createdAt
-      ? new Date(novel.createdAt).toLocaleDateString()
+    modalDate.textContent = novel.updatedAt
+      ? new Date(novel.updatedAt).toLocaleDateString()
       : "Recently";
-    modalSynopsis.textContent = novel.synopsis || "No synopsis provided.";
+
+    // JS STYLING FIX: Format synopsis into readable paragraphs
+    const rawSynopsis = novel.synopsis || "No synopsis provided.";
+    const paragraphs = rawSynopsis
+      .split(/\n\s*\n/)
+      .filter((p) => p.trim() !== "");
+
+    if (paragraphs.length > 1) {
+      modalSynopsis.innerHTML = paragraphs
+        .map(
+          (p) => `<p style="margin-bottom: 12px;">${escapeHtml(p.trim())}</p>`,
+        )
+        .join("");
+    } else {
+      modalSynopsis.innerHTML = `<p style="margin-bottom: 12px; line-height: 1.8; letter-spacing: 0.3px;">${escapeHtml(rawSynopsis.trim())}</p>`;
+    }
+
     modalCover.src =
       novel.coverImage || "../image/logo-nobackground-circle.png";
     modalSubtitle.textContent = novel.subtitle || "A New Story";
@@ -128,7 +155,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Status
-    modalStatus.textContent = "Pending";
+    const isBookPending = novel.status === "pending";
+    modalStatus.textContent = isBookPending ? "Pending Book" : "Pending Update";
     modalStatus.className = "badge paused";
     modalRejectSection.style.display = "none";
 
@@ -140,7 +168,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (chapters.length === 0) {
       modalChapterList.innerHTML = `<li style="color:#6b6680;font-style:italic;">No chapters submitted yet.</li>`;
     } else {
-      chapters.forEach((ch) => {
+      const sortedChapters = [...chapters].sort((a, b) => {
+        if (a.status === "pending" && b.status !== "pending") return -1;
+        if (b.status === "pending" && a.status !== "pending") return 1;
+        return a.number - b.number;
+      });
+
+      sortedChapters.forEach((ch) => {
         const li = document.createElement("li");
         li.className = "chapter-item";
 
@@ -156,6 +190,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const status = document.createElement("span");
         status.className = "chapter-status";
+        if (ch.status === "pending") {
+          status.style.color = "#e8963a";
+          status.style.fontWeight = "bold";
+        }
         status.textContent = ch.status || "pending";
 
         const readBtn = document.createElement("button");
@@ -206,18 +244,23 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ==========================================
-  // APPROVE & REJECT LOGIC
+  // APPROVE LOGIC
   // ==========================================
   function approveNovel(id) {
     const list = getNovels();
     const index = list.findIndex((n) => String(n.id) === String(id));
     if (index === -1) return;
 
-    list[index].status = "published";
+    if (list[index].status === "pending") {
+      list[index].status = "published";
+    }
 
-    // Also publish all its chapters
     if (Array.isArray(list[index].chapters)) {
-      list[index].chapters.forEach((ch) => (ch.status = "published"));
+      list[index].chapters.forEach((ch) => {
+        if (ch.status === "pending") {
+          ch.status = "published";
+        }
+      });
     }
 
     saveNovels(list);
@@ -226,15 +269,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     Swal.fire(
       "Approved!",
-      "The novel has been published and is now visible to readers.",
+      "The content has been published and is now visible to readers.",
       "success",
     );
   }
 
+  // ==========================================
+  // REJECT LOGIC
+  // ==========================================
   function rejectNovel(id) {
     Swal.fire({
       icon: "warning",
-      title: "Reject this novel?",
+      title: "Reject this content?",
       text: "Please state the reason. This will be sent to the author.",
       input: "textarea",
       inputPlaceholder:
@@ -255,16 +301,40 @@ document.addEventListener("DOMContentLoaded", () => {
       const index = list.findIndex((n) => String(n.id) === String(id));
       if (index === -1) return;
 
-      list[index].status = "rejected";
-      list[index].rejectReason = result.value.trim();
+      const novel = list[index];
+      const reason = result.value.trim();
+
+      if (novel.status === "pending") {
+        novel.status = "rejected";
+        novel.rejectReason = reason;
+      }
+
+      if (Array.isArray(novel.chapters)) {
+        novel.chapters.forEach((ch) => {
+          if (ch.status === "pending") {
+            ch.status = "draft"; // Send back to draft
+            ch.rejectReason = reason;
+          }
+        });
+      }
 
       saveNovels(list);
+
+      // 🚨 FIX: Trigger the warning alert for the Author Dashboard
+      const alertData = {
+        status: "warn",
+        novelTitle: novel.title,
+        reportReason: reason,
+        notified: "", // Force it to show up
+      };
+      localStorage.setItem("author_alert_status", JSON.stringify(alertData));
+
       renderTable();
       closeModal();
 
       Swal.fire(
         "Rejected",
-        "The novel has been rejected and sent back to the author.",
+        "The content has been rejected and sent back to the author.",
         "success",
       );
     });
