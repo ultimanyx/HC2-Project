@@ -10,15 +10,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!cardContainer) return;
 
-  const cardLinks = Array.from(cardContainer.querySelectorAll(":scope > a"));
-
-  function debounce(func, delay = 150) {
-    let timer;
-    return function (...args) {
-      clearTimeout(timer);
-      timer = setTimeout(() => func.apply(this, args), delay);
-    };
-  }
+  // Store the original order of the cards as they are in the HTML
+  const originalCards = Array.from(
+    cardContainer.querySelectorAll(":scope > a"),
+  );
 
   function filterAndSortNovels() {
     const titleQuery = titleSearchInput
@@ -33,14 +28,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const visibleCards = [];
 
-    cardLinks.forEach((link) => {
+    originalCards.forEach((link) => {
       const card = link.querySelector(".novel-card");
-
       if (!card) return;
 
       const titleText =
         card.querySelector("h1")?.textContent.trim().toLowerCase() || "";
-
       const genreText =
         card
           .querySelector("#genre-block h3")
@@ -48,68 +41,68 @@ document.addEventListener("DOMContentLoaded", () => {
           .toLowerCase() || "";
 
       const matchesTitle = !titleQuery || titleText.includes(titleQuery);
-
       const matchesGenre =
         selectedGenre === "all-genre" || genreText === selectedGenre;
 
-      // Rating filter removed – all ratings are allowed
-
       if (matchesTitle && matchesGenre) {
-        link.style.display = "";
+        link.style.display = ""; // Show
 
         visibleCards.push({
           element: link,
           title: titleText,
-          // We still need rating for sorting, so we read it
           rating:
             parseFloat(
               card.querySelector("span p:last-child")?.textContent || "0",
             ) || 0,
         });
       } else {
-        link.style.display = "none";
+        link.style.display = "none"; // Hide
       }
     });
 
+    // Sort logic
     visibleCards.sort((a, b) => {
       if (selectedSort === "popularity" || selectedSort === "newest") {
         return b.rating - a.rating;
       }
-
       if (selectedSort === "updated") {
         return a.title.localeCompare(b.title);
       }
-
       return 0;
     });
 
+    // Re-append the visible cards in the new sorted order
     visibleCards.forEach((item) => {
       cardContainer.appendChild(item.element);
     });
   }
 
-  const debouncedFilter = debounce(filterAndSortNovels, 150);
-
-  if (titleSearchInput) {
-    titleSearchInput.addEventListener("input", debouncedFilter);
-  }
-
+  // 1. ONLY apply filter when the button is clicked
   if (applyFilterButton) {
     applyFilterButton.addEventListener("click", filterAndSortNovels);
   }
 
+  // 2. Allow pressing "Enter" in the search box
+  if (titleSearchInput) {
+    titleSearchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        filterAndSortNovels();
+      }
+    });
+  }
+
+  // 3. Reset button restores original order and clears fields
   if (resetFilterButton) {
     resetFilterButton.addEventListener("click", () => {
       if (titleSearchInput) titleSearchInput.value = "";
       if (genreSelect) genreSelect.value = "all-genre";
       if (sortSelect) sortSelect.value = "popularity";
 
-      cardLinks.forEach((link) => {
+      originalCards.forEach((link) => {
         link.style.display = "";
         cardContainer.appendChild(link);
       });
     });
   }
-
-  filterAndSortNovels();
 });

@@ -895,7 +895,7 @@ a {
   padding: 25px 30px;
   margin-top: 2px;
   border-top: 1px solid var(--border);
-  background-color: var(--secondary);
+  background-color: var(--foreground);
   border-radius: 0 0 12px 12px;
 }
 

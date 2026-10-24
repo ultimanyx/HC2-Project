@@ -43,20 +43,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const writeKey = (key, list) =>
     localStorage.setItem(key, JSON.stringify(list));
 
-  /* ==========================================
-     LOAD ARCHIVED ITEMS
-     ========================================== */
   function readArchive() {
     const novelsRaw = readKey(NOVELS_KEY);
 
     const novels = novelsRaw
-      .filter((n) => n && n.archived)
+      .filter((n) => n && (n.archived || n.deletedByAuthor))
       .map((n) => ({
         id: n.id,
-        type: "Novel",
+        type: n.deletedByAuthor ? "DeletedByAuthor" : "Novel",
         title: n.title || "Untitled",
         owner: n.author || n.owner || "—",
-        archivedAt: Number(n.archivedAt) || 0,
+        archivedAt: Number(n.archivedAt) || Number(n.deletedAt) || 0,
         storageKey: NOVELS_KEY,
       }));
 
@@ -95,12 +92,11 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
-  /* ==========================================
-     STATS
-     ========================================== */
   function updateStats(items) {
     const total = items.length;
-    const novels = items.filter((i) => i.type === "Novel").length;
+    const novels = items.filter(
+      (i) => i.type === "Novel" || i.type === "DeletedByAuthor",
+    ).length;
     const ads = items.filter((i) => i.type === "Ad").length;
     const pct = (n) => (total === 0 ? 0 : Math.round((n / total) * 100));
 
@@ -113,9 +109,6 @@ document.addEventListener("DOMContentLoaded", () => {
       $("stat-ads-pct").textContent = `${pct(ads)}% of total`;
   }
 
-  /* ==========================================
-     FILTERS
-     ========================================== */
   const searchEl = $("search-archive");
   const typeEl = $("type-filter");
 
@@ -126,6 +119,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return items.filter((item) => {
       if (type === "Chapter") {
         if (!item.type.startsWith("Chapter")) return false;
+      } else if (type === "DeletedByAuthor") {
+        if (item.type !== "DeletedByAuthor") return false;
       } else if (type && item.type !== type) {
         return false;
       }
@@ -138,9 +133,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* ==========================================
-     RENDER
-     ========================================== */
   function render() {
     const all = readArchive();
     const visible = applyFilter(all);
@@ -168,9 +160,16 @@ document.addEventListener("DOMContentLoaded", () => {
       if (item.chapterNumber != null)
         tr.dataset.chapterNumber = String(item.chapterNumber);
 
+      let displayType = item.type;
+      let typeBadge = `<td>${escapeHtml(displayType)}</td>`;
+
+      if (displayType === "DeletedByAuthor") {
+        typeBadge = `<td><span class="badge" style="background:#fee2e2; color:#b91c1c;">Deleted by Author</span></td>`;
+      }
+
       tr.innerHTML = `
         <td><strong>${escapeHtml(item.title)}</strong></td>
-        <td>${escapeHtml(item.type)}</td>
+        ${typeBadge}
         <td>${escapeHtml(item.owner)}</td>
         <td>${formatDate(item.archivedAt)}</td>
         <td style="text-align: right">
@@ -195,9 +194,6 @@ document.addEventListener("DOMContentLoaded", () => {
   searchEl?.addEventListener("input", render);
   typeEl?.addEventListener("change", render);
 
-  /* ==========================================
-     RESTORE / DELETE
-     ========================================== */
   tbody.addEventListener("click", (e) => {
     if (!SwalOK) return;
 
@@ -232,28 +228,16 @@ document.addEventListener("DOMContentLoaded", () => {
     if (restoreBtn) {
       Swal.fire({
         title: "Are you sure?",
-        text: isChapter
-          ? `"${target.title}" will be restored to its novel.`
-          : `"${target.title}" will be moved back to the library.`,
+        text: `"${target.title}" will be restored to the library.`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Yes, restore it!",
-        confirmButtonColor: "#2f9e44", // <-- Green for positive action
+        confirmButtonColor: "#2f9e44",
         cancelButtonText: "No, cancel!",
         cancelButtonColor: "#6b6680",
         reverseButtons: true,
       }).then((result) => {
-        if (!result.isConfirmed) {
-          if (result.dismiss === Swal.DismissReason.cancel) {
-            Swal.fire({
-              title: "Cancelled",
-              text: "Still archived :)",
-              icon: "error",
-              confirmButtonColor: "#b8721f",
-            });
-          }
-          return;
-        }
+        if (!result.isConfirmed) return;
 
         const list = readKey(key);
 
@@ -274,8 +258,13 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
           const t = list.find((x) => String(x.id) === String(id));
           if (!t) return;
+
+          // 🚨 CLEAR ALL FLAGS: This ensures it is fully restored in one click!
           t.archived = false;
           delete t.archivedAt;
+          delete t.deletedByAuthor;
+          delete t.deletedAt;
+
           t.restoredAt = Date.now();
         }
 
@@ -283,9 +272,9 @@ document.addEventListener("DOMContentLoaded", () => {
         render();
         Swal.fire({
           title: "Restored!",
-          text: `"${target.title}" has been restored.`,
+          text: `"${target.title}" has been restored successfully.`,
           icon: "success",
-          confirmButtonColor: "#b8721f", // <-- Theme color
+          confirmButtonColor: "#b8721f",
         });
       });
       return;
@@ -295,26 +284,16 @@ document.addEventListener("DOMContentLoaded", () => {
     if (deleteBtn) {
       Swal.fire({
         title: "Are you sure?",
-        text: `"${target.title}" will be deleted permanently. You won't be able to revert this!`,
+        text: `"${target.title}" will be permanently deleted from the system. You won't be able to revert this!`,
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Yes, delete it!",
-        confirmButtonColor: "#d33", // <-- Red for destructive action
+        confirmButtonText: "Yes, delete it forever!",
+        confirmButtonColor: "#d33",
         cancelButtonText: "No, cancel!",
         cancelButtonColor: "#6b6680",
         reverseButtons: true,
       }).then((result) => {
-        if (!result.isConfirmed) {
-          if (result.dismiss === Swal.DismissReason.cancel) {
-            Swal.fire({
-              title: "Cancelled",
-              text: "Safe :)",
-              icon: "error",
-              confirmButtonColor: "#b8721f",
-            });
-          }
-          return;
-        }
+        if (!result.isConfirmed) return;
 
         const list = readKey(key);
 
@@ -334,7 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
           render();
           Swal.fire({
             title: "Deleted!",
-            text: `"${target.title}" has been deleted.`,
+            text: `"${target.title}" has been deleted permanently.`,
             icon: "success",
             confirmButtonColor: "#b8721f",
           });

@@ -10,25 +10,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!modalOverlay || !displayRating || !modalRatingSlider) return;
 
-  // Get the book ID from the HTML data attribute
-  const bookId = displayRating.getAttribute("data-book-id");
+  // Get the book ID from the input OR fallback to the <body> tag
+  let bookId =
+    displayRating.getAttribute("data-book-id") || document.body.dataset.bookId;
+
+  // Final fallback: get it from the book title if it's missing everywhere
+  if (!bookId) {
+    const titleEl = document.getElementById("titleBook");
+    if (titleEl)
+      bookId = titleEl.textContent.trim().toLowerCase().replace(/\s+/g, "-");
+  }
+
   const storageKey = `book_rating_${bookId}`;
 
   // 1. Load Existing Rating on Page Load
   const savedRating = localStorage.getItem(storageKey);
   if (savedRating) {
-    // Update the display stars
     displayRating.value = savedRating;
     displayRating.style.setProperty("--val", savedRating);
   } else {
-    // No rating yet, make sure it's empty
     displayRating.value = 0;
     displayRating.style.setProperty("--val", 0);
   }
 
+  // Make clicks on the disabled input pass through to the button
+  displayRating.style.pointerEvents = "none";
+
   // 2. Open Modal
   openModalBtn.addEventListener("click", function () {
-    // Pre-fill the modal slider with the saved rating (or 0)
     const currentRating = displayRating.value;
     modalRatingSlider.value = currentRating;
     modalRatingSlider.style.setProperty("--val", currentRating);
@@ -72,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // Save to localStorage
+    // Save to localStorage under the specific book's key
     localStorage.setItem(storageKey, newRating);
 
     // Update the display stars on the main page

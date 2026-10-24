@@ -1,20 +1,64 @@
-document.addEventListener("DOMContentLoaded", function () {
+function loadDashboardData() {
   const STORAGE_KEY = "novels";
 
   // ==========================================
-  // 1. LOAD & FILTER NOVELS
+  // 1. SEED DATA EXACTLY LIKE AUTHOR_ALL-NOVEL.JS
   // ==========================================
-  const getNovels = () => {
-    try {
-      const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-      return Array.isArray(raw) ? raw : [];
-    } catch {
-      return [];
-    }
-  };
+  let allNovels = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 
-  const allNovels = getNovels();
+  // If the array is empty or Dracula isn't there, create him
+  let dracula = allNovels.find((n) => String(n.id) === "seed-0");
 
+  if (!dracula) {
+    dracula = {
+      id: "seed-0",
+      title: "Dracula",
+      subtitle: "A Gothic Horror Classic",
+      author: "Bram Stoker",
+      genre: "Horror",
+      synopsis:
+        "Dracula is an 1897 Gothic horror novel by Irish author Bram Stoker...",
+      coverImage:
+        "../books/Horror(1)/Dracula by Bram Stoker/dracula-9781471141621_lg.jpg",
+      status: "published",
+      chapters: [
+        {
+          number: 1,
+          title: "Jonathan Harker's Journal",
+          status: "published",
+          words: 4120,
+          lastUpdated: Date.now() - 2 * 86400000,
+        },
+        {
+          number: 2,
+          title: "The Blood is the Life",
+          status: "published",
+          words: 3850,
+          lastUpdated: Date.now() - 5 * 86400000,
+        },
+        {
+          number: 3,
+          title: "The Grey Man",
+          status: "published",
+          words: 3210,
+          lastUpdated: Date.now() - 7 * 86400000,
+        },
+      ],
+      reads: 12843,
+      rating: 4.8,
+      systemSeeded: false,
+      archived: false,
+    };
+    allNovels.push(dracula);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(allNovels));
+  } else {
+    dracula.status = "published";
+    dracula.systemSeeded = false;
+  }
+
+  // ==========================================
+  // 2. FILTER NOVELS FOR DASHBOARD
+  // ==========================================
   const myNovels = allNovels.filter((n) => {
     if (n.archived) return false;
     if (n.systemSeeded && String(n.id) !== "seed-0") return false;
@@ -22,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // ==========================================
-  // 2. CALCULATE STATS
+  // 3. CALCULATE STATS
   // ==========================================
   let totalReads = 0;
   myNovels.forEach((n) => {
@@ -45,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ==========================================
-  // 3. RENDER TOP PERFORMING NOVELS
+  // 4. RENDER TOP PERFORMING NOVELS
   // ==========================================
   const topTbody = document.getElementById("dash-top-novels");
   const showingText = document.getElementById("dash-showing-text");
@@ -63,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
       topTbody.innerHTML = topNovels
         .map((n) => {
           const statusClass =
-            n.status === "published"
+            n.status === "published" || n.status === "Ongoing"
               ? "active"
               : n.status === "completed"
                 ? "completed"
@@ -98,21 +142,19 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ==========================================
-  // 4. RENDER REPORTED NOVELS & ADMIN ALERTS
+  // 5. RENDER REPORTED NOVELS & ADMIN ALERTS
   // ==========================================
   const reportedList = document.getElementById("reportedList");
 
   if (reportedList) {
     let listHtml = "";
 
-    // --- A. Check LocalStorage for Admin Actions ---
     const savedAlert = localStorage.getItem("author_alert_status");
     let alertData = null;
 
     if (savedAlert) {
       alertData = JSON.parse(savedAlert);
 
-      // Show Popup Notification (SweetAlert Toast)
       let toastTitle = "";
       let toastIcon = "";
 
@@ -127,7 +169,6 @@ document.addEventListener("DOMContentLoaded", function () {
         toastIcon = "info";
       }
 
-      // ✅ Fire the toast ONLY once per status change
       const alreadyNotified = alertData.notified === alertData.status;
 
       if (toastTitle && !alreadyNotified) {
@@ -141,12 +182,10 @@ document.addEventListener("DOMContentLoaded", function () {
           timerProgressBar: true,
         });
 
-        // Persist the flag so the toast never fires for this status again
         alertData.notified = alertData.status;
         localStorage.setItem("author_alert_status", JSON.stringify(alertData));
       }
 
-      // Build the Alert HTML (row still shows every visit)
       if (alertData.status === "warn") {
         listHtml += `
           <li class="admin-action-item">
@@ -192,7 +231,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    // --- B. Check for actual reported novels in the database ---
     const reportedNovels = myNovels.filter((n) => n.reported || n.reportReason);
     if (reportedNovels.length > 0) {
       reportedNovels.forEach((n) => {
@@ -208,7 +246,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
-    // --- C. Apply HTML or Empty State ---
     if (listHtml !== "") {
       reportedList.innerHTML = listHtml;
     } else {
@@ -221,7 +258,6 @@ document.addEventListener("DOMContentLoaded", function () {
       `;
     }
 
-    // --- D. Handle Appeal Button ---
     const appealBtn = document.getElementById("inlineAppealBtn");
     if (appealBtn && alertData) {
       appealBtn.addEventListener("click", function () {
@@ -243,8 +279,6 @@ document.addEventListener("DOMContentLoaded", function () {
           if (result.isConfirmed) {
             alertData.status = "appealed";
             alertData.appealReason = result.value.trim();
-            // ✅ Reset notified so a fresh "appealed" toast won't be skipped
-            // if you ever add one; the row still switches state here anyway.
             alertData.notified = "appealed";
             localStorage.setItem(
               "author_alert_status",
@@ -276,16 +310,24 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ==========================================
-  // 5. DYNAMIC WEEKLY READS CHART
+  // 6. DYNAMIC WEEKLY READS CHART
   // ==========================================
   const chartBars = document.querySelectorAll("#dash-chart-bars .bar");
 
   if (chartBars.length > 0) {
-    const baseReads = totalReads > 0 ? totalReads / 30 : 10;
-
     chartBars.forEach((bar) => {
       const randomHeight = Math.floor(Math.random() * (150 - 30 + 1)) + 30;
       bar.style.height = `${randomHeight}px`;
     });
+  }
+}
+
+// Run on initial load
+document.addEventListener("DOMContentLoaded", loadDashboardData);
+
+// Run if browser uses Back/Forward cache (fixes the login redirect issue)
+window.addEventListener("pageshow", function (event) {
+  if (event.persisted) {
+    loadDashboardData();
   }
 });

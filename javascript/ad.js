@@ -2,9 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
   "use strict";
 
   const AD_DURATION = 15;
-  const CHAPTER_BASE = "novel_chapter";
-  const CHAPTER_EXT = ".html";
-  const TOTAL_CHAPTERS = 47;
 
   const state = {
     timer: AD_DURATION,
@@ -25,37 +22,65 @@ document.addEventListener("DOMContentLoaded", function () {
   const volumeBtn = document.getElementById("volumeBtn");
   const volumeIcon = document.getElementById("volumeIcon");
 
+  /* ============================================================
+     CHAPTER URL PARSING — works for any book
+     ============================================================ */
+
+  function getChapterInfo() {
+    const filename = window.location.pathname.split(/[\\/]/).pop();
+    const m = filename.match(/^(.*?)chapter(\d+)(\.html?)$/i);
+    if (!m) return null;
+    return {
+      prefix: m[1],
+      numStr: m[2],
+      suffix: m[3],
+      current: parseInt(m[2], 10),
+    };
+  }
+
   function getCurrentChapterNumber() {
+    const info = getChapterInfo();
+    if (info) return info.current;
+
     if (!chapterNumberEl) return null;
-    const text = chapterNumberEl.textContent.trim();
-    const match = text.match(/\d+/);
-    return match ? parseInt(match[0], 10) : null;
+    const m = chapterNumberEl.textContent.trim().match(/\d+/);
+    return m ? parseInt(m[0], 10) : null;
   }
 
   function getNextChapterUrl() {
     const current = getCurrentChapterNumber();
-    if (current === null) return null;
-    return `${CHAPTER_BASE}${current + 1}${CHAPTER_EXT}`;
+    // If we are on chapter 3, there is no next URL
+    if (current === null || current >= 3) return null;
+
+    const info = getChapterInfo();
+    if (!info) return null;
+
+    const nextStr = String(info.current + 1).padStart(info.numStr.length, "0");
+    return info.prefix + "chapter" + nextStr + info.suffix;
   }
 
   function isLastChapter() {
     const current = getCurrentChapterNumber();
     if (current === null) return false;
-    return current >= TOTAL_CHAPTERS;
+    return current >= 3;
   }
+
+  /* ============================================================
+     BUTTON STATE — Always visible as "Next"
+     ============================================================ */
 
   function updateNextButtonState() {
     if (!nextBtn) return;
-    if (isLastChapter()) {
-      nextBtn.disabled = true;
-      nextBtn.textContent = "End";
-      nextBtn.title = "You have reached the last chapter";
-    } else {
-      nextBtn.disabled = false;
-      nextBtn.textContent = "Next";
-      nextBtn.title = "Continue to the next chapter";
-    }
+    // Keep it visible, enabled, and labeled "Next" everywhere
+    nextBtn.style.display = "";
+    nextBtn.disabled = false;
+    nextBtn.textContent = "Next";
+    nextBtn.title = "Continue to the next chapter";
   }
+
+  /* ============================================================
+     AD RENDERING
+     ============================================================ */
 
   function renderAd(ad) {
     if (ad.format.toLowerCase() === "banner") {
@@ -80,16 +105,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const video = document.getElementById("adVideo");
       if (video) {
         video.src = ad.mediaData;
-
         video.muted = true;
         if (volumeIcon) volumeIcon.src = "../icons/volume-mute.svg";
-
-        video.addEventListener("error", function () {
-          console.warn(
-            "Failed to load video ad. File might be too large or corrupted:",
-            ad.campaign,
-          );
-        });
 
         video.play().catch(function (error) {
           console.log("Autoplay prevented:", error);
@@ -97,6 +114,10 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   }
+
+  /* ============================================================
+     TIMER
+     ============================================================ */
 
   function updateUI() {
     const t = Math.max(0, state.timer);
@@ -136,6 +157,10 @@ document.addEventListener("DOMContentLoaded", function () {
     if (state.intervalId) clearInterval(state.intervalId);
     state.isRunning = false;
   }
+
+  /* ============================================================
+     OVERLAY
+     ============================================================ */
 
   function showOverlay() {
     overlay.classList.add("active");
@@ -211,24 +236,35 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  /* ============================================================
+     NAVIGATION
+     ============================================================ */
+
   function proceedToNextChapter() {
-    const nextUrl = getNextChapterUrl();
-    if (!nextUrl) return;
+    // If on chapter 3, just close the ad and stay on the page.
     if (isLastChapter()) {
-      alert("You have reached the end of the book!");
+      hideOverlay();
       return;
     }
+
+    const nextUrl = getNextChapterUrl();
+    if (!nextUrl) {
+      hideOverlay();
+      return;
+    }
+
     hideOverlay();
     window.location.href = nextUrl;
   }
 
+  /* ============================================================
+     EVENT WIRING
+     ============================================================ */
+
   if (nextBtn) {
     nextBtn.addEventListener("click", function (e) {
       e.preventDefault();
-      if (isLastChapter()) {
-        alert("You have reached the end of the book!");
-        return;
-      }
+      // Always show the ad, even on chapter 3
       showOverlay();
     });
   }
@@ -237,7 +273,7 @@ document.addEventListener("DOMContentLoaded", function () {
     exitBtn.addEventListener("click", proceedToNextChapter);
   }
 
-  // --- Volume Toggle Logic ---
+  // --- Volume Toggle ---
   if (volumeBtn && volumeIcon) {
     volumeBtn.addEventListener("click", function () {
       const video = document.getElementById("adVideo");

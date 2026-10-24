@@ -47,8 +47,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function loadNovels() {
     let allNovels = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 
+    // Ensure Dracula exists
     let dracula = allNovels.find((n) => String(n.id) === "seed-0");
-
     if (!dracula) {
       dracula = {
         id: "seed-0",
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ==========================================
-  // RENDER NOVEL ROWS (hardcoded Dracula stays)
+  // RENDER NOVEL ROWS
   // ==========================================
   function renderRows(list) {
     const hardcodedRow = tbody.querySelector('tr[data-hardcoded="true"]');
@@ -163,13 +163,17 @@ document.addEventListener("DOMContentLoaded", () => {
         !["seed-0", "seed-1", "draft-seed-0"].includes(idStr);
 
       let targetUrl = `author_view-novel.html?id=${encodeURIComponent(n.id)}`;
+      let btnText = "View";
+
+      // Change View to Edit for drafts
       if (n.status === "draft") {
         targetUrl = `author_edit-draft.html?id=${encodeURIComponent(n.id)}`;
+        btnText = "Edit";
       }
 
       const viewCell = isDemo
-        ? `<span class="btn btn-primary btn-sm" role="button" aria-disabled="true" title="Demo row" style="cursor:default;">View</span>`
-        : `<a class="btn btn-primary btn-sm view-novel-btn" href="${targetUrl}">View</a>`;
+        ? `<span class="btn btn-primary btn-sm" role="button" aria-disabled="true" title="Demo row" style="cursor:default;">${btnText}</span>`
+        : `<a class="btn btn-primary btn-sm view-novel-btn" href="${targetUrl}">${btnText}</a>`;
 
       const isPending = n.status === "pending";
       const archiveCell = isPending
@@ -195,7 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ==========================================
-  // REPORTED NOVELS PANEL (mirrors Dashboard)
+  // REPORTED NOVELS PANEL
   // ==========================================
   function renderReportedPanel() {
     const reportedList = document.getElementById("reportedList");
@@ -204,7 +208,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let listHtml = "";
     let alertData = null;
 
-    // --- A. Admin actions stored in localStorage ---
     const savedAlert = localStorage.getItem("author_alert_status");
     if (savedAlert) {
       try {
@@ -228,7 +231,6 @@ document.addEventListener("DOMContentLoaded", () => {
           toastIcon = "info";
         }
 
-        // ✅ Fire the toast ONLY once per status change
         const alreadyNotified = alertData.notified === alertData.status;
 
         if (toastTitle && !alreadyNotified && typeof Swal !== "undefined") {
@@ -295,7 +297,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // --- B. Real reported novels from the database ---
     const myNovels = loadNovels().filter((n) => !n.archived);
     const reportedNovels = myNovels.filter((n) => n.reported || n.reportReason);
 
@@ -313,7 +314,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // --- C. Apply HTML or Empty State ---
     if (listHtml !== "") {
       reportedList.innerHTML = listHtml;
     } else {
@@ -326,7 +326,6 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     }
 
-    // --- D. Appeal button handler ---
     const appealBtn = document.getElementById("inlineAppealBtn");
     if (appealBtn && alertData && typeof Swal !== "undefined") {
       appealBtn.addEventListener("click", function () {
@@ -349,7 +348,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
           alertData.status = "appealed";
           alertData.appealReason = result.value.trim();
-          // ✅ Prevents a re-fire if you add an "appealed" toast later
           alertData.notified = "appealed";
           localStorage.setItem(
             "author_alert_status",
@@ -387,7 +385,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const sortSelect = document.getElementById("sort-novel");
 
   function applyFilters() {
-    let list = loadNovels().filter((n) => !n.archived && n.status !== "draft");
+    let list = loadNovels().filter((n) => !n.archived);
 
     const q = (searchInput?.value || "").trim().toLowerCase();
     if (q) list = list.filter((n) => n.title.toLowerCase().includes(q));

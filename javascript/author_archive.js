@@ -3,9 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const tbody = document.querySelector(".table-card tbody");
   if (!tbody) return;
 
-  /* ==========================================
-     HELPERS
-     ========================================== */
   function escapeHtml(str) {
     return String(str ?? "").replace(
       /[&<>"']/g,
@@ -44,12 +41,14 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
   }
 
-  // Flatten all archived novels AND archived chapters
   function getArchivedItems() {
     const novels = readAll();
     let items = [];
 
     novels.forEach((n) => {
+      // 🚨 DO NOT show items deleted by the author (They are moved to Admin Recovery)
+      if (n.deletedByAuthor) return;
+
       // 1. Check if the whole novel is archived
       if (n.archived) {
         items.push({
@@ -80,18 +79,15 @@ document.addEventListener("DOMContentLoaded", () => {
     return items.sort((a, b) => (b.archivedAt || 0) - (a.archivedAt || 0));
   }
 
-  /* ==========================================
-     STATS
-     ========================================== */
   function updateStats() {
     const items = getArchivedItems();
     const archivedEl = document.getElementById("stat-archived");
+    const recoveryEl = document.getElementById("stat-recovery");
+
     if (archivedEl) archivedEl.textContent = items.length;
+    if (recoveryEl) recoveryEl.textContent = items.length;
   }
 
-  /* ==========================================
-     RENDER
-     ========================================== */
   function render() {
     const items = getArchivedItems();
     tbody.innerHTML = "";
@@ -113,7 +109,6 @@ document.addEventListener("DOMContentLoaded", () => {
       tr.dataset.novelId = String(item.novelId);
       tr.dataset.chapterNum = item.chapterNum ? String(item.chapterNum) : "";
 
-      // Badge for Novel vs Chapter
       const badgeHTML =
         item.type === "novel"
           ? `<span class="badge" style="background:#e0e7ff; color:#3730a3;">Novel</span>`
@@ -142,9 +137,6 @@ document.addEventListener("DOMContentLoaded", () => {
     updateStats();
   }
 
-  /* ==========================================
-     ACTIONS
-     ========================================== */
   tbody.addEventListener("click", (e) => {
     if (typeof Swal === "undefined") return;
 
@@ -200,18 +192,28 @@ document.addEventListener("DOMContentLoaded", () => {
     if (deleteBtn) {
       Swal.fire({
         title: "Permanently Delete?",
-        text: `This ${type} will be deleted forever. You cannot undo this!`,
+        text: `This ${type} will be removed from your view. (Admin retains a backup)`,
         icon: "error",
         showCancelButton: true,
         confirmButtonColor: "#dc2626",
-        confirmButtonText: "Yes, delete permanently",
+        confirmButtonText: "Yes, delete",
         cancelButtonText: "Cancel",
       }).then((result) => {
         if (result.isConfirmed) {
           let novels = readAll();
 
           if (type === "novel") {
-            novels = novels.filter((n) => String(n.id) !== String(novelId));
+            const target = novels.find((n) => String(n.id) === String(novelId));
+            if (target) {
+              // 🚨 TAG AS DELETED BY AUTHOR (Moves to Admin recovery bin)
+              target.deletedByAuthor = true;
+              target.deletedAt = Date.now();
+            }
+
+            // 🚨 SET THE LOCK: If they delete the draft, lock it so it doesn't auto-recreate.
+            if (String(novelId) === "draft-seed-0") {
+              localStorage.setItem("draft_seeded", "true");
+            }
           } else if (type === "chapter") {
             const novel = novels.find((n) => String(n.id) === String(novelId));
             if (novel && Array.isArray(novel.chapters)) {
@@ -225,7 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
           render();
           Swal.fire(
             "Deleted!",
-            `The ${type} has been permanently deleted.`,
+            `The ${type} has been removed from your archive.`,
             "success",
           );
         }

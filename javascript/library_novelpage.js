@@ -1,17 +1,25 @@
 /* ============================================================
-   LIBRARY HELPERS
+   LIBRARY HELPERS & HARDCODED RATINGS
    ============================================================ */
 
 const LIBRARY_KEY = "libraryBooks";
 const BOOKMARK_KEY = "bookmarkedChapters";
 
-function removeBookmarkForBook(bookId) {
-  const data = localStorage.getItem(BOOKMARK_KEY);
-  if (!data) return;
-  const bookmarks = JSON.parse(data);
-  delete bookmarks[bookId];
-  localStorage.setItem(BOOKMARK_KEY, JSON.stringify(bookmarks));
-}
+// These match the exact ratings from your browse.html cards
+const BOOK_RATINGS = {
+  "a-tale-of-two-cities": "4.7",
+  "pride-and-prejudice": "4.8",
+  "treasure-island": "4.3",
+  frankenstein: "4.6",
+  dracula: "4.8",
+  emma: "4.5",
+  "jane-eyre": "4.7",
+  "sense-and-sensibility": "4.6",
+  "wuthering-heights": "4.5",
+  "a-farewell-to-arms": "4.5",
+  "quo-vadis": "4.4",
+  "a-tangled-tale": "4.2",
+};
 
 function getLibraryBooks() {
   const data = localStorage.getItem(LIBRARY_KEY);
@@ -60,7 +68,7 @@ function toggleLibraryBook(book) {
 }
 
 /* ============================================================
-   NOVEL PAGE — DYNAMIC CHAPTER NAVIGATION (ALWAYS 20 PER TABLE)
+   NOVEL PAGE — DYNAMIC CHAPTER NAVIGATION
    ============================================================ */
 
 const chapterSelect = document.getElementById("chapter-number");
@@ -79,14 +87,11 @@ if (chapterSelect && previousButton && nextButton && chapterRows.length > 0) {
   for (let i = 0; i < chapterRows.length; i++) {
     const row = chapterRows[i];
 
-    // FIXED: Check if the row has any TEXT inside its links,
-    // regardless of whether the href is empty or not.
     const hasText = Array.from(row.querySelectorAll("a")).some((a) => {
       return a.textContent.trim() !== "";
     });
 
     if (!hasText) {
-      // Hide completely empty rows (like the padding row at the bottom)
       row.style.display = "none";
       continue;
     }
@@ -165,7 +170,12 @@ function highlightBookmarkedChapter() {
   if (!bookTitleElement) return;
 
   const bookTitle = bookTitleElement.textContent.trim();
-  const bookId = bookTitle.toLowerCase().replace(/\s+/g, "-");
+  // Format ID to match browse.html links (handles "Pride & Prejudice")
+  const bookId = bookTitle
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
 
   const chapterLinks = document.querySelectorAll("#chapter-list td a");
 
@@ -184,7 +194,6 @@ function highlightBookmarkedChapter() {
   const entry = allBookmarks[bookId];
   if (!entry) return;
 
-  // Normalize legacy / new format into a plain list
   let bookmarks = [];
   if (entry.bookmarks) {
     bookmarks = entry.bookmarks;
@@ -194,7 +203,6 @@ function highlightBookmarkedChapter() {
 
   if (bookmarks.length === 0) return;
 
-  // Find all bookmarked chapters AND identify the latest one
   const chaptersWithBookmarks = new Set();
   let latestChapter = null;
   let maxTime = -1;
@@ -212,13 +220,11 @@ function highlightBookmarkedChapter() {
 
   if (chaptersWithBookmarks.size === 0) return;
 
-  // Apply styles
   chapterLinks.forEach(function (link) {
     const linkText = link.textContent.trim();
     const chapterText = linkText.split(":")[0].trim();
 
     if (chaptersWithBookmarks.has(chapterText)) {
-      // 1. All bookmarked chapters get the icon and flex layout
       link.classList.add("chapter-has-bookmark");
 
       const img = document.createElement("img");
@@ -227,7 +233,6 @@ function highlightBookmarkedChapter() {
       img.className = "chapter-bookmark-icon";
       link.prepend(img);
 
-      // 2. Only the LATEST chapter gets the orange pill highlight
       if (chapterText === latestChapter) {
         link.classList.add("bookmarked-chapter-highlight");
       }
@@ -245,6 +250,11 @@ const libraryButton = document.getElementById("add-library-button");
 
 if (libraryButton && bookTitleElement) {
   const bookTitle = bookTitleElement.textContent.trim();
+  const bookId = bookTitle
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
 
   let bookAuthor = "Unknown";
   const authorElement = document.querySelector(".author");
@@ -254,13 +264,17 @@ if (libraryButton && bookTitleElement) {
   const coverElement = document.querySelector(".header-container > img");
   if (coverElement) bookCover = coverElement.src;
 
-  let bookRating = "0.0";
-  const ratingElement = document.querySelector(".book-rating");
-  if (ratingElement)
-    bookRating = ratingElement.textContent.replace(/[^0-9.]/g, "");
+  // Fetch the exact rating from the dictionary
+  let bookRating = BOOK_RATINGS[bookId] || "0.0";
+
+  // If the user submitted a custom rating via the modal, override the default
+  const userSavedRating = localStorage.getItem(`book_rating_${bookId}`);
+  if (userSavedRating) {
+    bookRating = parseFloat(userSavedRating).toFixed(1);
+  }
 
   const book = {
-    id: bookTitle.toLowerCase().replace(/\s+/g, "-"),
+    id: bookId,
     title: bookTitle,
     author: bookAuthor,
     cover: bookCover,
@@ -286,11 +300,13 @@ if (libraryButton && bookTitleElement) {
   updateLibraryButton();
 
   libraryButton.addEventListener("click", function () {
-    const result = toggleLibraryBook(book);
-
-    if (result === "removed") {
-      removeBookmarkForBook(book.id);
+    // Re-sync the rating just in case they clicked a star rating right before adding
+    const latestUserRating = localStorage.getItem(`book_rating_${bookId}`);
+    if (latestUserRating) {
+      book.rating = parseFloat(latestUserRating).toFixed(1);
     }
+
+    const result = toggleLibraryBook(book);
 
     let title = "";
     let text = "";
@@ -398,9 +414,19 @@ if (bookGrid) {
         statusText = "Reading";
       }
 
-      // Dynamically build the URL using book.id
-      html += '<a href="' + book.id + '-page.html">';
+      // Fallback: Fix any old saves that currently have "0.0"
+      let displayRating = book.rating;
+      if (displayRating === "0.0" || !displayRating) {
+        displayRating = BOOK_RATINGS[book.id] || "0.0";
+      }
 
+      // Always prioritize the live user rating if they used the modal
+      const liveUserRating = localStorage.getItem(`book_rating_${book.id}`);
+      if (liveUserRating) {
+        displayRating = parseFloat(liveUserRating).toFixed(1);
+      }
+
+      html += '<a href="' + book.id + '-page.html">';
       html += '  <div class="book-card">';
       html += '    <div class="book-cover">';
       html +=
@@ -418,7 +444,7 @@ if (bookGrid) {
       html += '      <div class="book-meta">';
       html += '        <span class="book-rating">';
       html += '          <img src="../icons/star-fill.svg" alt="star" />';
-      html += "          " + book.rating;
+      html += "          " + displayRating;
       html += "        </span>";
       html +=
         '        <span class="book-progress">' + book.progress + "%</span>";
