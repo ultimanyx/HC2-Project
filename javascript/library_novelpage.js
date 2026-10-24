@@ -1,16 +1,34 @@
 /* ============================================================
-   LIBRARY HELPERS
+   LIBRARY HELPERS & HARDCODED RATINGS
    ============================================================ */
 
 const LIBRARY_KEY = "libraryBooks";
 const BOOKMARK_KEY = "bookmarkedChapters";
 
-function removeBookmarkForBook(bookId) {
-  const data = localStorage.getItem(BOOKMARK_KEY);
-  if (!data) return;
-  const bookmarks = JSON.parse(data);
-  delete bookmarks[bookId];
-  localStorage.setItem(BOOKMARK_KEY, JSON.stringify(bookmarks));
+// Hardcoded ratings matching browse.html exactly
+const HARDCODED_RATINGS = {
+  "a-tale-of-two-cities": "4.7",
+  "pride-and-prejudice": "4.8",
+  "treasure-island": "4.3",
+  frankenstein: "4.6",
+  dracula: "4.8",
+  emma: "4.5",
+  "jane-eyre": "4.7",
+  "sense-and-sensibility": "4.6",
+  "wuthering-heights": "4.5",
+  "a-farewell-to-arms": "4.5",
+  "quo-vadis": "4.4",
+  "a-tangled-tale": "4.2",
+};
+
+// Helper to create a perfect ID from titles (handles "Pride & Prejudice" -> "pride-and-prejudice")
+function getBookId(title) {
+  if (!title) return "";
+  return title
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
 }
 
 function getLibraryBooks() {
@@ -60,7 +78,7 @@ function toggleLibraryBook(book) {
 }
 
 /* ============================================================
-   NOVEL PAGE — DYNAMIC CHAPTER NAVIGATION (ALWAYS 20 PER TABLE)
+   NOVEL PAGE — DYNAMIC CHAPTER NAVIGATION
    ============================================================ */
 
 const chapterSelect = document.getElementById("chapter-number");
@@ -71,22 +89,17 @@ const chapterRows = document.querySelectorAll("#chapter-list tr");
 if (chapterSelect && previousButton && nextButton && chapterRows.length > 0) {
   const chapterGroups = [];
   const rowsPerGroup = 10;
-
   const totalChapters = parseInt(document.body.dataset.totalChapters) || 0;
 
   let validRowCount = 0;
 
   for (let i = 0; i < chapterRows.length; i++) {
     const row = chapterRows[i];
-
-    // FIXED: Check if the row has any TEXT inside its links,
-    // regardless of whether the href is empty or not.
-    const hasText = Array.from(row.querySelectorAll("a")).some((a) => {
-      return a.textContent.trim() !== "";
-    });
+    const hasText = Array.from(row.querySelectorAll("a")).some(
+      (a) => a.textContent.trim() !== "",
+    );
 
     if (!hasText) {
-      // Hide completely empty rows (like the padding row at the bottom)
       row.style.display = "none";
       continue;
     }
@@ -126,9 +139,7 @@ if (chapterSelect && previousButton && nextButton && chapterRows.length > 0) {
         chapterRows[i].style.display = "";
       }
     }
-
     chapterSelect.value = group;
-
     const currentIndex = chapterGroups.indexOf(group);
     previousButton.disabled = currentIndex === 0;
     nextButton.disabled = currentIndex === chapterGroups.length - 1;
@@ -137,19 +148,14 @@ if (chapterSelect && previousButton && nextButton && chapterRows.length > 0) {
   chapterSelect.addEventListener("change", function () {
     showChapterGroup(this.value);
   });
-
   previousButton.addEventListener("click", function () {
     const currentIndex = chapterGroups.indexOf(chapterSelect.value);
-    if (currentIndex > 0) {
-      showChapterGroup(chapterGroups[currentIndex - 1]);
-    }
+    if (currentIndex > 0) showChapterGroup(chapterGroups[currentIndex - 1]);
   });
-
   nextButton.addEventListener("click", function () {
     const currentIndex = chapterGroups.indexOf(chapterSelect.value);
-    if (currentIndex < chapterGroups.length - 1) {
+    if (currentIndex < chapterGroups.length - 1)
       showChapterGroup(chapterGroups[currentIndex + 1]);
-    }
   });
 
   showChapterGroup(chapterGroups[0]);
@@ -163,13 +169,10 @@ const bookTitleElement = document.getElementById("titleBook");
 
 function highlightBookmarkedChapter() {
   if (!bookTitleElement) return;
-
   const bookTitle = bookTitleElement.textContent.trim();
-  const bookId = bookTitle.toLowerCase().replace(/\s+/g, "-");
-
+  const bookId = getBookId(bookTitle);
   const chapterLinks = document.querySelectorAll("#chapter-list td a");
 
-  // Reset previous state
   chapterLinks.forEach(function (link) {
     link.classList.remove("bookmarked-chapter-highlight");
     link.classList.remove("chapter-has-bookmark");
@@ -184,17 +187,11 @@ function highlightBookmarkedChapter() {
   const entry = allBookmarks[bookId];
   if (!entry) return;
 
-  // Normalize legacy / new format into a plain list
   let bookmarks = [];
-  if (entry.bookmarks) {
-    bookmarks = entry.bookmarks;
-  } else if (entry.chapter) {
-    bookmarks = [entry];
-  }
-
+  if (entry.bookmarks) bookmarks = entry.bookmarks;
+  else if (entry.chapter) bookmarks = [entry];
   if (bookmarks.length === 0) return;
 
-  // Find all bookmarked chapters AND identify the latest one
   const chaptersWithBookmarks = new Set();
   let latestChapter = null;
   let maxTime = -1;
@@ -212,39 +209,33 @@ function highlightBookmarkedChapter() {
 
   if (chaptersWithBookmarks.size === 0) return;
 
-  // Apply styles
   chapterLinks.forEach(function (link) {
     const linkText = link.textContent.trim();
     const chapterText = linkText.split(":")[0].trim();
 
     if (chaptersWithBookmarks.has(chapterText)) {
-      // 1. All bookmarked chapters get the icon and flex layout
       link.classList.add("chapter-has-bookmark");
-
       const img = document.createElement("img");
       img.src = "../icons/bookmark.svg";
       img.alt = "bookmarked chapter";
       img.className = "chapter-bookmark-icon";
       link.prepend(img);
-
-      // 2. Only the LATEST chapter gets the orange pill highlight
-      if (chapterText === latestChapter) {
+      if (chapterText === latestChapter)
         link.classList.add("bookmarked-chapter-highlight");
-      }
     }
   });
 }
-
 highlightBookmarkedChapter();
 
 /* ============================================================
-   NOVEL PAGE — ADD TO LIBRARY BUTTON
+   NOVEL PAGE — ADD TO LIBRARY BUTTON 
    ============================================================ */
 
 const libraryButton = document.getElementById("add-library-button");
 
 if (libraryButton && bookTitleElement) {
   const bookTitle = bookTitleElement.textContent.trim();
+  const bookId = getBookId(bookTitle);
 
   let bookAuthor = "Unknown";
   const authorElement = document.querySelector(".author");
@@ -254,24 +245,8 @@ if (libraryButton && bookTitleElement) {
   const coverElement = document.querySelector(".header-container > img");
   if (coverElement) bookCover = coverElement.src;
 
-  let bookRating = "0.0";
-  const ratingElement = document.querySelector(".book-rating");
-  if (ratingElement)
-    bookRating = ratingElement.textContent.replace(/[^0-9.]/g, "");
-
-  const book = {
-    id: bookTitle.toLowerCase().replace(/\s+/g, "-"),
-    title: bookTitle,
-    author: bookAuthor,
-    cover: bookCover,
-    rating: bookRating,
-    progress: 0,
-    status: "reading",
-  };
-
   function updateLibraryButton() {
-    const added = isInLibrary(book.id);
-
+    const added = isInLibrary(bookId);
     if (added) {
       libraryButton.textContent = "Added to Library";
       libraryButton.style.backgroundColor = "#b8721f";
@@ -286,11 +261,26 @@ if (libraryButton && bookTitleElement) {
   updateLibraryButton();
 
   libraryButton.addEventListener("click", function () {
-    const result = toggleLibraryBook(book);
+    // 1. Get the hardcoded rating based on the book ID
+    let bookRating = HARDCODED_RATINGS[bookId] || "0.0";
 
-    if (result === "removed") {
-      removeBookmarkForBook(book.id);
+    // 2. If the user manually rated it via the modal, that overrides everything
+    const userSavedRating = localStorage.getItem(`book_rating_${bookId}`);
+    if (userSavedRating) {
+      bookRating = parseFloat(userSavedRating).toFixed(1);
     }
+
+    const book = {
+      id: bookId,
+      title: bookTitle,
+      author: bookAuthor,
+      cover: bookCover,
+      rating: bookRating,
+      progress: 0,
+      status: "reading",
+    };
+
+    const result = toggleLibraryBook(book);
 
     let title = "";
     let text = "";
@@ -306,36 +296,11 @@ if (libraryButton && bookTitleElement) {
       icon = "info";
     }
 
-    Swal.fire({
-      title: title,
-      text: text,
-      icon: icon,
-    });
-
+    Swal.fire({ title: title, text: text, icon: icon });
     updateLibraryButton();
     highlightBookmarkedChapter();
   });
 }
-
-/* ============================================================
-   SYNCHRONIZE UI ON BACK/FORWARD NAVIGATION & TAB SWITCHING
-   ============================================================ */
-
-window.addEventListener("pageshow", function (event) {
-  if (event.persisted) {
-    if (typeof updateLibraryButton === "function") updateLibraryButton();
-    if (typeof highlightBookmarkedChapter === "function")
-      highlightBookmarkedChapter();
-  }
-});
-
-window.addEventListener("storage", function (e) {
-  if (e.key === BOOKMARK_KEY || e.key === LIBRARY_KEY) {
-    if (typeof updateLibraryButton === "function") updateLibraryButton();
-    if (typeof highlightBookmarkedChapter === "function")
-      highlightBookmarkedChapter();
-  }
-});
 
 /* ============================================================
    LIBRARY PAGE — DISPLAY BOOKS
@@ -367,11 +332,8 @@ if (bookGrid) {
     completedBooks.textContent = completedCount;
 
     const filteredBooks = [];
-
     for (let i = 0; i < books.length; i++) {
-      if (currentFilter === "all") {
-        filteredBooks.push(books[i]);
-      } else if (books[i].status === currentFilter) {
+      if (currentFilter === "all" || books[i].status === currentFilter) {
         filteredBooks.push(books[i]);
       }
     }
@@ -390,17 +352,22 @@ if (bookGrid) {
     for (let i = 0; i < filteredBooks.length; i++) {
       const book = filteredBooks[i];
 
-      let statusClass = "book-status-completed";
-      let statusText = "Completed";
+      let statusClass =
+        book.status === "reading"
+          ? "book-status-reading"
+          : "book-status-completed";
+      let statusText = book.status === "reading" ? "Reading" : "Completed";
 
-      if (book.status === "reading") {
-        statusClass = "book-status-reading";
-        statusText = "Reading";
+      // Force the hardcoded rating from the dictionary
+      let displayRating = HARDCODED_RATINGS[book.id] || book.rating || "0.0";
+
+      // If they rated it in the modal, use the new one
+      const liveUserRating = localStorage.getItem(`book_rating_${book.id}`);
+      if (liveUserRating) {
+        displayRating = parseFloat(liveUserRating).toFixed(1);
       }
 
-      // Dynamically build the URL using book.id
       html += '<a href="' + book.id + '-page.html">';
-
       html += '  <div class="book-card">';
       html += '    <div class="book-cover">';
       html +=
@@ -418,7 +385,7 @@ if (bookGrid) {
       html += '      <div class="book-meta">';
       html += '        <span class="book-rating">';
       html += '          <img src="../icons/star-fill.svg" alt="star" />';
-      html += "          " + book.rating;
+      html += "          " + displayRating;
       html += "        </span>";
       html +=
         '        <span class="book-progress">' + book.progress + "%</span>";
@@ -439,9 +406,8 @@ if (bookGrid) {
 
   for (let i = 0; i < filterButtons.length; i++) {
     filterButtons[i].addEventListener("click", function () {
-      for (let j = 0; j < filterButtons.length; j++) {
+      for (let j = 0; j < filterButtons.length; j++)
         filterButtons[j].classList.remove("active");
-      }
       this.classList.add("active");
       currentFilter = this.dataset.filter;
       renderLibrary();
