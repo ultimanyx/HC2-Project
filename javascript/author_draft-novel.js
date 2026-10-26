@@ -263,11 +263,12 @@ document.addEventListener("DOMContentLoaded", () => {
         saveNovels(updated);
         applyFilters();
 
-        Swal.fire(
-          "Submitted!",
-          "Your novel is now pending admin approval.",
-          "success",
-        );
+        Swal.fire({
+          title: "Submitted!",
+          text: "Your novel is now pending admin approval.",
+          icon: "success",
+          confirmButtonColor: "#b8721f",
+        });
       });
       return;
     }

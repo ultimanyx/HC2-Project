@@ -170,16 +170,17 @@ function highlightBookmarkedChapter() {
   if (!bookTitleElement) return;
 
   const bookTitle = bookTitleElement.textContent.trim();
-  // Format ID to match browse.html links (handles "Pride & Prejudice")
-  const bookId = bookTitle
-    .toLowerCase()
-    .replace(/&/g, "and")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
+  // ✅ FIXED: Grab the REAL ID from the body dataset (e.g. "draft-seed-0")
+  const bookId =
+    document.body.dataset.bookId ||
+    bookTitle
+      .toLowerCase()
+      .replace(/&/g, "and")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
 
   const chapterLinks = document.querySelectorAll("#chapter-list td a");
 
-  // Reset previous state
   chapterLinks.forEach(function (link) {
     link.classList.remove("bookmarked-chapter-highlight");
     link.classList.remove("chapter-has-bookmark");
@@ -250,11 +251,14 @@ const libraryButton = document.getElementById("add-library-button");
 
 if (libraryButton && bookTitleElement) {
   const bookTitle = bookTitleElement.textContent.trim();
-  const bookId = bookTitle
-    .toLowerCase()
-    .replace(/&/g, "and")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
+  // ✅ FIXED: Grab the REAL ID from the body dataset (e.g. "draft-seed-0")
+  const bookId =
+    document.body.dataset.bookId ||
+    bookTitle
+      .toLowerCase()
+      .replace(/&/g, "and")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
 
   let bookAuthor = "Unknown";
   const authorElement = document.querySelector(".author");
@@ -264,10 +268,8 @@ if (libraryButton && bookTitleElement) {
   const coverElement = document.querySelector(".header-container > img");
   if (coverElement) bookCover = coverElement.src;
 
-  // Fetch the exact rating from the dictionary
   let bookRating = BOOK_RATINGS[bookId] || "0.0";
 
-  // If the user submitted a custom rating via the modal, override the default
   const userSavedRating = localStorage.getItem(`book_rating_${bookId}`);
   if (userSavedRating) {
     bookRating = parseFloat(userSavedRating).toFixed(1);
@@ -300,7 +302,6 @@ if (libraryButton && bookTitleElement) {
   updateLibraryButton();
 
   libraryButton.addEventListener("click", function () {
-    // Re-sync the rating just in case they clicked a star rating right before adding
     const latestUserRating = localStorage.getItem(`book_rating_${bookId}`);
     if (latestUserRating) {
       book.rating = parseFloat(latestUserRating).toFixed(1);
@@ -369,6 +370,7 @@ if (bookGrid) {
   let currentFilter = "all";
   function renderLibrary() {
     const books = getLibraryBooks();
+    const allNovels = JSON.parse(localStorage.getItem("novels") || "[]"); // ✅ Fetch real novels to check IDs
 
     let readingCount = 0;
     let completedCount = 0;
@@ -404,7 +406,7 @@ if (bookGrid) {
     let html = "";
 
     for (let i = 0; i < filteredBooks.length; i++) {
-      const book = filteredBooks[i];
+      let book = filteredBooks[i];
 
       let statusClass = "book-status-completed";
       let statusText = "Completed";
@@ -414,19 +416,27 @@ if (bookGrid) {
         statusText = "Reading";
       }
 
-      // Fallback: Fix any old saves that currently have "0.0"
       let displayRating = book.rating;
       if (displayRating === "0.0" || !displayRating) {
         displayRating = BOOK_RATINGS[book.id] || "0.0";
       }
 
-      // Always prioritize the live user rating if they used the modal
       const liveUserRating = localStorage.getItem(`book_rating_${book.id}`);
       if (liveUserRating) {
         displayRating = parseFloat(liveUserRating).toFixed(1);
       }
 
-      html += '<a href="' + book.id + '-page.html">';
+      // ✅ FIX OLD BROKEN LINKS: If the book was saved with a slug ID (like "the-lost-kingdom"),
+      // look up the real ID (like "draft-seed-0") from the novels array.
+      let realId = book.id;
+      const matchedNovel = allNovels.find(
+        (n) => String(n.id) === String(book.id) || n.title === book.title,
+      );
+      if (matchedNovel) {
+        realId = matchedNovel.id;
+      }
+
+      html += '<a href="reader.html?id=' + realId + '">';
       html += '  <div class="book-card">';
       html += '    <div class="book-cover">';
       html +=
