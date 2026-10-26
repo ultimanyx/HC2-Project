@@ -538,7 +538,17 @@ a {
   align-items: flex-start;
   gap: 20px;
   margin: 20px 30px;
-  background-color: var(--background);
+  background-color: var(--card-background);
+  border-radius: 8px;
+}
+
+.header .subtitle {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--muted-foreground);
+  margin-top: -10px;
+  margin-bottom: 15px;
 }
 
 /* book cover */
