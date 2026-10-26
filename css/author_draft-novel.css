@@ -51,7 +51,7 @@
     format("truetype");
 }
 
-/* base - FIXED HTML/BODY HEIGHT */
+/* base - FIXED HTML/BODY HEIGHT (no line-height on body) */
 html,
 body {
   height: 100%;
@@ -74,11 +74,13 @@ a {
 /* layout - FIXED HEIGHT */
 .layout {
   display: flex;
-  height: 100%; /* Changed from 100vh */
+  height: 100%;
   overflow: hidden;
 }
 
-/* sidebar - FIXED HEIGHT */
+/* =========================================
+   SIDEBAR — canonical block (matches dashboard / all-novels / create-novel / earnings / chapter-editor / view-novel)
+   ========================================= */
 .sidebar {
   width: 270px;
   background-color: #ffffff;
@@ -86,12 +88,11 @@ a {
   padding: 20px 14px;
   display: flex;
   flex-direction: column;
-  height: 100%; /* Changed from 100vh */
-  overflow-y: auto;
   flex-shrink: 0;
+  height: 100%;
+  overflow-y: auto;
 }
 
-/* Brand - UNTOUCHED AS REQUESTED */
 .brand {
   display: flex;
   justify-content: center;
@@ -99,10 +100,11 @@ a {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 20px;
-  padding-left: 0px;
+  padding-left: 0;
   padding-right: 60px;
   color: #1a1826;
   gap: 8px;
+  line-height: 1.4; /* lock height */
 }
 
 .brand img {
@@ -110,34 +112,52 @@ a {
   height: 50px;
 }
 
-/* navigation */
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 10px;
   flex: 1;
 }
 
+.nav-item {
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: 3px;
+  color: #6b6680;
+  padding: 7px 10px;
+  border-radius: 6px;
+  line-height: 1.4; /* lock height */
+}
+
 .nav-item.sub {
-  display: flex;
-  align-items: center;
-  padding: 10px 16px;
+  padding-left: 16px;
   color: #6b6680;
   font-size: 16px;
-  font-weight: 500;
-  border-radius: 8px;
-  transition: all 0.2s ease;
+  font-weight: 400;
 }
 
-.nav-item.sub:hover {
-  background-color: #ede9e1;
-  color: #1a1826;
-}
-
-.nav-item.sub.active {
+.nav-item.active {
   background-color: rgba(184, 114, 31, 0.12);
   color: #b8721f;
   font-weight: 600;
+  font-size: 16px;
+}
+
+.nav-item:hover {
+  background-color: #ede9e1;
+}
+
+.nav-icon {
+  margin-right: 6px;
+}
+
+.nav-section {
+  font-size: 21px;
+  font-weight: 600;
+  color: #1a1826;
+  margin-top: 14px;
+  margin-bottom: 3px;
+  padding-left: 10px;
 }
 
 .logout {
@@ -146,7 +166,7 @@ a {
   gap: 8px;
   font-size: 15px;
   color: #6b6680;
-  padding: 10px 16px;
+  padding: 10px 14px;
   margin-top: auto;
   border-top: 1px solid var(--border);
   border-radius: 6px;
@@ -155,6 +175,7 @@ a {
     color 0.2s ease;
   text-decoration: none;
   cursor: pointer;
+  line-height: 1.4; /* lock height */
 }
 
 .logout:hover {
@@ -166,8 +187,9 @@ a {
 .main {
   flex: 1;
   padding: 24px 32px;
-  height: 100%; /* Changed from 100vh */
+  height: 100%;
   overflow-y: auto;
+  scrollbar-gutter: stable; /* FIX: always reserve scrollbar → sidebar never shifts */
 }
 
 .topbar {
@@ -573,7 +595,7 @@ tbody tr:last-child td {
   background: var(--secondary);
 }
 
-/* SweetAlert z-index para top ang sweetalert*/
+/* SweetAlert z-index */
 .swal2-container {
   z-index: 9999 !important;
 }

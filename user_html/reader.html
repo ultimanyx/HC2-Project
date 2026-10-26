@@ -70,6 +70,10 @@
       <img id="bookCover" src="../image/logo.png" alt="Book Cover" />
       <div class="header">
         <h1 id="titleBook">Loading...</h1>
+
+        <!-- ADDED SUBTITLE ELEMENT HERE -->
+        <p class="subtitle" id="bookSubtitle"></p>
+
         <span>
           <img src="../icons/book-half.svg" alt="bookicon" class="book-icon" />
           <p class="genre" id="bookGenre">Loading...</p>
@@ -135,12 +139,6 @@
       </div>
     </div>
 
-    <footer class="footer">
-      <div class="footer-bottom">
-        <p>© 2026 Novel Library. All rights reserved.</p>
-      </div>
-    </footer>
-
     <!-- RATING MODAL -->
     <div class="rating-modal-overlay" id="ratingModalOverlay">
       <div class="rating-modal">
@@ -171,6 +169,41 @@
       </div>
     </div>
 
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <img
+            src="../image/logo-nobackground-circle.png"
+            alt="Logo"
+            class="footer-logo"
+          />
+          <p>
+            Discover your next story and explore novels worth getting lost in.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Explore</h3>
+          <a href="home.html">Home</a>
+          <a href="browse.html">Browse</a>
+          <a href="library.html">My Library</a>
+          <a href="ranking.html">Rankings</a>
+        </div>
+
+        <div class="footer-section">
+          <h3>About</h3>
+          <a href="about-us.html">About Us</a>
+          <a href="contact-us.html">Contact</a>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Novel Library. All rights reserved.</p>
+      </div>
+    </footer>
+
     <script src="../javascript/sweetalert2.all.min.js"></script>
     <script src="../javascript/name-change.js"></script>
 
@@ -188,6 +221,11 @@
           document.body.dataset.bookId = book.id;
 
           document.getElementById("titleBook").textContent = book.title;
+
+          // 🚨 ADDED: Populate the subtitle element
+          document.getElementById("bookSubtitle").textContent =
+            book.subtitle || "";
+
           document.getElementById("bookGenre").textContent =
             book.genre || "Unknown";
           document.getElementById("bookAuthor").textContent =
@@ -198,7 +236,7 @@
             book.coverImage || "../image/logo.png";
           document.getElementById("modalBookTitle").textContent = book.title;
 
-          // 🚨 FIX: Filter the chapters so ONLY published/approved ones show up
+          // Filter the chapters so ONLY published/approved ones show up
           const publishedChapters = (book.chapters || []).filter(
             (ch) => ch.status === "published" || ch.status === undefined,
           );

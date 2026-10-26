@@ -1049,7 +1049,7 @@ document.addEventListener("DOMContentLoaded", function () {
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Archive",
-      confirmButtonColor: "#b8721f",
+      confirmButtonColor: "#d33",
       cancelButtonColor: "#6b6680",
     }).then((res) => {
       if (!res.isConfirmed) return;
@@ -1061,11 +1061,12 @@ document.addEventListener("DOMContentLoaded", function () {
         saveNovels(list);
       }
       renderTable();
-      Swal.fire(
-        "Archived!",
-        `"${novel.title}" has been moved to the Archive.`,
-        "success",
-      );
+      Swal.fire({
+        title: "Archived!",
+        text: `"${novel.title}" has been moved to the Archive.`,
+        icon: "success",
+        confirmButtonColor: "#b8721f",
+      });
     });
   });
 

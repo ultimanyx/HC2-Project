@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const NOVELS_KEY = "novels";
   const ADS_KEY = "ads";
+  const USERS_KEY = "users";
 
   const tbody = document.getElementById("archiveTableBody");
   if (!tbody) return;
@@ -87,7 +88,19 @@ document.addEventListener("DOMContentLoaded", () => {
         storageKey: ADS_KEY,
       }));
 
-    return [...novels, ...chapters, ...ads].sort(
+    // Fetch ALL archived users (Readers AND Authors)
+    const archivedUsers = readKey(USERS_KEY)
+      .filter((u) => u && u.archived)
+      .map((u) => ({
+        id: u.id,
+        type: u.role === "author" ? "Author" : "Reader",
+        title: u.username || "Unknown User", // Table displays this
+        owner: u.email || "—",
+        archivedAt: Number(u.archivedAt) || 0,
+        storageKey: USERS_KEY,
+      }));
+
+    return [...novels, ...chapters, ...ads, ...archivedUsers].sort(
       (a, b) => b.archivedAt - a.archivedAt,
     );
   }
@@ -165,6 +178,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (displayType === "DeletedByAuthor") {
         typeBadge = `<td><span class="badge" style="background:#fee2e2; color:#b91c1c;">Deleted by Author</span></td>`;
+      } else if (displayType === "Author") {
+        typeBadge = `<td><span class="badge" style="background:#e0e7ff; color:#3730a3;">Author</span></td>`;
+      } else if (displayType === "Reader") {
+        typeBadge = `<td><span class="badge" style="background:#dcfce7; color:#166534;">Reader</span></td>`;
       }
 
       tr.innerHTML = `
@@ -173,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <td>${escapeHtml(item.owner)}</td>
         <td>${formatDate(item.archivedAt)}</td>
         <td style="text-align: right">
-          <div class="action-group">
+          <div class="action-group" style="display: flex; gap: 8px; justify-content: flex-end;">
             <button type="button" class="btn btn-success archive-restore-btn">
               <img src="../icons/restore.svg" alt="" class="btn-icon" />
               Restore
@@ -211,6 +228,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!id || !key) return;
 
     let target = null;
+    let targetName = "Item"; // 🚨 Fixed: Store the correct display name here
+
     if (isChapter) {
       const parent = readKey(key).find(
         (n) => String(n.id) === String(parentNovelId),
@@ -218,8 +237,17 @@ document.addEventListener("DOMContentLoaded", () => {
       target = parent?.chapters?.find(
         (c) => Number(c.number) === chapterNumber,
       );
+      if (target) targetName = target.title || `Chapter ${target.number}`;
     } else {
       target = readKey(key).find((x) => String(x.id) === String(id));
+      if (target) {
+        // 🚨 Fixed: Users have 'username', novels/ads have 'title'
+        if (key === USERS_KEY) {
+          targetName = target.username || "Unknown User";
+        } else {
+          targetName = target.title || target.name || "Untitled";
+        }
+      }
     }
 
     if (!target) return;
@@ -228,7 +256,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (restoreBtn) {
       Swal.fire({
         title: "Are you sure?",
-        text: `"${target.title}" will be restored to the library.`,
+        text: `"${targetName}" will be restored.`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Yes, restore it!",
@@ -259,11 +287,16 @@ document.addEventListener("DOMContentLoaded", () => {
           const t = list.find((x) => String(x.id) === String(id));
           if (!t) return;
 
-          // 🚨 CLEAR ALL FLAGS: This ensures it is fully restored in one click!
+          // CLEAR ALL FLAGS
           t.archived = false;
           delete t.archivedAt;
           delete t.deletedByAuthor;
           delete t.deletedAt;
+
+          // Restore status if it's a user
+          if (key === USERS_KEY) {
+            t.status = "active";
+          }
 
           t.restoredAt = Date.now();
         }
@@ -272,7 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
         render();
         Swal.fire({
           title: "Restored!",
-          text: `"${target.title}" has been restored successfully.`,
+          text: `"${targetName}" has been restored successfully.`,
           icon: "success",
           confirmButtonColor: "#b8721f",
         });
@@ -284,7 +317,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (deleteBtn) {
       Swal.fire({
         title: "Are you sure?",
-        text: `"${target.title}" will be permanently deleted from the system. You won't be able to revert this!`,
+        text: `"${targetName}" will be permanently deleted from the system. You won't be able to revert this!`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Yes, delete it forever!",
@@ -313,7 +346,7 @@ document.addEventListener("DOMContentLoaded", () => {
           render();
           Swal.fire({
             title: "Deleted!",
-            text: `"${target.title}" has been deleted permanently.`,
+            text: `"${targetName}" has been deleted permanently.`,
             icon: "success",
             confirmButtonColor: "#b8721f",
           });
@@ -324,7 +357,7 @@ document.addEventListener("DOMContentLoaded", () => {
         render();
         Swal.fire({
           title: "Deleted!",
-          text: `"${target.title}" has been deleted.`,
+          text: `"${targetName}" has been deleted.`,
           icon: "success",
           confirmButtonColor: "#b8721f",
         });

@@ -63,7 +63,7 @@
     format("truetype");
 }
 
-/* base */
+/* base — no line-height on body (per request) */
 
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
@@ -81,12 +81,13 @@ a {
 
 .layout {
   display: flex;
-  height: 100vh; /* Changed from min-height */
-  overflow: hidden; /* Added */
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* sidebar */
-
+/* =========================================
+   SIDEBAR — canonical block (matches dashboard / all-novels / create-novel / earnings / chapter-editor)
+   ========================================= */
 .sidebar {
   width: 270px;
   background-color: #ffffff;
@@ -94,8 +95,9 @@ a {
   padding: 20px 14px;
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Added */
-  overflow-y: auto; /* Added */
+  flex-shrink: 0; /* FIX: never squeeze */
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .brand {
@@ -105,9 +107,11 @@ a {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 20px;
+  padding-left: 0;
   padding-right: 60px;
   color: #1a1826;
   gap: 8px;
+  line-height: 1.4; /* FIX: lock height */
 }
 
 .brand img {
@@ -129,6 +133,7 @@ a {
   color: #6b6680;
   padding: 7px 10px;
   border-radius: 6px;
+  line-height: 1.4; /* FIX: lock height */
 }
 
 .nav-item.sub {
@@ -167,6 +172,7 @@ a {
     background 0.2s ease,
     color 0.2s ease;
   cursor: pointer;
+  line-height: 1.4; /* FIX: lock height */
 }
 
 .logout:hover {
@@ -180,8 +186,9 @@ a {
   flex: 1;
   padding: 24px 32px;
   min-width: 0;
-  height: 100vh; /* Added */
-  overflow-y: auto; /* Added */
+  height: 100vh;
+  overflow-y: auto;
+  scrollbar-gutter: stable; /* FIX: reserve scrollbar → no sidebar shift */
 }
 
 /* topbar */
@@ -635,7 +642,8 @@ tbody td strong {
   background-color: rgba(59, 111, 145, 0.15);
   color: #2c536d;
 }
-/* SweetAlert z-index para top ang sweetalert*/
+
+/* SweetAlert z-index */
 .swal2-container {
   z-index: 9999 !important;
 }

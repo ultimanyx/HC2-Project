@@ -10,18 +10,20 @@ const ADMIN = {
 // ============================================================
 // DEFAULT ACCOUNTS (Will be saved to localStorage)
 // ============================================================
-const DEFAULT_READER = {
-  id: "u-001",
-  username: "John Smith",
-  email: "john@gmail.com",
-  password: "john123",
-  role: "reader",
-  status: "active",
-  joined: Date.now() - 30 * 86400000, // 30 days ago
-};
+const DEFAULT_READERS = [
+  {
+    id: "u-001",
+    username: "John Smith",
+    email: "john@gmail.com",
+    password: "john123",
+    role: "reader",
+    status: "active",
+    joined: Date.now() - 30 * 86400000,
+  },
+];
 
 const DEFAULT_AUTHOR = {
-  id: "u-002",
+  id: "u-100",
   username: "Bram Stoker",
   email: "bramstoker@gmail.com",
   password: "bramstoker",
@@ -35,20 +37,25 @@ const DEFAULT_AUTHOR = {
 // ============================================================
 function seedDefaultAccounts() {
   let users = JSON.parse(localStorage.getItem("users")) || [];
+  let modified = false;
 
-  // Seed Reader
-  const readerExists = users.find((u) => u.email === DEFAULT_READER.email);
-  if (!readerExists) {
-    users.push(DEFAULT_READER);
-  }
+  DEFAULT_READERS.forEach((reader) => {
+    const existingIndex = users.findIndex((u) => u.id === reader.id);
+    if (existingIndex === -1) {
+      users.push(reader);
+      modified = true;
+    }
+  });
 
-  // Seed Author
-  const authorExists = users.find((u) => u.email === DEFAULT_AUTHOR.email);
-  if (!authorExists) {
+  const authorIndex = users.findIndex((u) => u.id === DEFAULT_AUTHOR.id);
+  if (authorIndex === -1) {
     users.push(DEFAULT_AUTHOR);
+    modified = true;
   }
 
-  localStorage.setItem("users", JSON.stringify(users));
+  if (modified) {
+    localStorage.setItem("users", JSON.stringify(users));
+  }
 }
 
 seedDefaultAccounts();
@@ -84,7 +91,6 @@ if (signupForm) {
       return;
     }
 
-    // Create new user with ID, status, and joined date
     const newUser = {
       id: "u-" + Date.now(),
       username,
@@ -141,7 +147,7 @@ if (loginForm) {
     );
 
     if (foundUser) {
-      // ✅ Block banned users from logging in
+      // Block banned users from logging in
       if (foundUser.status === "banned") {
         Swal.fire(
           "Account Banned",
@@ -175,4 +181,52 @@ if (loginForm) {
   });
 }
 
-// ... (Keep Password Toggle & Logout logic as provided) ...
+// ============================================================
+// 3. PASSWORD TOGGLE LOGIC (FIXED)
+// ============================================================
+// Target the button using its class, not an ID
+const togglePasswordBtn = document.querySelector(".toggle-password");
+
+if (togglePasswordBtn) {
+  togglePasswordBtn.addEventListener("click", function () {
+    // Get the target input ID from the data-target attribute
+    const targetId = this.getAttribute("data-target");
+    const passwordInput = document.getElementById(targetId);
+
+    if (!passwordInput) return;
+
+    // Toggle the input type
+    const type =
+      passwordInput.getAttribute("type") === "password" ? "text" : "password";
+    passwordInput.setAttribute("type", type);
+
+    // Toggle the icons inside the button
+    const iconShow = this.querySelector(".icon-show");
+    const iconHide = this.querySelector(".icon-hide");
+
+    if (type === "text") {
+      // Password is visible
+      if (iconShow) iconShow.style.display = "none";
+      if (iconHide) iconHide.style.display = "block";
+    } else {
+      // Password is hidden
+      if (iconShow) iconShow.style.display = "block";
+      if (iconHide) iconHide.style.display = "none";
+    }
+  });
+}
+
+// ============================================================
+// 4. LOGOUT LOGIC
+// ============================================================
+const logoutBtn = document.getElementById("logout");
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    sessionStorage.removeItem("currentUser");
+    sessionStorage.removeItem("currentReader");
+    sessionStorage.removeItem("currentAuthor");
+    sessionStorage.removeItem("adminLoggedIn");
+    window.location.href = "../index.html";
+  });
+}

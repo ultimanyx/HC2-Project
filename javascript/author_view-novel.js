@@ -3,7 +3,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const id = new URLSearchParams(location.search).get("id");
 
   if (!id) {
-    Swal.fire("Error", "No novel selected.", "error").then(() => {
+    Swal.fire({
+      title: "Error",
+      text: "No novel selected.",
+      icon: "error",
+      confirmButtonColor: "#dc2626",
+    }).then(() => {
       window.location.href = "author_all-novel.html";
     });
     return;
@@ -14,11 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   if (!novel) {
-    Swal.fire(
-      "Not Found",
-      "This novel doesn't exist or was deleted.",
-      "error",
-    ).then(() => {
+    Swal.fire({
+      title: "Not Found",
+      text: "This novel doesn't exist or was deleted.",
+      icon: "error",
+      confirmButtonColor: "#dc2626",
+    }).then(() => {
       window.location.href = "author_all-novel.html";
     });
     return;
@@ -195,10 +201,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       Swal.fire({
         title: "Archive Chapter?",
-        text: "This chapter will be hidden from the list.",
-        icon: "warning",
+        text: "You can restore it later from the Archive page.",
+        icon: "question",
         showCancelButton: true,
-        confirmButtonColor: "#b8721f",
+        confirmButtonColor: "#dc2626",
         cancelButtonColor: "#6b6680",
         confirmButtonText: "Yes, archive it",
       }).then((res) => {
@@ -219,7 +225,12 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
           renderChapters();
-          Swal.fire("Archived!", "The chapter has been archived.", "success");
+          Swal.fire({
+            title: "Archived!",
+            text: "The chapter has been archived.",
+            icon: "success",
+            confirmButtonColor: "#b8721f",
+          });
         }
       });
     });
@@ -295,6 +306,8 @@ document.addEventListener("DOMContentLoaded", () => {
         title: "Form Reset",
         text: "Fields have been restored to their last saved values.",
         confirmButtonText: "OK",
+        iconColor: "#3b82f6",
+        confirmButtonColor: "#3b82f6",
       });
     });
   }
@@ -303,7 +316,13 @@ document.addEventListener("DOMContentLoaded", () => {
     saveBtn.addEventListener("click", () => {
       const newTitle = editTitle.value.trim();
       if (!newTitle) {
-        Swal.fire("Missing title", "Please enter a title.", "warning");
+        Swal.fire({
+          title: "Missing title",
+          text: "Please enter a title.",
+          icon: "warning",
+          iconColor: "#f59e0b",
+          confirmButtonColor: "#f59e0b",
+        });
         return;
       }
 
@@ -326,22 +345,25 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(raw));
       } catch (err) {
-        Swal.fire(
-          "Couldn't save",
-          "Storage quota exceeded. Try a smaller image.",
-          "error",
-        );
+        Swal.fire({
+          title: "Couldn't save",
+          text: "Storage quota exceeded. Try a smaller image.",
+          icon: "error",
+          confirmButtonColor: "#dc2626",
+        });
         return;
       }
 
       novel = updated;
       populateEditForm();
 
-      Swal.fire(
-        "Novel Updated",
-        `"${updated.title}" has been saved.`,
-        "success",
-      );
+      Swal.fire({
+        title: "Novel Updated",
+        text: `"${updated.title}" has been saved.`,
+        icon: "success",
+        iconColor: "#16a34a",
+        confirmButtonColor: "#16a34a",
+      });
     });
   }
 
@@ -365,7 +387,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!file) return;
 
     if (file.size > 5 * 1024 * 1024) {
-      Swal.fire("Too large", "Max file size is 5MB.", "error");
+      Swal.fire({
+        title: "Too large",
+        text: "Max file size is 5MB.",
+        icon: "error",
+        confirmButtonColor: "#dc2626",
+      });
       coverInput.value = "";
       return;
     }

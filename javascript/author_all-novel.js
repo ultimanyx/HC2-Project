@@ -290,7 +290,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (n.status === "draft") {
         targetUrl = `author_edit-draft.html?id=${encodeURIComponent(n.id)}`;
-        btnText = "Edit";
+        btnText = "View";
       }
 
       const viewCell = isDemo
@@ -578,7 +578,9 @@ document.addEventListener("DOMContentLoaded", () => {
       icon: "question",
       showCancelButton: true,
       confirmButtonText: "Yes, archive it!",
+      confirmButtonColor: "#dc2626",
       cancelButtonText: "No, cancel!",
+      cancelButtonColor: "#6b6680",
       reverseButtons: true,
     }).then((res) => {
       if (!res.isConfirmed) return;

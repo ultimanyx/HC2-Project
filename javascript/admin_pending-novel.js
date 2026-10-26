@@ -267,11 +267,12 @@ document.addEventListener("DOMContentLoaded", () => {
     renderTable();
     closeModal();
 
-    Swal.fire(
-      "Approved!",
-      "The content has been published and is now visible to readers.",
-      "success",
-    );
+    Swal.fire({
+      title: "Approved!",
+      text: "The content has been published and is now visible to readers.",
+      icon: "success",
+      confirmButtonColor: "#b8721f",
+    });
   }
 
   // ==========================================
@@ -332,11 +333,12 @@ document.addEventListener("DOMContentLoaded", () => {
       renderTable();
       closeModal();
 
-      Swal.fire(
-        "Rejected",
-        "The content has been rejected and sent back to the author.",
-        "success",
-      );
+      Swal.fire({
+        title: "Rejected",
+        text: "The content has been rejected and sent back to the author.",
+        icon: "success",
+        confirmButtonColor: "#b8721f",
+      });
     });
   }
 

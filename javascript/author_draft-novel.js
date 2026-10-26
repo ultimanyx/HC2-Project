@@ -280,7 +280,7 @@ document.addEventListener("DOMContentLoaded", () => {
         icon: "question",
         showCancelButton: true,
         confirmButtonText: "Archive",
-        confirmButtonColor: "#b8721f",
+        confirmButtonColor: "#dc2626",
         cancelButtonText: "Cancel",
       }).then((res) => {
         if (!res.isConfirmed) return;
@@ -295,7 +295,12 @@ document.addEventListener("DOMContentLoaded", () => {
         saveNovels(updated);
         applyFilters();
 
-        Swal.fire("Archived!", "Draft moved to Archive.", "success");
+        Swal.fire({
+          title: "Archived!",
+          text: "Draft moved to Archive.",
+          icon: "success",
+          confirmButtonColor: "#b8721f",
+        });
       });
     }
   });

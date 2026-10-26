@@ -115,8 +115,8 @@ a {
 
 .layout {
   display: flex;
-  height: 100vh; /* Changed from min-height */
-  overflow: hidden; /* Added */
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* sidebar */
@@ -128,9 +128,9 @@ a {
   padding: 20px 14px;
   display: flex;
   flex-direction: column;
-  flex-shrink: 0; /* Added so it doesn't squish */
-  height: 100vh; /* Added */
-  overflow-y: auto; /* Added */
+  flex-shrink: 0;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .brand {
@@ -140,10 +140,11 @@ a {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 20px;
-  padding-left: 0px;
+  padding-left: 0;
   padding-right: 60px;
   color: #1a1826;
   gap: 8px;
+  line-height: 1.4; /* FIX: lock brand height */
 }
 
 .brand img {
@@ -165,6 +166,7 @@ a {
   color: #6b6680;
   padding: 7px 10px;
   border-radius: 6px;
+  line-height: 1.4; /* FIX: lock nav-item height */
 }
 
 .nav-item.sub {
@@ -213,6 +215,7 @@ a {
     color 0.2s ease;
   text-decoration: none;
   cursor: pointer;
+  line-height: 1.4; /* FIX: lock logout height */
 }
 
 .logout:hover {
@@ -225,8 +228,9 @@ a {
 .main {
   flex: 1;
   padding: 24px 32px;
-  height: 100vh; /* Added */
-  overflow-y: auto; /* Added */
+  height: 100vh;
+  overflow-y: auto;
+  scrollbar-gutter: stable; /* FIX: reserve scrollbar so main width never changes */
 }
 
 .topbar {
@@ -679,7 +683,7 @@ tbody tr:last-child td {
   background: var(--secondary);
 }
 
-/* SweetAlert z-index para top ang sweetalert */
+/* SweetAlert z-index */
 .swal2-container {
   z-index: 9999 !important;
 }

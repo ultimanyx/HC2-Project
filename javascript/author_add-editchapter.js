@@ -258,6 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
       text: `"${title}" has been ${statusMessage}.`,
       icon: "success",
       confirmButtonText: "Continue",
+      confirmButtonColor: "#b8721f",
     }).then(() => {
       if (isBookDraft) {
         window.location.href = `author_edit-draft.html?id=${novelId}`;

@@ -5,7 +5,6 @@
 }
 
 /* --- ROOT ---*/
-
 :root {
   --background: #f8f6f1;
   --foreground: #1a1826;
@@ -32,18 +31,15 @@
 }
 
 /* --- Font ---*/
-
 @font-face {
   font-family: "Poppins";
   src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype");
 }
-
 @font-face {
   font-family: "Plus_Jakarta_Sans";
   src: url("../font/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf")
     format("truetype");
 }
-
 @font-face {
   font-family: "Fraunces";
   src: url("../font/Fraunces/static/Fraunces_72pt-Regular.ttf")
@@ -59,7 +55,6 @@ body {
 }
 
 /* ============ Body ==========*/
-
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   background-color: #f8f6f1;
@@ -73,7 +68,6 @@ a {
 }
 
 /* layout */
-
 .layout {
   display: flex;
   height: 100vh;
@@ -81,7 +75,6 @@ a {
 }
 
 /* sidebar */
-
 .sidebar {
   width: 270px;
   background-color: var(--card-background);
@@ -182,7 +175,6 @@ a {
 }
 
 /* --- Main ---*/
-
 .main {
   flex: 1;
   padding: 24px 32px;
@@ -226,7 +218,6 @@ a {
 }
 
 /* --- Stat ---*/
-
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -288,20 +279,7 @@ a {
     hue-rotate(3deg) brightness(91%) contrast(91%);
 }
 
-.stat-change {
-  font-size: 13px;
-}
-
-.stat-change.positive {
-  color: #3f7d4f;
-}
-
-.stat-change.warning {
-  color: #b8721f;
-}
-
 /* --- Filter Bar ---*/
-
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -354,7 +332,6 @@ a {
 }
 
 /* --- Buttons ---*/
-
 .btn {
   padding: 8px 16px;
   border-radius: 6px;
@@ -366,23 +343,6 @@ a {
   transition: 0.15s;
   cursor: pointer;
   white-space: nowrap;
-}
-
-.btn-success,
-.btn-danger {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  width: 105px;
-  padding: 6px 0;
-  border: none;
-  border-radius: 6px;
-  font-family: var(--font-body), sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  color: #fff;
-  cursor: pointer;
 }
 
 .btn:hover {
@@ -403,22 +363,8 @@ a {
   color: #ffffff;
 }
 
-.btn-success-muted {
-  background: #33683f;
-  color: #ffffff;
-}
-
 .btn-success:hover {
   background: #2f5d3a;
-}
-
-.btn-warning {
-  background: #d18a24;
-  color: #ffffff;
-}
-
-.btn-warning:hover {
-  background: #b8721f;
 }
 
 .btn-danger {
@@ -430,13 +376,53 @@ a {
   background: #b91c1c;
 }
 
+/* Archive Button Styling */
+.btn-archive {
+  background: rgba(220, 38, 38, 0.1);
+  color: #991b1b;
+  border: 1px solid transparent;
+  outline: none;
+}
+
+.btn-archive:hover {
+  background: rgba(220, 38, 38, 0.18);
+  color: #991b1b;
+}
+
+.btn-archive:active {
+  background: rgba(220, 38, 38, 0.25);
+}
+
+.btn-archive:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.25);
+}
+
+/* Unified button sizing */
 .btn-sm {
-  padding: 4px 12px;
+  padding: 6px 12px;
   font-size: 13px;
+  border-radius: 6px;
+}
+
+/* Action group container to align buttons */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* 🚨 FORCE ALL ACTION BUTTONS TO BE EXACTLY THE SAME SIZE */
+.action-buttons .btn {
+  width: 85px; /* Fixed width for both Ban and Archive */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 0; /* Removed horizontal padding so width stays exact */
+  margin: 0;
 }
 
 /* --- Table ---*/
-
 .table-card {
   margin-top: 10px;
   background-color: #ffffff;
@@ -481,14 +467,6 @@ tbody td:last-child {
   padding-right: 0;
 }
 
-tbody td .btn {
-  margin-right: 4px;
-}
-
-tbody td .btn:last-child {
-  margin-right: 0;
-}
-
 tbody tr:last-child td {
   border-bottom: none;
 }
@@ -498,7 +476,6 @@ tbody tr:hover {
 }
 
 /* --- Badges ---*/
-
 .badge {
   display: inline-block;
   font-size: 12px;
@@ -521,11 +498,6 @@ tbody tr:hover {
 .badge.banned {
   background-color: rgba(220, 38, 38, 0.15);
   color: #991b1b;
-}
-
-.badge.completed {
-  background-color: #ede9e1;
-  color: #6b6680;
 }
 
 .text-muted {

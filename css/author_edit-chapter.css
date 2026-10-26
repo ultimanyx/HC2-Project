@@ -61,7 +61,7 @@
     format("truetype");
 }
 
-/* base */
+/* base — no line-height on body (per request) */
 body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   background-color: #f8f6f1;
@@ -81,7 +81,9 @@ a {
   overflow: hidden;
 }
 
-/* sidebar */
+/* =========================================
+   SIDEBAR — canonical block (matches dashboard / all-novels / create-novel / earnings)
+   ========================================= */
 .sidebar {
   width: 270px;
   background-color: #ffffff;
@@ -89,6 +91,7 @@ a {
   padding: 20px 14px;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0; /* FIX: never squeeze */
   height: 100vh;
   overflow-y: auto;
 }
@@ -100,9 +103,11 @@ a {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 20px;
+  padding-left: 0;
   padding-right: 60px;
   color: #1a1826;
   gap: 8px;
+  line-height: 1.4; /* FIX: lock height */
 }
 
 .brand img {
@@ -124,6 +129,7 @@ a {
   color: #6b6680;
   padding: 7px 10px;
   border-radius: 6px;
+  line-height: 1.4; /* FIX: lock height */
 }
 
 .nav-item.sub {
@@ -162,6 +168,7 @@ a {
     background 0.2s ease,
     color 0.2s ease;
   cursor: pointer;
+  line-height: 1.4; /* FIX: lock height */
 }
 
 .logout:hover {
@@ -176,6 +183,7 @@ a {
   min-width: 0;
   height: 100vh;
   overflow-y: auto;
+  scrollbar-gutter: stable; /* FIX: reserve scrollbar → no sidebar shift */
 }
 
 /* topbar */
@@ -425,7 +433,7 @@ a {
     --font-body
   ); /* Changed from heading to body for readability */
   font-size: 16px;
-  line-height: 1.8 !important; /* 🚨 Force readable line spacing */
+  line-height: 1.8 !important; /* Force readable line spacing */
   color: var(--foreground);
   outline: none;
   overflow-y: auto;
@@ -437,7 +445,7 @@ a {
   box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
-/* 🚨 Force spacing on the paragraphs inside the editor */
+/* Force spacing on the paragraphs inside the editor */
 .editor-area p {
   margin-bottom: 16px !important;
   line-height: 1.8 !important;

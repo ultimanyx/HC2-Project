@@ -55,22 +55,27 @@ a {
   color: inherit;
 }
 
-/* Layout */
+/* =========================================
+   LAYOUT
+   ========================================= */
 .layout {
   display: flex;
   height: 100vh;
   overflow: hidden;
 }
 
-/* Sidebar */
+/* =========================================
+   SIDEBAR — identical block across all pages
+   ========================================= */
 .sidebar {
   width: 270px;
   background-color: #ffffff;
-  border-right: 1px solid var(--border);
+  border-right: 1px solid rgba(26, 24, 38, 0.1);
   padding: 20px 14px;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  height: 100vh;
   overflow-y: auto;
 }
 
@@ -81,8 +86,11 @@ a {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 20px;
+  padding-left: 0;
   padding-right: 60px;
+  color: #1a1826;
   gap: 8px;
+  line-height: 1.4;
 }
 
 .brand img {
@@ -98,49 +106,78 @@ a {
 }
 
 .nav-item {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
-  color: var(--muted-foreground);
+  margin-top: 3px;
+  color: #6b6680;
   padding: 7px 10px;
   border-radius: 6px;
+  line-height: 1.4;
 }
 
 .nav-item.sub {
   padding-left: 16px;
+  color: #6b6680;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .nav-item.active {
   background-color: rgba(184, 114, 31, 0.12);
-  color: var(--primary);
+  color: #b8721f;
   font-weight: 600;
+  font-size: 16px;
 }
 
 .nav-item:hover {
-  background-color: var(--secondary);
+  background-color: #ede9e1;
+}
+
+.nav-icon {
+  margin-right: 6px;
+}
+
+.nav-section {
+  font-size: 21px;
+  font-weight: 600;
+  color: #1a1826;
+  margin-top: 14px;
+  margin-bottom: 3px;
+  padding-left: 10px;
 }
 
 .logout {
   display: flex;
   align-items: center;
+  gap: 8px;
   font-size: 15px;
-  color: var(--muted-foreground);
+  color: #6b6680;
   padding: 10px 14px;
   margin-top: auto;
   border-top: 1px solid var(--border);
   border-radius: 6px;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+  text-decoration: none;
   cursor: pointer;
+  line-height: 1.4;
 }
 
 .logout:hover {
-  color: var(--destructive);
+  color: #dc2626;
   background-color: rgba(220, 38, 38, 0.08);
 }
 
-/* Main Content */
+/* =========================================
+   MAIN
+   ========================================= */
 .main {
   flex: 1;
   padding: 24px 32px;
+  height: 100vh;
   overflow-y: auto;
+  scrollbar-gutter: stable; /* FIX: reserve scrollbar → no shift */
 }
 
 .topbar {
@@ -175,7 +212,9 @@ a {
   font-weight: 600;
 }
 
-/* Form Container */
+/* =========================================
+   FORM
+   ========================================= */
 .form-container {
   background: var(--card-background);
   border: 1px solid var(--border);
@@ -186,7 +225,6 @@ a {
   margin: 0 auto;
 }
 
-/* Grid Layout */
 .form-grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -232,7 +270,6 @@ a {
   box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
-/* Specific Textarea Heights */
 .synopsis-textarea {
   min-height: 80px;
   resize: vertical;
@@ -243,7 +280,6 @@ a {
   resize: vertical;
 }
 
-/* Upload Zone - Made taller to fit the image */
 .upload-zone {
   border: 2px dashed var(--border);
   border-radius: 6px;
@@ -256,7 +292,7 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 280px; /* Increased to show full image */
+  min-height: 280px;
   overflow: hidden;
 }
 
@@ -275,7 +311,6 @@ a {
   font-size: 12px;
 }
 
-/* Form Actions */
 .form-actions {
   display: flex;
   align-items: center;
@@ -289,7 +324,6 @@ a {
   flex: 1;
 }
 
-/* Buttons */
 .btn {
   padding: 10px 20px;
   border-radius: 6px;
@@ -315,17 +349,16 @@ a {
   background: #9a5f16;
 }
 
-/* Specific style for the Save as Draft button (Neutral Gray theme) */
 .btn-draft {
-  background-color: #f3f4f6; /* Neutral light gray */
-  color: #4b5563; /* Neutral dark gray text */
-  border: 1px solid #d1d5db; /* Subtle gray border */
+  background-color: #f3f4f6;
+  color: #4b5563;
+  border: 1px solid #d1d5db;
   transition: all 0.2s ease;
 }
 
 .btn-draft:hover {
-  background-color: #e5e7eb; /* Slightly darker on hover */
-  color: #1f2937; /* Darker text on hover */
+  background-color: #e5e7eb;
+  color: #1f2937;
   border-color: #9ca3af;
 }
 

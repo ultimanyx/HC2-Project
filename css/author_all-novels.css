@@ -56,7 +56,6 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   font-size: 15px;
-  line-height: 1.4;
 }
 
 html,
@@ -76,6 +75,9 @@ a {
   overflow: hidden;
 }
 
+/* =========================================
+   SIDEBAR — identical block across all pages
+   ========================================= */
 .sidebar {
   width: 270px;
   background-color: var(--card-background);
@@ -99,6 +101,7 @@ a {
   padding-right: 60px;
   color: var(--foreground);
   gap: 8px;
+  line-height: 1.4;
 }
 
 .brand img {
@@ -120,6 +123,7 @@ a {
   color: var(--muted-foreground);
   padding: 7px 10px;
   border-radius: 6px;
+  line-height: 1.4;
 }
 
 .nav-item.sub {
@@ -168,6 +172,7 @@ a {
     color 0.2s ease;
   text-decoration: none;
   cursor: pointer;
+  line-height: 1.4;
 }
 
 .logout:hover {
@@ -175,11 +180,15 @@ a {
   background-color: rgba(220, 38, 38, 0.08);
 }
 
+/* =========================================
+   MAIN
+   ========================================= */
 .main {
   flex: 1;
   padding: 24px 32px;
   height: 100vh;
   overflow-y: auto;
+  scrollbar-gutter: stable; /* FIX: reserve scrollbar → no shift */
 }
 
 .topbar {
@@ -309,8 +318,8 @@ a {
   padding: 0;
   flex: 1;
   overflow-y: auto;
-  overflow-x: hidden; /* PREVENTS HORIZONTAL SCROLLBAR */
-  min-height: 0; /* Crucial for flex children scrolling */
+  overflow-x: hidden;
+  min-height: 0;
 }
 
 .report-breakdown li {

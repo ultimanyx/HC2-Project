@@ -54,14 +54,24 @@ document.addEventListener("DOMContentLoaded", function () {
         email: "jrrtolkien@example.com",
         password: "password",
         role: "author",
-        status: "banned",
+        status: "active",
         joined: new Date("2025-10-15").getTime(),
+      },
+      {
+        id: "u-100",
+        username: "Bram Stoker",
+        email: "bramstoker@gmail.com",
+        password: "bramstoker",
+        role: "author",
+        status: "active",
+        joined: new Date("2026-09-11").getTime(),
       },
     ];
 
     let modified = false;
     demoAuthors.forEach((demo) => {
-      if (!users.find((u) => u.email === demo.email)) {
+      const existingIndex = users.findIndex((u) => u.id === demo.id);
+      if (existingIndex === -1) {
         users.push(demo);
         modified = true;
       }
@@ -95,8 +105,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     if (needsSave) localStorage.setItem("users", JSON.stringify(allUsers));
 
-    // Filter for authors only
-    const users = allUsers.filter((u) => u.role === "author");
+    // Filter for authors only AND exclude archived ones
+    const users = allUsers.filter((u) => u.role === "author" && !u.archived);
 
     // Update Stats
     const totalUsers = users.length;
@@ -142,9 +152,14 @@ document.addEventListener("DOMContentLoaded", function () {
         <td><span class="badge ${badgeClass}">${badgeText}</span></td>
         <td>${joinedDate}</td>
         <td>
-          <button class="btn ${btnClass} btn-sm action-btn" data-action="${isBanned ? "unban" : "ban"}">
-            ${btnText}
-          </button>
+          <div class="action-buttons">
+            <button class="btn ${btnClass} btn-sm action-btn" data-action="${isBanned ? "unban" : "ban"}">
+              ${btnText}
+            </button>
+            <button class="btn btn-archive btn-sm archive-btn">
+              Archive
+            </button>
+          </div>
         </td>
       `;
       tableBody.appendChild(tr);
@@ -191,17 +206,45 @@ document.addEventListener("DOMContentLoaded", function () {
   if (searchInput) searchInput.addEventListener("input", filterTable);
   if (statusFilter) statusFilter.addEventListener("change", filterTable);
 
-  // --- 3. Ban/Unban Logic ---
+  // --- 3. Ban/Unban/Archive Logic ---
   if (tableBody) {
     tableBody.addEventListener("click", function (e) {
       const btn = e.target.closest(".action-btn");
-      if (!btn) return;
+      const archiveBtn = e.target.closest(".archive-btn");
 
-      const row = btn.closest("tr");
+      if (!btn && !archiveBtn) return;
+
+      const row = btn ? btn.closest("tr") : archiveBtn.closest("tr");
       const id = row.dataset.userId;
       const username = row.cells[1].innerText.trim();
-      const action = btn.dataset.action;
 
+      // Handle Archive
+      if (archiveBtn) {
+        Swal.fire({
+          title: "Archive Author?",
+          text: `Are you sure you want to archive "${username}"? They will be moved to the Archive page.`,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Yes, archive",
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#6b6680",
+          reverseButtons: true,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            archiveUser(id);
+            Swal.fire({
+              icon: "success",
+              title: "Author Archived",
+              text: `"${username}" has been moved to Archive.`,
+              confirmButtonColor: "#b8721f",
+            });
+          }
+        });
+        return;
+      }
+
+      // Handle Ban/Unban
+      const action = btn.dataset.action;
       if (action === "ban") {
         Swal.fire({
           title: "Ban Author?",
@@ -257,6 +300,22 @@ document.addEventListener("DOMContentLoaded", function () {
       loadAndRenderUsers();
     }
   }
+
+  function archiveUser(id) {
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    const index = users.findIndex((u) => String(u.id) === String(id));
+    if (index !== -1) {
+      users[index].archived = true;
+      users[index].archivedAt = Date.now();
+      users[index].status = "archived";
+      localStorage.setItem("users", JSON.stringify(users));
+      loadAndRenderUsers();
+    }
+  }
+
+  window.addEventListener("focus", () => {
+    loadAndRenderUsers();
+  });
 
   loadAndRenderUsers();
 });

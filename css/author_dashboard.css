@@ -78,7 +78,9 @@ a {
   overflow: hidden;
 }
 
-/* sidebar */
+/* =========================================
+   SIDEBAR — identical block across all pages
+   ========================================= */
 .sidebar {
   width: 270px;
   background-color: #ffffff;
@@ -98,10 +100,11 @@ a {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 20px;
-  padding-left: 0px;
+  padding-left: 0;
   padding-right: 60px;
   color: #1a1826;
   gap: 8px;
+  line-height: 1.4; /* FIX: lock height */
 }
 
 .brand img {
@@ -123,6 +126,7 @@ a {
   color: #6b6680;
   padding: 7px 10px;
   border-radius: 6px;
+  line-height: 1.4; /* FIX: lock height */
 }
 
 .nav-item.sub {
@@ -171,6 +175,7 @@ a {
     color 0.2s ease;
   text-decoration: none;
   cursor: pointer;
+  line-height: 1.4; /* FIX: lock height */
 }
 
 .logout:hover {
@@ -184,6 +189,7 @@ a {
   padding: 24px 32px;
   height: 100vh;
   overflow-y: auto;
+  scrollbar-gutter: stable; /* FIX: reserve scrollbar → no shift */
 }
 
 .topbar {
@@ -409,13 +415,12 @@ tbody tr:last-child td {
     hue-rotate(326deg) brightness(85%) contrast(89%);
 }
 
-/* dashboard grid (Chart + Reported Novels) */
+/* dashboard grid */
 .dashboard-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 16px;
   margin-bottom: 20px;
-  /* Removed align-items: start; so they stretch to the same height */
 }
 
 @media (max-width: 900px) {
@@ -424,7 +429,6 @@ tbody tr:last-child td {
   }
 }
 
-/* chart card */
 .chart-card {
   margin-top: 0;
   display: flex;
@@ -436,7 +440,7 @@ tbody tr:last-child td {
   align-items: flex-start;
   gap: 10px;
   padding-top: 8px;
-  flex: 1; /* Stretches inside the card */
+  flex: 1;
 }
 
 .y-axis {
@@ -542,7 +546,7 @@ tbody tr:last-child td {
 .stat-card--reported {
   display: flex;
   flex-direction: column;
-  height: 100%; /* Forces the card to fill the grid height */
+  height: 100%;
 }
 
 .report-breakdown {
@@ -551,8 +555,8 @@ tbody tr:last-child td {
   flex-direction: column;
   margin: 0;
   padding: 0;
-  flex: 1; /* Takes up remaining space in the card */
-  min-height: 0; /* Crucial for flex children to scroll properly */
+  flex: 1;
+  min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -624,7 +628,6 @@ tbody tr:last-child td {
   flex-shrink: 0;
 }
 
-/* Action Button (Appeal) injected into list */
 .alert-action-btn {
   background: var(--destructive);
   color: #ffffff;
@@ -643,14 +646,11 @@ tbody tr:last-child td {
   background: #b91c1c;
 }
 
-/* =========================================
-   EMPTY STATE FOR REPORTED NOVELS
-   ========================================= */
 .empty-report-state {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1; /* Pushes the content to center vertically */
+  flex: 1;
   border-bottom: none !important;
   padding: 20px 10px;
   width: 100%;

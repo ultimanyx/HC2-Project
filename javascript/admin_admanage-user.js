@@ -1,50 +1,62 @@
 document.addEventListener("DOMContentLoaded", function () {
   const searchInput = document.getElementById("search-user");
   const statusFilter = document.getElementById("status-filter");
-  const tableBody = document.getElementById("userTableBody"); // Correct ID
+  const tableBody = document.getElementById("userTableBody");
 
-  // Stats elements
   const statTotal = document.getElementById("stat-total");
   const statActive = document.getElementById("stat-active");
   const statNew = document.getElementById("stat-new");
 
-  // --- 0. Seed Demo Readers ---
+  // --- 0. CLEANUP DUPLICATES ---
+  function cleanupDuplicateUsers() {
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    const uniqueUsers = Array.from(
+      new Map(users.map((user) => [user.id, user])).values(),
+    );
+    if (users.length !== uniqueUsers.length) {
+      localStorage.setItem("users", JSON.stringify(uniqueUsers));
+    }
+  }
+
+  // --- 1. Seed Demo Readers ---
   function seedDemoReaders() {
     let users = JSON.parse(localStorage.getItem("users")) || [];
 
     const demoReaders = [
       {
         id: "u-001",
-        username: "john_doe",
-        email: "john@example.com",
-        password: "password",
+        username: "John Smith",
+        email: "john@gmail.com",
+        password: "john123",
         role: "reader",
         status: "active",
         joined: new Date("2026-01-12").getTime(),
       },
       {
         id: "u-002",
-        username: "jane_reader",
-        email: "jane@example.com",
-        password: "password",
+        username: "Jane Reader",
+        email: "jane@gmail.com",
+        password: "jane123",
         role: "reader",
         status: "active",
         joined: new Date("2026-02-03").getTime(),
       },
       {
         id: "u-003",
-        username: "emma_reader",
-        email: "emma@example.com",
-        password: "password",
+        username: "Emma Reader",
+        email: "emma@gmail.com",
+        password: "emma123",
         role: "reader",
-        status: "banned",
+        status: "active",
         joined: new Date("2025-10-15").getTime(),
       },
     ];
 
     let modified = false;
     demoReaders.forEach((demo) => {
-      if (!users.find((u) => u.email === demo.email)) {
+      const existingIndex = users.findIndex((u) => u.id === demo.id);
+      // ONLY add them if they don't exist.
+      if (existingIndex === -1) {
         users.push(demo);
         modified = true;
       }
@@ -55,13 +67,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  cleanupDuplicateUsers();
   seedDemoReaders();
 
-  // --- 1. Load and Render Readers ---
+  // --- 2. Load and Render Readers ---
   function loadAndRenderUsers() {
     let allUsers = JSON.parse(localStorage.getItem("users")) || [];
 
-    // Ensure all users have required fields
     let needsSave = false;
     allUsers.forEach((u, i) => {
       if (!u.id) {
@@ -79,10 +91,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     if (needsSave) localStorage.setItem("users", JSON.stringify(allUsers));
 
-    // Filter for readers only
-    const users = allUsers.filter((u) => u.role === "reader");
+    // Filter for readers only AND exclude archived ones
+    const users = allUsers.filter((u) => u.role === "reader" && !u.archived);
 
-    // Update Stats
     const totalUsers = users.length;
     const activeUsers = users.filter((u) => u.status === "active").length;
     const thirtyDaysAgo = Date.now() - 30 * 86400000;
@@ -126,9 +137,14 @@ document.addEventListener("DOMContentLoaded", function () {
         <td><span class="badge ${badgeClass}">${badgeText}</span></td>
         <td>${joinedDate}</td>
         <td>
-          <button class="btn ${btnClass} btn-sm action-btn" data-action="${isBanned ? "unban" : "ban"}">
-            ${btnText}
-          </button>
+          <div class="action-buttons">
+            <button class="btn ${btnClass} btn-sm action-btn" data-action="${isBanned ? "unban" : "ban"}">
+              ${btnText}
+            </button>
+            <button class="btn btn-archive btn-sm archive-btn">
+              Archive
+            </button>
+          </div>
         </td>
       `;
       tableBody.appendChild(tr);
@@ -151,7 +167,6 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   }
 
-  // --- 2. Search & Filter ---
   function filterTable() {
     if (!searchInput || !statusFilter || !tableBody) return;
     const query = searchInput.value.toLowerCase();
@@ -175,17 +190,45 @@ document.addEventListener("DOMContentLoaded", function () {
   if (searchInput) searchInput.addEventListener("input", filterTable);
   if (statusFilter) statusFilter.addEventListener("change", filterTable);
 
-  // --- 3. Ban/Unban Logic ---
+  // --- 3. Ban/Unban/Archive Logic ---
   if (tableBody) {
     tableBody.addEventListener("click", function (e) {
       const btn = e.target.closest(".action-btn");
-      if (!btn) return;
+      const archiveBtn = e.target.closest(".archive-btn");
 
-      const row = btn.closest("tr");
+      if (!btn && !archiveBtn) return;
+
+      const row = btn ? btn.closest("tr") : archiveBtn.closest("tr");
       const id = row.dataset.userId;
       const username = row.cells[1].innerText.trim();
-      const action = btn.dataset.action;
 
+      // Handle Archive
+      if (archiveBtn) {
+        Swal.fire({
+          title: "Archive Reader?",
+          text: `Are you sure you want to archive "${username}"? They will be moved to the Archive page.`,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Yes, archive",
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#6b6680",
+          reverseButtons: true,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            archiveUser(id);
+            Swal.fire({
+              icon: "success",
+              title: "User Archived",
+              text: `"${username}" has been moved to Archive.`,
+              confirmButtonColor: "#b8721f",
+            });
+          }
+        });
+        return;
+      }
+
+      // Handle Ban/Unban
+      const action = btn.dataset.action;
       if (action === "ban") {
         Swal.fire({
           title: "Ban Reader?",
@@ -241,6 +284,27 @@ document.addEventListener("DOMContentLoaded", function () {
       loadAndRenderUsers();
     }
   }
+
+  function archiveUser(id) {
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    const index = users.findIndex((u) => String(u.id) === String(id));
+    if (index !== -1) {
+      users[index].archived = true;
+      users[index].archivedAt = Date.now();
+      users[index].status = "archived";
+      localStorage.setItem("users", JSON.stringify(users));
+      loadAndRenderUsers();
+    } else {
+      console.error("User not found for archiving:", id);
+    }
+  }
+
+  // Listen for changes in other tabs
+  window.addEventListener("storage", (e) => {
+    if (e.key === "users") {
+      loadAndRenderUsers();
+    }
+  });
 
   loadAndRenderUsers();
 });

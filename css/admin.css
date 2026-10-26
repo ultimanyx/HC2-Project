@@ -81,7 +81,7 @@ a {
   overflow: hidden;
 }
 
-/* sidebar */
+/* sidebar — identical to admin_pending-novel.css */
 .sidebar {
   width: 270px;
   background-color: var(--card-background);
@@ -139,7 +139,7 @@ a {
   background-color: rgba(184, 114, 31, 0.12);
   color: var(--primary);
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px; /* FIX: match admin_pending-novel.css */
 }
 
 .nav-item:hover {

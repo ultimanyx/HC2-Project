@@ -4,7 +4,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const novelId = urlParams.get("novelId");
 
   if (!novelId) {
-    Swal.fire("Error", "No novel selected.", "error").then(() => {
+    Swal.fire({
+      title: "Error",
+      text: "No novel selected.",
+      icon: "error",
+      confirmButtonColor: "#dc2626",
+    }).then(() => {
       window.location.href = "admin_all-novels.html";
     });
     return;
@@ -14,7 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
   let novel = novels.find((n) => String(n.id) === String(novelId));
 
   if (!novel) {
-    Swal.fire("Not Found", "This novel does not exist.", "error").then(() => {
+    Swal.fire({
+      title: "Not Found",
+      text: "This novel does not exist.",
+      icon: "error",
+      confirmButtonColor: "#dc2626",
+    }).then(() => {
       window.location.href = "admin_all-novels.html";
     });
     return;
@@ -146,26 +156,46 @@ document.addEventListener("DOMContentLoaded", () => {
       showCancelButton: true,
       confirmButtonText: "Archive",
       confirmButtonColor: "#b8721f",
+      cancelButtonColor: "#6b7280", // Added matching cancel color
     }).then((res) => {
       if (!res.isConfirmed) return;
 
-      const chapter = novel.chapters.find(
-        (c) => String(c.number) === String(chNum),
-      );
-      if (chapter) {
-        chapter.archived = true;
-        chapter.archivedAt = Date.now();
-      }
+      try {
+        const chapter = novel.chapters.find(
+          (c) => String(c.number) === String(chNum),
+        );
+        if (chapter) {
+          chapter.archived = true;
+          chapter.archivedAt = Date.now();
+        }
 
-      // Save to storage
-      const index = novels.findIndex((n) => String(n.id) === String(novelId));
-      if (index !== -1) {
-        novels[index].chapters = novel.chapters;
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(novels));
-      }
+        // Save to storage
+        const index = novels.findIndex((n) => String(n.id) === String(novelId));
+        if (index !== -1) {
+          novels[index].chapters = novel.chapters;
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(novels));
+        }
 
-      // Reload page to reflect changes
-      window.location.reload();
+        // ✅ FIXED: Show success message FIRST, then reload when they click OK
+        Swal.fire({
+          title: "Archived!",
+          text: "The chapter has been archived.",
+          icon: "success",
+          confirmButtonColor: "#b8721f",
+        }).then(() => {
+          // Reload page ONLY AFTER they dismiss the success message
+          window.location.reload();
+        });
+      } catch (error) {
+        // Catch LocalStorage quota errors just in case
+        console.error("Archive failed:", error);
+        Swal.fire({
+          title: "Error",
+          text: "Could not archive chapter. Your browser storage might be full.",
+          icon: "error",
+          confirmButtonColor: "#dc2626",
+        });
+      }
     });
   });
 });

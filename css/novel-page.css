@@ -551,6 +551,10 @@ a {
   margin-bottom: 15px;
 }
 
+.header .subtitle:empty {
+  display: none;
+}
+
 /* book cover */
 .header-container > img {
   width: 300px;
