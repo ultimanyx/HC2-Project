@@ -44,55 +44,179 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
+  // ==========================================
+  // SEED HARDCODED DRAFT
+  // ==========================================
+  function seedHardcodedDraft() {
+    let novels = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    let changed = false;
+
+    const filteredNovels = novels.filter((n) => {
+      const isDuplicate =
+        n.title.toLowerCase() === "the lost kingdom" &&
+        String(n.id) !== "draft-seed-0";
+
+      if (isDuplicate) {
+        changed = true;
+        return false;
+      }
+      return true;
+    });
+
+    const existingIndex = filteredNovels.findIndex(
+      (n) => String(n.id) === "draft-seed-0",
+    );
+
+    if (existingIndex === -1) {
+      filteredNovels.push({
+        id: "draft-seed-0",
+        title: "The Lost Kingdom",
+        subtitle: "A throne unclaimed",
+        genre: "Fantasy",
+        synopsis:
+          "An heir believed dead. A throne left empty. A kingdom on the brink of war. The Lost Kingdom is the first book in an epic fantasy saga.",
+        coverImage: "../image/lostcrown.jpeg",
+        status: "draft",
+        author: "Sarah J.",
+        chapters: [
+          {
+            number: 1,
+            title: "Prologue: The Empty Throne",
+            status: "draft",
+            words: 1120,
+            lastUpdated: Date.now() - 86400000,
+          },
+          {
+            number: 2,
+            title: "A Kingdom Without a King",
+            status: "draft",
+            words: 1890,
+            lastUpdated: Date.now() - 172800000,
+          },
+          {
+            number: 3,
+            title: "The Broken Oath",
+            status: "draft",
+            words: 2340,
+            lastUpdated: Date.now() - 259200000,
+          },
+          {
+            number: 4,
+            title: "Whispers in the Dark",
+            status: "draft",
+            words: 0,
+            lastUpdated: Date.now(),
+          },
+        ],
+        reads: 0,
+        rating: null,
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+        lastEdited: Date.now(),
+      });
+      changed = true;
+    }
+
+    if (changed)
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(filteredNovels));
+  }
+
+  // ==========================================
+  // SCRAPE HARDCODED DATA FROM HTML
+  // ==========================================
+  function scrapeHardcodedDracula() {
+    const hardcodedRow = tbody.querySelector('tr[data-hardcoded="true"]');
+    if (!hardcodedRow) return null;
+
+    const title =
+      hardcodedRow.querySelector("td:nth-child(1)")?.textContent.trim() ||
+      "Dracula";
+    const statusLabel =
+      hardcodedRow.querySelector("td:nth-child(2) span")?.textContent.trim() ||
+      "Ongoing";
+    const genre =
+      hardcodedRow.querySelector("td:nth-child(3)")?.textContent.trim() ||
+      "Horror";
+    const readsStr =
+      hardcodedRow.querySelector("td:nth-child(5)")?.textContent.trim() || "0";
+    const ratingStr =
+      hardcodedRow.querySelector("td:nth-child(6)")?.textContent.trim() || "0";
+
+    const reads = parseInt(readsStr.replace(/,/g, ""), 10) || 0;
+    const rating = parseFloat(ratingStr) || 0;
+
+    const statusMap = {
+      Ongoing: "published",
+      Completed: "completed",
+      Draft: "draft",
+      "Pending Review": "pending",
+      "On Hiatus": "hiatus",
+    };
+
+    return {
+      id: "seed-0",
+      title: title,
+      author: "Bram Stoker",
+      genre: genre,
+      coverImage:
+        "../books/Horror(1)/Dracula by Bram Stoker/dracula-9781471141621_lg.jpg",
+      status: statusMap[statusLabel] || "published",
+      chapters: [
+        {
+          number: 1,
+          title: "Jonathan Harker's Journal",
+          status: "published",
+          words: 4120,
+          lastUpdated: Date.now(),
+        },
+        {
+          number: 2,
+          title: "The Blood is the Life",
+          status: "published",
+          words: 3850,
+          lastUpdated: Date.now(),
+        },
+        {
+          number: 3,
+          title: "The Grey Man",
+          status: "published",
+          words: 3210,
+          lastUpdated: Date.now(),
+        },
+      ],
+      reads: reads,
+      rating: rating,
+      systemSeeded: false,
+      archived: false,
+    };
+  }
+
+  // Run the seed function before loading
+  seedHardcodedDraft();
+
   function loadNovels() {
     let allNovels = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 
     let dracula = allNovels.find((n) => String(n.id) === "seed-0");
+    const scrapedDracula = scrapeHardcodedDracula();
+
     if (!dracula) {
-      dracula = {
-        id: "seed-0",
-        title: "Dracula",
-        subtitle: "A Gothic Horror Classic",
-        author: "Bram Stoker",
-        genre: "Horror",
-        synopsis:
-          "Dracula is an 1897 Gothic horror novel by Irish author Bram Stoker...",
-        coverImage:
-          "../books/Horror(1)/Dracula by Bram Stoker/dracula-9781471141621_lg.jpg",
-        status: "published",
-        chapters: [
-          {
-            number: 1,
-            title: "Jonathan Harker's Journal",
-            status: "published",
-            words: 4120,
-            lastUpdated: Date.now() - 2 * 86400000,
-          },
-          {
-            number: 2,
-            title: "The Blood is the Life",
-            status: "published",
-            words: 3850,
-            lastUpdated: Date.now() - 5 * 86400000,
-          },
-          {
-            number: 3,
-            title: "The Grey Man",
-            status: "published",
-            words: 3210,
-            lastUpdated: Date.now() - 7 * 86400000,
-          },
-        ],
-        reads: 12843,
-        rating: 4.8,
-        systemSeeded: false,
-        archived: false,
-      };
-      allNovels.push(dracula);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(allNovels));
-    } else {
+      if (scrapedDracula) {
+        allNovels.push(scrapedDracula);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(allNovels));
+      }
+    } else if (scrapedDracula) {
+      // Only sync the visual table fields.
+      dracula.title = scrapedDracula.title;
+      dracula.genre = scrapedDracula.genre;
       dracula.status = "published";
       dracula.systemSeeded = false;
+
+      // 🚨 THE FIX: Delete these fields so the View page always falls back to HTML text
+      delete dracula.synopsis;
+      delete dracula.subtitle;
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(allNovels));
     }
 
     return allNovels
@@ -249,7 +373,6 @@ document.addEventListener("DOMContentLoaded", () => {
           );
         }
 
-        // 🚨 UPDATED: Includes Chapter and Additional Details
         if (alertData.status === "warn") {
           const chapterDisplay = alertData.chapter
             ? `(${alertData.chapter})`

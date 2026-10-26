@@ -145,7 +145,6 @@ document.addEventListener("DOMContentLoaded", () => {
       let badgeClass = "active";
       let badgeText = "Published";
 
-      // 🚨 FIX: Compare the chapter NUMBER from the alert to the chapter number in the row
       const alertChapterStr =
         alertData && alertData.chapter ? alertData.chapter : "";
       const alertChapterNum = parseInt(alertChapterStr.replace(/\D/g, ""), 10);
@@ -246,16 +245,29 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function populateEditForm() {
-    if (editTitle)
-      editTitle.value =
-        novel.title !== undefined ? novel.title : editTitle.value;
-    if (editSubtitle)
-      editSubtitle.value =
-        novel.subtitle !== undefined ? novel.subtitle : editSubtitle.value;
-    if (editGenre) editGenre.value = novel.genre || "Fantasy";
-    if (editSynopsis)
-      editSynopsis.value =
-        novel.synopsis !== undefined ? novel.synopsis : editSynopsis.value;
+    // Title (LocalStorage)
+    if (editTitle && novel.title) editTitle.value = novel.title;
+
+    // Subtitle (Use LocalStorage if it exists, otherwise keep HTML default)
+    if (
+      editSubtitle &&
+      novel.subtitle !== undefined &&
+      novel.subtitle !== null
+    ) {
+      editSubtitle.value = novel.subtitle;
+    }
+
+    if (editGenre && novel.genre) editGenre.value = novel.genre;
+
+    // Synopsis (Use LocalStorage if it exists, otherwise keep HTML default)
+    if (
+      editSynopsis &&
+      novel.synopsis !== undefined &&
+      novel.synopsis !== null
+    ) {
+      editSynopsis.value = novel.synopsis;
+    }
+
     if (editStatus)
       editStatus.value = STATUS_TO_LABEL[normalizeStatus(novel.status)];
 
