@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
       dracula.status = "published";
       dracula.systemSeeded = false;
 
-      // 🚨 THE FIX: Delete these fields so the View page always falls back to HTML text
+      // Delete these fields so the View page always falls back to HTML text
       delete dracula.synopsis;
       delete dracula.subtitle;
 

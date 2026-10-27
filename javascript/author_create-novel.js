@@ -89,7 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const genre = genreSelect.value;
     const synopsis = synopsisInput.value.trim();
 
-    // 🚨 FIX: Convert raw text line breaks into HTML paragraphs
     const rawChapterBody = chapterInput.value.trim();
     const paragraphs = rawChapterBody.split(/\n\s*\n/);
     const chapterBody = paragraphs

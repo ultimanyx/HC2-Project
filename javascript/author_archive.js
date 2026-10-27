@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let items = [];
 
     novels.forEach((n) => {
-      // 🚨 DO NOT show items deleted by the author (They are moved to Admin Recovery)
+      //  DO NOT show items deleted by the author (They are moved to Admin Recovery)
       if (n.deletedByAuthor) return;
 
       // 1. Check if the whole novel is archived
@@ -205,12 +205,12 @@ document.addEventListener("DOMContentLoaded", () => {
           if (type === "novel") {
             const target = novels.find((n) => String(n.id) === String(novelId));
             if (target) {
-              // 🚨 TAG AS DELETED BY AUTHOR (Moves to Admin recovery bin)
+              //  TAG AS DELETED BY AUTHOR (Moves to Admin recovery bin)
               target.deletedByAuthor = true;
               target.deletedAt = Date.now();
             }
 
-            // 🚨 SET THE LOCK: If they delete the draft, lock it so it doesn't auto-recreate.
+            //  SET THE LOCK: If they delete the draft, lock it so it doesn't auto-recreate.
             if (String(novelId) === "draft-seed-0") {
               localStorage.setItem("draft_seeded", "true");
             }

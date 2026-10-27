@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
         (a.createdAt || a.updatedAt || 0) - (b.createdAt || b.updatedAt || 0),
     );
 
-  // 🚨 FIX: Loop through ALL new books, not just newBooks[0]
   newBooks.forEach((book) => {
     const targetUrl = `reader.html?id=${book.id}`;
 

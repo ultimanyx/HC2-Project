@@ -248,7 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(novels));
     }
 
-    // 🚨 AUTOMATIC RESOLVE: Clear the warning because the author took action
+    //Clear the warning because the author took action
     localStorage.removeItem("author_alert_status");
 
     const actionText = isEditing ? "Updated" : "Added";

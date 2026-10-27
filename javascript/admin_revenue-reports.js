@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const periodFilter = document.getElementById("period");
   const monthPickerGroup = document.getElementById("monthPickerGroup");
   const monthFilter = document.getElementById("monthFilter");
-  const itemFilter = document.getElementById("item-filter"); // ✅ NEW
+  const itemFilter = document.getElementById("item-filter");
   const formatFilter = document.getElementById("format");
   const applyBtn = document.getElementById("applyBtn");
   const resetBtn = document.getElementById("resetBtn");
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const selectedPeriod = periodFilter.value;
     const selectedMonth = monthFilter.value;
-    const selectedItem = itemFilter.value.toLowerCase(); // ✅ NEW
+    const selectedItem = itemFilter.value.toLowerCase();
     const selectedFormat = formatFilter.value.toLowerCase();
 
     const rows = tableBody.querySelectorAll("tr");
@@ -36,13 +36,13 @@ document.addEventListener("DOMContentLoaded", function () {
       // Format is at index 2 (0: Date, 1: Campaign, 2: Format)
       const rowFormat = row.cells[2].textContent.trim().toLowerCase();
       // Campaign name is at index 1
-      const rowItem = row.cells[1].textContent.trim().toLowerCase(); // ✅ NEW
+      const rowItem = row.cells[1].textContent.trim().toLowerCase();
 
       // Check Format
       const matchesFormat =
         selectedFormat === "all" || rowFormat === selectedFormat;
 
-      // ✅ Check Item/Campaign
+      //  Check Item/Campaign
       const matchesItem = selectedItem === "all" || rowItem === selectedItem;
 
       // Check Date

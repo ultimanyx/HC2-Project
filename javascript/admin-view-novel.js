@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(novels));
         }
 
-        // ✅ FIXED: Show success message FIRST, then reload when they click OK
+        //  Show success message FIRST, then reload when they click OK
         Swal.fire({
           title: "Archived!",
           text: "The chapter has been archived.",

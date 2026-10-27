@@ -228,7 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!id || !key) return;
 
     let target = null;
-    let targetName = "Item"; // 🚨 Fixed: Store the correct display name here
+    let targetName = "Item"; //  Store the correct display name here
 
     if (isChapter) {
       const parent = readKey(key).find(
@@ -241,7 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       target = readKey(key).find((x) => String(x.id) === String(id));
       if (target) {
-        // 🚨 Fixed: Users have 'username', novels/ads have 'title'
+        //  Users have 'username', novels/ads have 'title'
         if (key === USERS_KEY) {
           targetName = target.username || "Unknown User";
         } else {
