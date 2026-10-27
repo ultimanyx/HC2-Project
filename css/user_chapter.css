@@ -1420,13 +1420,15 @@ body {
    ========================================= */
 .floating-controls {
   position: fixed;
-  right: 24px;
-  bottom: 24px;
+  right: auto;
+  left: 24px;
+  bottom: auto;
+  top: 90px;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   gap: 10px;
-  z-index: 9000;
+  z-index: 5000;
 }
 
 .reader-settings {
