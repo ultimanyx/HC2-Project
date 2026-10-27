@@ -510,6 +510,10 @@ body {
   overflow: hidden;
 }
 
+.slideshow-container img {
+  opacity: 85%;
+}
+
 /* Hide slides by default */
 .mySlides {
   display: none;
@@ -614,35 +618,6 @@ body {
   to {
     opacity: 1;
   }
-}
-
-/* Hero banner */
-.hero-banner {
-  width: 100%;
-  height: 400px;
-  display: flex;
-  align-items: center;
-  background-color: var(--primary);
-  color: var(--primary-foreground);
-}
-
-.banner-text {
-  padding: 60px 40px;
-}
-
-.banner-text h3 {
-  padding-top: 20px;
-  font-family: var(--font-heading);
-  font-size: 2.5rem;
-  font-weight: 800;
-}
-
-.banner-text p {
-  max-width: 600px;
-  padding-top: 20px;
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.6;
 }
 
 /* Weekly books */
