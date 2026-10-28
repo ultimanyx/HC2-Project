@@ -370,7 +370,7 @@ if (bookGrid) {
   let currentFilter = "all";
   function renderLibrary() {
     const books = getLibraryBooks();
-    const allNovels = JSON.parse(localStorage.getItem("novels") || "[]"); // ✅ Fetch real novels to check IDs
+    const allNovels = JSON.parse(localStorage.getItem("novels") || "[]"); // Fetch real novels to check IDs
 
     let readingCount = 0;
     let completedCount = 0;
@@ -405,6 +405,25 @@ if (bookGrid) {
 
     let html = "";
 
+    // List of all static classic books that have their own HTML pages
+    const HARDCODED_CLASSICS = [
+      "a-tale-of-two-cities",
+      "pride-and-prejudice",
+      "treasure-island",
+      "frankenstein",
+      "dracula",
+      "emma",
+      "jane-eyre",
+      "sense-and-sensibility",
+      "wuthering-heights",
+      "a-farewell-to-arms",
+      "quo-vadis",
+      "a-tangled-tale",
+      "ben-hur",
+      "nicomachean-ethics",
+      "poor-jack",
+    ];
+
     for (let i = 0; i < filteredBooks.length; i++) {
       let book = filteredBooks[i];
 
@@ -426,17 +445,31 @@ if (bookGrid) {
         displayRating = parseFloat(liveUserRating).toFixed(1);
       }
 
-      // ✅ FIX OLD BROKEN LINKS: If the book was saved with a slug ID (like "the-lost-kingdom"),
-      // look up the real ID (like "draft-seed-0") from the novels array.
-      let realId = book.id;
-      const matchedNovel = allNovels.find(
-        (n) => String(n.id) === String(book.id) || n.title === book.title,
-      );
-      if (matchedNovel) {
-        realId = matchedNovel.id;
+      // Create a URL-friendly slug based on the Title
+      const bookSlug = book.title
+        .toLowerCase()
+        .replace(/&/g, "and")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+
+      let targetUrl = "";
+
+      // 1. Check if this is a classic book with a static page
+      if (HARDCODED_CLASSICS.includes(bookSlug)) {
+        targetUrl = bookSlug + "-page.html";
+      } else {
+        // 2. It's a user-created novel, link to reader.html
+        let realId = book.id;
+        const matchedNovel = allNovels.find(
+          (n) => String(n.id) === String(book.id) || n.title === book.title,
+        );
+        if (matchedNovel) {
+          realId = matchedNovel.id;
+        }
+        targetUrl = "reader.html?id=" + realId;
       }
 
-      html += '<a href="reader.html?id=' + realId + '">';
+      html += '<a href="' + targetUrl + '">';
       html += '  <div class="book-card">';
       html += '    <div class="book-cover">';
       html +=

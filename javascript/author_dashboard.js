@@ -91,18 +91,32 @@ function loadDashboardData() {
     } else {
       topTbody.innerHTML = topNovels
         .map((n) => {
-          const statusClass =
-            n.status === "published" || n.status === "Ongoing"
-              ? "active"
-              : n.status === "completed"
-                ? "completed"
-                : "pending";
-          const statusText =
-            n.status === "published"
-              ? "Ongoing"
-              : n.status === "completed"
-                ? "Completed"
-                : "Pending Review";
+          // ✅ INLINE STYLES MATCHING YOUR CSS
+          let statusStyle = "";
+          let statusText = "Pending Review";
+
+          if (n.status === "published" || n.status === "Ongoing") {
+            statusStyle =
+              "background-color: rgba(63, 125, 79, 0.15); color: #2f5d3a;"; // Green
+            statusText = "Ongoing";
+          } else if (n.status === "completed") {
+            statusStyle =
+              "background-color: var(--secondary); color: var(--muted-foreground);"; // Gray
+            statusText = "Completed";
+          } else if (n.status === "draft") {
+            statusStyle =
+              "background-color: rgba(109, 40, 217, 0.1); color: #5b21b6;"; // Purple
+            statusText = "Draft";
+          } else if (n.status === "hiatus") {
+            statusStyle =
+              "background-color: rgba(184, 114, 31, 0.15); color: #8a5410;"; // Yellow/Orange
+            statusText = "On Hiatus";
+          } else {
+            statusStyle =
+              "background-color: rgba(59, 111, 145, 0.15); color: var(--link-hover);"; // Blue
+            statusText = "Pending Review";
+          }
+
           const bookEarnings = (Number(n.reads) || 0) * 0.15;
           const rating = n.rating
             ? `<img src="../icons/star-fill.svg" alt="star" class="star-rating"> ${n.rating}`
@@ -111,7 +125,7 @@ function loadDashboardData() {
           return `
             <tr>
               <td><strong>${n.title}</strong></td>
-              <td><span class="badge ${statusClass}">${statusText}</span></td>
+              <td><span style="${statusStyle} padding: 3px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; display: inline-block;">${statusText}</span></td>
               <td>${(Number(n.reads) || 0).toLocaleString()}</td>
               <td>${rating}</td>
               <td>₱${bookEarnings.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>

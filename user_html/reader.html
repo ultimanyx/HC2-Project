@@ -214,18 +214,35 @@
 
       if (bookId) {
         const novels = JSON.parse(localStorage.getItem("novels") || "[]");
-        const book = novels.find((n) => String(n.id) === String(bookId));
+
+        // 1. Try to find the book by exact ID (e.g., ?id=seed-0)
+        let book = novels.find((n) => String(n.id) === String(bookId));
+
+        // 2. If not found, try to match by URL slug (e.g., ?id=dracula matches "Dracula")
+        if (!book) {
+          book = novels.find((n) => {
+            if (!n.title) return false;
+            const slug = n.title
+              .toLowerCase()
+              .replace(/&/g, "and")
+              .replace(/[^a-z0-9]+/g, "-")
+              .replace(/^-|-$/g, "");
+            return slug === bookId.toLowerCase();
+          });
+        }
+
+        // 3. Fallback: If it's still missing and they clicked Dracula, force the seed ID
+        if (!book && bookId.toLowerCase() === "dracula") {
+          book = novels.find((n) => String(n.id) === "seed-0");
+        }
 
         if (book) {
           document.title = book.title;
           document.body.dataset.bookId = book.id;
 
           document.getElementById("titleBook").textContent = book.title;
-
-          // 🚨 ADDED: Populate the subtitle element
           document.getElementById("bookSubtitle").textContent =
             book.subtitle || "";
-
           document.getElementById("bookGenre").textContent =
             book.genre || "Unknown";
           document.getElementById("bookAuthor").textContent =
@@ -269,6 +286,11 @@
             tbody.innerHTML = `<tr><td colspan="2" style="text-align:center; padding: 20px;">No chapters published yet.</td></tr>`;
             document.getElementById("readFirstBtn").style.display = "none";
           }
+        } else {
+          // If the book truly doesn't exist
+          document.getElementById("titleBook").textContent = "Book Not Found";
+          document.getElementById("bookSynopsis").textContent =
+            "The novel you are looking for does not exist in the database.";
         }
       }
     </script>
