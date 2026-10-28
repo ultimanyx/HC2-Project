@@ -113,20 +113,10 @@ if (modalSubmit) {
 
     localStorage.setItem(REPORT_KEY, JSON.stringify(reports));
 
-    // Create the alert data for the Author
-    const authorStatusData = {
-      status: "warn",
-      novelTitle: bookTitle,
-      chapterTitle: currentChapterTitle,
-      chapter: currentChapter,
-      reportReason: reason,
-      reportDetails: details,
-      date: new Date().toLocaleDateString(),
-    };
-    localStorage.setItem(
-      "author_alert_status",
-      JSON.stringify(authorStatusData),
-    );
+    // NOTE: The author's `author_alert_status` is intentionally NOT written here.
+    // It is only written by the admin page when an admin explicitly confirms
+    // the "Warn Author" action. This prevents the author from receiving a
+    // warning before the report has been reviewed.
 
     closeModal();
 
