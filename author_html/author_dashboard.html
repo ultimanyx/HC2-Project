@@ -82,14 +82,27 @@
                 </div>
               </div>
               <div class="chart-plot">
+                <!--
+                  BAR HEIGHTS ARE CONTROLLED ONLY HERE IN HTML.
+                  Each px value maps directly to the "Reads" Y-axis scale
+                  (max 160px = 160 reads). Change a number below to adjust a bar.
+                  JS will NEVER override these heights.
+                -->
                 <div class="chart-bars" id="dash-chart-bars">
                   <div class="bar" style="height: 120px"></div>
+                  <!-- Mon -->
                   <div class="bar" style="height: 85px"></div>
+                  <!-- Tue -->
                   <div class="bar" style="height: 140px"></div>
+                  <!-- Wed -->
                   <div class="bar" style="height: 95px"></div>
+                  <!-- Thu -->
                   <div class="bar" style="height: 150px"></div>
+                  <!-- Fri -->
                   <div class="bar" style="height: 65px"></div>
-                  <div class="bar" style="height: 50px"></div>
+                  <!-- Sat -->
+                  <div class="bar" style="height: 160px"></div>
+                  <!-- Sun -->
                 </div>
                 <div class="chart-x-axis">
                   <span>Mon</span>

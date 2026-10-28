@@ -307,13 +307,9 @@ function loadDashboardData() {
     }
   }
 
-  const chartBars = document.querySelectorAll("#dash-chart-bars .bar");
-  if (chartBars.length > 0) {
-    chartBars.forEach((bar) => {
-      const randomHeight = Math.floor(Math.random() * (150 - 30 + 1)) + 30;
-      bar.style.height = `${randomHeight}px`;
-    });
-  }
+  // ✅ REMOVED: chart bar height randomizer.
+  // Bar heights are now controlled ONLY by the inline `style="height: XXpx"`
+  // values in author_dashboard.html. JS no longer touches them.
 }
 
 document.addEventListener("DOMContentLoaded", loadDashboardData);
